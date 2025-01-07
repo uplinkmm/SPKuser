@@ -1,0 +1,171 @@
+<template>
+    <div class="w-full lg:w-7/12 mx-auto px-4 bg-white pb-20 min-h-[100vh]">
+        <Navbar title="2D result" :need-auth="false"></Navbar>
+
+        <div class="flex justify-center mt-2">
+            <p class="text-[96px] w-fit text-green-600 font-semibold">
+                {{ twoDList?.twod }}
+            </p>
+        </div>
+        <div class="flex justify-center mt-2 mb-4">
+            <p class="text-base text-black">
+                <!-- Updated : 2024 - 3 - 05 12:00:00 -->
+                Updated : {{ twoDList?.time }}
+            </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-4">
+            <div
+                v-for="(twoD, index) in twoDList.results"
+                class="twod-bg text-white px-6 py-4 rounded-md mb-3"
+            >
+                <div class="text-center">
+                    <p class="inline-block pr-2">
+                        {{ twoD.open_time }}
+                    </p>
+                    <span class="inline-block uppercase">
+                        {{ twoD.day_part }}
+                    </span>
+                    <hr class="mt-2 mb-4" />
+                </div>
+                <div class="grid grid-cols-5">
+                    <div class="col-span-2">
+                        <p>Set</p>
+                        <p v-if="twoD.set == '--'">
+                            {{ twoDList.set }}
+                        </p>
+                        <p v-else>
+                            {{ twoD.set }}
+                        </p>
+                    </div>
+                    <div class="col-span-2">
+                        <p>Value</p>
+                        <p v-if="twoD.value == '--'">
+                            {{ twoDList.value }}
+                        </p>
+                        <p v-else>
+                            {{ twoD.value }}
+                        </p>
+                    </div>
+                    <div class="col-span-1">
+                        <p>2D</p>
+                        <p class="text-[#F6E271] font-semibold">
+                            {{ twoD.twod }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mb-4 block lg:hidden" />
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-1">
+            <div
+                v-for="(twoD, index) in twoDList?.modern_internet?.numbers"
+                class="twod-bg text-white px-6 py-4 rounded-md mb-3"
+            >
+                <div class="text-center">
+                    <p class="inline-block pr-2">
+                        {{ twoD.time }}
+                    </p>
+                    <hr class="mt-2 mb-4" />
+                </div>
+                <div class="grid grid-cols-5">
+                    <div class="col-span-3">
+                        <p>Morden</p>
+                        <p >
+                            {{ twoD.Modern }}
+                        </p>
+                    </div>
+                    <div class="col-span-2">
+                        <p>Internet</p>
+                        <p >
+                            {{ twoD.Internet }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div
+            class="grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,_31.5%)] justify-center mx-auto gap-x-4"
+        >
+            <div class="twod-bg text-white px-6 py-4 rounded-md mb-3">
+                <div class="grid grid-cols-7">
+                    <div class="col-span-2">
+                        <p>12:03</p>
+                        <p>PM</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p>Modern</p>
+                        <p class="text-[#F6E271] font-semibold">25</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p>Internet</p>
+                        <p class="text-[#F6E271] font-semibold">25</p>
+                    </div>
+                    <div class="col-span-1">
+                        <p>TW</p>
+                        <p class="text-[#F6E271] font-semibold">25</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</template>
+
+<script>
+import { Modal, Ripple, initTWE, Input } from "tw-elements";
+import {
+    getApiData,
+    postApiData,
+    deleteApiData,
+} from "../../utilities/ajax-helpers";
+import Navbar from "../Nav/Navbar.vue";
+
+export default {
+    components: {
+        Navbar,
+    },
+    data() {
+        return {
+            twoDList: [],
+            // two_d:null,
+            intervalId: null,
+        };
+    },
+
+    methods: {
+        // async get2DLive() {
+        //     const response = await getApiData({ url: '/api/2d/live' });
+        //     if (response.data) {
+        //         this.two_d = response.data;
+        //     }
+        //     console.log('live api called');
+        // },
+        async get2DList() {
+            const response = await getApiData({
+                url: "https://admin.2dmyanmarpro.com/api/2d/live",
+            });
+            if (response.data) {
+                this.twoDList = response.data;
+            } else {
+                // console.log("some errors occur");
+            }
+        },
+    },
+
+    created() {
+        this.intervalId = setInterval(this.get2DList, 3000);
+    },
+
+    mounted() {
+        this.get2DList();
+        // this.get2DLive();
+        initTWE({ Modal, Ripple });
+    },
+
+    beforeDestroy() {
+        clearInterval(this.intervalId);
+    },
+};
+</script>

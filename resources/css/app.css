@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .frame-container{
+        @apply w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-transparent pb-8
+    }
+    .table-td{
+        @apply text-center py-2 border-t-4 border-[#FDC652] text-sm
+    }
+    .dash-under::after{
+        @apply absolute left-4 bottom-1 bg-gray-600 h-0.5 w-1/4 content-['']
+    }
+}

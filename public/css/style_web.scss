@@ -1,0 +1,214 @@
+
+@font-face {
+    font-family: 'ibrand';
+    src:  url('../fonts/Ibrand.ttf') format('truetype'),
+}
+@font-face {
+    font-family: 'Poppins';
+    src:  url('../fonts/Poppins-Regular.ttf') format('truetype'),
+}
+
+*{
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: 0.05rem;
+}
+.frame-container{
+    // background-image: url("../img/img2.jpg");
+    // background-size: cover;
+    background-color: #eee;
+}
+.font-inter{
+    font-family: 'inter';
+}
+.twod-bg{
+    background:#F69312;
+}
+.threed-bg {
+    background: #3194FE;
+}
+.hover-twod:hover{
+    background: #fd9e21;
+}
+/* width */
+.small-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+/* Track */
+.small-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+  /* Handle */
+.small-scrollbar::-webkit-scrollbar-thumb {
+    background: #ccc; 
+}
+  
+  /* Handle on hover */
+.small-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #888; 
+}
+
+.main-container{
+    // background-color: #f1f1f1;
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+    // background-color: white;
+    display: flex;
+
+}
+.main-content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    // float: right;
+    display: inline-block;
+}
+.inner-container{
+    // padding: 2.5rem 1.5rem;
+}
+
+.primary-btn{
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 16px;
+    color: white;
+    background-color: #665BE5;
+
+}
+.add-btn{
+    font-size: 14px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: white;
+    background-color: #000;
+}
+
+.primary-input{
+    padding:0.5rem;
+    color:black;
+}
+
+.small-slider .slick-prev:before, .slick-next:before{
+    font-family: "Font Awesome 5 Pro"!important;
+}
+.small-slider .slick-prev:before{
+    content: "\f104"!important;
+    color: #000!important;
+}
+.small-slider .slick-next:before{
+    content: "\f105"!important;
+    color: #000!important;
+}
+
+
+.small-slider .slick-prev{
+    left: 2px!important;
+    background-color: white!important;
+    z-index: 30;
+}
+.small-slider .slick-next{
+    right: 12px!important;
+    background-color: white!important;
+    z-index: 30;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#update_slick .slick-list {
+    padding: 0 25% 0 0 !important;
+}
+#twoD_carousel .slick-list {
+    padding: 0 20% 0 0 !important;
+}
+#3d_slick .slick-list {
+    padding: 0 20% 0 0 !important;
+}
+
+@media (min-width: 640px) {
+    #twoD_carousel .slick-list {
+            padding: 0 20% 0 0 !important;
+        }
+}
+@media (min-width: 768px) {
+    #twoD_carousel .slick-list {
+            padding: 0 20% 0 0 !important;
+        }
+}
+@media (min-width: 1024px) {
+    #twoD_carousel .slick-list {
+            padding: 0 30% 0 0 !important;
+        }
+}
+
+
+.calendar-table{
+    border-top: 1px solid rgb(156,163,175);
+    border-left: 1px solid rgb(156, 163, 175);
+    margin: 0 1rem;
+}
+.calendar-table div{
+    padding: 0.25rem 0;
+    text-align: center;
+    border-right: 1px solid rgb(156, 163, 175);
+    border-bottom: 1px solid rgb(156, 163, 175);
+}
+
+
+
+.fc-daygrid-dot-event .fc-event-title{
+    text-align: center!important;
+    font-weight: 400!important;
+}
+.fc-daygrid-event-dot{
+    display: none!important;
+}
+.fc-daygrid-dot-event:hover{
+    background: none!important;
+}
+.fc-title {
+    font-size: .9em;
+}
+.fc-daygrid-day-number{
+    color: #404a41;
+}
+@media (min-width: 1024px) {
+    .fc-event-title {
+        font-size: 18px!important;
+    }
+}
+
+.threed-calendar-row:nth-child(odd) {
+    background-color: #f3f2f2;
+}
+
+.threed-calendar-row:nth-child(even) {
+    background-color: white;
+}
+
+.fc .fc-toolbar-title{
+    font-size: 14px!important;
+}
+
+
+.bg-img{
+    background-image: url('../img/background-img.png');
+    background-size: cover;
+}
+.frame-container{
+    background-image: url('../img/background-img.png');
+    background-size: cover;
+}
+.background-black{
+    background-color: #29261D;
+    color: white;
+}
