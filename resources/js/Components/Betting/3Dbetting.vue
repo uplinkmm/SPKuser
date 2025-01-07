@@ -1,6 +1,7 @@
 <template lang="">
     <notifications position="top center" />
 
+    
     <div
         v-if="step == 4"
         class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-0 bg-img pb-24 min-h-[100vh]"
