@@ -1,6 +1,6 @@
 <template>
     <main
-        class="w-full h-full min-h-[30vh] mx-auto px-0 pb-2 flex flex-row justify-center items-center relative"
+        class="w-full h-full min-h-[30vh] mx-auto px-0 pb-2 flex flex-row justify-center relative"
     >
         <div class="" @keyup.enter="login">
             <div class="mb-4">
@@ -24,12 +24,12 @@
             <div class="mb-4">
                 <button
                     @click="login"
-                    class="block w-full py-2 px-2 text-sm rounded-md bg-[#000] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                    class="block w-full py-2 px-2 text-sm rounded-md bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
                 >
                     Login
                 </button>
             </div>
-            <button class="text-sm w-full text-center text-black hover:underline" @click="changeForgotPassword">Forgot password?</button>
+            <button class="text-sm w-full text-center text-gray-300 hover:underline" @click="changeForgotPassword">Forgot password?</button>
         </div>
         <form method="POST" id="signin-form" ref="signinForm" action="/login">
             <input type="hidden" v-model="csrfToken" name="_token" />
@@ -38,7 +38,7 @@
             <input type="hidden" name="remember" value="true" />
         </form>
     </main>
-    <div class="contents">
+    <!-- <div class="contents">
         <div
             class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-700 before:mt-0.5 after:flex-1 after:border-t after:border-gray-700 after:mt-0.5"
         >
@@ -71,7 +71,7 @@
                 /></svg
             >Continue with Facebook
         </a>
-    </div>
+    </div> -->
 </template>
 
 <script>

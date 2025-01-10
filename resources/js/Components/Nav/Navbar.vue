@@ -1,8 +1,8 @@
 <template lang="">
 
-    <div class="flex justify-between py-4 px-0 lg:px-4 mb-4" :class="getUser && isHomePage ? 'bg-[#FDC652] text-white !px-8 font-semibold' : 'bg-transparent'">
-        <div v-if="isHomePage && user">
-            <p>{{ user.name }}</p>
+    <div class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center" :class="getUser && isHomePage ? 'bg-[#FDC652] text-white font-semibold -mx-4' : 'bg-[#DDA33F] text-white -mx-4'">
+        <div v-if="isHomePage && user" class="flex gap-x-2 text-sm">
+            <p>{{ user.name }}</p> 
             <p>{{ user.balance?.toLocaleString() }}</p>
         </div>
         <FcmNotification :get-noti="getNotis"></FcmNotification>
@@ -11,12 +11,12 @@
                 <i class="fas fa-chevron-left"></i>
             </a>
         </button>
-        <p :class="textColor" class="text-black text-base">{{ title }}</p>
+        <p :class="textColor" class="text-white text-base">{{ title }}</p>
         <div class="flex gap-x-4">
-            <!-- <button>
+            <button>
                 <i class="fal fa-search"></i>
-            </button> -->
-            <a href="/notifications" :class="isHomePage ? 'pt-3' : ''">
+            </button>
+            <a href="/notifications" :class="isHomePage ? 'pt-0' : ''">
                 <i class="far fa-bell" ></i>
                 <span
                     v-if="notiCount > 0"
@@ -26,7 +26,53 @@
                 </span>
             </a>
         </div>
+        
     </div>
+
+    <!-- search -->
+    <div class="hidden fixed left-0 right-0 bottom-[60px] block w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 top-[0] bg-black overflow-hidden z-50 bg-img" style="height:calc(100vh - 60px)">
+        <div class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4">
+            <div>
+                <button>
+                    <a @click="backBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </button>
+                <input class="py-2 h-full ml-2 bg-transparent focus:right-0 focus:shadow-none focus:outline-none border-b px-2">
+            </div>
+            <div class="flex gap-x-4">
+                <button>
+                    <i class="fal fa-search"></i>
+                </button>
+                
+            </div>
+        </div>
+        <div>
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";

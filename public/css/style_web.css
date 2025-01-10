@@ -52,6 +52,9 @@
   width: 100%;
   display: inline-block; }
 
+.primary-text {
+  color: #E5B80B; }
+
 .primary-btn {
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -160,15 +163,30 @@
   font-size: 14px !important; }
 
 .bg-img {
-  background-image: url("../img/background-img.png");
+  background-image: url("../img/bg.png");
   background-size: cover; }
 
 .frame-container {
-  background-image: url("../img/background-img.png");
-  background-size: cover; }
+  background-image: url("../img/bg.png");
+  background-size: cover;
+  overflow-y: auto;
+  height: 100vh; }
+
+.frame-container::-webkit-scrollbar {
+  display: none; }
 
 .background-black {
   background-color: #29261D;
   color: white; }
+
+.underline-border::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  background-color: #FDC652;
+  height: 1px;
+  width: 30px;
+  display: none; }
 
 /*# sourceMappingURL=style_web.css.map */

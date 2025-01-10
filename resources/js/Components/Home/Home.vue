@@ -1,6 +1,6 @@
 <template lang="">
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-0 bg-img pb-16 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <Navbar
             title=""
@@ -26,7 +26,12 @@
                 </div>
             </a>
         </div> -->
-        <div class="px-8 mb-8">
+        <div class="px-4 mb-16">
+            <div class="w-full pt-4">
+                <a class="contents"> 
+                    <img src="../../../../public/img/home_img.png" class="w-full">
+                </a>
+            </div>
             <div class="-mx-3" id="ad_slick">
                 <div class="w-full mx-3" v-for="(ads, index) in adses">
                     <img
@@ -36,7 +41,7 @@
                 </div>
             </div>
             <div
-                class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                class="bg-[#C67D06] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a v-if="!getUser" href="/login_register">
                     <div
@@ -57,20 +62,11 @@
                     </div>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-x-4 mb-4">
-                <a
+            <div class="grid grid-cols-2 gap-x-4 gap-y-4 mb-4">
+                <!-- <a
                     href="/2d"
                     class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
                 >
-                    <!-- <div class="w-fit mx-auto">
-                        <div>
-                            <img
-                                class="w-24 mb-4"
-                                src="../../../../public/img/Paper.png"
-                            />
-                            <p class="text-white text-xl pl-2">2D Live</p>
-                        </div>
-                    </div> -->
                     <div
                         class="w-full mx-auto flex flex-col justify-between h-full py-16"
                     >
@@ -103,49 +99,68 @@
                             </p>
                         </div>
                     </div>
-                </a>
-
-                <div>
-                    <a
-                        href="/2D_betting"
-                        class="bg-white aspect-[1/0.8] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-                    >
-                        <div class="w-fit mx-auto flex">
-                            <div>
-                                <img
-                                    class="w-4/12 mb-4 pt-4 lg:pt-0"
-                                    src="../../../../public/img/image 2.png"
-                                />
-                                <p
-                                    class="text-black text-xl self-end pb-6 pl-4"
-                                >
-                                    2D ထိုးမည်
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a
-                        href="/3D_betting"
-                        class="background-black aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col"
-                    >
-                        <div class="w-fit mx-auto flex">
-                            <div>
-                                <img
-                                    class="w-4/12 mb-4 pt-4 lg:pt-0"
-                                    src="../../../../public/img/Map_fill.png"
-                                />
-                                <p
-                                    class="text-white text-xl self-end pb-6 pl-4"
-                                >
-                                    3D ထိုးမည်
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                </a> -->
+                <div class="col-span-2 mb-6">
+                    <p class="text-white text-xl">
+                        <i class="fas fa-flag primary-text pr-2"></i> 
+                        Games
+                    </p>
                 </div>
+                <a href="/2D_betting" class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4">
+                    <p class="text-white font-semibold text-xl absolute top-3">
+                        2D
+                    </p>
+                    <img class="w-full aspect-square" src="../../../../public/img/twod_card 1.png"/>
+                </a>
+                <a href="/3D_betting" class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4">
+                    <p class="text-white font-semibold text-xl absolute top-3">
+                        3D
+                    </p>
+                    <img class="w-full aspect-square" src="../../../../public/img/threed_card 1.png"/>
+                </a>
+                <a href="/2D_betting" class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4 w-full aspect-square">
+                    <p class="text-white font-semibold text-xl absolute top-3">
+                        Slots
+                    </p>
+                    <!-- <img class="w-full aspect-square" src="../../../../public/img/twod_card 1.png"/> -->
+                </a>
+                <a href="/2D_betting" class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4 w-full aspect-square">
+                    <p class="text-white font-semibold text-xl absolute top-3">
+                        Live
+                    </p>
+                    <!-- <img class="w-full aspect-square" src="../../../../public/img/twod_card 1.png"/> -->
+                </a>
+                <!-- <a href="/2D_betting" class="bg-white aspect-[1/0.8] mb-4 rounded-2xl shadow-lg flex justify-center flex-col">
+                    <div class="w-fit mx-auto flex relative">
+                        <div>
+                            <img
+                                class="w-4/12 mb-4 pt-4 lg:pt-0"
+                                src="../../../../public/img/image 2.png"
+                            />
+                            <p
+                                class="text-black text-xl self-end pb-6 pl-4"
+                            >
+                                2D ထိုးမည်
+                            </p>
+                        </div>
+                    </div>
+                </a> -->
+                <!-- <a href="/3D_betting" class="background-black aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
+                    <div class="w-fit mx-auto flex">
+                        <div>
+                            <img
+                                class="w-4/12 mb-4 pt-4 lg:pt-0"
+                                src="../../../../public/img/Map_fill.png"
+                            />
+                            <p class="text-white text-xl self-end pb-6 pl-4">
+                                    3D ထိုးမည်
+                            </p>
+                        </div>
+                    </div>
+                </a> -->
             </div>
 
-            <div
+            <!-- <div
                 class="bg-white mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a href="/winner_lists/1">
@@ -166,9 +181,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div
+            <!-- <div
                 class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a href="/lottery_history">
@@ -191,10 +206,10 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
         </div>
 
-        <div class="px-8 mb-6">
+        <!-- <div class="px-8 mb-6">
             <div class="flex justify-between px-4 mb-2">
                 <p class="text-sm text-black font-bold mb-0"></p>
                 <a href="/slots" class="text-xs text-black font-semibold mb-0">
@@ -270,7 +285,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>

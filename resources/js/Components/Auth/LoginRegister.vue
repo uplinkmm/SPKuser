@@ -17,11 +17,12 @@
                 </div>
             </div>
             <div v-if="!forgot_password" class="flex justify-center items-center flex-col min-h-screen">
+                <img src="../../../../public/img/ssk 1.png" alt="">
                 <ul class="flex space-x-4 mb-6" role="tablist" data-twe-nav-ref>
                     <li role="presentation">
                         <a
                             href="#tabs-twoD"
-                            class="my-2 block px-4 pb-3.5 pt-4 text-md text- text-[#000] data-[twe-nav-active]:border-b border-[#000] font-semibold"
+                            class="my-2 block pr-4 pb-3.5 font-semibold pt-4 text-md primary-text data-[twe-nav-active]:after:!block underline-border relative"
                             data-twe-toggle="pill"
                             data-twe-target="#tabs-twoD"
                             data-twe-nav-active
@@ -34,7 +35,7 @@
                     <li role="presentation">
                         <a
                             href="#tabs-threeD"
-                            class="my-2 block px-4 pb-3.5 font-semibold pt-4 text-md text-[#000] data-[twe-nav-active]:border-b border-[#000]"
+                            class="my-2 block pr-4 pb-3.5 font-semibold pt-4 text-md primary-text data-[twe-nav-active]:after:!block underline-border relative"
                             data-twe-toggle="pill"
                             data-twe-target="#tabs-threeD"
                             role="tab"

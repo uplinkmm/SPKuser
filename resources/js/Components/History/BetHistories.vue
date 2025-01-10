@@ -1,6 +1,6 @@
 <template>
     <div
-        class="frame-container px-0 pb-0 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
 

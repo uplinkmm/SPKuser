@@ -3,7 +3,7 @@
 
     <div
         v-if="step == 7"
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-3 lg:px-3 bg-img pb-24 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         <!-- <div class="mb-3 flex justify-end px-4">
@@ -24,14 +24,14 @@
                 </option>
             </select>
         </div> -->
-        <div class="mb-3 flex justify-center px-4">
+        <div class="flex justify-center px-4 mb-6">
             <button v-for="(setting, index) in settings" 
             @click="   
                     setting_value= setting.id;
                     winners = [];
                     getBetWinners();
                     " 
-                    class="mx-0 text-sm px-3 py-3 " :class="setting_value == setting.id ? 'border-b border-gray-400' : ''">
+                    class="mx-0 text-sm px-3 py-3 primary-text" :class="setting_value == setting.id ? 'after:!block underline-border relative' : ''">
                     {{ setting.name }}
             </button>
         </div>
@@ -39,7 +39,7 @@
             class="relative mb-0 w-full rounded-lg bg-white pt-4 pb-14 px-4"
         >
             <table class="table-auto w-full">
-                <thead class="bg-[#FDC652] text-white">
+                <thead class="bg-white text-black">
                     <tr>
                         <th class="py-4">No</th>
                         <th class="py-4">Name</th>
@@ -74,7 +74,7 @@
 
     <div
         v-else
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-3 lg:px-3 bg-img pb-24 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         <!-- Error page -->
@@ -99,7 +99,7 @@
                 <div class="grid grid-cols-2 gap-x-4 mb-8">
                     <a
                         href="history?game_id=1"
-                        class="bg-[#FDC652] rounded-lg shadow-md text-center text-white py-8"
+                        class="bg-[#29261D] rounded-lg shadow-md text-center text-white py-8"
                     >
                         <a>
                             <i class="fal fa-file text-3xl pb-1"></i>
@@ -108,7 +108,7 @@
                     </a>
                     <div
                         @click="step = 7"
-                        class="bg-[#29261D] rounded-lg shadow-md text-center text-white py-8"
+                        class="bg-[#FDC652] rounded-lg shadow-md text-center text-white py-8"
                     >
                         <a>
                             <i class="fal fa-users text-3xl pb-1"></i>
@@ -117,25 +117,27 @@
                     </div>
                 </div>
                 <div v-if="twod_settings.length" class="bg-transparent items-center justify-center mb-8">
-                    <div class="text-center mb-4">
+                    <!-- <div class="text-center mb-4">
                         <h1 class="text-lg font-semibold">
                             ထိုးမည့်အချိန်ကို ရွေးပါ
                         </h1>
-                    </div>
+                    </div> -->
 
-                    <div
-                        v-for="(twod_setting, index) in twod_settings"
-                        :key="index"
-                        @click="chooseTime(twod_setting)"
-                        class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
-                    >
-                        <i class="far fa-stopwatch" style="font-size: 24px"></i>
+                    <div>
+                        <div
+                            v-for="(twod_setting, index) in twod_settings"
+                            :key="index"
+                            @click="chooseTime(twod_setting)"
+                            class=" first:bg-[#40403E] last:bg-[#DDA33F] text-white rounded-lg cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
+                        >
+                            <i class="far fa-stopwatch" style="font-size: 24px"></i>
 
-                        <span> {{ formatTime(twod_setting.lottery_time) }} </span>
-                        <i
-                            class="far fa-angle-right"
-                            style="font-size: 24px"
-                        ></i>
+                            <span> {{ formatTime(twod_setting.lottery_time) }} </span>
+                            <i
+                                class="far fa-angle-right"
+                                style="font-size: 24px"
+                            ></i>
+                        </div>
                     </div>
                 </div>
                 <div v-else class="bg-transparent items-center justify-center mb-8">
@@ -152,7 +154,7 @@
             </div>
         </div>
 
-        <div :class="step == 1 ? 'block' : 'hidden'">
+        <div :class="step == 1 ? 'block' : 'hidden'" class="pb-16">
             <div
                 class="relative block mb-6 w-full rounded-lg shadow-xl bg-white  py-4" 
             >
@@ -162,7 +164,7 @@
                             <li>
                                 <button
                                     @click="reverseBetNumbers"
-                                    class="px-4 py-2 lg:py-3 bg-[#3194FE] text-white text-sm rounded-lg w-full mb-3"
+                                    class="px-4 py-2 lg:py-3 bg-[#DDA33F] text-white text-sm rounded-lg w-full mb-3"
                                 >
                                     {{ $t("R") }}
                                 </button>
@@ -170,7 +172,7 @@
                             <li>
                                 <button
                                     @click="roundBet"
-                                    class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full mb-3"
+                                    class="px-4 py-2 lg:py-3 bg-[#DDA33F] text-white text-sm rounded-lg w-full mb-3"
                                 >
                                     {{ $t("Round Bet") }}
                                 </button>
@@ -178,7 +180,7 @@
                             <li>
                                 <button
                                     @click="quickBettingBtn"
-                                    class="px-4 py-2 lg:py-3 bg-[#99C32A] text-white text-sm rounded-lg w-full mb-3"
+                                    class="px-4 py-2 lg:py-3 bg-[#DDA33F] text-white text-sm rounded-lg w-full mb-3"
                                 >
                                     {{ $t("Quick Bet") }}
                                 </button>
@@ -190,11 +192,12 @@
                     >
                         <div>
                             <div class="mb-4">
-                                <label
-                                    for="amount"
-                                    class="text-sm mb-3 relative block"
-                                    >Amount</label
-                                >
+                                <div class=" w-full flex justify-between">
+                                    <label for="amount" class="text-sm mb-3 relative block">Amount</label>
+                                    <p class="text-xs">
+                                        {{ $t("Closing Time") }}  : {{ closingTimeFormat }}
+                                   </p>
+                                </div>
                                 <input
                                     type="number"
                                     id="amount"
@@ -205,12 +208,13 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FDC652] text-white px-4 py-2 lg:py-2 w-full rounded-lg text-base"
+                                    class="bg-[#000] text-white px-4 py-2 lg:py-2 w-full rounded-lg text-base"
                                     @click="changeToStep2(1)"
                                 >
-                                    Done
+                                    ထိုးမည်
                                 </button>
                             </div>
+                            
                         </div>                        
                     </div>
                 </div>
@@ -308,7 +312,7 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-0 w-full rounded-lg shadow-xl bg-white pb-14"
+            class="relative mb-12 w-full rounded-lg shadow-xl bg-white pb-14"
             :class="step == 2 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
         >
@@ -447,7 +451,7 @@
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold">ရိုးရိုး</h1>
+                        <h1 class="text-lg font-semibold primary-text">ရိုးရိုး</h1>
                     </div>
 
                     <div
@@ -495,7 +499,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold">နက်ခတ်ပါ၀ါ</h1>
+                        <h1 class="text-lg font-semibold primary-text">နက်ခတ်ပါ၀ါ</h1>
                     </div>
 
                     <div
@@ -532,7 +536,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold">ပါတ်</h1>
+                        <h1 class="text-lg font-semibold primary-text">ပါတ်</h1>
                     </div>
 
                     <div
@@ -604,7 +608,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold">ထိပ်</h1>
+                        <h1 class="text-lg font-semibold primary-text">ထိပ်</h1>
                     </div>
 
                     <div
@@ -676,7 +680,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold">နောက်</h1>
+                        <h1 class="text-lg font-semibold primary-text">နောက်</h1>
                     </div>
 
                     <div
@@ -748,7 +752,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold">ဘရိတ်</h1>
+                        <h1 class="text-lg font-semibold primary-text">ဘရိတ်</h1>
                     </div>
 
                     <div
@@ -846,7 +850,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#99C32A] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#DDA33F] text-white px-4 py-2 w-full rounded-lg text-sm"
                                     @click="getTwoDigitCombinations(false)"
                                 >
                                     အပူးမပါ
@@ -877,7 +881,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FC7D63] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#C67D06] text-white px-4 py-2 w-full rounded-lg text-sm"
                                     @click="getTwoDigitCombinations(true)"
                                 >
                                     အပူးပါ
@@ -886,7 +890,7 @@
                         </div>
                         
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex justify-between col-span-2 mb-8">
                         <p class="text-sm">
                             လက်ကျန်ငွေ : {{ wallet_balance?.toLocaleString() }} MMks
                         </p>
@@ -1089,11 +1093,10 @@
     </div>
 
     <button
-        data-twe-toggle="modal"
+        data-twe-toggle="modal" class="hidden"
         data-twe-target="#error_modal"
         id="error_modal_btn"
     >
-        <!-- <i class="fal fa-trash"></i> -->
     </button>
     <!--Error Modal Box -->
     <div
@@ -1182,7 +1185,7 @@
         hidden
         disabled
         type="button"
-        class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+        class="hidden rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
         data-twe-toggle="modal"
         data-twe-target="#exampleModal"
         data-twe-ripple-init

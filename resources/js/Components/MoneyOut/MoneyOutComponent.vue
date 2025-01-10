@@ -3,7 +3,12 @@
     <div class="frame-container min-h-[100vh]">
         <Navbar :title="$t('Withdrawal')" :back-btn="backBtn"></Navbar>
 
-        <div>
+        <div class="px-4">
+            <div class="w-full">
+                <p class="w-full text-center primary-text mb-8">
+                    ငွေသွင်းမည်
+                </p>
+            </div>
             <!-- <div
                 class="flex justify-center px-4 py-8 shadow-lg rounded-2xl mb-8 bg-white"
             >
@@ -25,7 +30,7 @@
                 </div>
             </div> -->
 
-            <div v-show="step == 1" class="relative pb-24">
+            <div v-show="step == 1" class="relative pb-24 mt-[40%]">
                 <!-- <div>
                     <p class="text-white">{{ $t("Deposit") }}</p>
                 </div> -->

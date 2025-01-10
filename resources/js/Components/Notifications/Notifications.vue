@@ -3,7 +3,7 @@
         class="frame-container pb-20 min-h-[100vh] flex flex-col"
     >
         <Navbar title="Notifications" :back-btn="backBtn"></Navbar>
-        <div class=" bg-[#fff6] px-4 rounded-xl flex-grow">
+        <div class=" bg-[#fff] px-4 rounded-xl flex-grow">
             <!--Tabs navigation-->
             <ul
                 class="flex list-none flex-row flex-wrap border-b-0  px-2 pt-2 mb-2 bg-transparent"
@@ -83,7 +83,7 @@
                                 v-if="bet_win.is_read == 0"
                                 class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
                             ></div>
-                            <p class="text-base text-black mb-3">
+                            <p class="text-base text-black mb-3 font-semibold">
                                 {{ bet_win.preview }}
                             </p>
                             <p class="text-xs font-inter mb-1">

@@ -3,7 +3,7 @@
       class="w-full h-full min-h-[60vh] mx-auto px-8 pb-2 flex flex-row justify-center items-center relative"
   >
       <div class="">
-            <p class="mb-8 text-center font-semibold">Forgot Password?</p>
+            <p class="mb-8 text-center font-semibold primary-text">Forgot Password?</p>
           <div class="mb-4">
               <label
                   class="flex w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white"
@@ -60,7 +60,7 @@
               <button
                   @click="forgotPassword"
                   :disabled="!otpRequested"
-                  class="block w-full py-2.5 px-2 text-sm rounded-md bg-[#000] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                  class="block w-full py-2.5 px-2 text-sm rounded-md bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
               >
                   Confirm
               </button>
