@@ -12,8 +12,10 @@ class ProfileRepository implements ProfileInterface
         $customer = Customer::select(['id', 'name', 'phone_number', 'verified_at'])
         ->with(['main_wallet'])
         ->findOrFail(UserData()->id);
+        $contact=Contact::orderBy('id','asc')->get();
         $customer->main_money_balance=$customer->main_wallet->balance;
         $customer->game_money_balance=$customer->balanceFloat;
+        $customer->contact=$contact;
         unset($customer['wallet']);
         unset($customer['main_wallet']);
         return $customer;

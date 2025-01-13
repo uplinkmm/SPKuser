@@ -64,6 +64,7 @@ Route::middleware('auth:api')->group(function () {
     Route::group(['prefix' => 'game'], function () {
         Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
         Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
+        Route::get('search_game', [GameController::class, 'searchGameList']);
     });
     Route::group(['prefix' => 'direct'], function () {
         Route::post('Seamless/LaunchGame', [DirectLaunchGameController::class, 'launchGame']);

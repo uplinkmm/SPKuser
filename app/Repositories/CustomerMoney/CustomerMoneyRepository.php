@@ -118,7 +118,9 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
         WHEN status = 'rejected' THEN rejected_at
         END AS date")
         )
-        ->paginate(20);
+        ->take(11)
+        ->latest()
+        ->get();
         return $transactions;
     }
 }

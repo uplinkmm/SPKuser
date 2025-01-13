@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1\Game;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\GameDetailResource;
-use App\Http\Resources\GameListResource;
-use App\Http\Resources\HotGameListResource;
+use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
 use App\Models\Admin\GameList;
 use App\Models\Admin\GameType;
-use App\Traits\HttpResponses;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\GameListResource;
+use App\Http\Resources\GameDetailResource;
+use App\Http\Resources\HotGameListResource;
 
 class GameController extends Controller
 {
@@ -90,5 +91,21 @@ class GameController extends Controller
             ->get();
 
         return $this->success(HotGameListResource::collection($gameLists), 'Hot Game Detail Successfully');
+    }
+
+    public function searchGameList(Request $request){
+        $searchInput=$request->search_input;
+        if(strlen($searchInput) < 4){
+            ResponseMessage('Search Input RequeCharacter count at least 4 ',419);
+        }
+        $perPage = $request->per_page ?? config('common.per_page');
+        $gameLists = GameList::with('product')
+        ->where('status', 1)
+        ->when(strlen($searchInput) >= 4,function($q)use($searchInput){
+            $q->where('name','LIKE',$searchInput.'%');
+        })
+        ->paginate($perPage);
+        return $this->success($gameLists);
+
     }
 }

@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
             'cash_withdrawl_transaction' => 'App\Models\CashWithdrawlTransaction',
             'slot_transaction' => 'App\Models\SlotTransaction',
             'wallet' => 'App\Models\Wallet',
+            'wallet_transfer' => 'App\Models\WalletTransfer',
         ]);
     }
 }

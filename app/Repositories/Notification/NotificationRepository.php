@@ -10,7 +10,14 @@ class NotificationRepository implements NotificationInterface
 {
     public function notificationList($request)
     {
-        $type = $request->type == 'topup_transaction' ? ['topup_transaction', 'cash_withdrawl_transaction'] : ['betting_win', 'twist_win_number'];
+        // $type = $request->type == 'topup_transaction' ? ['topup_transaction', 'cash_withdrawl_transaction'] : ['betting_win', 'twist_win_number'];
+        if($request->type=='topup_transaction'){
+            $type=['topup_transaction', 'cash_withdrawl_transaction'];
+        }elseif($request->type=='betting_win'){
+            $type=['betting_win', 'twist_win_number'];
+        }else{
+            $type=['ads'] ;
+        }
         $userId = UserData()->id;
         if ((int) $request->is_count == 1) {
             NotificationPerson::where('personable_type', 'customer')
@@ -32,6 +39,10 @@ class NotificationRepository implements NotificationInterface
                 $join->on('notifications.notificationable_id', '=', 'cash_withdrawl_transactions.id')
                     ->where('notifications.notificationable_type', 'cash_withdrawl_transaction');
             })
+             ->leftJoin('ads', function ($join) {
+                $join->on('notifications.notificationable_id', '=', 'ads.id')
+                    ->where('notifications.notificationable_type', 'ads');
+            })
             ->leftJoin('accounts as topup_account', function ($join) {
                 $join->on('topup_transactions.account_id', '=', 'topup_account.id');
             })
@@ -42,6 +53,9 @@ class NotificationRepository implements NotificationInterface
     WHEN notifications.notificationable_type = 'topup_transaction' THEN topup_transactions.status 
     WHEN notifications.notificationable_type = 'cash_withdrawl_transaction' THEN cash_withdrawl_transactions.status 
     ELSE null END as status"),
+    DB::raw("CASE 
+    WHEN notifications.notificationable_type = 'ads' THEN ads.photo 
+    ELSE null END as photo"),
     DB::raw("
             CASE 
                 WHEN notifications.notificationable_type = 'topup_transaction' AND topup_transactions.status = 'confirmed' THEN topup_transactions.confirmed_at
