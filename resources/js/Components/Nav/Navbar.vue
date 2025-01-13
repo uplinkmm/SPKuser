@@ -1,8 +1,14 @@
 <template lang="">
-
-    <div class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center" :class="getUser && isHomePage ? 'bg-[#FDC652] text-white font-semibold -mx-4' : 'bg-[#DDA33F] text-white -mx-4'">
+    <div
+        class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center"
+        :class="
+            getUser && isHomePage
+                ? 'bg-[#FDC652] text-white font-semibold -mx-4'
+                : 'bg-[#DDA33F] text-white -mx-4'
+        "
+    >
         <div v-if="isHomePage && user" class="flex gap-x-2 text-sm">
-            <p>{{ user.name }}</p> 
+            <p>{{ user.name }}</p>
             <p>{{ user.balance?.toLocaleString() }}</p>
         </div>
         <FcmNotification :get-noti="getNotis"></FcmNotification>
@@ -13,11 +19,11 @@
         </button>
         <p :class="textColor" class="text-white text-base">{{ title }}</p>
         <div class="flex gap-x-4">
-            <button @click="searchBtn()">
+            <button @click="focusSearchInput">
                 <i class="fal fa-search"></i>
             </button>
             <a href="/notifications" :class="isHomePage ? 'pt-0' : ''">
-                <i class="far fa-bell" ></i>
+                <i class="far fa-bell"></i>
                 <span
                     v-if="notiCount > 0"
                     class="ml-2 text-white rounded pl-0.5 pr-1 bg-red-700 font-semibold text-sm"
@@ -26,122 +32,64 @@
                 </span>
             </a>
         </div>
-        
     </div>
     <transition name="fade-in">
-    <!-- search -->
-    <div v-if="isSearch" class="fixed left-0 right-0 bottom-[60px] block w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 top-[0] bg-black overflow-hidden overflow-y-auto no-scrollbar z-50 bg-img" style="height:calc(100vh - 60px)">
-        <div class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4">
-            <div>
-                <button>
-                    <a @click="cancelSearch()">
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                </button>
-                <input class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2">
-            </div>
-            <div class="flex gap-x-4">
-                <button>
-                    <i class="fal fa-search"></i>
-                </button>
-                
-            </div>
-        </div>
-        
-        <div class="overflow-y-auto no-scrollbar">
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
+        <!-- search -->
+        <div
+            :class="showSearch ? 'block' : 'hidden'"
+            class="fixed left-0 right-0 bottom-[60px] block w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 top-[0] bg-black overflow-hidden overflow-y-auto no-scrollbar z-50 bg-img"
+            style="height: calc(100vh - 60px)"
+        >
+            <div
+                class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4"
+            >
                 <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
+                    <button>
+                        <a @click="showSearch = false">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </button>
+                    <input
+                        v-model="search_input"
+                        @keydown.enter="searchSlots"
+                        ref="searchInput"
+                        class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2"
+                    />
                 </div>
-            </div>
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
+                <div class="flex gap-x-4">
+                    <button @click="searchSlots">
+                        <i class="fal fa-search"></i>
+                    </button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
-                </div>
-            </div>
+            <div class="overflow-y-auto no-scrollbar">
+                <p v-if="isEmpty">No result found!</p>
 
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
-                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
-                    alt=""
-                    class="w-full mr-4"
-                />
-                <div>
-                    <p>Thor</p>
-                    <p>Pragmatic Play</p>
+                <div
+                    v-for="(game, index) in searchResults"
+                    :key="index"
+                    class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4"
+                >
+                    <img
+                        @click="getGameUrl(game)"
+                        :src="game.image_url"
+                        alt=""
+                        class="w-full mr-4 cursor-pointer"
+                    />
+                    <div class="cursor-pointer">
+                        <p>{{ game.name }}</p>
+                        <p>{{ game.product.name }}</p>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        
-    </div>
     </transition>
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import FcmNotification from "../Notifications/FcmNotification.vue";
-import { getApiData } from "../../utilities/ajax-helpers";
+import { getApiData, postApiDataSlot } from "../../utilities/ajax-helpers";
 
 export default {
     name: "Navbar",
@@ -169,7 +117,10 @@ export default {
     data() {
         return {
             user: "",
-            isSearch:false,
+            showSearch: false,
+            search_input: "",
+            searchResults: [],
+            isEmpty: false,
         };
     },
     computed: {
@@ -186,17 +137,62 @@ export default {
                 this.setNotiCount(response.data.count);
                 this.user = response.data.user;
             } else {
-                if (response.message == "Please login to continue" && this.needAuth) {
+                if (
+                    response.message == "Please login to continue" &&
+                    this.needAuth
+                ) {
                     window.location.href = "/login_register";
                 }
             }
         },
-        searchBtn(){
-            this.isSearch = true;
+        async searchSlots() {
+            let response = await getApiData({
+                url: `/api/game/search_game?search_input=${this.search_input}`,
+                token: this.getToken,
+            });
+            if (response.data.data) {
+                this.searchResults = response.data.data;
+                if (this.searchResults.length == 0) {
+                    this.isEmpty = true;
+                } else {
+                    this.isEmpty = false;
+                }
+            }
         },
-        cancelSearch(){
-            this.isSearch = false;
-        }
+        async getGameUrl(game) {
+            let url = `/api/game/Seamless/LaunchGame`;
+            let formData = new FormData();
+            formData.append("productId", game.product.code);
+            formData.append("gameType", game.game_type_id);
+            formData.append("gameId", game.code);
+
+            let response = await postApiDataSlot({
+                url: url,
+                form_data: formData,
+                token: this.getToken,
+            });
+
+            console.log(game.code);
+            console.log(response.data);
+            if (response?.data?.ErrorCode == 0) {
+                this.$notify({
+                    text: "Loading....",
+                    type: "info",
+                });
+                window.location.href = response.data.Url;
+            } else {
+                this.$notify({
+                    text: "Something went wrong.Try again!",
+                    type: "error",
+                });
+            }
+        },
+        focusSearchInput() {
+            this.showSearch = true;
+            setTimeout(() => {
+                this.$refs.searchInput.focus();
+            }, 1);
+        },
     },
     mounted() {
         if (this.needAuth == true && !this.getUser) {
@@ -206,6 +202,4 @@ export default {
     },
 };
 </script>
-<style lang="">
-
-</style>
+<style lang=""></style>

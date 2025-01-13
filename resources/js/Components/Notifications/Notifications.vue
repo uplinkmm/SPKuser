@@ -45,7 +45,7 @@
                         >Payment</a
                     >
                 </li>
-                <!-- <li role="presentation">
+                <li role="presentation">
                     <a
                         href="#tabs-promotion"
                         class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
@@ -55,14 +55,14 @@
                         aria-controls="tabs-promotion"
                         aria-selected="false"
                         @click="
-                            type = 'promotion';
+                            type = 'ads';
                             page = 1;
 
                             getNotis();
                         "
-                        >promotion</a
+                        >Promotion</a
                     >
-                </li> -->
+                </li>
             </ul>
 
             <div class="mb-6">
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div
+                <div
                     class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
                     id="tabs-promotion"
                     role="tabpanel"
@@ -156,20 +156,38 @@
                 >
                     <div class="mx-0 pb-8">
                         <div
-                            class="pl-6 lg:pl-8 pr-8 py-6  mb-0 bg-white relative border-b border-gray-300"
+                            v-for="(promo, index) in promotion"
+                            :key="index"
+                            class="pl-6 lg:pl-8 pr-8 py-6 mb-0 bg-white relative border-b border-gray-300 flex items-start"
                         >
-                            <div
-                                class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
-                            ></div>
-                            <p class="text-base text-black mb-3">
-                                Your number 24 is winning!!
-                            </p>
-                            <p class="text-xs font-inter">
-                                June 20, 2024 12:01
-                            </p>
+                            <!-- Image in front -->
+                            <img
+                                :src="promo.photo"
+                                class="w-12 h-12 rounded-full mr-4"
+                            />
+
+                            <!-- Promotion Content -->
+                            <div class="flex-1">
+                                <div
+                                    class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
+                                ></div>
+                                <p class="text-base text-black mb-3">
+                                    {{ promo.title }}
+                                </p>
+                                <p class="text-sm text-black mb-3">
+                                    {{ promo.preview }}
+                                </p>
+                                <p class="text-xs font-inter">
+                                    {{ dateFormat(promo.date_time) }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div> -->
+                    <div v-if="showSpinner">
+                        Loading...
+                        <!-- <circle2 background="#000" color="#fff"></circle2> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -256,7 +274,7 @@ export default {
 
                 this.last_page = response.data.last_page;
             }
-            if (this.type == "promotion") {
+            if (this.type == "ads") {
                 if (this.page == 1) {
                     this.promotion = response.data.notification_list.data;
                 } else {
