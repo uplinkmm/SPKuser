@@ -64,3 +64,4 @@ Route::view('/privacypolicy', 'privacy_and_policy.privacy_and_policy')->name('pr
 Route::view('/tnc', 'term_and_condition.term_and_condition')->name('tnc');
 Route::view('/slots', 'slots.index')->name('slots');
 Route::view('/slots/game_lists', 'slots.slots_games')->name('slots_games');
+Route::view('/slots/providers', 'slots.slots_providers')->name('slots_providers');
