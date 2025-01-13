@@ -13,7 +13,7 @@
         </button>
         <p :class="textColor" class="text-white text-base">{{ title }}</p>
         <div class="flex gap-x-4">
-            <button>
+            <button @click="searchBtn()">
                 <i class="fal fa-search"></i>
             </button>
             <a href="/notifications" :class="isHomePage ? 'pt-0' : ''">
@@ -28,17 +28,17 @@
         </div>
         
     </div>
-
+    <transition name="fade-in">
     <!-- search -->
-    <div class="hidden fixed left-0 right-0 bottom-[60px] block w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 top-[0] bg-black overflow-hidden z-50 bg-img" style="height:calc(100vh - 60px)">
-        <div class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4">
+    <div v-if="isSearch" class="fixed left-0 right-0 bottom-[60px] block w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 top-[0] bg-black overflow-hidden overflow-y-auto no-scrollbar z-50 bg-img" style="height:calc(100vh - 60px)">
+        <div class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4">
             <div>
                 <button>
-                    <a @click="backBtn">
+                    <a @click="cancelSearch()">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                 </button>
-                <input class="py-2 h-full ml-2 bg-transparent focus:right-0 focus:shadow-none focus:outline-none border-b px-2">
+                <input class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2">
             </div>
             <div class="flex gap-x-4">
                 <button>
@@ -47,7 +47,71 @@
                 
             </div>
         </div>
-        <div>
+        
+        <div class="overflow-y-auto no-scrollbar">
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
+                <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                    alt=""
+                    class="w-full mr-4"
+                />
+                <div>
+                    <p>Thor</p>
+                    <p>Pragmatic Play</p>
+                </div>
+            </div>
             <div class="grid grid-cols-2 text-white items-end gap-x-4 border-b-2 border-gray-400 py-4 px-2 mb-4">
                 <img src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
                     alt=""
@@ -72,7 +136,7 @@
         
         
     </div>
-
+    </transition>
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
@@ -105,6 +169,7 @@ export default {
     data() {
         return {
             user: "",
+            isSearch:false,
         };
     },
     computed: {
@@ -126,6 +191,12 @@ export default {
                 }
             }
         },
+        searchBtn(){
+            this.isSearch = true;
+        },
+        cancelSearch(){
+            this.isSearch = false;
+        }
     },
     mounted() {
         if (this.needAuth == true && !this.getUser) {
@@ -135,4 +206,6 @@ export default {
     },
 };
 </script>
-<style lang=""></style>
+<style lang="">
+
+</style>
