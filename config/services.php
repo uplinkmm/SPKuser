@@ -43,4 +43,9 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
     ],
 
+    'smspoh' => [
+        'key' => env('SMS_POH_API_KEY'),
+        'secret' => env('SMS_POH_API_SECRET')
+    ],
+
 ];
