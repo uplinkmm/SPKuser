@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ProfileRepository implements ProfileInterface
 {
     public function getProfile($request)
-    {
+    { 
         $customer = Customer::select(['id', 'name', 'phone_number', 'verified_at'])
         ->with(['main_wallet'])
         ->findOrFail(UserData()->id);

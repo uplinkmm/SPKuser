@@ -46,7 +46,22 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         // dd($request->user()->currentAccessToken()->delete());
-        $request->user()->tokens()->delete();
+        // $request->user()->tokens()->delete();
+        // auth()->guard('sanctum')->forgetUser();
+        if ($request->user()->currentAccessToken()) {
+            // Ensure it's not a TransientToken
+            $token = $request->user()->currentAccessToken();
+            // dd($token);
+            if (!($token instanceof \Laravel\Sanctum\TransientToken)) {
+                $token->delete(); // Delete the database token
+                return response()->json(['message' => 'Successfully logged out']);
+            } else {
+                return response()->json(['message' => 'Cannot delete a transient token.'], 400);
+            }
+        } else {
+            dd('ef');
+            return response()->json(['message' => 'No current access token found.'], 400);
+        }
         ResponseMessage('Successfully logged out');
     }
 
