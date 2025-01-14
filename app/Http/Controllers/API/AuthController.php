@@ -71,8 +71,8 @@ class AuthController extends Controller
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'password' => rand(0000, 9999),
-            'otp' => rand(000000, 999999),
-            // 'otp' => '000000',
+            // 'otp' => rand(000000, 999999),
+            'otp' => '000000',
         ];
 
         try {
