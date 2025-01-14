@@ -1,7 +1,5 @@
 <template lang="">
-    <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-0 bg-img pb-16 min-h-[100vh]"
-    >
+    <div class="frame-container min-h-[100vh]">
         <Navbar
             title=""
             :is-home-page="true"
@@ -26,7 +24,15 @@
                 </div>
             </a>
         </div> -->
-        <div class="px-8 mb-8">
+        <div class="px-4 mb-16">
+            <div class="w-full pt-4">
+                <a class="contents">
+                    <img
+                        src="../../../../public/img/home_img.png"
+                        class="w-full"
+                    />
+                </a>
+            </div>
             <div class="-mx-3" id="ad_slick">
                 <div class="w-full mx-3" v-for="(ads, index) in adses">
                     <img
@@ -36,7 +42,7 @@
                 </div>
             </div>
             <div
-                class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                class="bg-[#C67D06] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a v-if="!getUser" href="/login_register">
                     <div
@@ -57,20 +63,11 @@
                     </div>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-x-4 mb-4">
-                <a
+            <div class="grid grid-cols-2 gap-x-4 gap-y-4 mb-4">
+                <!-- <a
                     href="/2d"
                     class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
                 >
-                    <!-- <div class="w-fit mx-auto">
-                        <div>
-                            <img
-                                class="w-24 mb-4"
-                                src="../../../../public/img/Paper.png"
-                            />
-                            <p class="text-white text-xl pl-2">2D Live</p>
-                        </div>
-                    </div> -->
                     <div
                         class="w-full mx-auto flex flex-col justify-between h-full py-16"
                     >
@@ -103,171 +100,55 @@
                             </p>
                         </div>
                     </div>
-                </a>
-
-                <div>
-                    <a
-                        href="/2D_betting"
-                        class="bg-white aspect-[1/0.8] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-                    >
-                        <div class="w-fit mx-auto flex">
-                            <div>
-                                <img
-                                    class="w-4/12 mb-4 pt-4 lg:pt-0"
-                                    src="../../../../public/img/image 2.png"
-                                />
-                                <p
-                                    class="text-black text-xl self-end pb-6 pl-4"
-                                >
-                                    2D ထိုးမည်
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a
-                        href="/3D_betting"
-                        class="background-black aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col"
-                    >
-                        <div class="w-fit mx-auto flex">
-                            <div>
-                                <img
-                                    class="w-4/12 mb-4 pt-4 lg:pt-0"
-                                    src="../../../../public/img/Map_fill.png"
-                                />
-                                <p
-                                    class="text-white text-xl self-end pb-6 pl-4"
-                                >
-                                    3D ထိုးမည်
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                </a> -->
+                <div class="col-span-2 mb-6">
+                    <p class="text-white text-xl">
+                        <i class="fas fa-flag primary-text pr-2"></i>
+                        Games
+                    </p>
                 </div>
-            </div>
-
-            <div
-                class="bg-white mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-            >
-                <a href="/winner_lists/1">
-                    <div
-                        class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
-                    >
-                        <img
-                            class="w-16 my-4"
-                            src="../../../../public/img/Chart_black.png"
-                        />
-                        <div class="flex justify-center flex-col">
-                            <p class="text-black text-xl pb-0 pl-2 mb-1">
-                                ထီပေါက်သူများ
-                            </p>
-                            <p class="text-black text-sm pb-0 pl-2">
-                                ထီပေါက်သူများ
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div
-                class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-            >
-                <a href="/lottery_history">
-                    <div
-                        class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
-                    >
-                        <img
-                            class="w-16 my-4"
-                            src="../../../../public/img/Chart_white.png"
-                        />
-                        <div class="flex justify-center flex-col">
-                            <p
-                                class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
-                            >
-                                ထီပေါက်စဉ်များ
-                            </p>
-                            <p class="text-white text-sm pb-0 pl-2">
-                                ထွက်ခဲ့သော နံပတ်များ
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="px-8 mb-6">
-            <div class="flex justify-between px-4 mb-2">
-                <p class="text-sm text-black font-bold mb-0"></p>
-                <a href="/slots" class="text-xs text-black font-semibold mb-0">
-                    See All
-                </a>
-            </div>
-
-            <div class="">
-                <ul
-                    class="mb-0 flex gap-x-3 list-none flex-row flex-wrap border-b-0"
-                    role="tablist"
-                    data-twe-nav-ref
+                <a
+                    href="/2D_betting"
+                    class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4"
                 >
-                    <li v-for="(type, index) in gameTypes" :key="index">
-                        <a
-                            @click="
-                                selectedGameType = type;
-                                getProviders();
-                            "
-                            :class="
-                                type?.name == selectedGameType?.name
-                                    ? 'text-md'
-                                    : 'text-xs'
-                            "
-                            class="my-2 block text-black border-x-0 border-b-2 border-t-0 border-transparent font-normal uppercase leading-tight hover:isolate hover:border-transparent focus:isolate focus:border-transparent data-[twe-nav-active]:border-none data-[twe-nav-active]:text-black data-[twe-nav-active]:font-semibold"
-                            >{{ type.name }}</a
-                        >
-                    </li>
-                </ul>
-
-                <div class="mb-6">
-                    <div
-                        class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-                        id="tabs-home"
-                        role="tabpanel"
-                        aria-labelledby="tabs-home-tab"
-                        data-twe-tab-active
+                    <p class="text-white font-semibold text-xl absolute top-3">
+                        2D
+                    </p>
+                    <img
+                        class="w-full aspect-square"
+                        src="../../../../public/img/twod_card 1.png"
+                    />
+                </a>
+                <a
+                    href="/3D_betting"
+                    class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4"
+                >
+                    <p class="text-white font-semibold text-xl absolute top-3">
+                        3D
+                    </p>
+                    <img
+                        class="w-full aspect-square"
+                        src="../../../../public/img/threed_card 1.png"
+                    />
+                </a>
+                <div
+                    class="contents"
+                    v-for="(type, index) in gameTypes"
+                    :key="index"
+                >
+                    <a
+                        :href="`/slots/providers?game_type=${JSON.stringify({
+                            id: type.id,
+                            name: type.name,
+                        })}`"
+                        class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4 w-full aspect-square"
                     >
-                        <div class="mb-8">
-                            <div class="w-full">
-                                <div
-                                    class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
-                                >
-                                    <div
-                                        v-for="(product, index) in providers
-                                            ?.game_type?.products"
-                                        :key="index"
-                                        class="relative"
-                                    >
-                                        <a
-                                            :href="`/slots/game_lists?provider=${JSON.stringify(
-                                                {
-                                                    id: product.id,
-                                                    name: product.name,
-                                                    code: product.code,
-                                                }
-                                            )}&game_type=${JSON.stringify({
-                                                id: selectedGameType.id,
-                                                name: selectedGameType.name,
-                                            })}`"
-                                            class="cursor-pointer"
-                                        >
-                                            <img
-                                                class="w-full aspect-[3/2] rounded-lg"
-                                                :src="product.imgUrl"
-                                                alt=""
-                                            />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <p
+                            class="text-white font-semibold text-xl absolute top-3"
+                        >
+                            {{ type.name }}
+                        </p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -323,50 +204,6 @@ export default {
             } else {
             }
         },
-        // async getGameLists() {
-        //     this.slots = [];
-        //     let url = `/api/hotgamelist`;
-        //     let response = await getApiData({
-        //         url: url,
-        //     });
-        //     this.slots = response.data;
-        // },
-        // async getGameUrl(game) {
-        //     console.log(this.getToken);
-        //     if (this.getToken == null) {
-        //         this.$notify({
-        //             text: "Please login and try again!",
-        //             type: "error",
-        //         });
-        //         return;
-        //     }
-        //     let url = `/api/game/Seamless/LaunchGame`;
-        //     let formData = new FormData();
-        //     formData.append("productId", game.product_code);
-        //     formData.append("gameType", game.game_type_id);
-        //     formData.append("gameId", game.code);
-
-        //     let response = await postApiDataSlot({
-        //         url: url,
-        //         form_data: formData,
-        //         token: this.getToken,
-        //     });
-
-        //     console.log(game.code);
-        //     console.log(response.data);
-        //     if (response?.data?.ErrorCode == 0) {
-        //         this.$notify({
-        //             text: "Loading....",
-        //             type: "info",
-        //         });
-        //         window.location.href = response.data.Url;
-        //     } else {
-        //         this.$notify({
-        //             text: "Something went wrong.Try again!",
-        //             type: "error",
-        //         });
-        //     }
-        // },
         async getGameTypes() {
             let url = `/api/gameType`;
 
@@ -375,18 +212,6 @@ export default {
                 token: this.getToken,
             });
             this.gameTypes = response.data;
-            this.selectedGameType = response.data[0];
-            this.getProviders();
-            console.log(response.data);
-        },
-        async getProviders() {
-            let url = `/api/gameTypeProducts/${this.selectedGameType.id}`;
-            let response = await getApiData({
-                url: url,
-                token: this.getToken,
-            });
-            this.providers = response.data;
-            this.selectedProvider = response.data.game_type.products[0];
         },
     },
     updated() {

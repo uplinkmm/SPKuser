@@ -4,7 +4,7 @@
     
     <div
         v-if="step == 4"
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-0 bg-img pb-24 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <Navbar title="ထီပေါက်သူ" :back-btn="backBtn" class="!px-8"></Navbar>
 
@@ -42,7 +42,7 @@
     </div>
     <div
         v-else
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-6 bg-img pb-24 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <!-- <div
         class="frame-container min-h-[100vh]"

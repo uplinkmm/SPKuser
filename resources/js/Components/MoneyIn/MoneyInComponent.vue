@@ -3,8 +3,13 @@
     <div class="frame-container min-h-[100vh]">
         <Navbar title="ငွေသွင်းမည်" :back-btn="backBtn"></Navbar>
 
-        <div>
-            <div
+        <div class="px-4">
+            <div class="w-full">
+                <p class="w-full text-center primary-text mb-8">
+                    ငွေသွင်းမည်
+                </p>
+            </div>
+            <!-- <div
                 class="flex justify-center px-4 py-8 shadow-lg rounded-2xl mb-4 bg-white"
             >
                 <div>
@@ -23,9 +28,9 @@
                         <p>{{ gameMoneyBalance?.toLocaleString() }} MMKs</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div v-show="!isPaymentFormShown">
+            <div v-show="!isPaymentFormShown" class="mt-[40%]">
                 <!-- <div>
                     <p class="text-white">{{ $t("Deposit") }}</p>
                 </div> -->
@@ -40,7 +45,7 @@
                                 <img
                                     src="../../../../public/img/kpay.png"
                                     alt=""
-                                    class="w-10 aspect-square mr-4"
+                                    class="w-14 aspect-square mr-4"
                                 />
                                 KBZ Pay ဖြင့် ငွေသွင်းမည်
                             </p>
@@ -56,7 +61,7 @@
                                 <img
                                     src="../../../../public/img/wave.png"
                                     alt=""
-                                    class="w-10 aspect-square mr-4"
+                                    class="w-14 aspect-square mr-4"
                                 />
                                 wave ဖြင့် ငွေသွင်းမည်
                             </p>
@@ -68,7 +73,7 @@
 
             <div v-show="isPaymentFormShown">
                 <div>
-                    <p class="text-black pl-2 mb-1">Payment Information</p>
+                    <p class="primary-text pl-2 mb-4">Payment Information</p>
                 </div>
                 <div>
                     <div
@@ -80,7 +85,7 @@
                                 <img
                                     src="../../../../public/img/kpay.png"
                                     alt=""
-                                    class="w-10 aspect-square mr-4"
+                                    class="w-14 h-14 aspect-square mr-4"
                                 />
                                 <div class="text-sm">
                                     <p class="flex items-center">
@@ -96,7 +101,7 @@
                                 "
                                 class="text-xs"
                             >
-                                <i class="fal fa-copy"></i>
+                                <i class="fal fa-copy text-2xl"></i>
 
                                 <p>ကူးယူမည်</p>
                             </button>
@@ -112,7 +117,7 @@
                                 <img
                                     src="../../../../public/img/wave.png"
                                     alt=""
-                                    class="w-10 aspect-square mr-4"
+                                    class="w-14 h-14 aspect-square mr-4"
                                 />
                                 <div class="text-sm">
                                     <p class="flex items-center">
@@ -128,16 +133,16 @@
                                 "
                                 class="text-xs"
                             >
-                                <i class="fal fa-copy"></i>
+                                <i class="fal fa-copy text-2xl"></i>
 
                                 <p>ကူးယူမည်</p>
                             </button>
                         </div>
                     </div>
 
-                    <div class="px-12 py-8 shadow-lg rounded-2xl mb-8 bg-white">
-                        <p class="mb-4">Fill The Form</p>
-                        <div class="mb-4">
+                    <div class="px-10 py-6 shadow-lg rounded-2xl mb-8 bg-white">
+                        <p class="w-full text-center mb-6 text-lg">Fill The Form</p>
+                        <div class="mb-8">
                             <label
                                 for="amount"
                                 class="text-sm mb-3 relative block"
@@ -166,7 +171,7 @@
                         <div class="mb-4">
                             <button
                                 @click="makeTopupTransactionBtnClicked"
-                                class="bg-[#FDC652] text-white px-4 py-2 w-full"
+                                class="bg-black text-white px-4 py-2 w-full rounded-md"
                             >
                                 Done
                             </button>
@@ -175,7 +180,7 @@
                 </div>
             </div>
         </div>
-        <div class="px-12 py-16 shadow-lg rounded-2xl mb-8 bg-white">
+        <!-- <div class="px-12 py-16 shadow-lg rounded-2xl mb-8 bg-white">
             <div class="flex flex-col gap-y-4">
                 <a href="/history" class="flex items-center">
                     <i class="fal fa-wallet mr-4 w-4"></i>
@@ -201,7 +206,7 @@
                     <p>Contacts</p>
                 </a>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

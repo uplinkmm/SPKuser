@@ -201,10 +201,10 @@ export default {
                 token: this.getToken,
             });
             if (this.type == "topup_transaction") {
-                this.topup_transaction = response.data.data;
+                this.topup_transaction = response.data;
             }
             if (this.type == "cash_withdrawal_transaction") {
-                this.cash_withdrawal_transaction = response.data.data;
+                this.cash_withdrawal_transaction = response.data;
             }
         },
         dateFormat(date_time) {

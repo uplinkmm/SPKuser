@@ -6,7 +6,7 @@
             :back-btn="backBtn"
         ></Navbar>
 
-        <div>
+        <div class="px-4">
             <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
                 <div>
                     <div class="flex justify-between gap-x-4 mb-4">
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="px-12 py-16 shadow-lg rounded-2xl mb-8 bg-white">
+            <div class="px-12 py-16 shadow-lg rounded-2xl mb-16 bg-white">
                 <div class="flex flex-col gap-y-4">
                     <a
                         href="/deposit_withdrawal_histories"

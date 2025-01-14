@@ -1,6 +1,6 @@
 <template>
     <main
-        class="w-full h-full min-h-[60vh] mx-auto px-8 bg-white pb-2 flex flex-row justify-center items-center relative"
+        class="w-full h-full min-h-[60vh] mx-auto px-8  pb-2 flex flex-row justify-center relative"
     >
         <div class="">
             <div class="mb-4">
@@ -14,7 +14,7 @@
             </div>
             <div class="mb-4">
                 <label
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md"
+                    class="block w-full py-2 px-2 border bg-white border-gray-400 text-sm rounded-md"
                 >
                     <input
                         type="text"
@@ -77,7 +77,7 @@
                 <button
                     @click="register"
                     :disabled="!otpRequested"
-                    class="block w-full py-2 px-2 text-sm rounded-md bg-[#FDC652] text-white focus:ring-0 focus:shadow-none"
+                    class="block w-full py-2 px-2 text-sm rounded-md border border-[#E4BD1B] bg-black text-white focus:ring-0 focus:shadow-none"
                 >
                     Sign Up
                 </button>

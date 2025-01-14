@@ -82,7 +82,14 @@
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
                             <p>Feedback</p>
                         </a>
-                        <a href="#" class="flex items-center">
+                        <a
+                            @click="
+                                step = 'contacts';
+                                title = 'Contact us';
+                            "
+                            href="#"
+                            class="flex items-center"
+                        >
                             <i class="fal fa-phone mr-4 w-4"></i>
                             <p>Contacts</p>
                         </a>
@@ -156,6 +163,37 @@
                     <p v-html="terms_and_conditions.name"></p>
                 </div>
             </div>
+
+            <div
+                v-show="step == 'contacts'"
+                class="px-8 py-16 shadow-lg rounded-2xl mb-8 bg-white"
+            >
+                <div class="space-y-6">
+                    <div
+                        v-for="(contact, index) in contacts"
+                        :key="index"
+                        class="flex items-center p-4 bg-gray-50 rounded-lg shadow-sm"
+                    >
+                        <div
+                            class="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full"
+                        >
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-medium text-gray-800">
+                                {{ contact.name }}
+                            </p>
+                            <a
+                                :href="'tel:' + contact.phone_number"
+                                class="text-blue-500 hover:underline"
+                            >
+                                {{ contact.phone_number }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -180,6 +218,8 @@ export default {
             new_password: "",
             new_password_confirmation: "",
             terms_and_conditions: "",
+            contacts: [],
+
         };
     },
     computed: {
@@ -196,7 +236,7 @@ export default {
             this.title = "Change Password";
         },
         backBtn() {
-            if (this.step == "changePass") {
+            if (this.step == "changePass" || this.step == "contacts") {
                 this.step = "mainProfile";
                 this.title = "Profile";
                 return;
@@ -211,6 +251,8 @@ export default {
                 token: this.getToken,
             });
             this.user_profile_data = response.data;
+            this.contacts = response.data.contact;
+
         },
         async getTermsAndConditions() {
             let response = await getApiData({
