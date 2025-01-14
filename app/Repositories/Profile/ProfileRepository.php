@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Profile;
 
+use App\Models\Contact;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
