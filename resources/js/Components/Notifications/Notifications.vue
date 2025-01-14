@@ -162,7 +162,7 @@
                         >
                             <!-- Image in front -->
                             <img
-                                :src="promo.photo"
+                                :src="`${img_prefix}${promo.photo}`"
                                 class="w-12 h-12 rounded-full mr-4"
                             />
 
@@ -221,6 +221,7 @@ export default {
             showSpinner: false,
             page: 1,
             last_page: 0,
+            img_prefix:""
         };
     },
     components: {
@@ -319,6 +320,11 @@ export default {
     created() {},
 
     mounted() {
+        if (window.location.href.includes("shweshankan")) {
+            this.img_prefix = "https://admin.shweshankan.com";
+        } else {
+            this.img_prefix = "http://localhost:8001";
+        }
         this.getNotis();
         window.addEventListener("scroll", this.handleScroll);
 
