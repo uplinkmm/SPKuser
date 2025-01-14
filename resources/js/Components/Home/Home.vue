@@ -255,13 +255,13 @@ export default {
         // this.getGameLists();
         this.getGameTypes();
 
-        if (window.location.href.includes("shwepaukkan")) {
-            this.img_prefix = "https://admin.shwepaukkan.com";
+        if (window.location.href.includes("shweshankan")) {
+            this.img_prefix = "https://admin.shweshankan.com";
         } else {
             this.img_prefix = "http://localhost:8001";
         }
         this.getAds();
-        this.intervalId = setInterval(this.get2DList, 3000);
+        // this.intervalId = setInterval(this.get2DList, 3000);
 
         initTWE({ Modal, Tab, Ripple });
 
