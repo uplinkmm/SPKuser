@@ -80,7 +80,7 @@
                         </a>
                         <a href="#" class="flex items-center">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
-                            <p>Feedback</p>
+                            <button data-twe-toggle="modal" data-twe-target="#add_feedback_modal">Feedback</button>
                         </a>
                         <a
                             @click="
@@ -195,10 +195,59 @@
             </div>
 
         </div>
+
+
+
+
+
+        <div
+            data-twe-modal-init
+            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="add_feedback_modal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div data-twe-modal-dialog-ref class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]">
+                <div class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none">
+                    <div class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6">
+                        <h4 class="text-xl font-medium leading-normal text-surface text-center w-full" id="exampleModalLabel">
+                            Feed Back
+                        </h4>
+                        <button type="button" id="close_main_money_model"
+                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-twe-modal-dismiss aria-label="Close" >
+                            <span class="[&>svg]:h-6 [&>svg]:w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="relative flex-auto pb-6 px-16" data-twe-modal-body-ref>
+                        <div class="mb-8">
+                            <label for="feedback" class="text-sm mb-3 relative block">Feed Back</label>
+                            <textarea
+                                type="number" rows="8"
+                                id="feedback" placeholder="Feed Back"
+                                class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
+                            ></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <button class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import { Modal, Ripple, Dropdown, initTWE } from "tw-elements";
 import { mapGetters, mapMutations } from "vuex";
 import { getApiData, postApiData } from "../../utilities/ajax-helpers";
 import Navbar from "../Nav/Navbar.vue";
@@ -352,6 +401,7 @@ export default {
     },
 
     mounted() {
+        initTWE({ Modal, Ripple, Dropdown });
         this.getProfile();
         this.getTermsAndConditions();
     },
