@@ -16,6 +16,7 @@ use App\Http\Controllers\API\BettingTransactionController;
 use App\Http\Controllers\API\TopupTransactionAPIController;
 use App\Http\Controllers\API\CustomerMoneyBalanceController;
 use App\Http\Controllers\API\CashWithdrawlTransactionAPIController;
+use App\Http\Controllers\API\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ Route::controller(AdsController::class)->group(function () {
 Route::controller(TermAndConditionController::class)->group(function () {
     Route::get('get_term_and_condition', 'index');
 });
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get('get_profile', 'getProfile');
         Route::post('change_password', 'changePassword');
@@ -86,7 +87,7 @@ Route::middleware('auth:api')->group(function () {
     Route::controller(WalletTransferController::class)->group(function () {
         Route::post('create_wallet_transfer', 'createWalletTransfer');
     }); 
-
+    Route::resource('feedbacks', FeedbackController::class)->only(['index', 'store','destroy']);
 });
 Route::get('/generate_hash', [SlotController::class, 'getGameList']);
 

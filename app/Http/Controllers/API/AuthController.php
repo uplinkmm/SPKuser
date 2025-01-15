@@ -48,8 +48,11 @@ class AuthController extends Controller
         // dd($request->user()->currentAccessToken()->delete());
         // $request->user()->tokens()->delete();
         // auth()->guard('sanctum')->forgetUser();
+        // $token = $request->user()->currentAccessToken();
+
         if ($request->user()->currentAccessToken()) {
             // Ensure it's not a TransientToken
+            // $token = $request->bearerToken();
             $token = $request->user()->currentAccessToken();
             // dd($token);
             if (!($token instanceof \Laravel\Sanctum\TransientToken)) {
