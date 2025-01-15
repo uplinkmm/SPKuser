@@ -80,18 +80,21 @@
                         </a>
                         <a href="#" class="flex items-center">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
-                            <button data-twe-toggle="modal" data-twe-target="#add_feedback_modal">Feedback</button>
+                            <button
+                                data-twe-toggle="modal"
+                                data-twe-target="#add_feedback_modal"
+                            >
+                                Feedback
+                            </button>
                         </a>
-                        <a
-                            @click="
-                                step = 'contacts';
-                                title = 'Contact us';
-                            "
-                            href="#"
-                            class="flex items-center"
-                        >
+                        <a href="#" class="flex items-center">
                             <i class="fal fa-phone mr-4 w-4"></i>
-                            <p>Contacts</p>
+                            <button
+                                data-twe-toggle="modal"
+                                data-twe-target="#contact_modal"
+                            >
+                                Contacts
+                            </button>
                         </a>
                         <a @click="logOut" class="flex items-center">
                             <i class="fal fa-sign-out-alt mr-4 w-4"></i>
@@ -163,42 +166,7 @@
                     <p v-html="terms_and_conditions.name"></p>
                 </div>
             </div>
-
-            <div
-                v-show="step == 'contacts'"
-                class="px-8 py-16 shadow-lg rounded-2xl mb-8 bg-white"
-            >
-                <div class="space-y-6">
-                    <div
-                        v-for="(contact, index) in contacts"
-                        :key="index"
-                        class="flex items-center p-4 bg-gray-50 rounded-lg shadow-sm"
-                    >
-                        <div
-                            class="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full"
-                        >
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-lg font-medium text-gray-800">
-                                {{ contact.name }}
-                            </p>
-                            <a
-                                :href="'tel:' + contact.phone_number"
-                                class="text-blue-500 hover:underline"
-                            >
-                                {{ contact.phone_number }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-
-
-
 
         <div
             data-twe-modal-init
@@ -208,36 +176,156 @@
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
         >
-            <div data-twe-modal-dialog-ref class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]">
-                <div class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none">
-                    <div class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6">
-                        <h4 class="text-xl font-medium leading-normal text-surface text-center w-full" id="exampleModalLabel">
-                            Feed Back
+            <div
+                data-twe-modal-dialog-ref
+                class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
+            >
+                <div
+                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                >
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
+                    >
+                        <h4
+                            class="text-xl font-medium leading-normal text-surface text-center w-full"
+                            id="exampleModalLabel"
+                        >
+                            Feedback
                         </h4>
-                        <button type="button" id="close_main_money_model"
+                        <button
+                            type="button"
+                            id="close_feedback"
                             class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                            data-twe-modal-dismiss aria-label="Close" >
+                            data-twe-modal-dismiss
+                            aria-label="Close"
+                        >
                             <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
                                 </svg>
                             </span>
                         </button>
                     </div>
-                    <div class="relative flex-auto pb-6 px-16" data-twe-modal-body-ref>
+                    <div
+                        class="relative flex-auto pb-6 px-16"
+                        data-twe-modal-body-ref
+                    >
                         <div class="mb-8">
-                            <label for="feedback" class="text-sm mb-3 relative block">Feed Back</label>
+                            <label
+                                for="feedback"
+                                class="text-sm mb-3 relative block"
+                                >Feed Back</label
+                            >
                             <textarea
-                                type="number" rows="8"
-                                id="feedback" placeholder="Feed Back"
+                                v-model="feedback"
+                                type="text"
+                                rows="8"
+                                id="feedback"
+                                placeholder="Feed Back"
                                 class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
                             ></textarea>
                         </div>
 
                         <div class="mb-4">
-                            <button class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full">
+                            <button
+                                @click="sendFeedback"
+                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                            >
                                 Send
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            data-twe-modal-init
+            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="contact_modal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                data-twe-modal-dialog-ref
+                class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
+            >
+                <div
+                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                >
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
+                    >
+                        <h4
+                            class="text-xl font-medium leading-normal text-surface text-center w-full"
+                            id="exampleModalLabel"
+                        >
+                            Contacts
+                        </h4>
+                        <button
+                            type="button"
+                            id="close_contact"
+                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-twe-modal-dismiss
+                            aria-label="Close"
+                        >
+                            <span class="[&>svg]:h-6 [&>svg]:w-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                    <div
+                        class="relative flex-auto pb-6 px-16"
+                        data-twe-modal-body-ref
+                    >
+                        <div class="mb-8">
+                            <div
+                                v-for="(contact, index) in contacts"
+                                :key="index"
+                                class="flex items-center p-4 bg-gray-50 rounded-lg shadow-sm"
+                            >
+                                <div
+                                    class="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full"
+                                >
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p
+                                        class="text-lg font-medium text-gray-800"
+                                    >
+                                        {{ contact.name }}
+                                    </p>
+                                    <a
+                                        :href="'tel:' + contact.phone_number"
+                                        class="text-blue-500 hover:underline"
+                                    >
+                                        {{ contact.phone_number }}
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -267,8 +355,8 @@ export default {
             new_password: "",
             new_password_confirmation: "",
             terms_and_conditions: "",
+            feedback: "",
             contacts: [],
-
         };
     },
     computed: {
@@ -301,7 +389,6 @@ export default {
             });
             this.user_profile_data = response.data;
             this.contacts = response.data.contact;
-
         },
         async getTermsAndConditions() {
             let response = await getApiData({
@@ -309,6 +396,43 @@ export default {
                 token: this.getToken,
             });
             this.terms_and_conditions = response.data;
+        },
+        async sendFeedback() {
+            if (!this.feedback) {
+                this.$notify({
+                    text: "Fill the feedback form!.",
+                    type: "error",
+                });
+                return;
+            }
+            let url = "/api/feedbacks";
+            let formData = new FormData();
+            formData.append("text", this.feedback);
+
+            let response = await postApiData({
+                url: url,
+                form_data: formData,
+                token: this.getToken,
+            });
+            if (response.success) {
+                this.$notify({
+                    text: "Successfully send feedback.",
+                    type: "info",
+                });
+                this.feedback = "";
+                this.modalClose("close_feedback");
+            } else {
+                this.$notify({
+                    text: response.message?.text,
+                    type: "error",
+                });
+            }
+        },
+        modalClose(id) {
+            const button = document.getElementById(id);
+            if (button) {
+                button.click();
+            }
         },
         dateFormat(date_time) {
             return moment(date_time).format("MM DD YYYY");
