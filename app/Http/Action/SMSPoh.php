@@ -30,7 +30,7 @@ class SMSPoh
 
         //payload
         $payload = [
-            "from" => "Uplink-mm", // Sender name
+            "from" => "SMSPoh Demo", // Sender name
             "to" => $this->customer->phone_number, // Recipient phone number
             "message" => "Your otp code is " . $this->customer->otp, // OTP message
         ];
@@ -44,7 +44,7 @@ class SMSPoh
             // Check for successful response
             if ($response->successful()) {
                 // return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
-                Log::error('OTP sent successfully.');
+                Log::info('OTP sent successfully.');
                 return true;
             }
 
