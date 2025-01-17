@@ -26,6 +26,8 @@ class SMSPoh
         $combined = "$apiKey:$apiSecret"; // Combine API key and secret in the format <apiKey>:<apiSecret>
 
         $apiToken = base64_encode($combined);
+        $decoded = base64_decode($apiToken);
+
         //payload
         $payload = [
             "from" => "Uplink-mm", // Sender name
@@ -35,16 +37,17 @@ class SMSPoh
 
         try {
             $response = Http::withHeaders([
-                'Authorization' => "Bearer {$apiToken}",
+                'Authorization' => "Bearer $apiToken",
                 'Content-Type' => 'application/json',
             ])->post($apiEndPoint, $payload);
-    
+
             // Check for successful response
             if ($response->successful()) {
                 // return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
+                Log::error('OTP sent successfully.');
                 return true;
             }
-    
+
             // Log and return error response if request fails
             Log::error('Failed to send OTP:', ['response' => $response->body()]);
             return false;
