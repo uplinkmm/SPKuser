@@ -134,7 +134,7 @@ export default {
         async getNotis() {
             let response = await getApiData({
                 url: `/api/notification_list?type=betting_win&page=1&is_count=0`,
-                token: this.getToken,
+                token: this.getToken ? this.getToken : "",
             });
             if (response.success) {
                 this.setNotiCount(response.data.count);
