@@ -130,11 +130,11 @@ export default {
         ...mapGetters(["notiCount", "getToken", "getUser"]),
     },
     methods: {
-        ...mapMutations(["setNotiCount"]),
+        ...mapMutations(["setNotiCount", "setUser"]),
         async getNotis() {
             let response = await getApiData({
                 url: `/api/notification_list?type=betting_win&page=1&is_count=0`,
-                token: this.getToken,
+                token: this.getToken ? this.getToken : "",
             });
             if (response.success) {
                 this.setNotiCount(response.data.count);
@@ -145,6 +145,11 @@ export default {
                     this.needAuth
                 ) {
                     window.location.href = "/login_register";
+                } else if (
+                    response.message == "Please login to continue" &&
+                    !this.needAuth
+                ) {
+                    this.setUser("");
                 }
             }
         },

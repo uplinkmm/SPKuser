@@ -5,9 +5,10 @@ export async function getApiData(payload)
     let response = null;
     response = await axios.get(payload.url, {
         headers: {
-            'Content-Type': 'multipart/formdata',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'Authorization': 'Bearer ' + payload.token,
-            'Access-Control-Allow-Origin': '*'
+            // 'Access-Control-Allow-Origin': '*'
         }
     }).then(function(response){
         let responsePayload = { data: null, message: null, success: response.data.success };

@@ -74,9 +74,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(BettingTransactionController::class)->group(function () {
         Route::post('createTransaction', 'createTransaction');
     });
-    Route::controller(NotificationController::class)->group(function () {
-        Route::get('notification_list', 'index');
-    }); 
+    // Route::controller(NotificationController::class)->group(function () {
+    //     Route::get('notification_list', 'index');
+    // }); 
     Route::get('/game_list', [GameController::class, 'index']);
     Route::controller(GameController::class)->group(function () {
         Route::get('game_setting_by_game_id', 'getGameSetting');
@@ -90,6 +90,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('feedbacks', FeedbackController::class)->only(['index', 'store','destroy']);
 });
 Route::get('/generate_hash', [SlotController::class, 'getGameList']);
+Route::middleware('auth:sanctum')->get('/notification_list', [NotificationController::class, 'index']);
 
 
 
