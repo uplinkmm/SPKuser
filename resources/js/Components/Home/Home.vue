@@ -25,14 +25,14 @@
             </a>
         </div> -->
         <div class="px-4 mb-16">
-            <div class="w-full pt-4">
+            <!-- <div class="w-full pt-4">
                 <a class="contents">
                     <img
                         src="../../../../public/img/home_img.png"
                         class="w-full"
                     />
                 </a>
-            </div>
+            </div> -->
             <div class="-mx-3" id="ad_slick">
                 <div class="w-full mx-3" v-for="(ads, index) in adses">
                     <img
@@ -255,13 +255,13 @@ export default {
         // this.getGameLists();
         this.getGameTypes();
 
-        if (window.location.href.includes("shwepaukkan")) {
-            this.img_prefix = "https://admin.shwepaukkan.com";
+        if (window.location.href.includes("shweshankan")) {
+            this.img_prefix = "https://admin.shweshankan.com";
         } else {
             this.img_prefix = "http://localhost:8001";
         }
         this.getAds();
-        this.intervalId = setInterval(this.get2DList, 3000);
+        // this.intervalId = setInterval(this.get2DList, 3000);
 
         initTWE({ Modal, Tab, Ripple });
 
