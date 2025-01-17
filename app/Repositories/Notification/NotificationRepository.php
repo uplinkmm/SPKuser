@@ -97,6 +97,7 @@ class NotificationRepository implements NotificationInterface
         $balance = CustomerWallet::where('customer_id', UserData()->id)->first();
         $userData->balance = $balance ? $balance->balance : 0;
         $userData->name = UserData()->name;
+        $userData->game_money_balance=UserData()->balanceFloat;
         $data['user'] = $userData;
         return $data;
 

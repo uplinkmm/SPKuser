@@ -9,7 +9,10 @@
     >
         <div v-if="isHomePage && user" class="flex gap-x-2 text-sm">
             <p>{{ user.name }}</p>
+            <i class="far fa-wallet pl-2 mt-1"></i>
             <p>{{ user.balance?.toLocaleString() }}</p>
+            <i class="far fa-gamepad pl-4 mt-1"></i>
+            <p>{{ user.game_money_balance?.toLocaleString() }}</p>
         </div>
         <FcmNotification :get-noti="getNotis"></FcmNotification>
         <button v-if="hideBackBtn == false">
@@ -160,6 +163,14 @@ export default {
             }
         },
         async getGameUrl(game) {
+            if (!this.getToken) {
+                this.$notify({
+                    text: "Please login to continue!",
+                    type: "error",
+                });
+                window.location.href = "/login_register";
+                return;
+            }
             let url = `/api/game/Seamless/LaunchGame`;
             let formData = new FormData();
             formData.append("productId", game.product.code);

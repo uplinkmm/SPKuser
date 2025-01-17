@@ -76,13 +76,16 @@ class AuthController extends Controller
             'password' => rand(0000, 9999),
             // 'otp' => rand(000000, 999999),
         ];
-
         try {
-            $customer=Customer::firstOrCreate(
+            $customer = Customer::firstOrCreate(
                 ['phone_number' => $request->phone_number, 'is_verified' => 0],
                 $customerData // Default values to create a new user
             );
-            (new SMSPoh($customer))->sendVerifcationCode();
+            $isSuccess = (new SMSPoh($customer))->sendVerifcationCode();
+            if ($isSuccess) {
+                return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
+            }
+            return response()->json(['success' => false, 'message' => 'Failed to send OTP.'],);
             ResponseMessage('OTP sent, check SMS message');
         } catch (Exception $e) {
             ResponseMessage($e->getMessage(), 400);

@@ -51,7 +51,7 @@ Route::group(['prefix' => 'Seamless'], function () {
     Route::post('PushBet', [PushBetController::class, 'pushBet']);
     Route::post('Bonus', [BonusController::class, 'bonus']);
     Route::post('Jackpot', [JackPotController::class, 'jackPot']);
-  
+
     Route::post('MobileLogin', [MobileLoginController::class, 'MobileLogin']);
     // });
 });
@@ -64,9 +64,11 @@ Route::middleware('auth:api')->group(function () {
     Route::group(['prefix' => 'game'], function () {
         Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
         Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
-        Route::get('search_game', [GameController::class, 'searchGameList']);
     });
     Route::group(['prefix' => 'direct'], function () {
         Route::post('Seamless/LaunchGame', [DirectLaunchGameController::class, 'launchGame']);
     });
+});
+Route::group(['prefix' => 'game'], function () {
+    Route::get('search_game', [GameController::class, 'searchGameList']);
 });
