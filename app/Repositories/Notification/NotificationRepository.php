@@ -14,9 +14,11 @@ class NotificationRepository implements NotificationInterface
     public function notificationList($request)
     {
         $bearerToken = $request->bearerToken();
-        $currentAccessToken = $request->user()->currentAccessToken();
-        dd($currentAccessToken);
-        // $type = $request->type == 'topup_transaction' ? ['topup_transaction', 'cash_withdrawl_transaction'] : ['betting_win', 'twist_win_number'];
+        $authToken=null;
+         if ($bearerToken) {
+            [$id, $plainTextToken] = explode('|', $bearerToken, 2);
+            $authToken = $request->user()->tokens()->where('id', $id)->first();
+        }
         if($request->type=='topup_transaction'){
             $type=['topup_transaction', 'cash_withdrawl_transaction'];
         }elseif($request->type=='betting_win'){
@@ -24,7 +26,7 @@ class NotificationRepository implements NotificationInterface
         }else{
             $type=['ads'] ;
         }
-        if($bearerToken){
+        if($authToken){
             $userId =  UserData()->id;
         }else{
             $userId=null;
