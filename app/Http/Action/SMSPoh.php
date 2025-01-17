@@ -30,7 +30,7 @@ class SMSPoh
 
         //payload
         $payload = [
-            "from" => "Uplink-mm", // Sender name
+            "from" => "SMSPoh Demo", // Sender name
             "to" => $this->customer->phone_number, // Recipient phone number
             "message" => "Your otp code is " . $this->customer->otp, // OTP message
         ];
