@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
 
-class PullReport extends Command
+class PullReportCommand extends Command
 {
     /**
      * The name and signature of the console command.
