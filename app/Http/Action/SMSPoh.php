@@ -44,7 +44,7 @@ class SMSPoh
             // Check for successful response
             if ($response->successful()) {
                 // return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
-                Log::error('OTP sent successfully.');
+                Log::info('OTP sent successfully.');
                 return true;
             }
 
