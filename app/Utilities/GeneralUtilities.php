@@ -302,8 +302,8 @@ if (!function_exists('requestDateTimeFormat')) {
 if (!function_exists('UserData')) {
     function UserData()
     {
-        //return  auth('api')->user();
-        return auth('sanctum')->user();
+        return  auth('api')->user();
+        // return auth('sanctum')->user();
     }
 }
 
