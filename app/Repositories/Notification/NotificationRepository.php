@@ -13,12 +13,7 @@ class NotificationRepository implements NotificationInterface
 {
     public function notificationList($request)
     {
-        $bearerToken = $request->bearerToken();
-        $authToken=null;
-         if ($bearerToken) {
-            [$id, $plainTextToken] = explode('|', $bearerToken, 2);
-            $authToken = $request->user()->tokens()->where('id', $id)->first();
-        }
+        $authToken=checkAuthToken($request);
         if($request->type=='topup_transaction'){
             $type=['topup_transaction', 'cash_withdrawl_transaction'];
         }elseif($request->type=='betting_win'){
