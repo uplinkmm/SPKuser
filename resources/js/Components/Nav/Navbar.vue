@@ -12,7 +12,7 @@
             <i class="far fa-wallet pl-2 mt-1"></i>
             <p>{{ user.balance?.toLocaleString() }}</p>
             <i class="far fa-gamepad pl-4 mt-1"></i>
-            <p>{{ user.balance?.toLocaleString() }}</p>
+            <p>{{ user.game_money_balance?.toLocaleString() }}</p>
         </div>
         <FcmNotification :get-noti="getNotis"></FcmNotification>
         <button v-if="hideBackBtn == false">
