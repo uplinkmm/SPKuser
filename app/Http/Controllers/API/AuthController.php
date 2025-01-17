@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Action\SMSPoh;
 use Exception;
 
 use App\Models\User;
@@ -62,7 +63,6 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Cannot delete a transient token.'], 400);
             }
         } else {
-            dd('ef');
             return response()->json(['message' => 'No current access token found.'], 400);
         }
         ResponseMessage('Successfully logged out');
@@ -75,14 +75,14 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'password' => rand(0000, 9999),
             // 'otp' => rand(000000, 999999),
-            'otp' => '000000',
         ];
 
         try {
-            Customer::firstOrCreate(
+            $customer=Customer::firstOrCreate(
                 ['phone_number' => $request->phone_number, 'is_verified' => 0],
                 $customerData // Default values to create a new user
             );
+            (new SMSPoh($customer))->sendVerifcationCode();
             ResponseMessage('OTP sent, check SMS message');
         } catch (Exception $e) {
             ResponseMessage($e->getMessage(), 400);
