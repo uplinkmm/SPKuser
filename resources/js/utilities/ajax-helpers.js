@@ -6,6 +6,7 @@ export async function getApiData(payload)
     response = await axios.get(payload.url, {
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'Authorization': 'Bearer ' + payload.token,
             // 'Access-Control-Allow-Origin': '*'
         }
