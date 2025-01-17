@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Action\SMSPoh;
 use Exception;
-
 use App\Models\User;
-use App\Models\Agent;
 
+use App\Models\Agent;
 use App\Models\Customer;
+
+use App\Http\Action\SMSPoh;
 
 use Illuminate\Http\Request;
 
@@ -17,6 +17,7 @@ use App\Models\PersonFcmToken;
 use Illuminate\Support\Facades\DB;
 use App\Actions\Auth\APILoginAction;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Customer\CustomerRequest;
 use App\Http\Requests\Customer\ForgetPasswordRequest;
@@ -47,24 +48,26 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         // dd($request->user()->currentAccessToken()->delete());
-        // $request->user()->tokens()->delete();
+        $request->user()->tokens()->delete();
+        ResponseMessage('Successfully logged out');
+
         // auth()->guard('sanctum')->forgetUser();
         // $token = $request->user()->currentAccessToken();
-        $bearerToken = $request->bearerToken();
-        if ($bearerToken) {
-            // Extract the token ID from the bearer token (e.g., "53|...").
-            [$id, $plainTextToken] = explode('|', $bearerToken, 2);
+        
+        // $bearerToken = $request->bearerToken();
+        // if ($bearerToken) {
+        //     // Extract the token ID from the bearer token (e.g., "53|...").
+        //     [$id, $plainTextToken] = explode('|', $bearerToken, 2);
+        //     // Find the token in the database.
+        //     $token = $request->user()->tokens()->where('id', $id)->first();
+        //     // if ($token && Hash::check($plainTextToken, $token->token)) {
+        //     if ($token) {
+        //         $token->delete(); // Delete the token from the database.
+        //         ResponseMessage('Successfully logged out');
 
-            // Find the token in the database.
-            $token = $request->user()->tokens()->where('id', $id)->first();
-            // if ($token && Hash::check($plainTextToken, $token->token)) {
-            if ($token) {
-                $token->delete(); // Delete the token from the database.
-                ResponseMessage('Successfully logged out');
-
-                return response()->json(['message' => 'Successfully logged out']);
-            }
-        }
+        //         return response()->json(['message' => 'Successfully logged out']);
+        //     }
+        // }
 
 
         // if ($request->user()->currentAccessToken()) {
