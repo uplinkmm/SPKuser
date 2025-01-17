@@ -50,21 +50,39 @@ class AuthController extends Controller
         // $request->user()->tokens()->delete();
         // auth()->guard('sanctum')->forgetUser();
         // $token = $request->user()->currentAccessToken();
+        $bearerToken = $request->bearerToken();
+        if ($bearerToken) {
+            // Extract the token ID from the bearer token (e.g., "53|...").
+            [$id, $plainTextToken] = explode('|', $bearerToken, 2);
 
-        if ($request->user()->currentAccessToken()) {
-            // Ensure it's not a TransientToken
-            // $token = $request->bearerToken();
-            $token = $request->user()->currentAccessToken();
-            // dd($token);
-            if (!($token instanceof \Laravel\Sanctum\TransientToken)) {
-                $token->delete(); // Delete the database token
+            // Find the token in the database.
+            $token = $request->user()->tokens()->where('id', $id)->first();
+            // if ($token && Hash::check($plainTextToken, $token->token)) {
+            if ($token) {
+                $token->delete(); // Delete the token from the database.
+                ResponseMessage('Successfully logged out');
+
                 return response()->json(['message' => 'Successfully logged out']);
-            } else {
-                return response()->json(['message' => 'Cannot delete a transient token.'], 400);
             }
-        } else {
-            return response()->json(['message' => 'No current access token found.'], 400);
         }
+
+
+        // if ($request->user()->currentAccessToken()) {
+        //     // Ensure it's not a TransientToken
+        //     $bearerToken = $request->bearerToken();
+        //     dd($request->user()->tokens()->first());
+        //     $token = $request->user()->tokens()->where('token', hash('sha256', $bearerToken))->first();
+
+        //     $token = $request->user()->currentAccessToken();
+        //     if (!($token instanceof \Laravel\Sanctum\TransientToken)) {
+        //         $token->delete(); // Delete the database token
+        //         return response()->json(['message' => 'Successfully logged out']);
+        //     } else {
+        //         return response()->json(['message' => 'Cannot delete a transient token.'], 400);
+        //     }
+        // } else {
+        //     return response()->json(['message' => 'No current access token found.'], 400);
+        // }
         ResponseMessage('Successfully logged out');
     }
 
@@ -85,7 +103,7 @@ class AuthController extends Controller
             if ($isSuccess) {
                 return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
             }
-            return response()->json(['success' => false, 'message' => 'Failed to send OTP.'],);
+            return response()->json(['success' => false, 'message' => 'Failed to send OTP.'], );
             ResponseMessage('OTP sent, check SMS message');
         } catch (Exception $e) {
             ResponseMessage($e->getMessage(), 400);

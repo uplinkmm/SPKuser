@@ -10,6 +10,8 @@ class NotificationRepository implements NotificationInterface
 {
     public function notificationList($request)
     {
+        $bearerToken = $request->bearerToken();
+        dd(UserData());
         // $type = $request->type == 'topup_transaction' ? ['topup_transaction', 'cash_withdrawl_transaction'] : ['betting_win', 'twist_win_number'];
         if($request->type=='topup_transaction'){
             $type=['topup_transaction', 'cash_withdrawl_transaction'];
