@@ -25,14 +25,14 @@
             </a>
         </div> -->
         <div class="px-4 mb-16">
-            <div class="w-full pt-4">
+            <!-- <div class="w-full pt-4">
                 <a class="contents">
                     <img
                         src="../../../../public/img/home_img.png"
                         class="w-full"
                     />
                 </a>
-            </div>
+            </div> -->
             <div class="-mx-3" id="ad_slick">
                 <div class="w-full mx-3" v-for="(ads, index) in adses">
                     <img
