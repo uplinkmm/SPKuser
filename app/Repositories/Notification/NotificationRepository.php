@@ -5,12 +5,40 @@ namespace App\Repositories\Notification;
 use App\Models\CustomerWallet;
 use App\Models\NotificationPerson;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class NotificationRepository implements NotificationInterface
 {
     public function notificationList($request)
     {
         $bearerToken = $request->bearerToken();
+        $currentAccessToken = $request->user()->currentAccessToken();
+        dd($currentAccessToken);
+        $guard = auth()->guard();  // Get the current guard
+    
+        // Check the type of the guard and log its name
+        Log::info('Current guard: ' . get_class($guard));
+    
+        // You can also log the user and access token
+        Log::info('Authenticated user: ', [auth()->user()]);
+        Log::info('Current access token: ', [auth()->user()?->currentAccessToken()]);
+
+
+//         Log::info('Auth guard: ' . auth()->guard()->getName());
+// Log::info('Authenticated user: ', [auth()->user()]);
+// Log::info('Current access token: ', [auth()->user()?->currentAccessToken()]);
+//         dd($currentAccessToken);
+//         Log::info('Bearer Token: ' . $request->bearerToken());
+//         $token = PersonalAccessToken::findToken('58|cHrb0RouqoIWEArRvBQhBHWjq30q9WSri51tCDbJ43f5e703');
+// if ($token) {
+//     Log::info('Token found: ' . $token->id);
+// } else {
+//     Log::info('Token not found in the database.');
+// }
+        // Log::info('Current Access Token: ' . $currentAccessToken);
+
         // $type = $request->type == 'topup_transaction' ? ['topup_transaction', 'cash_withdrawl_transaction'] : ['betting_win', 'twist_win_number'];
         if($request->type=='topup_transaction'){
             $type=['topup_transaction', 'cash_withdrawl_transaction'];
