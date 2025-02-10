@@ -1,10 +1,7 @@
 <template lang="">
     <notifications position="top center" />
 
-    <div
-        v-if="step == 7"
-        class="frame-container min-h-[100vh]"
-    >
+    <div v-if="step == 7" class="frame-container min-h-[100vh]">
         <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         <!-- <div class="mb-3 flex justify-end px-4">
             <select
@@ -25,19 +22,24 @@
             </select>
         </div> -->
         <div class="flex justify-center px-4 mb-6">
-            <button v-for="(setting, index) in settings" 
-            @click="   
-                    setting_value= setting.id;
+            <button
+                v-for="(setting, index) in settings"
+                @click="
+                    setting_value = setting.id;
                     winners = [];
                     getBetWinners();
-                    " 
-                    class="mx-0 text-sm px-3 py-3 primary-text" :class="setting_value == setting.id ? 'after:!block underline-border relative' : ''">
-                    {{ setting.name }}
+                "
+                class="mx-0 text-sm px-3 py-3 primary-text"
+                :class="
+                    setting_value == setting.id
+                        ? 'after:!block underline-border relative'
+                        : ''
+                "
+            >
+                {{ setting.name }}
             </button>
         </div>
-        <div
-            class="relative mb-0 w-full rounded-lg bg-white pt-4 pb-14 px-4"
-        >
+        <div class="relative mb-0 w-full rounded-lg bg-white pt-4 pb-14 px-4">
             <table class="table-auto w-full">
                 <thead class="bg-white text-black">
                     <tr>
@@ -50,9 +52,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(winner, index) in winners" :key="index" class="border-b !border-gray-400">
+                    <tr
+                        v-for="(winner, index) in winners"
+                        :key="index"
+                        class="border-b !border-gray-400"
+                    >
                         <td class="text-center text-sm py-4">{{ ++index }}</td>
-                        <td class="text-center text-sm py-4">{{ winner.name }}</td>
+                        <td class="text-center text-sm py-4">
+                            {{ winner.name }}
+                        </td>
                         <!-- <td class="text-center text-sm py-4">
                             {{ formatDate(winner.date_time) }}
                         </td> -->
@@ -72,10 +80,7 @@
         </div>
     </div>
 
-    <div
-        v-else
-        class="frame-container min-h-[100vh]"
-    >
+    <div v-else class="frame-container min-h-[100vh]">
         <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         <!-- Error page -->
         <div :class="step == 6 ? 'block' : 'hidden'">
@@ -116,7 +121,10 @@
                         </a>
                     </div>
                 </div>
-                <div v-if="twod_settings.length" class="bg-transparent items-center justify-center mb-8">
+                <div
+                    v-if="twod_settings.length"
+                    class="bg-transparent items-center justify-center mb-8"
+                >
                     <!-- <div class="text-center mb-4">
                         <h1 class="text-lg font-semibold">
                             ထိုးမည့်အချိန်ကို ရွေးပါ
@@ -128,11 +136,16 @@
                             v-for="(twod_setting, index) in twod_settings"
                             :key="index"
                             @click="chooseTime(twod_setting)"
-                            class=" first:bg-[#40403E] last:bg-[#DDA33F] text-white rounded-lg cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
+                            class="first:bg-[#40403E] last:bg-[#DDA33F] text-white rounded-lg cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
                         >
-                            <i class="far fa-stopwatch" style="font-size: 24px"></i>
+                            <i
+                                class="far fa-stopwatch"
+                                style="font-size: 24px"
+                            ></i>
 
-                            <span> {{ formatTime(twod_setting.lottery_time) }} </span>
+                            <span>
+                                {{ formatTime(twod_setting.lottery_time) }}
+                            </span>
                             <i
                                 class="far fa-angle-right"
                                 style="font-size: 24px"
@@ -140,7 +153,10 @@
                         </div>
                     </div>
                 </div>
-                <div v-else class="bg-transparent items-center justify-center mb-8">
+                <div
+                    v-else
+                    class="bg-transparent items-center justify-center mb-8"
+                >
                     <div
                         class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-16 flex justify-center"
                     >
@@ -156,7 +172,7 @@
 
         <div :class="step == 1 ? 'block' : 'hidden'" class="pb-16">
             <div
-                class="relative block mb-6 w-full rounded-lg shadow-xl bg-white  py-4" 
+                class="relative block mb-6 w-full rounded-lg shadow-xl bg-white py-4"
             >
                 <div class="flex gap-x-0 lg:gap-x-4">
                     <div class="w-6/12 lg:w-4/12 px-4">
@@ -192,11 +208,16 @@
                     >
                         <div>
                             <div class="mb-4">
-                                <div class=" w-full flex justify-between">
-                                    <label for="amount" class="text-sm mb-3 relative block">Amount</label>
+                                <div class="w-full flex justify-between">
+                                    <label
+                                        for="amount"
+                                        class="text-sm mb-3 relative block"
+                                        >Amount</label
+                                    >
                                     <p class="text-xs">
-                                        {{ $t("Closing Time") }}  : {{ closingTimeFormat }}
-                                   </p>
+                                        {{ $t("Closing Time") }} :
+                                        {{ closingTimeFormat }}
+                                    </p>
                                 </div>
                                 <input
                                     type="number"
@@ -214,26 +235,24 @@
                                     ထိုးမည်
                                 </button>
                             </div>
-                            
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="flex justify-between px-4">
                     <div>
                         <p class="text-sm">
-                            {{ $t("Balance") }} 
+                            {{ $t("Balance") }}
                         </p>
                         <p class="text-sm">
-                             {{ wallet_balance?.toLocaleString() }} MMks
+                            {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
                     </div>
                     <!-- <p class="text-sm">
-                        {{ $t("Balance") }}  {{ wallet_balance }} MMks
+                        {{ $t("Balance") }}  {{ wallet_balance }} MMK
                     </p> -->
                     <div>
                         <p class="text-sm">
-                            {{ $t("Closing Time") }} 
-                            
+                            {{ $t("Closing Time") }}
                         </p>
                         <p class="text-sm text-right">
                             {{ closingTimeFormat }}
@@ -316,7 +335,9 @@
             :class="step == 2 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
         >
-            <div class="flex justify-between p-6 bg-[#FDC652] text-white rounded-tr-lg rounded-tl-lg">
+            <div
+                class="flex justify-between p-6 bg-[#FDC652] text-white rounded-tr-lg rounded-tl-lg"
+            >
                 <div>
                     <p class="pr-8 py-2">
                         {{ getCurrentDate() }}
@@ -329,10 +350,12 @@
                     <p class="pr-8 py-2">
                         {{ formatTime(selectedGameSetting.lottery_time) }}
                     </p>
-                    <p class="pr-8">{{ totalBetAmount?.toLocaleString() }} MMks</p>
+                    <p class="pr-8">
+                        {{ totalBetAmount?.toLocaleString() }} MMK
+                    </p>
                 </div>
             </div>
-            <div class="mb-5  px-4">
+            <div class="mb-5 px-4">
                 <div class="flex justify-end mb-4"></div>
                 <table class="table-auto w-full">
                     <thead>
@@ -429,13 +452,13 @@
             </div>
             <div class="absolute bottom-0 mb-4 w-full flex justify-center">
                 <!-- <p class="text-sm pt-2 pr-8">
-                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount }} MMks
+                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount }} MMK
                 </p> -->
                 <button
                     class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
                     @click="step = 1"
                 >
-                    Cancle
+                    Cancel
                 </button>
                 <button
                     class="bg-[#FDC652] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
@@ -451,7 +474,9 @@
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">ရိုးရိုး</h1>
+                        <h1 class="text-lg font-semibold primary-text">
+                            ရိုးရိုး
+                        </h1>
                     </div>
 
                     <div
@@ -459,37 +484,37 @@
                     >
                         <button
                             @click="simpleBet('sone_sone')"
-                            class="border border-gray-400 text-sm rounded-lg  py-3 px-1"
+                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
                         >
                             စုံစုံ
                         </button>
                         <button
                             @click="simpleBet('ma_ma')"
-                            class="border border-gray-400 text-sm rounded-lg  py-3 px-1"
+                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
                         >
                             မမ
                         </button>
                         <button
                             @click="simpleBet('sone_ma')"
-                            class="border border-gray-400 text-sm rounded-lg  py-3 px-1"
+                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
                         >
                             စုံမ
                         </button>
                         <button
                             @click="simpleBet('ma_sone')"
-                            class="border border-gray-400 text-sm rounded-lg  py-3 px-1"
+                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
                         >
                             မစုံ
                         </button>
                         <button
                             @click="simpleBet('sone_puu')"
-                            class="border border-gray-400 text-sm rounded-lg  py-3 px-1"
+                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
                         >
                             စုံပူး
                         </button>
                         <button
                             @click="simpleBet('ma_puu')"
-                            class="border border-gray-400 text-sm rounded-lg  py-3 px-1"
+                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
                         >
                             မပူး
                         </button>
@@ -499,7 +524,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">နက်ခတ်ပါ၀ါ</h1>
+                        <h1 class="text-lg font-semibold primary-text">
+                            နက္ခတ်ပါဝါ
+                        </h1>
                     </div>
 
                     <div
@@ -507,19 +534,19 @@
                     >
                         <button
                             @click="natKhatPower('nat')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             နက်
                         </button>
                         <button
                             @click="natKhatPower('power')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             ပါ၀ါ
                         </button>
                         <button
                             @click="natKhatPower('a_puu')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             အပူး
                         </button>
@@ -544,61 +571,61 @@
                     >
                         <button
                             @click="patNumberBet('0')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             0
                         </button>
                         <button
                             @click="patNumberBet('1')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             1
                         </button>
                         <button
                             @click="patNumberBet('2')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             2
                         </button>
                         <button
                             @click="patNumberBet('3')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             3
                         </button>
                         <button
                             @click="patNumberBet('4')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             4
                         </button>
                         <button
                             @click="patNumberBet('5')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             5
                         </button>
                         <button
                             @click="patNumberBet('6')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             6
                         </button>
                         <button
                             @click="patNumberBet('7')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             7
                         </button>
                         <button
                             @click="patNumberBet('8')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             8
                         </button>
                         <button
                             @click="patNumberBet('9')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             9
                         </button>
@@ -616,61 +643,61 @@
                     >
                         <button
                             @click="numbersStartingWith('0')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             0
                         </button>
                         <button
                             @click="numbersStartingWith('1')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             1
                         </button>
                         <button
                             @click="numbersStartingWith('2')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             2
                         </button>
                         <button
                             @click="numbersStartingWith('3')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             3
                         </button>
                         <button
                             @click="numbersStartingWith('4')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             4
                         </button>
                         <button
                             @click="numbersStartingWith('5')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             5
                         </button>
                         <button
                             @click="numbersStartingWith('6')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             6
                         </button>
                         <button
                             @click="numbersStartingWith('7')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             7
                         </button>
                         <button
                             @click="numbersStartingWith('8')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             8
                         </button>
                         <button
                             @click="numbersStartingWith('9')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             9
                         </button>
@@ -680,7 +707,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">နောက်</h1>
+                        <h1 class="text-lg font-semibold primary-text">
+                            နောက်
+                        </h1>
                     </div>
 
                     <div
@@ -688,61 +717,61 @@
                     >
                         <button
                             @click="numbersEndingWith('0')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             0
                         </button>
                         <button
                             @click="numbersEndingWith('1')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             1
                         </button>
                         <button
                             @click="numbersEndingWith('2')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             2
                         </button>
                         <button
                             @click="numbersEndingWith('3')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             3
                         </button>
                         <button
                             @click="numbersEndingWith('4')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             4
                         </button>
                         <button
                             @click="numbersEndingWith('5')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             5
                         </button>
                         <button
                             @click="numbersEndingWith('6')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             6
                         </button>
                         <button
                             @click="numbersEndingWith('7')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             7
                         </button>
                         <button
                             @click="numbersEndingWith('8')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             8
                         </button>
                         <button
                             @click="numbersEndingWith('9')"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             9
                         </button>
@@ -752,7 +781,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">ဘရိတ်</h1>
+                        <h1 class="text-lg font-semibold primary-text">
+                            ဘရိတ်
+                        </h1>
                     </div>
 
                     <div
@@ -760,61 +791,61 @@
                     >
                         <button
                             @click="breakNumbers(0, 10)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             0
                         </button>
                         <button
                             @click="breakNumbers(1, 11)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             1
                         </button>
                         <button
                             @click="breakNumbers(2, 12)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             2
                         </button>
                         <button
                             @click="breakNumbers(3, 13)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             3
                         </button>
                         <button
                             @click="breakNumbers(4, 14)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             4
                         </button>
                         <button
                             @click="breakNumbers(5, 15)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             5
                         </button>
                         <button
                             @click="breakNumbers(6, 16)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             6
                         </button>
                         <button
                             @click="breakNumbers(1, 17)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             7
                         </button>
                         <button
                             @click="breakNumbers(8, 18)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             8
                         </button>
                         <button
                             @click="breakNumbers(9, 19)"
-                            class="border border-gray-400 rounded-lg  py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             9
                         </button>
@@ -845,6 +876,7 @@
                                     id="round_digits"
                                     placeholder=""
                                     v-model="round_digits"
+                                    @input="validateNumber"
                                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                                 />
                             </div>
@@ -859,7 +891,7 @@
                         </div>
                         <p class="text-sm">
                             {{ $t("Total Betting Amount") }} :
-                            {{ totalBetAmount?.toLocaleString() }} MMks
+                            {{ totalBetAmount?.toLocaleString() }} MMK
                         </p>
                     </div>
 
@@ -888,11 +920,11 @@
                                 </button>
                             </div>
                         </div>
-                        
                     </div>
                     <div class="flex justify-between col-span-2 mb-8">
                         <p class="text-sm">
-                            လက်ကျန်ငွေ : {{ wallet_balance?.toLocaleString() }} MMks
+                            လက်ကျန်ငွေ :
+                            {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
                         <p class="text-sm">
                             {{ $t("Closing Time") }} :
@@ -953,7 +985,9 @@
                                             edit_bet_number.number
                                         "
                                     >
-                                        {{ bet_number.amount?.toLocaleString() }}
+                                        {{
+                                            bet_number.amount?.toLocaleString()
+                                        }}
                                     </span>
                                     <input
                                         v-show="
@@ -1093,11 +1127,11 @@
     </div>
 
     <button
-        data-twe-toggle="modal" class="hidden"
+        data-twe-toggle="modal"
+        class="hidden"
         data-twe-target="#error_modal"
         id="error_modal_btn"
-    >
-    </button>
+    ></button>
     <!--Error Modal Box -->
     <div
         data-twe-modal-init
@@ -1375,6 +1409,11 @@ export default {
             } else {
                 this.step = 1;
             }
+        },
+        validateNumber(event) {
+            const value = event.target.value;
+            // Remove any non-numeric characters
+            this.round_digits = value.replace(/[^0-9]/g, "");
         },
         addBetNumber(num) {
             const available_for_bet = this.checkOpenCloseTime();
@@ -1763,10 +1802,32 @@ export default {
         },
         natKhatPower(type) {
             if (type == "nat") {
-                var digits = ["18", "24", "35", "69", "70","81","42","53","96","07"];
+                var digits = [
+                    "18",
+                    "24",
+                    "35",
+                    "69",
+                    "70",
+                    "81",
+                    "42",
+                    "53",
+                    "96",
+                    "07",
+                ];
             }
             if (type == "power") {
-                var digits = ["05", "16", "27", "38", "49","50","61","72","83","94"];
+                var digits = [
+                    "05",
+                    "16",
+                    "27",
+                    "38",
+                    "49",
+                    "50",
+                    "61",
+                    "72",
+                    "83",
+                    "94",
+                ];
             }
             if (type == "a_puu") {
                 var digits = [

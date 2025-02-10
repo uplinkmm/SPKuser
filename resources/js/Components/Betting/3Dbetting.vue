@@ -197,7 +197,7 @@
                         </div>
                         <div class="block lg:flex justify-between">
                             <p class="text-sm mb-1">
-                                {{ $t("Balance") }} : {{ wallet_balance?.toLocaleString() }} MMks
+                                {{ $t("Balance") }} : {{ wallet_balance?.toLocaleString() }} MMK
                             </p>
                             <p class="text-sm">
                                 {{ $t("Closing Time") }} :
@@ -417,7 +417,7 @@
             <hr>
             <div class="pt-2 mb-0 w-full block">
                 <p class="text-sm pt-2  text-right pr-2 mb-4">
-                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount?.toLocaleString() }} MMks
+                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount?.toLocaleString() }} MMK
                 </p>
                 <div class=" w-full flex justify-center">
                     <button

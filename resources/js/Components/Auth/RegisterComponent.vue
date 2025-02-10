@@ -1,6 +1,6 @@
 <template>
     <main
-        class="w-full h-full min-h-[60vh] mx-auto px-8  pb-2 flex flex-row justify-center relative"
+        class="w-full h-full min-h-[60vh] mx-auto px-8 pb-2 flex flex-row justify-center relative"
     >
         <div class="">
             <div class="mb-4">
@@ -13,49 +13,71 @@
                 />
             </div>
             <div class="mb-4">
-                <label
-                    class="block w-full py-2 px-2 border bg-white border-gray-400 text-sm rounded-md"
-                >
+                <div class="relative">
                     <input
                         type="text"
                         id="phone_number"
                         v-model="phone_number"
                         :placeholder="$t('Phone Number')"
-                        class="focus:ring-0 focus:shadow-none"
+                        class="block w-full py-2 px-2 pr-16 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-black"
                     />
                     <button
-                        class="text-xs border-l border-gray-400 pl-1 py-1"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
                         @click="initialRegister"
                     >
                         Get OTP
                     </button>
-                </label>
+                </div>
             </div>
             <div class="mb-4">
-                <input
-                    type="text"
-                    id="otp"
-                    v-model="otp"
-                    placeholder="OTP"
-                    :disabled="!otpRequested"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                />
+                <div class="relative">
+                    <input
+                        type="text"
+                        id="otp"
+                        v-model="otp"
+                        placeholder="OTP"
+                        :disabled="!otpRequested"
+                        class="block w-full py-2 px-2 pr-16 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-black"
+                    />
+                    <button
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-8 py-1"
+                    >
+                        <p>
+                            {{
+                                countdown > 0
+                                    ? countdown.toString().padStart(2, "0") +
+                                      " s"
+                                    : "00 s"
+                            }}
+                        </p>
+                    </button>
+                </div>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4 relative">
                 <input
-                    type="password"
+                    :type="show_password ? 'text' : 'password'"
                     id="password"
                     v-model="password"
-                    placeholder="Password"
                     :disabled="!otpRequested"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                    placeholder="Password"
+                    class="block w-full py-2 px-2 pr-10 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
                 />
+                <i
+                    v-if="!show_password"
+                    @click="show_password = !show_password"
+                    class="far fa-eye text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                ></i>
+                <i
+                    v-if="show_password"
+                    @click="show_password = !show_password"
+                    class="far fa-eye-slash text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                ></i>
             </div>
 
             <div class="mb-4">
                 <input
-                    type="password"
+                    :type="show_password ? 'text' : 'password'"
                     id="confirm_password"
                     v-model="confirm_password"
                     placeholder="Confirm Password"
@@ -143,9 +165,11 @@ export default {
             otp: null,
             password: null,
             confirm_password: null,
-            code:null,
+            code: null,
             remember: true,
             otpRequested: false,
+            show_password: false,
+            countdown: 0,
         };
     },
     props: {
@@ -178,6 +202,7 @@ export default {
                     text: response.message,
                     type: "info",
                 });
+                this.startCountdown();
             } else {
                 this.$notify({
                     text: response.message,
@@ -190,6 +215,13 @@ export default {
             if (!this.otp) {
                 this.$notify({
                     text: "OTP code must be entered",
+                    type: "warn",
+                });
+                return 1;
+            }
+            if (!this.countdown) {
+                this.$notify({
+                    text: "OTP code is expired!",
                     type: "warn",
                 });
                 return 1;
@@ -245,6 +277,19 @@ export default {
                     type: "error",
                 });
                 return false;
+            }
+        },
+        startCountdown() {
+            if (this.countdown === 0) {
+                this.countdown = 60; // Set countdown to 60 seconds
+
+                let interval = setInterval(() => {
+                    if (this.countdown > 0) {
+                        this.countdown--;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 1000);
             }
         },
     },

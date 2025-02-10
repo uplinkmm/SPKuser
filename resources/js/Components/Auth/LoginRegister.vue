@@ -11,7 +11,7 @@
                     
                     <div>
                         <forgot-password
-                            :fcm-token="fcmToken"
+                            :fcm-token="fcmToken" :change-forgot-password="changeForgotPassword" 
                         ></forgot-password>
                     </div>
                 </div>
@@ -107,8 +107,8 @@ export default {
     mixins: [fcmMixin],
 
     methods: {
-        changeForgotPassword(){
-            this.forgot_password = true;
+        changeForgotPassword(value){
+            this.forgot_password = value;
         }
     },
 
