@@ -14,6 +14,7 @@ class NotificationRepository implements NotificationInterface
     public function notificationList($request)
     {
         $authToken=checkAuthToken($request);
+        $userId = $authToken ? UserData()->id : null;
         if($request->type=='topup_transaction'){
             $type=['topup_transaction', 'cash_withdrawl_transaction'];
         }elseif($request->type=='betting_win'){
@@ -21,11 +22,7 @@ class NotificationRepository implements NotificationInterface
         }else{
             $type=['ads'] ;
         }
-        if($authToken){
-            $userId =  UserData()->id;
-        }else{
-            $userId=null;
-        }
+        
 
         if ((int) $request->is_count == 1) {
             NotificationPerson::where('personable_type', 'customer')
