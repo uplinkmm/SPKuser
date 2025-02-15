@@ -148,6 +148,10 @@
                         >
                             {{ type.name }}
                         </p>
+                        <img
+                        class="w-full mt-8 aspect-square"
+                        :src="type.img_url"
+                    />
                     </a>
                 </div>
             </div>

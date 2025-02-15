@@ -112,14 +112,17 @@
                                 <p class="text-sm  mb-1">
                                     {{ dateFormat(transcation.date_time) }}
                                 </p>
-                                <p class="text-sm text-green-600 mb-1 capitalize">
+                                <p  v-if="transcation.status=='confirmed'" class="text-sm text-green-600 mb-1 capitalize">
+                                    {{ transcation.status }}
+                                </p>
+                                <p v-else class="text-sm text-red-600 mb-1 capitalize">
                                     {{ transcation.status }}
                                 </p>
                             </div>
                             <hr class="my-2">
                             <div class="flex justify-between">
                                 <p class="text-xs text-green-600 mb-1 font-semibold">
-                                     {{ transcation.notificationable_type == topup_transaction ? 'ငွေသွင်း' : 'ငွေထုတ်' }}
+                                     {{ transcation.notificationable_type == "topup_transaction" ? 'ငွေသွင်း' : 'ငွေထုတ်' }}
                                 </p>
                                 <p class="text-sm mb-1">
                                     {{ transcation.amount?.toLocaleString() }} ကျပ်
