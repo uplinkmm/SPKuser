@@ -17,18 +17,22 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Action\CustomerWalletBalance;
 use App\Http\Action\WalletTransactionCommon;
 use App\Repositories\Betting\BettingInterface;
+use App\Traits\BettingValidation;
 
 class BettingRepository implements BettingInterface
 {
-    use WalletTransactionCommon, TimeStatusTrait;
+    use WalletTransactionCommon, TimeStatusTrait,BettingValidation;
     public function createBetting($request)
     {
+        $gameSettingId = $request->input('game_setting_id');
+        $gameId = $request->input('game_id');
+        $this->checkValidTimeByGameSetting($gameId,$gameSettingId);
         $betting_numbers = json_decode($request->numbers);
         DB::beginTransaction();
         try {
             
-            $gameId = $request->input('game_id');
-            $gameSettingId = $request->input('game_setting_id');
+            // $gameId = $request->input('game_id');
+            // $gameSettingId = $request->input('game_setting_id');
             // $timeStatus = $request->input('time_status'); // Assuming 'timeStatus' is passed in the request
             #validate closing amount
             // $totalBetAmount = $this->calculateTotalBetAmount($gameId, $gameSettingId, $timeStatus);
