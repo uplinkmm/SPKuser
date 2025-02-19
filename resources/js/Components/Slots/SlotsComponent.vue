@@ -2,7 +2,7 @@
     <notifications position="top center" />
 
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-8 bg-img pb-24 min-h-[100vh]"
+        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
     >
         <Navbar title="Games" :back-btn="backBtn"></Navbar>
 
@@ -23,7 +23,7 @@
                                 ? 'text-md'
                                 : 'text-xs'
                         "
-                        class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent text-black font-normal uppercase leading-tight hover:isolate hover:border-transparent focus:isolate focus:border-transparent data-[twe-nav-active]:border-none data-[twe-nav-active]:text-black data-[twe-nav-active]:font-semibold"
+                        class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent text-white font-normal uppercase leading-tight hover:isolate hover:border-transparent focus:isolate focus:border-transparent data-[twe-nav-active]:border-none data-[twe-nav-active]:text-white data-[twe-nav-active]:font-semibold"
                         >{{ type.name }}</a
                     >
                 </li>

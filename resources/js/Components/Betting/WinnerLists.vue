@@ -11,14 +11,14 @@
         >
             <p
                 class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="game_id == 1 ? 'text-black border-b border-gray-700' : ' text-gray-500'"
+                :class="game_id == 1 ? 'text-white border-b border-gray-700' : ' text-gray-500'"
                 @click="changeGame(1)"
             >
                 2D
             </p>
             <p
                 class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="game_id == 2 ? 'text-black border-b border-gray-700' : ' text-gray-500'"
+                :class="game_id == 2 ? 'text-white border-b border-gray-700' : ' text-gray-500'"
                 @click="changeGame(2)"
             >
                 3D
