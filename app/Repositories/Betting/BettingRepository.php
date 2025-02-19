@@ -9,15 +9,16 @@ use App\Models\BettingWin;
 use App\Models\GameSetting;
 use App\Http\Action\GameData;
 use App\Models\BettingNumber;
+use App\Models\ClosingNumber;
 use App\Models\WinningNumber;
 use App\Traits\TimeStatusTrait;
+use App\Traits\BettingValidation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use App\Http\Action\CustomerWalletBalance;
 use App\Http\Action\WalletTransactionCommon;
 use App\Repositories\Betting\BettingInterface;
-use App\Traits\BettingValidation;
 
 class BettingRepository implements BettingInterface
 {
@@ -30,7 +31,6 @@ class BettingRepository implements BettingInterface
         $betting_numbers = json_decode($request->numbers);
         DB::beginTransaction();
         try {
-            
             // $gameId = $request->input('game_id');
             // $gameSettingId = $request->input('game_setting_id');
             // $timeStatus = $request->input('time_status'); // Assuming 'timeStatus' is passed in the request
@@ -48,6 +48,7 @@ class BettingRepository implements BettingInterface
                     $gameSettingId,
                     $number->number
                 );
+                // dd($betttingAmountAndClosingAmount);
                 $closingAmount = $betttingAmountAndClosingAmount['closing_amount'];
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
                 $newBetAmount = $number->amount;
@@ -80,8 +81,17 @@ class BettingRepository implements BettingInterface
         $date = $now->format('Y-m-d');
         $gameSetting = GameSetting::where('is_active', 1)->find($gameSettingId);
         if (!$gameSetting) {
-            ResponseMessage('Game Setting Not Found', 404);
+            ResponseMessage('Game Setting Not Found', status_code: 404);
         }
+        $closingNumber=ClosingNumber::orderBy('id','desc')->where('number',$number)
+        ->where('game_id',$gameId)
+        ->where('game_setting_id',$gameSettingId)
+        ->whereDate('date_time',$date)
+        ->first();
+        $closingAmount=config('2d_setting.max_closing_bet_amount');
+        $closingAmount=$closingNumber ? $closingNumber->amount : config('2d_setting.max_closing_bet_amount');
+       
+       
         $startTime = convertDateTimeFormat($date . $gameSetting->opening_time);
         $endTime = convertDateTimeFormat($date . $gameSetting->closing_time);
         $query = DB::table('betting_numbers as bn')
@@ -122,7 +132,6 @@ class BettingRepository implements BettingInterface
         // Retrieve the total bet amount and closing amount
         $query->select(
             DB::raw('COALESCE(SUM(bn.amount), 0) AS total_bet_amount'),
-            DB::raw('CAST(COALESCE(MAX(cn.amount), ' . $max . ') AS UNSIGNED) AS closing_amount')
         );
 
         // Execute the query and fetch results
@@ -130,7 +139,7 @@ class BettingRepository implements BettingInterface
 
         return [
             'total_bet_amount' => $result->total_bet_amount,
-            'closing_amount' => $result->closing_amount,
+            'closing_amount' => $closingAmount,
         ];
 
     }
@@ -159,7 +168,7 @@ class BettingRepository implements BettingInterface
         // $timeStatus=$gameSetting->time_status;
         // $startTime = convertDateTimeFormat($date . $gameSetting->opening_time);
         // $endTime = convertDateTimeFormat($date . $gameSetting->closing_time);
-
+        
         $date = now()->format('Y-m-d');
         $max = $gameSetting->closing_amount;
         $min_bet_amount = $gameSetting->min;
@@ -229,16 +238,6 @@ class BettingRepository implements BettingInterface
                     ), 0
                 ) AS total_bet_amount
             '),
-                //                 DB::raw('
-//     COALESCE(
-//         SUM(
-//             CASE 
-//                 WHEN cn.id IS NOT NULL THEN (' . $max . ' - cn.amount) + fb.total_amount_all
-//                 ELSE fb.total_amount_all
-//             END
-//         ), 0
-//     ) AS total_bet_amount
-// '),
                 DB::raw('COALESCE(SUM(fbc.total_amount_customer), 0) AS total_amount'), // Total amount for the specific customer
                 DB::raw('
                 CASE
@@ -276,48 +275,6 @@ class BettingRepository implements BettingInterface
             )
             ->orderBy('number')
             ->get();
-
-        // $betsWithTotalAmount = DB::table(DB::raw('(' . $subqueryD1->toSql() . ') as d1'))
-        //     ->mergeBindings($subqueryD1)
-        //     ->crossJoin(DB::raw('(' . $subqueryD2->toSql() . ') as d2'))
-        //     ->mergeBindings($subqueryD2)
-        //     ->leftJoinSub($filteredBets, 'fb', function ($join) {
-        //         $join->on(DB::raw('LPAD(d1.n * 10 + d2.n, 2, "0")'), '=', 'fb.number');
-        //     })
-        //     ->leftJoinSub($filteredBetsForCustomer, 'fbc', function ($join) {
-        //         $join->on(DB::raw('LPAD(d1.n * 10 + d2.n, 2, "0")'), '=', 'fbc.number');
-        //     })
-        //     ->leftJoinSub($latestClosingNumbersDetails, 'cn', function ($join) {
-        //         $join->on(DB::raw('LPAD(d1.n * 10 + d2.n, 2, "0")'), '=', 'cn.number');
-        //     })
-        //     ->select(
-        //         DB::raw('LPAD(d1.n * 10 + d2.n, 2, "0") AS number'),
-        //         DB::raw('COALESCE(SUM(fb.total_amount_all), 0) AS total_bet_amount'),
-        //         DB::raw('COALESCE(SUM(fbc.total_amount_customer), 0) AS total_amount'), // Total amount for the specific customer
-        //         DB::raw('
-        //             CASE
-        //                 WHEN cn.id IS NULL THEN ' . $max . '
-        //                 WHEN cn.amount IS NOT NULL THEN CAST(cn.amount AS UNSIGNED)
-        //                 ELSE NULL
-        //             END AS closing_amount'),
-        //         // DB::raw('IF(cn.id IS NOT NULL, 1, 0) AS is_closing'), // Define is_closing based on the existence of latest_cn.id
-        //         DB::raw($min_bet_amount . ' AS min'),
-        //         DB::raw($max_bet_amount . ' AS max'),
-        //         DB::raw('
-        //             CASE
-        //                 WHEN cn.id IS NOT NULL AND cn.amount IS NULL THEN 0
-        //                 WHEN cn.amount IS NOT NULL AND COALESCE(SUM(fb.total_amount_all), 0) < cn.amount THEN 1
-        //                 ELSE 1
-        //             END AS is_active'),
-        //         DB::raw('IF(COALESCE(MAX(cn.amount), ' . $max . ') > 0, COALESCE(SUM(fb.total_amount_all), 0) / COALESCE(MAX(cn.amount), ' . $max . ') * 100, 0) AS total_bet_percentage')
-        //     )
-        //     ->groupBy(
-        //         DB::raw('LPAD(d1.n * 10 + d2.n, 2, "0")'),
-        //         'cn.id'
-        //     )
-        //     ->orderBy('number')
-        //     ->get();
-
         return $betsWithTotalAmount;
     }
 
