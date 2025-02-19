@@ -149,9 +149,9 @@
                             {{ type.name }}
                         </p>
                         <img
-                        class="w-full mt-8 aspect-square"
-                        :src="type.img_url"
-                    />
+                            class="w-full mt-8 aspect-square"
+                            :src="type.img_url"
+                        />
                     </a>
                 </div>
             </div>
@@ -218,42 +218,49 @@ export default {
             this.gameTypes = response.data;
         },
     },
-    updated() {
-        // $("#ad_slick").slick({
-        $("#ad_slick").not(".slick-initialized").slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                // {
-                //     breakpoint: 1024,
-                //     settings: {
-                //         slidesToShow: 4,
-                //     },
-                // },
-                // {
-                //     breakpoint: 768,
-                //     settings: {
-                //         slidesToShow: 3,
-                //     },
-                // },
-                // {
-                //     breakpoint: 640,
-                //     settings: {
-                //         slidesToShow: 3,
-                //     },
-                // },
-                // {
-                //     breakpoint: 480,
-                //     settings: {
-                //         slidesToShow: 1,
-                //     },
-                // },
-            ],
-        });
+    watch: {
+        adses(newVal) {
+            if (newVal.length > 0) {
+                this.$nextTick(() => {
+                    if ($("#ad_slick").length) {
+                        $("#ad_slick").slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            autoplay: true,
+                            autoplaySpeed: 2000,
+                            dots: false,
+                            arrows: false,
+                            responsive: [
+                                {
+                                    breakpoint: 1024,
+                                    settings: {
+                                        slidesToShow: 4,
+                                    },
+                                },
+                                {
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 3,
+                                    },
+                                },
+                                {
+                                    breakpoint: 640,
+                                    settings: {
+                                        slidesToShow: 3,
+                                    },
+                                },
+                                {
+                                    breakpoint: 480,
+                                    settings: {
+                                        slidesToShow: 1,
+                                    },
+                                },
+                            ],
+                        });
+                    }
+                });
+            }
+        },
     },
     mounted() {
         // this.getGameLists();
@@ -268,107 +275,6 @@ export default {
         // this.intervalId = setInterval(this.get2DList, 3000);
 
         initTWE({ Modal, Tab, Ripple });
-
-        // $("#ad_slick").slick({
-        //     slidesToShow: 1,
-        //     slidesToScroll: 1,
-        //     autoplay: true,
-        //     autoplaySpeed: 2000,
-        //     dots: false,
-        //     arrows: false,
-        //     responsive: [
-        //         // {
-        //         //     breakpoint: 1024,
-        //         //     settings: {
-        //         //         slidesToShow: 4,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 768,
-        //         //     settings: {
-        //         //         slidesToShow: 3,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 640,
-        //         //     settings: {
-        //         //         slidesToShow: 3,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 480,
-        //         //     settings: {
-        //         //         slidesToShow: 1,
-        //         //     },
-        //         // },
-        //     ],
-        // });
-
-        $("#twoD_carousel").slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    },
-                },
-            ],
-        });
-
-        $("#threeD_carousel").slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    },
-                },
-            ],
-        });
     },
 };
 </script>
