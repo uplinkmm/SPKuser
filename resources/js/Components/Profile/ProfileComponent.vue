@@ -373,7 +373,7 @@ export default {
             this.title = "Change Password";
         },
         backBtn() {
-            if (this.step == "changePass" || this.step == "contacts") {
+            if (this.step == "changePass" || this.step == "contacts" || this.step=='termsAndConditions') {
                 this.step = "mainProfile";
                 this.title = "Profile";
                 return;
