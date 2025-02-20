@@ -285,7 +285,7 @@ export default {
             }
             setTimeout(() => {
                 this.modalClose();
-            }, 3000);
+            }, 2000);
         },
         modalClose() {
             const button = document.getElementById("close_modal");
@@ -299,6 +299,5 @@ export default {
         this.csrfToken = $('meta[name="csrf-token"]').attr("content");
         this.setCsrfToken(this.csrfToken);
     },
-    mounted() {},
 };
 </script>
