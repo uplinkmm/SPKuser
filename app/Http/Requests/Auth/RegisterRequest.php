@@ -17,7 +17,6 @@ class RegisterRequest extends APIRequest
                     return $query->where('is_verified', 1);
                 }),
             ],
-            // 'password' => 'required|min:6',
             'password' => 'required|confirmed|min:6',
             'otp' => 'required',
 

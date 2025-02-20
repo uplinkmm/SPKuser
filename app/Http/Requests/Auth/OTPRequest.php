@@ -11,12 +11,12 @@ class OTPRequest extends APIRequest
 {
     public function rules()
     {
-        dd('abc');
+                // Rule::unique('customers', 'phone_number'),
         return [
             'phone_number' => [
                 'required',
-                Rule::unique('customers', 'phone_number')->where(function ($query) {
-                    return $query->where('is_verified', 1);
+                Rule::exists('customers', 'phone_number')->where(function ($query) {
+                    $query->where('is_verified', 1);
                 }),
             ],
         ];
