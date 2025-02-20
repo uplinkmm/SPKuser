@@ -30,6 +30,7 @@
                     <button
                         class="text-xs border-l border-gray-400 pl-1 py-1 flex-shrink-0"
                         @click="getOtp"
+                        :disabled="countdown != 0"
                     >
                         Get OTP
                     </button>
@@ -136,10 +137,11 @@ export default {
         };
     },
     props: {
-        props: {
-            fcmToken: {},
-        },
+        fcmToken: {},
         changeForgotPassword: {
+            type: Function,
+        },
+        setErrorBox: {
             type: Function,
         },
     },
@@ -150,10 +152,7 @@ export default {
 
         async getOtp() {
             if (!this.phone_number) {
-                this.$notify({
-                    text: "You forgot to phone number",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "You forgot to phone number");
 
                 return 1;
             }
@@ -163,57 +162,45 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
             if (response.success) {
                 this.otpRequested = true;
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
+                this.setErrorBox(false, response.message);
+
                 this.startCountdown();
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setErrorBox(true, response.message.phone_number);
             }
         },
 
         async forgotPassword() {
             if (this.countdown == 0) {
-                this.$notify({
-                    text: "OTP code is expired!",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "OTP code is expired!");
+
                 return 1;
             }
             if (!this.otp || !this.password || !this.password_confirmation) {
-                this.$notify({
-                    text: "All field must be entered",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "All field must be entered");
+
                 return 1;
             }
             if (this.countdown == 0) {
-                this.$notify({
-                    text: "OTP code is expired!",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "OTP code is expired!");
+
                 return 1;
             }
 
             if (this.password != this.password_confirmation) {
-                this.$notify({
-                    text: "Confirm password not match",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "Confirm password not match");
+
                 return 1;
             }
             if (
                 this.password.length < 6 ||
                 this.password_confirmation.length < 6
             ) {
-                this.$notify({
-                    text: "Password must be at least 6 characters long.",
-                    type: "info",
-                });
+                this.setErrorBox(
+                    true,
+                    "Password must be at least 6 characters long."
+                );
+
                 return;
             }
 
@@ -231,10 +218,11 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
 
             if (response.success) {
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
+            
+                this.setErrorBox(
+                    false,
+                    response.message
+                );
                 this.token = response.data.token;
                 this.setToken(this.token);
                 let user = response.data.user;
@@ -243,10 +231,10 @@ export default {
 
                 return true;
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setErrorBox(
+                    true,
+                    response.message
+                );
                 return false;
             }
         },

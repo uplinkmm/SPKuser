@@ -24,6 +24,7 @@
                     <button
                         class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
                         @click="initialRegister"
+                        :disabled="countdown != 0"
                     >
                         Get OTP
                     </button>
@@ -151,97 +152,6 @@
             >Continue with Facebook
         </a>
     </div>
-    <div
-        data-twe-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black bg-opacity-50"
-        id="error_signup"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-    >
-        <div
-            data-twe-modal-dialog-ref
-            class="pointer-events-none relative w-[400px] mx-auto mt-[20vh] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-[20vh] min-[576px]:max-w-[400px]"
-        >
-            <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none"
-            >
-                <div
-                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b border-neutral-200 py-4 px-6"
-                >
-                    <h4
-                        class="text-xl font-medium leading-normal text-surface w-full text-center"
-                        :class="
-                            error_box.error ? 'text-red-600' : 'text-green-600'
-                        "
-                    >
-                        {{ error_box.error ? "Error" : "Success" }}
-                    </h4>
-                    <button
-                        type="button"
-                        id="close_signup_modal"
-                        class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                        data-twe-modal-dismiss
-                        aria-label="Close"
-                    >
-                        <span class="[&>svg]:h-6 [&>svg]:w-6">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-                <div class="relative flex-auto p-6" data-twe-modal-body-ref>
-                    <div class="flex items-center justify-center">
-                        <div
-                            class="flex items-center p-4 rounded-lg shadow-sm"
-                            :class="
-                                error_box.error ? 'bg-red-50' : 'bg-green-50'
-                            "
-                        >
-                            <i
-                                v-if="error_box.error"
-                                class="fas fa-exclamation-circle text-red-600 text-2xl mr-4"
-                            ></i>
-                            <i
-                                v-else
-                                class="fas fa-check-circle text-green-600 text-2xl mr-4"
-                            ></i>
-                            <div class="text-md text-gray-700">
-                                {{ error_box.message }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-shrink-0 items-center justify-end rounded-b-md border-t border-neutral-200 py-3 px-6"
-                >
-                    <button
-                        type="button"
-                        class="px-4 py-2 text-sm font-medium text-white rounded-md"
-                        :class="
-                            error_box.error
-                                ? 'bg-red-600 hover:bg-red-700'
-                                : 'bg-green-600 hover:bg-green-700'
-                        "
-                        data-twe-modal-dismiss
-                    >
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -266,15 +176,12 @@ export default {
             otpRequested: false,
             show_password: false,
             countdown: 0,
-            error_box: {
-                error: true,
-                message: "Your phone number is already exit!",
-            },
         };
     },
     props: {
-        props: {
-            fcmToken: {},
+        fcmToken: {},
+        setErrorBox: {
+            type: Function,
         },
     },
     // mixins: [fcmMixin],
@@ -284,15 +191,10 @@ export default {
 
         async initialRegister() {
             if (!this.user_name || !this.phone_number) {
-                this.error_box.error = true;
-                this.error_box.message =
-                    "You forgot to enter name and phone number";
-                this.modalOpen();
-                //this.$notify({
-                //    text: "You forgot to enter name and phone number",
-                //    type: "warn",
-                // });
-
+                this.setErrorBox(
+                    true,
+                    "You forgot to enter name and phone number"
+                );
                 return 1;
             }
             let formData = new FormData();
@@ -302,53 +204,42 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
             if (response.success) {
                 this.otpRequested = true;
-                //this.$notify({
-                //   text: response.message,
-                //   type: "info",
-                // });
-                this.error_box.error = false;
-                this.error_box.message = response.message;
-                this.modalOpen();
+                this.setErrorBox(false, response.message);
                 this.startCountdown();
             } else {
-                this.error_box.error = true;
-                this.error_box.message = response.message.phone_number;
-                this.modalOpen();
+                this.setErrorBox(true, response.message.phone_number);
             }
         },
 
         async register() {
             if (!this.otp) {
-                this.error_box.error = true;
-                this.error_box.message = "OTP code must be entered";
-                this.modalOpen();
+                this.setErrorBox(true, "OTP code must be entered");
+
                 return 1;
             }
             if (!this.countdown) {
-                this.error_box.error = true;
-                this.error_box.message = "OTP code is expired!";
-                this.modalOpen();
+                this.setErrorBox(true, "OTP code is expired!");
+
                 return 1;
             }
 
             if (!this.password || !this.confirm_password) {
-                this.error_box.error = true;
-                this.error_box.message =
-                    "Password and confirm password must be entered";
-                this.modalOpen();
+                this.setErrorBox(
+                    true,
+                    "Password and confirm password must be entered"
+                );
                 return 1;
             }
             if (this.password != this.confirm_password) {
-                this.error_box.error = true;
-                this.error_box.message = "Confirm password not match";
-                this.modalOpen();
+                this.setErrorBox(true, "Confirm password not match");
                 return 1;
             }
             if (this.password.length < 6 || this.confirm_password.length < 6) {
-                this.error_box.error = true;
-                this.error_box.message =
-                    "Password must be at least 6 characters long.";
-                this.modalOpen();
+                this.setErrorBox(
+                    true,
+                    "Password must be at least 6 characters long."
+                );
+
                 return;
             }
             let url = "/api/register";
@@ -364,9 +255,7 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
 
             if (response.success) {
-                this.error_box.error = false;
-                this.error_box.message = response.message;
-                this.modalOpen();
+                this.setErrorBox(false, response.message);
                 this.token = response.data.token;
                 this.setToken(this.token);
                 let user = response.data.user;
@@ -375,13 +264,14 @@ export default {
 
                 return true;
             } else {
-                this.error_box.error = true;
-                this.error_box.message =
+                this.setErrorBox(
+                    true,
                     response.message.phone_number ||
-                    response.message.password ||
-                    response.message.password_confirmation ||
-                    response.message.otp;
-                this.modalOpen();
+                        response.message.password ||
+                        response.message.password_confirmation ||
+                        response.message.otp
+                );
+
                 return false;
             }
         },
@@ -396,21 +286,6 @@ export default {
                         clearInterval(interval);
                     }
                 }, 1000);
-            }
-        },
-        modalOpen() {
-            const button = document.getElementById("error_signup_btn");
-            if (button) {
-                button.click();
-            }
-            setTimeout(() => {
-                this.modalClose();
-            }, 2000);
-        },
-        modalClose() {
-            const button = document.getElementById("close_signup_modal");
-            if (button) {
-                button.click();
             }
         },
     },
