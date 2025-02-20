@@ -335,7 +335,6 @@ if (!function_exists('checkAuthToken')) {
         // return $authToken;
 
         $bearerToken = $request->bearerToken();
-
         if (!$bearerToken) {
             return null; // No bearer token found
         }
@@ -347,9 +346,9 @@ if (!function_exists('checkAuthToken')) {
         }
         // Retrieve the token from database
         $authToken = $request->user()->tokens()->where('id', $id)->first();
-
         if (!$authToken) {
             return null; // Token not found in database
         }
+        return $authToken;
     }
 }
