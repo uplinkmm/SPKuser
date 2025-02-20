@@ -162,7 +162,7 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
             if (response.success) {
                 this.otpRequested = true;
-                this.setErrorBox(false, response.message.phone_number);
+                this.setErrorBox(false, response.message);
                 this.startCountdown();
             } else {
                 this.setErrorBox(true, response.message.phone_number);
