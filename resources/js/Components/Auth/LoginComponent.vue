@@ -39,11 +39,6 @@
                 >
                     Login
                 </button>
-                <button
-                    data-twe-toggle="modal"
-                    data-twe-target="#contact_modal"
-                    id="error_btn"
-                ></button>
             </div>
             <button
                 class="text-sm w-full text-center text-gray-300 hover:underline"

@@ -104,11 +104,6 @@
                 >
                     Sign Up
                 </button>
-                <button
-                    data-twe-toggle="modal"
-                    data-twe-target="#error_signup"
-                    id="error_signup_btn"
-                ></button>
             </div>
         </div>
         <form method="POST" id="signin-form" ref="signinForm" action="/login">
