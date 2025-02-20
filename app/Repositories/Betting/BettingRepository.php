@@ -28,7 +28,10 @@ class BettingRepository implements BettingInterface
         $gameSettingId = $request->input('game_setting_id');
         $gameId = $request->input('game_id');
         $this->checkValidTimeByGameSetting($gameId,$gameSettingId);
-        $betting_numbers = json_decode($request->numbers);
+        $betting_numbers = json_decode($request->numbers,true);
+        if (empty($betting_numbers) || !is_array($betting_numbers)) {
+            ResponseMessage('Invalid or empty betting numbers',419);
+        }
         DB::beginTransaction();
         try {
             // $gameId = $request->input('game_id');
@@ -46,19 +49,19 @@ class BettingRepository implements BettingInterface
                 $betttingAmountAndClosingAmount = $this->calculateTotalBetAmountForNumber(
                     $gameId,
                     $gameSettingId,
-                    $number->number
+                    $number['number']
                 );
                 // dd($betttingAmountAndClosingAmount);
                 $closingAmount = $betttingAmountAndClosingAmount['closing_amount'];
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
-                $newBetAmount = $number->amount;
+                $newBetAmount = $number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
-                    ResponseMessage('Total bet amount for number ' . $number->number . ' exceeds the closing amount', 400);
+                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount', 400);
                 }
                 #end
                 $beting_number = $betting->bettingNumbers()->create([
-                    'number' => $number->number,
-                    'amount' => (int) $number->amount,
+                    'number' => $number['number'],
+                    'amount' => (int) $number['amount'],
                     'betting_multiplier' => (int) $request->betting_multiplier,
                     // 'game_setting_id' => (int) $request->game_setting_id,
                 ]);
