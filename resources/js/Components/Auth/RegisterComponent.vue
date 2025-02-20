@@ -253,6 +253,7 @@ export default {
             formData.append("name", this.user_name);
             formData.append("phone_number", this.phone_number);
             formData.append("password", this.password);
+            formData.append("password_confirmation", this.confirm_password);
             formData.append("otp", this.otp);
             formData.append("code", this.code);
             formData.append("fcm_token", this.fcmToken); //from mixin
@@ -273,7 +274,7 @@ export default {
                 return true;
             } else {
                 this.$notify({
-                    text: response.message,
+                    text: response.message.name||response.message.phone_number || response.message.password || response.message.password_confirmation || response.message.otp,
                     type: "error",
                 });
                 return false;
