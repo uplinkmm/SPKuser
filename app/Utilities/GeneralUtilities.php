@@ -321,3 +321,35 @@ if (!function_exists('GenerateMD5Hash')) {
         return $hash;
     }
 }
+
+
+if (!function_exists('checkAuthToken')) {
+    function checkAuthToken($request)
+    {
+
+        // $authToken=null;
+        //  if ($bearerToken) {
+        //     [$id, $plainTextToken] = explode('|', $bearerToken, 2);
+        //     $authToken = $request->user()->tokens()->where('id', $id)->first();
+        // }
+        // return $authToken;
+
+        $bearerToken = $request->bearerToken();
+
+        if (!$bearerToken) {
+            return null; // No bearer token found
+        }
+
+        try {
+            [$id, $plainTextToken] = explode('|', $bearerToken, 2);
+        } catch (\Exception $e) {
+            return null; // Handle token format error
+        }
+        // Retrieve the token from database
+        $authToken = $request->user()->tokens()->where('id', $id)->first();
+
+        if (!$authToken) {
+            return null; // Token not found in database
+        }
+    }
+}
