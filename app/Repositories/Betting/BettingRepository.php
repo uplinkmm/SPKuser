@@ -478,8 +478,9 @@ class BettingRepository implements BettingInterface
                     ->where('bettings.game_id', $request->game_id)
                     ->whereDate('bettings.date_time', $today)
                     ->where('customer_id', UserData()->id)
+                    ->where('bettings.total_amount', '>', 0) // Ensure total_amount is greater than 0
                     ->select('bettings.id', 'date_time', 'total_amount', 'game_settings.time_status','game_settings.lottery_time', 'customer_id', 'bettings.game_id', 'game_setting_id')
-                    ->paginate(20);
+                    ->paginate(100);
             }
             if ($game->type == '3d') {
                 $gameSettingIds = GameSetting::where('game_id', $request->game_id)->orderBy('id', 'desc')->take(2)->pluck('id')->toArray();
@@ -493,6 +494,7 @@ class BettingRepository implements BettingInterface
                     ->where('game_id', $request->game_id)
                     ->where('customer_id', UserData()->id)
                     ->whereIn('game_setting_id', $gameSettingIds)
+                    ->where('bettings.total_amount', '>', 0) // Ensure total_amount is greater than 0
                     ->select('id', 'date_time', 'total_amount', 'time_status', 'customer_id', 'game_id', 'game_setting_id')
                     ->paginate(20);
             }
