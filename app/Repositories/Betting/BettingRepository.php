@@ -28,7 +28,10 @@ class BettingRepository implements BettingInterface
         $gameSettingId = $request->input('game_setting_id');
         $gameId = $request->input('game_id');
         $this->checkValidTimeByGameSetting($gameId,$gameSettingId);
-        $betting_numbers = json_decode($request->numbers);
+        $betting_numbers = json_decode($request->numbers,true);
+        if (empty($betting_numbers) || !is_array($betting_numbers)) {
+            ResponseMessage('Invalid or empty betting numbers',419);
+        }
         DB::beginTransaction();
         try {
             // $gameId = $request->input('game_id');
@@ -46,19 +49,19 @@ class BettingRepository implements BettingInterface
                 $betttingAmountAndClosingAmount = $this->calculateTotalBetAmountForNumber(
                     $gameId,
                     $gameSettingId,
-                    $number->number
+                    $number['number']
                 );
                 // dd($betttingAmountAndClosingAmount);
                 $closingAmount = $betttingAmountAndClosingAmount['closing_amount'];
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
-                $newBetAmount = $number->amount;
+                $newBetAmount = $number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
-                    ResponseMessage('Total bet amount for number ' . $number->number . ' exceeds the closing amount', 400);
+                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount', 400);
                 }
                 #end
                 $beting_number = $betting->bettingNumbers()->create([
-                    'number' => $number->number,
-                    'amount' => (int) $number->amount,
+                    'number' => $number['number'],
+                    'amount' => (int) $number['amount'],
                     'betting_multiplier' => (int) $request->betting_multiplier,
                     // 'game_setting_id' => (int) $request->game_setting_id,
                 ]);
@@ -475,8 +478,9 @@ class BettingRepository implements BettingInterface
                     ->where('bettings.game_id', $request->game_id)
                     ->whereDate('bettings.date_time', $today)
                     ->where('customer_id', UserData()->id)
+                    ->where('bettings.total_amount', '>', 0) // Ensure total_amount is greater than 0
                     ->select('bettings.id', 'date_time', 'total_amount', 'game_settings.time_status','game_settings.lottery_time', 'customer_id', 'bettings.game_id', 'game_setting_id')
-                    ->paginate(20);
+                    ->paginate(100);
             }
             if ($game->type == '3d') {
                 $gameSettingIds = GameSetting::where('game_id', $request->game_id)->orderBy('id', 'desc')->take(2)->pluck('id')->toArray();
@@ -490,6 +494,7 @@ class BettingRepository implements BettingInterface
                     ->where('game_id', $request->game_id)
                     ->where('customer_id', UserData()->id)
                     ->whereIn('game_setting_id', $gameSettingIds)
+                    ->where('bettings.total_amount', '>', 0) // Ensure total_amount is greater than 0
                     ->select('id', 'date_time', 'total_amount', 'time_status', 'customer_id', 'game_id', 'game_setting_id')
                     ->paginate(20);
             }
