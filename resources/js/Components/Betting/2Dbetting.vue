@@ -1412,7 +1412,6 @@ export default {
         },
         validateNumber(event) {
             const value = event.target.value;
-            // Remove any non-numeric characters
             this.round_digits = value.replace(/[^0-9]/g, "");
         },
         addBetNumber(num) {
@@ -1640,13 +1639,21 @@ export default {
                 return;
             }
             if (
-                this.each_amount == "" ||
-                this.each_amount <= 0 ||
                 digits.length > 4 ||
                 digits.length < 3
             ) {
                 this.$notify({
-                    text: "Please enter bet numbers and amount",
+                    text: "Please enter numbers 3 or 4 digits.",
+                    type: "error",
+                });
+                return;
+            }
+            if (
+                this.each_amount == "" ||
+                this.each_amount <= 0 
+            ) {
+                this.$notify({
+                    text: "Please enter amount",
                     type: "error",
                 });
                 return;
