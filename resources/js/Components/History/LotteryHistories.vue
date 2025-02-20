@@ -155,6 +155,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr v-if="!data.length">
+                                    <td colspan="2" class="text-center py-4 px-8">
+                                        No 3D History Found
+                                    </td>
+                                </tr>
+
                                 <tr
                                     v-for="num in data"
                                     class="border-b !border-gray-300"

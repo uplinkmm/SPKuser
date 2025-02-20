@@ -36,6 +36,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="!winners.length">
+                        <td colspan="5" class="text-center py-4 text-sm">No winners yet.</td>
+                    </tr>
+                    
                     <tr
                         class="w-fulll "
                         v-for="(winner, index) in winners"
