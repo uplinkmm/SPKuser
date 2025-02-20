@@ -264,7 +264,8 @@ export default {
                     response.message.phone_number ||
                         response.message.password ||
                         response.message.password_confirmation ||
-                        response.message.otp
+                        response.message.otp ||
+                        response.message
                 );
 
                 return false;
