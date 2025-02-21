@@ -6,33 +6,7 @@
             :hide-back-btn="true"
             :need-auth="false"
         ></Navbar>
-        <!-- <div
-            class="flex justify-between pl-6 lg:pl-8 pr-8 py-4 shadow-lg rounded-2xl mb-8 bg-white relative">
-            <a href="#" class="contents"
-                ><div class="flex flex-col justify-end">
-                    <p class="text-xl mb-1">Football</p>
-                    <p class="text-sm mb-3">ဘောလုံးပွဲများကစားရန်</p>
-                </div>
-                <div class="flex px-4">
-                    <img
-                        
-                        :key="index"
-                        class="w-28 mx-2"
-                        :src="`${img_prefix}${ads.photo}`"
-                        alt=""
-                    />
-                </div>
-            </a>
-        </div> -->
         <div class="px-4 mb-16">
-            <!-- <div class="w-full pt-4">
-                <a class="contents">
-                    <img
-                        src="../../../../public/img/home_img.png"
-                        class="w-full"
-                    />
-                </a>
-            </div> -->
             <div class="-mx-3" id="ad_slick">
                 <div class="w-full mx-3" v-for="(ads, index) in adses">
                     <img
@@ -42,7 +16,7 @@
                 </div>
             </div>
             <div
-                class="bg-[#C67D06] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a v-if="!getUser" href="/login_register">
                     <div
@@ -63,92 +37,164 @@
                     </div>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-4 mb-4">
-                <!-- <a
-                    href="/2d"
-                    class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
-                >
-                    <div
-                        class="w-full mx-auto flex flex-col justify-between h-full py-16"
-                    >
+            <div class="grid grid-cols-2 gap-x-4 gap-y-6 mb-4">
+                <a href="/2D_betting"
+                    class="bg-[#C67D06] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
+                    <div class="w-fit mx-auto flex">
                         <div>
+                            <img
+                                class="w-5/12 mb-4 pt-4 lg:pt-0" 
+                                src="../../../../public/img/Map_fill.png"
+                            />
                             <p
-                                class="text-white text-xl font-semibold text-center"
+                                class="text-white text-xl self-end pb-6 pl-4"
                             >
-                                {{ twoDList.twod }}
-                            </p>
-                        </div>
-                        <div class="flex justify-between w-full px-[8%]">
-                            <div class="text-center">
-                                <p class="text-white text-xs">
-                                    {{ twoDList.set }}
-                                </p>
-                                <p class="text-white text-xs">Modern</p>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-white text-xs">
-                                    {{ twoDList.value }}
-                                </p>
-                                <p class="text-white text-xs">Internet</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p
-                                class="text-white text-lg font-semibold text-center"
-                            >
-                                2D Live
+                                2D ထိုးမည်
                             </p>
                         </div>
                     </div>
-                </a> -->
-                <div class="col-span-2 mb-6">
-                    <p class="text-white text-xl">
-                        <i class="fas fa-flag primary-text pr-2"></i>
-                        Games
-                    </p>
-                </div>
-                <a
-                    href="/2D_betting"
-                    class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4"
-                >
-                    <p class="text-white font-semibold text-xl absolute top-3">
-                        2D
-                    </p>
-                    <img
-                        class="w-full aspect-square"
-                        src="../../../../public/img/twod_card 1.png"
-                    />
                 </a>
-                <a
-                    href="/3D_betting"
-                    class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4"
-                >
-                    <p class="text-white font-semibold text-xl absolute top-3">
-                        3D
-                    </p>
-                    <img
-                        class="w-full aspect-square"
-                        src="../../../../public/img/threed_card 1.png"
-                    />
+                <a href="/3D_betting"
+                    class="bg-[#fff] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
+                    <div class="w-fit mx-auto flex">
+                        <div>
+                            <img
+                                class="w-5/12 mb-4 pt-4 lg:pt-0" 
+                                src="../../../../public/img/Map_fill_black.png"
+                            />
+                            <p
+                                class="text-black text-xl self-end pb-6 pl-4"
+                            >
+                                3D ထိုးမည်
+                            </p>
+                        </div>
+                    </div>
                 </a>
-                <div
-                    class="contents"
-                    v-for="(type, index) in gameTypes"
-                    :key="index"
+
+                <div 
+                    class="bg-white mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
                 >
-                    <a
-                        :href="`/slots/providers?game_type=${JSON.stringify({
-                            id: type.id,
-                            name: type.name,
-                        })}`"
-                        class="relative block bg-[#DDA33F] rounded-2xl px-4 pb-4 w-full aspect-square"
-                    >
-                        <p
-                            class="text-white font-semibold text-xl absolute top-3"
+                    <a href="/winner_lists/1">
+                        <div
+                            class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
                         >
-                            {{ type.name }}
-                        </p>
+                            <img
+                                class="w-16 my-4"
+                                src="../../../../public/img/Chart_black.png"
+                            />
+                            <div class="flex justify-center flex-col">
+                                <p class="text-black text-xl pb-0 pl-2 mb-1">
+                                    ထီပေါက်သူများ
+                                </p>
+                                <p class="text-black text-sm pb-0 pl-2">
+                                    ထီပေါက်သူများ
+                                </p>
+                            </div>
+                        </div>
                     </a>
+                </div>
+
+                <div
+                    class="bg-[#C67D06] mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
+                >
+                    <a href="/lottery_history">
+                        <div
+                            class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                        >
+                            <img
+                                class="w-16 my-4"
+                                src="../../../../public/img/Chart_white.png"
+                            />
+                            <div class="flex justify-center flex-col">
+                                <p
+                                    class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
+                                >
+                                    ထီပေါက်စဉ်များ
+                                </p>
+                                <p class="text-white text-sm pb-0 pl-2">
+                                    ထွက်ခဲ့သော နံပတ်များ
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-4 mb-6">
+            <div class="flex justify-between px-4 mb-2">
+                <p class="text-sm text-white font-bold mb-0"></p>
+                <a href="/slots" class="text-xs text-white font-semibold mb-0">
+                    See All
+                </a>
+            </div>
+
+            <div class="">
+                <ul
+                    class="mb-0 flex gap-x-3 list-none flex-row flex-wrap border-b-0"
+                    role="tablist"
+                    data-twe-nav-ref
+                >
+                    <li v-for="(type, index) in gameTypes" :key="index">
+                        <a
+                            @click="
+                                selectedGameType = type;
+                                getProviders();
+                            "
+                            :class="
+                                type?.name == selectedGameType?.name
+                                    ? 'text-md'
+                                    : 'text-xs'
+                            "
+                            class="my-2 block text-white border-x-0 border-b-2 border-t-0 border-transparent font-normal uppercase leading-tight hover:isolate hover:border-transparent focus:isolate focus:border-transparent data-[twe-nav-active]:border-none data-[twe-nav-active]:text-black data-[twe-nav-active]:font-semibold"
+                            >{{ type.name }}</a
+                        >
+                    </li>
+                </ul>
+
+                <div class="mb-6">
+                    <div
+                        class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
+                        id="tabs-home"
+                        role="tabpanel"
+                        aria-labelledby="tabs-home-tab"
+                        data-twe-tab-active
+                    >
+                        <div class="mb-8">
+                            <div class="w-full">
+                                <div
+                                    class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
+                                >
+                                    <div
+                                        v-for="(product, index) in providers
+                                            ?.game_type?.products"
+                                        :key="index"
+                                        class="relative"
+                                    >
+                                        <a
+                                            :href="`/slots/game_lists?provider=${JSON.stringify(
+                                                {
+                                                    id: product.id,
+                                                    name: product.name,
+                                                    code: product.code,
+                                                }
+                                            )}&game_type=${JSON.stringify({
+                                                id: selectedGameType.id,
+                                                name: selectedGameType.name,
+                                            })}`"
+                                            class="cursor-pointer"
+                                        >
+                                            <img
+                                                class="w-full aspect-[3/2] rounded-lg"
+                                                :src="product.imgUrl"
+                                                alt=""
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -212,44 +258,62 @@ export default {
                 token: this.getToken,
             });
             this.gameTypes = response.data;
+            this.selectedGameType = response.data[0];
+            this.getProviders();
+        },
+        async getProviders() {
+            let url = `/api/gameTypeProducts/${this.selectedGameType.id}`;
+            let response = await getApiData({
+                url: url,
+                token: this.getToken,
+            });
+            this.providers = response.data;
+            this.selectedProvider = response.data.game_type.products[0];
         },
     },
-    updated() {
-        // $("#ad_slick").slick({
-        $("#ad_slick").not(".slick-initialized").slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                // {
-                //     breakpoint: 1024,
-                //     settings: {
-                //         slidesToShow: 4,
-                //     },
-                // },
-                // {
-                //     breakpoint: 768,
-                //     settings: {
-                //         slidesToShow: 3,
-                //     },
-                // },
-                // {
-                //     breakpoint: 640,
-                //     settings: {
-                //         slidesToShow: 3,
-                //     },
-                // },
-                // {
-                //     breakpoint: 480,
-                //     settings: {
-                //         slidesToShow: 1,
-                //     },
-                // },
-            ],
-        });
+    watch: {
+        adses(newVal) {
+            if (newVal.length > 0) {
+                this.$nextTick(() => {
+                    if ($("#ad_slick").length) {
+                        $("#ad_slick").slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            autoplay: true,
+                            autoplaySpeed: 2000,
+                            dots: false,
+                            arrows: false,
+                            responsive: [
+                                {
+                                    breakpoint: 1024,
+                                    settings: {
+                                        slidesToShow: 4,
+                                    },
+                                },
+                                {
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 3,
+                                    },
+                                },
+                                {
+                                    breakpoint: 640,
+                                    settings: {
+                                        slidesToShow: 3,
+                                    },
+                                },
+                                {
+                                    breakpoint: 480,
+                                    settings: {
+                                        slidesToShow: 1,
+                                    },
+                                },
+                            ],
+                        });
+                    }
+                });
+            }
+        },
     },
     mounted() {
         // this.getGameLists();
@@ -264,107 +328,6 @@ export default {
         // this.intervalId = setInterval(this.get2DList, 3000);
 
         initTWE({ Modal, Tab, Ripple });
-
-        // $("#ad_slick").slick({
-        //     slidesToShow: 1,
-        //     slidesToScroll: 1,
-        //     autoplay: true,
-        //     autoplaySpeed: 2000,
-        //     dots: false,
-        //     arrows: false,
-        //     responsive: [
-        //         // {
-        //         //     breakpoint: 1024,
-        //         //     settings: {
-        //         //         slidesToShow: 4,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 768,
-        //         //     settings: {
-        //         //         slidesToShow: 3,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 640,
-        //         //     settings: {
-        //         //         slidesToShow: 3,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 480,
-        //         //     settings: {
-        //         //         slidesToShow: 1,
-        //         //     },
-        //         // },
-        //     ],
-        // });
-
-        $("#twoD_carousel").slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    },
-                },
-            ],
-        });
-
-        $("#threeD_carousel").slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    },
-                },
-            ],
-        });
     },
 };
 </script>

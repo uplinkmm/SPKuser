@@ -12,15 +12,26 @@
                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
                 />
             </div>
-            <div class="mb-8">
+            <div class="mb-8 relative">
                 <input
-                    type="password"
+                    :type="show_password ? 'text' : 'password'"
                     id="password"
                     v-model="password"
                     placeholder="Password"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
+                    class="block w-full py-2 px-2 pr-10 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
                 />
+                <i
+                    v-if="!show_password"
+                    @click="show_password = !show_password"
+                    class="far fa-eye text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                ></i>
+                <i
+                    v-if="show_password"
+                    @click="show_password = !show_password"
+                    class="far fa-eye-slash text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                ></i>
             </div>
+
             <div class="mb-4">
                 <button
                     @click="login"
@@ -29,7 +40,12 @@
                     Login
                 </button>
             </div>
-            <button class="text-sm w-full text-center text-gray-300 hover:underline" @click="changeForgotPassword">Forgot password?</button>
+            <button
+                class="text-sm w-full text-center text-gray-300 hover:underline"
+                @click="changeForgotPassword(true)"
+            >
+                Forgot password?
+            </button>
         </div>
         <form method="POST" id="signin-form" ref="signinForm" action="/login">
             <input type="hidden" v-model="csrfToken" name="_token" />
@@ -87,11 +103,15 @@ export default {
             name: null,
             phone_number: null,
             password: null,
+            show_password: false,
         };
     },
     props: {
         fcmToken: {},
         changeForgotPassword: {
+            type: Function,
+        },
+        setErrorBox: {
             type: Function,
         },
     },
@@ -101,13 +121,18 @@ export default {
         ...mapMutations(["setUser", "setToken", "setCsrfToken"]),
 
         async login() {
-            if (this.password.length < 6) {
-                this.$notify({
-                    text: "Password must be at least 6 characters long.",
-                    type: "info",
-                });
+            if (!this.password || !this.phone_number) {
+                this.setErrorBox(true, "Please fill all field!");
                 return;
             }
+            if (this.password.length < 6) {
+                this.setErrorBox(
+                    true,
+                    "Password must be at least 6 characters long."
+                );
+                return;
+            }
+
             let url = "/api/login";
             let formData = new FormData();
             formData.append("phone_number", this.phone_number);
@@ -116,10 +141,7 @@ export default {
 
             let response = await postApiData({ url: url, form_data: formData });
             if (response.data) {
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
+                this.setErrorBox(false, response.message);
                 this.token = response.data.token;
                 this.setToken(this.token);
                 let user = response.data.user;
@@ -128,16 +150,17 @@ export default {
 
                 return true;
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setErrorBox(
+                    true,
+                    response.message ||
+                        response.message.phone_number ||
+                        response.message.password
+                );
 
                 return false;
             }
         },
     },
-
     created() {
         this.csrfToken = $('meta[name="csrf-token"]').attr("content");
         this.setCsrfToken(this.csrfToken);

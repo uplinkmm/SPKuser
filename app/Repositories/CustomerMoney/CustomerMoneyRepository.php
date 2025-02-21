@@ -96,7 +96,6 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
         $game_money=new stdClass();
         // $game_money->balance=$customerGameBalance;
         $game_money->balance=UserData()->balanceFloat;
-        
         return ['main_money' => $main_money, 'game_money' => $game_money];
     }
 

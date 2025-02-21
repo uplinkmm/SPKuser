@@ -15,7 +15,7 @@
                             ပင်မ ပိုက်ဆံအိတ်
                         </p>
                         <p class="flex-grow">
-                            {{ mainMoneyBalance.toLocaleString() }} MMKs
+                            {{ mainMoneyBalance.toLocaleString() }} MMK
                         </p>
                         <button
                             @click="
@@ -35,7 +35,7 @@
                             Game ပိုက်ဆံအိတ်
                         </p>
                         <p class="flex-grow">
-                            {{ gameMoneyBalance.toLocaleString() }} MMKs
+                            {{ gameMoneyBalance.toLocaleString() }} MMK
                         </p>
                         <button
                             @click="
@@ -183,7 +183,7 @@
                             <label
                                 for="amount"
                                 class="text-sm mb-3 relative block"
-                                >Amount</label
+                                >Amount ({{ mainMoneyBalance }} MMK)</label
                             >
                             <input
                                 type="number"
@@ -203,7 +203,7 @@
                             </button>
                         </div>
                         <div class="mb-12">
-                            <p class="text-sm">Maximum Amount : 100 MMKs</p>
+                            <p class="text-sm">Minimum Amount : 100 MMK</p>
                         </div>
                     </div>
                 </div>
@@ -273,7 +273,7 @@
                             <label
                                 for="amount"
                                 class="text-sm mb-3 relative block"
-                                >Amount</label
+                                >Amount ({{ gameMoneyBalance }} MMK)</label
                             >
                             <input
                                 type="number"
@@ -293,7 +293,7 @@
                             </button>
                         </div>
                         <div class="mb-12">
-                            <p class="text-sm">Maximum Amount : 100 MMKs</p>
+                            <p class="text-sm">Minimum Amount : 100 MMK</p>
                         </div>
                     </div>
                 </div>
@@ -338,15 +338,40 @@ export default {
             }
         },
         async transferWallet() {
-            if (!this.wallet_transfer.amount) {
+            if (
+                !this.wallet_transfer.amount ||
+                this.wallet_transfer.amount < 100
+            ) {
+                this.$notify({
+                    text: !this.wallet_transfer.amount
+                        ? "Amount is required!"
+                        : "Minium amount is 100 MMK!",
+                    type: "error",
+                });
                 return;
             }
-            if(this.wallet_transfer.transfer_type == 'to_game'){
-                if(!this.gameMoneyBalance){
+            if (this.wallet_transfer.transfer_type == "to_game") {
+                if (
+                    this.mainMoneyBalance == 0 ||
+                    this.wallet_transfer.amount > this.mainMoneyBalance
+                ) {
+                    this.$notify({
+                        text: "Amount is insufficient",
+                        type: "error",
+                    });
                     return;
                 }
-            }else{
-
+            } else {  //to_wallet
+                if (
+                    this.gameMoneyBalance == 0 ||
+                    this.wallet_transfer.amount > this.gameMoneyBalance
+                ) {
+                    this.$notify({
+                        text: "Amount is insufficient",
+                        type: "error",
+                    });
+                    return;
+                }
             }
             let url = `/api/create_wallet_transfer`;
             let formData = new FormData();
@@ -371,7 +396,7 @@ export default {
                 this.modalClose();
             } else {
                 this.$notify({
-                    text: "Something went wrong!",
+                    text: response.message,
                     type: "error",
                 });
             }

@@ -56,7 +56,8 @@
                         v-model="search_input"
                         @keydown.enter="searchSlots"
                         ref="searchInput"
-                        class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2"
+                        placeholder="Search slots games"
+                        class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2 placeholder-gray-600"
                     />
                 </div>
                 <div class="flex gap-x-4">

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-0 bg-img pb-0 min-h-[100vh]"
+        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
     >
         <Navbar
             title="History"
@@ -19,7 +19,7 @@
                         :class="[
                             'my-2 block px-4 pb-3.5 pt-2 text-sm',
                             game_id === 1
-                                ? 'text-black border-b-2 border-black'
+                                ? 'text-white border-b-2 border-white'
                                 : 'text-neutral-500 ',
                         ]"
                         @click="
@@ -36,7 +36,7 @@
                         :class="[
                             'my-2 block px-4 pb-3.5 pt-2 text-sm',
                             game_id === 2
-                                ? 'text-black border-b-2 border-black'
+                                ? 'text-white border-b-2 border-white'
                                 : 'text-neutral-500 ',
                         ]"
                         @click="

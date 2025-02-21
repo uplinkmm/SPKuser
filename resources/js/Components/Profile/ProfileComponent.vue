@@ -28,14 +28,14 @@
                             {{
                                 user_profile_data?.main_money_balance?.toLocaleString()
                             }}
-                            MMks
+                            MMK
                         </p>
                         <p>
                             <i class="fal fa-wallet"></i>
                             {{
                                 user_profile_data?.game_money_balance?.toLocaleString()
                             }}
-                            MMks
+                            MMK
                         </p>
                     </div>
                 </div>
@@ -373,7 +373,7 @@ export default {
             this.title = "Change Password";
         },
         backBtn() {
-            if (this.step == "changePass" || this.step == "contacts") {
+            if (this.step == "changePass" || this.step == "contacts" || this.step=='termsAndConditions') {
                 this.step = "mainProfile";
                 this.title = "Profile";
                 return;

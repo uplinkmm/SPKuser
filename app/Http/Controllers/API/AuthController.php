@@ -17,9 +17,12 @@ use App\Models\PersonFcmToken;
 use Illuminate\Support\Facades\DB;
 use App\Actions\Auth\APILoginAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Auth\OTPRequest;
 use App\Http\Requests\Customer\CustomerRequest;
+use App\Http\Requests\Auth\InitialRegisterRequest;
 use App\Http\Requests\Customer\ForgetPasswordRequest;
 use App\Repositories\CustomerMoney\CustomerMoneyRepositoryInterface;
 
@@ -89,7 +92,7 @@ class AuthController extends Controller
         ResponseMessage('Successfully logged out');
     }
 
-    public function initialRegister(Request $request)
+    public function initialRegister(InitialRegisterRequest $request)
     {
         $customerData = [
             'name' => $request->name,
@@ -107,13 +110,12 @@ class AuthController extends Controller
                 return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
             }
             return response()->json(['success' => false, 'message' => 'Failed to send OTP.'], );
-            ResponseMessage('OTP sent, check SMS message');
         } catch (Exception $e) {
             ResponseMessage($e->getMessage(), 400);
         }
     }
 
-    public function getCodeWithPhoneNumber(Request $request)
+    public function getCodeWithPhoneNumber(OTPRequest $request)
     {
         $phoneNumber = $request->phone_number;
         $customer = Customer::where('phone_number', $phoneNumber)->first();
@@ -123,9 +125,14 @@ class AuthController extends Controller
         if ($customer->provider_id != null || $customer->provider_name != null) {
             ResponseMessage('Forget password is invalid,', 419);
         }
-        $customer->otp = '000000';
-        $customer->save();
-        ResponseMessage('OTP sent, check SMS message');
+        $isSuccess = (new SMSPoh($customer))->sendVerifcationCode();
+        if ($isSuccess) {
+            return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
+        }
+        return response()->json(['success' => false, 'message' => 'Failed to send OTP.'], );
+        // $customer->otp = '000000';
+        // $customer->save();
+        // ResponseMessage('OTP sent, check SMS message');
     }
     public function forgetPassword(ForgetPasswordRequest $request)
     {
@@ -160,7 +167,7 @@ class AuthController extends Controller
         ResponseMessage('Something went wrong!', 400);
 
     }
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $customer = Customer::where('phone_number', $request->phone_number)->first();
         if (!$customer) {
