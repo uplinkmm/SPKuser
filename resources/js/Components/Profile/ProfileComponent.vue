@@ -28,14 +28,14 @@
                             {{
                                 user_profile_data?.main_money_balance?.toLocaleString()
                             }}
-                            MMks
+                            MMK
                         </p>
                         <p>
                             <i class="fal fa-wallet"></i>
                             {{
                                 user_profile_data?.game_money_balance?.toLocaleString()
                             }}
-                            MMks
+                            MMK
                         </p>
                     </div>
                 </div>

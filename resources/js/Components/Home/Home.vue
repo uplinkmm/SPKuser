@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div
-                class="bg-[#C67D06] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a v-if="!getUser" href="/login_register">
                     <div
@@ -63,7 +63,183 @@
                     </div>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-4 mb-4">
+            <div class="grid grid-cols-2 gap-x-4 gap-y-6 mb-4">
+                <a href="/2D_betting"
+                    class="bg-[#C67D06] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
+                    <div class="w-fit mx-auto flex">
+                        <div>
+                            <img
+                                class="w-5/12 mb-4 pt-4 lg:pt-0" 
+                                src="../../../../public/img/Map_fill.png"
+                            />
+                            <p
+                                class="text-white text-xl self-end pb-6 pl-4"
+                            >
+                                2D ထိုးမည်
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/3D_betting"
+                    class="bg-[#fff] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
+                    <div class="w-fit mx-auto flex">
+                        <div>
+                            <img
+                                class="w-5/12 mb-4 pt-4 lg:pt-0" 
+                                src="../../../../public/img/Map_fill_black.png"
+                            />
+                            <p
+                                class="text-black text-xl self-end pb-6 pl-4"
+                            >
+                                3D ထိုးမည်
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <div 
+                    class="bg-white mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
+                >
+                    <a href="/winner_lists/1">
+                        <div
+                            class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                        >
+                            <img
+                                class="w-16 my-4"
+                                src="../../../../public/img/Chart_black.png"
+                            />
+                            <div class="flex justify-center flex-col">
+                                <p class="text-black text-xl pb-0 pl-2 mb-1">
+                                    ထီပေါက်သူများ
+                                </p>
+                                <p class="text-black text-sm pb-0 pl-2">
+                                    ထီပေါက်သူများ
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div
+                    class="bg-[#C67D06] mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
+                >
+                    <a href="/lottery_history">
+                        <div
+                            class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                        >
+                            <img
+                                class="w-16 my-4"
+                                src="../../../../public/img/Chart_white.png"
+                            />
+                            <div class="flex justify-center flex-col">
+                                <p
+                                    class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
+                                >
+                                    ထီပေါက်စဉ်များ
+                                </p>
+                                <p class="text-white text-sm pb-0 pl-2">
+                                    ထွက်ခဲ့သော နံပတ်များ
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="px-0 mb-6 col-span-2">
+                    <div class="flex justify-between px-4 mb-2">
+                        <p class="text-lg text-white font-bold mb-0">Slots</p>
+                        <a href="/slots" class="text-xs text-white font-semibold mb-0">
+                            See All
+                        </a>
+                    </div>
+                    <div class="w-full">
+                        <div
+                            class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
+                        >
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Candy-Blitz-Bombs_339x180.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Dwarf-Dragon_339x180.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/FrontRunner_OddsOn_339x180.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Fruity-Treats_339x180.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Release-the-Bison_339x180.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a href="#">
+                                    <img
+                                        class="w-full aspect-[3/2]"
+                                        src="../../../../public/img/Rise-of-Pyramids_339x180-1.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                
+
+                
+
+
+
                 <!-- <a
                     href="/2d"
                     class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
@@ -101,7 +277,7 @@
                         </div>
                     </div>
                 </a> -->
-                <div class="col-span-2 mb-6">
+                <!-- <div class="col-span-2 mb-6">
                     <p class="text-white text-xl">
                         <i class="fas fa-flag primary-text pr-2"></i>
                         Games
@@ -130,7 +306,7 @@
                         class="w-full aspect-square"
                         src="../../../../public/img/threed_card 1.png"
                     />
-                </a>
+                </a> -->
                 <div
                     class="contents"
                     v-for="(type, index) in gameTypes"
@@ -148,6 +324,10 @@
                         >
                             {{ type.name }}
                         </p>
+                        <img
+                            class="w-full mt-8 aspect-square"
+                            :src="type.img_url"
+                        />
                     </a>
                 </div>
             </div>
@@ -214,42 +394,49 @@ export default {
             this.gameTypes = response.data;
         },
     },
-    updated() {
-        // $("#ad_slick").slick({
-        $("#ad_slick").not(".slick-initialized").slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                // {
-                //     breakpoint: 1024,
-                //     settings: {
-                //         slidesToShow: 4,
-                //     },
-                // },
-                // {
-                //     breakpoint: 768,
-                //     settings: {
-                //         slidesToShow: 3,
-                //     },
-                // },
-                // {
-                //     breakpoint: 640,
-                //     settings: {
-                //         slidesToShow: 3,
-                //     },
-                // },
-                // {
-                //     breakpoint: 480,
-                //     settings: {
-                //         slidesToShow: 1,
-                //     },
-                // },
-            ],
-        });
+    watch: {
+        adses(newVal) {
+            if (newVal.length > 0) {
+                this.$nextTick(() => {
+                    if ($("#ad_slick").length) {
+                        $("#ad_slick").slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            autoplay: true,
+                            autoplaySpeed: 2000,
+                            dots: false,
+                            arrows: false,
+                            responsive: [
+                                {
+                                    breakpoint: 1024,
+                                    settings: {
+                                        slidesToShow: 4,
+                                    },
+                                },
+                                {
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 3,
+                                    },
+                                },
+                                {
+                                    breakpoint: 640,
+                                    settings: {
+                                        slidesToShow: 3,
+                                    },
+                                },
+                                {
+                                    breakpoint: 480,
+                                    settings: {
+                                        slidesToShow: 1,
+                                    },
+                                },
+                            ],
+                        });
+                    }
+                });
+            }
+        },
     },
     mounted() {
         // this.getGameLists();
@@ -264,107 +451,6 @@ export default {
         // this.intervalId = setInterval(this.get2DList, 3000);
 
         initTWE({ Modal, Tab, Ripple });
-
-        // $("#ad_slick").slick({
-        //     slidesToShow: 1,
-        //     slidesToScroll: 1,
-        //     autoplay: true,
-        //     autoplaySpeed: 2000,
-        //     dots: false,
-        //     arrows: false,
-        //     responsive: [
-        //         // {
-        //         //     breakpoint: 1024,
-        //         //     settings: {
-        //         //         slidesToShow: 4,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 768,
-        //         //     settings: {
-        //         //         slidesToShow: 3,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 640,
-        //         //     settings: {
-        //         //         slidesToShow: 3,
-        //         //     },
-        //         // },
-        //         // {
-        //         //     breakpoint: 480,
-        //         //     settings: {
-        //         //         slidesToShow: 1,
-        //         //     },
-        //         // },
-        //     ],
-        // });
-
-        $("#twoD_carousel").slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    },
-                },
-            ],
-        });
-
-        $("#threeD_carousel").slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: false,
-            arrows: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    },
-                },
-            ],
-        });
     },
 };
 </script>

@@ -5,12 +5,20 @@ namespace App\Repositories\Notification;
 use App\Models\CustomerWallet;
 use App\Models\NotificationPerson;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class NotificationRepository implements NotificationInterface
 {
     public function notificationList($request)
     {
-        // $type = $request->type == 'topup_transaction' ? ['topup_transaction', 'cash_withdrawl_transaction'] : ['betting_win', 'twist_win_number'];
+        $bearerToken = $request->bearerToken();
+        $authToken=null;
+         if ($bearerToken) {
+            [$id, $plainTextToken] = explode('|', $bearerToken, 2);
+            $authToken = $request->user()->tokens()->where('id', $id)->first();
+        }
         if($request->type=='topup_transaction'){
             $type=['topup_transaction', 'cash_withdrawl_transaction'];
         }elseif($request->type=='betting_win'){
@@ -18,7 +26,12 @@ class NotificationRepository implements NotificationInterface
         }else{
             $type=['ads'] ;
         }
-        $userId = UserData()->id;
+        if($authToken){
+            $userId =  UserData()->id;
+        }else{
+            $userId=null;
+        }
+
         if ((int) $request->is_count == 1) {
             NotificationPerson::where('personable_type', 'customer')
                 ->where('personable_id', $userId)
@@ -95,12 +108,18 @@ class NotificationRepository implements NotificationInterface
         $data['count'] = $countOfUnRead;
         $userData = new \stdClass();
         $balance = CustomerWallet::where('customer_id', UserData()->id)->first();
-        $userData->balance = $balance ? $balance->balance : 0;
-        $userData->name = UserData()->name;
-        $userData->game_money_balance=UserData()->balanceFloat;
+        if($userId){
+            $userData->balance = $balance ? $balance->balance : 0;
+            $userData->name = UserData()->name;
+            $userData->game_money_balance=UserData()->balanceFloat;
+        }else{
+            // $userData->balance=0;
+            // $userData->game_money_balance=0;
+            // $userData->name=null;
+            $userData=null;
+        }
         $data['user'] = $userData;
         return $data;
-
         // Base query for notification retrieval
         //       $notificationQuery = NotificationPerson::orderBy('notification_people.id', 'desc')
         //       ->where('personable_type', 'customer')

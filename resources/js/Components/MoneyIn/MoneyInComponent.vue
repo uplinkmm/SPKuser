@@ -18,14 +18,14 @@
                             <i class="fal fa-wallet mr-3"></i>
                             {{ $t("Main Money") }}
                         </p>
-                        <p>{{ mainMoneyBalance?.toLocaleString() }} MMKs</p>
+                        <p>{{ mainMoneyBalance?.toLocaleString() }} MMK</p>
                     </div>
                     <div class="flex gap-x-4">
                         <p>
                             <i class="fal fa-wallet mr-3"></i>
                             {{ $t("Game Money") }}
                         </p>
-                        <p>{{ gameMoneyBalance?.toLocaleString() }} MMKs</p>
+                        <p>{{ gameMoneyBalance?.toLocaleString() }} MMK</p>
                     </div>
                 </div>
             </div> -->

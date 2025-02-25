@@ -56,7 +56,8 @@
                         v-model="search_input"
                         @keydown.enter="searchSlots"
                         ref="searchInput"
-                        class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2"
+                        placeholder="Search slots games"
+                        class="py-1 h-full ml-2 bg-transparent text-sm focus:right-0 focus:shadow-none focus:outline-none border-b px-2 placeholder-gray-600"
                     />
                 </div>
                 <div class="flex gap-x-4">
@@ -130,11 +131,11 @@ export default {
         ...mapGetters(["notiCount", "getToken", "getUser"]),
     },
     methods: {
-        ...mapMutations(["setNotiCount"]),
+        ...mapMutations(["setNotiCount", "setUser"]),
         async getNotis() {
             let response = await getApiData({
                 url: `/api/notification_list?type=betting_win&page=1&is_count=0`,
-                token: this.getToken,
+                token: this.getToken ? this.getToken : "",
             });
             if (response.success) {
                 this.setNotiCount(response.data.count);
@@ -145,6 +146,11 @@ export default {
                     this.needAuth
                 ) {
                     window.location.href = "/login_register";
+                } else if (
+                    response.message == "Please login to continue" &&
+                    !this.needAuth
+                ) {
+                    this.setUser("");
                 }
             }
         },
