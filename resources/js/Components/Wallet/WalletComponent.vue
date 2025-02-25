@@ -352,8 +352,8 @@ export default {
             }
             if (this.wallet_transfer.transfer_type == "to_game") {
                 if (
-                    this.gameMoneyBalance == 0 ||
-                    this.wallet_transfer.amount > this.gameMoneyBalance
+                    this.mainMoneyBalance == 0 ||
+                    this.wallet_transfer.amount > this.mainMoneyBalance
                 ) {
                     this.$notify({
                         text: "Amount is insufficient",
@@ -361,10 +361,10 @@ export default {
                     });
                     return;
                 }
-            } else {
+            } else {  //to_wallet
                 if (
-                    this.mainMoneyBalance == 0 ||
-                    this.wallet_transfer.amount > this.mainMoneyBalance
+                    this.gameMoneyBalance == 0 ||
+                    this.wallet_transfer.amount > this.gameMoneyBalance
                 ) {
                     this.$notify({
                         text: "Amount is insufficient",

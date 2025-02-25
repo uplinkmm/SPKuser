@@ -24,6 +24,7 @@
                     <button
                         class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
                         @click="initialRegister"
+                        :disabled="countdown != 0"
                     >
                         Get OTP
                     </button>
@@ -173,8 +174,9 @@ export default {
         };
     },
     props: {
-        props: {
-            fcmToken: {},
+        fcmToken: {},
+        setErrorBox: {
+            type: Function,
         },
     },
     // mixins: [fcmMixin],
@@ -184,11 +186,10 @@ export default {
 
         async initialRegister() {
             if (!this.user_name || !this.phone_number) {
-                this.$notify({
-                    text: "You forgot to enter name and phone number",
-                    type: "warn",
-                });
-
+                this.setErrorBox(
+                    true,
+                    "You forgot to enter name and phone number"
+                );
                 return 1;
             }
             let formData = new FormData();
@@ -198,54 +199,42 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
             if (response.success) {
                 this.otpRequested = true;
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
+                this.setErrorBox(false, response.message);
                 this.startCountdown();
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setErrorBox(true, response.message.phone_number);
             }
         },
 
         async register() {
             if (!this.otp) {
-                this.$notify({
-                    text: "OTP code must be entered",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "OTP code must be entered");
+
                 return 1;
             }
             if (!this.countdown) {
-                this.$notify({
-                    text: "OTP code is expired!",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "OTP code is expired!");
+
                 return 1;
             }
 
             if (!this.password || !this.confirm_password) {
-                this.$notify({
-                    text: "Password and confirm password must be entered",
-                    type: "warn",
-                });
+                this.setErrorBox(
+                    true,
+                    "Password and confirm password must be entered"
+                );
                 return 1;
             }
             if (this.password != this.confirm_password) {
-                this.$notify({
-                    text: "Confirm password not match",
-                    type: "warn",
-                });
+                this.setErrorBox(true, "Confirm password not match");
                 return 1;
             }
             if (this.password.length < 6 || this.confirm_password.length < 6) {
-                this.$notify({
-                    text: "Password must be at least 6 characters long.",
-                    type: "info",
-                });
+                this.setErrorBox(
+                    true,
+                    "Password must be at least 6 characters long."
+                );
+
                 return;
             }
             let url = "/api/register";
@@ -253,6 +242,7 @@ export default {
             formData.append("name", this.user_name);
             formData.append("phone_number", this.phone_number);
             formData.append("password", this.password);
+            formData.append("password_confirmation", this.confirm_password);
             formData.append("otp", this.otp);
             formData.append("code", this.code);
             formData.append("fcm_token", this.fcmToken); //from mixin
@@ -260,10 +250,7 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
 
             if (response.success) {
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
+                this.setErrorBox(false, response.message);
                 this.token = response.data.token;
                 this.setToken(this.token);
                 let user = response.data.user;
@@ -272,10 +259,15 @@ export default {
 
                 return true;
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setErrorBox(
+                    true,
+                    response.message.phone_number ||
+                        response.message.password ||
+                        response.message.password_confirmation ||
+                        response.message.otp ||
+                        response.message
+                );
+
                 return false;
             }
         },

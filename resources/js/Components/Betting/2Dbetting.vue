@@ -413,8 +413,9 @@
                                         edit_bet_number.number
                                     "
                                     type="number"
-                                    class="shadow appearance-none border border-gray-500 rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:shadow-outline"
+                                    class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
                                     v-model="edit_bet_number.amount"
+                                    placeholder="Enter amount"
                                 />
                             </td>
                             <td class="text-center py-2">
@@ -424,6 +425,7 @@
                                         edit_bet_number.number
                                     "
                                     @click="editBetAmount"
+                                    class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
                                 >
                                     <i class="fas fa-check mr-2"></i>
                                 </button>
@@ -433,6 +435,7 @@
                                         edit_bet_number.number
                                     "
                                     @click="edit_bet_number = bet_number"
+                                    class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
                                 >
                                     <i class="fal fa-edit mr-2"></i>
                                 </button>
@@ -442,6 +445,7 @@
                                     @click="
                                         delete_bet_number = bet_number.number
                                     "
+                                    class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
                                 >
                                     <i class="fal fa-trash"></i>
                                 </button>
@@ -995,8 +999,9 @@
                                             edit_bet_number.number
                                         "
                                         type="number"
-                                        class="shadow appearance-none border border-gray-500 rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:shadow-outline"
+                                        class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
                                         v-model="edit_bet_number.amount"
+                                        placeholder="Enter amount"
                                     />
                                 </td>
                                 <td class="text-center py-2">
@@ -1006,18 +1011,22 @@
                                             edit_bet_number.number
                                         "
                                         @click="editBetAmount"
+                                        class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
                                     >
                                         <i class="fas fa-check mr-2"></i>
                                     </button>
+                                    <!-- Edit Button (Blue) -->
                                     <button
                                         v-show="
                                             bet_number.number !=
                                             edit_bet_number.number
                                         "
                                         @click="edit_bet_number = bet_number"
+                                        class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
                                     >
                                         <i class="fal fa-edit mr-2"></i>
                                     </button>
+                                    <!-- Delete Button (Red) -->
                                     <button
                                         data-twe-toggle="modal"
                                         data-twe-target="#delete_modal"
@@ -1025,6 +1034,7 @@
                                             delete_bet_number =
                                                 bet_number.number
                                         "
+                                        class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
                                     >
                                         <i class="fal fa-trash"></i>
                                     </button>
@@ -1412,7 +1422,6 @@ export default {
         },
         validateNumber(event) {
             const value = event.target.value;
-            // Remove any non-numeric characters
             this.round_digits = value.replace(/[^0-9]/g, "");
         },
         addBetNumber(num) {
@@ -1564,24 +1573,19 @@ export default {
                 //check closing amount
                 this.error_modal_text = this.errorText;
                 this.showErrorModal();
-                // this.$notify({
-                //     text: this.errorText,
-                //     type: "error",
-                // });
-
                 return;
             }
             if (this.checkUserEachLimitError) {
                 //check closing amount
                 this.error_modal_text = this.checkUserEachLimitError;
                 this.showErrorModal();
-                // this.$notify({
-                //     text: this.checkUserEachLimitError,
-                //     type: "error",
-                // });
                 return;
             }
-            this.calling_api = true;
+            if(this.bet_numbers.length == 0){
+                this.error_modal_text = "Invalid or empty betting numbers";
+                this.showErrorModal();
+            }
+            this.calling_api = true;            
             let formData = new FormData();
             formData.append("numbers", JSON.stringify(this.bet_numbers));
             formData.append("betting_multiplier", this.bet_multiplier);
@@ -1639,14 +1643,16 @@ export default {
                 });
                 return;
             }
-            if (
-                this.each_amount == "" ||
-                this.each_amount <= 0 ||
-                digits.length > 4 ||
-                digits.length < 3
-            ) {
+            if (digits.length > 4 || digits.length < 3) {
                 this.$notify({
-                    text: "Please enter bet numbers and amount",
+                    text: "Please enter numbers 3 or 4 digits.",
+                    type: "error",
+                });
+                return;
+            }
+            if (this.each_amount == "" || this.each_amount <= 0) {
+                this.$notify({
+                    text: "Please enter amount",
                     type: "error",
                 });
                 return;
@@ -1655,10 +1661,6 @@ export default {
             } else {
                 this.error_modal_text = `Amount must be between ${this.min} and ${this.max}`;
                 this.showErrorModal();
-                // this.$notify({
-                //     text: errorText,
-                //     type: "error",
-                // });
                 return;
             }
             const result = [];

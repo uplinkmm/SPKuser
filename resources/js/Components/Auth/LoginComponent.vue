@@ -111,6 +111,9 @@ export default {
         changeForgotPassword: {
             type: Function,
         },
+        setErrorBox: {
+            type: Function,
+        },
     },
     // mixins: [fcmMixin],
 
@@ -119,17 +122,14 @@ export default {
 
         async login() {
             if (!this.password || !this.phone_number) {
-                this.$notify({
-                    text: "Please fill all field!",
-                    type: "error",
-                });
+                this.setErrorBox(true, "Please fill all field!");
                 return;
             }
             if (this.password.length < 6) {
-                this.$notify({
-                    text: "Password must be at least 6 characters long.",
-                    type: "error",
-                });
+                this.setErrorBox(
+                    true,
+                    "Password must be at least 6 characters long."
+                );
                 return;
             }
 
@@ -141,10 +141,7 @@ export default {
 
             let response = await postApiData({ url: url, form_data: formData });
             if (response.data) {
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
+                this.setErrorBox(false, response.message);
                 this.token = response.data.token;
                 this.setToken(this.token);
                 let user = response.data.user;
@@ -153,16 +150,17 @@ export default {
 
                 return true;
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setErrorBox(
+                    true,
+                    response.message ||
+                        response.message.phone_number ||
+                        response.message.password
+                );
 
                 return false;
             }
         },
     },
-
     created() {
         this.csrfToken = $('meta[name="csrf-token"]').attr("content");
         this.setCsrfToken(this.csrfToken);

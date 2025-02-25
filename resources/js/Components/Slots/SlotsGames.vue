@@ -2,7 +2,7 @@
     <notifications position="top center" />
 
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-8 bg-img pb-24 min-h-[100vh]"
+        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
     >
         <Navbar
             :title="`${this.selectedGameType?.name} - ${this.selectedProvider?.name}`"
