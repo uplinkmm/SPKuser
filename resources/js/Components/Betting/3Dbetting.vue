@@ -96,10 +96,10 @@
                         class="bg-green-400 text-white rounded-xl cursor-pointer shadow-md pt-10 pb-8 px-6 flex justify-between items-end mb-5"
                     >
                         <div class="block">
-                            <p class="mb-3">
+                            <p v-if="game" class="mb-3">
                                 {{
                                     formatDateTime(
-                                        game.game_setting.lottery_date_time
+                                        game.game_setting?.lottery_date_time
                                     )
                                 }}
                             </p>
