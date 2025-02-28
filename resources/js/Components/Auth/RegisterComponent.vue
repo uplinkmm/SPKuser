@@ -267,7 +267,6 @@ export default {
                         response.message.otp ||
                         response.message
                 );
-
                 return false;
             }
         },
