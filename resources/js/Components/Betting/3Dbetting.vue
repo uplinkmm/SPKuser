@@ -73,22 +73,10 @@
                     </div>
                 </div>
                 <div class="contents" v-if="!showSpinner">
+          
                 <div
-                    v-if="!settings.length"
-                    class="bg-transparent items-center justify-center mb-8"
-                >
-                    <div
-                        class="bg-white rounded-xl cursor-pointer shadow-md py-20 px-12 flex"
-                    >
-                        <i
-                            class="fas fa-exclamation text-red-700"
-                            style="font-size: 24px"
-                        ></i>
-                        <span class="pl-8">3D ခေတ္တ ပိတ်ထားပါသည် </span>
-                    </div>
-                </div>
-                <div
-                    v-else
+                  v-if="settings.length > 0 && main_game_active && settings[0]?.is_active"
+                 
                     class="bg-transparent items-center justify-center mb-8"
                 >
                     <div
@@ -118,6 +106,20 @@
                             class="far fa-angle-right"
                             style="font-size: 24px"
                         ></i> -->
+                    </div>
+                </div>
+                <div
+                v-else
+                    class="bg-transparent items-center justify-center mb-8"
+                >
+                    <div
+                        class="bg-white rounded-xl cursor-pointer shadow-md py-20 px-12 flex"
+                    >
+                        <i
+                            class="fas fa-exclamation text-red-700"
+                            style="font-size: 24px"
+                        ></i>
+                        <span class="pl-8">3D ခေတ္တ ပိတ်ထားပါသည် </span>
                     </div>
                 </div>
             </div>
@@ -783,6 +785,7 @@ export default {
             winning_numbers: [],
             delete_bet_number: "",
             error_modal_text: "",
+            main_game_active: 1,
         };
     },
     computed: {
@@ -1214,6 +1217,7 @@ export default {
                 }
             );
             // this.settings = [];
+            this.main_game_active = response.data.is_active;
             if (response.data.is_active && response.data.settings.length) {
                 this.getBetNumbers();
                 if (response.data.settings.length) {
