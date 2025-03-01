@@ -11,7 +11,8 @@ trait BettingValidation
     {
         $currentDateTime = Carbon::now();
         $currentTime = $currentDateTime->format('H:i');
-        $game = Game::where('is_active', 1)->where('id', $gameId)->first();
+        $game = Game::where('is_active', 1)->where('id', $gameId)
+        ->first();
         if (!$game) {
             ResponseMessage('Game is invalid ', 419);
         }
