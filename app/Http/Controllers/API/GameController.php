@@ -30,7 +30,7 @@ class GameController extends Controller
             $currentTime = Carbon::now();
             $day = Carbon::now()->day;
             $now = Carbon::now();
-            if ($day > 1 && $day <= 15) {
+            if ($day >= 1 && $day <= 15) {
                 // $date= i want to define current data ,current month and day is 1
                 $date = Carbon::now()->setDate(Carbon::now()->year, Carbon::now()->month, 16);
             }
@@ -39,7 +39,6 @@ class GameController extends Controller
                 $date = Carbon::now()->setDate(Carbon::now()->year, Carbon::now()->addMonth()->month, 1);
             }
             $date = convertDateFormat($date);
-            // dd($date);
             $game_setting = GameSetting::where('game_id', $request->game_id)
                 // ->when($game->type == '3d', function ($query) use ($date) {
                 //     $query->whereDate('lottery_date_time', $date);
