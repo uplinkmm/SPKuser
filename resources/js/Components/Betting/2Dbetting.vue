@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div
-                    v-if="twod_settings.length"
+                    v-if="twod_settings.length && main_game_active"
                     class="bg-transparent items-center justify-center mb-8"
                 >
                     <!-- <div class="text-center mb-4">
@@ -1355,6 +1355,7 @@ export default {
             twod_settings: [],
             settings: [],
             setting_value: "",
+            main_game_active: 1,
             calling_api: false,
             bet_limit: "",
             winner_page: 1,
@@ -2047,6 +2048,7 @@ export default {
 
                 if (response.data.twod_settings.length) {
                     this.twod_settings = response.data.twod_settings;
+                    this.main_game_active = response.data.is_active;
                     this.step = 5;
                 } else {
                     this.step = 5; //error page
