@@ -205,6 +205,7 @@ class BettingRepository implements BettingInterface
             ->select('cn.number', DB::raw('MAX(cn.date_time) as latest_date'))
             ->where('cn.game_id', $gameSetting->game_id)
             ->where('cn.game_setting_id', $gameSetting->id)
+            ->where('cn.is_active',1)
             ->whereDate('cn.date_time', $date)
             ->groupBy('cn.number');
 
