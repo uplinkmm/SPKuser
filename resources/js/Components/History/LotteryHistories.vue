@@ -155,7 +155,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-if="!data.length">
+                                <tr v-if="!data?.length">
                                     <td colspan="2" class="text-center py-4 px-8">
                                         No 3D History Found
                                     </td>
