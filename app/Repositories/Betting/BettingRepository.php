@@ -388,7 +388,7 @@ class BettingRepository implements BettingInterface
                         latest_cn.id IS NOT NULL, 
                         IF(
                             ' . $max . ' > 0, 
-                            (( (COALESCE(latest_cn.amount, 0)+COALESCE(SUM(fb.total_amount_all), 0))) /'.$defaultClosingAmount.' * 100), 
+                            (( (COALESCE(latest_cn.amount, 0)+COALESCE(SUM(fb.total_amount_all), 0))) /'.$max.' * 100), 
                             0
                         ),
                         IF(
