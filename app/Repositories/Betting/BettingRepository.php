@@ -295,9 +295,9 @@ class BettingRepository implements BettingInterface
         $gameSettingId=$game->game_setting->id;
         // dd($gameSettingId);
         $now = now();
-        $max = config('3d_setting.max_closing_bet_amount');
-        $min_bet_amount = config('3d_setting.min_bet_amount');
-        $max_bet_amount = config('3d_setting.max_bet_amount');
+        $max = $game->game_setting->closing_amount;
+        $min_bet_amount = $game->game_setting->min;
+        $max_bet_amount = $$game->game_setting->max;
         $subqueryD1 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d1'));
         $subqueryD2 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d2'));
         $subqueryD3 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d3'));
