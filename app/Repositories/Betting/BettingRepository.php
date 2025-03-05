@@ -52,8 +52,7 @@ class BettingRepository implements BettingInterface
                     $number['number']
                 );
                 // dd($betttingAmountAndClosingAmount);
-                $closingAmount = $betttingAmountAndClosingAmount['closing_amount'];
-                // dd($closingAmount);
+                $closingAmount = (int)$betttingAmountAndClosingAmount['closing_amount'];
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
                 $newBetAmount = $number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
@@ -91,6 +90,7 @@ class BettingRepository implements BettingInterface
             ->where('game_id', $gameId)
             ->where('game_setting_id', $gameSettingId)
             ->whereDate('date_time', $date)
+            ->where('is_active')
             ->first();
         
         // $closingAmount = config('2d_setting.max_closing_bet_amount');
@@ -108,14 +108,14 @@ class BettingRepository implements BettingInterface
             $query
                 ->whereBetween('b.date_time', [$startTime, $endTime])
                 ->where('b.game_id', $gameId)
-                ->where('b.game_setting_id', $gameSettingId)
-                ->leftJoin('closing_numbers as cn', function ($join) use ($date) {
-                    $join->on('bn.number', '=', 'cn.number')
-                        // ->where('cn.time_status', $timeStatus)
-                        ->where('cn.game_id', config('2d_setting.game_id'))
-                        ->where('cn.is_active', 1)
-                        ->whereDate('cn.date_time', $date);
-                });
+                ->where('b.game_setting_id', $gameSettingId);
+                // ->leftJoin('closing_numbers as cn', function ($join) use ($date) {
+                //     $join->on('bn.number', '=', 'cn.number')
+                //         // ->where('cn.time_status', $timeStatus)
+                //         ->where('cn.game_id', config('2d_setting.game_id'))
+                //         ->where('cn.is_active', 1)
+                //         ->whereDate('cn.date_time', $date);
+                // });
         } else if ($gameId == 2) {
             $max = config('3d_setting.max_closing_bet_amount');
             $query->where('b.game_setting_id', $gameSettingId);
