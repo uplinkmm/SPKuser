@@ -1426,8 +1426,12 @@ export default {
             this.round_digits = value.replace(/[^0-9]/g, "");
         },
         addBetNumber(num) {
+            console.log(num);
             const available_for_bet = this.checkOpenCloseTime();
             if (available_for_bet == false) {
+                return;
+            }
+            if(num.total_bet_percentage==100){
                 return;
             }
             const index = this.bet_numbers.findIndex(

@@ -914,6 +914,9 @@ export default {
             // if (available_for_bet == false) {
             //     return;
             // }
+            if(num.total_bet_percentage==100){
+                return;
+            }
             const index = this.bet_numbers.findIndex(
                 (bet) => bet.number === num.number
             );
