@@ -319,7 +319,6 @@ class BettingRepository implements BettingInterface
             ->where('cn1.game_setting_id', $game->game_setting->id)
             ->where('cn1.is_active', 1)
             ->whereRaw('cn1.id = (select max(cn2.id) from closing_numbers as cn2 where cn2.number = cn1.number and cn2.game_id = cn1.game_id and cn2.game_setting_id = cn1.game_setting_id and cn2.is_active = 1)');
-
         // $betsWithTotalAmount = DB::table(DB::raw('(' . $subqueryD1->toSql() . ') as d1'))
         //     ->mergeBindings($subqueryD1)
         //     ->crossJoin(DB::raw('(' . $subqueryD2->toSql() . ') as d2'))
