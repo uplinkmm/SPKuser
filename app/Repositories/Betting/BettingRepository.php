@@ -117,7 +117,7 @@ class BettingRepository implements BettingInterface
                 //         ->whereDate('cn.date_time', $date);
                 // });
         } else if ($gameId == 2) {
-            $max = config('3d_setting.max_closing_bet_amount');
+            // $max = config('3d_setting.max_closing_bet_amount');
             $query->where('b.game_setting_id', $gameSettingId);
                 // ->leftJoin('closing_numbers as cn', function ($join) {
                 //     $join->on('bn.number', '=', 'cn.number')
@@ -156,8 +156,13 @@ class BettingRepository implements BettingInterface
         $gameSettingId = isset($request->game_setting_id) ? $request->game_setting_id : null;
         #game
         $game = (new GameData($request->game_id))->getGame($gameSettingId);
+        if(!$game){
+            ResponseMessage('Game is invalid',419);
+        }
         #betting number_list
-        $bettin_number_list = $request->game_id == config('2d_setting.game_id') ? $this->get2dBettingNumberList($game) : $this->get3dBettingNumberList($game);
+        // $bettin_number_list = $request->game_id == config('2d_setting.game_id') ? $this->get2dBettingNumberList($game) : $this->get3dBettingNumberList($game);
+        $bettin_number_list = $game->game_type == '2d' ? $this->get2dBettingNumberList($game) : $this->get3dBettingNumberList($game);
+        
         #get wallet money
         $balance = (new CustomerWalletBalance(UserData()->id))->getCustomerWalletBalance();
         #setUp_Response
@@ -165,7 +170,7 @@ class BettingRepository implements BettingInterface
         $new_data->bet_list_numbers = $bettin_number_list;
         $new_data->game = $game;
         $new_data->balance = $balance;
-        $new_data->bet_limit = $request->game_id == config('2d_setting.game_id') ? UserData()->two_d_limit : UserData()->three_d_limit;
+        $new_data->bet_limit = $game->game_type == '2d' ? UserData()->two_d_limit : UserData()->three_d_limit;
         return $new_data;
     }
 
@@ -297,7 +302,7 @@ class BettingRepository implements BettingInterface
         $gameSettingId=$game->game_setting->id;
         // dd($gameSettingId);
         $now = now();
-        $defaultClosingAmount=config('3d_setting.max_closing_bet_amount');
+        // $defaultClosingAmount=config('3d_setting.max_closing_bet_amount');
         $max = $game->game_setting->closing_amount;
         $min_bet_amount = $game->game_setting->min;
         $max_bet_amount = $game->game_setting->max;
