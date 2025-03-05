@@ -53,6 +53,7 @@ class BettingRepository implements BettingInterface
                 );
                 // dd($betttingAmountAndClosingAmount);
                 $closingAmount = $betttingAmountAndClosingAmount['closing_amount'];
+                // dd($closingAmount);
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
                 $newBetAmount = $number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
@@ -116,25 +117,26 @@ class BettingRepository implements BettingInterface
                 });
         } else if ($gameId == 2) {
             $max = config('3d_setting.max_closing_bet_amount');
-            $query->where('b.game_setting_id', $gameSettingId)
-                ->leftJoin('closing_numbers as cn', function ($join) {
-                    $join->on('bn.number', '=', 'cn.number')
-                        ->where('cn.game_id', config('3d_setting.game_id'))
-                        ->where('cn.is_active', 1);
-                })
-                ->leftJoin('game_settings as gs', function ($join) use ($now) {
-                    $join->on('gs.game_id', '=', 'cn.game_id')
-                        ->where('gs.is_active', 1)
-                        ->where(function ($query) use ($now) {
-                            $query->where('gs.opening_date_time', '<=', $now)
-                                ->where('gs.closing_date_time', '>=', $now);
-                        });
-                });
+            $query->where('b.game_setting_id', $gameSettingId);
+                // ->leftJoin('closing_numbers as cn', function ($join) {
+                //     $join->on('bn.number', '=', 'cn.number')
+                //         ->where('cn.game_id', config('3d_setting.game_id'))
+                //         ->where('cn.is_active', 1);
+                // })
+                // ->leftJoin('game_settings as gs', function ($join) use ($now) {
+                //     $join->on('gs.game_id', '=', 'b.game_id')
+                //         ->where('gs.is_active', 1)
+                //         ->where(function ($query) use ($now) {
+                //             $query->where('gs.opening_date_time', '<=', $now)
+                //                 ->where('gs.closing_date_time', '>=', $now);
+                //         });
+                // });
         }
 
         // Retrieve the total bet amount and closing amount
         $query->select(
             DB::raw('COALESCE(SUM(bn.amount), 0) AS total_bet_amount'),
+            // DB::raw('COALESCE(SUM(DISTINCT bn.amount), 0) AS total_bet_amount')
         );
 
         // Execute the query and fetch results
@@ -290,6 +292,8 @@ class BettingRepository implements BettingInterface
         if (!$game->game_setting) {
             ResponseMessage("Betting isn't available beacause of game setting is missing", 419);
         }
+        $gameSettingId=$game->game_setting->id;
+        // dd($gameSettingId);
         $now = now();
         $max = config('3d_setting.max_closing_bet_amount');
         $min_bet_amount = config('3d_setting.min_bet_amount');
@@ -333,16 +337,18 @@ class BettingRepository implements BettingInterface
             ->leftJoinSub($latestClosingNumbers, 'latest_cn', function ($join) {
                 $join->on(DB::raw('LPAD(d1.n * 100 + d2.n * 10 + d3.n, 3, "0")'), '=', 'latest_cn.number');
             })
-            ->leftJoin('game_settings as gs', function ($join) use ($now) {
-                $join->on('gs.game_id', '=', DB::raw(config('3d_setting.game_id')))
-                    ->where('gs.is_active', 1)
-                    ->where(function ($query) use ($now) {
-                        $query->where('gs.opening_date_time', '<=', $now)
-                            ->where('gs.closing_date_time', '>=', $now);
-                    });
-            })
+            // ->leftJoin('game_settings as gs', function ($join) use ($now,$gameSettingId) {
+                // $join->on('gs.id', '=', DB::raw(config('3d_setting.game_id')))
+                // $join->on('gs.id', '=', $gameSettingId)
+                    // ->where('gs.is_active', 1);
+                    // ->where(function ($query) use ($now) {
+                    //     $query->where('gs.opening_date_time', '<=', $now)
+                    //         ->where('gs.closing_date_time', '>=', $now);
+                    // });
+            // })
             ->select(
                 DB::raw('LPAD(d1.n * 100 + d2.n * 10 + d3.n, 3, "0") AS number'),
+                // 'fb.number as number',
 
                 //     DB::raw('
                 //     COALESCE(
@@ -354,8 +360,8 @@ class BettingRepository implements BettingInterface
                 //         ), 0
                 //     ) AS total_bet_amount
                 // '),
-                // DB::raw('COALESCE(SUM(fb.total_amount_all), 0) AS Total'),
-                DB::raw('COALESCE(fb.total_amount_all, 0) AS total_bet_amount'),
+                DB::raw('COALESCE(SUM(fb.total_amount_all), 0) AS total_bet_amount'),
+                // DB::raw('COALESCE(fb.total_amount_all, 0) AS total_bet_amount'),
                 DB::raw('COALESCE(fbc.total_amount_customer, 0) AS total_amount'), // Total amount for the specific customer
                 DB::raw('
                 CASE
@@ -374,28 +380,13 @@ class BettingRepository implements BettingInterface
                     WHEN latest_cn.amount IS NOT NULL AND COALESCE(SUM(fb.total_amount_all), 0) < latest_cn.amount THEN 1
                     ELSE 1
                 END AS is_active'),
-                //     DB::raw('
-                //     IF(
-                //         ' . $max . ' > 0, 
-                //         COALESCE(
-                //             SUM(
-                //                 CASE 
-                //                     WHEN latest_cn.id IS NOT NULL AND fb.total_amount_all IS NULL THEN (' . $max . ' - latest_cn.amount)
-                //                     WHEN latest_cn.id IS NOT NULL THEN (' . $max . ' - latest_cn.amount) + fb.total_amount_all
-                //                     ELSE fb.total_amount_all
-                //                 END
-                //             ), 0
-                //         ) / ' . $max . ' * 100, 
-                //         0
-                //     ) AS total_bet_percentage
-                // '),
                 DB::raw('
                 ROUND(
                     IF(
                         latest_cn.id IS NOT NULL, 
                         IF(
                             ' . $max . ' > 0, 
-                            (( (COALESCE(latest_cn.amount, 0) + COALESCE(fb.total_amount_all, 0))) / ' . $max . ' * 100), 
+                            (( (COALESCE(latest_cn.amount, 0) + COALESCE(SUM(fb.total_amount_all), 0))) / ' . $max . ' * 100), 
                             0
                         ),
                         IF(
@@ -407,22 +398,10 @@ class BettingRepository implements BettingInterface
                     2
                 ) AS total_bet_percentage
             ')
-                //                 DB::raw('
-//     IF(
-//         ' . $max . ' > 0, 
-//         ((COALESCE(latest_cn.amount, ' . $max . ') - COALESCE(SUM(
-//             CASE 
-//                 WHEN latest_cn.id IS NOT NULL THEN (' . $max . ' - latest_cn.amount) + fb.total_amount_all
-//                 WHEN latest_cn.id IS  NULL THEN (' . $max . ' - latest_cn.amount) + fb.total_amount_all
-//                 ELSE fb.total_amount_all
-//             END
-//         ), 0)) / ' . $max . ' * 100), 
-//         0
-//     ) AS total_percentage_amount
-// '),
                 // DB::raw('ROUND(IF(COALESCE(latest_cn.amount, ' . $max . ') > 0, COALESCE(fb.total_amount_all, 0) / COALESCE(latest_cn.amount, ' . $max . ') * 100, 0), 2) AS total_bet_percentage'),
             )
             ->groupBy(
+                // 'fb.number',
                 DB::raw('LPAD(d1.n * 100 + d2.n * 10 + d3.n, 3, "0")'),
                 'fb.total_amount_all',
                 'fbc.total_amount_customer',
