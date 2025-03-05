@@ -211,6 +211,7 @@ class BettingRepository implements BettingInterface
             ->whereDate('cn.date_time', $date)
             ->groupBy('cn.number');
 
+            
 
         $latestClosingNumbersDetails = DB::table('closing_numbers as cn')
             ->joinSub($latestClosingNumbers, 'lc', function ($join) {
@@ -295,6 +296,7 @@ class BettingRepository implements BettingInterface
         $gameSettingId=$game->game_setting->id;
         // dd($gameSettingId);
         $now = now();
+        $defaultClosingAmount=config('3d_setting.max_closing_bet_amount');
         $max = $game->game_setting->closing_amount;
         $min_bet_amount = $game->game_setting->min;
         $max_bet_amount = $game->game_setting->max;
@@ -386,12 +388,12 @@ class BettingRepository implements BettingInterface
                         latest_cn.id IS NOT NULL, 
                         IF(
                             ' . $max . ' > 0, 
-                            (( (COALESCE(SUM(fb.total_amount_all), 0))) / COALESCE(latest_cn.amount, 0) * 100), 
+                            (( (COALESCE(latest_cn.amount, 0)+COALESCE(SUM(fb.total_amount_all), 0))) /'.$defaultClosingAmount.' * 100), 
                             0
                         ),
                         IF(
                             COALESCE(SUM(fb.total_amount_all), 0) > 0, 
-                            (' . $max . ' - COALESCE(fb.total_amount_all, 0)) / ' . $max . ' * 100, 
+                            (COALESCE(fb.total_amount_all, 0)) / ' . $max . ' * 100, 
                             0
                         )
                     ), 
