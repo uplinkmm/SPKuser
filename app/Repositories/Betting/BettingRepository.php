@@ -92,8 +92,9 @@ class BettingRepository implements BettingInterface
             ->where('game_setting_id', $gameSettingId)
             ->whereDate('date_time', $date)
             ->first();
-        $closingAmount = config('2d_setting.max_closing_bet_amount');
-        $closingAmount = $closingNumber ? $closingNumber->amount : config('2d_setting.max_closing_bet_amount');
+        
+        // $closingAmount = config('2d_setting.max_closing_bet_amount');
+        $closingAmount = $closingNumber ? $closingNumber->amount : $gameSetting->closing_amount;
 
 
         $startTime = convertDateTimeFormat($date . $gameSetting->opening_time);
