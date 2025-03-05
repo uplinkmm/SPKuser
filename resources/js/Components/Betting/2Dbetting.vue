@@ -1393,7 +1393,7 @@ export default {
             var errorText = "";
             this.bet_numbers.forEach((bet) => {
                 if (this.bet_limit < bet.amount + bet.total_amount) {
-                    errorText = `${bet.number} has reached limit.`;
+                    errorText = `${bet.number} has reached your limit.`;
                     return;
                 }
             });
