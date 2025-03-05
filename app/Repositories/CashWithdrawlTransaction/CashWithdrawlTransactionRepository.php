@@ -33,7 +33,6 @@ class CashWithdrawlTransactionRepository implements CashWithdrawlTransactionRepo
             DB::beginTransaction();
             $withdrawl = CashWithdrawlTransaction::create($data);
              if($withdrawl){
-               
                 $data['title']='Admin';
                 $data['body']='has just withdrawal by ' .$withdrawl->account->name;
                 $data['date_time']=now();

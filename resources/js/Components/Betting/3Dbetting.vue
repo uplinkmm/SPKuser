@@ -48,7 +48,6 @@
         class="frame-container min-h-[100vh]"
     > -->
         <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
-
         <!-- choose time -->
         <div :class="step == 0 ? 'block' : 'hidden'">
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0 lg:px-4">
