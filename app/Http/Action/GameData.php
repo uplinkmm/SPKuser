@@ -26,8 +26,9 @@ class GameData{
     }
 
     public function get2dGame($gameSettingId){
-        $gameSetting=GameSetting::where('is_active',1)
+        $gameSetting=GameSetting::with('game')->where('is_active',1)
         ->find($gameSettingId);
+        $gameSetting->type=$gameSetting->game->type;
         return $gameSetting;
         // $game= \App\Models\Game::orderBy('id','asc')
         // ->where('id',$this->game_id)
