@@ -68,7 +68,7 @@
             </div>
 
             <div class="overflow-y-auto no-scrollbar">
-                <p v-if="isEmpty">No result found!</p>
+                <p v-if="isEmpty" class="text-white text-center py-4 text-sm font-semibold">No results found!</p>
 
                 <div
                     v-for="(game, index) in searchResults"
