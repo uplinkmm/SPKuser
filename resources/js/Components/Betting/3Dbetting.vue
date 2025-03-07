@@ -370,10 +370,10 @@
                                         bet_number.number ==
                                         edit_bet_number.number
                                     "
-                                    v-model="edit_bet_number.amount"
-                                    class="shadow appearance-none border border-gray-500 rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:shadow-outline"
                                     type="number"
-                                    placeholder="Amount"
+                                    class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                                    v-model="edit_bet_number.amount"
+                                    placeholder="Enter amount"
                                 />
                             </td>
                             <td class="text-center py-2">
@@ -383,6 +383,7 @@
                                         edit_bet_number.number
                                     "
                                     @click="editBetAmount"
+                                    class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
                                 >
                                     <i class="fas fa-check mr-2"></i>
                                 </button>
@@ -392,21 +393,17 @@
                                         edit_bet_number.number
                                     "
                                     @click="edit_bet_number = bet_number"
+                                    class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
                                 >
                                     <i class="fal fa-edit mr-2"></i>
                                 </button>
-                                <!-- <button
-                                    @click="deleteBetNumber(bet_number.number)"
-                                >
-                                    <i class="fal fa-trash"></i>
-                                </button> -->
-
                                 <button
                                     data-twe-toggle="modal"
                                     data-twe-target="#delete_modal"
                                     @click="
                                         delete_bet_number = bet_number.number
                                     "
+                                    class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
                                 >
                                     <i class="fal fa-trash"></i>
                                 </button>
@@ -917,6 +914,9 @@ export default {
             // if (available_for_bet == false) {
             //     return;
             // }
+            if(num.total_bet_percentage==100){
+                return;
+            }
             const index = this.bet_numbers.findIndex(
                 (bet) => bet.number === num.number
             );

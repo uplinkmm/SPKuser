@@ -1393,7 +1393,7 @@ export default {
             var errorText = "";
             this.bet_numbers.forEach((bet) => {
                 if (this.bet_limit < bet.amount + bet.total_amount) {
-                    errorText = `${bet.number} has reached limit.`;
+                    errorText = `${bet.number} has reached your limit.`;
                     return;
                 }
             });
@@ -1426,8 +1426,12 @@ export default {
             this.round_digits = value.replace(/[^0-9]/g, "");
         },
         addBetNumber(num) {
+            console.log(num);
             const available_for_bet = this.checkOpenCloseTime();
             if (available_for_bet == false) {
+                return;
+            }
+            if(num.total_bet_percentage==100){
                 return;
             }
             const index = this.bet_numbers.findIndex(
