@@ -388,42 +388,44 @@ class BettingRepository implements BettingInterface
                     WHEN latest_cn.amount IS NOT NULL AND COALESCE(SUM(fb.total_amount_all), 0) < latest_cn.amount THEN 1
                     ELSE 1
                 END AS is_active'),
+                //                 DB::raw('
+//     ROUND(
+//         IF(
+//             latest_cn.id IS NOT NULL, 
+//             IF(
+//                 ' . $max . ' > 0, 
+//                 (( ' . $max . ' - (COALESCE(latest_cn.amount, 0) + COALESCE(SUM(fb.total_amount_all), 0))) / ' . $max . ' * 100), 
+//                 0
+//             ),
+//             IF(
+//                 COALESCE(SUM(fb.total_amount_all), 0) > 0, 
+//                 ((  COALESCE(SUM(fb.total_amount_all), 0)) / ' . $max . ' * 100), 
+//                 0
+//             )
+//         ), 
+//         2
+//     ) AS total_bet_percentage
+// ')
+
                 DB::raw('
     ROUND(
         IF(
             latest_cn.id IS NOT NULL, 
-            IF(
-                ' . $max . ' > 0, 
-                (( ' . $max . ' - (COALESCE(latest_cn.amount, 0) + COALESCE(SUM(fb.total_amount_all), 0))) / ' . $max . ' * 100), 
-                0
-            ),
+           IF(
+    ' . $max . ' > 0, 
+    (((' . $max . ' - COALESCE(latest_cn.amount, 0)) + COALESCE(SUM(fb.total_amount_all), 0)) / ' . $max . ' * 100), 
+    0
+),
             IF(
                 COALESCE(SUM(fb.total_amount_all), 0) > 0, 
-                (( ' . $max . ' - COALESCE(SUM(fb.total_amount_all), 0)) / ' . $max . ' * 100), 
+                ((  COALESCE(SUM(fb.total_amount_all), 0)) / ' . $max . ' * 100), 
                 0
             )
         ), 
         2
     ) AS total_bet_percentage
 ')
-                //     DB::raw('
-                //     ROUND(
-                //         IF(
-                //             latest_cn.id IS NOT NULL, 
-                //             IF(
-                //                 ' . $max . ' > 0, 
-                //                 (( (COALESCE(latest_cn.amount, 0)+COALESCE(SUM(fb.total_amount_all), 0))) /'.$max.' * 100), 
-                //                 0
-                //             ),
-                //             IF(
-                //                 COALESCE(SUM(fb.total_amount_all), 0) > 0, 
-                //                 (COALESCE(fb.total_amount_all, 0)) / ' . $max . ' * 100, 
-                //                 0
-                //             )
-                //         ), 
-                //         2
-                //     ) AS total_bet_percentage
-                // ')
+
                 // DB::raw('ROUND(IF(COALESCE(latest_cn.amount, ' . $max . ') > 0, COALESCE(fb.total_amount_all, 0) / COALESCE(latest_cn.amount, ' . $max . ') * 100, 0), 2) AS total_bet_percentage'),
             )
             ->groupBy(
