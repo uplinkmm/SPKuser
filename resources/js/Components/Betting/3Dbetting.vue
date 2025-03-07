@@ -887,13 +887,13 @@ export default {
         },
         progressBarClass(percentage) {
             if (percentage === 100) {
-                return "bg-[#c7080e] h-1-5";
-            } else if (percentage > 70 && percentage < 100) {
-                return "bg-[#f7db07] h-1-5";
+                return "bg-[#c7080e] h-1-5"; //red
+            } else if (percentage >= 70 && percentage < 100) {
+                return "bg-[#f7db07] h-1-5"; //yellow
             } else if (percentage < 70) {
-                return "bg-[#17b509] h-1-5";
+                return "bg-[#17b509] h-1-5"; //green    
             } else {
-                return "bg-[#7a2985] h-1-5"; // Default color
+                return "bg-[#7a2985] h-1-5"; //purple
             }
         },
         computedWidth(percentage) {
