@@ -47,18 +47,28 @@ trait UseWebhook
     ) {
         $seamless_transactions = [];
         foreach ($requestTransactions as $requestTransaction) {
-            $wager = Wager::firstOrCreate(
-                ['seamless_wager_id' => $requestTransaction->WagerID],
-                [
-                    'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
-                    'seamless_wager_id' => $requestTransaction->WagerID,
-                ]
-            );
+            if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
+                $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
+                $wager = Wager::create(
+                    [
+                        'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+                        'seamless_wager_id' => $uniqueNumber,
+                    ]
+                );
+            } else {
+                $wager = Wager::firstOrCreate(
+                    ['seamless_wager_id' => $requestTransaction->WagerID],
+                    [
+                        'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+                        'seamless_wager_id' => $requestTransaction->WagerID,
+                    ]
+                );
+            }
             if ($refund) {
                 $wager->update([
                     'status' => WagerStatus::Refund,
                 ]);
-            } elseif (! $wager->wasRecentlyCreated) {
+            } elseif ($wager && !$wager->wasRecentlyCreated) {
                 $wager->update([
                     'status' => $requestTransaction->TransactionAmount > 0 ? WagerStatus::Win : WagerStatus::Lose,
                 ]);
@@ -66,12 +76,12 @@ trait UseWebhook
 
             $game_type = GameType::where('code', $requestTransaction->GameType)->first();
 
-            if (! $game_type) {
+            if (!$game_type) {
                 throw new Exception("Game type not found for {$requestTransaction->GameType}");
             }
             $product = Product::where('code', $requestTransaction->ProductID)->first();
 
-            if (! $product) {
+            if (!$product) {
                 throw new Exception("Product not found for {$requestTransaction->ProductID}");
             }
 
@@ -80,10 +90,9 @@ trait UseWebhook
                 ->first();
             $rate = $game_type_product->rate;
             $user = Auth::user(); // Get the authenticated user
-
             $seamless_transactions[] = $event->transactions()->create([
                 'customer_id' => $event->customer_id, // changed from 'user_id' => $event->use_id
-                'wager_id' => $wager->id,
+                'wager_id' => $wager->id ,
                 'game_type_id' => $game_type->id,
                 'product_id' => $product->id,
                 'seamless_transaction_id' => $requestTransaction->TransactionID,
@@ -99,7 +108,7 @@ trait UseWebhook
     }
 
     // public function processTransfer(User $from,User $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
-    public function processTransfer($from,$to, TransactionName $transactionName, float $amount, int $rate, array $meta)
+    public function processTransfer($from, $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
     {
         // TODO: ask: what if operator doesn't want to pay bonus
         app(WalletService::class)

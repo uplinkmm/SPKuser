@@ -24,17 +24,13 @@ class BuyInController extends Controller
         DB::beginTransaction();
         try {
             $validator = $request->check();
-
             if ($validator->fails()) {
                 return $validator->getResponse();
             }
-
             $before_balance = $request->getMember()->balanceFloat;
 
             $event = $this->createEvent($request);
-
             $seamless_transactions = $this->createWagerTransactions($validator->getRequestTransactions(), $event);
-
             foreach ($seamless_transactions as $seamless_transaction) {
                 $this->processTransfer(
                     $request->getMember(),

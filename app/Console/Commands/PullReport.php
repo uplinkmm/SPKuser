@@ -33,9 +33,12 @@ class PullReport extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->operatorCode = config('game.api.operator_code');
-        $this->secretKey = config('game.api.secret_key');
-        $this->apiUrl = config('game.api.url');
+        // $this->operatorCode = config('game.api.operator_code');
+        // $this->secretKey = config('game.api.secret_key');
+        // $this->apiUrl = config('game.api.url');
+        $this->operatorCode = env('SEAMLESS_OPERATOR_CODE');
+        $this->secretKey = env('SEAMLESS_SECRET_KEY');
+        $this->apiUrl = env('SEAMLESS_API_URL');
     }
 
     /**
@@ -53,8 +56,10 @@ class PullReport extends Command
         Log::info($this->apiUrl);
         $apiUrl = $this->apiUrl.'/Seamless/PullReport';
         Log::info($apiUrl);
-        $operatorCode = Config::get('game.api.operator_code');
-        $secretKey = Config::get('game.api.secret_key');
+        // $operatorCode = Config::get('game.api.operator_code');
+        // $secretKey = Config::get('game.api.secret_key');
+        $operatorCode = $this->operatorCode;
+        $secretKey = $this->secretKey;
         // Generate the signature
         $requestTime = now()->format('YmdHis');
         $signature = md5($operatorCode.$requestTime.'pullreport'.$secretKey);
