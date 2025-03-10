@@ -50,7 +50,6 @@ class PlaceBetNewVersionController extends Controller
         // Validate the structure of the request
         $validator = $request->check();
 
-        // dd($validator);
         if ($validator->fails()) {
             // Release Redis lock and return validation error response
             // tem redis
@@ -59,6 +58,7 @@ class PlaceBetNewVersionController extends Controller
 
             return $validator->getResponse();
         }
+
 
         // Retrieve transactions from the request
         $transactions = $validator->getRequestTransactions();

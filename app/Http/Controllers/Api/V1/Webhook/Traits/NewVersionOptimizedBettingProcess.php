@@ -28,7 +28,7 @@ trait NewVersionOptimizedBettingProcess
         // Try to acquire a Redis lock for the user's wallet
         $lock = Redis::set("wallet:lock:$userId", true, 'EX', 10, 'NX');  // 10-second lock
 
-        if (! $lock) {
+        if (!$lock) {
             return response()->json(['message' => 'The wallet is currently being updated. Please try again later.'], 409);
         }
 
@@ -106,7 +106,7 @@ trait NewVersionOptimizedBettingProcess
             }
         });
 
-        return count($bets).' bets inserted successfully.';
+        return count($bets) . ' bets inserted successfully.';
     }
 
     /**
@@ -131,7 +131,7 @@ trait NewVersionOptimizedBettingProcess
                     $seamlessTransactionsData = [];
 
                     // Log batch size being processed
-                    Log::debug('Processing bet batch of size: '.count($betBatch));
+                    Log::debug('Processing bet batch of size: ' . count($betBatch));
 
                     // Loop through each bet in the batch
                     foreach ($betBatch as $transaction) {
@@ -147,7 +147,7 @@ trait NewVersionOptimizedBettingProcess
                             if ($gameType) {
                                 $transaction->ActualGameTypeID = $gameType->id;
                             } else {
-                                throw new \Exception('Invalid GameType: '.$transaction->GameType);
+                                throw new \Exception('Invalid GameType: ' . $transaction->GameType);
                             }
 
                             // Attempt to retrieve the ActualProductID from the database based on ProductID
@@ -155,14 +155,14 @@ trait NewVersionOptimizedBettingProcess
                             if ($product) {
                                 $transaction->ActualProductID = $product->id;
                             } else {
-                                throw new \Exception('Invalid ProductID: '.$transaction->ProductID);
+                                throw new \Exception('Invalid ProductID: ' . $transaction->ProductID);
                             }
 
                             // Fetch the rate from GameTypeProduct
                             $game_type_product = GameTypeProduct::where('game_type_id', $gameType->id)
                                 ->where('product_id', $product->id)
                                 ->first();
-                            if (! $game_type_product) {
+                            if (!$game_type_product) {
                                 throw new \Exception('GameTypeProduct combination not found.');
                             }
 
@@ -192,7 +192,7 @@ trait NewVersionOptimizedBettingProcess
 
                         // Now, use the $transactionData array as expected
                         $existingWager = Wager::where('seamless_wager_id', $transactionData['WagerID'])->lockForUpdate()->first();
-                        if (! $existingWager) {
+                        if (!$existingWager) {
                             // Collect wager data for batch insert
                             $wagerData[] = [
                                 'customer_id' => $userId,  // Use user_id from the SeamlessEvent
@@ -222,17 +222,17 @@ trait NewVersionOptimizedBettingProcess
                     }
 
                     // Perform batch inserts
-                    if (! empty($wagerData)) {
+                    if (!empty($wagerData)) {
                         Log::debug('Inserting wager data', ['wagerData' => $wagerData]);
                         DB::table('wagers')->insert($wagerData); // Insert wagers in bulk
                     }
 
-                    if (! empty($seamlessTransactionsData)) {
+                    if (!empty($seamlessTransactionsData)) {
                         Log::debug('Inserting seamless transactions data', ['seamlessTransactionsData' => $seamlessTransactionsData]);
                         DB::table('seamless_transactions')->insert($seamlessTransactionsData); // Insert transactions in bulk
                     }
                 });
-                Log::debug('createWagerTransactions completed successfully for event ID: '.$seamlessEventId);
+                Log::debug('createWagerTransactions completed successfully for event ID: ' . $seamlessEventId);
                 break; // Exit the retry loop if successful
 
             } catch (\Illuminate\Database\QueryException $e) {
@@ -252,7 +252,7 @@ trait NewVersionOptimizedBettingProcess
         } while ($retryCount < $maxRetries);
     }
 
-    public function processTransfer($from,$to, TransactionName $transactionName, float $amount, int $rate, array $meta)
+    public function processTransfer($from, $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
     {
         $retryCount = 0;
         $maxRetries = 5;

@@ -47,15 +47,15 @@ trait UseWebhook
     ) {
         $seamless_transactions = [];
         foreach ($requestTransactions as $requestTransaction) {
-            if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
-                $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
-                $wager = Wager::create(
-                    [
-                        'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
-                        'seamless_wager_id' => $uniqueNumber,
-                    ]
-                );
-            } else {
+            // if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
+            //     $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
+            //     $wager = Wager::create(
+            //         [
+            //             'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+            //             'seamless_wager_id' => $uniqueNumber,
+            //         ]
+            //     );
+            // } else {
                 $wager = Wager::firstOrCreate(
                     ['seamless_wager_id' => $requestTransaction->WagerID],
                     [
@@ -63,7 +63,7 @@ trait UseWebhook
                         'seamless_wager_id' => $requestTransaction->WagerID,
                     ]
                 );
-            }
+            // }
             if ($refund) {
                 $wager->update([
                     'status' => WagerStatus::Refund,
@@ -75,12 +75,10 @@ trait UseWebhook
             }
 
             $game_type = GameType::where('code', $requestTransaction->GameType)->first();
-
             if (!$game_type) {
                 throw new Exception("Game type not found for {$requestTransaction->GameType}");
             }
             $product = Product::where('code', $requestTransaction->ProductID)->first();
-
             if (!$product) {
                 throw new Exception("Product not found for {$requestTransaction->ProductID}");
             }
