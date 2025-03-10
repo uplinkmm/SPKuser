@@ -206,7 +206,7 @@ trait NewVersionOptimizedBettingProcess
                         // Collect seamless transaction data for batch insert
                         $seamlessTransactionsData[] = [
                             'customer_id' => $userId,  // Use user_id from the SeamlessEvent
-                            'wager_id' => $existingWager ? $existingWager->id : null,
+                            'wager_id' =>  $existingWager->id ,
                             'game_type_id' => $transactionData['ActualGameTypeID'],
                             'product_id' => $transactionData['ActualProductID'],
                             'seamless_transaction_id' => $transactionData['TransactionID'],
