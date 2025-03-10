@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('store:winning-numbers')->everyMinute();
-        $schedule->command('make:pull-report')->everyFiveSeconds();
+        // $schedule->command('make:pull-report')->everyFiveSeconds();
         // $schedule->command('archive:old-wagers')->everyThirtyMinutes();
         // //$schedule->command('wagers:delete-old-backups')->everyThirtyMinutes();
         // $schedule->command('wagers:delete-old-backups')->cron('*/45 * * * *');
