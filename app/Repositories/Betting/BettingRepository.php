@@ -55,7 +55,7 @@ class BettingRepository implements BettingInterface
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
                 $newBetAmount = (int)$number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
-                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount',  200);
+                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount',  400);
                 }
                 #end
                 $beting_number = $betting->bettingNumbers()->create([
