@@ -188,17 +188,16 @@ class AuthController extends Controller
                 // $customer->agggent
                 $customer->verified_at = CurrentTime();
                 $customer->save();
-
                 // $this->moneyRepo->createPointBag($customer->id);
                 // $this->moneyRepo->createGameWallet($customer);
                 $this->moneyRepo->createWallet($customer->id);
 
                 $loginResponse = (new APILoginAction('phone_number', $request->phone_number, $request->password, 'App\Models\Customer'))->run('customer_token');
                 $loginResponse['user']['login_type'] = 'customer';
-                DB::commit();
                 $this->storeFcmToken($request->fcm_token, $customer->id);
                 #implement agent to user
                 $this->storeAgent($request->code, $customer->id);
+                DB::commit();
                 ResponseData($loginResponse, 201, true, 'Successfully registered and verified');
             } catch (Exception $e) {
                 DB::rollBack();
@@ -230,8 +229,13 @@ class AuthController extends Controller
     public function storeAgent($code, $customer_id)
     {
         if ($code !== null && $code !== "" && $code !== "null") {
-            $agent = Agent::where('code', $code)->first();
+            $agent = Agent::where('code', $code)
+            ->first();
             if ($agent) {
+                if($agent->is_active!=1 || $agent->is_active!="0")
+                {
+                    ResponseMessage('Your agent is not active ', 419);
+                }
                 $customer = Customer::find($customer_id);
                 $customer->agent_id = $agent->id;
                 $customer->save();
