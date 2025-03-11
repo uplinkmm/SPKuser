@@ -83,7 +83,6 @@ class BettingRepository implements BettingInterface
         $now = now();
         $date = $now->format('Y-m-d');
         $gameSetting = GameSetting::where('is_active', 1)->find($gameSettingId);
-        dd($gameSetting->game->type);
         if (!$gameSetting) {
             ResponseMessage('Game Setting Not Found', status_code: 404);
         }
