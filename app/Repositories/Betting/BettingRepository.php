@@ -55,7 +55,7 @@ class BettingRepository implements BettingInterface
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
                 $newBetAmount = (int)$number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
-                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount', 400);
+                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount',  200);
                 }
                 #end
                 $beting_number = $betting->bettingNumbers()->create([
@@ -68,6 +68,7 @@ class BettingRepository implements BettingInterface
             #store Wallet
             $this->actionOfWalletTransaction($betting, $betting->total_amount, 'out');
             DB::commit();
+            ResponseMessage('Betting Successfully',200);
             // return $betting;
         } catch (\Exception $e) {
             DB::rollback();
