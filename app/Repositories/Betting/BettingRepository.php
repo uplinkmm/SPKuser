@@ -54,7 +54,7 @@ class BettingRepository implements BettingInterface
                 // dd($betttingAmountAndClosingAmount);
                 $closingAmount = (int) $betttingAmountAndClosingAmount['closing_amount'];
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
-                $newBetAmount = $number['amount'];
+                $newBetAmount = (int)$number['amount'];
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
                     ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount', 400);
                 }
@@ -86,10 +86,14 @@ class BettingRepository implements BettingInterface
         if (!$gameSetting) {
             ResponseMessage('Game Setting Not Found', status_code: 404);
         }
+        $gameType=$gameSetting->game->type;
+
         $closingNumber = ClosingNumber::orderBy('id', 'desc')->where('number', $number)
             ->where('game_id', $gameId)
             ->where('game_setting_id', $gameSettingId)
-            ->whereDate('date_time', $date)
+            ->when($gameType=='2d',function($q)use($date){
+                $q->whereDate('date_time', $date);
+            })
             ->where('is_active')
             ->first();
 
