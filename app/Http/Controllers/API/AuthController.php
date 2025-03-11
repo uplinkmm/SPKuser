@@ -230,12 +230,18 @@ class AuthController extends Controller
     public function storeAgent($code, $customer_id)
     {
         if ($code !== null && $code !== "" && $code !== "null") {
-            $agent = Agent::where('code', $code)->first();
+            $agent = Agent::where('code', $code)
+            ->first();
             if ($agent) {
+                if($agent->is_active!=1 || $agent->is_active!="0")
+                {
+                    ResponseMessage('Your agent is not active ', 419);
+                }
                 $customer = Customer::find($customer_id);
                 $customer->agent_id = $agent->id;
                 $customer->save();
             } else {
+
                 ResponseMessage('Code is missing', 419);
             }
         }
