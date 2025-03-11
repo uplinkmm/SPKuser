@@ -47,15 +47,16 @@ trait UseWebhook
     ) {
         $seamless_transactions = [];
         foreach ($requestTransactions as $requestTransaction) {
-            // if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
-            //     $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
-            //     $wager = Wager::create(
-            //         [
-            //             'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
-            //             'seamless_wager_id' => $uniqueNumber,
-            //         ]
-            //     );
-            // } else {
+            if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
+                //     $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
+                //     $wager = Wager::create(
+                //         [
+                //             'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+                //             'seamless_wager_id' => $uniqueNumber,
+                //         ]
+                //     );
+                $wager = null;
+            } else {
                 $wager = Wager::firstOrCreate(
                     ['seamless_wager_id' => $requestTransaction->WagerID],
                     [
@@ -63,7 +64,7 @@ trait UseWebhook
                         'seamless_wager_id' => $requestTransaction->WagerID,
                     ]
                 );
-            // }
+            }
             if ($refund) {
                 $wager->update([
                     'status' => WagerStatus::Refund,
@@ -86,11 +87,14 @@ trait UseWebhook
             $game_type_product = GameTypeProduct::where('game_type_id', $game_type->id)
                 ->where('product_id', $product->id)
                 ->first();
+            if (!$game_type_product) {
+                throw new Exception("Product And Game Type Combination not found  ");
+            }
             $rate = $game_type_product->rate;
             $user = Auth::user(); // Get the authenticated user
             $seamless_transactions[] = $event->transactions()->create([
                 'customer_id' => $event->customer_id, // changed from 'user_id' => $event->use_id
-                'wager_id' => $wager->id ,
+                'wager_id' => $wager ? $wager->id : null,
                 'game_type_id' => $game_type->id,
                 'product_id' => $product->id,
                 'seamless_transaction_id' => $requestTransaction->TransactionID,

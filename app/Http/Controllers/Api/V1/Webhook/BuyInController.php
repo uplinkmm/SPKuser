@@ -32,24 +32,29 @@ class BuyInController extends Controller
             $event = $this->createEvent($request);
             $seamless_transactions = $this->createWagerTransactions($validator->getRequestTransactions(), $event);
             foreach ($seamless_transactions as $seamless_transaction) {
+                // dd($seamless_transaction);
+                $meta = [
+                    'event_id' => $request->getMessageID(),
+                    'seamless_transaction_id' => $seamless_transaction->id,
+                ];
+                
+                if (!is_null($seamless_transaction->wager_id)) {
+                    $meta['wager_id'] = $seamless_transaction->wager_id;
+                }
+        
                 $this->processTransfer(
                     $request->getMember(),
                     User::adminUser(),
                     TransactionName::BuyIn,
                     $seamless_transaction->transaction_amount,
                     $seamless_transaction->rate,
-                    [
-                        'wager_id' => $seamless_transaction->wager_id,
-                        'event_id' => $request->getMessageID(),
-                        'seamless_transaction_id' => $seamless_transaction->id,
-                    ]
+                    $meta,
                 );
             }
 
             $request->getMember()->wallet->refreshBalance();
 
             $after_balance = $request->getMember()->balanceFloat;
-
             DB::commit();
 
             return SlotWebhookService::buildResponse(
