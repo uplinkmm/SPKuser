@@ -232,7 +232,7 @@ class AuthController extends Controller
             $agent = Agent::where('code', $code)
             ->first();
             if ($agent) {
-                if($agent->is_active!=1 || $agent->is_active!="0")
+                if($agent->is_active!= 0|| $agent->is_active!="0")
                 {
                     ResponseMessage('Your agent is not active ', 419);
                 }
