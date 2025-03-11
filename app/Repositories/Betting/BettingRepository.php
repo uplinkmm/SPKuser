@@ -51,7 +51,6 @@ class BettingRepository implements BettingInterface
                     $gameSettingId,
                     $number['number']
                 );
-                // dd($betttingAmountAndClosingAmount);
                 $closingAmount = (int) $betttingAmountAndClosingAmount['closing_amount'];
                 $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
                 $newBetAmount = (int)$number['amount'];
@@ -94,12 +93,10 @@ class BettingRepository implements BettingInterface
             ->when($gameType=='2d',function($q)use($date){
                 $q->whereDate('date_time', $date);
             })
-            ->where('is_active')
+            ->where('is_active',1)
             ->first();
-
         // $closingAmount = config('2d_setting.max_closing_bet_amount');
         $closingAmount = $closingNumber ? $closingNumber->amount : $gameSetting->closing_amount;
-
 
         $startTime = convertDateTimeFormat($date . $gameSetting->opening_time);
         $endTime = convertDateTimeFormat($date . $gameSetting->closing_time);
