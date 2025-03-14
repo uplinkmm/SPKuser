@@ -214,6 +214,7 @@ trait NewVersionOptimizedBettingProcess
                             'transaction_amount' => $transactionData['TransactionAmount'],
                             'bet_amount' => $transactionData['BetAmount'],
                             'valid_amount' => $transactionData['ValidBetAmount'],
+                            'payout_amount' => $transactionData['PayoutAmount'],
                             'status' => $transactionData['Status'],
                             'seamless_event_id' => $seamlessEventId,  // Include seamless_event_id
                             'created_at' => now(),
