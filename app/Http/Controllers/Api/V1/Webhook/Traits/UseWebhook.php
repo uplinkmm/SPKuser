@@ -50,7 +50,7 @@ trait UseWebhook
             // dd($requestTransaction);
             if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
                     $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
-                    $wager = Wager::create(
+                    $wager = Wager::firstOrCreate(
                         [
                             'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
                             'seamless_wager_id' => $uniqueNumber,
