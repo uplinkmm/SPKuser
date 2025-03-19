@@ -13,6 +13,7 @@ class Wager extends Model
     protected $fillable = [
         'customer_id',
         'seamless_wager_id',
+        'seamless_transaction_id',
         'status',
     ];
 

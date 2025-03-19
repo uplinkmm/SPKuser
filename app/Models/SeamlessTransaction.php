@@ -23,6 +23,7 @@ class SeamlessTransaction extends Model
         'rate',
         'transaction_amount',
         'bet_amount',
+        'payout_amount',
         'valid_amount',
         'status',
     ];

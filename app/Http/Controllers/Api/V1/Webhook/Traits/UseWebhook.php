@@ -47,21 +47,26 @@ trait UseWebhook
     ) {
         $seamless_transactions = [];
         foreach ($requestTransactions as $requestTransaction) {
+            // dd($requestTransaction);
             if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
-                //     $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
-                //     $wager = Wager::create(
-                //         [
-                //             'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
-                //             'seamless_wager_id' => $uniqueNumber,
-                //         ]
-                //     );
-                $wager = null;
+                    $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
+                    $wager = Wager::firstOrCreate(
+                        [
+                            'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+                            'seamless_wager_id' => $uniqueNumber,
+                        ]
+                    );
+                // $wager = null;
             } else {
                 $wager = Wager::firstOrCreate(
-                    ['seamless_wager_id' => $requestTransaction->WagerID],
+                    [
+                        'seamless_wager_id' => $requestTransaction->WagerID,
+                        // 'seamless_transaction_id' => $requestTransaction->TransactionID
+                    ],
                     [
                         'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
                         'seamless_wager_id' => $requestTransaction->WagerID,
+                        // 'seamless_transaction_id' => $requestTransaction->TransactionID,
                     ]
                 );
             }
@@ -74,7 +79,6 @@ trait UseWebhook
                     'status' => $requestTransaction->TransactionAmount > 0 ? WagerStatus::Win : WagerStatus::Lose,
                 ]);
             }
-
             $game_type = GameType::where('code', $requestTransaction->GameType)->first();
             if (!$game_type) {
                 throw new Exception("Game type not found for {$requestTransaction->GameType}");
@@ -102,6 +106,7 @@ trait UseWebhook
                 'transaction_amount' => $requestTransaction->TransactionAmount,
                 'bet_amount' => $requestTransaction->BetAmount,
                 'valid_amount' => $requestTransaction->ValidBetAmount,
+                'payout_amount' => $requestTransaction->PayoutAmount,
                 'status' => $requestTransaction->Status,
                 //'agent_id' => $user->agent_id
             ]);
