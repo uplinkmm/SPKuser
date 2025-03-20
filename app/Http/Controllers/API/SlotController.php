@@ -12,20 +12,22 @@ class SlotController extends Controller
     public function getGameList(Request $request)
     {
         $name=$request->name;
+        $productCode=$request->product_code;
+        $gameType=$request->game_type;
         $requestDateTime = requestDateTimeFormat();
         // $requestDateTime='2024-11-05 09:30:00';
         $hash = GenerateMD5Hash($name, $requestDateTime, null);
-        return [$hash,$requestDateTime];
-        $url = env('STAGING_URL') . 'Seamless/GetGameList';
+        // return [$hash,$requestDateTime];
+        $url = env('SEAMLESS_API_URL') . '/Seamless/GetGameList';
         $data = [
-            'OperatorCode' => env('OPERATOR_ID'),
+            'OperatorCode' => env('SEAMLESS_OPERATOR_CODE'),
             'MemberName	' => 'Tester',
             'DisplayName' => 'f61bd50815a4c3656ae5b4e46c2bfc08',
             'RequestTime' => $requestDateTime,
             'Sign' => $hash,
             'Password' => "TESTERPASSWORD",
-            'ProductID' => "1091",
-            'GameType' => "1",
+            'ProductID' => $productCode,
+            'GameType' => $gameType,
             'LanguageCode' => "1",
             'Platform' => "0",
         ];
