@@ -37,6 +37,8 @@
                                             :src="item.image_url"
                                             alt=""
                                         />
+                                        <p class="text-white text-center pt-1 text-sm"> {{item.name}}</p>
+
                                     </a>
                                 </div>
                             </div>
