@@ -189,6 +189,7 @@
                                                 :src="product.imgUrl"
                                                 alt=""
                                             />
+                                            <p class="text-white text-center pt-1 text-sm"> {{product.name}}</p>
                                         </a>
                                     </div>
                                 </div>
