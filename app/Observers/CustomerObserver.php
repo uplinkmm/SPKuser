@@ -12,7 +12,11 @@ class CustomerObserver
     public function created(Customer $customer): void
     {
         //
-        $customer->user_name = 'user_' . $customer->id;
+        // $customer->user_name = 'user_' . $customer->id;
+        do {
+            $userName = 'user_' . $customer->id . '_' . mt_rand(1000, 9999);
+        } while (\App\Models\Customer::where('user_name', $userName)->exists());
+        $customer->user_name = $userName;
         $customer->save(); // Save the updated user_name
     }
 
