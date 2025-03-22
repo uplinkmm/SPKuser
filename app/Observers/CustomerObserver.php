@@ -11,7 +11,6 @@ class CustomerObserver
      */
     public function created(Customer $customer): void
     {
-        //
         // $customer->user_name = 'user_' . $customer->id;
         do {
             $userName = 'user_' . $customer->id . '_' . mt_rand(1000, 9999);
