@@ -94,7 +94,7 @@ Route::middleware('auth:sanctum')->get('/notification_list', [NotificationContro
 
 
 
-// Route::get('send_noti',[TestController::class,'testNoti']);
+Route::get('send_noti',[TestController::class,'testNoti']);
 
 
 Route::get('test_redis',[TestController::class,'testRedis']);
