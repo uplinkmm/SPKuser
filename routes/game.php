@@ -8,7 +8,7 @@ Route::middleware('auth:api')->group(function () {
 
 });
 
-// Route::get('/get_game_list', [SlotController::class, 'getGameList']);
+Route::get('/get_game_list', [SlotController::class, 'getGameList']);
 // Route::get('/game_launch', [SlotController::class, 'launchGame']);
 // Route::post('/testjson', [SlotController::class, 'testjson']);
 

@@ -510,7 +510,6 @@ class BettingRepository implements BettingInterface
                 ->groupBy('customers.id', 'customers.name', 'customers.phone_number', 'betting_numbers.number', 'bettings.date_time')
                 ->paginate(20);
             return $winning_list;
-
         }
         if (isset($request->game_setting_id)) {
             $today = convertDateFormat(now());

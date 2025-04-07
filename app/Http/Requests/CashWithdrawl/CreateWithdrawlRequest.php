@@ -32,7 +32,7 @@ class CreateWithdrawlRequest extends FormRequest
             // 'password' => ['required',   
             //     function ($attribute, $value, $fail)use($userId) {
             //        if (!Hash::check($value, \App\Models\Customer::find($userId)->password)) {
-            //            $fail('Password is invalid');
+            //            $fail('Password is invalids');
             //        }
             //    },
             // ],
