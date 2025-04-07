@@ -9,7 +9,7 @@ return [
      * ------------------------------------------------------------------------
      */
 
-    'default' => env('FIREBASE_PROJECT', 'shwesankan-f6f4d'),
+    'default' => env('FCM_SERVER_KEY', 'shwesankan-f6f4d'),
 
     /*
      * ------------------------------------------------------------------------
@@ -65,6 +65,20 @@ return [
                 'client_x509_cert_url' => 'https://www.googleapis.com/robot/v1/metadata/x509/shweshankan%40shwesankan-f6f4d.iam.gserviceaccount.com',
                 'universe_domain' => 'googleapis.com',
             ],
+            
+            // 'credentials' => [
+            //     'type' => 'service_account',
+            //     'project_id' => 'shwesankan-f6f4d',
+            //     'private_key_id' => '5194ceae343f462d5722b185ce46ee6bae33443a',
+            //     'private_key' => "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCrHh7XdTYmK/iV\nhWRaATs3IFiESP1/wQH46MJ7f3pAt7hiX4DEHIKRYUpJyykfjMbz5pwuPLkaLgq4\npaPsrs83A6xC1DjLAYj+NHfPoq+OoFiChXLWS6qUGXmLeSGGBKtMDv8xGDUHTQRC\n9YB6p/VIgShn9+FRIbwib5URR0phDtH3YhZyteyQR+o6d7mFVX34kTgh/YErSG2O\nXH6090wa7JnI8bbeWnlxtDinooRnGCsycc9rxnMFOWuTEv3Fah3qxHCbLazCAxgZ\n4nA7htfaeMBMs861fxXAipOLpULNQaknUOSIWHtwcPCw73namL4e+hPtFJjAx+Zr\n2lfyWQ+hAgMBAAECggEAA+3iwaoLeqQpFr7bw2zSkCUeHziBWKsFCXMHzzfpxd1q\nHpkojuhEL8QrBWeEu9ia02ws0yt6CSG8RYnpKhTIBZCAJr8yiCfSflrUUvhefWEN\ncz7O+KB/a9vrZHJdPJN0HwCbp8QRaKfiNIroXrinW1k65StGGVuz0xsakk1fpfuc\nTxOPzEK8ETLrcVdwTUqwbp4Byh+DncdgBDRxjFrVdJ7VcC4F44n0U/KPSpJ01SyI\nnM/cbZdFC6yQOXdPrAY13H8s+0yAFIwsfTY8mY24rcOQD1PV1Y+hQlZACQyabdvp\nbhW0ZUBLXDwmzmVb5XomIl4tF/2XBFoBLdm+Rv/jaQKBgQDwCVg4KYgsiUqWBPHN\n6uGDuE1/uKBHkh6s7IzF+M6zwgI3pkKtTapM6QmoipjeqZWx1Lwrl8NiWWoi/MB4\n0XxtTG/M2Lo4mV4Nqlf0JfUPdgKTRvj0GLAwXeR8eRZVAOX5df3khDYrnpe1LIM+\nbjdkWai5L7DmRYtSEHn5CjRdmQKBgQC2f2w8mgUO8zzB3eRk5dYS6G6woMUEeROs\nKYw6eycTOESuuhd0TRLHDm/17OVYJW3tN/Lh8vtHzC00IEHeA57GzenlnoR8Vlyx\nkhl0cYvf0/5yG3VgoyaprlkM4OdvLR28qhe9cgQ5qEvW819nEG0Rz008WJu6JX7g\nS3voS9K3SQKBgQCBycu1sl87FZEKxOmqGdKOUl01LjMb/9ouTklf0kSR1dk1FeT/\np/rpUygxxZ8a5j9WxFxqhcjTqN1GxbucmEjbIHVjIdyvNd4xLWYZUVzMW1bRI5MB\nCUhbHqmo1CBLHg07cZ0yrnpL45jMEaF1ZEr3K7ObTjosiHXojZgmHGpsIQKBgDel\nTMyBrg8r7ZezX+PADPFA/BdRPiGqBWyWUpK2YGjE3HRme6ZTpekaJttWu2uQJh+R\n0rZAj4wJ3rKpL0xR0EUQHkSMfBspfiQKx0YxJRQ/oLMMWlL4DF7qsW5y2T6WBB41\nwv1Z2Z33CgDlvm4/nPI0QnmnDvzIWBJuEb739605AoGBANIhcW9+LY9aM671x+Nf\nNVtuFjGDssd9BhVTMYPEtLdLoDrcHveRg+S1r1IDyYRflL3dZHEocTJ+xOdwCVHz\n/iNyjRMIAI2IHuno5BYFmAD0tOTCycPm4PM1Jl+vaw2SSKYXlbuqXkju3fdtdqht\nL3ZyLTOLQ/8RV5XAQfV8pmSb\n-----END PRIVATE KEY-----\n",
+            //     'client_email' => 'firebase-adminsdk-xcsxd@shwesankan-f6f4d.iam.gserviceaccount.com',
+            //     'client_id' => '111272075060100956110',
+            //     'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
+            //     'token_uri' => 'https://oauth2.googleapis.com/token',
+            //     'auth_provider_x509_cert_url' => 'https://www.googleapis.com/oauth2/v1/certs',
+            //     'client_x509_cert_url' => 'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-xcsxd%40shwesankan-f6f4d.iam.gserviceaccount.com',
+            //     'universe_domain' => 'googleapis.com',
+            // ],
             /*
              * ------------------------------------------------------------------------
              * Firebase Auth Component

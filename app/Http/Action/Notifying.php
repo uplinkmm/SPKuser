@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Action;
-use Illuminate\Notifications\Notification;
+use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
-use Illuminate\Bus\Queueable;
 
 class Notifying extends Notification implements ShouldQueue
 {
@@ -34,26 +35,27 @@ class Notifying extends Notification implements ShouldQueue
 
     public function toFcm($notifiable): FcmMessage
     {
+        Log::info('Send noti successfully');
         return (new FcmMessage(notification: new FcmNotification(
                 title: $this->title,
                 body: $this->body,
                 image: 'http://example.com/url-to-image-here.png'
             )))
-            ->data(['data1' => 'value', 'data2' => 'value2'])
-            ->custom([
-                'android' => [
-                    'notification' => [
-                        'color' => '#0A0A0A',
-                    ],
-                    'fcm_options' => [
-                        'analytics_label' => 'analytics',
-                    ],
-                ],
-                'apns' => [
-                    'fcm_options' => [
-                        'analytics_label' => 'analytics',
-                    ],
-                ],
-            ]);
+            ->data(['data1' => 'value', 'data2' => 'value2']);
+            // ->custom([
+            //     'android' => [
+            //         'notification' => [
+            //             'color' => '#0A0A0A',
+            //         ],
+            //         'fcm_options' => [
+            //             'analytics_label' => 'analytics',
+            //         ],
+            //     ],
+            //     'apns' => [
+            //         'fcm_options' => [
+            //             'analytics_label' => 'analytics',
+            //         ],
+            //     ],
+            // ]);
     }
 }

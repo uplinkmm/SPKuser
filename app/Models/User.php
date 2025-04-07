@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Bavix\Wallet\Traits\HasWalletFloat;
 use Bavix\Wallet\Interfaces\Wallet;
 
-class User extends Authenticatable implements Wallet
+class User extends Authenticatable implements Wallet    
 {
     use HasApiTokens, HasFactory, Notifiable,HasWalletFloat;
 
