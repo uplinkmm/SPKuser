@@ -268,15 +268,15 @@
   color: #000; }
 
 .active-tabs {
-  background: #eb5c00 !important; }
+  background: #C67D06 !important; }
   .active-tabs .tab-list-item-text {
     color: white !important; }
 
 .active-tabs::after {
-  border-top-color: #eb5c00 !important; }
+  border-top-color: #C67D06 !important; }
 
 .active-tabs::before {
-  border-bottom-color: #eb5c00 !important; }
+  border-bottom-color: #C67D06 !important; }
 
 @media (min-width: 481px) and (max-width: 1023px) {
   .tab-list-item-first {

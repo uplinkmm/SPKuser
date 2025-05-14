@@ -54,6 +54,7 @@
                         </div>
                     </div>
                 </a>
+                
                 <a href="/3D_betting"
                     class="bg-[#fff] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
                     <div class="w-fit mx-auto flex">
