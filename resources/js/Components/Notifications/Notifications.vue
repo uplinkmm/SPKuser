@@ -2,7 +2,7 @@
     <div
         class="frame-container pb-20 min-h-[100vh] flex flex-col"
     >
-        <Navbar title="Notifications" :back-btn="backBtn"></Navbar>
+        <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
         <div class=" bg-[#fff] px-4 rounded-xl flex-grow">
             <!--Tabs navigation-->
             <ul
