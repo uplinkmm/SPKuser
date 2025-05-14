@@ -61,7 +61,7 @@ class APILoginAction {
 
         if(!Hash::check($this->password, $user->getAuthPassword()))
         {
-            $login_response["message"] = "Password not match";
+            $login_response["message"] = "Phone Number or Password is invalid";
 
             return $login_response;
         }

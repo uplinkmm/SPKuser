@@ -10,7 +10,9 @@ class AdsRepository implements AdsInterface
 {
     public function list($request)
     {
-        return Ads::orderBy("id", "desc")->take(3)->get();
+        return Ads::orderBy("id", "desc")
+        ->where('type','ads')
+        ->take(3)->get();
     }
     
 }

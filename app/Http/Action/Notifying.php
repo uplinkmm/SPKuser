@@ -37,25 +37,25 @@ class Notifying extends Notification implements ShouldQueue
     {
         Log::info('Send noti successfully');
         return (new FcmMessage(notification: new FcmNotification(
-                title: $this->title,
+                title: $this->title,                                            
                 body: $this->body,
                 image: 'http://example.com/url-to-image-here.png'
             )))
-            ->data(['data1' => 'value', 'data2' => 'value2']);
-            // ->custom([
-            //     'android' => [
-            //         'notification' => [
-            //             'color' => '#0A0A0A',
-            //         ],
-            //         'fcm_options' => [
-            //             'analytics_label' => 'analytics',
-            //         ],
-            //     ],
-            //     'apns' => [
-            //         'fcm_options' => [
-            //             'analytics_label' => 'analytics',
-            //         ],
-            //     ],
-            // ]);
+            // ->data(['data1' => 'value', 'data2' => 'value2']);
+            ->custom([
+                'android' => [
+                    'notification' => [
+                        'color' => '#0A0A0A',                                                                                                                                                                               
+                    ],
+                    'fcm_options' => [
+                        'analytics_label' => 'analytics',
+                    ],
+                ],
+                'apns' => [
+                    'fcm_options' => [
+                        'analytics_label' => 'analytics',
+                    ],
+                ],
+            ]);
     }
 }
