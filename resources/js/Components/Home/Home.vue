@@ -43,7 +43,7 @@
                     <div class="w-fit mx-auto flex">
                         <div>
                             <img
-                                class="w-5/12 mb-4 pt-4 lg:pt-0 pl-4" 
+                                class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
                                 src="../../../../public/img/2d.png"
                             />
                             <p
@@ -59,7 +59,7 @@
                     <div class="w-fit mx-auto flex">
                         <div>
                             <img
-                                class="w-5/12 mb-4 pt-4 lg:pt-0 pl-4" 
+                                class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
                                 src="../../../../public/img/3D.png"
                             />
                             <p
