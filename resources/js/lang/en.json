@@ -27,8 +27,13 @@
     "History": "History",
     "Change Password": "Change Password",
     "Myanmar/English": "Myanmar / English",
+    "Term & Condition":"Term & Condition",
+    "Feedback":"Feedback",
+    "Contacts":"Contacts",
     "Amount": "Amount",
     "Account Name": "Account Name",
     "Clear": "Clear",
-    "Deposit Withdrawal History": "Deposit Withdrawal History"
+    "Deposit Withdrawal History": "Deposit Withdrawal History",
+    "Notification":"Notification",
+    "Logout":"Logout"
 }

@@ -5,7 +5,7 @@
     "2D Betting": "2D ထိုးမည်",
     "3D Betting": "3D ထိုးမည်",
     "Wallet": "ပိုက်ဆံအိတ်",
-    "Profile": "Profile",
+    "Profile": "ကျွန်ုပ်",
     "Phone Number": "ဖုန်းနံပါတ်",
     "Name": "အမည်",
     "R": "R မည်",
@@ -25,10 +25,16 @@
     "Deposit": "ငွေသွင်းမည်",
     "Withdrawal": "ငွေထုတ်မည်",
     "History": "မှတ်တမ်း",
-    "Change Password": "Password ချိန်းရန်",
+    "Change Password": "စကား၀ှက် ပြောင်းရန်",
     "Myanmar/English": "မြန်မာ / အင်္ဂလိပ်",
+    "Term & Condition":"စည်းကမ်းသတ်မှတ်ချက်များ",
+    "Feedback":"အကြံပေးစာ",
+    "Contacts":"ဆက်သွယ်ရန်",
     "Amount": "ပမာဏ",
     "Account Name": "Account အမည်",
     "Clear": "ဖျက်မည်",
-    "Deposit Withdrawal History": "ငွေသွင်းငွေထုတ် မှတ်တမ်း"
+    "Deposit Withdrawal History": "ငွေသွင်းငွေထုတ် မှတ်တမ်း",
+    "Notification":"အသိပေးချက်",
+    "Logout":"ထွက်မည်"
+
 }

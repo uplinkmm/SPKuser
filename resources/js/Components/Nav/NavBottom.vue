@@ -32,7 +32,7 @@
                       class="py-3 text-xs w-full relative flex flex-col text-[#E5B80B]"
                   >
                       <i class="fal fa-home-lg-alt block pb-1"></i>
-                      Home
+                       {{ $t('Home')}}
                   </a>
               </div>
               <!-- <div class=" text-center">
@@ -50,7 +50,7 @@
                       class="py-3 text-xs w-full relative flex flex-col text-[#E5B80B]"
                   >
                       <i class="fal fa-wallet block pb-1"></i>
-                      Wallet
+                       {{ $t('Wallet') }}
                   </a>
               </div>
               <div class=" text-center">
@@ -59,7 +59,8 @@
                     class="py-3 text-xs w-full relative flex flex-col text-[#E5B80B]"
                 >
                     <i class="fal fa-bell block pb-1"></i>
-                    Notification
+                    {{$t("Notification")}}
+                     
                 </a>
               </div>
               <div class=" text-center">
@@ -68,7 +69,7 @@
                       class="py-3 text-xs w-full relative flex flex-col text-[#E5B80B]"
                   >
                       <i class="fal fa-user-alt block pb-1"></i>
-                      Profile
+                       {{$t("Profile")}}
                   </a>
               </div>
           </div>
