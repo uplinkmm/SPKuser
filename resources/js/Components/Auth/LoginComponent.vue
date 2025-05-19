@@ -6,7 +6,7 @@
             <div class="mb-4">
                 <input
                     type="text"
-                    id="phone_number"
+                    id="phone_number_login"
                     v-model="phone_number"
                     :placeholder="$t('Phone Number')"
                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
@@ -15,7 +15,7 @@
             <div class="mb-8 relative">
                 <input
                     :type="show_password ? 'text' : 'password'"
-                    id="password"
+                    id="password_login"
                     v-model="password"
                     placeholder="Password"
                     class="block w-full py-2 px-2 pr-10 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
@@ -47,7 +47,7 @@
                 Forgot password?
             </button>
         </div>
-        <form method="POST" id="signin-form" ref="signinForm" action="/login">
+        <form method="POST" id="signin-form-login" ref="signinForm" action="/login">
             <input type="hidden" v-model="csrfToken" name="_token" />
             <input type="hidden" v-model="phone_number" name="phone_number" />
             <input type="hidden" v-model="password" name="password" />

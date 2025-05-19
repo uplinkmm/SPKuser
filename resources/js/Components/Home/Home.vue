@@ -43,8 +43,8 @@
                     <div class="w-fit mx-auto flex">
                         <div>
                             <img
-                                class="w-5/12 mb-4 pt-4 lg:pt-0" 
-                                src="../../../../public/img/Map_fill.png"
+                                class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
+                                src="../../../../public/img/2d.png"
                             />
                             <p
                                 class="text-white text-xl self-end pb-6 pl-4"
@@ -54,13 +54,14 @@
                         </div>
                     </div>
                 </a>
+                
                 <a href="/3D_betting"
                     class="bg-[#fff] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
                     <div class="w-fit mx-auto flex">
                         <div>
                             <img
-                                class="w-5/12 mb-4 pt-4 lg:pt-0" 
-                                src="../../../../public/img/Map_fill_black.png"
+                                class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
+                                src="../../../../public/img/3D.png"
                             />
                             <p
                                 class="text-black text-xl self-end pb-6 pl-4"
@@ -80,7 +81,7 @@
                         >
                             <img
                                 class="w-16 my-4"
-                                src="../../../../public/img/Chart_black.png"
+                                src="../../../../public/img/trophy_9109356.png"
                             />
                             <div class="flex justify-center flex-col">
                                 <p class="text-black text-xl pb-0 pl-2 mb-1">
@@ -103,7 +104,7 @@
                         >
                             <img
                                 class="w-16 my-4"
-                                src="../../../../public/img/Chart_white.png"
+                                src="../../../../public/img/numbers.png"
                             />
                             <div class="flex justify-center flex-col">
                                 <p
@@ -130,7 +131,30 @@
             </div>
 
             <div class="">
-                <ul
+                <ul class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
+                    role="tablist"
+                    data-twe-nav-ref>
+                    <!-- <li class="tab-list-item-first active-tabs"  v-for="(type, index) in gameTypes" :key="index">
+                        <span class="tab-list-item-text">All</span>
+                    </li> -->
+
+                    <li v-for="(type, index) in gameTypes" :key="index" class="tab-list-item"
+                        :class="
+                            type == selectedGameType
+                                    ? 'active-tabs'
+                                    : ''
+                            ">
+                        <a
+                            @click="
+                                selectedGameType = type;
+                                getProviders();
+                            "
+                            class="tab-list-item-text"
+                            >{{ type.name }}</a
+                        >
+                    </li>
+                </ul>
+                <!-- <ul
                     class="mb-0 flex gap-x-3 list-none flex-row flex-wrap border-b-0"
                     role="tablist"
                     data-twe-nav-ref
@@ -150,7 +174,7 @@
                             >{{ type.name }}</a
                         >
                     </li>
-                </ul>
+                </ul> -->
 
                 <div class="mb-6">
                     <div

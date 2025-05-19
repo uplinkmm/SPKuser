@@ -1,6 +1,6 @@
 <template>
     <div class="frame-container min-h-[100vh]">
-        <Navbar :title="title" :back-btn="backBtn"></Navbar>
+        <Navbar :title="$t(title)" :back-btn="backBtn"></Navbar>
 
         <div>
             <div v-show="step == 'mainProfile'">
@@ -71,12 +71,12 @@
                             href="#"
                             @click="
                                 step = 'termsAndConditions';
-                                title = 'Terms And Conditions';
+                                title = 'Term & Condition';
                             "
                             class="flex"
                         >
                             <i class="fal fa-scroll-old mr-4 w-4 pt-1"></i>
-                            <p>Terms & Conditions</p>
+                            <p>{{$t("Term & Condition")}}</p>
                         </a>
                         <a href="#" class="flex items-center">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
@@ -84,7 +84,7 @@
                                 data-twe-toggle="modal"
                                 data-twe-target="#add_feedback_modal"
                             >
-                                Feedback
+                                {{ $t("Feedback") }}
                             </button>
                         </a>
                         <a href="#" class="flex items-center">
@@ -93,12 +93,12 @@
                                 data-twe-toggle="modal"
                                 data-twe-target="#contact_modal"
                             >
-                                Contacts
+                                {{ $t("Contacts") }}
                             </button>
                         </a>
                         <a @click="logOut" class="flex items-center">
                             <i class="fal fa-sign-out-alt mr-4 w-4"></i>
-                            <p>Logout</p>
+                            <p>{{ $t("Logout") }}</p>
                         </a>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                             class="text-xl font-medium leading-normal text-surface text-center w-full"
                             id="exampleModalLabel"
                         >
-                            Feedback
+                            {{ $t("Feedback") }}
                         </h4>
                         <button
                             type="button"
@@ -224,7 +224,7 @@
                             <label
                                 for="feedback"
                                 class="text-sm mb-3 relative block"
-                                >Feed Back</label
+                                >{{ $t("Feedback") }}</label
                             >
                             <textarea
                                 v-model="feedback"
@@ -271,7 +271,7 @@
                             class="text-xl font-medium leading-normal text-surface text-center w-full"
                             id="exampleModalLabel"
                         >
-                            Contacts
+                            {{ $t("Contacts") }}
                         </h4>
                         <button
                             type="button"
