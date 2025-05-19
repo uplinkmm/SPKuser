@@ -8,10 +8,10 @@
         ></Navbar>
         <div class="px-4 mb-16">
             <div class="-mx-3" id="ad_slick">
-                <div class="w-full mx-3" v-for="(ads, index) in adses">
+                <div class=" mx-3" v-for="(ads, index) in adses">
                     <img
                         :src="`${img_prefix}${ads.photo}`"
-                        class="w-full mb-6"
+                        class="w-full aspect-video mb-6"
                     />
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <div>
                             <img
                                 class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
-                                src="../../../../public/img/2d.png"
+                                src="../../../../public/img/billiard_2377303.png"
                             />
                             <p
                                 class="text-white text-xl self-end pb-6 pl-4"
@@ -61,7 +61,7 @@
                         <div>
                             <img
                                 class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
-                                src="../../../../public/img/3D.png"
+                                src="../../../../public/img/billiard_2377303.png"
                             />
                             <p
                                 class="text-black text-xl self-end pb-6 pl-4"
@@ -81,7 +81,7 @@
                         >
                             <img
                                 class="w-16 my-4"
-                                src="../../../../public/img/trophy_9109356.png"
+                                src="../../../../public/img/cup_5287941.png"
                             />
                             <div class="flex justify-center flex-col">
                                 <p class="text-black text-xl pb-0 pl-2 mb-1">
@@ -184,7 +184,7 @@
                         aria-labelledby="tabs-home-tab"
                         data-twe-tab-active
                     >
-                        <div class="mb-8">
+                        <div class="mb-12">
                             <div class="w-full">
                                 <div
                                     class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
