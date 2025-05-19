@@ -14,14 +14,14 @@
     <link rel="manifest" href="/manifest.json" />
 
     <!-- Fallback icon for iOS -->
-    <link rel="apple-touch-icon" href="/icons/pwa_icon.jpg" />
+    <link rel="apple-touch-icon" href="/icons/pwa_icon.png" />
 
     <!-- iOS splash and meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Shwe Shan Kan" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <link rel="icon" type="image/jpg" href="/icons/pwa_icon.jpg">
+    <link rel="icon" type="image/png" href="/icons/pwa_icon.png">
 
     @vite('resources/js/app.js')
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
