@@ -103,7 +103,7 @@ class NotificationRepository implements NotificationInterface
         if($userId){
             $userData->balance = $balance ? $balance->balance : 0;
             $userData->name = UserData()->name;
-            $userData->game_money_balance=UserData()->balanceFloat;
+            $userData->game_money_balance=intval(UserData()->balanceFloat);
         }else{
             // $userData->balance=0;
             // $userData->game_money_balance=0;
