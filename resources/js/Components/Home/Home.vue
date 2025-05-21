@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-x-4 gap-y-6 mb-4">
-                <a href="/2D_betting"
+                <a href="/2d/live"
                     class="bg-[#C67D06] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
                     <div class="w-fit mx-auto flex">
                         <div>

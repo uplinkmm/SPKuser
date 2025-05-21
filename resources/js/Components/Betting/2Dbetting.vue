@@ -101,7 +101,7 @@
         <!-- choose time -->
         <div :class="step == 5 ? 'block' : 'hidden'">
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
-                <div class="grid grid-cols-2 gap-x-4 mb-8">
+                <!-- <div class="grid grid-cols-2 gap-x-4 mb-8">
                     <a
                         href="history?game_id=1"
                         class="bg-[#29261D] rounded-lg shadow-md text-center text-white py-8"
@@ -120,16 +120,16 @@
                             <p>ထီပေါက်သူ</p>
                         </a>
                     </div>
-                </div>
+                </div> -->
                 <div
                     v-if="twod_settings.length && main_game_active"
                     class="bg-transparent items-center justify-center mb-8"
                 >
-                    <!-- <div class="text-center mb-4">
-                        <h1 class="text-lg font-semibold">
+                    <div class="text-center mb-4">
+                        <h1 class="text-white py-5 text-lg font-semibold">
                             ထိုးမည့်အချိန်ကို ရွေးပါ
                         </h1>
-                    </div> -->
+                    </div>
 
                     <div>
                         <div

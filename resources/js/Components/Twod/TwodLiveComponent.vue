@@ -1,17 +1,36 @@
 <template>
-    <div class="w-full lg:w-7/12 mx-auto px-4 bg-white pb-20 min-h-[100vh]">
-        <Navbar title="2D result" :need-auth="false"></Navbar>
+    <div class="frame-container bg-white min-h-[100vh]">
+        <Navbar title="2D" :need-auth="false" :back-btn="backBtn"></Navbar>
 
+        <div class="bg-[#FDC652] flex justify-center mt-2 rounded-lg gap-2 items-center">
+            <a
+                href="/history?game_id=1"
+                class=" text-center p-8"
+            >
+                <i class="fal fa-file text-3xl pb-1 text-white"></i>
+                <p class="text-black">မှတ်တမ်း</p>
+            </a>
+            <a
+                href="/2D_betting"
+                class=" text-center p-8"
+            >
+                <img src="../../../../public/img/billiard_2377303.png" class="w-10" alt="">
+                <p class="text-black">ထိုးမည်</p>
+            </a>
+            <div class=" text-center p-8">
+                <a href="/winner_lists/1">
+                    <i class="fal fa-users text-3xl pb-1 text-white"></i>
+                    <p class="text-black">ထီပေါက်သူ</p>
+                </a>
+            </div>
+        </div>
         <div class="flex justify-center mt-2">
             <p class="text-[96px] w-fit text-green-600 font-semibold">
                 {{ twoDList?.twod }}
             </p>
         </div>
         <div class="flex justify-center mt-2 mb-4">
-            <p class="text-base text-black">
-                <!-- Updated : 2024 - 3 - 05 12:00:00 -->
-                Updated : {{ twoDList?.time }}
-            </p>
+            <p class="text-base text-white">Updated : {{ twoDList?.time }}</p>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-4">
             <div
@@ -72,13 +91,13 @@
                 <div class="grid grid-cols-5">
                     <div class="col-span-3">
                         <p>Morden</p>
-                        <p >
+                        <p>
                             {{ twoD.Modern }}
                         </p>
                     </div>
                     <div class="col-span-2">
                         <p>Internet</p>
-                        <p >
+                        <p>
                             {{ twoD.Internet }}
                         </p>
                     </div>
@@ -142,9 +161,12 @@ export default {
         //     }
         //     console.log('live api called');
         // },
+        backBtn() {
+            window.history.back();
+        },
         async get2DList() {
             const response = await getApiData({
-                url: "https://admin.2dmyanmarpro.com/api/2d/live",
+                url: "https://admin.shwepaukkan.com/api/2d/live",
             });
             if (response.data) {
                 this.twoDList = response.data;
