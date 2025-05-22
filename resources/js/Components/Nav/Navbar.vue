@@ -3,8 +3,8 @@
         class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center"
         :class="
             getUser && isHomePage
-                ? 'bg-[#FDC652] text-white font-semibold -mx-4'
-                : 'bg-[#DDA33F] text-white -mx-4'
+                ? 'primary-bg text-white font-semibold -mx-4'
+                : 'primary-bg text-white -mx-4'
         "
     >
         <div v-if="isHomePage && user" class="flex gap-x-2 text-sm">

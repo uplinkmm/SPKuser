@@ -3,24 +3,24 @@
         <Navbar title="2D" :need-auth="false" :back-btn="backBtn"></Navbar>
 
         <div
-            class="bg-[#FDC652] flex justify-center mt-2 rounded-lg gap-2 items-center"
+            class="primary-bg flex justify-center mt-2 rounded-lg gap-2 items-center text-sm lg:text-base"
         >
             <a href="/history?game_id=1" class="text-center p-8">
-                <i class="fal fa-file text-3xl pb-1 text-white"></i>
-                <p class="text-black">မှတ်တမ်း</p>
+                <i class="fal fa-file text-3xl pb-2 text-white"></i>
+                <p class="text-white">မှတ်တမ်း</p>
             </a>
             <a href="/2D_betting" class="text-center p-8">
                 <img
-                    src="../../../../public/img/billiard_2377303.png"
-                    class="w-10"
+                    src="../../../../public/img/billiard_white.png"
+                    class=" h-10 pb-1"
                     alt=""
                 />
-                <p class="text-black">ထိုးမည်</p>
+                <p class="text-white">ထိုးမည်</p>
             </a>
             <div class="text-center p-8">
                 <a href="/winner_lists/1">
-                    <i class="fal fa-users text-3xl pb-1 text-white"></i>
-                    <p class="text-black">ထီပေါက်သူ</p>
+                    <i class="fal fa-users text-3xl pb-2 text-white"></i>
+                    <p class="text-white">ထီပေါက်သူ</p>
                 </a>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-4">
             <div
                 v-for="(twoD, index) in twoDList.results"
-                class="twod-bg text-white px-6 py-4 rounded-md mb-3"
+                class="primary-bg text-white px-6 py-4 rounded-md mb-3"
             >
                 <div class="text-center">
                     <p class="inline-block pr-2">
@@ -80,7 +80,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-1">
             <div
                 v-for="(twoD, index) in twoDList?.modern_internet?.numbers"
-                class="twod-bg text-white px-6 py-4 rounded-md mb-3"
+                class="primary-bg text-white px-6 py-4 rounded-md mb-3"
             >
                 <div class="text-center">
                     <p class="inline-block pr-2">

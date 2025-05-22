@@ -9,6 +9,12 @@
   font-family: 'Poppins',sans-serif;
   letter-spacing: 0.05rem; }
 
+.primary-bg {
+  background-color: #C67D06; }
+
+.primary-text {
+  color: #C67D06; }
+
 .frame-container {
   background-color: #eee; }
 

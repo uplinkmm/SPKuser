@@ -37,8 +37,8 @@
                     </div>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-6 mb-4">
-                <a href="/2d/live"
+            <div class="grid grid-cols-2 gap-x-6 gap-y-6 mb-4">
+                <!-- <a href="/2d/live"
                     class="bg-[#C67D06] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
                     <div class="w-fit mx-auto flex">
                         <div>
@@ -53,9 +53,23 @@
                             </p>
                         </div>
                     </div>
+                </a> -->
+                <a href="/2d/live">
+                    <div class="bg-[#C67D06] rounded-xl">
+                        <img src="../../../../public/img/mm_2dd.jpg" class="object-cover w-full h-full rounded-xl">
+                        <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">2D</p>
+                    </div>
                 </a>
                 
-                <a href="/3D_betting"
+
+                <a href="/3d/live">
+                    <div class="bg-[#C67D06] rounded-xl">
+                        <img src="../../../../public/img/mm_3d.jpg" class="object-cover w-full h-full rounded-xl">
+                        <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p>
+                    </div>
+                </a>
+                
+                <!-- <a href="/3D_betting"
                     class="bg-[#fff] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
                     <div class="w-fit mx-auto flex">
                         <div>
@@ -70,7 +84,7 @@
                             </p>
                         </div>
                     </div>
-                </a>
+                </a> -->
 
                 <div 
                     class="bg-white mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
