@@ -72,7 +72,8 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
 
         return $wallet;
     }
-    public function createGameWallet($customer){
+    public function createGameWallet($customer)
+    {
         // if (CustomerGameWallet::where('customer_id', $customer->id)->first()) {
         //     // point bag already exists for customer
         //     return null;
@@ -88,38 +89,48 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
     {
         // dd(UserData()->balanceFloat);
         // $pointBag = CustomerPointBag::where('customer_id', $customerId)->first();
-        $pointBag=(new CustomerPointBalance($customerId))->getCustomerPointBalance();
-        $customerWalletBalance=(new CustomerWalletBalance($customerId))->getCustomerWalletBalance();
+        $pointBag = (new CustomerPointBalance($customerId))->getCustomerPointBalance();
+        $customerWalletBalance = (new CustomerWalletBalance($customerId))->getCustomerWalletBalance();
         // $customerGameBalance=(new CustomerWalletBalance($customerId))->getCustomerGameBalnce();
-        $main_money=new stdClass();
-        $main_money->balance=$customerWalletBalance;    
-        $game_money=new stdClass();
+        $main_money = new stdClass();
+        $main_money->balance = $customerWalletBalance;
+        $game_money = new stdClass();
         // $game_money->balance=$customerGameBalance;
-        $game_money->balance=UserData()->balanceFloat;
+        $game_money->balance = intval(UserData()->balanceFloat);
         return ['main_money' => $main_money, 'game_money' => $game_money];
     }
 
-    public function getCustomerWalletMoney($customerId){
-        $balance=(new CustomerWalletBalance($customerId))->getCustomerWalletBalance();
-        return ['wallet_balance'=>$balance];
+    public function getCustomerWalletMoney($customerId)
+    {
+        $balance = (new CustomerWalletBalance($customerId))->getCustomerWalletBalance();
+        return ['wallet_balance' => $balance];
     }
 
-    public function getTransactionHistory($request){
-        $customerId=UserData()->id;
-        $className= $request->type=='topup_transaction' ? TopupTransaction::class : CashWithdrawlTransaction::class ;
-        $transactions=$className::with(['account:id,account_type,phone_number'])
-        ->orderBy('id','desc')
-        ->where('customer_id',$customerId)
-        ->select('id','customer_id','amount','status','confirmed_at','rejected_at','remark','account_id',
-        DB::raw("CASE 
+    public function getTransactionHistory($request)
+    {
+        $customerId = UserData()->id;
+        $className = $request->type == 'topup_transaction' ? TopupTransaction::class : CashWithdrawlTransaction::class;
+        $transactions = $className::with(['account:id,account_type,phone_number'])
+            ->orderBy('id', 'desc')
+            ->where('customer_id', $customerId)
+            ->select(
+                'id',
+                'customer_id',
+                'amount',
+                'status',
+                'confirmed_at',
+                'rejected_at',
+                'remark',
+                'account_id',
+                DB::raw("CASE 
         WHEN status = 'pending' THEN created_at
         WHEN status = 'confirmed' THEN confirmed_at
         WHEN status = 'rejected' THEN rejected_at
         END AS date")
-        )
-        ->take(11)
-        ->latest()
-        ->get();
+            )
+            ->take(11)
+            ->latest()
+            ->get();
         return $transactions;
     }
 }
