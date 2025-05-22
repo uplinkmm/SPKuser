@@ -5,50 +5,6 @@
         <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
 
         <div class="">
-            <!-- <ul
-                class="flex list-none flex-row flex-wrap border-b-0 ps-0 px-4 py-0 mb-8 bg-white sticky top-0 z-10"
-                role="tablist"
-            >
-                <li role="presentation">
-                    <a
-                        href="#tabs-twoD"
-                        :class="[
-                            'my-2 block px-4 pb-3.5 pt-4 text-sm',
-                            game_id === 1
-                                ? 'text-black border-b-2 border-black'
-                                : 'text-neutral-500 hover:bg-neutral-100',
-                        ]"
-                        role="tab"
-                        aria-controls="tabs-twoD"
-                        @click="
-                            game_id = 1;
-                            updateURLAndFetch();
-                        "
-                    >
-                        2D
-                    </a>
-                </li>
-
-                <li role="presentation">
-                    <a
-                        href="#tabs-threeD"
-                        :class="[
-                            'my-2 block px-4 pb-3.5 pt-4 text-sm',
-                            game_id === 2
-                                ? 'text-black border-b-2 border-black'
-                                : 'text-neutral-500 hover:bg-neutral-100',
-                        ]"
-                        role="tab"
-                        aria-controls="tabs-threeD"
-                        @click="
-                            game_id = 2;
-                            updateURLAndFetch();
-                        "
-                    >
-                        3D
-                    </a>
-                </li>
-            </ul> -->
 
             <div class="mb-6">
                 <!-- 2D History Section -->
@@ -59,6 +15,10 @@
                     role="tabpanel"
                 >
                     <div class="mx-0 pb-8">
+                        <div v-if="two_d_histories.length === 0" class="text-center text-white py-8">
+                            No history found
+                        </div>
+
                         <div
                             v-for="(history, index) in two_d_histories"
                             :key="index"
@@ -137,6 +97,9 @@
                     role="tabpanel"
                 >
                     <div class="mx-0 pb-8">
+                        <div v-if="three_d_histories.length === 0" class="text-center text-white py-8">
+                            No history found
+                        </div>
                         <div
                             v-for="(history, index) in three_d_histories"
                             :key="index"

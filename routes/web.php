@@ -48,7 +48,7 @@ Route::view('/test', 'Test.test')->name('test');
 
 //test
 
-Route::view('/2d', 'twod.live')->name('twoD');
+Route::view('/2d/live', 'twod.live')->name('twoD.live');
 Route::view('/2d/dream_numbers', 'twod.dream_number')->name('twoD.dream_numbers');
 Route::view('/2d/calendar', 'twod.calendar')->name('twoD.calendar');
 Route::view('/2d/analysis', 'twod.analysis')->name('twoD.analysis');
