@@ -86,7 +86,7 @@
                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                 />
             </div>
-            <div class="mb-8">
+            <!-- <div class="mb-8">
                 <input
                     type="text"
                     id="agent_code"
@@ -94,7 +94,7 @@
                     placeholder="Agent Code(Optional)"
                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                 />
-            </div>
+            </div> -->
 
             <div>
                 <button
@@ -143,8 +143,9 @@
                 <path
                     fill="currentColor"
                     d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-                /></svg
-            >Continue with Facebook
+                />
+            </svg>
+            Continue with Facebook
         </a>
     </div>
 </template>
@@ -166,7 +167,7 @@ export default {
             otp: null,
             password: null,
             confirm_password: null,
-            code: null,
+           // code: null,
             remember: true,
             otpRequested: false,
             show_password: false,
@@ -244,7 +245,7 @@ export default {
             formData.append("password", this.password);
             formData.append("password_confirmation", this.confirm_password);
             formData.append("otp", this.otp);
-            formData.append("code", this.code);
+            // formData.append("code", this.code);
             formData.append("fcm_token", this.fcmToken); //from mixin
 
             let response = await postApiData({ url: url, form_data: formData });

@@ -273,7 +273,7 @@
                             @click="num.is_active == 1 ? addBetNumber(num) : ''"
                         >
                             <div class="w-full">
-                                <p class="text-xs lg:text-base mb-2 font-inter">
+                                <p class="text-xs lg:text-lg mb-2 font-inter">
                                     {{ num.number }}
                                 </p>
                                 <div

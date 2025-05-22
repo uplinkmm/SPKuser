@@ -7,7 +7,21 @@
         <Navbar title="Games" :back-btn="backBtn"></Navbar>
 
         <div class="">
-            <ul
+            <ul class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
+                role="tablist" data-twe-nav-ref>
+                <li v-for="(type, index) in gameTypes" :key="index" class="tab-list-item"
+                    :class="type == selectedGameType ? 'active-tabs' : ''">
+                    <a @click="selectedGameType = type;
+                                getProviders();
+                            "
+                        class="tab-list-item-text"
+                        >
+                        {{ type.name }}
+                    </a>
+                </li>
+            </ul>
+
+            <!-- <ul
                 class="mb-0 flex gap-x-3 list-none flex-row flex-wrap border-b-0"
                 role="tablist"
                 data-twe-nav-ref
@@ -27,7 +41,7 @@
                         >{{ type.name }}</a
                     >
                 </li>
-            </ul>
+            </ul> -->
 
             <div class="mb-6">
                 <div
