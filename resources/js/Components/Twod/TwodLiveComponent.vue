@@ -25,9 +25,12 @@
             </div>
         </div>
         <div class="flex justify-center mt-2">
-            <p class="text-[96px] w-fit text-green-600 font-semibold">
+            <p class="text-[96px] w-fit text-white font-semibold">
                 {{ twoDList?.twod }}
             </p>
+            <!-- <p class="text-[96px] w-fit text-green-600 font-semibold">
+                {{ twoDList?.twod }}
+            </p> -->
         </div>
         <div class="flex justify-center mt-2 mb-4">
             <p class="text-base text-white">Updated : {{ twoDList?.time }}</p>
