@@ -86,30 +86,62 @@
                     </div>
                 </a> -->
 
-                <div 
-                    class="bg-white mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
+                <a href="/winner_lists/1" class="relative col-span-2">
+                    <div class="bg-[#C67D06] rounded-xl w-full">
+                        <img src="../../../../public/img/winner.jpg" class="object-cover w-full aspect-[16/6] rounded-xl">
+                        <!-- <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p> -->
+                        <div class="text-center py-3">
+                            <p
+                                class="text-white text-lg pb-0 pl-2 mb-0 "
+                            >
+                                ထီပေါက်သူများ
+                            </p>
+                            <!-- <p class="text-white text-sm pb-0 pl-2">
+                                ထွက်ခဲ့သော နံပတ်များ
+                            </p> -->
+                        </div>
+                    </div>
+                </a>
+                <!-- <div 
+                    class="bg-[#C67D06] mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
                 >
                     <a href="/winner_lists/1">
                         <div
-                            class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                            class="flex justify-start gap-x-4 w-full mx-auto py-0"
                         >
                             <img
-                                class="w-16 my-4"
-                                src="../../../../public/img/cup_5287941.png"
+                                class=" w-4/12 aspect-square my-0 rounded-2xl"
+                                src="../../../../public/img/winner2.jpeg"
                             />
                             <div class="flex justify-center flex-col">
-                                <p class="text-black text-xl pb-0 pl-2 mb-1">
+                                <p class="text-white text-xl pb-0 pl-2 mb-1">
                                     ထီပေါက်သူများ
                                 </p>
-                                <p class="text-black text-sm pb-0 pl-2">
+                                <p class="text-white text-sm pb-0 pl-2">
                                     ထီပေါက်သူများ
                                 </p>
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
-                <div
+                <a href="/lottery_history" class="relative col-span-2">
+                    <div class="bg-[#C67D06] rounded-xl w-full">
+                        <img src="../../../../public/img/ball.jpg" class="object-cover w-full aspect-[16/6] rounded-xl">
+                        <!-- <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p> -->
+                        <div class="text-center py-3">
+                            <p
+                                class="text-white text-lg pb-0 pl-2 mb-0 "
+                            >
+                                ထီပေါက်စဉ်များ
+                            </p>
+                            <!-- <p class="text-white text-sm pb-0 pl-2">
+                                ထွက်ခဲ့သော နံပတ်များ
+                            </p> -->
+                        </div>
+                    </div>
+                </a>
+                <!-- <div
                     class="bg-[#C67D06] mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
                 >
                     <a href="/lottery_history">
@@ -132,7 +164,7 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
 
