@@ -62,7 +62,7 @@
                 </a>
                 
 
-                <a href="/3d/live">
+                <a href="/3D_betting">
                     <div class="bg-[#C67D06] rounded-xl">
                         <img src="../../../../public/img/mm_3d.jpg" class="object-cover w-full h-full rounded-xl">
                         <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p>

@@ -301,7 +301,7 @@
                             "
                         >
                             <div class="w-full">
-                                <p class="text-xs lg:text-lg mb-2 font-inter">
+                                <p class="text-xs lg:text-2xl mb-2 font-inter">
                                     {{ num.number }}
                                 </p>
                                 <div
