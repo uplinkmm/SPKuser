@@ -153,7 +153,6 @@ export default {
             showSpinner: false,
         };
     },
-
     methods: {
         // async get2DLive() {
         //     const response = await getApiData({ url: '/api/2d/live' });
