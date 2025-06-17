@@ -88,7 +88,7 @@
 
                 <a href="/winner_lists/1" class="relative col-span-2">
                     <div class="bg-[#C67D06] rounded-xl w-full">
-                        <img src="../../../../public/img/winner.jpg" class="object-cover w-full aspect-[16/6] rounded-xl">
+                        <img src="../../../../public/img/winner.jpg" class="object-cover w-full aspect-[16/4.5] rounded-xl">
                         <!-- <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p> -->
                         <div class="text-center py-3">
                             <p
@@ -127,7 +127,7 @@
 
                 <a href="/lottery_history" class="relative col-span-2">
                     <div class="bg-[#C67D06] rounded-xl w-full">
-                        <img src="../../../../public/img/ball.jpg" class="object-cover w-full aspect-[16/6] rounded-xl">
+                        <img src="../../../../public/img/ball.jpg" class="object-cover w-full aspect-[16/4.5] rounded-xl">
                         <!-- <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p> -->
                         <div class="text-center py-3">
                             <p
