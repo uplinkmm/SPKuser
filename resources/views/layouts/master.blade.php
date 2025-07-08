@@ -32,6 +32,8 @@
 
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/slick.js') }}"></script>
+
+
 </head>
 
 <body>
