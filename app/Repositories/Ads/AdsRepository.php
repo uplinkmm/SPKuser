@@ -18,7 +18,8 @@ class AdsRepository implements AdsInterface
     public function getMarqueeAds($request){
         return Ads::orderBy("id", "desc")
         ->where('type','marquee')
-        ->get();
+        ->orderBy('id','desc')
+        ->first();
     }
     
 }
