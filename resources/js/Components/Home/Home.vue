@@ -20,7 +20,7 @@
                 
             </div> -->
             <div
-                class="overflow-hidden whitespace-nowrap bg-[#354ebd70] absolute top-0 left-4 right-4"
+                class="overflow-hidden mb-5 z-50 whitespace-nowrap bg-[#354ebd70] absolute top-0 left-4 right-4"
             >
                 <div style="position: relative; min-height: 20px">
                     <div
