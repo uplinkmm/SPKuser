@@ -608,8 +608,10 @@ export default {
 
         if (window.location.href.includes("shweshankan")) {
             this.img_prefix = "https://admin.shweshankan.com";
-        } else {
+        } else if (window.location.href.includes("test")) {
             this.img_prefix = "http://sskadmin.test";
+        } else {
+            this.img_prefix = "http://localhost:8001";
         }
         this.getAds();
         // this.intervalId = setInterval(this.get2DList, 3000);
