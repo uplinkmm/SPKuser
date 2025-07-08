@@ -21,9 +21,12 @@
             </div> -->
             <div
                 class="overflow-hidden whitespace-nowrap bg-[#354ebd70] absolute top-0 left-4 right-4"
+                style="position: relative; min-height: 20px"
             >
                 <div
-                    class="block marquee-left text-white text-xs font-semibold py-1"
+                    id="marquee-text"
+                    class="block text-white text-xs font-semibold py-1"
+                    style="position: absolute; white-space: nowrap"
                 >
                     {{ marqueeAds?.name }}
                 </div>
@@ -35,12 +38,12 @@
                         class="w-full aspect-video mb-6"
                     />
                 </div>
-                <div class="mx-3">
+                <!-- <div class="mx-3">
                     <img
                         src="https://admin.shweshankan.com/storage/img/dyt40RFxWQTLfiBoxWeWV7BWqjASiHTCHtI7l9kJ.jpg"
                         class="w-full aspect-video mb-6"
                     />
-                </div>
+                </div> -->
             </div>
             <div
                 class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
@@ -527,6 +530,32 @@ export default {
         },
     },
     watch: {
+        marqueeAds(newVal) {
+            if (newVal) {
+                this.$nextTick(() => {
+                    function animateMarquee() {
+                        const marqueeText = $("#marquee-text");
+                        const container = marqueeText.parent();
+                        const containerWidth = container.width();
+                        const textWidth = marqueeText.width();
+
+                        marqueeText.css({ left: containerWidth });
+
+                        marqueeText.animate(
+                            { left: -textWidth },
+                            20000, // Adjust the duration as needed
+                            "linear",
+                            function () {
+                                // Reset the animation
+                                animateMarquee();
+                            }
+                        );
+                    }
+
+                    animateMarquee();
+                });
+            }
+        },
         adses(newVal) {
             if (newVal.length > 0) {
                 this.$nextTick(() => {
@@ -592,15 +621,27 @@ export default {
             direction: "left",
             duplicated: true,
         });
-    },
-    updated() {
-        $(".marquee").marquee({
-            duration: 1000,
-            gap: 50,
-            delayBeforeStart: 0,
-            direction: "left",
-            duplicated: true,
-        });
+
+        function animateMarquee() {
+            const marqueeText = $("#marquee-text");
+            const container = marqueeText.parent();
+            const containerWidth = container.width();
+            const textWidth = marqueeText.width();
+
+            marqueeText.css({ left: containerWidth });
+
+            marqueeText.animate(
+                { left: -textWidth },
+                20000, // Adjust the duration as needed
+                "linear",
+                function () {
+                    // Reset the animation
+                    animateMarquee();
+                }
+            );
+        }
+
+        // animateMarquee();
     },
 };
 </script>
