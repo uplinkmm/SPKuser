@@ -333,4 +333,20 @@
   -ms-overflow-style: none;
   /* Hides the scrollbar */ }
 
+@keyframes marquee-left {
+  0% {
+    transform: translateX(100%); }
+  100% {
+    transform: translateX(-200%); } }
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-100%); }
+  100% {
+    transform: translateX(100%); } }
+.marquee-left {
+  animation: marquee-left 20s linear infinite; }
+
+.marquee-right {
+  animation: marquee-right 10s linear infinite; }
+
 /*# sourceMappingURL=style_web.css.map */
