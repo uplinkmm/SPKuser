@@ -586,7 +586,16 @@ export default {
         initTWE({ Modal, Tab, Ripple });
 
         $(".marquee").marquee({
-            duration: 50000,
+            duration: 1000,
+            gap: 50,
+            delayBeforeStart: 0,
+            direction: "left",
+            duplicated: true,
+        });
+    },
+    updated() {
+        $(".marquee").marquee({
+            duration: 1000,
             gap: 50,
             delayBeforeStart: 0,
             direction: "left",
