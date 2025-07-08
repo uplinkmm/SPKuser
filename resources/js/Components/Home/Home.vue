@@ -25,7 +25,7 @@
                 <div
                     class="block marquee-left text-white text-xs font-semibold py-1"
                 >
-                    {{ marqueeAds.name }}
+                    {{ marqueeAds?.name }}
                 </div>
             </div>
             <div class="-mx-3" id="ad_slick">
