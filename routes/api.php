@@ -41,6 +41,7 @@ Route::post('/forget_password', [AuthController::class, 'forgetPassword']);
 
 Route::controller(AdsController::class)->group(function () {
     Route::get('get_ads', 'index');
+    Route::get('get_marquee_ads', 'getMarqueeAds');
 });
 Route::controller(TermAndConditionController::class)->group(function () {
     Route::get('get_term_and_condition', 'index');

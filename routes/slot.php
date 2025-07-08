@@ -39,7 +39,7 @@ Route::group(['prefix' => 'Seamless'], function () {
     Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
 
     // Route::group(["middleware" => ["webhook_log"]], function(){
-    Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
+    // Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
     Route::post('GameResult', [GameResultController::class, 'gameResult']);
     Route::post('Rollback', [RollbackController::class, 'rollback']);
     // Route::post('PlaceBet', [PlaceBetController::class, 'placeBet']);
@@ -61,6 +61,11 @@ Route::group(['prefix' => 'Seamless'], function () {
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::middleware('auth:api')->group(function () {
+    Route::group(['prefix' => 'Seamless'], function () {
+    
+        // Route::group(["middleware" => ["webhook_log"]], function(){
+        Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
+    });
     Route::group(['prefix' => 'game'], function () {
         Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
         Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
