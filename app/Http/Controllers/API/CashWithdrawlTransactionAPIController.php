@@ -28,9 +28,9 @@ class CashWithdrawlTransactionAPIController extends Controller
         if(!Hash::check($request->password, $customer->getAuthPassword())){
             ResponseMessage('Password is Invalid', 401);
         }
-        if ((string) $request->phone_number !== (string) $customer->phone_number) {
-            ResponseMessage('Phone Number is Invalid', 401);
-        }
+        // if ((string) $request->phone_number !== (string) $customer->phone_number) {
+        //     ResponseMessage('Phone Number is Invalid', 401);
+        // }
         $data = $request->all();
         $data['customer_id'] = $customer->id;
         $withdrawl = $this->withdrawlRepo->createTransaction($data);
