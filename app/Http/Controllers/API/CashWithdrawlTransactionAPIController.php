@@ -33,15 +33,17 @@ class CashWithdrawlTransactionAPIController extends Controller
         // }
         $data = $request->all();
         $data['customer_id'] = $customer->id;
-        $totolPendingAmount=CashWithdrawlTransaction::where('customer_id',$data['customer_id'])
-        ->where('status','pending')
-        ->sum('amount');
-        $withdrawalAmount=$totolPendingAmount+$data['amount'];
+        //remove adding pending amount
+        // $totolPendingAmount=CashWithdrawlTransaction::where('customer_id',$data['customer_id'])
+        // ->where('status','pending')
+        // ->sum('amount');
+        // $withdrawalAmount=$totolPendingAmount+$data['amount'];
        
-        $mainBalance=(int)$customer->main_wallet->balance;
-        if($withdrawalAmount > $mainBalance){
-            ResponseMessage('Withdrawal is invalid',419);
-        }
+        // $mainBalance=(int)$customer->main_wallet->balance;
+        // if($withdrawalAmount > $mainBalance){
+        //     ResponseMessage('Withdrawal is invalid',419);
+        // }
+        //end
         $withdrawl = $this->withdrawlRepo->createTransaction($data);
         if($withdrawl){
             ResponseData($withdrawl, 200, true, 'Cash withdrawal requested');
