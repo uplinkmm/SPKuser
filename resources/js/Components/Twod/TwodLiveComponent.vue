@@ -172,6 +172,7 @@ export default {
             this.showSpinner = true;
             const response = await getApiData({
                 url: "https://admin.shwepaukkan.com/api/2d/live",
+                // url: "http://localhost:4100/api/2d/live",
             });
             if (response.data) {
                 this.twoDList = response.data;
