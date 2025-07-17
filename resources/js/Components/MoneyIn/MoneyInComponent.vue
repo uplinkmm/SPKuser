@@ -5,9 +5,7 @@
 
         <div class="px-4">
             <div class="w-full">
-                <p class="w-full text-center primary-text mb-8">
-                    ငွေသွင်းမည်
-                </p>
+                <p class="w-full text-center primary-text mb-8">ငွေသွင်းမည်</p>
             </div>
             <!-- <div
                 class="flex justify-center px-4 py-8 shadow-lg rounded-2xl mb-4 bg-white"
@@ -141,7 +139,9 @@
                     </div>
 
                     <div class="px-10 py-6 shadow-lg rounded-2xl mb-8 bg-white">
-                        <p class="w-full text-center mb-6 text-lg">Fill The Form</p>
+                        <p class="w-full text-center mb-6 text-lg">
+                            Fill The Form
+                        </p>
                         <div class="mb-8">
                             <label
                                 for="amount"
@@ -161,7 +161,7 @@
                                 >Transaction id (Last 6 digits)</label
                             >
                             <input
-                                type="number"
+                                type="text"
                                 id="id"
                                 v-model="paymentTrId"
                                 placeholder="Transaction id"
@@ -314,7 +314,6 @@ export default {
                     type: "warn",
                 });
                 return 1;
-
             }
             var temp = this.accounts.find(
                 (n) => n.account_type == this.paymentProvider
