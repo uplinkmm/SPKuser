@@ -194,6 +194,9 @@ export default {
         },
 
         convertDatetimeToLongDate12Hour(datetimeStr) {
+            if(datetimeStr == '--'){
+                return '-- -- --';
+            }
             const monthNames = [
                 'January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'
@@ -211,11 +214,38 @@ export default {
             const formattedTime = `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')} ${ampm}`;
 
             return `${formattedDate} ${formattedTime}`;
+        },
+
+        isOffHours() {
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+
+            // Convert current time to a single comparable minute value for easier comparison
+            const currentTimeInMinutes = currentHours * 60 + currentMinutes;
+
+            // Define off-hour start and end times in minutes from midnight
+            const offHoursStartInMinutes = 16 * 60 + 31; // 4:31 PM
+            const offHoursEndInMinutes = 8 * 60 + 50;   // 8:50 AM
+
+            // Case 1: Off-hours start in the evening and end the next morning (e.g., 4:31 PM to 11:59 PM OR 12:00 AM to 8:50 AM)
+            if (offHoursStartInMinutes < offHoursEndInMinutes) {
+                // This scenario is not directly applicable for a range that crosses midnight
+                // If it were, it would be a simple `currentTimeInMinutes >= start && currentTimeInMinutes <= end`
+                // However, our range (4:31 PM to 8:50 AM) crosses midnight.
+                // So, we handle it as two separate ranges.
+            }
+
+            // Case 2: Off-hours start in the evening and end the next morning (crosses midnight)
+            // This is the correct logic for 4:31 PM to 8:50 AM
+            return currentTimeInMinutes >= offHoursStartInMinutes || currentTimeInMinutes <= offHoursEndInMinutes;
         }
     },
 
     created() {
-        this.intervalId = setInterval(() => this.get2DList(), 3000);
+        if(!this.isOffHours()){
+            this.intervalId = setInterval(() => this.get2DList(), 3000);
+        }
     },
 
     mounted() {
