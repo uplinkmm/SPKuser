@@ -116,9 +116,11 @@
                             ကြည့်ရန်
                         </p>
                     </a>
-                    <a href="#" class="flex items-center">
+                    <a href="tel:+959955511333" class="flex items-center">
                         <i class="fal fa-wallet mr-4 w-4"></i>
-                        <p>Contacts</p>
+                        <p>
+                            {{ $t("Contacts") }}
+                        </p>
                     </a>
                 </div>
 
