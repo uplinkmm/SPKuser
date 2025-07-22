@@ -421,7 +421,7 @@
                     </li>
                     <li class="mb-4 group">
                         <a
-                            href="https://t.me/shweshankan_gaming"
+                            href="tg://resolve?domain=shweshankan_gaming"
                             target="_blank"
                             class="flex gap-x-4"
                         >
