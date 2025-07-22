@@ -93,11 +93,19 @@
                         <i class="fal fa-money-check-alt mr-4 w-4"></i>
                         <p>{{ $t("Deposit Withdrawal History") }}</p>
                     </a>
-                    <a href="#" class="flex items-center">
+                    <a
+                        target="_blank"
+                        href="https://youtube.com/shorts/cFvmsnfVNF0?si=UmA6F83Rhm5lnzpT"
+                        class="flex items-center"
+                    >
                         <i class="fal fa-wallet mr-4 w-4"></i>
-                        <p>ငွေဖြည့်နည်း ကြည့်ရန်</p>
+                        <p>ငွေထုတ်နည်း ကြည့်ရန်</p>
                     </a>
-                    <a href="#" class="flex items-center">
+                    <a
+                        target="_blank"
+                        href="https://youtube.com/shorts/4jtKqT-Jm3E?si=F4mBf4h0mrcM7VgY"
+                        class="flex items-center"
+                    >
                         <i class="fal fa-wallet mr-4 w-4"></i>
                         <p>ငွေသွင်းနည်း ကြည့်ရန်</p>
                     </a>
@@ -361,7 +369,8 @@ export default {
                     });
                     return;
                 }
-            } else {  //to_wallet
+            } else {
+                //to_wallet
                 if (
                     this.gameMoneyBalance == 0 ||
                     this.wallet_transfer.amount > this.gameMoneyBalance
