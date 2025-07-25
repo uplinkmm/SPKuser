@@ -109,13 +109,13 @@
                         <i class="fal fa-wallet mr-4 w-4"></i>
                         <p>ငွေသွင်းနည်း ကြည့်ရန်</p>
                     </a>
-                    <a href="#" class="flex">
+                    <!-- <a href="#" class="flex">
                         <i class="fal fa-wallet mr-4 w-4 pt-1"></i>
                         <p class="text-base leading-7">
                             ပင်မ ပိုက်ဆံအိတ်မှ ဂိမ်း ပိုက်ဆံအိတ်သို့ လွှဲနည်း
                             ကြည့်ရန်
                         </p>
-                    </a>
+                    </a> -->
                     <a href="tel:+959955511333" class="flex items-center">
                         <i class="fal fa-wallet mr-4 w-4"></i>
                         <p>
