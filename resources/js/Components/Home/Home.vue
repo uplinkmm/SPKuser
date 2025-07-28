@@ -420,7 +420,11 @@
                         </a>
                     </li>
                     <li class="mb-4 group">
-                        <a href="t.me/shweshankan_gaming" class="flex gap-x-4">
+                        <a
+                            href="tg://resolve?domain=shweshankan_gaming"
+                            target="_blank"
+                            class="flex gap-x-4"
+                        >
                             <div
                                 class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                             >
