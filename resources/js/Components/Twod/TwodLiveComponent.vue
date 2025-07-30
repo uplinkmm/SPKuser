@@ -12,7 +12,7 @@
             <a href="/2D_betting" class="text-center p-8">
                 <img
                     src="../../../../public/img/billiard_white.png"
-                    class=" h-10 pb-1"
+                    class="h-10 pb-1"
                     alt=""
                 />
                 <p class="text-white">ထိုးမည်</p>
@@ -33,7 +33,8 @@
             </p> -->
         </div>
         <div class="flex justify-center mt-2 mb-4">
-            <p class="text-base text-white">Updated :
+            <p class="text-base text-white">
+                Updated :
                 <span v-if="twoDList && twoDList.time">
                     {{ convertDatetimeToLongDate12Hour(twoDList.time) }}
                 </span>
@@ -84,7 +85,7 @@
 
         <hr class="mb-4 block lg:hidden" />
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-1">
+        <!-- <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-1">
             <div
                 v-for="(twoD, index) in twoDList?.modern_internet?.numbers"
                 class="primary-bg text-white px-6 py-4 rounded-md mb-3"
@@ -107,31 +108,6 @@
                         <p>
                             {{ twoD.Internet }}
                         </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div
-            class="grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,_31.5%)] justify-center mx-auto gap-x-4"
-        >
-            <div class="twod-bg text-white px-6 py-4 rounded-md mb-3">
-                <div class="grid grid-cols-7">
-                    <div class="col-span-2">
-                        <p>12:03</p>
-                        <p>PM</p>
-                    </div>
-                    <div class="col-span-2">
-                        <p>Modern</p>
-                        <p class="text-[#F6E271] font-semibold">25</p>
-                    </div>
-                    <div class="col-span-2">
-                        <p>Internet</p>
-                        <p class="text-[#F6E271] font-semibold">25</p>
-                    </div>
-                    <div class="col-span-1">
-                        <p>TW</p>
-                        <p class="text-[#F6E271] font-semibold">25</p>
                     </div>
                 </div>
             </div>
@@ -172,25 +148,27 @@ export default {
             window.history.back();
         },
         async get2DList() {
-            if(this.showSpinner == false){
-            this.showSpinner = true;
-            const response = await getApiData({
-                url: "https://admin.shwepaukkan.com/api/2d/live",
-                // url: "http://localhost:4100/api/2d/live",
-            });
-            if (response.data) {
-                this.twoDList = response.data;
-                this.showSpinner = false;
-            } else {
-                this.showSpinner = false;
-            }
+            if (this.showSpinner == false) {
+                this.showSpinner = true;
+                const response = await getApiData({
+                    url: "https://admin.shwepaukkan.com/api/2d/live",
+                    // url: "http://localhost:4100/api/2d/live",
+                });
+                if (response.data) {
+                    this.twoDList = response.data;
+                    this.showSpinner = false;
+                } else {
+                    this.showSpinner = false;
+                }
             }
         },
 
         convertTo12HourFormat(timeStr) {
-            const [hour, minute, second] = timeStr.split(':').map(Number);
+            const [hour, minute, second] = timeStr.split(":").map(Number);
             const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-            return `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
+            return `${String(hour12).padStart(2, "0")}:${String(
+                minute
+            ).padStart(2, "0")}:${String(second).padStart(2, "0")}`;
         },
 
         convertDatetimeToLongDate12Hour(datetimeStr) {
@@ -198,20 +176,32 @@ export default {
                 return '-- -- --';
             }
             const monthNames = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
             ];
 
-            const [datePart, timePart] = datetimeStr.split(' ');
-            const [year, month, day] = datePart.split('-').map(Number);
-            const [hour, minute, second] = timePart.split(':').map(Number);
+            const [datePart, timePart] = datetimeStr.split(" ");
+            const [year, month, day] = datePart.split("-").map(Number);
+            const [hour, minute, second] = timePart.split(":").map(Number);
 
-            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const ampm = hour >= 12 ? "PM" : "AM";
             const hour12 = hour % 12 === 0 ? 12 : hour % 12;
 
             const monthName = monthNames[month - 1];
             const formattedDate = `${monthName} ${day}, ${year}`;
-            const formattedTime = `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')} ${ampm}`;
+            const formattedTime = `${String(hour12).padStart(2, "0")}:${String(
+                minute
+            ).padStart(2, "0")}:${String(second).padStart(2, "0")} ${ampm}`;
 
             return `${formattedDate} ${formattedTime}`;
         },
