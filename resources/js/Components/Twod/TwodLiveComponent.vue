@@ -33,16 +33,20 @@
             </p> -->
         </div>
         <div class="flex justify-center mt-2 mb-4">
-            <p class="text-base text-white">Updated : {{ twoDList?.time }}</p>
+            <p class="text-base text-white">Updated :
+                <span v-if="twoDList && twoDList.time">
+                    {{ convertDatetimeToLongDate12Hour(twoDList.time) }}
+                </span>
+            </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-4">
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-x-4 mb-0 lg:mb-4">
             <div
                 v-for="(twoD, index) in twoDList.results"
                 class="primary-bg text-white px-6 py-4 rounded-md mb-3"
             >
                 <div class="text-center">
                     <p class="inline-block pr-2">
-                        {{ twoD.open_time }}
+                        {{ convertTo12HourFormat(twoD.open_time) }}
                     </p>
                     <span class="inline-block uppercase">
                         {{ twoD.day_part }}
@@ -172,6 +176,7 @@ export default {
             this.showSpinner = true;
             const response = await getApiData({
                 url: "https://admin.shwepaukkan.com/api/2d/live",
+                // url: "http://localhost:4100/api/2d/live",
             });
             if (response.data) {
                 this.twoDList = response.data;
@@ -181,6 +186,32 @@ export default {
             }
             }
         },
+
+        convertTo12HourFormat(timeStr) {
+            const [hour, minute, second] = timeStr.split(':').map(Number);
+            const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+            return `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
+        },
+
+        convertDatetimeToLongDate12Hour(datetimeStr) {
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            const [datePart, timePart] = datetimeStr.split(' ');
+            const [year, month, day] = datePart.split('-').map(Number);
+            const [hour, minute, second] = timePart.split(':').map(Number);
+
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+
+            const monthName = monthNames[month - 1];
+            const formattedDate = `${monthName} ${day}, ${year}`;
+            const formattedTime = `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')} ${ampm}`;
+
+            return `${formattedDate} ${formattedTime}`;
+        }
     },
 
     created() {
