@@ -93,24 +93,34 @@
                         <i class="fal fa-money-check-alt mr-4 w-4"></i>
                         <p>{{ $t("Deposit Withdrawal History") }}</p>
                     </a>
-                    <a href="#" class="flex items-center">
+                    <a
+                        target="_blank"
+                        href="https://youtube.com/shorts/cFvmsnfVNF0?si=UmA6F83Rhm5lnzpT"
+                        class="flex items-center"
+                    >
                         <i class="fal fa-wallet mr-4 w-4"></i>
-                        <p>ငွေဖြည့်နည်း ကြည့်ရန်</p>
+                        <p>ငွေထုတ်နည်း ကြည့်ရန်</p>
                     </a>
-                    <a href="#" class="flex items-center">
+                    <a
+                        target="_blank"
+                        href="https://youtube.com/shorts/4jtKqT-Jm3E?si=F4mBf4h0mrcM7VgY"
+                        class="flex items-center"
+                    >
                         <i class="fal fa-wallet mr-4 w-4"></i>
                         <p>ငွေသွင်းနည်း ကြည့်ရန်</p>
                     </a>
-                    <a href="#" class="flex">
+                    <!-- <a href="#" class="flex">
                         <i class="fal fa-wallet mr-4 w-4 pt-1"></i>
                         <p class="text-base leading-7">
                             ပင်မ ပိုက်ဆံအိတ်မှ ဂိမ်း ပိုက်ဆံအိတ်သို့ လွှဲနည်း
                             ကြည့်ရန်
                         </p>
-                    </a>
-                    <a href="#" class="flex items-center">
+                    </a> -->
+                    <a href="tel:+959955511333" class="flex items-center">
                         <i class="fal fa-wallet mr-4 w-4"></i>
-                        <p>Contacts</p>
+                        <p>
+                            {{ $t("Contacts") }}
+                        </p>
                     </a>
                 </div>
 
@@ -361,7 +371,8 @@ export default {
                     });
                     return;
                 }
-            } else {  //to_wallet
+            } else {
+                //to_wallet
                 if (
                     this.gameMoneyBalance == 0 ||
                     this.wallet_transfer.amount > this.gameMoneyBalance
