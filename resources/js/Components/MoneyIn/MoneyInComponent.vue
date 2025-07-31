@@ -367,7 +367,7 @@ export default {
             } else {
                 window.history.back();
 
-                // window.location.href = "/home";
+                window.location.href = "/home";
             }
         },
         copyPhoneNumber(phone_number) {
