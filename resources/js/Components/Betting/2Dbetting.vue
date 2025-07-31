@@ -224,6 +224,8 @@
                                     id="amount"
                                     placeholder="Amount"
                                     v-model="each_amount"
+                                    @input="validateNumber($event, 'amount')"
+                                    ref="amount"
                                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                                 />
                             </div>
@@ -465,10 +467,11 @@
                     Cancel
                 </button>
                 <button
+                    :disabled="calling_api"
                     class="bg-[#FDC652] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
                     @click="sendBetting"
                 >
-                    ထိုးမည်
+                    {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
                 </button>
             </div>
         </div>
@@ -880,7 +883,10 @@
                                     id="round_digits"
                                     placeholder=""
                                     v-model="round_digits"
-                                    @input="validateNumber"
+                                    @input="
+                                        validateNumber($event, 'round_digits')
+                                    "
+                                    ref="round_digits"
                                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                                 />
                             </div>
@@ -908,10 +914,19 @@
                                     >Amount</label
                                 >
                                 <input
-                                    type="number"
+                                    type="text"
+                                    inputmode="numeric"
+                                    pattern="[0-9]*"
                                     id="amount"
                                     placeholder="Amount"
                                     v-model="each_amount"
+                                    @input="
+                                        validateNumber(
+                                            $event,
+                                            'round_bet_amount'
+                                        )
+                                    "
+                                    ref="round_bet_amount"
                                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                                 />
                             </div>
@@ -1045,10 +1060,11 @@
                 </div>
                 <div class="absolute mb-6 w-full flex justify-center">
                     <button
+                        :disabled="calling_api"
                         class="bg-[#FDC652] text-white px-12 py-2 rounded-lg text-sm font-semibold"
                         @click="sendBetting"
                     >
-                        ထိုးမည်
+                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
                     </button>
                 </div>
             </div>
@@ -1324,6 +1340,7 @@ import Navbar from "../Nav/Navbar.vue";
 import { mapGetters } from "vuex";
 import moment from "moment";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
+import { checkNumber } from "../../utilities/common";
 
 export default {
     name: "2Dbetting",
@@ -1421,17 +1438,13 @@ export default {
                 this.step = 1;
             }
         },
-        validateNumber(event) {
-            const value = event.target.value;
-            this.round_digits = value.replace(/[^0-9]/g, "");
-        },
         addBetNumber(num) {
             console.log(num);
             const available_for_bet = this.checkOpenCloseTime();
             if (available_for_bet == false) {
                 return;
             }
-            if(num.total_bet_percentage==100){
+            if (num.total_bet_percentage == 100) {
                 return;
             }
             const index = this.bet_numbers.findIndex(
@@ -1586,11 +1599,11 @@ export default {
                 this.showErrorModal();
                 return;
             }
-            if(this.bet_numbers.length == 0){
+            if (this.bet_numbers.length == 0) {
                 this.error_modal_text = "Invalid or empty betting numbers";
                 this.showErrorModal();
             }
-            this.calling_api = true;            
+            this.calling_api = true;
             let formData = new FormData();
             formData.append("numbers", JSON.stringify(this.bet_numbers));
             formData.append("betting_multiplier", this.bet_multiplier);
@@ -2105,6 +2118,11 @@ export default {
         },
         getCurrentTime() {
             return moment().format("hh:mm A");
+        },
+
+        validateNumber(event, refName) {
+            const tempValue = checkNumber(event.target.value);
+            this.$refs[refName].value = tempValue;
         },
     },
     watch: {

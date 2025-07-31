@@ -632,6 +632,7 @@ class BettingRepository implements BettingInterface
                 // }
                 return TwoDResult::orderBy('id', 'asc')
                     // ->where('date_time',Carbon::now()->subDays(6))
+                    ->whereIn('open_time',['12:01:00','16:30:00'])
                     ->whereBetween('stock_date', [Carbon::now()->subDays(6)->startOfDay(), Carbon::now()->endOfDay()])
                     ->get();
             }
