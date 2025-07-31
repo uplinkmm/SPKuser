@@ -33,16 +33,20 @@
             </p> -->
         </div>
         <div class="flex justify-center mt-2 mb-4">
-            <p class="text-base text-white">Updated : {{ twoDList?.time }}</p>
+            <p class="text-base text-white">Updated :
+                <span v-if="twoDList && twoDList.time">
+                    {{ convertDatetimeToLongDate12Hour(twoDList.time) }}
+                </span>
+            </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-4">
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-x-4 mb-0 lg:mb-4">
             <div
                 v-for="(twoD, index) in twoDList.results"
                 class="primary-bg text-white px-6 py-4 rounded-md mb-3"
             >
                 <div class="text-center">
                     <p class="inline-block pr-2">
-                        {{ twoD.open_time }}
+                        {{ convertTo12HourFormat(twoD.open_time) }}
                     </p>
                     <span class="inline-block uppercase">
                         {{ twoD.day_part }}
@@ -172,6 +176,7 @@ export default {
             this.showSpinner = true;
             const response = await getApiData({
                 url: "https://admin.shwepaukkan.com/api/2d/live",
+                // url: "http://localhost:4100/api/2d/live",
             });
             if (response.data) {
                 this.twoDList = response.data;
@@ -181,10 +186,66 @@ export default {
             }
             }
         },
+
+        convertTo12HourFormat(timeStr) {
+            const [hour, minute, second] = timeStr.split(':').map(Number);
+            const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+            return `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
+        },
+
+        convertDatetimeToLongDate12Hour(datetimeStr) {
+            if(datetimeStr == '--'){
+                return '-- -- --';
+            }
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            const [datePart, timePart] = datetimeStr.split(' ');
+            const [year, month, day] = datePart.split('-').map(Number);
+            const [hour, minute, second] = timePart.split(':').map(Number);
+
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+
+            const monthName = monthNames[month - 1];
+            const formattedDate = `${monthName} ${day}, ${year}`;
+            const formattedTime = `${String(hour12).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')} ${ampm}`;
+
+            return `${formattedDate} ${formattedTime}`;
+        },
+
+        isOffHours() {
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+
+            // Convert current time to a single comparable minute value for easier comparison
+            const currentTimeInMinutes = currentHours * 60 + currentMinutes;
+
+            // Define off-hour start and end times in minutes from midnight
+            const offHoursStartInMinutes = 16 * 60 + 31; // 4:31 PM
+            const offHoursEndInMinutes = 8 * 60 + 50;   // 8:50 AM
+
+            // Case 1: Off-hours start in the evening and end the next morning (e.g., 4:31 PM to 11:59 PM OR 12:00 AM to 8:50 AM)
+            if (offHoursStartInMinutes < offHoursEndInMinutes) {
+                // This scenario is not directly applicable for a range that crosses midnight
+                // If it were, it would be a simple `currentTimeInMinutes >= start && currentTimeInMinutes <= end`
+                // However, our range (4:31 PM to 8:50 AM) crosses midnight.
+                // So, we handle it as two separate ranges.
+            }
+
+            // Case 2: Off-hours start in the evening and end the next morning (crosses midnight)
+            // This is the correct logic for 4:31 PM to 8:50 AM
+            return currentTimeInMinutes >= offHoursStartInMinutes || currentTimeInMinutes <= offHoursEndInMinutes;
+        }
     },
 
     created() {
-        this.intervalId = setInterval(() => this.get2DList(), 3000);
+        if(!this.isOffHours()){
+            this.intervalId = setInterval(() => this.get2DList(), 3000);
+        }
     },
 
     mounted() {
