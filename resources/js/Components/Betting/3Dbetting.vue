@@ -1,11 +1,7 @@
 <template lang="">
     <notifications position="top center" />
 
-    
-    <div
-        v-if="step == 4"
-        class="frame-container min-h-[100vh]"
-    >
+    <div v-if="step == 4" class="frame-container min-h-[100vh]">
         <Navbar title="ထီပေါက်သူ" :back-btn="backBtn" class="!px-8"></Navbar>
 
         <div
@@ -40,17 +36,16 @@
             </table>
         </div>
     </div>
-    <div
-        v-else
-        class="frame-container min-h-[100vh]"
-    >
+    <div v-else class="frame-container min-h-[100vh]">
         <!-- <div
         class="frame-container min-h-[100vh]"
     > -->
         <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         <!-- choose time -->
         <div :class="step == 0 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0 lg:px-4">
+            <div
+                class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0 lg:px-4"
+            >
                 <div class="grid grid-cols-2 gap-x-4 mb-8">
                     <a
                         href="history?game_id=2"
@@ -72,56 +67,58 @@
                     </div>
                 </div>
                 <div class="contents" v-if="!showSpinner">
-          
-                <div
-                  v-if="settings.length > 0 && main_game_active && settings[0]?.is_active"
-                 
-                    class="bg-transparent items-center justify-center mb-8"
-                >
                     <div
-                        @click="step = 1"
-                        class="bg-green-400 text-white rounded-xl cursor-pointer shadow-md pt-10 pb-8 px-6 flex justify-between items-end mb-5"
+                        v-if="
+                            settings.length > 0 &&
+                            main_game_active &&
+                            settings[0]?.is_active
+                        "
+                        class="bg-transparent items-center justify-center mb-8"
                     >
-                        <div class="block">
-                            <p v-if="game" class="mb-3">
-                                {{
-                                    formatDateTime(
-                                        game.game_setting?.lottery_date_time
-                                    )
-                                }}
-                            </p>
+                        <div
+                            @click="step = 1"
+                            class="bg-green-400 text-white rounded-xl cursor-pointer shadow-md pt-10 pb-8 px-6 flex justify-between items-end mb-5"
+                        >
+                            <div class="block">
+                                <p v-if="game" class="mb-3">
+                                    {{
+                                        formatDateTime(
+                                            game.game_setting?.lottery_date_time
+                                        )
+                                    }}
+                                </p>
 
-                            <i
-                                class="fal fa-check-circle"
-                                style="font-size: 24px"
-                            ></i>
-                        </div>
+                                <i
+                                    class="fal fa-check-circle"
+                                    style="font-size: 24px"
+                                ></i>
+                            </div>
 
-                        <div class="block">
-                            <p class="text-right mb-3">3D</p>
-                            <p class="text-xl font-semibold">ထိုးမည်</p>
-                        </div>
-                        <!-- <i
+                            <div class="block">
+                                <p class="text-right mb-3">3D</p>
+                                <p class="text-xl font-semibold">ထိုးမည်</p>
+                            </div>
+                            <!-- <i
                             class="far fa-angle-right"
                             style="font-size: 24px"
                         ></i> -->
+                        </div>
                     </div>
-                </div>
-                <div
-                v-else
-                    class="bg-transparent items-center justify-center mb-8"
-                >
                     <div
-                        class="bg-white rounded-xl cursor-pointer shadow-md py-20 px-12 flex"
+                        v-else
+                        class="bg-transparent items-center justify-center mb-8"
                     >
-                        <i
-                            class="fas fa-exclamation text-red-700"
-                            style="font-size: 24px"
-                        ></i>
-                        <span class="pl-8">3D ခေတ္တ ပိတ်ထားပါသည် </span>
+                        <div
+                            class="bg-white rounded-xl cursor-pointer shadow-md py-20 px-12 flex"
+                        >
+                            <i
+                                class="fas fa-exclamation text-red-700"
+                                style="font-size: 24px"
+                            ></i>
+                            <span class="pl-8">3D ခေတ္တ ပိတ်ထားပါသည် </span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div
@@ -178,6 +175,8 @@
                                     id="amount"
                                     placeholder="Amount"
                                     v-model="each_amount"
+                                    @input="validateNumber($event, 'amount')"
+                                    ref="amount"
                                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                                 />
                             </div>
@@ -198,7 +197,8 @@
                         </div>
                         <div class="block lg:flex justify-between">
                             <p class="text-sm mb-1">
-                                {{ $t("Balance") }} : {{ wallet_balance?.toLocaleString() }} MMK
+                                {{ $t("Balance") }} :
+                                {{ wallet_balance?.toLocaleString() }} MMK
                             </p>
                             <p class="text-sm">
                                 {{ $t("Closing Time") }} :
@@ -412,17 +412,19 @@
                     </tbody>
                 </table>
             </div>
-            <hr>
+            <hr />
             <div class="pt-2 mb-0 w-full block">
-                <p class="text-sm pt-2  text-right pr-2 mb-4">
-                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount?.toLocaleString() }} MMK
+                <p class="text-sm pt-2 text-right pr-2 mb-4">
+                    {{ $t("Total Betting Amount") }} :
+                    {{ totalBetAmount?.toLocaleString() }} MMK
                 </p>
-                <div class=" w-full flex justify-center">
+                <div class="w-full flex justify-center">
                     <button
+                        :disabled="calling_api"
                         @click="sendBetting"
                         class="bg-[#FDC652] text-white px-12 py-2 rounded-lg text-sm font-semibold"
                     >
-                        ထိုးမည်
+                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
                     </button>
                 </div>
             </div>
@@ -697,8 +699,9 @@ import moment from "moment";
 import Navbar from "../Nav/Navbar.vue";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 
+import { checkNumber } from "../../utilities/common";
 export default {
-    name: "3Dcomponent",
+    name: "3Dbetting",
     components: {
         Navbar,
     },
@@ -891,7 +894,7 @@ export default {
             } else if (percentage >= 70 && percentage < 100) {
                 return "bg-[#f7db07] h-1-5"; //yellow
             } else if (percentage < 70) {
-                return "bg-[#17b509] h-1-5"; //green    
+                return "bg-[#17b509] h-1-5"; //green
             } else {
                 return "bg-[#7a2985] h-1-5"; //purple
             }
@@ -914,7 +917,7 @@ export default {
             // if (available_for_bet == false) {
             //     return;
             // }
-            if(num.total_bet_percentage==100){
+            if (num.total_bet_percentage == 100) {
                 return;
             }
             const index = this.bet_numbers.findIndex(
@@ -1097,8 +1100,9 @@ export default {
                 form_data: formData,
                 token: this.getToken,
             });
+            this.calling_api = false;
+
             if (response.success) {
-                this.calling_api = false;
                 this.$notify({
                     text: "Success betting.",
                     type: "info",
@@ -1109,8 +1113,6 @@ export default {
                 this.time_status = "";
                 this.getBetNumbers();
             } else {
-                this.calling_api = false;
-
                 this.error_modal_text = response.message;
                 this.showErrorModal();
                 // this.$notify({
@@ -1276,6 +1278,10 @@ export default {
             if (button) {
                 button.click();
             }
+        },
+        validateNumber(event, refName) {
+            const tempValue = checkNumber(event.target.value);
+            this.$refs[refName].value = tempValue;
         },
     },
     watch: {

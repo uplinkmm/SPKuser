@@ -20,7 +20,7 @@ class AdsRepository implements AdsInterface
         return Ads::orderBy("id", "desc")
         ->where('type','marquee')
         ->orderBy('id','desc')
-        ->first();
+        ->first();                                  
     }
     
 }
