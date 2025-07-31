@@ -172,8 +172,10 @@
                             <button
                                 @click="makeTopupTransactionBtnClicked"
                                 class="bg-black text-white px-4 py-2 w-full rounded-md"
+                                :disabled="loading"
                             >
-                                Done
+                                <span v-if="loading">Loading...</span>
+                                <span v-else>Done</span>
                             </button>
                         </div>
                     </div>
@@ -228,6 +230,7 @@ export default {
             paymentProvider: null,
             paymentTrId: null,
             accounts: null,
+            loading: false,
         };
     },
     components: {
@@ -328,6 +331,7 @@ export default {
                 });
                 return;
             }
+            this.loading = true;
             let formData = new FormData();
             formData.append("amount", this.amount);
             formData.append("payment_provider", this.paymentProvider);
@@ -340,6 +344,7 @@ export default {
                 form_data: formData,
                 token: this.getToken,
             });
+            this.loading = false;
             if (response.success) {
                 this.$notify({
                     text: response.message,
