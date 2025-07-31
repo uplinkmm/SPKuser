@@ -630,7 +630,7 @@ class BettingRepository implements BettingInterface
                 //         throw $e; // Optionally rethrow the exception to handle it further up the chain
                 //     }
                 // }
-                return TwoDResult::orderBy('id', 'asc')
+                return TwoDResult::orderBy('stock_date', 'asc')
                     // ->where('date_time',Carbon::now()->subDays(6))
                     ->whereIn('open_time',['12:01:00','16:30:00'])
                     ->whereBetween('stock_date', [Carbon::now()->subDays(6)->startOfDay(), Carbon::now()->endOfDay()])
