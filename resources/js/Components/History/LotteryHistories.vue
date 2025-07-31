@@ -11,7 +11,7 @@
 
         <div class="">
             <ul
-                class="flex list-none flex-row justify-center flex-wrap border-b-0 ps-0 px-4 py-0 mb-4 bg-transparent sticky top-0 z-10"
+                class="flex list-none flex-row justify-center flex-wrap border-b-0 ps-0 px-4 py-0 mb-4 bg-transparent top-0 z-10"
                 role="tablist"
             >
                 <li role="presentation">
