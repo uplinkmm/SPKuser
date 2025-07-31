@@ -228,10 +228,11 @@ export default {
 
             // Case 2: Off-hours start in the evening and end the next morning (crosses midnight)
             // This is the correct logic for 4:31 PM to 8:50 AM
-            return currentTimeInMinutes >= offHoursStartInMinutes || currentTimeInMinutes <= offHoursEndInMinutes;
-        }
-=========
->>>>>>>>> Temporary merge branch 2
+            return (
+                currentTimeInMinutes >= offHoursStartInMinutes ||
+                currentTimeInMinutes <= offHoursEndInMinutes
+            );
+        },
     },
 
     created() {
