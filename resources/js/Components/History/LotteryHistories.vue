@@ -56,15 +56,15 @@
                 >
                     <div class="mx-0 pb-8">
                         <div
-                           
-                            v-for="(list, index) in data" :key="index"
+                            v-for="(list, index) in data"
+                            :key="index"
                             class="pb-4 mb-4 bg-white relative group"
                         >
                             <div
                                 class="flex justify-start mb-1 bg-[#FDC652] py-4 px-8 text-white"
                             >
                                 <p class="text-base font-semibold">
-                                    {{ formatDate(list.date_time) }}
+                                    {{ formatDate(list.stock_datetime) }}
                                 </p>
                             </div>
                             <div
@@ -72,7 +72,9 @@
                             >
                                 <div class="px-8 py-2">
                                     <div class="mb-4 pt-2">
-                                        <p>{{ formatTime(list.lottery_time) }}</p>
+                                        <p>
+                                            {{ formatTime(list.open_time) }}
+                                        </p>
                                     </div>
                                     <div
                                         class="grid grid-cols-3 gap-x-3 gap-y-6"
@@ -103,16 +105,20 @@
                                             >
                                                 2D
                                             </p>
-                                            <p class="text-gray-500">{{ list.two_d }}</p>
+                                            <p class="text-gray-500">
+                                                {{ list.twod }}
+                                            </p>
                                         </div>
 
-                                        <div>
+                                        <!-- <div>
                                             <p
                                                 class="font-semibold text-neutral-600 mb-2"
                                             >
                                                 Modern
                                             </p>
-                                            <p class="text-gray-500">{{ list.modern }}</p>
+                                            <p class="text-gray-500">
+                                                {{ list.modern }}
+                                            </p>
                                         </div>
                                         <div>
                                             <p
@@ -120,7 +126,9 @@
                                             >
                                                 Internet
                                             </p>
-                                            <p class="text-gray-500">{{ list.internet }}</p>
+                                            <p class="text-gray-500">
+                                                {{ list.internet }}
+                                            </p>
                                         </div>
                                         <div>
                                             <p
@@ -128,8 +136,10 @@
                                             >
                                                 TW
                                             </p>
-                                            <p class="text-gray-500">{{ list.tw }}</p>
-                                        </div>
+                                            <p class="text-gray-500">
+                                                {{ list.tw }}
+                                            </p>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +166,10 @@
                             </thead>
                             <tbody>
                                 <tr v-if="!data?.length">
-                                    <td colspan="2" class="text-center py-4 px-8">
+                                    <td
+                                        colspan="2"
+                                        class="text-center py-4 px-8"
+                                    >
                                         No 3D History Found
                                     </td>
                                 </tr>
