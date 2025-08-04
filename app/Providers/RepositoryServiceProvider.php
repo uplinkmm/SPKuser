@@ -11,7 +11,8 @@ use App\Repositories\Betting\BettingInterface;
 
 use App\Repositories\Profile\ProfileInterface;
 use App\Repositories\Betting\BettingRepository;
-
+use App\Repositories\BettingTransaction\BettingTransactionInterface;
+use App\Repositories\BettingTransaction\BettingTransactionRepository;
 use App\Repositories\Profile\ProfileRepository;
 use App\Repositories\Notification\NotificationInterface;
 use App\Repositories\Notification\NotificationRepository;
@@ -51,5 +52,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AdsInterface::class, AdsRepository::class);
         $this->app->bind(SeamlessInterface::class, SeamlessRepository::class);
         $this->app->bind(WalletTransferInterface::class, WalletTransferRepository::class);
+        $this->app->bind(BettingTransactionInterface::class, BettingTransactionRepository::class);
+
     }
 }

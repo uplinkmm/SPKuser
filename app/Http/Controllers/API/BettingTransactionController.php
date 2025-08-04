@@ -10,9 +10,9 @@ class BettingTransactionController extends Controller
 {
     //
     private $bettingTransactionRepo;
-    public function __construct(BettingTransactionInterface $repo)
-    {
-        $this->bettingTransactionRepo = $repo;
-    }
+    // public function __construct(BettingTransactionInterface $repo)
+    // {
+    //     $this->bettingTransactionRepo = $repo;
+    // }
     
 }

@@ -77,3 +77,10 @@ Route::middleware('auth:api')->group(function () {
 Route::group(['prefix' => 'game'], function () {
     Route::get('search_game', [GameController::class, 'searchGameList']);
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::group(['prefix' => 'game'], function () {
+        Route::get('provider_game/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
+    });
+
+});
