@@ -1399,7 +1399,10 @@ export default {
                     errorText = `${bet.number} has reached limit.`;
                     return;
                 }
-                if (bet.closing_amount < bet.amount + bet.total_bet_amount) {
+                if (
+                    bet.closing_amount <
+                    parseInt(bet.amount) + parseInt(bet.total_bet_amount)
+                ) {
                     errorText = `${bet.number} has reached limit.`;
                     return;
                 }
@@ -1409,7 +1412,10 @@ export default {
         checkUserEachLimitError() {
             var errorText = "";
             this.bet_numbers.forEach((bet) => {
-                if (this.bet_limit < bet.amount + bet.total_amount) {
+                if (
+                    this.bet_limit <
+                    parseInt(bet.amount) + parseInt(bet.total_amount)
+                ) {
                     errorText = `${bet.number} has reached your limit.`;
                     return;
                 }
@@ -1439,7 +1445,6 @@ export default {
             }
         },
         addBetNumber(num) {
-            console.log(num);
             const available_for_bet = this.checkOpenCloseTime();
             if (available_for_bet == false) {
                 return;
@@ -2029,7 +2034,7 @@ export default {
         checkAvailableAmount(number) {
             if (
                 number.closing_amount >=
-                number.amount + number.total_bet_amount
+                parseInt(number.amount) + parseInt(number.total_bet_amount)
             ) {
                 return true;
             } else {
