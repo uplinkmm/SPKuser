@@ -10,16 +10,17 @@ class AdsRepository implements AdsInterface
 {
     public function list($request)
     {
+        
         return Ads::orderBy("id", "desc")
         ->where('type','ads')
-        ->take(3)->get();
+        ->get();
     }
 
     public function getMarqueeAds($request){
         return Ads::orderBy("id", "desc")
         ->where('type','marquee')
         ->orderBy('id','desc')
-        ->first();
+        ->first();                                  
     }
     
 }
