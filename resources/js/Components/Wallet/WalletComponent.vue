@@ -206,10 +206,11 @@
 
                         <div class="mb-4">
                             <button
+                                :disabled="loading"
                                 @click="transferWallet"
                                 class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
                             >
-                                Transfer
+                                {{ loading ? "Loading.." : "Transfer" }}
                             </button>
                         </div>
                         <div class="mb-12">
@@ -296,10 +297,11 @@
 
                         <div class="mb-4">
                             <button
+                                :disabled="loading"
                                 @click="transferWallet"
                                 class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
                             >
-                                Transfer
+                                {{ loading ? "Loading.." : "Transfer" }}
                             </button>
                         </div>
                         <div class="mb-12">
@@ -330,6 +332,7 @@ export default {
                 amount: "",
                 transfer_type: "", //to_game ,to_wallet
             },
+            loading: false,
         };
     },
     computed: {
@@ -392,12 +395,13 @@ export default {
                 "transfer_type",
                 this.wallet_transfer.transfer_type
             );
-
+            this.loading = true;
             let response = await postApiData({
                 url: url,
                 token: this.getToken,
                 form_data: formData,
             });
+            this.loading = false;
             if (response.success) {
                 this.$notify({
                     text: "Success transfer.",
