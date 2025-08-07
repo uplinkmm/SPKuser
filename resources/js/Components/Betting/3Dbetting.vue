@@ -809,7 +809,10 @@ export default {
                     errorText = `${bet.number} has reached limit.`;
                     return;
                 }
-                if (bet.closing_amount < bet.amount + bet.total_bet_amount) {
+                if (
+                    bet.closing_amount <
+                    parseInt(bet.amount) + bet.total_bet_amount
+                ) {
                     errorText = `${bet.number} has reached limit.`;
                     return;
                 }
@@ -824,7 +827,7 @@ export default {
         checkUserEachLimitError() {
             var errorText = "";
             this.bet_numbers.forEach((bet) => {
-                if (this.bet_limit < bet.amount + bet.total_amount) {
+                if (this.bet_limit < parseInt(bet.amount) + bet.total_amount) {
                     errorText = `${bet.number} has reached limit.`;
                     return;
                 }
