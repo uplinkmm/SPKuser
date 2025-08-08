@@ -76,7 +76,7 @@
                             class="flex"
                         >
                             <i class="fal fa-scroll-old mr-4 w-4 pt-1"></i>
-                            <p>{{$t("Term & Condition")}}</p>
+                            <p>{{ $t("Term & Condition") }}</p>
                         </a>
                         <a href="#" class="flex items-center">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
@@ -373,7 +373,11 @@ export default {
             this.title = "Change Password";
         },
         backBtn() {
-            if (this.step == "changePass" || this.step == "contacts" || this.step=='termsAndConditions') {
+            if (
+                this.step == "changePass" ||
+                this.step == "contacts" ||
+                this.step == "termsAndConditions"
+            ) {
                 this.step = "mainProfile";
                 this.title = "Profile";
                 return;
