@@ -5,7 +5,7 @@
 
         <div class="px-4">
             <div class="w-full">
-                <p class="w-full text-center primary-text mb-8">ငွေသွင်းမည်</p>
+                <!-- <p class="w-full text-center primary-text mb-8">ငွေထုတ်မည်</p> -->
             </div>
             <!-- <div
                 class="flex justify-center px-4 py-8 shadow-lg rounded-2xl mb-8 bg-white"
@@ -247,7 +247,7 @@ import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 import Navbar from "../Nav/Navbar.vue";
 
 export default {
-    name: "WalletComponent",
+    name: "MoneyOut",
     components: {
         Navbar,
     },
