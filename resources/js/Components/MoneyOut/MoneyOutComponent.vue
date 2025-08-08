@@ -345,9 +345,12 @@ export default {
                 form_data: formData,
                 token: this.getToken,
             });
-            this.loading = false;
 
             if (response.success) {
+                this.amount = "";
+                this.accountName = "";
+                this.phoneNumber = "";
+                this.password = "";
                 this.$notify({
                     text: response.message,
                     type: "info",
@@ -361,6 +364,7 @@ export default {
                     type: "error",
                 });
             }
+            this.loading = false;
         },
         paymentProviderBtnClicked(type) {
             if (this.checkAccount(type)) {
