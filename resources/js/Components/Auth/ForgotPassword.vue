@@ -217,11 +217,7 @@ export default {
             let response = await postApiData({ url: url, form_data: formData });
 
             if (response.success) {
-            
-                this.setErrorBox(
-                    false,
-                    response.message
-                );
+                this.setErrorBox(false, response.message);
                 this.token = response.data.token;
                 this.setToken(this.token);
                 let user = response.data.user;
@@ -230,10 +226,7 @@ export default {
 
                 return true;
             } else {
-                this.setErrorBox(
-                    true,
-                    response.message
-                );
+                this.setErrorBox(true, response.message);
                 return false;
             }
         },

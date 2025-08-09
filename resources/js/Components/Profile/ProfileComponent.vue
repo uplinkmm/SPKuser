@@ -151,10 +151,11 @@
                 </div>
                 <div class="mb-0">
                     <button
+                        :disabled="loading"
                         @click="changePassword()"
                         class="bg-[#FDC652] text-white px-4 py-2 w-full"
                     >
-                        Done
+                        {{ loading ? "Changing..." : "Done" }}
                     </button>
                 </div>
             </div>
@@ -238,10 +239,11 @@
 
                         <div class="mb-4">
                             <button
+                                :disabled="loading"
                                 @click="sendFeedback"
                                 class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
                             >
-                                Send
+                                {{ loading ? "Sending..." : "Send" }}
                             </button>
                         </div>
                     </div>
@@ -357,6 +359,7 @@ export default {
             terms_and_conditions: "",
             feedback: "",
             contacts: [],
+            loading: false,
         };
     },
     computed: {
@@ -412,12 +415,13 @@ export default {
             let url = "/api/feedbacks";
             let formData = new FormData();
             formData.append("text", this.feedback);
-
+            this.loading = true;
             let response = await postApiData({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
+            this.loading = false;
             if (response.success) {
                 this.$notify({
                     text: "Successfully send feedback.",
@@ -472,12 +476,13 @@ export default {
                 "new_password_confirmation",
                 this.new_password_confirmation
             );
-
+            this.loading = true;
             let response = await postApiData({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
+            this.loading = false;
             if (response.success) {
                 this.$notify({
                     text: response.message,
