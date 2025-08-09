@@ -197,12 +197,14 @@
                             />
                         </div>
                         <div class="mb-4">
+                            <!-- :disabled="loading" -->
+
                             <button
-                                :disabled="loading"
                                 @click="makeCashWithdrawBtnClicked"
                                 class="bg-[#FDC652] text-white px-4 py-2 w-full"
                             >
-                                {{ loading ? "Loading" : "Done" }}
+                                <!-- {{ loading ? "Loading" : "Done" }} -->
+                                Done
                             </button>
                         </div>
                     </div>
