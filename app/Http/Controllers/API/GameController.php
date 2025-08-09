@@ -49,9 +49,9 @@ class GameController extends Controller
                 })
                 ->orderBy('id', 'desc');
             if ($game->type == '2d') {
-                if ($currentTime->isSaturday() || $currentTime->isSunday()) {
-                    $game->is_active=0;
-                }
+                // if ($currentTime->isSaturday() || $currentTime->isSunday()) {
+                //     $game->is_active=0;
+                // }
                 // if ($currentTime->isSaturday() || $currentTime->isSunday()) {
                 //     $game->settings = [];
                 // }else{
