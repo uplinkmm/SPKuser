@@ -20,7 +20,7 @@
                 <i class="fas fa-chevron-left"></i>
             </a>
         </button>
-        <p :class="textColor" class="text-white text-base">{{ title }}</p>
+        <p :class="textColor" class="text-white text-base ml-12">{{ title }}</p>
         <div class="flex gap-x-4">
             <button @click="focusSearchInput">
                 <i class="fal fa-search"></i>
@@ -68,7 +68,12 @@
             </div>
 
             <div class="overflow-y-auto no-scrollbar">
-                <p v-if="isEmpty" class="text-white text-center py-4 text-sm font-semibold">No results found!</p>
+                <p
+                    v-if="isEmpty"
+                    class="text-white text-center py-4 text-sm font-semibold"
+                >
+                    No results found!
+                </p>
 
                 <div
                     v-for="(game, index) in searchResults"
