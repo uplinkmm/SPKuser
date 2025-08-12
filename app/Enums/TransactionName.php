@@ -8,6 +8,8 @@ enum TransactionName: string
 
     case CapitalDeposit = 'capital_deposit';
 
+    case Bet = 'bet';
+
     case Stake = 'stake';
     case Payout = 'payout';
     case Bonus = 'bonus';
