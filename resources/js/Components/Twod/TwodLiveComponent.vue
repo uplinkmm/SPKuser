@@ -43,6 +43,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-1 gap-x-4 mb-0 lg:mb-4">
             <div
                 v-for="(twoD, index) in twoDList.results"
+                :key="index"
                 class="primary-bg text-white px-6 py-4 rounded-md mb-3"
             >
                 <div class="text-center">

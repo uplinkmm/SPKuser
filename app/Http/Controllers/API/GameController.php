@@ -52,11 +52,6 @@ class GameController extends Controller
                 if ($currentTime->isSaturday() || $currentTime->isSunday()) {
                     $game->is_active=0;
                 }
-                // if ($currentTime->isSaturday() || $currentTime->isSunday()) {
-                //     $game->settings = [];
-                // }else{
-                //     $game->settings = $game_setting->get();
-                // }
                 $game->settings = $game_setting->get();
             }
             if ($game->type == '3d') {

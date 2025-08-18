@@ -5,9 +5,7 @@
 
         <div class="px-4">
             <div class="w-full">
-                <p class="w-full text-center primary-text mb-8">
-                    ငွေသွင်းမည်
-                </p>
+                <!-- <p class="w-full text-center primary-text mb-8">ငွေထုတ်မည်</p> -->
             </div>
             <!-- <div
                 class="flex justify-center px-4 py-8 shadow-lg rounded-2xl mb-8 bg-white"
@@ -38,7 +36,7 @@
                 <div class="mt-8">
                     <div
                         @click="paymentProviderBtnClicked('kpay')"
-                        class="px-6 py-8 shadow-lg  rounded-3xl mb-6 bg-white"
+                        class="px-6 py-8 shadow-lg rounded-3xl mb-6 bg-white"
                     >
                         <button
                             class="flex justify-between w-full items-center"
@@ -73,8 +71,9 @@
                         </button>
                     </div>
                 </div>
-                <p class="text-white font-semibold absolute bottom-[15%]"> 
-                    ငွေသွင်း / ငွေထုတ် ဝန်ဆောင်မှုကို ၂၄ နာရီ ပိတ်ရက်မရှိ  ဝန်ဆောင်မှုပေးနေပါသည်။
+                <p class="text-white font-semibold absolute bottom-[15%]">
+                    ငွေသွင်း / ငွေထုတ် ဝန်ဆောင်မှုကို ၂၄ နာရီ ပိတ်ရက်မရှိ
+                    ဝန်ဆောင်မှုပေးနေပါသည်။
                 </p>
             </div>
             <div v-if="step == 2">
@@ -199,16 +198,18 @@
                         </div>
                         <div class="mb-4">
                             <button
+                                :disabled="loading"
                                 @click="makeCashWithdrawBtnClicked"
                                 class="bg-[#FDC652] text-white px-4 py-2 w-full"
                             >
-                                Done
+                                {{ loading ? "Loading" : "Done" }}
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- <div class="px-12 py-16 shadow-lg rounded-2xl mb-8 bg-white">
             <div class="flex flex-col gap-y-4">
                 <a href="/history" class="flex items-center">
@@ -246,7 +247,7 @@ import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 import Navbar from "../Nav/Navbar.vue";
 
 export default {
-    name: "WalletComponent",
+    name: "MoneyOut",
     components: {
         Navbar,
     },
@@ -262,6 +263,7 @@ export default {
             step: 1, //1-choose provider ,2 - payment
             payment_provider: "",
             accounts: "",
+            loading: false,
         };
     },
     mixins: [CheckAuthMixin],
@@ -337,12 +339,18 @@ export default {
 
             formData.append("account_id", temp.id);
             let url = `/api/cash_withdrawl_transactions/create`;
+            this.loading = true;
             let response = await postApiData({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
+
             if (response.success) {
+                this.amount = "";
+                this.accountName = "";
+                this.phoneNumber = "";
+                this.password = "";
                 this.$notify({
                     text: response.message,
                     type: "info",
@@ -356,6 +364,7 @@ export default {
                     type: "error",
                 });
             }
+            this.loading = false;
         },
         paymentProviderBtnClicked(type) {
             if (this.checkAccount(type)) {

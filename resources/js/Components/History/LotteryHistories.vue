@@ -176,6 +176,7 @@
 
                                 <tr
                                     v-for="num in data"
+                                    :key="num.id"
                                     class="border-b !border-gray-300"
                                 >
                                     <td class="text-left py-4 px-8">

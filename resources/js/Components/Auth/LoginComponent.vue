@@ -34,10 +34,11 @@
 
             <div class="mb-4">
                 <button
+                    :disabled="loading"
                     @click="login"
                     class="block w-full py-2 px-2 text-sm rounded-md bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
                 >
-                    Login
+                    {{ loading ? "Loading..." : "Login" }}
                 </button>
             </div>
             <button
@@ -47,7 +48,12 @@
                 Forgot password?
             </button>
         </div>
-        <form method="POST" id="signin-form-login" ref="signinForm" action="/login">
+        <form
+            method="POST"
+            id="signin-form-login"
+            ref="signinForm"
+            action="/login"
+        >
             <input type="hidden" v-model="csrfToken" name="_token" />
             <input type="hidden" v-model="phone_number" name="phone_number" />
             <input type="hidden" v-model="password" name="password" />
@@ -104,6 +110,7 @@ export default {
             phone_number: null,
             password: null,
             show_password: false,
+            loading: false,
         };
     },
     props: {
@@ -138,8 +145,9 @@ export default {
             formData.append("phone_number", this.phone_number);
             formData.append("password", this.password);
             formData.append("fcm_token", this.fcmToken); //from mixin
-
+            this.loading = true;
             let response = await postApiData({ url: url, form_data: formData });
+            this.loading = false;
             if (response.data) {
                 this.setErrorBox(false, response.message);
                 this.token = response.data.token;
