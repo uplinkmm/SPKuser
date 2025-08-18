@@ -35,47 +35,131 @@ class BettingRepository implements BettingInterface
         }
         DB::beginTransaction();
         try {
-            // $gameId = $request->input('game_id');
-            // $gameSettingId = $request->input('game_setting_id');
-            // $timeStatus = $request->input('time_status'); // Assuming 'timeStatus' is passed in the request
-            #validate closing amount
-            // $totalBetAmount = $this->calculateTotalBetAmount($gameId, $gameSettingId, $timeStatus);
+
             $data = $request->all();
             $customer = UserData();
             $data['customer_id'] = $customer->id;
             $data['date_time'] = now();
             $betting = Betting::create($data);
+            $bettingNumbersData = [];
+            $numbers = collect($betting_numbers)->pluck('number')->toArray();
+            $results = $this->calculateTotalsForNumbers($gameId, $gameSettingId, $numbers);
             foreach ($betting_numbers as $number) {
                 #check closing amount for each betting number
-                $betttingAmountAndClosingAmount = $this->calculateTotalBetAmountForNumber(
-                    $gameId,
-                    $gameSettingId,
-                    $number['number']
-                );
-                $closingAmount = (int) $betttingAmountAndClosingAmount['closing_amount'];
-                $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
-                $newBetAmount = (int)$number['amount'];
+                // $betttingAmountAndClosingAmount = $this->calculateTotalBetAmountForNumber(
+                //     $gameId,
+                //     $gameSettingId,
+                //     $number['number']
+                // );
+                // $closingAmount = (int) $betttingAmountAndClosingAmount['closing_amount'];
+                // $totalBetAmount = (int) $betttingAmountAndClosingAmount['total_bet_amount'];
+                // $newBetAmount = (int) $number['amount'];
+                // if ($totalBetAmount + $newBetAmount > $closingAmount) {
+                //     ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount', 400);
+                // }
+
+                 // $beting_number = $betting->bettingNumbers()->create([
+                //     'number' => $number['number'],
+                //     'amount' => (int) $number['amount'],
+                //     'betting_multiplier' => (int) $request->betting_multiplier,
+                // ]);
+                
+                $calc = $results[$number['number']];
+                $closingAmount = $calc['closing_amount'];
+                $totalBetAmount = $calc['total_bet_amount'];
+                $newBetAmount = (int) $number['amount'];
+            
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
-                    ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount',  400);
+                    ResponseMessage("Total bet amount for number {$number['number']} exceeds the closing amount", 400);
                 }
+              
                 #end
-                $beting_number = $betting->bettingNumbers()->create([
+                $bettingNumbersData[] = [
+                    'betting_id' => $betting->id,
                     'number' => $number['number'],
-                    'amount' => (int) $number['amount'],
+                    'amount' => $newBetAmount,
                     'betting_multiplier' => (int) $request->betting_multiplier,
-                    // 'game_setting_id' => (int) $request->game_setting_id,
-                ]);
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+               
             }
+            BettingNumber::insert($bettingNumbersData);
             #store Wallet
             $this->actionOfWalletTransaction($betting, $betting->total_amount, 'out');
             DB::commit();
-            ResponseMessage('Betting Successfully',200);
+            ResponseMessage('Betting Successfully', 200);
             // return $betting;
         } catch (\Exception $e) {
             DB::rollback();
             ResponseMessage($e->getMessage(), 402);
             throw $e;
         }
+    }
+
+    private function calculateTotalsForNumbers($gameId, $gameSettingId, array $numbers)
+    {
+        $now = now();
+        $date = $now->format('Y-m-d');
+
+        // Load Game Setting once
+        $gameSetting = GameSetting::where('is_active', 1)->find($gameSettingId);
+        if (!$gameSetting) {
+            ResponseMessage('Game Setting Not Found', status_code: 404);
+        }
+
+        $gameType = $gameSetting->game->type;
+
+        // -------------------------------
+        // 1. Closing Amounts for Numbers
+        // -------------------------------
+        $closingQuery = ClosingNumber::orderBy('id', 'desc')
+            ->where('game_id', $gameId)
+            ->where('game_setting_id', $gameSettingId)
+            ->whereIn('number', $numbers)
+            ->where('is_active', 1);
+
+        if ($gameType == '2d') {
+            $closingQuery->whereDate('date_time', $date);
+        }
+
+        $closingNumbers = $closingQuery
+            ->pluck('amount', 'number'); // key: number, value: amount
+
+        // -------------------------------
+        // 2. Total Bets for Numbers
+        // -------------------------------
+        $query = DB::table('betting_numbers as bn')
+            ->join('bettings as b', 'bn.betting_id', '=', 'b.id')
+            ->whereIn('bn.number', $numbers);
+
+        $startTime = convertDateTimeFormat($date . $gameSetting->opening_time);
+        $endTime = convertDateTimeFormat($date . $gameSetting->closing_time);
+
+        if ($gameId == 1) {
+            $query->whereBetween('b.date_time', [$startTime, $endTime])
+                ->where('b.game_id', $gameId)
+                ->where('b.game_setting_id', $gameSettingId);
+        } elseif ($gameId == 2) {
+            $query->where('b.game_setting_id', $gameSettingId);
+        }
+
+        $totals = $query
+            ->select('bn.number', DB::raw('COALESCE(SUM(bn.amount), 0) as total_bet_amount'))
+            ->groupBy('bn.number')
+            ->pluck('total_bet_amount', 'bn.number');
+        // -------------------------------
+        // 3. Merge Results
+        // -------------------------------
+        $results = [];
+        foreach ($numbers as $num) {
+            $results[$num] = [
+                'total_bet_amount' => (int) ($totals[$num] ?? 0),
+                'closing_amount' => (int) ($closingNumbers[$num] ?? $gameSetting->closing_amount),
+            ];
+        }
+
+        return $results;
     }
 
     private function calculateTotalBetAmountForNumber($gameId, $gameSettingId, $number)
@@ -87,15 +171,15 @@ class BettingRepository implements BettingInterface
         if (!$gameSetting) {
             ResponseMessage('Game Setting Not Found', status_code: 404);
         }
-        $gameType=$gameSetting->game->type;
+        $gameType = $gameSetting->game->type;
 
         $closingNumber = ClosingNumber::orderBy('id', 'desc')->where('number', $number)
             ->where('game_id', $gameId)
             ->where('game_setting_id', $gameSettingId)
-            ->when($gameType=='2d',function($q)use($date){
+            ->when($gameType == '2d', function ($q) use ($date) {
                 $q->whereDate('date_time', $date);
             })
-            ->where('is_active',1)
+            ->where('is_active', 1)
             ->first();
         // $closingAmount = config('2d_setting.max_closing_bet_amount');
         $closingAmount = $closingNumber ? $closingNumber->amount : $gameSetting->closing_amount;
@@ -112,35 +196,14 @@ class BettingRepository implements BettingInterface
                 ->whereBetween('b.date_time', [$startTime, $endTime])
                 ->where('b.game_id', $gameId)
                 ->where('b.game_setting_id', $gameSettingId);
-            // ->leftJoin('closing_numbers as cn', function ($join) use ($date) {
-            //     $join->on('bn.number', '=', 'cn.number')
-            //         // ->where('cn.time_status', $timeStatus)
-            //         ->where('cn.game_id', config('2d_setting.game_id'))
-            //         ->where('cn.is_active', 1)
-            //         ->whereDate('cn.date_time', $date);
-            // });
         } else if ($gameId == 2) {
             // $max = config('3d_setting.max_closing_bet_amount');
             $query->where('b.game_setting_id', $gameSettingId);
-            // ->leftJoin('closing_numbers as cn', function ($join) {
-            //     $join->on('bn.number', '=', 'cn.number')
-            //         ->where('cn.game_id', config('3d_setting.game_id'))
-            //         ->where('cn.is_active', 1);
-            // })
-            // ->leftJoin('game_settings as gs', function ($join) use ($now) {
-            //     $join->on('gs.game_id', '=', 'b.game_id')
-            //         ->where('gs.is_active', 1)
-            //         ->where(function ($query) use ($now) {
-            //             $query->where('gs.opening_date_time', '<=', $now)
-            //                 ->where('gs.closing_date_time', '>=', $now);
-            //         });
-            // });
         }
 
         // Retrieve the total bet amount and closing amount
         $query->select(
             DB::raw('COALESCE(SUM(bn.amount), 0) AS total_bet_amount'),
-            // DB::raw('COALESCE(SUM(DISTINCT bn.amount), 0) AS total_bet_amount')
         );
 
         // Execute the query and fetch results
@@ -632,7 +695,7 @@ class BettingRepository implements BettingInterface
                 // }
                 return TwoDResult::orderBy('stock_datetime', 'asc')
                     // ->where('date_time',Carbon::now()->subDays(6))
-                    ->whereIn('open_time',['12:01:00','16:30:00'])
+                    ->whereIn('open_time', ['12:01:00', '16:30:00'])
                     ->whereBetween('stock_date', [Carbon::now()->subDays(6)->startOfDay(), Carbon::now()->endOfDay()])
                     ->get();
             }
