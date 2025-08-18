@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Gsc;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
-use App\Enums\TransactionName;
 use App\Models\Admin\GameType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -15,9 +14,8 @@ use Illuminate\Support\Facades\Redis;
 use App\Enums\SlotWebhookResponseCode;
 use App\Services\Slot\SlotWebhookService;
 use App\Http\Requests\Gsc\GscWebhookRequest;
-use App\Http\Controllers\Api\Gsc\GscWebhook\GscWtihdrawProcess;
 
-class WithdrawController extends Controller
+class DepositController extends Controller
 {
     //
     use GscWtihdrawProcess;
