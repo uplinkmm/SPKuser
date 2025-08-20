@@ -7,15 +7,24 @@
         <Navbar title="Games" :back-btn="backBtn"></Navbar>
 
         <div class="">
-            <ul class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
-                role="tablist" data-twe-nav-ref>
-                <li v-for="(type, index) in gameTypes" :key="index" class="tab-list-item"
-                    :class="type == selectedGameType ? 'active-tabs' : ''">
-                    <a @click="selectedGameType = type;
-                                getProviders();
-                            "
+            <ul
+                class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
+                role="tablist"
+                data-twe-nav-ref
+            >
+                <li
+                    v-for="(type, index) in gameTypes"
+                    :key="index"
+                    class="tab-list-item"
+                    :class="type == selectedGameType ? 'active-tabs' : ''"
+                >
+                    <a
+                        @click="
+                            selectedGameType = type;
+                            getProviders();
+                        "
                         class="tab-list-item-text"
-                        >
+                    >
                         {{ type.name }}
                     </a>
                 </li>
@@ -77,11 +86,27 @@
                                     >
                                         <img
                                             class="w-full aspect-[3/2] rounded-lg"
-                                            :src="product.imgUrl"
+                                            :src="product.pivot.image"
                                             alt=""
                                         />
-                                        <p class="text-white text-center pt-1 text-sm"> {{product.name}}</p>
+                                        <p
+                                            class="text-white text-center pt-1 text-sm"
+                                        >
+                                            {{ product.name }}
+                                        </p>
                                     </a>
+                                </div>
+                                <div
+                                    v-if="
+                                        providers?.game_type?.products.length ==
+                                        0
+                                    "
+                                >
+                                    <p
+                                        class="text-white text-center pt-1 text-sm"
+                                    >
+                                        No Game Found!
+                                    </p>
                                 </div>
                             </div>
                         </div>

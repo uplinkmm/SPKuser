@@ -305,7 +305,7 @@
                                         >
                                             <img
                                                 class="w-full aspect-[3/2] rounded-lg"
-                                                :src="product.imgUrl"
+                                                :src="product.pivot.image"
                                                 alt=""
                                             />
                                             <p
@@ -314,6 +314,18 @@
                                                 {{ product.name }}
                                             </p>
                                         </a>
+                                    </div>
+                                    <!-- product.products  length 0 show text -->
+                                    <div
+                                        v-if="
+                                            providers?.game_type?.products == 0
+                                        "
+                                    >
+                                        <p
+                                            class="text-white text-center pt-1 text-sm"
+                                        >
+                                            No Game Found!
+                                        </p>
                                     </div>
                                 </div>
                             </div>

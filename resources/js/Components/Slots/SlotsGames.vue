@@ -37,8 +37,11 @@
                                             :src="item.image_url"
                                             alt=""
                                         />
-                                        <p class="text-white text-center pt-1 text-sm"> {{item.name}}</p>
-
+                                        <p
+                                            class="text-white text-center pt-1 text-sm"
+                                        >
+                                            {{ item.name }}
+                                        </p>
                                     </a>
                                 </div>
                             </div>
@@ -93,26 +96,23 @@ export default {
             return new Promise((resolve) => setTimeout(resolve, ms));
         },
         async getGameUrl(game) {
-            let url = `/api/game/Seamless/LaunchGame`;
+            let url = `/api/operators/launch_game`;
             let formData = new FormData();
-            formData.append("productId", this.selectedProvider.code);
-            formData.append("gameType", this.selectedGameType.id);
-            formData.append("gameId", game.code);
+            formData.append("product_code", game.product_code);
+            formData.append("game_type", game.game_type);
+            formData.append("game_code", game.code);
 
             let response = await postApiDataSlot({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
-
-            console.log(game.code);
-            console.log(response.data);
-            if (response?.data?.ErrorCode == 0) {
+            if (response.status == 200) {
                 this.$notify({
                     text: "Loading....",
                     type: "info",
                 });
-                window.location.href = response.data.Url;
+                window.location.href = response.data.url;
             } else {
                 this.$notify({
                     text: "Something went wrong.Try again!",
@@ -123,6 +123,7 @@ export default {
     },
     mounted() {
         const params = new URLSearchParams(window.location.search);
+        console.log("provider", params.get("provider"));
         this.selectedProvider = JSON.parse(params.get("provider"));
         this.selectedGameType = JSON.parse(params.get("game_type"));
         this.getGameLists();
