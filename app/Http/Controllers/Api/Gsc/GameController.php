@@ -47,8 +47,8 @@ class GameController extends Controller
                 // 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ])
-            ->timeout(120) // wait up to 120 seconds
-            ->get($apiUrl, $data);
+                ->timeout(120) // wait up to 120 seconds
+                ->get($apiUrl, $data);
             if ($response->successful()) {
                 return $response->json();
             }
@@ -93,35 +93,35 @@ class GameController extends Controller
         }
     }
 
-    public function launchGame(Request $request){
-        $user=Auth::user();
+    public function launchGame(Request $request)
+    {
+        $user = Auth::user();
         $operatorCode = Config::get('game.api.operator_code');
         $secretKey = Config::get('game.api.secret_key');
         $apiUrl = Config::get('game.api.url') . '/api/operators/launch-game';
         $password = Config::get('game.api.password');
         // Generate the signature
         $requestTime = now()->format('YmdHis');
-        $gameCode=$request->game_code;
-        $productCode=$request->product_code;
-        $gameType=$request->game_type;
+        $gameCode = $request->game_code;
+        $productCode = $request->product_code;
+        $gameType = $request->game_type;
         $signature = md5($requestTime . $secretKey . 'launchgame' . $operatorCode);
         $data = [
             'operator_code' => $operatorCode,
-            'member_account'=>$user->user_name,
-            'nickname'=>$user->name,
-            'password'=>$user->password,
-            'currency'=>'IDR',
-            'game_code'=>$gameCode,
-            'product_code'=>$productCode,
-            "language_code"=>0,
-            'game_type'=>$gameType,
-            'ip'=>request()->ip(),
-            'platform'=>'WEB',
+            'member_account' => $user->user_name,
+            'nickname' => $user->name,
+            'password' => $password,
+            'currency' => 'IDR',
+            'game_code' => $gameCode,
+            'product_code' => $productCode,
+            "language_code" => 0,
+            'game_type' => $gameType,
+            'ip' => request()->ip(),
+            'platform' => 'WEB',
             'sign' => $signature,
             'request_time' => $requestTime,
-            'operator_lobby_url'=>Config::get('game.api.url'),
+            'operator_lobby_url' => Config::get('game.api.url'),
         ];
-        // dd($data);
         try {
             // Send the request
             $response = Http::withHeaders([
