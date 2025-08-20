@@ -55,7 +55,7 @@ class GameListController extends Controller
     }
     public function gameList($product_id, $game_type_id)
     {
-        $gameLists = GameList::with('product')
+        $gameLists = GameList::with('product','gameType')
             ->where('product_id', $product_id)
             ->where('game_type_id', $game_type_id)
             ->where('status', 1)
