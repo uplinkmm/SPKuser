@@ -111,7 +111,9 @@ class WithdrawController extends Controller
                 $this->processTransfer(
                     $fromUser,                        // From user
                     $toUser,                          // To user (admin/system wallet)
-                    $transaction->action,           // Transaction name (e.g., Stake)
+                    // $transaction->action,    
+                    TransactionName::from($transaction->action),
+                           // Transaction name (e.g., Stake)
                     $transaction->amount,  // Use object property access for TransactionAmount
                     $rate,                            // Use the fetched rate or default value
                     $meta                             // Meta data (wager id, event id, et  c.)

@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Game;
+namespace App\Http\Controllers\Api\Gsc;
 
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Models\Admin\GameList;
 use App\Models\Admin\GameType;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\GameListResource;
 use App\Http\Resources\GameDetailResource;
-use App\Http\Resources\HotGameListResource;
 
-class GameController extends Controller
+class GameListController extends Controller
 {
+    //
     use HttpResponses;
 
     public function gameType()
@@ -21,16 +20,6 @@ class GameController extends Controller
 
         return $this->success($gameType);
     }
-
-    // public function gameTypeProducts($gameTypeID)
-    // {
-    //     $gameTypes = GameType::with(['products' => function ($query) {
-    //         $query->where('status',1);
-    //         $query->orderBy('order', 'asc');
-    //     }])->where('id', $gameTypeID)->where('status',1)
-    //         ->first();
-    //     return $this->success($gameTypes);
-    // }
 
     public function gameTypeProducts($gameTypeID)
     {
@@ -64,7 +53,6 @@ class GameController extends Controller
 
         return $this->success($gameTypes);
     }
-
     public function gameList($product_id, $game_type_id)
     {
         $gameLists = GameList::with('product')
@@ -74,38 +62,6 @@ class GameController extends Controller
             ->get();
 
         return $this->success(GameDetailResource::collection($gameLists), 'Game Detail Successfully');
-
-    }
-
-    public function getGameDetail($provider_id, $game_type_id)
-    {
-        $gameLists = GameList::where('provider_id', $provider_id)
-            ->where('game_type_id', $game_type_id)->get();
-
-        return $this->success(GameDetailResource::collection($gameLists), 'Game Detail Successfully');
-    }
-
-    public function HotgameList()
-    {
-        $gameLists = GameList::where('hot_status', 1)
-            ->get();
-
-        return $this->success(HotGameListResource::collection($gameLists), 'Hot Game Detail Successfully');
-    }
-
-    public function searchGameList(Request $request){
-        $searchInput=$request->search_input;
-        if(strlen($searchInput) < 4){
-            ResponseMessage('Search Input RequeCharacter count at least 4 ',419);
-        }
-        $perPage = $request->per_page ?? config('common.per_page');
-        $gameLists = GameList::with('product')
-        ->where('status', 1)
-        ->when(strlen($searchInput) >= 4,function($q)use($searchInput){
-            $q->where('name','LIKE',$searchInput.'%');
-        })
-        ->paginate($perPage);
-        return $this->success($gameLists);
 
     }
 }

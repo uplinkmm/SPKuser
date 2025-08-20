@@ -29,58 +29,58 @@ use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('gameTypeProducts/{id}', [GameController::class, 'gameTypeProducts']);
-Route::get('allGameProducts', [GameController::class, 'allGameProducts']);
-Route::get('gameType', [GameController::class, 'gameType']);
-Route::get('hotgamelist', [GameController::class, 'HotgameList']);
-Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
+// Route::get('gameTypeProducts/{id}', [GameController::class, 'gameTypeProducts']);
+// Route::get('allGameProducts', [GameController::class, 'allGameProducts']);
+// Route::get('gameType', [GameController::class, 'gameType']);
+// Route::get('hotgamelist', [GameController::class, 'HotgameList']);
+// Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
 
-Route::group(['prefix' => 'Seamless'], function () {
-    Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
+// Route::group(['prefix' => 'Seamless'], function () {
+//     Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
 
-    // Route::group(["middleware" => ["webhook_log"]], function(){
-    // Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
-    Route::post('GameResult', [GameResultController::class, 'gameResult']);
-    Route::post('Rollback', [RollbackController::class, 'rollback']);
-    // Route::post('PlaceBet', [PlaceBetController::class, 'placeBet']);
-    Route::post('PlaceBet', [PlaceBetNewVersionController::class, 'placeBetNew']);
+//     // Route::group(["middleware" => ["webhook_log"]], function(){
+//     // Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
+//     Route::post('GameResult', [GameResultController::class, 'gameResult']);
+//     Route::post('Rollback', [RollbackController::class, 'rollback']);
+//     // Route::post('PlaceBet', [PlaceBetController::class, 'placeBet']);
+//     Route::post('PlaceBet', [PlaceBetNewVersionController::class, 'placeBetNew']);
 
-    Route::post('CancelBet', [CancelBetController::class, 'cancelBet']);
-    Route::post('BuyIn', [BuyInController::class, 'buyIn']);
-    Route::post('BuyOut', [BuyOutController::class, 'buyOut']);
-    Route::post('PushBet', [PushBetController::class, 'pushBet']);
-    Route::post('Bonus', [BonusController::class, 'bonus']);
-    Route::post('Jackpot', [JackPotController::class, 'jackPot']);
+//     Route::post('CancelBet', [CancelBetController::class, 'cancelBet']);
+//     Route::post('BuyIn', [BuyInController::class, 'buyIn']);
+//     Route::post('BuyOut', [BuyOutController::class, 'buyOut']);
+//     Route::post('PushBet', [PushBetController::class, 'pushBet']);
+//     Route::post('Bonus', [BonusController::class, 'bonus']);
+//     Route::post('Jackpot', [JackPotController::class, 'jackPot']);
 
-    Route::post('MobileLogin', [MobileLoginController::class, 'MobileLogin']);
-    // });
-});
-
-
+//     Route::post('MobileLogin', [MobileLoginController::class, 'MobileLogin']);
+//     // });
+// });
 
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
-Route::middleware('auth:api')->group(function () {
-    Route::group(['prefix' => 'Seamless'], function () {
+
+
+// // Route::group(['middleware' => ['auth:sanctum']], function () {
+// Route::middleware('auth:api')->group(function () {
+//     Route::group(['prefix' => 'Seamless'], function () {
     
-        // Route::group(["middleware" => ["webhook_log"]], function(){
-        Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
-    });
-    Route::group(['prefix' => 'game'], function () {
-        Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
-        Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
-    });
-    Route::group(['prefix' => 'direct'], function () {
-        Route::post('Seamless/LaunchGame', [DirectLaunchGameController::class, 'launchGame']);
-    });
-});
-Route::group(['prefix' => 'game'], function () {
-    Route::get('search_game', [GameController::class, 'searchGameList']);
-});
+//         // Route::group(["middleware" => ["webhook_log"]], function(){
+//         Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
+//     });
+//     Route::group(['prefix' => 'game'], function () {
+//         Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
+//         Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
+//     });
+//     Route::group(['prefix' => 'direct'], function () {
+//         Route::post('Seamless/LaunchGame', [DirectLaunchGameController::class, 'launchGame']);
+//     });
+// });
+// Route::group(['prefix' => 'game'], function () {
+//     Route::get('search_game', [GameController::class, 'searchGameList']);
+// });
 
-Route::middleware('auth:api')->group(function () {
-    Route::group(['prefix' => 'game'], function () {
-        Route::get('provider_game/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
-    });
+// Route::middleware('auth:api')->group(function () {
+//     Route::group(['prefix' => 'game'], function () {
+//         Route::get('provider_game/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
+//     });
 
-});
+// });

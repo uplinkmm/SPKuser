@@ -29,7 +29,7 @@ class SeamlessTransaction extends Model
     ];
 
     protected $casts = [
-        'status' => TransactionStatus::class,
+        // 'status' => TransactionStatus::class,
     ];
 
     public function customer()
@@ -44,6 +44,6 @@ class SeamlessTransaction extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        // return $this->hasMany(Transaction::class);
     }
 }

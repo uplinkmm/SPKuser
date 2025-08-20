@@ -25,7 +25,7 @@ class GscWebhookValidator
     protected array $response;
 
     /**
-     * @var RequestTransaction[]
+     * @var GscRequestTransaction[]
      */
     protected $requestTransactions;
 
