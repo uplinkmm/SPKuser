@@ -22,8 +22,8 @@ class SlotWebhookService
 
             'member_account' => $memberCode,
             'product_code' => $productCode,
-            'balance' => $balance,
-            'before_balance' => $before_balance,
+            'balance' => (float)$balance,
+            'before_balance' => (float)$before_balance,
             'code' => $responseCode->value,
             'message' => $responseCode->name,
         ];
