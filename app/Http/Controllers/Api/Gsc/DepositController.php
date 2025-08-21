@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Gsc;
 
 use App\Models\User;
+use App\Enums\CurrencyRate;
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Enums\TransactionName;
@@ -27,12 +28,13 @@ class DepositController extends Controller
     {
         $data = [];
         foreach ($batchRequest['batch_requests'] as $batch) {
-            $request = new GscWebhookRequest($batch); 
-            $request['operator_code']=$batchRequest->operator_code;
-            $request['sign']=$batchRequest->sign;
-            $request['request_time']=$batchRequest->request_time;
-            $request['url']=$batchRequest->url();
+            $request = new GscWebhookRequest($batch);
+            $request['operator_code'] = $batchRequest->operator_code;
+            $request['sign'] = $batchRequest->sign;
+            $request['request_time'] = $batchRequest->request_time;
+            $request['url'] = $batchRequest->url();
             $userId = $request->getMember()->id;
+            $currencyRate = CurrencyRate::fromName($batchRequest->currency);
             // Retry logic for acquiring the Redis lock
             //tem command for redis
             $attempts = 0;
@@ -113,12 +115,13 @@ class DepositController extends Controller
                 $after_balance = $request->getMember()->balanceFloat;
 
                 DB::commit();  // Commit only the bet insertion
-                $data[]= SlotWebhookService::buildGscResponse(
+                $data[] = SlotWebhookService::buildGscResponse(
                     SlotWebhookResponseCode::Success,
                     $request->getMember()->user_name,
                     $request->getProductID(),
                     $after_balance,
-                    $before_balance
+                    $before_balance,
+                    $currencyRate
                 );
                 // return SlotWebhookService::buildGscResponse(
                 //     SlotWebhookResponseCode::Success,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Gsc;
 
 use App\Models\User;
+use App\Enums\CurrencyRate;
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Enums\TransactionName;
@@ -23,13 +24,14 @@ class WithdrawController extends Controller
     use GscWtihdrawProcess;
     public function withdraw(GscWebhookRequest $batchRequest)
     {
-        $data=[];
+        $data = [];
         foreach ($batchRequest['batch_requests'] as $batch) {
-            $request = new GscWebhookRequest($batch); 
-            $request['operator_code']=$batchRequest->operator_code;
-            $request['sign']=$batchRequest->sign;
-            $request['request_time']=$batchRequest->request_time;
-            $request['url']=$batchRequest->url();
+            $request = new GscWebhookRequest($batch);
+            $request['operator_code'] = $batchRequest->operator_code;
+            $request['sign'] = $batchRequest->sign;
+            $request['request_time'] = $batchRequest->request_time;
+            $request['url'] = $batchRequest->url();
+            $currencyRate = CurrencyRate::fromName($batchRequest->currency);
             // dd($batchRequest->all());
             $userId = $request->getMember()->id;
             // Retry logic for acquiring the Redis lock
@@ -151,12 +153,13 @@ class WithdrawController extends Controller
             // Redis::del("wallet:lock:$userId");
 
             // Return success response
-            $data[]= SlotWebhookService::buildGscResponse(
+            $data[] = SlotWebhookService::buildGscResponse(
                 SlotWebhookResponseCode::Success,
                 $request->getMember()->user_name,
                 $request->getProductID(),
                 $after_balance,
-                $before_balance
+                $before_balance,
+                $currencyRate
             );
         }
         return response()->json([
