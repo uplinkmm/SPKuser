@@ -32,6 +32,16 @@ class WithdrawController extends Controller
             $request['request_time'] = $batchRequest->request_time;
             $request['url'] = $batchRequest->url();
             $currencyRate = CurrencyRate::fromName($batchRequest->currency);
+            if (!$currencyRate) {
+                return SlotWebhookService::buildGscResponse(
+                    SlotWebhookResponseCode::InternalServerError,
+                    $request->getMember()->user_name,
+                    $request->getProductID(),
+                    $request->getMember()->balanceFloat,
+                    $request->getMember()->balanceFloat,
+                    1,
+                );
+            }
             // dd($batchRequest->all());
             $userId = $request->getMember()->id;
             // Retry logic for acquiring the Redis lock
