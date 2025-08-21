@@ -169,7 +169,7 @@ class WithdrawController extends Controller
                 $request->getProductID(),
                 $after_balance,
                 $before_balance,
-                $currencyRate
+                $currencyRate->value
             );
         }
         return response()->json([

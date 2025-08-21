@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Enums\SlotWebhookResponseCode;
 use App\Services\Slot\SlotWebhookService;
+use App\Services\Slot\SlotWebhookValidator;
 use App\Http\Requests\Gsc\GscWebhookRequest;
 use App\Http\Requests\Slot\SlotWebhookRequest;
+use App\Services\Gsc\GscWebhookValidator;
 
 class BalanceController extends Controller
 {
@@ -18,12 +20,21 @@ class BalanceController extends Controller
     {
         DB::beginTransaction();
         try {
+
             $data = [];
             foreach ($request->input('batch_requests', []) as $batch) {
                 $batchRequest = new GscWebhookRequest($batch);
                 $balance = $batchRequest->getMember()->balanceFloat;
                 $member = $batchRequest->getMember();
+                $batchRequest['operator_code'] = $request->operator_code;
+                $batchRequest['sign'] = $request->sign;
+                $batchRequest['request_time'] = $request->request_time;
+                $batchRequest['url'] = $request->url();
                 $currencyRate = CurrencyRate::fromName($request->currency);
+                $validator = GscWebhookValidator::make($batchRequest)->validate();
+                if ($validator->fails()) {
+                    return $validator->getResponse();
+                }
                 if (!$currencyRate) {
                     return SlotWebhookService::buildGscResponse(
                         SlotWebhookResponseCode::InternalServerError,
@@ -47,7 +58,7 @@ class BalanceController extends Controller
                     $request->getProductID(),
                     $balance,
                     $balance,
-                    $currencyRate,
+                    $currencyRate->value,
                 );
             }
             return response()->json([

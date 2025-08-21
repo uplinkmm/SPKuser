@@ -18,9 +18,9 @@ class SlotWebhookService
 
     public static function buildGscResponse(SlotWebhookResponseCode $responseCode, $memberCode, $productCode, $balance, $before_balance,$currencyRate)
     {
-        $rate=$currencyRate->value;
-        $convertedBalance = round($balance / $rate, 4);
-        $convertedBeforeBalance = round($before_balance / $rate, 4);
+        $rate=$currencyRate;
+        $convertedBalance = round($balance / $currencyRate, 4);
+        $convertedBeforeBalance = round($before_balance / $currencyRate, 4);
         $data = [
 
             'member_account' => $memberCode,

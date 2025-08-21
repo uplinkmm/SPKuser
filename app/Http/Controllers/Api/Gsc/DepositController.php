@@ -131,7 +131,7 @@ class DepositController extends Controller
                     $request->getProductID(),
                     $after_balance,
                     $before_balance,
-                    $currencyRate
+                    $currencyRate->value
                 );
                 // return SlotWebhookService::buildGscResponse(
                 //     SlotWebhookResponseCode::Success,
