@@ -66,10 +66,11 @@ class GscWebhookValidator
 
     protected function isValidSignature()
     {
-        $method = $this->request->getMethodName();
+        $method = $this->request->getMethodName()=="balance" ? "getbalance": $this->request->getMethodName();
         $operatorCode = $this->request->getOperatorCode();
         $requestTime = $this->request->getRequestTime();
         $secretKey = $this->getSecretKey();
+        // dd($method,$operatorCode,$requestTime,$secretKey);
         $signature = md5( $operatorCode.$requestTime.$method.$secretKey);
         return $this->request->getSign() == $signature;
     }
