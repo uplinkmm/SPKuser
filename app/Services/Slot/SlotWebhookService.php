@@ -27,11 +27,7 @@ class SlotWebhookService
             'code' => $responseCode->value,
             'message' => $responseCode->name,
         ];
-        return ['data'=>[$data]];
-        // return response()->json([
-        //     'data' => [
-        //         $data
-        //     ]
-        // ]);
+        return $data;
+        // return ['data'=>[$data]];
     }
 }

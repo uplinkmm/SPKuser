@@ -120,7 +120,9 @@ class GameController extends Controller
             'platform' => 'WEB',
             'sign' => $signature,
             'request_time' => $requestTime,
-            'operator_lobby_url' => Config::get('game.api.url'),
+            // 'operator_lobby_url' => Config::get('game.api.url'),
+            'operator_lobby_url' => 'https://shweshankan.com',
+            
         ];
         try {
             // Send the request

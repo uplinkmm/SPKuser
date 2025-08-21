@@ -17,23 +17,38 @@ class BalanceController extends Controller
     {
         DB::beginTransaction();
         try {
-
-
-            // $validator = SlotWebhookValidator::make($request)->validate();
-
-            // if ($validator->fails()) {
-            //     return $validator->getResponse();
-            // }
-            $balance = $request->getMember()->balanceFloat;
-            $member=$request->getMember();
-            DB::commit();
-            return SlotWebhookService::buildGscResponse(
-                SlotWebhookResponseCode::Success,
-                $member->user_name,
-                $request->getProductID(),
-                $balance,
-                $balance
-            );
+            $data=[];
+            foreach ($request->input('batch_requests', []) as $batch) {
+                $batchRequest = new GscWebhookRequest($batch); 
+                $balance = $batchRequest->getMember()->balanceFloat;
+                $member=$batchRequest->getMember();
+                // $data[]=[
+                //     'member_account'=>$batchRequest->member_account,
+                //     'product_code'=>$batchRequest->member_account,
+                //     'balance'=>$balance,
+                //     'code'=>SlotWebhookResponseCode::Success->value,
+                //     'message'=>SlotWebhookResponseCode::Success->name,
+                // ];
+                $data[]=SlotWebhookService::buildGscResponse(
+                    SlotWebhookResponseCode::Success,
+                    $member->user_name,
+                    $request->getProductID(),
+                    $balance,
+                    $balance
+                );
+            }
+            return response()->json([
+                'data' => $data
+            ]);
+            // dd('incorrect');
+            // DB::commit();
+            // return SlotWebhookService::buildGscResponse(
+            //     SlotWebhookResponseCode::Success,
+            //     $member->user_name,
+            //     $request->getProductID(),
+            //     $balance,
+            //     $balance
+            // );
         } catch (\Exception $e) {
             DB::rollBack();
 

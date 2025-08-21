@@ -52,7 +52,6 @@ class GscWebhookRequest extends FormRequest
 
     public function getMember()
     {
-        // dd($this->member);
         if (! isset($this->member)) {
             $this->member = Customer::where('user_name', $this->getMemberName())->first();
         }
@@ -63,19 +62,24 @@ class GscWebhookRequest extends FormRequest
     public function getMemberName()
     {
         // dd(collect($this->input('batch_requests'))->pluck('member_account'));
-        $memberName=$this->input('batch_requests.0.member_account');
+        // $memberName=$this->input('batch_requests.0.member_account');
+        return $this->get('member_account');
+
         // dd($memberName);
-        return $memberName;
+        // return $memberName;
     }
 
     public function getProductID()
     {
-        return $this->input('batch_requests.0.product_code');
+        return $this->get('product_code');
+
+        // return $this->input('batch_requests.0.product_code');
     }
 
     public function getGameCode()
     {
-        return $this->input('batch_requests.0.game_type');
+        return $this->get('game_type');
+        // return $this->input('batch_requests.0.game_type');
     }
 
     public function getMessageID()
@@ -85,7 +89,8 @@ class GscWebhookRequest extends FormRequest
 
     public function getMethodName()
     {
-        return strtolower(str($this->url())->explode('/')->last());
+        return strtolower(str($this->url)->explode('/')->last());
+        // return strtolower(str($this->url())->explode('/')->last());
     }
 
     public function getOperatorCode()
@@ -105,13 +110,13 @@ class GscWebhookRequest extends FormRequest
 
     public function getTransactions()
     {
-        $transactions = $this->input('batch_requests.0.transactions', []);
+        $transactions = $this->input('transactions', []);
 
         if ($transactions) {
             return $transactions;
         }
 
-        $transaction = $this->get('batch_requests.0.transaction', []);
+        $transaction = $this->get('transaction', []);
 
         if ($transaction) {
             return [$transaction];
