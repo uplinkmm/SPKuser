@@ -19,15 +19,15 @@ enum TransactionName: string
     // case BuyIn = 'buy_in';
     // case BuyOut = 'buy_out';
 
-    case bet='bet';
-    case tip='tip';
-    case rollback='rollback';
-    case adjustment='adjustment';
-    case settled='settled';
-    case jack_pot='jack_pot';
-    case cancel='cancel';
-    case promo='promo'; 
-    case leader_board='leader_board'; 
+    case BET='BET';
+    case TIP='TIP';
+    case ROLLBACK='ROLLBACK';
+    case ADJUSTMENT='ADJUSTMENT';
+    case SETTLED='SETTLED';
+    case JACKPOT='JACKPOT';
+    case CANCEL='CANCEL';
+    case PROMO='PROMO'; 
+    case LEADERBOARD='LEADERBOARD'; 
 
 
 

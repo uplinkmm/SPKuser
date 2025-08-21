@@ -18,11 +18,12 @@ trait GscWtihdrawProcess
 
     public function createEvent(GscWebhookRequest $request): SeamlessEvent
     {
+        $formatted = date('Y-m-d H:i:s', $request->getRequestTime());
         return SeamlessEvent::create([
             'customer_id' => $request->getMember()->id, //'user_id' => $request->getMember()->id
             'message_id' => $request->getMessageID(),
             'product_id' => $request->getProductID(),
-            'request_time' => $request->getRequestTime(),
+            'request_time' => $formatted,
             'raw_data' => $request->all(),
         ]);
     }

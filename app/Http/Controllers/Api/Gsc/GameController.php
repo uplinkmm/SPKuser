@@ -62,19 +62,19 @@ class GameController extends Controller
     public function availableProduct(Request $request)
     {
         $user = Auth::user();
-        $operatorCode = Config::get('game.api.operator_code');
-        $secretKey = Config::get('game.api.secret_key');
-        $apiUrl = Config::get('game.api.url') . '/api/operators/available-products';
-        $password = Config::get('game.api.password');
-        // Generate the signature
-        $requestTime = now()->format('YmdHis');
-        $signature = md5($requestTime . $secretKey . 'productlist' . $operatorCode);
-        // Prepare the payload
-        $data = [
-            'operator_code' => $operatorCode,
-            'sign' => $signature,
-            'request_time' => $requestTime,
-        ];
+            $operatorCode = Config::get('game.api.operator_code');
+            $secretKey = Config::get('game.api.secret_key');
+            $apiUrl = Config::get('game.api.url') . '/api/operators/available-products';
+            $password = Config::get('game.api.password');
+            // Generate the signature
+            $requestTime = now()->format('YmdHis');
+            $signature = md5($requestTime . $secretKey . 'productlist' . $operatorCode);
+            // Prepare the payload
+            $data = [
+                'operator_code' => $operatorCode,
+                'sign' => $signature,
+                'request_time' => $requestTime,
+            ];
         try {
             // Send the request
             $response = Http::withHeaders([

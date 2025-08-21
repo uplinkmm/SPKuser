@@ -29,7 +29,7 @@ class GscRequestTransaction extends Data
         // // public ?float $PayoutAmount,
         // // public ?float $ValidBetAmount,
 
-        public ?int $id,
+        public ?string $id,
         public ?string $game_type,
         public ?int $product_code,
         public ?string $action,

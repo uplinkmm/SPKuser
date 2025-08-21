@@ -95,7 +95,7 @@ class WithdrawController extends Controller
                 // Insert bets using chunking for better performance
                 $message = $this->insertBets($transactions, $event);  // Insert bets in chunks
 
-                // DB::commit();  // Commit only the bet insertion
+                DB::commit();  // Commit only the bet insertion
 
             } catch (\Exception $e) {
                 DB::rollBack();
@@ -126,7 +126,6 @@ class WithdrawController extends Controller
                     // dd($transaction);
 
                     $action = $transaction->action;
-
                     // Call processTransfer for each transaction
                     $this->processTransfer(
                         $fromUser,                        // From user
