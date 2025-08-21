@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Gsc;
 
+use App\Enums\CurrencyRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,8 @@ class BalanceController extends Controller
                 $batchRequest = new GscWebhookRequest($batch); 
                 $balance = $batchRequest->getMember()->balanceFloat;
                 $member=$batchRequest->getMember();
-                // $data[]=[
+                $currencyRate=CurrencyRate::fromName($request->currency);
+                            // $data[]=[
                 //     'member_account'=>$batchRequest->member_account,
                 //     'product_code'=>$batchRequest->member_account,
                 //     'balance'=>$balance,
@@ -34,7 +36,8 @@ class BalanceController extends Controller
                     $member->user_name,
                     $request->getProductID(),
                     $balance,
-                    $balance
+                    $balance,
+                    $currencyRate,
                 );
             }
             return response()->json([

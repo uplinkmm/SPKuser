@@ -16,14 +16,17 @@ class SlotWebhookService
         ];
     }
 
-    public static function buildGscResponse(SlotWebhookResponseCode $responseCode, $memberCode, $productCode, $balance, $before_balance)
+    public static function buildGscResponse(SlotWebhookResponseCode $responseCode, $memberCode, $productCode, $balance, $before_balance,$currencyRate)
     {
+        $rate=$currencyRate->value;
+        $convertedBalance = round($balance / $rate, 4);
+        $convertedBeforeBalance = round($before_balance / $rate, 4);
         $data = [
 
             'member_account' => $memberCode,
             'product_code' => $productCode,
-            'balance' => (float)$balance,
-            'before_balance' => (float)$before_balance,
+            'balance' => (float)$convertedBalance,
+            'before_balance' => (float)$convertedBeforeBalance,
             'code' => $responseCode->value,
             'message' => $responseCode->name,
         ];
