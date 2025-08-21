@@ -99,9 +99,15 @@ enum CurrencyRate: int
     case MMK2 = 1000;
     case VND2 = 1000;
     case MMK3 = 100;
-    public static function fromName(string $name): self
+    public static function fromName(string $name): ?self
     {
-        return constant("self::$name");
+        foreach (self::cases() as $case) {
+            if ($case->name === $name) {
+                return $case;
+            }
+        }
+        return null;
+        // throw new \InvalidArgumentException("Invalid currency: $name");
     }
 
 

@@ -147,7 +147,8 @@ class GscWebhookValidator
             $this->request->getMember()->user_name,
             $this->request->getProductID(),
             $this->request->getMember()->balanceFloat,
-            $this->request->getMember()->balanceFloat
+            $this->request->getMember()->balanceFloat,
+            1
         );
         return $this;
     }

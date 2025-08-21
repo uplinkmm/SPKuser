@@ -18,20 +18,30 @@ class BalanceController extends Controller
     {
         DB::beginTransaction();
         try {
-            $data=[];
+            $data = [];
             foreach ($request->input('batch_requests', []) as $batch) {
-                $batchRequest = new GscWebhookRequest($batch); 
+                $batchRequest = new GscWebhookRequest($batch);
                 $balance = $batchRequest->getMember()->balanceFloat;
-                $member=$batchRequest->getMember();
-                $currencyRate=CurrencyRate::fromName($request->currency);
-                            // $data[]=[
+                $member = $batchRequest->getMember();
+                $currencyRate = CurrencyRate::fromName($request->currency);
+                if (!$currencyRate) {
+                    return SlotWebhookService::buildGscResponse(
+                        SlotWebhookResponseCode::InternalServerError,
+                        $member->user_name,
+                        $request->getProductID(),
+                        $balance,
+                        $balance,
+                        1,
+                    );
+                }
+                // $data[]=[
                 //     'member_account'=>$batchRequest->member_account,
                 //     'product_code'=>$batchRequest->member_account,
                 //     'balance'=>$balance,
                 //     'code'=>SlotWebhookResponseCode::Success->value,
                 //     'message'=>SlotWebhookResponseCode::Success->name,
                 // ];
-                $data[]=SlotWebhookService::buildGscResponse(
+                $data[] = SlotWebhookService::buildGscResponse(
                     SlotWebhookResponseCode::Success,
                     $member->user_name,
                     $request->getProductID(),

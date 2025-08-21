@@ -35,6 +35,7 @@ class DepositController extends Controller
             $request['url'] = $batchRequest->url();
             $userId = $request->getMember()->id;
             $currencyRate = CurrencyRate::fromName($batchRequest->currency);
+            
             // Retry logic for acquiring the Redis lock
             //tem command for redis
             $attempts = 0;
