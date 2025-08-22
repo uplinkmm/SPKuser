@@ -2,6 +2,7 @@
 namespace App\Services\Gsc;
 
 use App\Models\Wager;
+use App\Enums\TransactionName;
 use App\Models\SeamlessTransaction;
 use App\Enums\SlotWebhookResponseCode;
 use App\Services\Slot\SlotWebhookService;
@@ -42,12 +43,15 @@ class GscWebhookValidator
         if (!$this->request->getMember()) {
             return $this->response(SlotWebhookResponseCode::MemberNotExists);
         }
+
         foreach ($this->request->getTransactions() as $transaction) {
-            $transaction['game_type']=$this->request->getGameCode();
-            $transaction['product_code']=$this->request->getProductID();
+            $transaction['game_type'] = $this->request->getGameCode();
+            $transaction['product_code'] = $this->request->getProductID();
             $requestTransaction = GscRequestTransaction::from($transaction);
             $this->requestTransactions[] = $requestTransaction;
-
+            if (!TransactionName::isValid($requestTransaction->action)) {
+                return $this->response(SlotWebhookResponseCode::InternalServerError);
+            }
             if ($requestTransaction->id && !$this->isNewTransaction($requestTransaction)) {
                 return $this->response(SlotWebhookResponseCode::DuplicateTransaction);
             }
@@ -66,11 +70,11 @@ class GscWebhookValidator
 
     protected function isValidSignature()
     {
-        $method = $this->request->getMethodName()=="balance" ? "getbalance": $this->request->getMethodName();
+        $method = $this->request->getMethodName() == "balance" ? "getbalance" : $this->request->getMethodName();
         $operatorCode = $this->request->getOperatorCode();
         $requestTime = $this->request->getRequestTime();
         $secretKey = $this->getSecretKey();
-        $signature = md5( $operatorCode.$requestTime.$method.$secretKey);
+        $signature = md5($operatorCode . $requestTime . $method . $secretKey);
         return $this->request->getSign() == $signature;
     }
 
@@ -142,7 +146,7 @@ class GscWebhookValidator
         //     $this->request->getMember() ? $this->getAfterBalance() : 0,
         //     $this->request->getMember() ? $this->getBeforeBalance() : 0
         // );
-        $this->response=SlotWebhookService::buildGscResponse(
+        $this->response = SlotWebhookService::buildGscResponse(
             $responseCode,
             $this->request->getMember()->user_name,
             $this->request->getProductID(),

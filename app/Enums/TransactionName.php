@@ -19,15 +19,15 @@ enum TransactionName: string
     // case BuyIn = 'buy_in';
     // case BuyOut = 'buy_out';
 
-    case BET='BET';
-    case TIP='TIP';
-    case ROLLBACK='ROLLBACK';
-    case ADJUSTMENT='ADJUSTMENT';
-    case SETTLED='SETTLED';
-    case JACKPOT='JACKPOT';
-    case CANCEL='CANCEL';
-    case PROMO='PROMO'; 
-    case LEADERBOARD='LEADERBOARD'; 
+    case BET = 'BET';
+    case TIP = 'TIP';
+    case ROLLBACK = 'ROLLBACK';
+    case ADJUSTMENT = 'ADJUSTMENT';
+    case SETTLED = 'SETTLED';
+    case JACKPOT = 'JACKPOT';
+    case CANCEL = 'CANCEL';
+    case PROMO = 'PROMO';
+    case LEADERBOARD = 'LEADERBOARD';
 
 
 
@@ -43,5 +43,9 @@ enum TransactionName: string
     case GameMoneyTransfer = 'game_money_transfer';
 
     case MainMoneyTransfer = 'main_money_transfer';
+    public static function isValid(string $action): bool
+    {
+        return in_array($action, array_column(self::cases(), 'value'), true);
+    }
 
 }
