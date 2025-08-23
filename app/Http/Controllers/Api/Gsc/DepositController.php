@@ -124,7 +124,7 @@ class DepositController extends Controller
 
                 $after_balance = $request->getMember()->balanceFloat;
 
-                DB::commit();  // Commit only the bet insertion
+                // DB::commit();  // Commit only the bet insertion
                 $data[] = SlotWebhookService::buildGscResponse(
                     SlotWebhookResponseCode::Success,
                     $request->getMember()->user_name,
@@ -154,7 +154,7 @@ class DepositController extends Controller
             // Return success response
 
         }
-        return response()->json([
+            return response()->json([
             'data' => $data
         ]);
     }
