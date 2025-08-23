@@ -75,7 +75,6 @@ class WithdrawController extends Controller
 
                 return $validator->getResponse();
             }
-            dd('hell0');
             $transactions = $validator->getRequestTransactions();
             // Check if the transactions are in the expected format
             if (!is_array($transactions) || empty($transactions)) {
