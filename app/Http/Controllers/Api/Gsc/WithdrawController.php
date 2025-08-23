@@ -42,8 +42,7 @@ class WithdrawController extends Controller
                     1,
                 );
             }
-            // dd($batchRequest->all());
-            $userId = $request->getMember()->id;
+            $userId = $request->getMember() ? $request->getMember()->id : null;
             // Retry logic for acquiring the Redis lock
             //tem command for redis
             $attempts = 0;
@@ -76,11 +75,12 @@ class WithdrawController extends Controller
 
                 return $validator->getResponse();
             }
+            dd('hell0');
             $transactions = $validator->getRequestTransactions();
             // Check if the transactions are in the expected format
             if (!is_array($transactions) || empty($transactions)) {
 
-                Redis::del("wallet:lock:$userId"); //tem redis
+                // Redis::del("wallet:lock:$userId"); //tem redis
 
                 return response()->json([
                     'message' => 'Invalid transaction data format.',

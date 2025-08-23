@@ -25,7 +25,7 @@ class GscWebhookRequest extends FormRequest
      */
     public function rules(): array
     {
-         // if (in_array($this->getMethodName(), ['balance'])) {
+        // if (in_array($this->getMethodName(), ['balance'])) {
         //     $transaction_rules['batch_requests'] = ['required'];
         //     if ($this->getMethodName() !== 'getbalance') {
         //         $transaction_rules['Transaction'] = ['required'];
@@ -52,7 +52,7 @@ class GscWebhookRequest extends FormRequest
 
     public function getMember()
     {
-        if (! isset($this->member)) {
+        if (!isset($this->member)) {
             $this->member = Customer::where('user_name', $this->getMemberName())->first();
         }
 

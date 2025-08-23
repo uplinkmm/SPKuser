@@ -52,6 +52,9 @@ class GscWebhookValidator
             if (!TransactionName::isValid($requestTransaction->action)) {
                 return $this->response(SlotWebhookResponseCode::InternalServerError);
             }
+            // if (!$this->request->getMember()) {
+            //     return $this->response(SlotWebhookResponseCode::MemberNotExists);
+            // }
             if ($requestTransaction->id && !$this->isNewTransaction($requestTransaction)) {
                 return $this->response(SlotWebhookResponseCode::DuplicateTransaction);
             }
@@ -148,10 +151,10 @@ class GscWebhookValidator
         // );
         $this->response = SlotWebhookService::buildGscResponse(
             $responseCode,
-            $this->request->getMember()->user_name,
+            $this->request->getMember() ? $this->request->getMember()->user_name : null,
             $this->request->getProductID(),
-            $this->request->getMember()->balanceFloat,
-            $this->request->getMember()->balanceFloat,
+                  $this->request->getMember() ? $this->getAfterBalance() : 0,
+            $this->request->getMember() ? $this->getBeforeBalance() : 0,
             1
         );
         return $this;
