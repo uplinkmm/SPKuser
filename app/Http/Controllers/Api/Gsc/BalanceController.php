@@ -33,7 +33,11 @@ class BalanceController extends Controller
                 $currencyRate = CurrencyRate::fromName($request->currency);
                 $validator = GscWebhookValidator::make($batchRequest)->validate();
                 if ($validator->fails()) {
-                    return $validator->getResponse();
+                    // return $validator->getResponse();
+                    $data[] = $validator->getResponse();
+                    return response()->json([
+                        'data' => $data
+                    ]);
                 }
                 if (!$currencyRate) {
                     return SlotWebhookService::buildGscResponse(

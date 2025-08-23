@@ -73,7 +73,11 @@ class WithdrawController extends Controller
                 // Redis::del("wallet:lock:$userId");
                 // temp redis
 
-                return $validator->getResponse();
+                // return $validator->getResponse();
+                $data[] = $validator->getResponse();
+                return response()->json([
+                    'data' => $data
+                ]);
             }
             $transactions = $validator->getRequestTransactions();
             // Check if the transactions are in the expected format

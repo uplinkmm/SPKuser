@@ -74,8 +74,10 @@ class DepositController extends Controller
                 // tem redis
                 // Redis::del("wallet:lock:$userId");
                 // temp redis
-
-                return $validator->getResponse();
+                $data[] = $validator->getResponse();
+                return response()->json([
+                    'data' => $data
+                ]);
             }
             // $transactions = $validator->getRequestTransactions();
             // Check if the transactions are in the expected format
@@ -88,7 +90,7 @@ class DepositController extends Controller
             //         'details' => $transactions,  // Provide details about the received data for debugging
             //     ], 400);  // 400 Bad Request
             // }
-            $before_balance = $request->getMember()->balanceFloat;
+            $before_balance = $request->getMember() ? $request->getMember()->balanceFloat : 0;
             DB::beginTransaction();
             try {
                 // Create and store the event in the database
@@ -154,7 +156,7 @@ class DepositController extends Controller
             // Return success response
 
         }
-            return response()->json([
+        return response()->json([
             'data' => $data
         ]);
     }
