@@ -33,15 +33,15 @@ class DepositController extends Controller
             $request['sign'] = $batchRequest->sign;
             $request['request_time'] = $batchRequest->request_time;
             $request['url'] = $batchRequest->url();
-            $userId = $request->getMember()->id;
+            $userId = $$request->getMember() ? $request->getMember()->id : null;
             $currencyRate = CurrencyRate::fromName($batchRequest->currency);
             if (!$currencyRate) {
                 return SlotWebhookService::buildGscResponse(
                     SlotWebhookResponseCode::InternalServerError,
                     $request->getMember()->user_name,
                     $request->getProductID(),
-                    $request->getMember()->balanceFloat,
-                    $request->getMember()->balanceFloat,
+                    $request->getMember() ? $request->getMember()->balanceFloat : 0,
+                    $request->getMember() ? $request->getMember()->balanceFloat : 0,
                     1,
                 );
             }
