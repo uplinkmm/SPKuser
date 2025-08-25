@@ -58,21 +58,21 @@ class BettingRepository implements BettingInterface
                 //     ResponseMessage('Total bet amount for number ' . $number['number'] . ' exceeds the closing amount', 400);
                 // }
 
-                 // $beting_number = $betting->bettingNumbers()->create([
+                // $beting_number = $betting->bettingNumbers()->create([
                 //     'number' => $number['number'],
                 //     'amount' => (int) $number['amount'],
                 //     'betting_multiplier' => (int) $request->betting_multiplier,
                 // ]);
-                
+
                 $calc = $results[$number['number']];
                 $closingAmount = $calc['closing_amount'];
                 $totalBetAmount = $calc['total_bet_amount'];
                 $newBetAmount = (int) $number['amount'];
-            
+
                 if ($totalBetAmount + $newBetAmount > $closingAmount) {
                     ResponseMessage("Total bet amount for number {$number['number']} exceeds the closing amount", 400);
                 }
-              
+
                 #end
                 $bettingNumbersData[] = [
                     'betting_id' => $betting->id,
@@ -82,7 +82,7 @@ class BettingRepository implements BettingInterface
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
-               
+
             }
             BettingNumber::insert($bettingNumbersData);
             #store Wallet
@@ -275,22 +275,37 @@ class BettingRepository implements BettingInterface
             ->select('bn.number', DB::raw('SUM(bn.amount) as total_amount_customer'))
             ->groupBy('bn.number');
 
+        // $latestClosingNumbers = DB::table('closing_numbers as cn')
+        //     ->select('cn.number', DB::raw('MAX(cn.date_time) as latest_date'))
+        //     ->where('cn.game_id', $gameSetting->game_id)
+        //     ->where('cn.game_setting_id', $gameSetting->id)
+        //     ->where('cn.is_active', 1)
+        //     ->whereDate('cn.date_time', $date)
+        //     ->groupBy('cn.number');
+
+        // $latestClosingNumbersDetails = DB::table('closing_numbers as cn')
+        //     ->joinSub($latestClosingNumbers, 'lc', function ($join) {
+        //         $join->on('cn.number', '=', 'lc.number')
+        //             ->on('cn.date_time', '=', 'lc.latest_date');
+        //     })
+        //     ->select('cn.*');
         $latestClosingNumbers = DB::table('closing_numbers as cn')
-            ->select('cn.number', DB::raw('MAX(cn.date_time) as latest_date'))
+            ->select('cn.number', DB::raw('MAX(cn.id) as latest_id'))
             ->where('cn.game_id', $gameSetting->game_id)
             ->where('cn.game_setting_id', $gameSetting->id)
             ->where('cn.is_active', 1)
             ->whereDate('cn.date_time', $date)
             ->groupBy('cn.number');
-
-
-
         $latestClosingNumbersDetails = DB::table('closing_numbers as cn')
             ->joinSub($latestClosingNumbers, 'lc', function ($join) {
-                $join->on('cn.number', '=', 'lc.number')
-                    ->on('cn.date_time', '=', 'lc.latest_date');
+                $join->on('cn.id', '=', 'lc.latest_id');
             })
             ->select('cn.*');
+
+
+
+
+
         $betsWithTotalAmount = DB::table(DB::raw('(' . $subqueryD1->toSql() . ') as d1'))
             ->mergeBindings($subqueryD1)
             ->crossJoin(DB::raw('(' . $subqueryD2->toSql() . ') as d2'))
