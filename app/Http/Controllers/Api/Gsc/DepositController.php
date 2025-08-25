@@ -79,7 +79,6 @@ class DepositController extends Controller
                     'data' => $data
                 ]);
             }
-            dd('incorrect');
             // $transactions = $validator->getRequestTransactions();
             // Check if the transactions are in the expected format
             // if (!is_array($transactions) || empty($transactions)) {
