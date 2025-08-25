@@ -58,7 +58,7 @@ class GscWebhookValidator
             if ($requestTransaction->id && !$this->isNewTransaction($requestTransaction)) {
                 return $this->response(SlotWebhookResponseCode::DuplicateTransaction);
             }
-            if (!in_array($this->request->getMethodName(), ['withdraw', 'deposit']) && $this->isNewWager($requestTransaction)) {
+            if (in_array($this->request->getMethodName(), ['withdraw','deposit']) && in_array($requestTransaction->wager_status,['BONUS','SETTLED','RESETTLED','VOID']) && $this->isNewWager($requestTransaction)) {
                 return $this->response(SlotWebhookResponseCode::BetNotExist);
             }
             $this->totalTransactionAmount += $requestTransaction->amount;
