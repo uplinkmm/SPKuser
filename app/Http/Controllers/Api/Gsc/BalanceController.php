@@ -30,6 +30,7 @@ class BalanceController extends Controller
                 $batchRequest['sign'] = $request->sign;
                 $batchRequest['request_time'] = $request->request_time;
                 $batchRequest['url'] = $request->url();
+                $batchRequest['currency']=$request->currency;
                 $currencyRate = CurrencyRate::fromName($request->currency);
                 $validator = GscWebhookValidator::make($batchRequest)->validate();
                 if ($validator->fails()) {
