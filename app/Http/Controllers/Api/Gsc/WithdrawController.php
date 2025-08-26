@@ -31,6 +31,7 @@ class WithdrawController extends Controller
             $request['sign'] = $batchRequest->sign;
             $request['request_time'] = $batchRequest->request_time;
             $request['url'] = $batchRequest->url();
+            $request['currency']=$batchRequest->currency;
             $currencyRate = CurrencyRate::fromName($batchRequest->currency);
             if (!$currencyRate) {
                 return SlotWebhookService::buildGscResponse(

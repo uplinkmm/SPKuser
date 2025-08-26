@@ -33,6 +33,7 @@ class DepositController extends Controller
             $request['sign'] = $batchRequest->sign;
             $request['request_time'] = $batchRequest->request_time;
             $request['url'] = $batchRequest->url();
+            $request['currency']=$batchRequest->currency;
             $userId = $request->getMember() ? $request->getMember()->id : null;
             $currencyRate = CurrencyRate::fromName($batchRequest->currency);
             if (!$currencyRate) {
