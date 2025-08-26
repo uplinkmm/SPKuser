@@ -19,6 +19,7 @@ class PushBetDataController extends Controller
   use GscWebhook;
   public function pushBetData(GscWebhookRequest $batchRequest)
   {
+    // $data=[];
     foreach ($batchRequest['wagers'] as $batch) {
       $request = new GscWebhookRequest($batch);
       $request['operator_code'] = $batchRequest->operator_code;
@@ -44,12 +45,13 @@ class PushBetDataController extends Controller
         // Release Redis lock and return validation error response
         // tem redis
         // Redis::del("wallet:lock:$userId");
-        // temp redis
-        $data[] = $validator->getResponse();
-        return response()->json([
-          'data' => $data
-        ]);
+        // temp redis 
+        return $validator->getResponse();
+        // return response()->json([
+        //   'data' => $data
+        // ]);
       }
+
       $before_balance = $request->getMember() ? $request->getMember()->balanceFloat : 0;
 
       DB::beginTransaction();
