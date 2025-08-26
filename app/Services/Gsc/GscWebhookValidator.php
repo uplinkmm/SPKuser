@@ -2,6 +2,7 @@
 namespace App\Services\Gsc;
 
 use App\Models\Wager;
+use App\Enums\CurrencyRate;
 use App\Enums\TransactionName;
 use App\Models\SeamlessTransaction;
 use App\Enums\SlotWebhookResponseCode;
@@ -58,10 +59,13 @@ class GscWebhookValidator
             if ($requestTransaction->id && !$this->isNewTransaction($requestTransaction)) {
                 return $this->response(SlotWebhookResponseCode::DuplicateTransaction);
             }
-            if (in_array($this->request->getMethodName(), ['withdraw','deposit']) && in_array($requestTransaction->wager_status,['BONUS','SETTLED','RESETTLED','VOID']) && $this->isNewWager($requestTransaction)) {
+            if (in_array($this->request->getMethodName(), ['withdraw', 'deposit']) && in_array($requestTransaction->wager_status, ['BONUS', 'SETTLED', 'RESETTLED', 'VOID']) && $this->isNewWager($requestTransaction)) {
                 return $this->response(SlotWebhookResponseCode::BetNotExist);
             }
             $this->totalTransactionAmount += $requestTransaction->amount;
+        }
+        if (!$this->isValidCurrency()) {
+            return $this->response(SlotWebhookResponseCode::InternalServerError);
         }
 
         if (!$this->hasEnoughBalance()) {
@@ -81,6 +85,12 @@ class GscWebhookValidator
         return $this->request->getSign() == $signature;
     }
 
+    protected function isValidCurrency()
+    {
+        $currencyRate = CurrencyRate::fromName($this->request->currency);
+        return $currencyRate;
+
+    }
     protected function isNewWager(GscRequestTransaction $transaction)
     {
         return !$this->getExistingWager($transaction);
@@ -153,7 +163,7 @@ class GscWebhookValidator
             $responseCode,
             $this->request->getMember() ? $this->request->getMember()->user_name : null,
             $this->request->getProductID(),
-                  $this->request->getMember() ? $this->getAfterBalance() : 0,
+            $this->request->getMember() ? $this->getAfterBalance() : 0,
             $this->request->getMember() ? $this->getBeforeBalance() : 0,
             1
         );

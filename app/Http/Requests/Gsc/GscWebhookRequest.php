@@ -33,15 +33,30 @@ class GscWebhookRequest extends FormRequest
         // } else {
         //     $transaction_rules['Transactions'] = ['required'];
         // }
-        $transaction_rules = [];
-        $transaction_rules['batch_requests'] = ['required'];
-        return [
-            'operator_code' => ['required'],
-            'currency' => ['required'],
-            'sign' => ['required'],
-            'request_time' => ['required'],
-            ...$transaction_rules,
-        ];
+        $methodName = strtolower(str($this->url())->explode('/')->last());
+        if ($methodName == 'pushbetdata') {
+            $transaction_rules = [];
+            $transaction_rules['wagers'] = ['required'];
+            return [
+                'operator_code' => ['required'],
+                'sign' => ['required'],
+                'request_time' => ['required'],
+                'wagers' => ['required', 'array'],
+                // 'wagers.*.currency' => ['required', 'string'], // each wager must have currency
+                // ...$transaction_rules,
+            ];
+        } else {
+            $transaction_rules = [];
+            $transaction_rules['batch_requests'] = ['required'];
+            return [
+                'operator_code' => ['required'],
+                'currency' => ['required'],
+                'sign' => ['required'],
+                'request_time' => ['required'],
+                ...$transaction_rules,
+            ];
+        }
+
     }
     public function check()
     {

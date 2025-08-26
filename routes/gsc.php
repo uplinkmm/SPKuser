@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Gsc\GameController;
 use App\Http\Controllers\Api\Gsc\BalanceController;
 use App\Http\Controllers\Api\Gsc\DepositController;
+use App\Http\Controllers\Api\Gsc\PushBetDataController;
 use App\Http\Controllers\Api\Gsc\WithdrawController;
 
 Route::get('gameTypeProducts/{id}', [GameListController::class, 'gameTypeProducts']);
@@ -28,5 +29,6 @@ Route::group(['prefix' => 'v1/api/seamless'], function () {
     Route::post('balance', [BalanceController::class, 'getBalance']);
     Route::post('withdraw', [WithdrawController::class, 'withdraw']);
     Route::post('deposit', [DepositController::class, 'deposit']);
+    Route::post('pushbetdata', [PushBetDataController::class, 'pushBetData']);
 
 });

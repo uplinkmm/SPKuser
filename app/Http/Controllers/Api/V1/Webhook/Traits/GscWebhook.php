@@ -61,17 +61,17 @@ trait GscWebhook
             //         );
             //     // $wager = null;
             // } else {
-                $wager = Wager::firstOrCreate(
-                    [
-                        'seamless_wager_id' => $requestTransaction->wager_code,
-                        // 'seamless_transaction_id' => $requestTransaction->TransactionID
-                    ],
-                    [
-                        'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
-                        'seamless_wager_id' => $requestTransaction->wager_code,
-                        // 'seamless_transaction_id' => $requestTransaction->TransactionID,
-                    ]
-                );
+            $wager = Wager::firstOrCreate(
+                [
+                    'seamless_wager_id' => $requestTransaction->wager_code,
+                    // 'seamless_transaction_id' => $requestTransaction->TransactionID
+                ],
+                [
+                    'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+                    'seamless_wager_id' => $requestTransaction->wager_code,
+                    // 'seamless_transaction_id' => $requestTransaction->TransactionID,
+                ]
+            );
             // }
             if ($refund) {
                 $wager->update([
@@ -117,17 +117,61 @@ trait GscWebhook
         return $seamless_transactions;
     }
 
-    // public function processTransfer(User $from,User $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
-        public function processTransfer($from, $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
-        {
-            // TODO: ask: what if operator doesn't want to pay bonus
-            app(WalletService::class)
-                ->transfer(
-                    $from,
-                    $to,
-                    abs($amount),
-                    $transactionName,
-                    $meta
-                );
+    public function updateAndCreateWager($batch, $event)
+    {
+        $wager = Wager::firstOrCreate(
+            [
+                'seamless_wager_id' => $batch['wager_code'],
+                // 'seamless_transaction_id' => $requestTransaction->TransactionID
+            ],
+            [
+                'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
+                'seamless_wager_id' => $batch['wager_code'],
+                // 'wager_status'=>$batch['wager_status'],
+                // 'wager_type'=>$batch['wager_type']
+                // 'seamless_transaction_id' => $requestTransaction->TransactionID,
+            ]
+        );
+        if($wager){
+            $existSeamlessTransction=SeamlessTransaction::where('wager_id',$wager->id)->first();
+            if($existSeamlessTransction){
+                $existSeamlessTransction->update([
+                    'bet_amount'=>$batch['bet_amount'],
+                    'valid_bet_amount'=>$batch['valid_bet_amount'],
+                    'payout_amount'=>$batch['prize_amount'],
+                ]);
+            }
         }
+        return $wager;
+        
+        // $game_type = GameType::where('code', $batch->game_type)->first();
+        // if (!$game_type) {
+        //     throw new Exception("Game type not found for {$batch->game_type}");
+        // }
+        // $product = Product::where('code', $batch->product_code)->first();
+        // if (!$product) {
+        //     throw new Exception("Product not found for {$batch->product_code}");
+        // }
+
+        // $game_type_product = GameTypeProduct::where('game_type_id', $game_type->id)
+        //     ->where('product_id', $product->id)
+        //     ->first();
+        // if (!$game_type_product) {
+        //     throw new Exception("Product And Game Type Combination not found  ");
+        // }
+    }
+
+    // public function processTransfer(User $from,User $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
+    public function processTransfer($from, $to, TransactionName $transactionName, float $amount, int $rate, array $meta)
+    {
+        // TODO: ask: what if operator doesn't want to pay bonus
+        app(WalletService::class)
+            ->transfer(
+                $from,
+                $to,
+                abs($amount),
+                $transactionName,
+                $meta
+            );
+    }
 }
