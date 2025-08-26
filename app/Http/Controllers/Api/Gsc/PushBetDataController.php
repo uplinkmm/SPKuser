@@ -25,8 +25,9 @@ class PushBetDataController extends Controller
       $request['sign'] = $batchRequest->sign;
       $request['request_time'] = $batchRequest->request_time;
       $request['url'] = $batchRequest->url();
+      $request['currency'] = $batch['currency'];
       $userId = $request->getMember() ? $request->getMember()->id : null;
-      $currencyRate = CurrencyRate::fromName($batchRequest->currency);
+      $currencyRate = CurrencyRate::fromName($batch['currency']);
       if (!$currencyRate) {
         return SlotWebhookService::buildGscResponse(
           SlotWebhookResponseCode::InternalServerError,
