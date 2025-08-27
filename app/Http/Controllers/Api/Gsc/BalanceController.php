@@ -47,7 +47,7 @@ class BalanceController extends Controller
                         $request->getProductID(),
                         $balance,
                         $balance,
-                        1,
+                        // 1,
                     );
                 }
                 // $data[]=[

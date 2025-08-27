@@ -47,9 +47,6 @@ class PushBetDataController extends Controller
         // Redis::del("wallet:lock:$userId");
         // temp redis 
         return $validator->getResponse();
-        // return response()->json([
-        //   'data' => $data
-        // ]);
       }
 
       $before_balance = $request->getMember() ? $request->getMember()->balanceFloat : 0;
