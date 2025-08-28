@@ -124,7 +124,6 @@ class GameController extends Controller
             'operator_lobby_url' => 'https://shweshankan.com',
             
         ];
-        dd($data);
         try {
             // Send the request
             $response = Http::withHeaders([
