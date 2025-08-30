@@ -103,6 +103,7 @@ trait GscWtihdrawProcess
                                 'GameType' => $transaction->game_type,
                                 'TransactionID' => $transaction->id,
                                 'WagerID' => $transaction->wager_code,
+                                'WagerType'=>$transaction->wager_type,
                                 'BetAmount' => $transaction->bet_amount,
                                 'TransactionAmount' => $transaction->amount,
                                 'PayoutAmount' => $transaction->prize_amount,
@@ -111,6 +112,7 @@ trait GscWtihdrawProcess
                                 'ActualGameTypeID' => $transaction->ActualGameTypeID,
                                 'ActualProductID' => $transaction->ActualProductID,
                             ];
+
 
                         } else {
                             Log::error('Invalid transaction data format', ['transaction' => $transaction]);
@@ -125,7 +127,8 @@ trait GscWtihdrawProcess
                             $wagerData[] = [
                                 'customer_id' => $userId,  // Use user_id from the SeamlessEvent
                                 'seamless_wager_id' => $transactionData['WagerID'],
-                                // 'wager_status'=>$transactionData['wager_status'],
+                                'wager_status'=>$transactionData['Status'],
+                                'wager_type'=>$transactionData['WagerType'],
                                 'status' => $transactionData['TransactionAmount'] > 0 ? WagerStatus::Win : WagerStatus::Lose,
                                 'created_at' => now(),
                                 'updated_at' => now(),

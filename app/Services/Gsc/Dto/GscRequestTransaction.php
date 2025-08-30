@@ -35,6 +35,7 @@ class GscRequestTransaction extends Data
         public ?string $action,
         public ?string $wager_code,
         public ?string $wager_status,
+        public ?string $wager_type,
         public ?string $round_id,
         public ?float $amount,
         public ?float $bet_amount,
