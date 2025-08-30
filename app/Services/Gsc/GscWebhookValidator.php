@@ -99,7 +99,7 @@ class GscWebhookValidator
     public function getExistingWager(GscRequestTransaction $transaction)
     {
         if (!isset($this->existingWager)) {
-            $this->existingWager = Wager::where('seamless_wager_id', $transaction->id)->first();
+            $this->existingWager = Wager::where('seamless_wager_id', $transaction->wager_code)->first();
         }
 
         return $this->existingWager;

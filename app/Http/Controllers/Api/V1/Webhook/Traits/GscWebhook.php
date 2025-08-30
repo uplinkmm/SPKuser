@@ -111,6 +111,8 @@ trait GscWebhook
                 'valid_amount' => $requestTransaction->valid_bet_amount,
                 'payout_amount' => $requestTransaction->prize_amount,
                 'status' => $requestTransaction->action,
+                'action' => $requestTransaction->action,
+
                 //'agent_id' => $user->agent_id
             ]);
         }

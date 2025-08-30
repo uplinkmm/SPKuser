@@ -26,6 +26,7 @@ class SeamlessTransaction extends Model
         'payout_amount',
         'valid_amount',
         'status',
+        'action',
     ];
 
     protected $casts = [

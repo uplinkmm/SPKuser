@@ -98,6 +98,7 @@ trait GscWtihdrawProcess
                             // Build transaction data
                             $transactionData = [
                                 'Status' => $transaction->wager_status,
+                                'Action' => $transaction->action,
                                 'ProductID' => $transaction->product_code,
                                 'GameType' => $transaction->game_type,
                                 'TransactionID' => $transaction->id,
@@ -143,6 +144,7 @@ trait GscWtihdrawProcess
                             'valid_amount' => $transactionData['ValidBetAmount'],
                             'payout_amount' => $transactionData['PayoutAmount'], //
                             'status' => $transactionData['Status'],
+                            'action' => $transactionData['Action'],
                             'seamless_event_id' => $seamlessEventId,  // Include seamless_event_id
                             'created_at' => now(),
                             'updated_at' => now(),

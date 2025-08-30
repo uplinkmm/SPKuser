@@ -67,7 +67,6 @@ class DepositController extends Controller
             //     ], 409); // 409 Conflict
             // }
             //end redis
-
             $validator = $request->check();
 
             if ($validator->fails()) {
