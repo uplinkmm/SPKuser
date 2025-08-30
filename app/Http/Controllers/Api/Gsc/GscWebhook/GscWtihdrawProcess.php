@@ -103,11 +103,13 @@ trait GscWtihdrawProcess
                                 'GameType' => $transaction->game_type,
                                 'TransactionID' => $transaction->id,
                                 'WagerID' => $transaction->wager_code,
+                                'GameCode' => $transaction->game_code,
                                 'WagerType'=>$transaction->wager_type,
                                 'BetAmount' => $transaction->bet_amount,
                                 'TransactionAmount' => $transaction->amount,
                                 'PayoutAmount' => $transaction->prize_amount,
                                 'ValidBetAmount' => $transaction->valid_bet_amount,
+                                'SettledAt' => $transaction->settled_at,
                                 'Rate' => $rate,  // Use the fetched rate
                                 'ActualGameTypeID' => $transaction->ActualGameTypeID,
                                 'ActualProductID' => $transaction->ActualProductID,
@@ -141,6 +143,7 @@ trait GscWtihdrawProcess
                             'game_type_id' => $transactionData['ActualGameTypeID'],
                             'product_id' => $transactionData['ActualProductID'],
                             'seamless_transaction_id' => $transactionData['TransactionID'],
+                            'game_code' => $transactionData['GameCode'],
                             'rate' => $transactionData['Rate'],
                             'transaction_amount' => $transactionData['TransactionAmount'],
                             'bet_amount' => $transactionData['BetAmount'],
@@ -149,6 +152,7 @@ trait GscWtihdrawProcess
                             'status' => $transactionData['Status'],
                             'action' => $transactionData['Action'],
                             'seamless_event_id' => $seamlessEventId,  // Include seamless_event_id
+                            'settled_at'=>$transactionData['SettledAt'],
                             'created_at' => now(),
                             'updated_at' => now(),
                         ];

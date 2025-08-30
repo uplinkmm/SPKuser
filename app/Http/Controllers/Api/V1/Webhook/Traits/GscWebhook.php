@@ -50,6 +50,7 @@ trait GscWebhook
     ) {
         $seamless_transactions = [];
         foreach ($requestTransactions as $requestTransaction) {
+            // dd($requestTransaction);
             // if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
             //         $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
             //         $wager = Wager::create(
@@ -105,6 +106,7 @@ trait GscWebhook
                 'wager_id' => $wager ? $wager->id : null,
                 'game_type_id' => $game_type->id,
                 'product_id' => $product->id,
+                'game_code'=>$requestTransaction->game_code,
                 'seamless_transaction_id' => $requestTransaction->id,
                 'rate' => $rate,
                 'transaction_amount' => $requestTransaction->amount,
@@ -113,7 +115,7 @@ trait GscWebhook
                 'payout_amount' => $requestTransaction->prize_amount,
                 'status' => $requestTransaction->action,
                 'action' => $requestTransaction->action,
-
+                'settled_at'=>$requestTransaction->settled_at,
                 //'agent_id' => $user->agent_id
             ]);
         }

@@ -2,7 +2,11 @@
 
 namespace App\Services\Gsc\Dto;
 
+use Carbon\Carbon;
 use Spatie\LaravelData\Data;
+use App\Services\Gsc\Dto\UnixTimestampCaster;
+use Spatie\LaravelData\Attributes\WithCast;
+
 
 class GscRequestTransaction extends Data
 {
@@ -37,13 +41,16 @@ class GscRequestTransaction extends Data
         public ?string $wager_status,
         public ?string $wager_type,
         public ?string $round_id,
+        #[WithCast(UnixTimestampCaster::class)]
+        public ?Carbon $settled_at,
         public ?float $amount,
         public ?float $bet_amount,
         public ?float $valid_bet_amount,
         public ?float $prize_amount,
         public ?float $tip_amount,
         public ?string $game_code,
-         public ?int $ActualGameTypeID,
+        public ?int $ActualGameTypeID,
         public ?int $ActualProductID,
-    ) {}
+    ) {
+    }
 }

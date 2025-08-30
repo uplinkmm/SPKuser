@@ -17,6 +17,7 @@ class SeamlessTransaction extends Model
         'game_type_id',
         'product_id',
         'seamless_event_id',
+        'game_code',
         'customer_id',
         'wager_id',
         'seamless_transaction_id',
@@ -27,11 +28,13 @@ class SeamlessTransaction extends Model
         'valid_amount',
         'status',
         'action',
+        'settled_at',
     ];
 
     protected $casts = [
         // 'status' => TransactionStatus::class,
-    ];
+    'settled_at' => 'datetime',
+    ];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
     public function customer()
     {
