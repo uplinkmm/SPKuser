@@ -50,20 +50,20 @@ class WithdrawController extends Controller
             $maxAttempts = 3;
             $lock = false;
 
-            // while ($attempts < $maxAttempts && !$lock) {
-            //     $lock = Redis::set("wallet:lock:$userId", true, 'EX', 15, 'NX'); // 15 seconds lock
-            //     $attempts++;
+            while ($attempts < $maxAttempts && !$lock) {
+                $lock = Redis::set("wallet:lock:$userId", true, 'EX', 15, 'NX'); // 15 seconds lock
+                $attempts++;
 
-            //     if (!$lock) {
-            //         sleep(1); // Wait for 1 second before retrying
-            //     }
-            // }
-            // if (!$lock) {
-            //     return response()->json([
-            //         'message' => 'Another transaction is currently processing. Please try again later.',
-            //         'userId' => $userId,
-            //     ], 409); // 409 Conflict
-            // }
+                if (!$lock) {
+                    sleep(1); // Wait for 1 second before retrying
+                }
+            }
+            if (!$lock) {
+                return response()->json([
+                    'message' => 'Another transaction is currently processing. Please try again later.',
+                    'userId' => $userId,
+                ], 409); // 409 Conflict
+            }
             //end redis
 
             $validator = $request->check();
@@ -71,7 +71,7 @@ class WithdrawController extends Controller
             if ($validator->fails()) {
                 // Release Redis lock and return validation error response
                 // tem redis
-                // Redis::del("wallet:lock:$userId");
+                Redis::del("wallet:lock:$userId");
                 // temp redis
 
                 // return $validator->getResponse();
@@ -84,7 +84,7 @@ class WithdrawController extends Controller
             // Check if the transactions are in the expected format
             if (!is_array($transactions) || empty($transactions)) {
 
-                // Redis::del("wallet:lock:$userId"); //tem redis
+                Redis::del("wallet:lock:$userId"); //tem redis
 
                 return response()->json([
                     'message' => 'Invalid transaction data format.',
@@ -163,7 +163,7 @@ class WithdrawController extends Controller
             }
 
             // Release the Redis lock
-            // Redis::del("wallet:lock:$userId");
+            Redis::del("wallet:lock:$userId");
 
             // Return success response
             $data[] = SlotWebhookService::buildGscResponse(

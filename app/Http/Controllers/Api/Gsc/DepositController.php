@@ -52,27 +52,27 @@ class DepositController extends Controller
             $maxAttempts = 3;
             $lock = false;
 
-            // while ($attempts < $maxAttempts && !$lock) {
-            //     $lock = Redis::set("wallet:lock:$userId", true, 'EX', 15, 'NX'); // 15 seconds lock
-            //     $attempts++;
+            while ($attempts < $maxAttempts && !$lock) {
+                $lock = Redis::set("wallet:lock:$userId", true, 'EX', 15, 'NX'); // 15 seconds lock
+                $attempts++;
 
-            //     if (!$lock) {
-            //         sleep(1); // Wait for 1 second before retrying
-            //     }
-            // }
-            // if (!$lock) {
-            //     return response()->json([
-            //         'message' => 'Another transaction is currently processing. Please try again later.',
-            //         'userId' => $userId,
-            //     ], 409); // 409 Conflict
-            // }
+                if (!$lock) {
+                    sleep(1); // Wait for 1 second before retrying
+                }
+            }
+            if (!$lock) {
+                return response()->json([
+                    'message' => 'Another transaction is currently processing. Please try again later.',
+                    'userId' => $userId,
+                ], 409); // 409 Conflict
+            }
             //end redis
             $validator = $request->check();
 
             if ($validator->fails()) {
                 // Release Redis lock and return validation error response
                 // tem redis
-                // Redis::del("wallet:lock:$userId");
+                Redis::del("wallet:lock:$userId");
                 // temp redis
                 $data[] = $validator->getResponse();
                 return response()->json([
@@ -151,7 +151,7 @@ class DepositController extends Controller
             }
 
             // Release the Redis lock
-            // Redis::del("wallet:lock:$userId");
+            Redis::del("wallet:lock:$userId");
 
             // Return success response
 
