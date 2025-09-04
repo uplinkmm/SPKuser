@@ -47,7 +47,6 @@ trait UseWebhook
     ) {
         $seamless_transactions = [];
         foreach ($requestTransactions as $requestTransaction) {
-            // dd($requestTransaction);
             if ($requestTransaction->WagerID == "0" || $requestTransaction->WagerID == 0) {
                     $uniqueNumber = (int)(date('YmdHis', strtotime(now())) . $event->customer_id);
                     $wager = Wager::create(
@@ -66,6 +65,9 @@ trait UseWebhook
                     [
                         'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
                         'seamless_wager_id' => $requestTransaction->WagerID,
+                        // 'wager_status' => $requestTransaction->Wager,
+                        // 'wager_type' => $requestTransaction->WagerID,
+
                         // 'seamless_transaction_id' => $requestTransaction->TransactionID,
                     ]
                 );

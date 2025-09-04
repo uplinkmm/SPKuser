@@ -132,8 +132,8 @@ trait GscWebhook
             [
                 'customer_id' => $event->customer_id, //change from  'user_id'=> $event->user_id,
                 'seamless_wager_id' => $batch['wager_code'],
-                // 'wager_status'=>$batch['wager_status'],
-                // 'wager_type'=>$batch['wager_type']
+                'wager_status'=>$batch['wager_status'],
+                'wager_type'=>$batch['wager_type']
                 // 'seamless_transaction_id' => $requestTransaction->TransactionID,
             ]
         );
