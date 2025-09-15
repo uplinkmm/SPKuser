@@ -8,7 +8,9 @@ use App\Http\Controllers\API\SlotController;
 use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\CommonController;
 use App\Http\Controllers\API\BettingController;
+use App\Http\Controllers\API\LotteryController;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\FeedbackController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\WalletTransferController;
 use App\Http\Controllers\API\TermAndConditionController;
@@ -16,7 +18,6 @@ use App\Http\Controllers\API\BettingTransactionController;
 use App\Http\Controllers\API\TopupTransactionAPIController;
 use App\Http\Controllers\API\CustomerMoneyBalanceController;
 use App\Http\Controllers\API\CashWithdrawlTransactionAPIController;
-use App\Http\Controllers\API\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create_wallet_transfer', 'createWalletTransfer');
     }); 
     Route::resource('feedbacks', FeedbackController::class)->only(['index', 'store','destroy']);
+    Route::controller(LotteryController::class)->group(function () {
+        Route::get('lottery_list', 'index');
+        Route::post('create_lottery', 'createLottery');
+        Route::get('lottery_detail/{id}', 'detail');
+    });
 });
 Route::get('/generate_hash', [SlotController::class, 'getGameList']);
 Route::middleware('auth:sanctum')->get('/notification_list', [NotificationController::class, 'index']);

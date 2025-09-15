@@ -46,6 +46,8 @@ class AppServiceProvider extends ServiceProvider
             'slot_transaction' => 'App\Models\SlotTransaction',
             'wallet' => 'App\Models\Wallet',
             'wallet_transfer' => 'App\Models\WalletTransfer',
+            'lottery' => 'App\Models\Lottery',
+            'lottery_winning_number'=>'App\Models\LotteryWinningNumber',
         ]);
     }
 }
