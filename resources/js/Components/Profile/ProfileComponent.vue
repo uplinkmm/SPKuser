@@ -5,24 +5,26 @@
         <div>
             <div v-show="step == 'mainProfile'">
                 <div
-                    class="px-12 py-12 shadow-lg rounded-2xl mb-8 bg-white text-black font-semibold"
+                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
                 >
-                    <div class="flex justify-center mb-3">
+                    <div class=" mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
                     </div>
-                    <div class="text-center font-inter mb-4">
+                    <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
+                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
+                            09 797482251
                         </p>
-                        <p class="text-sm mb-1 lg:mb-2">
+                        <!-- <p class="text-sm mb-1 lg:mb-2">
                             Since
                             {{ dateFormat(user_profile_data.verified_at) }}
-                        </p>
+                        </p> -->
                     </div>
-                    <div class="flex justify-between text-xs">
+                    <!-- <div class="flex justify-between text-xs">
                         <p>
                             <i class="fal fa-wallet"></i>
                             {{
@@ -37,10 +39,15 @@
                             }}
                             MMK
                         </p>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="px-12 py-16 shadow-lg rounded-2xl mb-8 bg-white">
-                    <div class="flex flex-col gap-y-4">
+                <div class="px-8 py-16 mb-8 ">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    >
+                        ပရိုဖိုင်
+                    </h2>
+                    <div class="flex flex-col gap-y-4 divide-y divide-black">
                         <button
                             type="button"
                             @click="clickChangePass()"
@@ -51,7 +58,7 @@
                         </button>
                         <a
                             @click="changeLocale()"
-                            class="cursor-pointer flex items-center"
+                            class="cursor-pointer flex items-center pt-3"
                         >
                             <i class="fal fa-sort-alt mr-4 w-4"></i>
                             <p>{{ $t("Myanmar/English") }}</p>
@@ -62,23 +69,13 @@
                         </a> -->
                         <a
                             href="/deposit_withdrawal_histories"
-                            class="flex items-center"
+                            class="flex items-center pt-3"
                         >
                             <i class="fal fa-money-check-alt mr-4 w-4"></i>
                             <p>{{ $t("Deposit Withdrawal History") }}</p>
                         </a>
-                        <a
-                            href="#"
-                            @click="
-                                step = 'termsAndConditions';
-                                title = 'Term & Condition';
-                            "
-                            class="flex"
-                        >
-                            <i class="fal fa-scroll-old mr-4 w-4 pt-1"></i>
-                            <p>{{ $t("Term & Condition") }}</p>
-                        </a>
-                        <a href="#" class="flex items-center">
+                        
+                        <a href="#" class="flex items-center pt-3">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
                             <button
                                 data-twe-toggle="modal"
@@ -87,7 +84,7 @@
                                 {{ $t("Feedback") }}
                             </button>
                         </a>
-                        <a href="#" class="flex items-center">
+                        <!-- <a href="#" class="flex items-center pt-3">
                             <i class="fal fa-phone mr-4 w-4"></i>
                             <button
                                 data-twe-toggle="modal"
@@ -96,11 +93,30 @@
                                 {{ $t("Contacts") }}
                             </button>
                         </a>
-                        <a @click="logOut" class="flex items-center">
+                        <a @click="logOut" class="flex items-center pt-3">
                             <i class="fal fa-sign-out-alt mr-4 w-4"></i>
                             <p>{{ $t("Logout") }}</p>
+                        </a> -->
+                        <a
+                            href="#"
+                            @click="
+                                step = 'termsAndConditions';
+                                title = 'Term & Condition';
+                            "
+                            class="flex pt-3"
+                        >
+                            <i class="fal fa-scroll-old mr-4 w-4 pt-1"></i>
+                            <p>{{ $t("Term & Condition") }}</p>
                         </a>
                     </div>
+                </div>
+
+                <div class="px-8">
+                    <button
+                        class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-sm transition-colors duration-300"
+                    >
+                    <i class="fal fa-phone mr-4 w-4"></i>Customer Service သို့ ဖုန်းခေါ်ရန်
+                    </button>
                 </div>
             </div>
             <div
