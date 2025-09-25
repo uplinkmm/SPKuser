@@ -6,6 +6,131 @@
             :back-btn="backBtn"
         ></Navbar>
 
+
+
+
+        <div>
+            <div class="px-4">
+                <div class="mb-4">
+                    <div class="flex items-center justify-center p-4 bg-transparent">
+                        <div class="flex-shrink-0 mr-4">
+                            <img src="../../../../public/img/profile.png" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm">
+                        </div>
+                        
+                        <div class="h-full">
+                            <p class="text-xl font-semibold text-gray-800 mb-2">Nge Lay</p>
+                            <p class="text-sm text-gray-700">092012345</p>
+                        </div>
+                    </div>
+                
+                </div>
+                <div>
+                    <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
+                        <div>
+                            <div class="flex justify-between gap-x-4 mb-4">
+                                <p class="flex-grow-0 w-36">
+                                    <!-- <i class="fal fa-wallet"></i> -->
+                                    ပင်မ ပိုက်ဆံအိတ်
+                                </p>
+                                <p class="flex-grow text-right">
+                                    {{ mainMoneyBalance.toLocaleString() }} MMK
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-x-4">
+                                <p class="flex-grow-0 w-36">
+                                    <!-- <i class="fal fa-wallet"></i> -->
+                                    Game ပိုက်ဆံအိတ်
+                                </p>
+                                <p class="flex-grow text-right">
+                                    {{ gameMoneyBalance.toLocaleString() }} MMK
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
+                        <div class="grid grid-cols-3 gap-x-6">
+                            <div>
+                                <a href="/topup">
+                                    <img
+                                        src="../../../../public/img/money 1.png"
+                                        class="w-14 mx-auto"
+                                    />
+                                    <p>{{ $t("Deposit") }}</p>
+                                </a>
+                            </div>
+    
+                            <div class="">
+                                <a href="/cash_withdraw">
+                                    <img
+                                        src="../../../../public/img/money 1.png"
+                                        class="w-14 mx-auto"
+                                    />
+                                    <p>{{ $t("Withdrawal") }}</p>
+                                </a>
+                            </div>
+                            <div class="">
+                                <a href="/cash_withdraw">
+                                    <img
+                                        src="../../../../public/img/money 1.png"
+                                        class="w-14 mx-auto"
+                                    />
+                                    <p>ငွေလဲမည်</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6">
+
+                <div class=" rounded-lg  p-4">
+                    <h2 class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3">မှတ်တမ်းများ</h2>
+                    
+                    <div class="divide-y divide-gray-200">
+                        <a href="/2d/live" class="flex items-center justify-between py-4 cursor-pointer ">
+                            <div class="flex items-center space-x-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                                </svg>
+                                <span class="text-lg">2D Live</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </a>
+                        
+                        <a hreft="/history?game_id=1" class="flex items-center justify-between py-4 cursor-pointer ">
+                            <div class="flex items-center space-x-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z" />
+                                </svg>
+                                <span class="text-lg">2D မှတ်တမ်း</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </a>
+            
+                        <a href="/winner_lists/1" class="flex items-center justify-between py-4 cursor-pointer ">
+                            <div class="flex items-center space-x-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                                </svg>
+                                <span class="text-lg">ထီပေါက်သူများ</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="px-4">
             <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
                 <div>

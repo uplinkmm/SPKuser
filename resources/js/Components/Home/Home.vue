@@ -47,6 +47,11 @@
                     />
                 </div> -->
             </div>
+
+
+
+
+
             <div
                 class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
@@ -69,150 +74,132 @@
                     </div>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-x-6 gap-y-6 mb-4">
-                <!-- <a href="/2d/live"
-                    class="bg-[#C67D06] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
-                    <div class="w-fit mx-auto flex">
+
+
+
+
+            <div class="grid grid-cols-2 gap-x-4 mb-4">
+                <a
+                    href="/2d/live"
+                    class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
+                >
+                    <!-- <div class="w-fit mx-auto">
                         <div>
                             <img
-                                class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
-                                src="../../../../public/img/billiard_2377303.png"
+                                class="w-24 mb-4"
+                                src="../../../../public/img/Paper.png"
                             />
-                            <p
-                                class="text-white text-xl self-end pb-6 pl-4"
-                            >
-                                2D ထိုးမည်
-                            </p>
+                            <p class="text-white text-xl pl-2">2D Live</p>
                         </div>
-                    </div>
-                </a> -->
-                <a href="/2d/live">
-                    <div class="bg-[#C67D06] rounded-xl">
-                        <img
-                            src="../../../../public/img/mm_2dd.jpg"
-                            class="object-cover w-full h-full rounded-xl"
-                        />
-                        <p
-                            class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold"
-                        >
-                            2D
-                        </p>
+                    </div> -->
+                    <div class="w-full mx-auto flex flex-col justify-between h-full py-16">
+                        <div>
+                            <p class="text-white text-xl font-semibold text-center">{{twoDList.twod}}</p>
+                        </div>
+                        <div class="flex justify-between w-full px-[8%]">
+                            <div class="text-center">
+                                <p class="text-white text-xs">{{twoDList.set}}</p>
+                                <p class="text-white text-xs">Modern</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-white text-xs">{{twoDList.value}}</p>
+                                <p class="text-white text-xs">Internet</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-white text-lg font-semibold text-center">2D Live</p>
+                        </div>
                     </div>
                 </a>
 
-                <a href="/3D_betting">
-                    <div class="bg-[#C67D06] rounded-xl">
-                        <img
-                            src="../../../../public/img/mm_3d.jpg"
-                            class="object-cover w-full h-full rounded-xl"
-                        />
-                        <p
-                            class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold"
-                        >
-                            3D
-                        </p>
-                    </div>
-                </a>
-
-                <!-- <a href="/3D_betting"
-                    class="bg-[#fff] aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col">
-                    <div class="w-fit mx-auto flex">
-                        <div>
-                            <img
-                                class="w-4/12 mb-4 pt-4 lg:pt-0 pl-4" 
-                                src="../../../../public/img/billiard_2377303.png"
-                            />
-                            <p
-                                class="text-black text-xl self-end pb-6 pl-4"
-                            >
-                                3D ထိုးမည်
-                            </p>
+                <div>
+                    <a
+                        href="/2D_betting"
+                        class="background-black aspect-[1/0.8] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                    >
+                        <div class="w-fit mx-auto flex">
+                            <div>
+                                <img
+                                    class="w-4/12 mb-4 pt-4 lg:pt-0" 
+                                    src="../../../../public/img/image 2.png"
+                                />
+                                <p
+                                    class="text-white text-xl self-end pb-6 pl-4"
+                                >
+                                    2D ထိုးမည်
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a> -->
+                    </a>
+                    <a
+                        href="/3D_betting"
+                        class="background-black aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col"
+                    >
+                        <div class="w-fit mx-auto flex">
+                            <div>
+                                <img
+                                    class="w-4/12 mb-4 pt-4 lg:pt-0" 
+                                    src="../../../../public/img/Map_fill.png"
+                                />
+                                <p
+                                    class="text-white text-xl self-end pb-6 pl-4"
+                                >
+                                    3D ထိုးမည်
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-                <a href="/winner_lists/1" class="relative col-span-2">
-                    <div class="bg-[#C67D06] rounded-xl w-full">
+            <div
+                class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+            >
+                <a href="/winner_lists/1">
+                    <div
+                        class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                    >
                         <img
-                            src="../../../../public/img/winner.jpg"
-                            class="object-cover w-full aspect-[16/4.5] rounded-xl"
+                            class="w-16 my-4"
+                            src="../../../../public/img/Chart_white.png"
                         />
-                        <!-- <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p> -->
-                        <div class="text-center py-3">
-                            <p class="text-white text-lg pb-0 pl-2 mb-0">
+                        <div class="flex justify-center flex-col">
+                            <p class="text-white text-xl pb-0 pl-2 mb-1">
                                 ထီပေါက်သူများ
                             </p>
-                            <!-- <p class="text-white text-sm pb-0 pl-2">
-                                ထွက်ခဲ့သော နံပတ်များ
-                            </p> -->
+                            <p class="text-white text-sm pb-0 pl-2">
+                                ထီပေါက်သူများ
+                            </p>
                         </div>
                     </div>
                 </a>
-                <!-- <div 
-                    class="bg-[#C67D06] mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
-                >
-                    <a href="/winner_lists/1">
-                        <div
-                            class="flex justify-start gap-x-4 w-full mx-auto py-0"
-                        >
-                            <img
-                                class=" w-4/12 aspect-square my-0 rounded-2xl"
-                                src="../../../../public/img/winner2.jpeg"
-                            />
-                            <div class="flex justify-center flex-col">
-                                <p class="text-white text-xl pb-0 pl-2 mb-1">
-                                    ထီပေါက်သူများ
-                                </p>
-                                <p class="text-white text-sm pb-0 pl-2">
-                                    ထီပေါက်သူများ
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
+            </div>
 
-                <a href="/lottery_history" class="relative col-span-2">
-                    <div class="bg-[#C67D06] rounded-xl w-full">
+            <div
+                class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+            >
+                <a href="/lottery_history">
+                    <div
+                        class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                    >
                         <img
-                            src="../../../../public/img/ball.jpg"
-                            class="object-cover w-full aspect-[16/4.5] rounded-xl"
+                            class="w-16 my-4"
+                            src="../../../../public/img/Chart_white.png"
                         />
-                        <!-- <p class="mb-0 py-2 select-none text-center text-[#FFF] text-sm lg:text-base font-bold ">3D</p> -->
-                        <div class="text-center py-3">
-                            <p class="text-white text-lg pb-0 pl-2 mb-0">
+                        <div class="flex justify-center flex-col">
+                            <p
+                                class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
+                            >
                                 ထီပေါက်စဉ်များ
                             </p>
-                            <!-- <p class="text-white text-sm pb-0 pl-2">
+                            <p class="text-white text-sm pb-0 pl-2">
                                 ထွက်ခဲ့သော နံပတ်များ
-                            </p> -->
+                            </p>
                         </div>
                     </div>
                 </a>
-                <!-- <div
-                    class="bg-[#C67D06] mb-0 rounded-2xl shadow-lg flex justify-center flex-col col-span-2"
-                >
-                    <a href="/lottery_history">
-                        <div
-                            class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
-                        >
-                            <img
-                                class="w-16 my-4"
-                                src="../../../../public/img/numbers.png"
-                            />
-                            <div class="flex justify-center flex-col">
-                                <p
-                                    class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
-                                >
-                                    ထီပေါက်စဉ်များ
-                                </p>
-                                <p class="text-white text-sm pb-0 pl-2">
-                                    ထွက်ခဲ့သော နံပတ်များ
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
             </div>
+            
         </div>
 
         <div class="px-4 mb-6">

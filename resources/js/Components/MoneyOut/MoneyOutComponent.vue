@@ -3,6 +3,165 @@
     <div class="frame-container min-h-[100vh]">
         <Navbar :title="$t('Withdrawal')" :back-btn="backBtn"></Navbar>
 
+
+
+        <!-- 1st  -->
+        <div>
+            <div class="w-full">
+                <p class="w-full text-center primary-text mb-8">ငွေထုတ်မည်</p>
+            </div>
+            <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
+                <div>
+                    <div class="flex justify-between gap-x-4 mb-4">
+                        <p class="flex-grow-0 w-36">
+                            <!-- <i class="fal fa-wallet"></i> -->
+                            ပင်မ ပိုက်ဆံအိတ်
+                        </p>
+                        <p class="flex-grow text-right">
+                            {{ mainMoneyBalance.toLocaleString() }} MMK
+                        </p>
+                    </div>
+                    <div class="flex justify-between gap-x-4">
+                        <p class="flex-grow-0 w-36">
+                            <!-- <i class="fal fa-wallet"></i> -->
+                            Game ပိုက်ဆံအိတ်
+                        </p>
+                        <p class="flex-grow text-right">
+                            {{ gameMoneyBalance.toLocaleString() }} MMK
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
+                <div class="grid grid-cols-3 gap-x-6">
+                    <div class=" text-center">
+                        <a href="/topup">
+                            <img
+                                src="../../../../public/img/kpay.png"
+                                class="w-14 mx-auto"
+                            />
+                            <p>Kpay</p>
+                        </a>
+                    </div>
+
+                    <div class=" text-center">
+                        <a href="/cash_withdraw">
+                            <img
+                                src="../../../../public/img/wave.png"
+                                class="w-14 mx-auto"
+                            />
+                            <p>Wave</p>
+                        </a>
+                    </div>
+                    <div class=" text-center">
+                        <a href="/cash_withdraw">
+                            <img
+                                src="../../../../public/img/aya_pay.png"
+                                class="w-14 mx-auto"
+                            />
+                            <p>AYA Pay</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full max-w-md px-4">
+                <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">ငွေထုတ်မည့် ပမာဏ</h2>
+        
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class=" text-xs px-4 pt-4 text-gray-700"> Amount</p>
+                    <input 
+                        type="text" 
+                        placeholder="Amount" 
+                        class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 "
+                    >
+                </label>
+        
+                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300">
+                    လုပ်ဆောင်မည်
+                </button>
+        
+                <p class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold">
+                    ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br>ဖော်ပြပါ အကောင့်များသို့သာ ငွေလွှဲရန်
+                </p>
+            </div>
+        </div>
+
+
+
+        <!-- 2nd -->
+        <div>
+            <div class="w-full">
+                <p class="w-full text-center primary-text mb-8">ငွေထုတ်မည်</p>
+            </div>
+            <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
+                <div>
+                    <div class="flex justify-between gap-x-4 mb-4">
+                        <p class="flex-grow-0 w-36">
+                            <!-- <i class="fal fa-wallet"></i> -->
+                            ပင်မ ပိုက်ဆံအိတ်
+                        </p>
+                        <p class="flex-grow text-right">
+                            {{ mainMoneyBalance.toLocaleString() }} MMK
+                        </p>
+                    </div>
+                    <div class="flex justify-between gap-x-4">
+                        <p class="flex-grow-0 w-36">
+                            <!-- <i class="fal fa-wallet"></i> -->
+                            Game ပိုက်ဆံအိတ်
+                        </p>
+                        <p class="flex-grow text-right">
+                            {{ gameMoneyBalance.toLocaleString() }} MMK
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-left text-xl text-black py-3 px-4">
+                ငွေသွင်းမည့် ပမာဏ : 1,0000 Kyats
+            </p>
+
+            <div class="w-full max-w-md px-4">
+                <!-- <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">ငွေသွင်းမည် ပမာဏ</h2> -->
+        
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class=" text-xs px-4 pt-4 text-gray-700"> Bank Account</p>
+                    <input 
+                        type="text" 
+                        placeholder="Bank Account" 
+                        class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 "
+                    >
+                </label>
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class=" text-xs px-4 pt-4 text-gray-700"> Bank Account Name</p>
+                    <input 
+                        type="text" 
+                        placeholder="Bank Account Name" 
+                        class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 "
+                    >
+                </label>
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class=" text-xs px-4 pt-4 text-gray-700"> Password</p>
+                    <input 
+                        type="text" 
+                        placeholder="Password" 
+                        class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 "
+                    >
+                </label>
+        
+                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300">
+                    ငွေထုတ်မည်
+                </button>
+        
+                <p class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold">
+                    ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br>ဖော်ပြပါ အကောင့်များသို့သာ ငွေလွှဲရန်
+                </p>
+            </div>
+        </div>
+
+
+
+
+
         <div class="px-4">
             <div class="w-full">
                 <!-- <p class="w-full text-center primary-text mb-8">ငွေထုတ်မည်</p> -->

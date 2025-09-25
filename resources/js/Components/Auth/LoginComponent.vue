@@ -128,17 +128,17 @@ export default {
         ...mapMutations(["setUser", "setToken", "setCsrfToken"]),
 
         async login() {
-            if (!this.password || !this.phone_number) {
-                this.setErrorBox(true, "Please fill all field!");
-                return;
-            }
-            if (this.password.length < 6) {
-                this.setErrorBox(
-                    true,
-                    "Password must be at least 6 characters long."
-                );
-                return;
-            }
+            // if (!this.password || !this.phone_number) {
+            //     this.setErrorBox(true, "Please fill all field!");
+            //     return;
+            // }
+            // if (this.password.length < 6) {
+            //     this.setErrorBox(
+            //         true,
+            //         "Password must be at least 6 characters long."
+            //     );
+            //     return;
+            // }
 
             let url = "/api/login";
             let formData = new FormData();

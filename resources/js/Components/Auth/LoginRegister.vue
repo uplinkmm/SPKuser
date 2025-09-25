@@ -22,7 +22,13 @@
                 v-if="!forgot_password"
                 class="flex justify-center items-center flex-col min-h-screen"
             >
-                <img src="../../../../public/img/ssk 1.png" alt="" />
+                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-28 h-28 mb-4" alt="" />
+                <p class=" mb-2">
+                    ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်
+                </p>
+                <p class="text-2xl font-semibold">
+                    အကောင့်ဝင်ရန်
+                </p>
                 <ul class="flex space-x-4 mb-6" role="tablist" data-twe-nav-ref>
                     <li role="presentation">
                         <a
@@ -172,7 +178,7 @@
         </div>
     </div>
     <button
-        data-twe-toggle="modal"
+        data-twe-toggle="modal" class=" hidden"
         data-twe-target="#error_modal"
         id="error_modal_btn"
     ></button>

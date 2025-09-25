@@ -209,11 +209,13 @@
 
 
 .bg-img{
-    background-image: url('../img/bg.png');
+    // background-image: url('../img/bg.png');
+    background-color: #ffc529;
     background-size: cover;
 }
 .frame-container{
-    background-image: url('../img/bg.png');
+    // background-image: url('../img/bg.png');
+    background-color: #ffc529;
     background-size: cover;
     overflow-y: auto;
     height: 100vh;

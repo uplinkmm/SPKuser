@@ -169,11 +169,11 @@
   font-size: 14px !important; }
 
 .bg-img {
-  background-image: url("../img/bg.png");
+  background-color: #ffc529;
   background-size: cover; }
 
 .frame-container {
-  background-image: url("../img/bg.png");
+  background-color: #ffc529;
   background-size: cover;
   overflow-y: auto;
   height: 100vh; }
@@ -332,7 +332,5 @@
 .hidden-scrollbar {
   -ms-overflow-style: none;
   /* Hides the scrollbar */ }
-
-
 
 /*# sourceMappingURL=style_web.css.map */

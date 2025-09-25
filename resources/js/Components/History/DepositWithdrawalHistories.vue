@@ -1,19 +1,24 @@
 <template>
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto bg-img px-3 pb-0 min-h-[100vh]"
+        class="frame-container min-h-[100vh]"
     >
         <Navbar title="Payment History" :back-btn="backBtn"></Navbar>
 
+        <div>
+            <p class=" text-center mb-2 font-semibold text-2xl">
+                မှတ်တမ်း
+            </p>
+        </div>
         <div class="">
             <ul
-                class="flex list-none flex-row flex-wrap border-b-0 ps-0 px-4 pb-2 mb-4 bg-[#FDC652] text-white"
+                class="flex list-none flex-row flex-wrap border-b-0 ps-0 px-4 pb-2 mb-4 text-back"
                 role="tablist"
                 data-twe-nav-ref
             >
                 <li role="presentation">
                     <a
                         href="#tabs-twoD"
-                        class="my-2 block px-2 pb-3.5 pt-4 text-sm text-white hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-white font-semibold ml-3"
+                        class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-black font-semibold ml-3"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-twoD"
                         data-twe-nav-active
@@ -24,13 +29,13 @@
                             type = 'topup_transaction';
                             getHistories();
                         "
-                        >ငွေသွင်းမှတ်တမ်း</a
+                        >ငွေသွင်း</a
                     >
                 </li>
                 <li role="presentation">
                     <a
                         href="#tabs-threeD"
-                        class="my-2 block px-2 pb-3.5 pt-4 text-sm text-white hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-white font-semibold"
+                        class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-black font-semibold"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-threeD"
                         role="tab"
@@ -40,7 +45,7 @@
                             type = 'cash_withdrawal_transaction';
                             getHistories();
                         "
-                        >ငွေထုတ်မှတ်တမ်း</a
+                        >ငွေထုတ်</a
                     >
                 </li>
             </ul>
@@ -57,45 +62,55 @@
                         <div
                             v-for="(history, index) in topup_transaction"
                             :key="index"
-                            class="pl-6 lg:pl-8 pr-8 py-4 shadow-lg rounded-2xl mb-8 bg-white relative"
+                            class="pl-6 lg:pl-8 pr-8 pt-6 pb-4 shadow-lg mb-8 bg-white relative"
                         >
-                            <div class="flex justify-between mb-3">
-                                <p class="text-base font-semibold">ငွေသွင်း</p>
-                                <p class="text-base font-semibold">
-                                    {{ history.amount?.toLocaleString() }} ကျပ်
+                            <div class="grid grid-cols-3 mb-2 border-b pb-2">
+                                <p class="text-sm">
+                                    <!-- {{ dateFormat(history.date) }} -->
+                                    {{ history.date.slice(0,10) }}
                                 </p>
-                            </div>
-                            <div class="flex justify-between mb-3">
-                                <p class="text-base">
-                                    {{ history.account.account_type }}
-                                </p>
-                                <p class="text-base">
-                                    {{ history.account.phone_number }}
-                                </p>
-                            </div>
-                            <div class="flex justify-between mb-3">
-                                <p class="text-base">
-                                    {{ dateFormat(history.date) }}
+                                <p class="text-sm">
+                                    <!-- {{ dateFormat(history.date) }} -->
+                                    {{ dateFormat(history.date).slice(11,19) }}
                                 </p>
                                 <p
-                                    class="text-base text-yellow-600"
+                                    class="text-sm text-yellow-600 text-right"
                                     v-if="history.status == 'pending'"
                                 >
                                     {{ history.status }}
                                 </p>
                                 <p
-                                    class="text-base text-red-600"
+                                    class="text-sm text-red-600 text-right"
                                     v-if="history.status == 'rejected'"
                                 >
                                     {{ history.status }}
                                 </p>
                                 <p
-                                    class="text-base text-green-600"
+                                    class="text-sm text-green-600 text-right"
                                     v-if="history.status == 'confirmed'"
                                 >
                                     {{ history.status }}
                                 </p>
                             </div>
+                            <div class="grid grid-cols-3 mb-2 border-b pb-2">
+                                <p class="text-sm font-semibold">ငွေသွင်း</p>
+                                <p class="text-sm font-semibold">ငွေပမာဏ</p>
+                                <p class="text-sm font-semibold text-right">
+                                    {{ history.amount?.toLocaleString() }} ကျပ်
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-3 mb-3">
+                                <p class="text-sm">
+                                    {{ history.account.account_type }}
+                                </p>
+                                <p class="text-sm">
+                                    လုပ်ငန်းစဉ် နံပတ်
+                                </p>
+                                <p class="text-sm text-right">
+                                    {{ history.account.phone_number }}
+                                </p>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -113,7 +128,57 @@
                             :key="index"
                             class="pl-6 lg:pl-8 pr-8 py-4 shadow-lg rounded-2xl mb-8 bg-white relative"
                         >
-                            <div class="flex justify-between mb-3">
+
+                        
+                            <div class="grid grid-cols-3 mb-2 border-b pb-2">
+                                <p class="text-sm">
+                                    <!-- {{ dateFormat(history.date) }} -->
+                                    {{ history.date.slice(0,10) }}
+                                </p>
+                                <p class="text-sm">
+                                    <!-- {{ dateFormat(history.date) }} -->
+                                    {{ dateFormat(history.date).slice(11,19) }}
+                                </p>
+                                <p
+                                    class="text-sm text-yellow-600 text-right"
+                                    v-if="history.status == 'pending'"
+                                >
+                                    {{ history.status }}
+                                </p>
+                                <p
+                                    class="text-sm text-red-600 text-right"
+                                    v-if="history.status == 'rejected'"
+                                >
+                                    {{ history.status }}
+                                </p>
+                                <p
+                                    class="text-sm text-green-600 text-right"
+                                    v-if="history.status == 'confirmed'"
+                                >
+                                    {{ history.status }}
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-3 mb-2 border-b pb-2">
+                                <p class="text-sm font-semibold">ငွေထုတ်</p>
+                                <p class="text-sm font-semibold">ငွေပမာဏ</p>
+                                <p class="text-sm font-semibold text-right">
+                                    {{ history.amount?.toLocaleString() }} ကျပ်
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-3 mb-3">
+                                <p class="text-sm">
+                                    {{ history.account.account_type }}
+                                </p>
+                                <p class="text-sm">
+                                    လုပ်ငန်းစဉ် နံပတ်
+                                </p>
+                                <p class="text-sm text-right">
+                                    {{ history.account.phone_number }}
+                                </p>
+                            </div>
+
+
+                            <!-- <div class="flex justify-between mb-3">
                                 <p class="text-base font-semibold">ငွေထုတ်</p>
                                 <p class="text-base font-semibold">
                                     {{ history.amount?.toLocaleString() }} ကျပ်
@@ -123,9 +188,8 @@
                                 <p class="text-base">
                                     {{ history.account.account_type }}
                                 </p>
-                                <!-- <p class="text-base">hihi</p> -->
-                            </div>
-                            <div class="flex justify-between mb-3">
+                            </div> -->
+                            <!-- <div class="flex justify-between mb-3">
                                 <p class="text-base">
                                     {{ dateFormat(history.date) }}
                                 </p>
@@ -147,7 +211,7 @@
                                 >
                                     {{ history.status }}
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

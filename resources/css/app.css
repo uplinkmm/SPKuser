@@ -4,7 +4,7 @@
 
 @layer components {
     .frame-container{
-        @apply w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-transparent pb-8
+        @apply w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 pb-0
     }
     .table-td{
         @apply text-center py-2 border-t-4 border-[#FDC652] text-sm
