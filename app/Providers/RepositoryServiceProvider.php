@@ -21,6 +21,8 @@ use App\Repositories\CustomerMoney\CustomerMoneyRepositoryInterface;
 use App\Repositories\TopupTransaction\TopupTransactionRepositoryInterface;
 use App\Repositories\CashWithdrawlTransaction\CashWithdrawlTransactionRepository;
 use App\Repositories\CashWithdrawlTransaction\CashWithdrawlTransactionRepositoryInterface;
+use App\Repositories\Lottery\LotteryInterface;
+use App\Repositories\Lottery\LotteryRepository;
 use App\Repositories\Seamless\SeamlessInterface;
 use App\Repositories\Seamless\SeamlessRepository;
 use App\Repositories\WalletTransfer\WalletTransferInterface;
@@ -51,5 +53,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AdsInterface::class, AdsRepository::class);
         $this->app->bind(SeamlessInterface::class, SeamlessRepository::class);
         $this->app->bind(WalletTransferInterface::class, WalletTransferRepository::class);
+        $this->app->bind(LotteryInterface::class, LotteryRepository::class);
     }
 }
