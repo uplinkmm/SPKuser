@@ -410,7 +410,7 @@
                                         >
                                             <img
                                                 class="w-full aspect-[3/2] rounded-lg"
-                                                :src="product.imgUrl"
+                                                :src="product.pivot.image"
                                                 alt=""
                                             />
                                             <p

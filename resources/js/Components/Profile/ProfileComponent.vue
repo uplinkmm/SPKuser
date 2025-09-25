@@ -59,7 +59,7 @@
                             <i class="fal fa-key mr-4 w-4"></i>
                             <p class="">{{ $t("Change Password") }}</p>
                         </button>
-                        <a
+                        <button
                             @click="
                                 step = 'changeLang';
                                 title = 'Change Language';
@@ -68,8 +68,8 @@
                         >
                             <i class="fal fa-sort-alt mr-4 w-4"></i>
                             <p>{{ $t("Myanmar/English") }}</p>
-                        </a>
-                        <a
+                        </button>
+                        <button
                             @click="
                                 step = 'history';
                                 title = 'History';
@@ -78,7 +78,7 @@
                         >
                             <i class="fal fa-book mr-4 w-4"></i>
                             <p>{{ $t("History") }}</p>
-                        </a>
+                        </button>
 
                         <a href="#" class="flex items-center pt-3">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
@@ -97,11 +97,8 @@
                             >
                                 {{ $t("Contacts") }}
                             </button>
-                        </a>
-                        <a @click="logOut" class="flex items-center pt-3">
-                            <i class="fal fa-sign-out-alt mr-4 w-4"></i>
-                            <p>{{ $t("Logout") }}</p>
-                        </a> -->
+                        </a>-->
+
                         <a
                             href="#"
                             @click="
@@ -112,6 +109,13 @@
                         >
                             <i class="fal fa-scroll-old mr-4 w-4 pt-1"></i>
                             <p>{{ $t("Term & Condition") }}</p>
+                        </a>
+                        <a
+                            @click="logOut"
+                            class="cursor-pointer flex items-center pt-3"
+                        >
+                            <i class="fal fa-sign-out-alt mr-4 w-4"></i>
+                            <p>{{ $t("Logout") }}</p>
                         </a>
                     </div>
                 </div>
@@ -290,31 +294,22 @@
                     </h2>
                     <div class="flex flex-col gap-y-4 divide-y divide-black">
                         <button
+                            v-for="language in languages"
+                            :key="language.code"
                             type="button"
-                            @click="clickChangePass()"
-                            class="flex items-center"
+                            @click="changeLocale(language.code)"
+                            class="flex items-center justify-between pt-3"
                         >
-                            <i class="fal fa-key mr-4 w-4"></i>
-                            <p class="">Myanmar</p>
+                            <div class="flex items-center">
+                                <i class="fal fa-sort-alt mr-4 w-4"></i>
+                                <p class="">{{ language.name }}</p>
+                            </div>
+
+                            <i
+                                v-if="language.code == currentLocale"
+                                class="fas fa-check"
+                            ></i>
                         </button>
-                        <a
-                            @click="changeLocale()"
-                            class="cursor-pointer flex items-center pt-3"
-                        >
-                            <i class="fal fa-sort-alt mr-4 w-4"></i>
-                            <p>English</p>
-                        </a>
-                        <!-- <a href="/history" class="flex items-center">
-                            <i class="fal fa-book mr-4 w-4"></i>
-                            <p>{{ $t("History") }}</p>
-                        </a> -->
-                        <a
-                            href="/deposit_withdrawal_histories"
-                            class="flex items-center pt-3"
-                        >
-                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                            <p>CHi na</p>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -352,7 +347,7 @@
                             <p class="">ငွေသွင်းငွေထုတ် မှတ်တမ်းများ</p>
                         </a>
                         <a
-                            @click="changeLocale()"
+                            href="/history?game_id=1"
                             class="cursor-pointer flex items-center pt-3"
                         >
                             <i class="fal fa-sort-alt mr-4 w-4"></i>
@@ -363,21 +358,21 @@
                             <p>{{ $t("History") }}</p>
                         </a> -->
                         <a
-                            href="/deposit_withdrawal_histories"
+                            href="/history?game_id=2"
                             class="flex items-center pt-3"
                         >
                             <i class="fal fa-money-check-alt mr-4 w-4"></i>
                             <p>3D မှတ်တမ်း</p>
                         </a>
                         <a
-                            href="/deposit_withdrawal_histories"
+                            href="/winner_lists/1"
                             class="flex items-center pt-3"
                         >
                             <i class="fal fa-money-check-alt mr-4 w-4"></i>
                             <p>ထီပေါက်သူများ</p>
                         </a>
                         <a
-                            href="/deposit_withdrawal_histories"
+                            href="/lottery_history"
                             class="flex items-center pt-3"
                         >
                             <i class="fal fa-money-check-alt mr-4 w-4"></i>
@@ -390,13 +385,7 @@
                             <i class="fal fa-money-check-alt mr-4 w-4"></i>
                             <p>ကံစမ်းမဲ မှတ်တမ်း</p>
                         </a>
-                        <a
-                            href="/deposit_withdrawal_histories"
-                            class="flex items-center pt-3"
-                        >
-                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                            <p>3D မှတ်တမ်း</p>
-                        </a>
+
                         <a
                             href="/deposit_withdrawal_histories"
                             class="flex items-center pt-3"
@@ -628,6 +617,12 @@ export default {
             feedback: "",
             contacts: [],
             loading: false,
+            languages: [
+                { code: "mm", name: "Myanmar" },
+                { code: "en", name: "English" },
+                { code: "cn", name: "Chinese" },
+                { code: "th", name: "Thai" },
+            ],
         };
     },
     computed: {
@@ -644,8 +639,14 @@ export default {
             this.title = "Change Password";
         },
         backBtn() {
+            if (this.step == "changePassStepTwo") {
+                this.step = "changePassStepOne";
+                return;
+            }
             if (
-                this.step == "changePass" ||
+                this.step == "changePassStepOne" ||
+                this.step == "history" ||
+                this.step == "changeLang" ||
                 this.step == "contacts" ||
                 this.step == "termsAndConditions"
             ) {
@@ -768,18 +769,15 @@ export default {
                 });
             }
         },
-        changeLocale() {
-            if (this.currentLocale == "mm") {
-                this.$i18n.locale = "en";
-                this.setLanguageCode("en");
-                return;
-            }
-            if (this.currentLocale == "en") {
-                this.$i18n.locale = "mm";
-                this.setLanguageCode("mm");
-
-                return;
-            }
+        changeLocale(lang) {
+            this.$i18n.locale = lang;
+            this.setLanguageCode(lang);
+            this.step = "mainProfile";
+            this.$notify({
+                text: "Language changed successfully.",
+                type: "info",
+            });
+            return;
         },
         async logOut() {
             let url = "/api/logout";

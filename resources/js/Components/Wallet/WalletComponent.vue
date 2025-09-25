@@ -108,7 +108,7 @@
 
                     <div class="divide-y divide-gray-200">
                         <a
-                            href="/2d/live"
+                            href="/deposit_withdrawal_histories"
                             class="flex items-center justify-between py-4 cursor-pointer"
                         >
                             <div class="flex items-center space-x-4">
@@ -126,7 +126,9 @@
                                         d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                     />
                                 </svg>
-                                <span class="text-lg">2D Live</span>
+                                <span class="text-lg"
+                                    >ငွေသွင်း ငွေထုတ် မှတ်တမ်းများ</span
+                                >
                             </div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +147,8 @@
                         </a>
 
                         <a
-                            hreft="/history?game_id=1"
+                            href="https://www.youtube.com/shorts/4jtKqT-Jm3E"
+                            target="_blank"
                             class="flex items-center justify-between py-4 cursor-pointer"
                         >
                             <div class="flex items-center space-x-4">
@@ -163,7 +166,9 @@
                                         d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
                                     />
                                 </svg>
-                                <span class="text-lg">2D မှတ်တမ်း</span>
+                                <span class="text-lg"
+                                    >ငွေဖြည့်နည်း ကြည့်ရန်</span
+                                >
                             </div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +187,8 @@
                         </a>
 
                         <a
-                            href="/winner_lists/1"
+                            href="https://www.youtube.com/shorts/cFvmsnfVNF0?si=UmA6F83Rhm5lnzpT"
+                            target="_blank"
                             class="flex items-center justify-between py-4 cursor-pointer"
                         >
                             <div class="flex items-center space-x-4">
@@ -200,7 +206,9 @@
                                         d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                     />
                                 </svg>
-                                <span class="text-lg">ထီပေါက်သူများ</span>
+                                <span class="text-lg"
+                                    >ငွေထုတ်နည်း ကြည့်ရန်</span
+                                >
                             </div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

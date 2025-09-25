@@ -361,13 +361,13 @@ export default {
             }
         },
         backBtn() {
-            if (this.isPaymentFormShown) {
-                this.isPaymentFormShown = false;
+            if (this.step == 2) {
+                this.step = 1;
                 return;
             } else {
                 window.history.back();
 
-                window.location.href = "/home";
+                // window.location.href = "/home";
             }
         },
         copyPhoneNumber(phone_number) {

@@ -26,15 +26,14 @@
     "Withdrawal": "ငွေထုတ်မည်",
     "History": "မှတ်တမ်း",
     "Change Password": "စကား၀ှက် ပြောင်းရန်",
-    "Myanmar/English": "မြန်မာ / အင်္ဂလိပ်",
-    "Term & Condition":"စည်းကမ်းသတ်မှတ်ချက်များ",
-    "Feedback":"အကြံပေးစာ",
-    "Contacts":"ဆက်သွယ်ရန်",
+    "Myanmar/English": "ဘာသာစကား ပြောင်းမည်",
+    "Term & Condition": "စည်းကမ်းသတ်မှတ်ချက်များ",
+    "Feedback": "အကြံပေးစာ",
+    "Contacts": "ဆက်သွယ်ရန်",
     "Amount": "ပမာဏ",
     "Account Name": "Account အမည်",
     "Clear": "ဖျက်မည်",
     "Deposit Withdrawal History": "ငွေသွင်းငွေထုတ် မှတ်တမ်း",
-    "Notification":"အသိပေးချက်",
-    "Logout":"ထွက်မည်"
-
+    "Notification": "အသိပေးချက်",
+    "Logout": "ထွက်မည်"
 }
