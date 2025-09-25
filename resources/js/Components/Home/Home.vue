@@ -48,10 +48,6 @@
                 </div> -->
             </div>
 
-
-
-
-
             <div
                 class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
@@ -75,43 +71,8 @@
                 </a>
             </div>
 
-
-
-
             <div class="grid grid-cols-2 gap-x-4 mb-4">
-                <a
-                    href="/2d/live"
-                    class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
-                >
-                    <!-- <div class="w-fit mx-auto">
-                        <div>
-                            <img
-                                class="w-24 mb-4"
-                                src="../../../../public/img/Paper.png"
-                            />
-                            <p class="text-white text-xl pl-2">2D Live</p>
-                        </div>
-                    </div> -->
-                    <div class="w-full mx-auto flex flex-col justify-between h-full py-16">
-                        <div>
-                            <p class="text-white text-xl font-semibold text-center">{{twoDList.twod}}</p>
-                        </div>
-                        <div class="flex justify-between w-full px-[8%]">
-                            <div class="text-center">
-                                <p class="text-white text-xs">{{twoDList.set}}</p>
-                                <p class="text-white text-xs">Modern</p>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-white text-xs">{{twoDList.value}}</p>
-                                <p class="text-white text-xs">Internet</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-white text-lg font-semibold text-center">2D Live</p>
-                        </div>
-                    </div>
-                </a>
-
+                <HomeTwoDLive />
                 <div>
                     <a
                         href="/2D_betting"
@@ -120,7 +81,7 @@
                         <div class="w-fit mx-auto flex">
                             <div>
                                 <img
-                                    class="w-4/12 mb-4 pt-4 lg:pt-0" 
+                                    class="w-4/12 mb-4 pt-4 lg:pt-0"
                                     src="../../../../public/img/image 2.png"
                                 />
                                 <p
@@ -138,7 +99,7 @@
                         <div class="w-fit mx-auto flex">
                             <div>
                                 <img
-                                    class="w-4/12 mb-4 pt-4 lg:pt-0" 
+                                    class="w-4/12 mb-4 pt-4 lg:pt-0"
                                     src="../../../../public/img/Map_fill.png"
                                 />
                                 <p
@@ -199,7 +160,6 @@
                     </div>
                 </a>
             </div>
-            
         </div>
 
         <div class="px-4 mb-6">
@@ -450,11 +410,12 @@ import {
     postApiData,
     postApiDataSlot,
 } from "../../utilities/ajax-helpers";
-
+import HomeTwoDLive from "./HomeTwoDLive.vue";
 export default {
     name: "Home",
     components: {
         Navbar,
+        HomeTwoDLive,
     },
     data() {
         return {
