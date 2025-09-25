@@ -22,9 +22,11 @@
 
                         <div class="h-full">
                             <p class="text-xl font-semibold text-gray-800 mb-2">
-                                Nge Lay
+                                {{ getUser.name }}
                             </p>
-                            <p class="text-sm text-gray-700">092012345</p>
+                            <p class="text-sm text-gray-700">
+                                {{ getUser.phone_number }}
+                            </p>
                         </div>
                     </div>
                 </div>
