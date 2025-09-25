@@ -1,18 +1,19 @@
 <?php
 namespace App\Repositories\Betting;
 
-use App\Models\TwoDResult;
 use stdClass;
 use Carbon\Carbon;
 use App\Models\Game;
 use App\Models\Betting;
 use App\Models\BettingWin;
+use App\Models\TwoDResult;
 use App\Models\GameSetting;
 use App\Http\Action\GameData;
 use App\Models\BettingNumber;
 use App\Models\ClosingNumber;
 use App\Models\WinningNumber;
 use App\Traits\TimeStatusTrait;
+use App\Models\LotteryPromotion;
 use App\Traits\BettingValidation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -225,18 +226,30 @@ class BettingRepository implements BettingInterface
         if (!$game) {
             ResponseMessage('Game is invalid', 419);
         }
+        $new_data = new stdClass();
         #betting number_list
+           if ($game->game_type == '2d') {
+            $bettin_number_list = $this->get2dBettingNumberList($game);
+        } elseif ($game->game_type == '3d') {
+            $bettin_number_list = $this->get3dBettingNumberList($game);
+        } elseif ($game->game_type == 'draw') {
+            $bettin_number_list = $this->getLotteryBettingNumberList($game);
+            $lotteryPromotion = $this->getLotteryPromotionByGameSetting($game);
+            $new_data->promotion = $lotteryPromotion;
+        }
         // $bettin_number_list = $request->game_id == config('2d_setting.game_id') ? $this->get2dBettingNumberList($game) : $this->get3dBettingNumberList($game);
-        $bettin_number_list = $game->type == '2d' ? $this->get2dBettingNumberList($game) : $this->get3dBettingNumberList($game);
+        // $bettin_number_list = $game->type == '2d' ? $this->get2dBettingNumberList($game) : $this->get3dBettingNumberList($game);
 
         #get wallet money
         $balance = (new CustomerWalletBalance(UserData()->id))->getCustomerWalletBalance();
         #setUp_Response
-        $new_data = new stdClass();
+        // $new_data = new stdClass();
         $new_data->bet_list_numbers = $bettin_number_list;
         $new_data->game = $game;
         $new_data->balance = $balance;
-        $new_data->bet_limit = $game->type == '2d' ? UserData()->two_d_limit : UserData()->three_d_limit;
+        if ($game->game_type != 'draw') {
+            $new_data->bet_limit = $request->game_id == config('2d_setting.game_id') ? UserData()->two_d_limit : UserData()->three_d_limit;
+        }
         return $new_data;
     }
 
@@ -512,6 +525,56 @@ class BettingRepository implements BettingInterface
             ->orderBy('number')
             ->get();
         return $betsWithTotalAmount;
+    }
+    public function getLotteryBettingNumberList($gameSetting)
+    {
+        // dd($game);
+        $limit_number = $gameSetting->limitation_quantity;//50
+        $d1 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) as d1'));
+        $d2 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) as d2'));
+        $d3 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) as d3'));
+
+
+        $gameSettingId = $gameSetting->id;
+        $allNumbers = DB::table(DB::raw('(' . $d1->toSql() . ') as d1'))
+            ->mergeBindings($d1)
+            ->crossJoin(DB::raw('(' . $d2->toSql() . ') as d2'))
+            ->mergeBindings($d2)
+            ->crossJoin(DB::raw('(' . $d3->toSql() . ') as d3'))
+            ->mergeBindings($d3)
+            ->select(DB::raw('LPAD(d1.n * 100 + d2.n * 10 + d3.n, 3, "0") AS number'));
+
+        $bettingNumberList = DB::table(DB::raw('(' . $allNumbers->toSql() . ') as all_numbers'))
+            ->mergeBindings($allNumbers)
+            ->leftJoin('lottery_numbers', function ($join) use ($gameSettingId) {
+                $join->on('lottery_numbers.number', '=', 'all_numbers.number')
+                    ->whereIn('lottery_numbers.lottery_id', function ($query) use ($gameSettingId) {
+                        $query->select('id')
+                            ->from('lotteries')
+                            ->where('game_setting_id', $gameSettingId);
+                    });
+            })
+            ->whereRaw('CAST(all_numbers.number AS UNSIGNED) <= ?', [$limit_number])
+            ->select([
+                'all_numbers.number',
+                DB::raw('CASE WHEN lottery_numbers.id IS NULL THEN 1 ELSE 0 END AS is_active')
+            ])
+            ->groupBy('all_numbers.number', 'lottery_numbers.id')
+            ->orderBy('all_numbers.number')
+            ->get();
+        return $bettingNumberList;
+    }
+
+    public function getLotteryPromotionByGameSetting($gameSetting)
+    {
+        // $lotteryPromotion = LotteryPromotion::where('game_setting_id', $gameSetting->id)
+        //     ->first();
+        $now = Carbon::now();
+        $lotteryPromotion = LotteryPromotion::with(['lottery_promotion_tickets'])->where('game_setting_id', $gameSetting->id)
+            ->whereDate('start_date', '<=', $now)
+            ->whereDate('end_date', '>=', $now)
+            ->first();
+        return $lotteryPromotion;
     }
 
     public function getBettingHistory($request)

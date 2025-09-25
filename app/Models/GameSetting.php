@@ -21,4 +21,7 @@ class GameSetting extends Model
     public function game(){
         return $this->belongsTo(Game::class);
     }
+    public function prizes(){
+        return $this->hasMany(Prize::class);
+    }
 }
