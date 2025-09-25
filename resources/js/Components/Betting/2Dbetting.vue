@@ -196,9 +196,9 @@
 
 
 
-                    <div class="text-center mb-4">
+                    <!-- <div class="text-center mb-4">
                         <h1 class="text-white py-5 text-lg font-semibold">
-                            ထိုးမည့်အချိန်ကို ရွေးပါ asdf
+                            ထိုးမည့်အချိန်ကို ရွေးပါ
                         </h1>
                     </div>
 
@@ -222,13 +222,84 @@
                                 style="font-size: 24px"
                             ></i>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <div
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+                <div 
                     v-else
                     class="bg-transparent items-center justify-center mb-8"
                 >
-                    <div
+
+                    <div class="flex-grow py-12 bg-[#F2B50F] -mx-4">
+                        <div class="text-center ">
+                            <h1 class="text-3xl font-bold mb-4">2D ထိုးမည်</h1>
+                            <div class="w-full flex justify-center mb-4">
+                                <img src="../../../../public/img/apologize 1.png">
+                            </div>
+                            <p class="text-lg">ယနေ့ 2D ပိတ်ပါသည်</p>
+                        </div>
+                    </div>
+
+                    <div class=" rounded-lg  p-4 bg-[#ffc529]">
+                        <h2 class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3">မှတ်တမ်းများ</h2>
+                        
+                        <div class="divide-y divide-gray-200">
+                            <a href="/2d/live" class="flex items-center justify-between py-4 cursor-pointer ">
+                                <div class="flex items-center space-x-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                                    </svg>
+                                    <span class="text-lg">2D Live</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </a>
+                            
+                            <a hreft="/history?game_id=1" class="flex items-center justify-between py-4 cursor-pointer ">
+                                <div class="flex items-center space-x-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z" />
+                                    </svg>
+                                    <span class="text-lg">2D မှတ်တမ်း</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </a>
+                
+                            <a href="/winner_lists/1" class="flex items-center justify-between py-4 cursor-pointer ">
+                                <div class="flex items-center space-x-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                                    </svg>
+                                    <span class="text-lg">ထီပေါက်သူများ</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- <div
                         class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-16 flex justify-center"
                     >
                         <i
@@ -236,7 +307,7 @@
                             style="font-size: 24px"
                         ></i>
                         <span class="pl-16">2D ခေတ္တ ပိတ်ထားပါသည် </span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -404,18 +475,23 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full rounded-lg  bg-white pb-14"
+            class="relative mb-12 w-full rounded-lg   pb-14"
             :class="step == 2 ? 'block' : 'hidden'"
-            style="min-height: calc(100vh - 168px)"
+            style="min-height: calc(100vh - 132px)"
         >
+            <div>
+                <p class=" text-center mb-2 text-lg">
+                    2D ထိုးမည်
+                </p>
+            </div>
             <div
-                class="flex justify-between p-6 bg-[#ffc529] text-black rounded-tr-lg rounded-tl-lg"
+                class="flex justify-between px-6 bg-[#ffc529] text-black rounded-tr-lg rounded-tl-lg"
             >
-                <div>
+                <div class="flex text-sm">
                     <p class="pr-8 py-2">
                         {{ getCurrentDate() }}
                     </p>
-                    <p class="pr-8">
+                    <p class="pr-8 py-2">
                         {{ getCurrentTime() }}
                     </p>
                 </div>
@@ -423,27 +499,38 @@
                     <p class="pr-8 py-2">
                         {{ formatTime(selectedGameSetting.lottery_time) }}
                     </p>
-                    <p class="pr-8">
+                    <!-- <p class="pr-8">
                         {{ totalBetAmount?.toLocaleString() }} MMK
-                    </p>
+                    </p> -->
                 </div>
             </div>
-            <div class="mb-5 px-4">
+            <div class="mb-5 px-4 bg-white pb-3 overflow-y-auto small-scrollbar" style="height: calc(100% - 80px)">
                 <div class="flex justify-end mb-4"></div>
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
-                            <th class="py-2">{{ $t("No") }}</th>
-                            <th class="py-2">{{ $t("Multiplier") }}</th>
-                            <th class="py-2">{{ $t("Betting Amount") }}</th>
-                            <th class="py-2">{{ $t("Edit Delete") }}</th>
+                            <th class="py-3">စဉ်</th>
+                            <th class="py-3">{{ $t("No") }}</th>
+                            <!-- <th class="py-2">{{ $t("Multiplier") }}</th> -->
+                            <th class="py-3">{{ $t("Betting Amount") }}</th>
+                            <th class="py-3">{{ $t("Edit Delete") }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
                             v-for="(bet_number, index) in bet_numbers"
-                            :key="index"
+                            :key="index" class="border-b last:border-0"
                         >
+                            <td
+                                class="text-center py-2"
+                                :class="
+                                    checkAvailableAmount(bet_number)
+                                        ? ''
+                                        : 'text-red-600'
+                                "
+                            >
+                                {{  index+1 }}
+                            </td>
                             <td
                                 class="text-center py-2"
                                 :class="
@@ -454,7 +541,7 @@
                             >
                                 {{ bet_number.number }}
                             </td>
-                            <td
+                            <!-- <td
                                 :class="
                                     checkAvailableAmount(bet_number)
                                         ? ''
@@ -463,7 +550,7 @@
                                 class="text-center py-2"
                             >
                                 {{ bet_multiplier }}
-                            </td>
+                            </td> -->
                             <td
                                 :class="
                                     checkAvailableAmount(bet_number)
@@ -508,7 +595,7 @@
                                         edit_bet_number.number
                                     "
                                     @click="edit_bet_number = bet_number"
-                                    class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
+                                    class="text-black hover:text-black transition duration-150 ease-in-out"
                                 >
                                     <i class="fal fa-edit mr-2"></i>
                                 </button>
@@ -518,7 +605,7 @@
                                     @click="
                                         delete_bet_number = bet_number.number
                                     "
-                                    class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
+                                    class="text-black hover:text-black transition duration-150 ease-in-out"
                                 >
                                     <i class="fal fa-trash"></i>
                                 </button>
@@ -539,7 +626,7 @@
                 </button>
                 <button
                     :disabled="calling_api"
-                    class="bg-[#FDC652] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
+                    class="bg-[#0978D3] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
                     @click="sendBetting"
                 >
                     {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
