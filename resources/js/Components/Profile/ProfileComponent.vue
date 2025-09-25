@@ -5,9 +5,9 @@
         <div>
             <div v-show="step == 'mainProfile'">
                 <div
-                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
                 >
-                    <div class=" mb-3">
+                    <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
                     </div>
                     <div class="text-left font-inter mb-4">
@@ -41,7 +41,7 @@
                         </p>
                     </div> -->
                 </div>
-                <div class="px-8 py-16 mb-8 ">
+                <div class="px-8 py-16 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -50,31 +50,36 @@
                     <div class="flex flex-col gap-y-4 divide-y divide-black">
                         <button
                             type="button"
-                            @click="clickChangePass()"
+                            @click="
+                                step = 'changePassStepOne';
+                                title = 'Change Password';
+                            "
                             class="flex items-center"
                         >
                             <i class="fal fa-key mr-4 w-4"></i>
                             <p class="">{{ $t("Change Password") }}</p>
                         </button>
                         <a
-                            @click="changeLocale()"
+                            @click="
+                                step = 'changeLang';
+                                title = 'Change Language';
+                            "
                             class="cursor-pointer flex items-center pt-3"
                         >
                             <i class="fal fa-sort-alt mr-4 w-4"></i>
                             <p>{{ $t("Myanmar/English") }}</p>
                         </a>
-                        <!-- <a href="/history" class="flex items-center">
+                        <a
+                            @click="
+                                step = 'history';
+                                title = 'History';
+                            "
+                            class="cursor-pointer flex items-center pt-3"
+                        >
                             <i class="fal fa-book mr-4 w-4"></i>
                             <p>{{ $t("History") }}</p>
-                        </a> -->
-                        <a
-                            href="/deposit_withdrawal_histories"
-                            class="flex items-center pt-3"
-                        >
-                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                            <p>{{ $t("Deposit Withdrawal History") }}</p>
                         </a>
-                        
+
                         <a href="#" class="flex items-center pt-3">
                             <i class="fal fa-comment-alt-lines mr-4 w-4"></i>
                             <button
@@ -115,16 +120,14 @@
                     <button
                         class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-sm transition-colors duration-300"
                     >
-                    <i class="fal fa-phone mr-4 w-4"></i>Customer Service သို့ ဖုန်းခေါ်ရန်
+                        <i class="fal fa-phone mr-4 w-4"></i>Customer Service
+                        သို့ ဖုန်းခေါ်ရန်
                     </button>
                 </div>
             </div>
-            <div
-                v-show="step == 'changePass'"
-                class="px-8 py-12 shadow-lg rounded-2xl mb-8 bg-white mt-[25%]"
-            >
-                <!-- testing change pass -->
-                <div v-show="5 < 2" class="relative h-full flex flex-col justify-center">
+            <!-- Chagne Password -->
+            <div v-show="step == 'changePassStepOne'" class="px-8 py-12 mb-8">
+                <div class="relative h-full flex flex-col justify-center">
                     <div class="mb-12 text-center">
                         <p class="text-2xl mb-4 font-semibold">
                             ပက်စ်ဝက်ပြောင်းရန်
@@ -133,7 +136,7 @@
                             အသစ်ထည့်လိုသော Password ထည့်သွင်းရန်
                         </p>
                     </div>
-                    <div>
+                    <div class="pb-16">
                         <label class="mb-6 rounded-xl shadow-md bg-white block">
                             <p class="text-xs px-4 pt-4 text-gray-700">
                                 Old Password
@@ -170,14 +173,17 @@
                     </div>
                     <div class="mb-0 absolute bottom-4 flex justify-end w-full">
                         <button
+                            @click="step = 'changePassStepTwo'"
                             class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
                         >
-                            Next <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                            Next
+                            <i class="fas fa-chevron-right ml-2 text-sm"></i>
                         </button>
                     </div>
                 </div>
-                <!-- testing change pass 2 -->
-                <div v-show="2 < 5" class="relative h-full flex flex-col justify-center">
+            </div>
+            <div v-show="step == 'changePassStepTwo'" class="px-8 py-12 mb-8">
+                <div class="relative h-full flex flex-col justify-center">
                     <div class="mb-12 text-center">
                         <p class="text-2xl mb-4 font-semibold">
                             ပက်စ်ဝက်ပြောင်းရန်
@@ -186,11 +192,9 @@
                             ရောက်ရှိလာသော OTP ၆ လုံးကို ထည့်ပါ
                         </p>
                     </div>
-                    <div>
+                    <div class="pb-16">
                         <label class="mb-6 rounded-xl shadow-md bg-white block">
-                            <p class="text-xs px-4 pt-4 text-gray-700">
-                                OTP
-                            </p>
+                            <p class="text-xs px-4 pt-4 text-gray-700">OTP</p>
                             <input
                                 type="text"
                                 v-model="current_password"
@@ -207,9 +211,9 @@
                         </button>
                     </div>
                 </div>
+            </div>
 
-
-                <!-- <div class="mb-4">
+            <!-- <div class="mb-4">
                     <label
                         for="old_password"
                         class="text-sm mb-2 relative block"
@@ -252,10 +256,7 @@
                     />
                 </div> -->
 
-
-
-
-                <!-- <div class="mb-0">
+            <!-- <div class="mb-0">
                     <button
                         :disabled="loading"
                         @click="changePassword()"
@@ -264,42 +265,28 @@
                         {{ loading ? "Changing..." : "Done" }}
                     </button>
                 </div> -->
-            </div>
-
-
-            <div
-                v-show="step == 'termsAndConditions'"
-                class="px-8 py-16 shadow-lg rounded-2xl mb-8 bg-white"
-            >
-                <div class="mb-0">
-                    <p v-html="terms_and_conditions.name"></p>
-                </div>
-            </div>
-
 
             <div v-show="step == 'changeLang'">
                 <div
-                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
                 >
-                    <div class=" mb-3">
+                    <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
                     </div>
                     <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
-                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
-                            09 797482251
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8 ">
+                <div class="px-8 py-16 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
-                    ဘာသာစကား ပြောင်းလဲရန်
+                        ဘာသာစကား ပြောင်းလဲရန်
                     </h2>
                     <div class="flex flex-col gap-y-4 divide-y divide-black">
                         <button
@@ -328,17 +315,15 @@
                             <i class="fal fa-money-check-alt mr-4 w-4"></i>
                             <p>CHi na</p>
                         </a>
-                        
                     </div>
                 </div>
             </div>
 
-
             <div v-show="step == 'history'">
                 <div
-                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
                 >
-                    <div class=" mb-3">
+                    <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
                     </div>
                     <div class="text-left font-inter mb-4">
@@ -352,21 +337,20 @@
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8 ">
+                <div class="px-8 py-16 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
-                    မှတ်တမ်းများ
+                        မှတ်တမ်းများ
                     </h2>
                     <div class="flex flex-col gap-y-4 divide-y divide-black">
-                        <button
-                            type="button"
-                            @click="clickChangePass()"
+                        <a
+                            href="/deposit_withdrawal_histories"
                             class="flex items-center"
                         >
                             <i class="fal fa-key mr-4 w-4"></i>
                             <p class="">ငွေသွင်းငွေထုတ် မှတ်တမ်းများ</p>
-                        </button>
+                        </a>
                         <a
                             @click="changeLocale()"
                             class="cursor-pointer flex items-center pt-3"
@@ -426,35 +410,31 @@
 
             <div v-show="step == 'termsAndConditions'">
                 <div
-                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
                 >
-                    <div class=" mb-3">
+                    <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
                     </div>
                     <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
-                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
-                            09 797482251
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8 ">
+                <div class="px-8 py-16 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
-                    စည်းကမ်းသတ်မှတ်ချက်များ
+                        စည်းကမ်းသတ်မှတ်ချက်များ
                     </h2>
                     <div class="mb-0">
                         <p v-html="terms_and_conditions.name"></p>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         <div
@@ -638,7 +618,7 @@ export default {
     },
     data() {
         return {
-            step: "mainProfile", //changePass
+            step: "mainProfile", //changePassStepOne, changePassStepTwo , changeLang
             title: "Profile",
             user_profile_data: {},
             current_password: "",
