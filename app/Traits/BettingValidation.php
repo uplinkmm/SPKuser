@@ -4,6 +4,7 @@ namespace App\Traits;
 use Carbon\Carbon;
 use App\Models\Game;
 use App\Models\GameSetting;
+use App\Models\LotteryNumber;
 
 trait BettingValidation
 {
@@ -12,7 +13,7 @@ trait BettingValidation
         $currentDateTime = Carbon::now();
         $currentTime = $currentDateTime->format('H:i');
         $game = Game::where('is_active', 1)->where('id', $gameId)
-        ->first();
+            ->first();
         if (!$game) {
             ResponseMessage('Game is invalid ', 419);
         }
@@ -33,8 +34,7 @@ trait BettingValidation
         //         ->first();
         // }
 
-        $gameSettingQuery = GameSetting::where('id', $gameSettingId);
-
+        $gameSettingQuery = GameSetting::where('id', $gameSettingId)->where('is_active',1);
         switch ($game->type) {
             case '2d':
                 $gameSettingQuery->whereTime('opening_time', '<=', $currentTime)
@@ -44,14 +44,28 @@ trait BettingValidation
                 $gameSettingQuery->where('opening_date_time', '<=', $currentDateTime)
                     ->where('closing_date_time', '>=', $currentDateTime);
                 break;
+            case 'draw':
+                $gameSettingQuery->where('opening_date_time', '<=', $currentDateTime)
+                    ->where('closing_date_time', '>=', $currentDateTime);
+                break;
             default:
                 return ResponseMessage('Invalid game type', 419);
         }
 
         $gameSetting = $gameSettingQuery->first();
-
+       
         if (!$gameSetting) {
             ResponseMessage('Game Setting is invalid', 419);
         }
+    }
+     public function checkLotteryNumberExist($gameSettingId,$number){
+        $lotteryNumber=LotteryNumber::join('lotteries','lottery_numbers.lottery_id','lotteries.id')
+        ->where('number',$number)
+        ->where('lotteries.game_setting_id',$gameSettingId)
+        ->exists();
+        if($lotteryNumber){
+            ResponseMessage('Lottery number is invalid,choose other number',419);
+        }
+        return true;
     }
 }
