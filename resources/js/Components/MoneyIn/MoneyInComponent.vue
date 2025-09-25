@@ -3,12 +3,8 @@
     <div class="frame-container min-h-[100vh]">
         <Navbar title="ငွေသွင်းမည်" :back-btn="backBtn"></Navbar>
 
-
         <!-- 1st  -->
-        <div>
-            <div class="w-full">
-                <p class="w-full text-center primary-text mb-8">ငွေသွင်းမည်</p>
-            </div>
+        <div class="min-h-[100vh]">
             <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
                 <div>
                     <div class="flex justify-between gap-x-4 mb-4">
@@ -31,357 +27,182 @@
                     </div>
                 </div>
             </div>
-            <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
-                <div class="grid grid-cols-3 gap-x-6">
-                    <div class=" text-center">
-                        <a href="/topup">
+
+            <div v-show="step == 1" class="contents">
+                <div
+                    class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+                >
+                    <div class="grid grid-cols-3 gap-x-6">
+                        <div
+                            @click="paymentProviderBtnClicked('kpay')"
+                            class="text-center pt-4"
+                            :class="{
+                                'bg-gray-200 shadow-md rounded-xl':
+                                    paymentProvider == 'kpay',
+                            }"
+                        >
                             <img
                                 src="../../../../public/img/kpay.png"
                                 class="w-14 mx-auto"
                             />
                             <p>Kpay</p>
-                        </a>
-                    </div>
+                        </div>
 
-                    <div class=" text-center">
-                        <a href="/cash_withdraw">
+                        <div
+                            @click="paymentProviderBtnClicked('wave')"
+                            class="text-center pt-4"
+                            :class="{
+                                'bg-gray-200 shadow-md rounded-xl':
+                                    paymentProvider == 'wave',
+                            }"
+                        >
                             <img
                                 src="../../../../public/img/wave.png"
                                 class="w-14 mx-auto"
                             />
                             <p>Wave</p>
-                        </a>
-                    </div>
-                    <div class=" text-center">
-                        <a href="/cash_withdraw">
+                        </div>
+                        <div
+                            @click="paymentProviderBtnClicked('aya')"
+                            class="text-center pt-4"
+                            :class="{
+                                'bg-gray-200 shadow-md rounded-xl':
+                                    paymentProvider == 'aya',
+                            }"
+                        >
                             <img
                                 src="../../../../public/img/money 1.png"
                                 class="w-14 mx-auto"
                             />
                             <p>AYA Pay</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-full max-w-md px-4">
-                <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">ငွေသွင်းမည် ပမာဏ</h2>
-        
-                <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class=" text-xs px-4 pt-4 text-gray-700"> Amount</p>
-                    <input 
-                        type="text" 
-                        placeholder="Amount" 
-                        class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 "
-                    >
-                </label>
-        
-                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300">
-                    လုပ်ဆောင်မည်
-                </button>
-        
-                <p class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold">
-                    ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br>ဖော်ပြပါ အကောင့်များသို့သာ ငွေလွှဲရန်
-                </p>
-            </div>
-            
-        </div>
-
-
-
-        <!-- 2nd -->
-        <div>
-            <div class="w-full">
-                <p class="w-full text-center primary-text mb-8">ငွေသွင်းမည်</p>
-            </div>
-            <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
-                <div>
-                    <div class="flex justify-between gap-x-4 mb-4">
-                        <p class="flex-grow-0 w-36">
-                            <!-- <i class="fal fa-wallet"></i> -->
-                            ပင်မ ပိုက်ဆံအိတ်
-                        </p>
-                        <p class="flex-grow text-right">
-                            {{ mainMoneyBalance.toLocaleString() }} MMK
-                        </p>
-                    </div>
-                    <div class="flex justify-between gap-x-4">
-                        <p class="flex-grow-0 w-36">
-                            <!-- <i class="fal fa-wallet"></i> -->
-                            Game ပိုက်ဆံအိတ်
-                        </p>
-                        <p class="flex-grow text-right">
-                            {{ gameMoneyBalance.toLocaleString() }} MMK
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="px-8 pt-8 pb-4 shadow-lg rounded-2xl mb-8 bg-white">
-                <div class="flex justify-between w-full items-center mb-2">
-                    <div class="flex text-left">
-                        <img
-                            src="../../../../public/img/wave.png"
-                            alt=""
-                            class="w-14 h-14 aspect-square mr-4"
-                        />
-                        <div class="text-sm">
-                            <p class="flex items-center">
-                                Wave in Flag
-                            </p>
-                            <p>911</p>
                         </div>
                     </div>
+                </div>
+
+                <div class="w-full max-w-md px-4">
+                    <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">
+                        ငွေသွင်းမည် ပမာဏ
+                    </h2>
+
+                    <label class="mb-6 rounded-xl shadow-md bg-white block">
+                        <p class="text-xs px-4 pt-4 text-gray-700">Amount</p>
+                        <input
+                            type="number"
+                            placeholder="Amount"
+                            v-model="amount"
+                            class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                        />
+                    </label>
 
                     <button
-                        @click="
-                        copyPhoneNumber(waveAccount.phone_number)
-                        "
-                        class="text-xs"
+                        @click="changeStepTwo"
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300"
                     >
-                        <i class="fal fa-copy text-2xl"></i>
-                        <p>ကူးယူမည်</p>
+                        လုပ်ဆောင်မည်
                     </button>
-                </div>
-                <p class=" text-sm text-center">
-                    ငွေသွင်းမည့် ပမာဏ : 1,0000 Kyats
-                </p>
-            </div>
 
-            
-            <div class="w-full max-w-md px-4">
-                <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">လုပ်ဆောင်မှု အမှတ် နောက်ဆုံး ဂဏန်း ၆ လုံး</h2>
-        
-                <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class=" text-xs px-4 pt-4 text-gray-700"> Transaction Number</p>
-                    <input 
-                        type="text" 
-                        placeholder="Transaction Number" 
-                        class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 "
+                    <p
+                        class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold"
                     >
-                </label>
-        
-                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300">
-                    ငွေသွင်းမည်
-                </button>
-        
-                <p class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold">
-                    ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br>ဖော်ပြပါ အကောင့်များသို့သာ ငွေလွှဲရန်
-                </p>
-            </div>
-        </div>
-
-
-
-
-
-
-
-        <div class="px-4">
-            <div class="w-full">
-                <p class="w-full text-center primary-text mb-8">ငွေသွင်းမည်</p>
-            </div>
-            <!-- <div
-                class="flex justify-center px-4 py-8 shadow-lg rounded-2xl mb-4 bg-white"
-            >
-                <div>
-                    <div class="flex gap-x-4 mb-4">
-                        <p>
-                            <i class="fal fa-wallet mr-3"></i>
-                            {{ $t("Main Money") }}
-                        </p>
-                        <p>{{ mainMoneyBalance?.toLocaleString() }} MMK</p>
-                    </div>
-                    <div class="flex gap-x-4">
-                        <p>
-                            <i class="fal fa-wallet mr-3"></i>
-                            {{ $t("Game Money") }}
-                        </p>
-                        <p>{{ gameMoneyBalance?.toLocaleString() }} MMK</p>
-                    </div>
-                </div>
-            </div> -->
-
-            <div v-show="!isPaymentFormShown" class="mt-[40%]">
-                <!-- <div>
-                    <p class="text-white">{{ $t("Deposit") }}</p>
-                </div> -->
-
-                <div>
-                    <div class="px-6 py-8 shadow-lg rounded-2xl mb-4 bg-white">
-                        <button
-                            @click="paymentProviderBtnClicked('kpay')"
-                            class="flex justify-between w-full items-center"
-                        >
-                            <p class="flex items-center whitespace-nowrap">
-                                <img
-                                    src="../../../../public/img/kpay.png"
-                                    alt=""
-                                    class="w-14 aspect-square mr-4"
-                                />
-                                KBZ Pay ဖြင့် ငွေသွင်းမည်
-                            </p>
-                            <i class="fas fa-angle-right ml-4"></i>
-                        </button>
-                    </div>
-                    <div class="px-6 py-8 shadow-lg rounded-2xl mb-4 bg-white">
-                        <button
-                            @click="paymentProviderBtnClicked('wave')"
-                            class="flex justify-between w-full items-center"
-                        >
-                            <p class="flex items-center whitespace-nowrap">
-                                <img
-                                    src="../../../../public/img/wave.png"
-                                    alt=""
-                                    class="w-14 aspect-square mr-4"
-                                />
-                                wave ဖြင့် ငွေသွင်းမည်
-                            </p>
-                            <i class="fas fa-angle-right ml-4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div v-show="isPaymentFormShown">
-                <div>
-                    <p class="primary-text pl-2 mb-4">Payment Information</p>
-                </div>
-                <div>
-                    <div
-                        class="px-8 py-8 shadow-lg rounded-2xl mb-6 bg-white"
-                        v-if="paymentProvider == 'kpay'"
-                    >
-                        <div class="flex justify-between w-full items-center">
-                            <div class="flex text-left">
-                                <img
-                                    src="../../../../public/img/kpay.png"
-                                    alt=""
-                                    class="w-14 h-14 aspect-square mr-4"
-                                />
-                                <div class="text-sm">
-                                    <p class="flex items-center">
-                                        {{ kpayAccount.name }}
-                                    </p>
-                                    <p>{{ kpayAccount.phone_number }}</p>
-                                </div>
-                            </div>
-
-                            <button
-                                @click="
-                                    copyPhoneNumber(kpayAccount.phone_number)
-                                "
-                                class="text-xs"
-                            >
-                                <i class="fal fa-copy text-2xl"></i>
-
-                                <p>ကူးယူမည်</p>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="px-8 py-8 shadow-lg rounded-2xl mb-8 bg-white"
-                        v-if="paymentProvider == 'wave'"
-                    >
-                        <div class="flex justify-between w-full items-center">
-                            <div class="flex text-left">
-                                <img
-                                    src="../../../../public/img/wave.png"
-                                    alt=""
-                                    class="w-14 h-14 aspect-square mr-4"
-                                />
-                                <div class="text-sm">
-                                    <p class="flex items-center">
-                                        {{ waveAccount.name }}
-                                    </p>
-                                    <p>{{ waveAccount.phone_number }}</p>
-                                </div>
-                            </div>
-
-                            <button
-                                @click="
-                                    copyPhoneNumber(waveAccount.phone_number)
-                                "
-                                class="text-xs"
-                            >
-                                <i class="fal fa-copy text-2xl"></i>
-
-                                <p>ကူးယူမည်</p>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="px-10 py-6 shadow-lg rounded-2xl mb-8 bg-white">
-                        <p class="w-full text-center mb-6 text-lg">
-                            Fill The Form
-                        </p>
-                        <div class="mb-8">
-                            <label
-                                for="amount"
-                                class="text-sm mb-3 relative block"
-                                >Amount</label
-                            >
-                            <input
-                                type="number"
-                                id="amount"
-                                v-model="amount"
-                                placeholder="Amount"
-                                class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                            />
-                        </div>
-                        <div class="mb-12">
-                            <label for="id" class="text-sm mb-3 relative block"
-                                >Transaction id (Last 6 digits)</label
-                            >
-                            <input
-                                type="text"
-                                id="id"
-                                v-model="paymentTrId"
-                                placeholder="Transaction id"
-                                class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                            />
-                        </div>
-                        <div class="mb-4">
-                            <button
-                                @click="makeTopupTransactionBtnClicked"
-                                class="bg-black text-white px-4 py-2 w-full rounded-md"
-                                :disabled="loading"
-                            >
-                                <span v-if="loading">Loading...</span>
-                                <span v-else>Done</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="px-12 py-16 shadow-lg rounded-2xl mb-8 bg-white">
-            <div class="flex flex-col gap-y-4">
-                <a href="/history" class="flex items-center">
-                    <i class="fal fa-wallet mr-4 w-4"></i>
-                    <p>{{ $t("History") }}</p>
-                </a>
-                <a href="#" class="flex items-center">
-                    <i class="fal fa-wallet mr-4 w-4"></i>
-                    <p>ငွေဖြည့်နည်း ကြည့်ရန်</p>
-                </a>
-                <a href="#" class="flex items-center">
-                    <i class="fal fa-wallet mr-4 w-4"></i>
-                    <p>ငွေသွင်းနည်း ကြည့်ရန်</p>
-                </a>
-                <a href="#" class="flex">
-                    <i class="fal fa-wallet mr-4 w-4 pt-1"></i>
-                    <p>
-                        ပင်မ ပိုက်ဆံအိတ်မှ ဂိမ်း ပိုက်ဆံအိတ်သို့ လွှဲနည်း
-                        ကြည့်ရန်
+                        ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br />ဖော်ပြပါ
+                        အကောင့်များသို့သာ ငွေလွှဲရန်
                     </p>
-                </a>
-                <a href="#" class="flex items-center">
-                    <i class="fal fa-wallet mr-4 w-4"></i>
-                    <p>Contacts</p>
-                </a>
+                </div>
             </div>
-        </div> -->
+            <div v-show="step == 2" class="contents">
+                <div class="px-8 pt-8 pb-4 shadow-lg rounded-2xl mb-8 bg-white">
+                    <div
+                        v-if="paymentProvider == 'kpay'"
+                        class="flex justify-between w-full items-center mb-2"
+                    >
+                        <div class="flex text-left">
+                            <img
+                                src="../../../../public/img/wave.png"
+                                alt=""
+                                class="w-14 h-14 aspect-square mr-4"
+                            />
+                            <div class="text-sm">
+                                <p class="flex items-center">
+                                    {{ kpayAccount.name }}
+                                </p>
+                                <p>{{ kpayAccount.phone_number }}</p>
+                            </div>
+                        </div>
+
+                        <button
+                            @click="copyPhoneNumber(kpayAccount.phone_number)"
+                            class="text-xs"
+                        >
+                            <i class="fal fa-copy text-2xl"></i>
+                            <p>ကူးယူမည်</p>
+                        </button>
+                    </div>
+                    <div
+                        v-if="paymentProvider == 'wave'"
+                        class="flex justify-between w-full items-center mb-2"
+                    >
+                        <div class="flex text-left">
+                            <img
+                                src="../../../../public/img/wave.png"
+                                alt=""
+                                class="w-14 h-14 aspect-square mr-4"
+                            />
+                            <div class="text-sm">
+                                <p class="flex items-center">
+                                    {{ waveAccount.name }}
+                                </p>
+                                <p>{{ waveAccount.phone_number }}</p>
+                            </div>
+                        </div>
+
+                        <button
+                            @click="copyPhoneNumber(waveAccount.phone_number)"
+                            class="text-xs"
+                        >
+                            <i class="fal fa-copy text-2xl"></i>
+                            <p>ကူးယူမည်</p>
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-center">
+                        ငွေသွင်းမည့် ပမာဏ : {{ amount }} Kyats
+                    </p>
+                </div>
+
+                <div class="w-full max-w-md px-4">
+                    <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">
+                        လုပ်ဆောင်မှု အမှတ် နောက်ဆုံး ဂဏန်း ၆ လုံး
+                    </h2>
+
+                    <label class="mb-6 rounded-xl shadow-md bg-white block">
+                        <p class="text-xs px-4 pt-4 text-gray-700">
+                            Transaction Number
+                        </p>
+                        <input
+                            type="number"
+                            v-model="paymentTrId"
+                            placeholder="Transaction Number"
+                            class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                        />
+                    </label>
+
+                    <button
+                        @click="makeTopupTransactionBtnClicked"
+                        :disabled="loading"
+                        class="w-full bg-blue-500 disabled:bg-blue-500 disabled:text-gray-300 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300"
+                    >
+                        {{ loading ? "Loading..." : "ငွေသွင်းမည်" }}
+                    </button>
+
+                    <p
+                        class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold"
+                    >
+                        ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br />ဖော်ပြပါ
+                        အကောင့်များသို့သာ ငွေလွှဲရန်
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -395,7 +216,7 @@ export default {
     data() {
         return {
             isPaymentFormShown: false,
-            isShow: true,
+            step: 1, //1 ,2
             mainMoneyBalance: 0,
             gameMoneyBalance: 0,
 
@@ -431,8 +252,6 @@ export default {
 
         paymentProviderBtnClicked(paymentProvider) {
             if (this.checkAccount(paymentProvider)) {
-                this.isShow = false;
-                this.isPaymentFormShown = true;
                 this.paymentProvider = paymentProvider;
             } else {
                 this.$notify({
@@ -440,6 +259,13 @@ export default {
                     type: "error",
                 });
             }
+        },
+        changeStepTwo() {
+            if (!this.amount || !this.paymentProvider) {
+                this.alertValidationMessage("amount or payment provider");
+                return;
+            }
+            this.step = 2;
         },
 
         async getBalances() {
