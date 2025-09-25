@@ -268,7 +268,6 @@
                                             })}`"
                                             class="cursor-pointer"
                                         >
-                                            {{ product.imgUrl }}
                                             <img
                                                 class="w-full aspect-[3/2] rounded-lg"
                                                 :src="product.imgUrl"
