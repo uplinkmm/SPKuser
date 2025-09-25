@@ -4,6 +4,11 @@ export default {
             noti_count: "",
             incoming_new_noti: 0,
             language_code: localStorage.getItem("appLanguage") || "mm",
+            img_prefix: window.location.href.includes("shwepaukkan")
+                ? "https://admin.shwepaukkan.com"
+                : window.location.href.includes("test")
+                ? "http://spkadmin.test"
+                : "http://spkadmin.test",
         };
     },
     getters: {
@@ -15,6 +20,9 @@ export default {
         },
         languageCode(state) {
             return state.language_code;
+        },
+        imgPrefix(state) {
+            return state.img_prefix;
         },
     },
     mutations: {
