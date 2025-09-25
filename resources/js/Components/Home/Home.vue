@@ -229,6 +229,24 @@
                         <div class="mb-12">
                             <div class="w-full">
                                 <div
+                                    v-if="selectedGameType.id == 0"
+                                    class="mb-12"
+                                >
+                                    <a
+                                        :href="`/lottery?id=${lottery.id}`"
+                                        v-for="(
+                                            lottery, index
+                                        ) in lottery_lists"
+                                        :key="index"
+                                    >
+                                        <img
+                                            :src="`${img_prefix}${lottery.photo}`"
+                                            class="w-full mb-6 rounded"
+                                        />
+                                    </a>
+                                </div>
+                                <div
+                                    v-else
                                     class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
                                 >
                                     <div
@@ -429,6 +447,7 @@ export default {
             selectedProvider: "",
             providers: [],
             marqueeAds: null,
+            lottery_lists: [],
         };
     },
     computed: {
@@ -460,8 +479,8 @@ export default {
                 url: url,
                 token: this.getToken,
             });
-            this.gameTypes = response.data;
-            this.selectedGameType = response.data[0];
+            this.gameTypes = [{ id: 0, name: "Lottery" }, ...response.data];
+            this.selectedGameType = this.gameTypes[0];
             this.getProviders();
         },
         async getMarqueeAds() {
@@ -474,6 +493,10 @@ export default {
             this.marqueeAds = response.data;
         },
         async getProviders() {
+            if (this.selectedGameType.id == 0) {
+                this.getActiveLotteryLists();
+                return;
+            }
             let url = `/api/gameTypeProducts/${this.selectedGameType.id}`;
             let response = await getApiData({
                 url: url,
@@ -481,6 +504,14 @@ export default {
             });
             this.providers = response.data;
             this.selectedProvider = response.data.game_type.products[0];
+        },
+        async getActiveLotteryLists() {
+            let url = `/api/lottery_list`;
+            let response = await getApiData({
+                url: url,
+                token: this.getToken,
+            });
+            this.lottery_lists = response.data;
         },
     },
     watch: {
@@ -558,10 +589,10 @@ export default {
         this.getGameTypes();
         this.getMarqueeAds();
 
-        if (window.location.href.includes("shweshankan")) {
-            this.img_prefix = "https://admin.shweshankan.com";
+        if (window.location.href.includes("shwepaukkan")) {
+            this.img_prefix = "https://admin.shwepaukkan.com";
         } else if (window.location.href.includes("test")) {
-            this.img_prefix = "http://sskadmin.test";
+            this.img_prefix = "http://spkadmin.test";
         } else {
             this.img_prefix = "http://localhost:8001";
         }
