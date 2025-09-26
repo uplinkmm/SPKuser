@@ -62,11 +62,11 @@
                             <p>Wave</p>
                         </div>
                         <div
-                            @click="paymentProviderBtnClicked('aya')"
+                            @click="paymentProviderBtnClicked('aya_pay')"
                             class="text-center pt-4"
                             :class="{
                                 'bg-gray-200 shadow-md rounded-xl':
-                                    payment_provider == 'aya',
+                                    payment_provider == 'aya_pay',
                             }"
                         >
                             <img
@@ -317,7 +317,7 @@ export default {
                 });
                 setTimeout(() => {
                     window.location.href = "/home";
-                }, 1000);
+                }, 100);
             } else {
                 this.$notify({
                     text: response.message,

@@ -71,7 +71,7 @@
                             }"
                         >
                             <img
-                                src="../../../../public/img/money 1.png"
+                                src="../../../../public/img/aya_pay.png"
                                 class="w-14 mx-auto"
                             />
                             <p>AYA Pay</p>
@@ -349,9 +349,10 @@ export default {
                     text: response.message,
                     type: "info",
                 });
+                this.paymentTrId = "";
                 setTimeout(() => {
                     window.location.href = "/home";
-                }, 1000);
+                }, 100);
             } else {
                 this.$notify({
                     text: response.message.payment_transaction_id,
