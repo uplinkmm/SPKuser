@@ -63,15 +63,15 @@
                             <p>Wave</p>
                         </div>
                         <div
-                            @click="paymentProviderBtnClicked('aya')"
+                            @click="paymentProviderBtnClicked('aya_pay')"
                             class="text-center pt-4"
                             :class="{
                                 'bg-gray-200 shadow-md rounded-xl':
-                                    paymentProvider == 'aya',
+                                    paymentProvider == 'aya_pay',
                             }"
                         >
                             <img
-                                src="../../../../public/img/money 1.png"
+                                src="../../../../public/img/aya_pay.png"
                                 class="w-14 mx-auto"
                             />
                             <p>AYA Pay</p>
@@ -349,9 +349,10 @@ export default {
                     text: response.message,
                     type: "info",
                 });
+                this.paymentTrId = "";
                 setTimeout(() => {
                     window.location.href = "/home";
-                }, 1000);
+                }, 100);
             } else {
                 this.$notify({
                     text: response.message.payment_transaction_id,
