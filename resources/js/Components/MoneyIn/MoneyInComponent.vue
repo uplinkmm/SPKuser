@@ -63,11 +63,11 @@
                             <p>Wave</p>
                         </div>
                         <div
-                            @click="paymentProviderBtnClicked('aya')"
+                            @click="paymentProviderBtnClicked('aya_pay')"
                             class="text-center pt-4"
                             :class="{
                                 'bg-gray-200 shadow-md rounded-xl':
-                                    paymentProvider == 'aya',
+                                    paymentProvider == 'aya_pay',
                             }"
                         >
                             <img
