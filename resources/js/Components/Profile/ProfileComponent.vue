@@ -123,7 +123,93 @@
                 v-show="step == 'changePass'"
                 class="px-8 py-12 shadow-lg rounded-2xl mb-8 bg-white mt-[25%]"
             >
-                <div class="mb-4">
+                <!-- testing change pass -->
+                <div v-show="5 < 2" class="relative h-full flex flex-col justify-center">
+                    <div class="mb-12 text-center">
+                        <p class="text-2xl mb-4 font-semibold">
+                            ပက်စ်ဝက်ပြောင်းရန်
+                        </p>
+                        <p class="text-sm mb-2 font-semibold">
+                            အသစ်ထည့်လိုသော Password ထည့်သွင်းရန်
+                        </p>
+                    </div>
+                    <div>
+                        <label class="mb-6 rounded-xl shadow-md bg-white block">
+                            <p class="text-xs px-4 pt-4 text-gray-700">
+                                Old Password
+                            </p>
+                            <input
+                                type="text"
+                                v-model="current_password"
+                                placeholder="Old Password"
+                                class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            />
+                        </label>
+                        <label class="mb-6 rounded-xl shadow-md bg-white block">
+                            <p class="text-xs px-4 pt-4 text-gray-700">
+                                New Password
+                            </p>
+                            <input
+                                type="text"
+                                v-model="new_password"
+                                placeholder="New Password"
+                                class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            />
+                        </label>
+                        <label class="mb-6 rounded-xl shadow-md bg-white block">
+                            <p class="text-xs px-4 pt-4 text-gray-700">
+                                Confirm Password
+                            </p>
+                            <input
+                                type="text"
+                                v-model="new_password_confirmation"
+                                placeholder="Confirm Password"
+                                class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            />
+                        </label>
+                    </div>
+                    <div class="mb-0 absolute bottom-4 flex justify-end w-full">
+                        <button
+                            class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                        >
+                            Next <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- testing change pass 2 -->
+                <div v-show="2 < 5" class="relative h-full flex flex-col justify-center">
+                    <div class="mb-12 text-center">
+                        <p class="text-2xl mb-4 font-semibold">
+                            ပက်စ်ဝက်ပြောင်းရန်
+                        </p>
+                        <p class="text-sm mb-2 font-semibold">
+                            ရောက်ရှိလာသော OTP ၆ လုံးကို ထည့်ပါ
+                        </p>
+                    </div>
+                    <div>
+                        <label class="mb-6 rounded-xl shadow-md bg-white block">
+                            <p class="text-xs px-4 pt-4 text-gray-700">
+                                OTP
+                            </p>
+                            <input
+                                type="text"
+                                v-model="current_password"
+                                placeholder="OTP"
+                                class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            />
+                        </label>
+                    </div>
+                    <div class="mb-0 absolute bottom-4 flex justify-end w-full">
+                        <button
+                            class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                        >
+                            Done
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- <div class="mb-4">
                     <label
                         for="old_password"
                         class="text-sm mb-2 relative block"
@@ -164,8 +250,12 @@
                         v-model="new_password_confirmation"
                         class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                     />
-                </div>
-                <div class="mb-0">
+                </div> -->
+
+
+
+
+                <!-- <div class="mb-0">
                     <button
                         :disabled="loading"
                         @click="changePassword()"
@@ -173,8 +263,10 @@
                     >
                         {{ loading ? "Changing..." : "Done" }}
                     </button>
-                </div>
+                </div> -->
             </div>
+
+
             <div
                 v-show="step == 'termsAndConditions'"
                 class="px-8 py-16 shadow-lg rounded-2xl mb-8 bg-white"
@@ -183,6 +275,186 @@
                     <p v-html="terms_and_conditions.name"></p>
                 </div>
             </div>
+
+
+            <div v-show="step == 'changeLang'">
+                <div
+                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                >
+                    <div class=" mb-3">
+                        <img src="../../../../public/img/profile.png" alt="" />
+                    </div>
+                    <div class="text-left font-inter mb-4">
+                        <p class="mb-1 lg:mb-2">
+                            {{ user_profile_data?.name }}
+                            Nge Lay
+                        </p>
+                        <p class="text-sm mb-1 lg:mb-2">
+                            {{ user_profile_data?.phone_number }}
+                            09 797482251
+                        </p>
+                    </div>
+                </div>
+                <div class="px-8 py-16 mb-8 ">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    >
+                    ဘာသာစကား ပြောင်းလဲရန်
+                    </h2>
+                    <div class="flex flex-col gap-y-4 divide-y divide-black">
+                        <button
+                            type="button"
+                            @click="clickChangePass()"
+                            class="flex items-center"
+                        >
+                            <i class="fal fa-key mr-4 w-4"></i>
+                            <p class="">Myanmar</p>
+                        </button>
+                        <a
+                            @click="changeLocale()"
+                            class="cursor-pointer flex items-center pt-3"
+                        >
+                            <i class="fal fa-sort-alt mr-4 w-4"></i>
+                            <p>English</p>
+                        </a>
+                        <!-- <a href="/history" class="flex items-center">
+                            <i class="fal fa-book mr-4 w-4"></i>
+                            <p>{{ $t("History") }}</p>
+                        </a> -->
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>CHi na</p>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+            <div v-show="step == 'history'">
+                <div
+                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                >
+                    <div class=" mb-3">
+                        <img src="../../../../public/img/profile.png" alt="" />
+                    </div>
+                    <div class="text-left font-inter mb-4">
+                        <p class="mb-1 lg:mb-2">
+                            {{ user_profile_data?.name }}
+                            Nge Lay
+                        </p>
+                        <p class="text-sm mb-1 lg:mb-2">
+                            {{ user_profile_data?.phone_number }}
+                            09 797482251
+                        </p>
+                    </div>
+                </div>
+                <div class="px-8 py-16 mb-8 ">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    >
+                    မှတ်တမ်းများ
+                    </h2>
+                    <div class="flex flex-col gap-y-4 divide-y divide-black">
+                        <button
+                            type="button"
+                            @click="clickChangePass()"
+                            class="flex items-center"
+                        >
+                            <i class="fal fa-key mr-4 w-4"></i>
+                            <p class="">ငွေသွင်းငွေထုတ် မှတ်တမ်းများ</p>
+                        </button>
+                        <a
+                            @click="changeLocale()"
+                            class="cursor-pointer flex items-center pt-3"
+                        >
+                            <i class="fal fa-sort-alt mr-4 w-4"></i>
+                            <p>2D မှတ်တမ်း</p>
+                        </a>
+                        <!-- <a href="/history" class="flex items-center">
+                            <i class="fal fa-book mr-4 w-4"></i>
+                            <p>{{ $t("History") }}</p>
+                        </a> -->
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>3D မှတ်တမ်း</p>
+                        </a>
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>ထီပေါက်သူများ</p>
+                        </a>
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>ထီပေါက်စဉ်</p>
+                        </a>
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>ကံစမ်းမဲ မှတ်တမ်း</p>
+                        </a>
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>3D မှတ်တမ်း</p>
+                        </a>
+                        <a
+                            href="/deposit_withdrawal_histories"
+                            class="flex items-center pt-3"
+                        >
+                            <i class="fal fa-money-check-alt mr-4 w-4"></i>
+                            <p>ကံစမ်းမဲ ပေါက်မှတ်တမ်း</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div v-show="step == 'termsAndConditions'">
+                <div
+                    class=" flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                >
+                    <div class=" mb-3">
+                        <img src="../../../../public/img/profile.png" alt="" />
+                    </div>
+                    <div class="text-left font-inter mb-4">
+                        <p class="mb-1 lg:mb-2">
+                            {{ user_profile_data?.name }}
+                            Nge Lay
+                        </p>
+                        <p class="text-sm mb-1 lg:mb-2">
+                            {{ user_profile_data?.phone_number }}
+                            09 797482251
+                        </p>
+                    </div>
+                </div>
+                <div class="px-8 py-16 mb-8 ">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    >
+                    စည်းကမ်းသတ်မှတ်ချက်များ
+                    </h2>
+                    <div class="mb-0">
+                        <p v-html="terms_and_conditions.name"></p>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
         <div
