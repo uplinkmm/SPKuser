@@ -314,6 +314,78 @@
 
         <div :class="step == 1 ? 'block' : 'hidden'" class="pb-16">
             <div
+                class="relative block mb-6 w-full rounded-lg shadow-xl bg-white py-4 px-4"
+            >
+                <div class="w-full flex justify-between">
+                    <label
+                        for="amount"
+                        class="text-sm mb-3 relative block"
+                        >Amount</label
+                    >
+                    <p class="text-xs">
+                        အနည်းဆုံး ၁၀၀ မှ စ ထိုးပါ
+                    </p>
+                </div>
+                <div class="flex gap-x-4 mb-2">
+
+                    <div class="mb-4">
+                        
+                        <input
+                            type="number"
+                            id="amount"
+                            placeholder="Amount"
+                            v-model="each_amount"
+                            @input="validateNumber($event, 'amount')"
+                            ref="amount"
+                            class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <button
+                            class="bg-[#0978D3] text-white px-4 py-2 lg:py-2 w-fit whitespace-nowrap rounded-lg text-base"
+                            @click="changeToStep2(1)"
+                        >
+                            ထိုးမည်
+                        </button>
+                    </div>
+                    <button @click="reverseBetNumbers"
+                        class="px-4 py-2 lg:py-2 bg-black text-white text-sm rounded-lg w-fit whitespace-nowrap mb-3"
+                    >
+                        {{ $t("R") }}
+                    </button>
+
+                </div>
+                <div class="grid grid-cols-2 gap-x-4 mb-3">
+                    <button @click="roundBet"
+                        class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
+                    >
+                        {{ $t("Round Bet") }}
+                    </button>
+                    <button @click="quickBettingBtn"
+                        class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
+                    >
+                        {{ $t("Quick Bet") }}
+                    </button>
+                </div>
+                <div class="flex justify-between px-4">
+                    <div>
+                        <p class="text-xs">
+                            {{ $t("Balance") }} : {{ wallet_balance?.toLocaleString() }} MMK
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-xs">
+                            {{ $t("Closing Time") }} : {{ closingTimeFormat }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- old version -->
+            <!-- <div
                 class="relative block mb-6 w-full rounded-lg shadow-xl bg-white py-4"
             >
                 <div class="flex gap-x-0 lg:gap-x-4">
@@ -391,9 +463,6 @@
                             {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
                     </div>
-                    <!-- <p class="text-sm">
-                        {{ $t("Balance") }}  {{ wallet_balance }} MMK
-                    </p> -->
                     <div>
                         <p class="text-sm">
                             {{ $t("Closing Time") }}
@@ -402,12 +471,9 @@
                             {{ closingTimeFormat }}
                         </p>
                     </div>
-                    <!-- <p class="text-sm">
-                        {{ $t("Closing Time") }} :
-                        {{ closingTimeFormat }}
-                    </p> -->
                 </div>
-            </div>
+            </div> -->
+            
 
             <div>
                 <div class="flex justify-end mb-4">

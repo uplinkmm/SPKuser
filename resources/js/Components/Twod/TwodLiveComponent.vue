@@ -33,7 +33,7 @@
             </p> -->
         </div>
         <div class="flex justify-center mt-2 mb-4">
-            <p class="text-base text-white">
+            <p class="text-base text-black">
                 Updated :
                 <span v-if="twoDList && twoDList.time">
                     {{ convertDatetimeToLongDate12Hour(twoDList.time) }}
