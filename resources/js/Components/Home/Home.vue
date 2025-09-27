@@ -149,7 +149,7 @@
                             </a>
                         </div>
                     </div>
-        
+
                     <div
                         class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
                     >
@@ -162,7 +162,9 @@
                                     src="../../../../public/img/Chart_white.png"
                                 />
                                 <div class="flex justify-center flex-col">
-                                    <p class="text-white text-xl pb-0 pl-2 mb-1">
+                                    <p
+                                        class="text-white text-xl pb-0 pl-2 mb-1"
+                                    >
                                         ထီပေါက်သူများ
                                     </p>
                                     <p class="text-white text-sm pb-0 pl-2">
@@ -172,7 +174,7 @@
                             </div>
                         </a>
                     </div>
-        
+
                     <div
                         class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
                     >
@@ -205,21 +207,23 @@
                     aria-labelledby="lottery-tab"
                 >
                     <div class="w-full">
-                        <div
-                            v-if="selectedGameType.id == 0"
-                            class="mb-12"
-                        >
+                        <div class="mb-12">
                             <a
                                 :href="`/lottery?id=${lottery.id}`"
-                                v-for="(
-                                    lottery, index
-                                    ) in lottery_lists"
-                                    :key="index"
+                                v-for="(lottery, index) in lottery_lists"
+                                :key="index"
                             >
-                                <img
-                                    :src="`${img_prefix}${lottery.photo}`"
-                                    class="w-full mb-6 rounded"
-                                />
+                                <div class="mb-4">
+                                    <div
+                                        class="w-full h-36 overflow-hidden border"
+                                    >
+                                        <img
+                                            :src="`${img_prefix}${lottery.photo}`"
+                                            class="w-full object-cover mb-6 rounded"
+                                        />
+                                    </div>
+                                    <p class="mt-2">{{ lottery.name }}</p>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -383,24 +387,6 @@
                         <div class="mb-12">
                             <div class="w-full">
                                 <div
-                                    v-if="selectedGameType.id == 0"
-                                    class="mb-12"
-                                >
-                                    <a
-                                        :href="`/lottery?id=${lottery.id}`"
-                                        v-for="(
-                                            lottery, index
-                                        ) in lottery_lists"
-                                        :key="index"
-                                    >
-                                        <img
-                                            :src="`${img_prefix}${lottery.photo}`"
-                                            class="w-full mb-6 rounded"
-                                        />
-                                    </a>
-                                </div>
-                                <div
-                                    v-else
                                     class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
                                 >
                                     <div
@@ -424,7 +410,7 @@
                                         >
                                             <img
                                                 class="w-full aspect-[3/2] rounded-lg"
-                                                :src="product.imgUrl"
+                                                :src="product.pivot.image"
                                                 alt=""
                                             />
                                             <p
@@ -633,7 +619,7 @@ export default {
                 url: url,
                 token: this.getToken,
             });
-            this.gameTypes = [{ id: 0, name: "Lottery" }, ...response.data];
+            this.gameTypes = response.data;
             this.selectedGameType = this.gameTypes[0];
             this.getProviders();
         },
@@ -742,6 +728,7 @@ export default {
         // this.getGameLists();
         this.getGameTypes();
         this.getMarqueeAds();
+        this.getActiveLotteryLists();
 
         if (window.location.href.includes("shwepaukkan")) {
             this.img_prefix = "https://admin.shwepaukkan.com";
@@ -775,8 +762,6 @@ export default {
         // }
 
         // // animateMarquee();
-
-        this.getActiveLotteryLists();
     },
 };
 </script>

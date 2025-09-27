@@ -227,9 +227,7 @@ export default {
             if (this.step == 2) {
                 this.step = 1;
                 return;
-            }
-            if (this.step == 1) {
-                // window.location.href = "/home";
+            } else {
                 window.history.back();
                 return;
             }

@@ -4,20 +4,169 @@
         <Navbar title="Lottery" :back-btn="backBtn"></Navbar>
 
         <div :class="step == 1 ? 'block' : 'hidden'" class="px-2 mb-12">
-            <div class="px-2 mb-6">
-                <img :src="img_prefix + game?.photo" class="w-full mb-6" />
-            </div>
-            <div class="px-2">
-                <p class="px-8 py-8 mb-4 bg-[#FEDC23] text-sm">
-                    {{ game?.description }}
+            <div class="mb-8">
+                <div class="px-2 mb-2 w-full h-28 overflow-hidden">
+                    <img
+                        :src="img_prefix + game?.photo"
+                        class="w-full object-cover"
+                    />
+                </div>
+                <p class="mb-4 text-sm">
+                    {{ game?.name }}
                 </p>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <button
+                    class="bg-[#0978D3] w-full py-3 rounded-3xl text-white mb-8"
+                    @click="step = 2"
+                >
+                    ထိုးမည်
+                </button>
+            </div>
+            <div class="rounded-lg p-4">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                >
+                    ကံစမ်းမဲနှင့် ပတ်သတ်သည့် အကြောင်းအရာများ
+                </h2>
+
+                <div class="divide-y divide-gray-200">
+                    <a
+                        href="/2d/live"
+                        class="flex items-center justify-between py-4 cursor-pointer"
+                    >
+                        <div class="flex items-center space-x-4">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-gray-600"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
+                                />
+                            </svg>
+                            <span class="text-lg">ကံစမ်းမဲအကြောင်း</span>
+                        </div>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5 text-gray-400"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                            />
+                        </svg>
+                    </a>
+
+                    <a
+                        hreft="/history?game_id=1"
+                        class="flex items-center justify-between py-4 cursor-pointer"
+                    >
+                        <div class="flex items-center space-x-4">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-gray-600"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
+                                />
+                            </svg>
+                            <span class="text-lg"
+                                >ကံစမ်းမဲ Promotion အကြောင်း</span
+                            >
+                        </div>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5 text-gray-400"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                            />
+                        </svg>
+                    </a>
+
+                    <a
+                        href="/winner_lists/1"
+                        class="flex items-center justify-between py-4 cursor-pointer"
+                    >
+                        <div class="flex items-center space-x-4">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-gray-600"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
+                                />
+                            </svg>
+                            <span class="text-lg">စည်းကမ်းသတ်မှတ်ချက်များ</span>
+                        </div>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5 text-gray-400"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                            />
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-sm mt-6">
+                    ကံစမ်းမဲနှင့် ပတ်သတ်သည့်အချက်အလက်များကို သေချာစွာ
+                    ဖတ်ရှုပေးပါရန်
+                </p>
+            </div>
+        </div>
+
+        <!-- select number -->
+        <div :class="step == 2 ? 'block' : 'hidden'" class="px-2 mb-12">
+            <div class="px-2 mb-12">
+                <p class="px-8 py-2">
+                    {{ game?.name }}
+                </p>
+                <p class="px-8 py-2">ကမ်းစမ်းမဲ</p>
+                <p class="px-8 py-2">တစ်စောင် - {{ game?.price }} ကျပ်</p>
             </div>
             <div class="px-4">
                 <button
-                    class="bg-black px-4 py-3 rounded-lg text-white w-full mb-8"
+                    class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-9 mb-8"
                     @click="chooseNumber"
                 >
-                    Choose Number & Click Here to Buy
+                    ရှေ့ဆက်မည်
                 </button>
 
                 <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
@@ -50,10 +199,11 @@
 
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full rounded-lg shadow-xl bg-white pb-14"
-            :class="step == 2 ? 'block' : 'hidden'"
+            class="relative mb-12 w-full rounded-lg shadow-xl pb-14"
+            :class="step == 3 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
         >
+            <p class="text-center py-4">{{ game?.name }}</p>
             <div
                 class="flex justify-between p-6 bg-[#FDC652] text-white rounded-tr-lg rounded-tl-lg"
             >
@@ -74,7 +224,7 @@
                     </p>
                 </div>
             </div>
-            <div class="mb-5 px-4">
+            <div class="mb-5 px-4 bg-white">
                 <div class="flex justify-end mb-4"></div>
                 <table class="table-auto w-full">
                     <thead>
@@ -118,7 +268,7 @@
                 <button
                     class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
                     @click="
-                        step = 1;
+                        step = 2;
                         resetPromotion();
                     "
                 >
@@ -155,7 +305,7 @@
                 class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
             >
                 <div
-                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                    class="pt-4 pb-8 pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
                 >
                     <div
                         class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
@@ -163,9 +313,7 @@
                         <h4
                             class="text-xl font-medium leading-normal text-surface text-center w-full"
                             id="exampleModalLabel"
-                        >
-                            Choose One More
-                        </h4>
+                        ></h4>
                         <button
                             type="button"
                             id="close_promotion_modal"
@@ -191,26 +339,36 @@
                         </button>
                     </div>
                     <div
-                        class="relative flex-auto py-6 px-16"
+                        class="relative flex-auto pt-2 pb-6 px-16"
                         data-twe-modal-body-ref
                     >
                         <div class="mb-8">
-                            <p class="text-sm mb-8 pb-20 px-6">
-                                You bought {{ bet_numbers.length }} Tickets and
-                                can choose
-                                <span class="font-bold">{{
-                                    freeTicketCount
-                                }}</span>
-                                more coz of promotion
+                            <svg
+                                class="w-16 h-16 mx-auto mb-6"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 640 640"
+                            >
+                                <path
+                                    d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"
+                                />
+                            </svg>
+                            <p class="pb-10 mb-4">
+                                ကံစမ်းမဲ {{ bet_numbers.length }} စောင်
+                                ဝယ်သည့်အတွက် Free {{ freeTicketCount }} စောင်
+                                ရရှိမည်ဖြစ်သည်
+                            </p>
+                            <p class="text-sm">
+                                Free {{ freeTicketCount }} စောင်
+                                ရွေးချယ်ပေးပါရန်
                             </p>
                         </div>
                         <div class="mb-4">
                             <button
-                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                                class="px-4 py-2 lg:py-3 bg-[#0978D3] text-white text-sm rounded-3xl w-full"
                                 data-twe-modal-dismiss
                                 aria-label="Close"
                             >
-                                Ok
+                                ရှေ့ဆက်မည်
                             </button>
                         </div>
                     </div>
@@ -413,7 +571,7 @@ export default {
             wallet_balance: null,
             game: null,
             bet_numbers: [],
-            step: 1, //1 = main page , 2 totale amount
+            step: 1, //1= main page , 2 select number ,3 = total amount
             delete_bet_number: null,
             error_modal_text: "",
             calling_api: false,
@@ -578,7 +736,7 @@ export default {
                     text: "Success betting.",
                     type: "info",
                 });
-                this.step = 1;
+                this.step = 2;
                 this.bet_numbers = [];
                 this.getBetNumbers();
             } else {
@@ -591,7 +749,7 @@ export default {
                     console.log(this.getFreeTicketCount());
                     if (this.promotion_mode && !this.promotion_ticket_counts) {
                         //after choose promotions
-                        this.step = 2;
+                        this.step = 3;
                     } else {
                         // show modal free tickets amount
                         this.ticket_counts_without_promoiton =
@@ -605,7 +763,7 @@ export default {
                 } else {
                     //no free tickets
                     this.resetPromotion();
-                    this.step = 2;
+                    this.step = 3;
                 }
             } else {
                 this.showErrorModal("Choose lottery numbers first!");
