@@ -13,47 +13,71 @@
                 </p>
                 
                 <button
-                        class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-sm transition-colors duration-300"
+                        class="w-fit px-8 bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-white font-bold py-3 rounded-md shadow-md text-sm transition-colors duration-300"
                     >
-                    <i class="fal fa-phone mr-4 w-4"></i>Customer Service သို့ ဖုန်းခေါ်ရန်
+                    <i class="fal fa-phone mr-4 w-4"></i>Call Customer Service
                     </button>
             </div>
             <div class="mb-4">
-                <input
-                    type="text"
-                    id="user_name"
-                    v-model="user_name"
-                    :placeholder="$t('Name')"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                />
-            </div>
-            <div class="mb-4">
-                <div class="relative">
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class="text-xs px-4 pt-4 text-gray-700">
+                        {{ $t('Name') }}
+                    </p>
                     <input
                         type="text"
-                        id="phone_number"
-                        v-model="phone_number"
-                        :placeholder="$t('Phone Number')"
-                        class="block w-full py-2 px-2 pr-16 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-black"
+                        id="user_name"
+                        v-model="user_name"
+                        :placeholder="$t('Name')"
+                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                     />
-                    <button
-                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
-                        @click="initialRegister"
-                        :disabled="countdown != 0"
-                    >
-                        Get OTP
-                    </button>
-                </div>
+                </label>
             </div>
             <div class="mb-4">
-                <div class="relative">
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class="text-xs px-4 pt-4 text-gray-700">
+                        {{ $t('Phone Number') }}
+                    </p>
+                    <div class="relative">
+                        <input
+                            type="text"
+                            id="phone_number"
+                            v-model="phone_number"
+                            :placeholder="$t('Phone Number')"
+                            class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                        />
+                        <button
+                            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
+                            @click="initialRegister"
+                            :disabled="countdown != 0"
+                        >
+                            Get OTP
+                        </button>
+                    </div>
+                </label>
+                
+            </div>
+            <div class="mb-4">
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class="text-xs px-4 pt-4 text-gray-700">
+                        OTP
+                    </p>
                     <input
                         type="text"
                         id="otp"
                         v-model="otp"
                         placeholder="OTP"
                         :disabled="!otpRequested"
-                        class="block w-full py-2 px-2 pr-16 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-black"
+                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                    />
+                </label>
+                <!-- <div class="relative">
+                    <input
+                        type="text"
+                        id="otp"
+                        v-model="otp"
+                        placeholder="OTP"
+                        :disabled="!otpRequested"
+                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                     />
                     <button
                         class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-8 py-1"
@@ -67,39 +91,52 @@
                             }}
                         </p>
                     </button>
-                </div>
+                </div> -->
             </div>
 
             <div class="mb-4 relative">
-                <input
-                    :type="show_password ? 'text' : 'password'"
-                    id="password"
-                    v-model="password"
-                    :disabled="!otpRequested"
-                    placeholder="Password"
-                    class="block w-full py-2 px-2 pr-10 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
-                />
-                <i
-                    v-if="!show_password"
-                    @click="show_password = !show_password"
-                    class="far fa-eye text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                ></i>
-                <i
-                    v-if="show_password"
-                    @click="show_password = !show_password"
-                    class="far fa-eye-slash text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                ></i>
+                <label class="mb-6 rounded-xl shadow-md bg-white block relative">
+                    <p class="text-xs px-4 pt-4 text-gray-700">
+                        Password
+                    </p>
+                    <input
+                        :type="show_password ? 'text' : 'password'"
+                        id="password"
+                        v-model="password"
+                        :disabled="!otpRequested"
+                        placeholder="Password"
+                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                    />
+                    <i
+                        v-if="!show_password"
+                        @click="show_password = !show_password"
+                        class="far fa-eye text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
+                    ></i>
+                    <i
+                        v-if="show_password"
+                        @click="show_password = !show_password"
+                        class="far fa-eye-slash text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
+                    ></i>
+                </label>
+
+                
             </div>
 
             <div class="mb-4">
-                <input
-                    :type="show_password ? 'text' : 'password'"
-                    id="confirm_password"
-                    v-model="confirm_password"
-                    placeholder="Confirm Password"
-                    :disabled="!otpRequested"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                />
+                <label class="mb-6 rounded-xl shadow-md bg-white block">
+                    <p class="text-xs px-4 pt-4 text-gray-700">
+                        Confirm Password
+                    </p>
+                    <input
+                        :type="show_password ? 'text' : 'password'"
+                        id="confirm_password"
+                        v-model="confirm_password"
+                        placeholder="Confirm Password"
+                        :disabled="!otpRequested"
+                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                    />
+                </label>
+                
             </div>
             <!-- <div class="mb-8">
                 <input
@@ -115,7 +152,7 @@
                 <button
                     @click="register"
                     :disabled="!otpRequested"
-                    class="block w-full py-2 px-2 text-sm rounded-md border border-[#E4BD1B] bg-black text-white focus:ring-0 focus:shadow-none"
+                    class="block w-full py-3 px-2 text-sm rounded-full border border-[#E4BD1B] bg-black text-white focus:ring-0 focus:shadow-none"
                 >
                     Sign Up
                 </button>

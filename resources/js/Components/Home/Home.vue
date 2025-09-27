@@ -86,7 +86,7 @@
                                     src="../../../../public/img/image 2.png"
                                 />
                                 <p
-                                    class="text-white text-xl self-end pb-6 pl-4"
+                                    class="text-[#ffc529] text-xl self-end pb-6 pl-4"
                                 >
                                     2D ထိုးမည်
                                 </p>
