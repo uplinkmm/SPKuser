@@ -3,6 +3,21 @@
         class="w-full h-full min-h-[60vh] mx-auto px-8 pb-2 flex flex-row justify-center relative"
     >
         <div class="">
+            <div class="mb-[10vh] text-center">
+                <p class="text-base mb-3 font-semibold">
+                    အကောင့်ဖွင့်ရန်
+                </p>
+                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-28 h-28 mb-6 mx-auto" alt="" />
+                <p class=" text-sm mb-4">
+                    OTP ကျမလာပါ Customer Service သို့ ဆက်သွယ်နိုင်ပါသည်
+                </p>
+                
+                <button
+                        class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-sm transition-colors duration-300"
+                    >
+                    <i class="fal fa-phone mr-4 w-4"></i>Customer Service သို့ ဖုန်းခေါ်ရန်
+                    </button>
+            </div>
             <div class="mb-4">
                 <input
                     type="text"
@@ -113,7 +128,7 @@
             <input type="hidden" name="remember" value="true" />
         </form>
     </main>
-    <div class="contents">
+    <!-- <div class="contents">
         <div
             class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
         >
@@ -147,7 +162,7 @@
             </svg>
             Continue with Facebook
         </a>
-    </div>
+    </div> -->
 </template>
 
 <script>

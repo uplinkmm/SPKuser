@@ -4,6 +4,9 @@
         <main
             class="frame-container flex flex-row justify-center items-center relative"
         >
+            <button @click="isLogin = false" class="text-black text-base absolute top-8 right-4 font-semibold" :class="isLogin ? 'block' : 'hidden'">
+                အကောင့်ဖွင့်ရန်
+            </button>
             <div
                 v-if="forgot_password"
                 class="flex justify-center items-center flex-col min-h-screen"
@@ -22,14 +25,22 @@
                 v-if="!forgot_password"
                 class="flex justify-center items-center flex-col min-h-screen"
             >
-                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-28 h-28 mb-4" alt="" />
-                <p class=" mb-2">
-                    ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်
-                </p>
-                <p class="text-2xl font-semibold">
-                    အကောင့်ဝင်ရန်
-                </p>
-                <ul class="flex space-x-4 mb-6" role="tablist" data-twe-nav-ref>
+                
+                <div v-if="isLogin">
+                    <login-component
+                                :fcm-token="fcmToken"
+                                :change-forgot-password="changeForgotPassword"
+                                :set-error-box="setErrorBox"
+                    ></login-component>
+                </div>
+                <div v-else>
+                    <register-component
+                                :fcm-token="fcmToken"
+                                :set-error-box="setErrorBox"
+                    ></register-component>
+                </div>
+
+                <!-- <ul class="flex space-x-4 mb-6" role="tablist" data-twe-nav-ref>
                     <li role="presentation">
                         <a
                             href="#tabs-twoD"
@@ -82,7 +93,7 @@
                             :set-error-box="setErrorBox"
                         ></register-component>
                     </div>
-                </div>
+                </div> -->
             </div>
         </main>
     </div>
@@ -216,6 +227,8 @@ export default {
                 error: true,
                 message: "",
             },
+
+            isLogin: true,
         };
     },
     mixins: [fcmMixin],

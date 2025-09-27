@@ -1,52 +1,78 @@
 <template>
     <main
-        class="w-full h-full min-h-[30vh] mx-auto px-0 pb-2 flex flex-row justify-center relative"
+        class="w-full h-full min-h-screen mx-auto px-0 pb-2 flex justify-center flex-col relative"
     >
-        <div class="" @keyup.enter="login">
-            <div class="mb-4">
-                <input
-                    type="text"
-                    id="phone_number_login"
-                    v-model="phone_number"
-                    :placeholder="$t('Phone Number')"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
-                />
+        
+        <div class="">
+            <div class="mb-[20vh] text-center">
+                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-28 h-28 mb-4 mx-auto" alt="" />
+                <p class=" mb-2">
+                            ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်
+                </p>
+                <p class="text-2xl font-semibold">
+                            အကောင့်ဝင်ရန်
+                </p>
             </div>
-            <div class="mb-8 relative">
-                <input
-                    :type="show_password ? 'text' : 'password'"
-                    id="password_login"
-                    v-model="password"
-                    placeholder="Password"
-                    class="block w-full py-2 px-2 pr-10 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
-                />
-                <i
-                    v-if="!show_password"
-                    @click="show_password = !show_password"
-                    class="far fa-eye text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                ></i>
-                <i
-                    v-if="show_password"
-                    @click="show_password = !show_password"
-                    class="far fa-eye-slash text-lg absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                ></i>
-            </div>
+            <div class="" @keyup.enter="login">
+                <div class="mb-4">
+                    <label class="mb-6 rounded-xl shadow-md bg-white block">
+                        <p class="text-xs px-4 pt-4 text-gray-700">
+                            {{ $t('Phone Number') }}
+                        </p>
+                        <input
+                            type="text"
+                            id="phone_number_login"
+                            v-model="phone_number"
+                            :placeholder="$t('Phone Number')"
+                            class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                        />
+                    </label>
 
-            <div class="mb-4">
+                    
+                </div>
+                <div class="mb-8 relative">
+                    <label class="mb-6 rounded-xl shadow-md bg-white block relative">
+                        <p class="text-xs px-4 pt-4 text-gray-700">
+                            Password
+                        </p>
+                        <input
+                            :type="show_password ? 'text' : 'password'"
+                            id="password_login"
+                            v-model="password"
+                            placeholder="Password"
+                            class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                        />
+                        <i
+                            v-if="!show_password"
+                            @click="show_password = !show_password"
+                            class="far fa-eye text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
+                        ></i>
+                        <i
+                            v-if="show_password"
+                            @click="show_password = !show_password"
+                            class="far fa-eye-slash text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
+                        ></i>
+                    </label>
+
+                    
+                </div>
+
+                <div class="mb-4">
+                    <button
+                        :disabled="loading"
+                        @click="login"
+                        class="block w-full py-2 px-2 text-sm rounded-full bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                    >
+                        {{ loading ? "Loading..." : "Login" }}
+                    </button>
+                </div>
                 <button
-                    :disabled="loading"
-                    @click="login"
-                    class="block w-full py-2 px-2 text-sm rounded-md bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                    class="text-sm w-full text-center text-black hover:underline"
+                    @click="changeForgotPassword(true)"
                 >
-                    {{ loading ? "Loading..." : "Login" }}
+                    Forgot password?
                 </button>
             </div>
-            <button
-                class="text-sm w-full text-center text-gray-300 hover:underline"
-                @click="changeForgotPassword(true)"
-            >
-                Forgot password?
-            </button>
         </div>
         <form
             method="POST"
