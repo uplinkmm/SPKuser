@@ -2,7 +2,7 @@
     <div class="frame-container bg-white min-h-[100vh]">
         <Navbar title="2D" :need-auth="false" :back-btn="backBtn"></Navbar>
 
-        <div
+        <!-- <div
             class="primary-bg flex justify-center mt-2 rounded-lg gap-2 items-center text-sm lg:text-base"
         >
             <a href="/history?game_id=1" class="text-center p-8">
@@ -23,7 +23,7 @@
                     <p class="text-white">ထီပေါက်သူ</p>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div class="flex justify-center mt-2">
             <p class="text-[96px] w-fit text-white font-semibold">
                 {{ twoDList?.twod }}
@@ -44,7 +44,7 @@
             <div
                 v-for="(twoD, index) in twoDList.results"
                 :key="index"
-                class="primary-bg text-white px-6 py-4 rounded-md mb-3"
+                class="bg-[#FF0000] text-white px-6 py-4 rounded-md mb-3"
             >
                 <div class="text-center">
                     <p class="inline-block pr-2">

@@ -341,15 +341,15 @@
                     <li
                         v-for="(type, index) in gameTypes"
                         :key="index"
-                        class="tab-list-item"
-                        :class="type == selectedGameType ? 'active-tabs' : ''"
+                        class="my-2 block pr-4 pb-2 font-semibold pt-4 text-sm  relative whitespace-nowrap cursor-pointer underline-border"
+                        :class="type == selectedGameType ? 'after:!block text-black' : 'text-gray-600'"
                     >
                         <a
                             @click="
                                 selectedGameType = type;
                                 getProviders();
                             "
-                            class="tab-list-item-text"
+                            class=""
                             >{{ type.name }}</a
                         >
                     </li>
