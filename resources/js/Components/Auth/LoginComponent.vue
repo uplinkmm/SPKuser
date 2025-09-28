@@ -1,11 +1,11 @@
 <template>
     <main
-        class="w-full h-full min-h-screen mx-auto px-0 pb-2 flex justify-center flex-col relative"
+        class="w-full h-full min-h-screen mx-auto px-0 pb-2 flex justify-center flex-row relative"
     >
         
-        <div class="">
-            <div class="mb-[20vh] text-center">
-                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-28 h-28 mb-4 mx-auto" alt="" />
+        <div class=" w-full">
+            <div class="mb-[10vh] text-center pt-24">
+                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-4 mx-auto" alt="" />
                 <p class=" mb-2">
                             ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်
                 </p>
@@ -61,7 +61,7 @@
                     <button
                         :disabled="loading"
                         @click="login"
-                        class="block w-full py-2 px-2 text-sm rounded-full bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                        class="block w-full py-3 px-2 text-sm rounded-full bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
                     >
                         {{ loading ? "Loading..." : "Login" }}
                     </button>

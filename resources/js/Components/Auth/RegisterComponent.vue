@@ -1,9 +1,9 @@
 <template>
     <main
-        class="w-full h-full min-h-[60vh] mx-auto px-8 pb-2 flex flex-row justify-center relative"
+        class="w-full h-full mx-auto px-0 pb-2 flex flex-row justify-center relative"
     >
-        <div class="">
-            <div class="mb-[10vh] text-center">
+        <div class="w-full">
+            <div class="mb-[5vh] pt-16 text-center">
                 <p class="text-base mb-3 font-semibold">
                     အကောင့်ဖွင့်ရန်
                 </p>
