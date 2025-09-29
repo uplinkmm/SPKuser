@@ -177,10 +177,11 @@
                     </div>
                     <div class="mb-0 absolute bottom-4 flex justify-end w-full">
                         <button
-                            @click="step = 'changePassStepTwo'"
-                            class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                            @click="handelChangePasswordStepOne"
+                            :disabled="passwordLoading"
+                            class="bg-black disabled:bg-gray-600 text-white pl-8 pr-7 py-3 w-fit rounded-full"
                         >
-                            Next
+                            {{ passwordLoading ? "Loading.." : "Next" }}
                             <i class="fas fa-chevron-right ml-2 text-sm"></i>
                         </button>
                     </div>
@@ -201,7 +202,7 @@
                             <p class="text-xs px-4 pt-4 text-gray-700">OTP</p>
                             <input
                                 type="text"
-                                v-model="current_password"
+                                v-model="otp"
                                 placeholder="OTP"
                                 class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                             />
@@ -209,9 +210,11 @@
                     </div>
                     <div class="mb-0 absolute bottom-4 flex justify-end w-full">
                         <button
-                            class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                            @click="handelChangePasswordStepTwo"
+                            :disabled="passwordLoading"
+                            class="bg-black text-white disabled:bg-slate-600 pl-8 pr-7 py-3 w-fit rounded-full"
                         >
-                            Done
+                            {{ passwordLoading ? "Loading..." : "Done" }}
                         </button>
                     </div>
                 </div>
@@ -623,6 +626,8 @@ export default {
                 { code: "cn", name: "Chinese" },
                 { code: "th", name: "Thai" },
             ],
+            otp: "",
+            passwordLoading: false,
         };
     },
     computed: {
@@ -714,7 +719,7 @@ export default {
         dateFormat(date_time) {
             return moment(date_time).format("MM DD YYYY");
         },
-        async changePassword() {
+        async handelChangePasswordStepOne() {
             if (
                 this.new_password == "" ||
                 this.current_password == "" ||
@@ -745,13 +750,54 @@ export default {
                 "new_password_confirmation",
                 this.new_password_confirmation
             );
-            this.loading = true;
+            this.passwordLoading = true;
             let response = await postApiData({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
-            this.loading = false;
+            this.passwordLoading = false;
+            if (response.success) {
+                this.$notify({
+                    text: response.message,
+                    type: "info",
+                });
+                this.step = "changePassStepTwo";
+                this.title = "Change Password";
+            } else {
+                this.$notify({
+                    text:
+                        response.message?.new_password ||
+                        response.message?.current_password ||
+                        response.message?.new_password_confirmation,
+                    type: "error",
+                });
+            }
+        },
+        async handelChangePasswordStepTwo() {
+            if (this.otp.length < 6) {
+                this.$notify({
+                    text: "Password must be at least 6 characters long.",
+                    type: "info",
+                });
+                return;
+            }
+            let url = "/api/change_password";
+            let formData = new FormData();
+            formData.append("otp", this.otp);
+            formData.append("current_password", this.current_password);
+            formData.append("new_password", this.new_password);
+            formData.append(
+                "new_password_confirmation",
+                this.new_password_confirmation
+            );
+            this.passwordLoading = true;
+            let response = await postApiData({
+                url: url,
+                form_data: formData,
+                token: this.getToken,
+            });
+            this.passwordLoading = false;
             if (response.success) {
                 this.$notify({
                     text: response.message,
