@@ -31,7 +31,7 @@
                     ကံစမ်းမဲနှင့် ပတ်သတ်သည့် အကြောင်းအရာများ
                 </h2>
 
-                <div class="divide-y divide-gray-200">
+                <div class="divide-y divide-gray-700">
                     <a
                         href="/2d/live"
                         class="flex items-center justify-between py-4 cursor-pointer"
@@ -43,7 +43,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-6 h-6 text-gray-600"
+                                class="w-6 h-6 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -59,7 +59,7 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="w-5 h-5 text-gray-400"
+                            class="w-5 h-5 text-gray-700"
                         >
                             <path
                                 stroke-linecap="round"
@@ -98,7 +98,7 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="w-5 h-5 text-gray-400"
+                            class="w-5 h-5 text-gray-700"
                         >
                             <path
                                 stroke-linecap="round"
@@ -119,7 +119,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-6 h-6 text-gray-600"
+                                class="w-6 h-6 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -153,7 +153,7 @@
         </div>
 
         <!-- select number -->
-        <div :class="step == 2 ? 'block' : 'hidden'" class="px-2 mb-12">
+        <div :class="step == 2 ? 'block' : 'hidden'" class="px-2 mb-12 pb-12">
             <div class="px-2 mb-12">
                 <p class="px-8 py-2">
                     {{ game?.name }}
@@ -163,7 +163,7 @@
             </div>
             <div class="px-4">
                 <button
-                    class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-9 mb-8"
+                    class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-fit mb-8"
                     @click="chooseNumber"
                 >
                     ရှေ့ဆက်မည်
@@ -199,13 +199,13 @@
 
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full rounded-lg shadow-xl pb-14"
+            class="relative mb-12 w-full  pb-14"
             :class="step == 3 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
         >
             <p class="text-center py-4">{{ game?.name }}</p>
             <div
-                class="flex justify-between p-6 bg-[#FDC652] text-white rounded-tr-lg rounded-tl-lg"
+                class="flex justify-between p-6 bg-[#fff] text-black rounded-tr-lg rounded-tl-lg"
             >
                 <div>
                     <p class="pr-8 py-2">
@@ -224,7 +224,7 @@
                     </p>
                 </div>
             </div>
-            <div class="mb-5 px-4 bg-white">
+            <div class="mb-5 px-4 bg-white pb-12">
                 <div class="flex justify-end mb-4"></div>
                 <table class="table-auto w-full">
                     <thead>
@@ -265,7 +265,7 @@
                 </table>
             </div>
             <div class="absolute bottom-0 mb-4 w-full flex justify-center">
-                <button
+                <!-- <button
                     class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
                     @click="
                         step = 2;
@@ -273,9 +273,9 @@
                     "
                 >
                     Cancel
-                </button>
+                </button> -->
                 <button
-                    class="bg-[#FDC652] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
+                    class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-full mb-8 mx-8"
                     @click="sendBetting"
                     :disabled="calling_api"
                 >
