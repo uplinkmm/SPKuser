@@ -501,7 +501,7 @@
                             <button
                                 :disabled="loading"
                                 @click="sendFeedback"
-                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-yellow-100 text-white text-sm rounded-lg w-full"
                             >
                                 {{ loading ? "Sending..." : "Send" }}
                             </button>
