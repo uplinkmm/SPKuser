@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Action;
 
+use App\Models\Game;
 use App\Models\GameSetting;
 
 class GameData
@@ -13,8 +14,11 @@ class GameData
     }
     public function getGame($gameSettingId)
     {
-        $gameSetting = GameSetting::with('game')->find($gameSettingId);
-        $gameType = $gameSetting->game->type;
+
+        // $gameSetting = GameSetting::with('game')->find($gameSettingId);
+        // $gameType = $gameSetting->game->type;
+        $game1=Game::find($this->game_id);
+        $gameType=$game1->type;
         if ($gameType == '2d' || $gameType == 'draw') {
             $game = $this->get2dGame($gameSettingId);
         } elseif ($gameType == '3d') {
@@ -61,6 +65,7 @@ class GameData
             unset($game['threedSetting']);
         }
         // Combine and rename the settings in the game object
+        $game->game_type=$game->type;
         $game->game_setting = $setting;
         $game->three_d_setting = null;
         // Return the modified game object
