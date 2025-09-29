@@ -13,13 +13,16 @@ class ProfileController extends Controller
     private $profileRepo;
     public function __construct(ProfileInterface $repo)
     {
-        $this->profileRepo=$repo;
+        $this->profileRepo = $repo;
     }
-    public function getProfile(Request $request){
-        $data=$this->profileRepo->getProfile($request);
+    public function getProfile(Request $request)
+    {
+        $data = $this->profileRepo->getProfile($request);
         ResponseData($data);
     }
-    public function changePassword(ChangePasswordRequest $request){
-        $this->profileRepo->changePassword($request);
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        return $this->profileRepo->changePassword($request);
+        // ResponseMessage('Password is match', 200);
     }
 }
