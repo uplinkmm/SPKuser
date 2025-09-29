@@ -346,7 +346,7 @@
                             <button
                                 :disabled="loading"
                                 @click="transferWallet"
-                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-[#bdb5a6] disabled:text-gray-300 hover:bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-yellow-100 disabled:text-gray-300 hover:bg-[#FFBF33] text-white text-sm rounded-lg w-full"
                             >
                                 {{ loading ? "Loading.." : "Transfer" }}
                             </button>

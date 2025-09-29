@@ -4,24 +4,26 @@
     >
         <div class="">
             <div class="mb-[10vh] text-center">
-                <p class="text-base mb-3 font-semibold">
-                    အကောင့်ဖွင့်ရန်
-                </p>
-                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-28 h-28 mb-6 mx-auto" alt="" />
-                <p class=" text-sm mb-4">
+                <p class="text-base mb-3 font-semibold">အကောင့်ဖွင့်ရန်</p>
+                <img
+                    src="../../../../public/img/SPK Logo.png"
+                    class="bg-black p-4 rounded-full w-28 h-28 mb-6 mx-auto"
+                    alt=""
+                />
+                <p class="text-sm mb-4">
                     OTP ကျမလာပါ Customer Service သို့ ဆက်သွယ်နိုင်ပါသည်
                 </p>
-                
+
                 <button
-                        class="w-fit px-8 bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-white font-bold py-3 rounded-md shadow-md text-sm transition-colors duration-300"
-                    >
+                    class="w-fit px-8 bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-white font-bold py-3 rounded-md shadow-md text-sm transition-colors duration-300"
+                >
                     <i class="fal fa-phone mr-4 w-4"></i>Call Customer Service
-                    </button>
+                </button>
             </div>
             <div class="mb-4">
                 <label class="mb-6 rounded-xl shadow-md bg-white block">
                     <p class="text-xs px-4 pt-4 text-gray-700">
-                        {{ $t('Name') }}
+                        {{ $t("Name") }}
                     </p>
                     <input
                         type="text"
@@ -35,7 +37,7 @@
             <div class="mb-4">
                 <label class="mb-6 rounded-xl shadow-md bg-white block">
                     <p class="text-xs px-4 pt-4 text-gray-700">
-                        {{ $t('Phone Number') }}
+                        {{ $t("Phone Number") }}
                     </p>
                     <div class="relative">
                         <input
@@ -48,19 +50,32 @@
                         <button
                             class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
                             @click="initialRegister"
-                            :disabled="countdown != 0"
+                            :disabled="
+                                countdown != 0 || initial_register_loading
+                            "
                         >
-                            Get OTP
+                            <p v-if="initial_register_loading">
+                                <i class="fal fa-spinner animate-spin w-10"></i>
+                            </p>
+                            <p v-if="countdown > 0">
+                                {{
+                                    countdown.toString().padStart(2, "0") + " s"
+                                }}
+                            </p>
+                            <p
+                                v-if="
+                                    countdown == 0 && !initial_register_loading
+                                "
+                            >
+                                Get OTP
+                            </p>
                         </button>
                     </div>
                 </label>
-                
             </div>
             <div class="mb-4">
                 <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class="text-xs px-4 pt-4 text-gray-700">
-                        OTP
-                    </p>
+                    <p class="text-xs px-4 pt-4 text-gray-700">OTP</p>
                     <input
                         type="text"
                         id="otp"
@@ -95,10 +110,10 @@
             </div>
 
             <div class="mb-4 relative">
-                <label class="mb-6 rounded-xl shadow-md bg-white block relative">
-                    <p class="text-xs px-4 pt-4 text-gray-700">
-                        Password
-                    </p>
+                <label
+                    class="mb-6 rounded-xl shadow-md bg-white block relative"
+                >
+                    <p class="text-xs px-4 pt-4 text-gray-700">Password</p>
                     <input
                         :type="show_password ? 'text' : 'password'"
                         id="password"
@@ -118,8 +133,6 @@
                         class="far fa-eye-slash text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
                     ></i>
                 </label>
-
-                
             </div>
 
             <div class="mb-4">
@@ -136,7 +149,6 @@
                         class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                     />
                 </label>
-                
             </div>
             <!-- <div class="mb-8">
                 <input
@@ -151,10 +163,13 @@
             <div>
                 <button
                     @click="register"
-                    :disabled="!otpRequested"
+                    :disabled="!otpRequested || register_loading"
                     class="block w-full py-3 px-2 text-sm rounded-full border border-[#E4BD1B] bg-black text-white focus:ring-0 focus:shadow-none"
                 >
-                    Sign Up
+                    <p v-if="register_loading">
+                        <i class="fal fa-spinner animate-spin"></i>
+                    </p>
+                    <p v-else>Sign Up</p>
                 </button>
             </div>
         </div>
@@ -219,11 +234,13 @@ export default {
             otp: null,
             password: null,
             confirm_password: null,
-           // code: null,
+            // code: null,
             remember: true,
             otpRequested: false,
             show_password: false,
             countdown: 0,
+            initial_register_loading: false,
+            register_loading: false,
         };
     },
     props: {
@@ -249,7 +266,9 @@ export default {
             formData.append("phone_number", this.phone_number);
             formData.append("name", this.user_name);
             let url = `/api/initial_register`;
+            this.initial_register_loading = true;
             let response = await postApiData({ url: url, form_data: formData });
+            this.initial_register_loading = false;
             if (response.success) {
                 this.otpRequested = true;
                 this.setErrorBox(false, response.message);
@@ -299,9 +318,9 @@ export default {
             formData.append("otp", this.otp);
             // formData.append("code", this.code);
             formData.append("fcm_token", this.fcmToken); //from mixin
-
+            this.register_loading = true;
             let response = await postApiData({ url: url, form_data: formData });
-
+            this.register_loading = false;
             if (response.success) {
                 this.setErrorBox(false, response.message);
                 this.token = response.data.token;
