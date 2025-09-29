@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use App\Http\Action\CustomerWalletBalance;
 use App\Http\Action\WalletTransactionCommon;
+use App\Models\LotteryWinningNumber;
 use App\Repositories\Betting\BettingInterface;
 
 class BettingRepository implements BettingInterface
@@ -228,7 +229,7 @@ class BettingRepository implements BettingInterface
         }
         $new_data = new stdClass();
         #betting number_list
-           if ($game->game_type == '2d') {
+        if ($game->game_type == '2d') {
             $bettin_number_list = $this->get2dBettingNumberList($game);
         } elseif ($game->game_type == '3d') {
             $bettin_number_list = $this->get3dBettingNumberList($game);
@@ -252,6 +253,8 @@ class BettingRepository implements BettingInterface
         }
         return $new_data;
     }
+
+    
 
     public function get2dBettingNumberList($gameSetting)
     {
