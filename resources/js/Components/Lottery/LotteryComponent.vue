@@ -24,7 +24,7 @@
                     ထိုးမည်
                 </button>
             </div>
-            <div v-if="1 > 2" class="rounded-lg p-4">
+            <div v-if="sub_step == 1" class="rounded-lg p-4">
                 <h2
                     class="text-lg font-bold mb-4 dash-under after:!w-8 relative after:!left-0 inline-block pb-3"
                 >
@@ -33,7 +33,7 @@
 
                 <div class="divide-y divide-gray-700">
                     <a
-                        href="/2d/live"
+                        @click="sub_step = 2"
                         class="flex items-center justify-between py-4 cursor-pointer"
                     >
                         <div class="flex items-center space-x-4">
@@ -70,7 +70,7 @@
                     </a>
 
                     <a
-                        hreft="/history?game_id=1"
+                        @click="sub_step = 3"
                         class="flex items-center justify-between py-4 cursor-pointer"
                     >
                         <div class="flex items-center space-x-4">
@@ -109,7 +109,7 @@
                     </a>
 
                     <a
-                        href="/winner_lists/1"
+                        @click="sub_step = 4"
                         class="flex items-center justify-between py-4 cursor-pointer"
                     >
                         <div class="flex items-center space-x-4">
@@ -151,15 +151,50 @@
                 </p>
             </div>
 
-            <div v-if="1 < 2" class="px-8 pb-4 mb-8">
+            <div v-if="sub_step == 2" class="px-8 pb-4 mb-8">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                >
+                    ကံစမ်းမဲအကြောင်း
+                </h2>
+                <div class="mb-0 mt-4">
+                    <p>
+                        {{ game.description }}
+                    </p>
+                </div>
+            </div>
+            <div v-if="sub_step == 3" class="px-8 pb-4 mb-8">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                >
+                    ကံစမ်းမဲ Promotion အကြောင်း
+                </h2>
+                <div class="mb-0 mt-4">
+                    <div v-if="lottery_promotion_tickets.length > 0">
+                        <p
+                            v-for="(
+                                promotion, index
+                            ) in lottery_promotion_tickets"
+                            :key="index"
+                            class="mb-2 text-lg"
+                        >
+                            {{ promotion.qty }} စောင်၀ယ်လျှင်
+                            {{ promotion.additional_qty }} စောင် အပိုရရှိပါမည်
+                        </p>
+                    </div>
+                    <div v-else>Prmotion မရှိပါ</div>
+                </div>
+            </div>
+            <div v-if="sub_step == 4" class="px-8 pb-4 mb-8">
                 <h2
                     class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
                 >
                     စည်းကမ်းသတ်မှတ်ချက်များ
                 </h2>
                 <div class="mb-0 mt-4">
-                    <!-- <p v-html="terms_and_conditions.name"></p> -->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora excepturi consectetur id eveniet? Ad id aliquam assumenda iusto. Reprehenderit, hic et! Voluptatem, doloremque voluptate. Explicabo quaerat quidem sint labore aliquam.</p>
+                    <p>
+                        {{ game.terms_and_condition }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -211,7 +246,7 @@
 
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full  pb-14"
+            class="relative mb-12 w-full pb-14"
             :class="step == 3 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
         >
@@ -593,6 +628,7 @@ export default {
             promotion_ticket_ids: [],
             promotion_mode: false,
             img_prefix: "",
+            sub_step: 1, //1,2,3,4
         };
     },
     computed: {
@@ -820,7 +856,22 @@ export default {
             return moment(time, "HH:mm").format("hh:mm A");
         },
         backBtn() {
-            window.history.back();
+            if (this.step == 3) {
+                this.step = 2;
+                return;
+            }
+            if (this.step == 2) {
+                this.step = 1;
+                return;
+            }
+            if (this.step == 1) {
+                if (this.sub_step > 1) {
+                    this.sub_step = 1;
+                    return;
+                } else {
+                    window.history.back();
+                }
+            }
         },
         getFreeTicketCount() {
             let freeTicketCount = 0;
