@@ -49,10 +49,10 @@
                 </div> -->
             </div>
 
-            <div
+            <div v-if="!getUser"
                 class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
-                <a v-if="!getUser" href="/login_register">
+                <a href="/login_register">
                     <div
                         class="flex justify-start gap-x-4 w-10/12 mx-auto py-6"
                     >
@@ -330,7 +330,7 @@
 
             <div class="">
                 <ul
-                    class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
+                    class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar pb-4"
                     role="tablist"
                     data-twe-nav-ref
                 >
@@ -341,7 +341,7 @@
                     <li
                         v-for="(type, index) in gameTypes"
                         :key="index"
-                        class="my-2 block pr-4 pb-2 font-semibold pt-4 text-sm  relative whitespace-nowrap cursor-pointer underline-border"
+                        class="my-2 block pr-4 pb-2 font-semibold pt-1 text-sm  relative whitespace-nowrap cursor-pointer underline-border"
                         :class="type == selectedGameType ? 'after:!block text-black' : 'text-gray-600'"
                     >
                         <a
