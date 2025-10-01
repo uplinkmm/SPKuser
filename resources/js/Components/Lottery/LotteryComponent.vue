@@ -184,6 +184,7 @@
                     </div>
                     <div v-else>
                         <p class="text-lg">Prmotion မရှိပါ</p>
+                        
                     </div>
                 </div>
             </div>
