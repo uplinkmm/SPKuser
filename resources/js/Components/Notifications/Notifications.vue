@@ -1,12 +1,10 @@
 <template>
-    <div
-        class="frame-container pb-20 min-h-[100vh] flex flex-col"
-    >
+    <div class="frame-container pb-20 min-h-[100vh] flex flex-col">
         <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
-        <div class=" bg-[#fff] px-4 rounded-xl flex-grow">
+        <div class="bg-[#fff] px-4 rounded-xl flex-grow">
             <!--Tabs navigation-->
             <ul
-                class="flex list-none flex-row flex-wrap border-b-0  px-2 pt-2 mb-2 bg-transparent"
+                class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent"
                 role="tablist"
                 data-twe-nav-ref
             >
@@ -77,7 +75,7 @@
                         <div
                             v-for="(bet_win, index) in betting_win"
                             :key="index"
-                            class="pl-4 lg:pl-4 pr-4 py-6  mb-2 bg-white relative border-b border-gray-300 rounded-md"
+                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 bg-white relative border-b border-gray-300 rounded-md"
                         >
                             <div
                                 v-if="bet_win.is_read == 0"
@@ -106,35 +104,53 @@
                         <div
                             v-for="(transcation, index) in topup_transaction"
                             :key="index"
-                            class="pl-6 lg:pl-8 pr-8 py-6  mb-2 bg-white relative border-b border-gray-300 rounded-lg"
+                            class="pl-6 lg:pl-8 pr-8 py-6 mb-2 bg-white relative border-b border-gray-300 rounded-lg"
                         >
                             <div class="flex justify-between">
-                                <p class="text-sm  mb-1">
+                                <p class="text-sm mb-1">
                                     {{ dateFormat(transcation.date_time) }}
                                 </p>
-                                <p  v-if="transcation.status=='confirmed'" class="text-sm text-green-600 mb-1 capitalize">
+                                <p
+                                    v-if="transcation.status == 'confirmed'"
+                                    class="text-sm text-green-600 mb-1 capitalize"
+                                >
                                     {{ transcation.status }}
                                 </p>
-                                <p v-else class="text-sm text-red-600 mb-1 capitalize">
+                                <p
+                                    v-else
+                                    class="text-sm text-red-600 mb-1 capitalize"
+                                >
                                     {{ transcation.status }}
                                 </p>
                             </div>
-                            <hr class="my-2">
+                            <hr class="my-2" />
                             <div class="flex justify-between">
-                                <p class="text-xs text-green-600 mb-1 font-semibold">
-                                     {{ transcation.notificationable_type == "topup_transaction" ? 'ငွေသွင်း' : 'ငွေထုတ်' }}
+                                <p
+                                    class="text-xs text-green-600 mb-1 font-semibold"
+                                >
+                                    {{
+                                        transcation.notificationable_type ==
+                                        "topup_transaction"
+                                            ? "ငွေသွင်း"
+                                            : "ငွေထုတ်"
+                                    }}
                                 </p>
                                 <p class="text-sm mb-1">
-                                    {{ transcation.amount?.toLocaleString() }} ကျပ်
+                                    {{
+                                        transcation.amount?.toLocaleString()
+                                    }}
+                                    ကျပ်
                                 </p>
                             </div>
-                            <hr class="mt-2 mb-4">
+                            <hr class="mt-2 mb-4" />
                             <div class="flex justify-between">
                                 <p class="text-base font-inter mb-1">
                                     {{ transcation.provider_name }}
                                 </p>
                                 <p class="text-base font-inter mb-1">
-                                    လုပ်ငန်းစဥ်နပါတ်-{{ transcation.payment_transaction_id }}
+                                    လုပ်ငန်းစဥ်နပါတ်-{{
+                                        transcation.payment_transaction_id
+                                    }}
                                 </p>
                             </div>
 
@@ -224,7 +240,7 @@ export default {
             showSpinner: false,
             page: 1,
             last_page: 0,
-            img_prefix:""
+            img_prefix: "",
         };
     },
     components: {
@@ -323,8 +339,8 @@ export default {
     created() {},
 
     mounted() {
-        if (window.location.href.includes("shweshankan")) {
-            this.img_prefix = "https://admin.shweshankan.com";
+        if (window.location.href.includes("shwepaukkan")) {
+            this.img_prefix = "https://admin.shwepaukkan.com";
         } else {
             this.img_prefix = "http://localhost:8001";
         }

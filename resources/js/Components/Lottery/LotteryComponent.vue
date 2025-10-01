@@ -184,7 +184,6 @@
                     </div>
                     <div v-else>
                         <p class="text-lg">Prmotion မရှိပါ</p>
-                        
                     </div>
                 </div>
             </div>
@@ -903,7 +902,7 @@ export default {
     },
 
     mounted() {
-        if (window.location.href.includes("shweshankan")) {
+        if (window.location.href.includes("shwepaukkan")) {
             this.img_prefix = "https://admin.shwepaukkan.com";
         } else if (window.location.href.includes("test")) {
             this.img_prefix = "http://spkadmin.test";
