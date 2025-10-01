@@ -217,10 +217,12 @@
                 >
                     ရှေ့ဆက်မည်
                 </button>
-                <div class="flex justify-between bg-transparent mb-3">
-                    <div class="relative inline-block w-32">
+                <div
+                    class="grid grid-cols-2 justify-between bg-transparent mb-3 items-start"
+                >
+                    <div class="flex items-center space-x-4 relative w-32">
                         <select
-                            class="block appearance-none w-full bg-blue-500 text-white px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            class="block appearance-none w-160 bg-black text-white px-6 py-2 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                             v-model="from_to_value"
                         >
                             <option
@@ -231,6 +233,12 @@
                                 {{ from_to.name }}
                             </option>
                         </select>
+                        <button
+                            @click="reverseFun"
+                            class="px-6 py-1.5 mt-3 bg-[#e09800] text-black text-base rounded-sm w-80 mb-3"
+                        >
+                            R
+                        </button>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
                         >
@@ -243,7 +251,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="flex justify-end mb-4">
+                    <div class="flex justify-end mb-4 mt-3">
                         <button
                             class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
                             @click="bet_numbers = []"
@@ -807,6 +815,56 @@ export default {
             if (!this.promotion_mode) {
                 this.ticket_counts_without_promoiton = this.bet_numbers.length;
             }
+        },
+        iterativePermutations(str) {
+            let results = [str[0]];
+
+            for (let i = 1; i < str.length; i++) {
+                let currentChar = str[i];
+                let newResults = [];
+
+                results.forEach((permutation) => {
+                    for (let j = 0; j <= permutation.length; j++) {
+                        let newPermutation =
+                            permutation.slice(0, j) +
+                            currentChar +
+                            permutation.slice(j);
+                        const index = this.bet_numbers.findIndex(
+                            (bet) => bet.number === newPermutation
+                        );
+                        if (index === -1) {
+                            newResults.push(newPermutation);
+                        }
+                    }
+                });
+
+                results = newResults;
+            }
+            const removeItself = results.filter((r) => r != str);
+            var temp = this.numbers
+                .filter(
+                    (n) => removeItself.includes(n.number) && n.is_active == 1
+                )
+                .map((n) => ({ ...n, amount: "" }));
+            return temp;
+        },
+        reverseFun() {
+            let result = [];
+            this.bet_numbers.forEach((bet) => {
+                let temp = this.iterativePermutations(bet.number);
+                result = [...result, ...temp];
+            });
+            this.bet_numbers = [...this.bet_numbers, ...result];
+            this.sortBetNumbers();
+            this.$notify({
+                text: "R ပြီးပါပြီ.",
+                type: "info",
+            });
+        },
+        sortBetNumbers() {
+            this.bet_numbers.sort(
+                (a, b) => parseInt(a.number) - parseInt(b.number)
+            );
         },
         deleteBetNumber() {
             const index = this.bet_numbers.findIndex(
