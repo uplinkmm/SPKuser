@@ -217,11 +217,45 @@
                 >
                     ရှေ့ဆက်မည်
                 </button>
-
+                <div class="flex justify-between bg-transparent mb-3">
+                    <div class="relative inline-block w-32">
+                        <select
+                            class="block appearance-none w-full bg-blue-500 text-white px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            v-model="from_to_value"
+                        >
+                            <option
+                                v-for="(from_to, index) in from_to_numbers"
+                                :key="index"
+                                :value="from_to"
+                            >
+                                {{ from_to.name }}
+                            </option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
+                        >
+                            <svg
+                                class="fill-current h-4 w-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M7 10l5 5 5-5H7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mb-4">
+                        <button
+                            class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
+                            @click="bet_numbers = []"
+                        >
+                            {{ $t("Clear") }}
+                        </button>
+                    </div>
+                </div>
                 <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
                     <div
                         class="contents"
-                        v-for="(num, index) in numbers"
+                        v-for="(num, index) in numbers100"
                         :key="index"
                     >
                         <div
@@ -631,6 +665,52 @@ export default {
             promotion_mode: false,
             img_prefix: "",
             sub_step: 1, //1,2,3,4
+            from_to_numbers: [
+                {
+                    name: "000 - 099",
+                    value: 100,
+                },
+                {
+                    name: "100 - 199",
+                    value: 200,
+                },
+                {
+                    name: "200 - 299",
+                    value: 300,
+                },
+                {
+                    name: "300 - 399",
+                    value: 400,
+                },
+                {
+                    name: "400 - 499",
+                    value: 500,
+                },
+                {
+                    name: "500 - 599",
+                    value: 600,
+                },
+                {
+                    name: "600 - 699",
+                    value: 700,
+                },
+                {
+                    name: "700 - 700",
+                    value: 800,
+                },
+                {
+                    name: "800 - 899",
+                    value: 900,
+                },
+                {
+                    name: "900 - 999",
+                    value: 1000,
+                },
+            ],
+            from_to_value: {
+                name: "000 - 099",
+                value: 100,
+            },
         };
     },
     computed: {
@@ -656,6 +736,12 @@ export default {
             });
             return freeTicketCount;
         },
+        numbers100() {
+            return this.numbers.slice(
+                this.from_to_value.value - 100,
+                this.from_to_value.value
+            );
+        },
     },
 
     mixins: [CheckAuthMixin],
@@ -678,6 +764,10 @@ export default {
             this.numbers = response.data.bet_list_numbers;
             this.wallet_balance = response.data.balance;
             this.game = response.data.game;
+            let temp = this.from_to_numbers.filter(
+                (num) => num.value <= this.numbers.length
+            );
+            this.from_to_numbers = temp;
             this.lottery_promotion_tickets =
                 response.data.promotion.lottery_promotion_tickets.sort(
                     (a, b) => b.qty - a.qty
