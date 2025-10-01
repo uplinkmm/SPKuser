@@ -13,11 +13,9 @@
                     <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
-                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
-                            09 797482251
                         </p>
                         <!-- <p class="text-sm mb-1 lg:mb-2">
                             Since
@@ -327,11 +325,9 @@
                     <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
-                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
-                            09 797482251
                         </p>
                     </div>
                 </div>
