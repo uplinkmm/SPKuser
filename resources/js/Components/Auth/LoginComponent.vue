@@ -17,7 +17,7 @@
                 <div class="mb-4">
                     <label class="mb-6 rounded-xl shadow-md bg-white block">
                         <p class="text-xs px-4 pt-4 text-gray-700">
-                            {{ $t('Phone Number') }}
+                            {{ $t("Phone Number") }}
                         </p>
                         <input
                             type="text"
@@ -27,14 +27,12 @@
                             class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />
                     </label>
-
-                    
                 </div>
                 <div class="mb-8 relative">
-                    <label class="mb-6 rounded-xl shadow-md bg-white block relative">
-                        <p class="text-xs px-4 pt-4 text-gray-700">
-                            Password
-                        </p>
+                    <label
+                        class="mb-6 rounded-xl shadow-md bg-white block relative"
+                    >
+                        <p class="text-xs px-4 pt-4 text-gray-700">Password</p>
                         <input
                             :type="show_password ? 'text' : 'password'"
                             id="password_login"
@@ -53,17 +51,19 @@
                             class="far fa-eye-slash text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
                         ></i>
                     </label>
-
-                    
                 </div>
 
                 <div class="mb-4">
                     <button
                         :disabled="loading"
                         @click="login"
-                        class="block w-full py-3 px-2 text-sm rounded-full bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                        class="block disabled:bg-gray-600 w-full py-3 px-2 text-sm rounded-full bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
                     >
-                        {{ loading ? "Loading..." : "Login" }}
+                        <p v-if="!loading">Login</p>
+                        <i
+                            v-if="loading"
+                            class="fal fa-spinner animate-spin w-10"
+                        ></i>
                     </button>
                 </div>
                 <button

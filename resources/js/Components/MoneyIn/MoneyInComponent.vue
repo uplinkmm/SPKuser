@@ -5,14 +5,14 @@
 
         <!-- 1st  -->
         <div class="min-h-[100vh]">
-            <div class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
-                <div>
+            <div class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
+                <div class=" text-sm lg:text-base">
                     <div class="flex justify-between gap-x-4 mb-4">
                         <p class="flex-grow-0 w-36">
                             <!-- <i class="fal fa-wallet"></i> -->
                             ပင်မ ပိုက်ဆံအိတ်
                         </p>
-                        <p class="flex-grow text-right">
+                        <p class="flex-grow text-right flex-shrink-0">
                             {{ mainMoneyBalance.toLocaleString() }} MMK
                         </p>
                     </div>
@@ -21,7 +21,7 @@
                             <!-- <i class="fal fa-wallet"></i> -->
                             Game ပိုက်ဆံအိတ်
                         </p>
-                        <p class="flex-grow text-right">
+                        <p class="flex-grow text-right flex-shrink-0">
                             {{ gameMoneyBalance.toLocaleString() }} MMK
                         </p>
                     </div>
@@ -30,7 +30,7 @@
 
             <div v-show="step == 1" class="contents">
                 <div
-                    class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+                    class="px-6 lg:px-12 pt-6 pb-8 shadow-lg rounded-3xl mb-8 lg:mb-8 bg-white"
                 >
                     <div class="grid grid-cols-3 gap-x-6">
                         <div
@@ -43,9 +43,9 @@
                         >
                             <img
                                 src="../../../../public/img/kpay.png"
-                                class="w-14 mx-auto"
+                                class="w-14 mx-auto mb-2"
                             />
-                            <p>Kpay</p>
+                            <p class="text-sm lg:text-base">Kpay</p>
                         </div>
 
                         <div
@@ -58,9 +58,9 @@
                         >
                             <img
                                 src="../../../../public/img/wave.png"
-                                class="w-14 mx-auto"
+                                class="w-14 mx-auto mb-2"
                             />
-                            <p>Wave</p>
+                            <p class="text-sm lg:text-base">Wave</p>
                         </div>
                         <div
                             @click="paymentProviderBtnClicked('aya_pay')"
@@ -72,15 +72,15 @@
                         >
                             <img
                                 src="../../../../public/img/aya_pay.png"
-                                class="w-14 mx-auto"
+                                class="w-14 mx-auto mb-2"
                             />
-                            <p>AYA Pay</p>
+                            <p class="text-sm lg:text-base">AYA Pay</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full max-w-md px-4">
-                    <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">
+                <div class="w-full max-w-md px-4 pb-20 lg:pb-0">
+                    <h2 class=" text-base lg:text-xl font-bold mb-4 text-gray-800 text-left">
                         ငွေသွင်းမည် ပမာဏ
                     </h2>
 
@@ -90,13 +90,13 @@
                             type="number"
                             placeholder="Amount"
                             v-model="amount"
-                            class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            class="w-full p-4 rounded-xl text-sm lg:text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />
                     </label>
 
                     <button
                         @click="changeStepTwo"
-                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300"
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-sm lg:text-xl transition-colors duration-300"
                     >
                         လုပ်ဆောင်မည်
                     </button>
@@ -170,7 +170,7 @@
                 </div>
 
                 <div class="w-full max-w-md px-4">
-                    <h2 class="text-xl font-bold mb-6 text-gray-800 text-left">
+                    <h2 class="text-base lg:text-xl font-bold mb-6 text-gray-800 text-left">
                         လုပ်ဆောင်မှု အမှတ် နောက်ဆုံး ဂဏန်း ၆ လုံး
                     </h2>
 
@@ -182,14 +182,14 @@
                             type="number"
                             v-model="paymentTrId"
                             placeholder="Transaction Number"
-                            class="w-full p-4 rounded-xl text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            class="w-full p-4 rounded-xl text-sm lg:text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />
                     </label>
 
                     <button
                         @click="makeTopupTransactionBtnClicked"
                         :disabled="loading"
-                        class="w-full bg-blue-500 disabled:bg-blue-500 disabled:text-gray-300 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-xl transition-colors duration-300"
+                        class="w-full bg-blue-500 disabled:bg-blue-500 disabled:text-gray-300 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-sm lg:text-xl transition-colors duration-300"
                     >
                         {{ loading ? "Loading..." : "ငွေသွင်းမည်" }}
                     </button>

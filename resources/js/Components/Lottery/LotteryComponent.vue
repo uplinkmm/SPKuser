@@ -26,7 +26,7 @@
             </div>
             <div class="rounded-lg p-4">
                 <h2
-                    class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    class="text-lg font-bold mb-4 dash-under after:!w-8 relative after:!left-0 inline-block pb-3"
                 >
                     ကံစမ်းမဲနှင့် ပတ်သတ်သည့် အကြောင်းအရာများ
                 </h2>

@@ -6,8 +6,8 @@
             :back-btn="backBtn"
         ></Navbar>
 
-        <div>
-            <div class="px-4">
+        <div class="mb-16">
+            <div class="px-2">
                 <div class="mb-4">
                     <div
                         class="flex items-center justify-center p-4 bg-transparent"
@@ -32,15 +32,15 @@
                 </div>
                 <div>
                     <div
-                        class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+                        class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
                     >
-                        <div>
+                        <div class=" text-sm lg:text-base">
                             <div class="flex justify-between gap-x-4 mb-4">
                                 <p class="flex-grow-0 w-36">
                                     <!-- <i class="fal fa-wallet"></i> -->
                                     ပင်မ ပိုက်ဆံအိတ်
                                 </p>
-                                <p class="flex-grow text-right">
+                                <p class="flex-grow text-right flex-shrink-0">
                                     {{ mainMoneyBalance.toLocaleString() }} MMK
                                 </p>
                             </div>
@@ -49,7 +49,7 @@
                                     <!-- <i class="fal fa-wallet"></i> -->
                                     Game ပိုက်ဆံအိတ်
                                 </p>
-                                <p class="flex-grow text-right">
+                                <p class="flex-grow text-right flex-shrink-0">
                                     {{ gameMoneyBalance.toLocaleString() }} MMK
                                 </p>
                             </div>
@@ -58,16 +58,16 @@
                 </div>
                 <div>
                     <div
-                        class="px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+                        class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
                     >
-                        <div class="grid grid-cols-3 gap-x-6">
+                        <div class="grid grid-cols-3 gap-x-4">
                             <div>
                                 <a href="/topup">
                                     <img
                                         src="../../../../public/img/money 1.png"
-                                        class="w-14 mx-auto"
+                                        class="w-10 lg:w-14 mx-auto mb-2"
                                     />
-                                    <p>{{ $t("Deposit") }}</p>
+                                    <p class="text-sm lg:text-base text-center">{{ $t("Deposit") }}</p>
                                 </a>
                             </div>
 
@@ -75,9 +75,9 @@
                                 <a href="/cash_withdraw">
                                     <img
                                         src="../../../../public/img/money 1.png"
-                                        class="w-14 mx-auto"
+                                        class="w-10 lg:w-14 mx-auto mb-2"
                                     />
-                                    <p>{{ $t("Withdrawal") }}</p>
+                                    <p class="text-sm lg:text-base text-center">{{ $t("Withdrawal") }}</p>
                                 </a>
                             </div>
                             <div class="">
@@ -89,24 +89,24 @@
                                 >
                                     <img
                                         src="../../../../public/img/money 1.png"
-                                        class="w-14 mx-auto"
+                                        class="w-10 lg:w-14 mx-auto mb-2"
                                     />
-                                    <p>ငွေလဲမည်</p>
+                                    <p class="text-sm lg:text-base text-center">ငွေလဲမည်</p>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="px-6">
+            <div class="px-0 lg:px-6">
                 <div class="rounded-lg p-4">
                     <h2
-                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                        class="text-base lg:text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
                         မှတ်တမ်းများ
                     </h2>
 
-                    <div class="divide-y divide-gray-200">
+                    <div class="divide-y divide-gray-700">
                         <a
                             href="/deposit_withdrawal_histories"
                             class="flex items-center justify-between py-4 cursor-pointer"
@@ -118,7 +118,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-6 h-6 text-gray-600"
+                                    class="w-4 h-4 text-gray-700"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -126,7 +126,7 @@
                                         d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                     />
                                 </svg>
-                                <span class="text-lg"
+                                <span class=" text-sm lg:text-lg"
                                     >ငွေသွင်း ငွေထုတ် မှတ်တမ်းများ</span
                                 >
                             </div>
@@ -136,7 +136,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-5 h-5 text-gray-400"
+                                class="w-4 h-4 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -158,7 +158,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-6 h-6 text-gray-600"
+                                    class="w-4 h-4 text-gray-700"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -166,7 +166,7 @@
                                         d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
                                     />
                                 </svg>
-                                <span class="text-lg"
+                                <span class="text-sm lg:text-lg"
                                     >ငွေဖြည့်နည်း ကြည့်ရန်</span
                                 >
                             </div>
@@ -176,7 +176,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-5 h-5 text-gray-400"
+                                class="w-4 h-4 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -198,7 +198,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-6 h-6 text-gray-600"
+                                    class="w-4 h-4 text-gray-700"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -206,7 +206,7 @@
                                         d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                     />
                                 </svg>
-                                <span class="text-lg"
+                                <span class="text-sm lg:text-lg"
                                     >ငွေထုတ်နည်း ကြည့်ရန်</span
                                 >
                             </div>
@@ -216,7 +216,7 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-5 h-5 text-gray-400"
+                                class="w-4 h-4 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -346,7 +346,7 @@
                             <button
                                 :disabled="loading"
                                 @click="transferWallet"
-                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-[#bdb5a6] disabled:text-gray-300 hover:bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-yellow-100 disabled:text-gray-300 hover:bg-[#FFBF33] text-white text-sm rounded-lg w-full"
                             >
                                 {{ loading ? "Loading.." : "Transfer" }}
                             </button>

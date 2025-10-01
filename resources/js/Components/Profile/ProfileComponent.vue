@@ -5,7 +5,7 @@
         <div>
             <div v-show="step == 'mainProfile'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -41,7 +41,7 @@
                         </p>
                     </div> -->
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -177,10 +177,11 @@
                     </div>
                     <div class="mb-0 absolute bottom-4 flex justify-end w-full">
                         <button
-                            @click="step = 'changePassStepTwo'"
-                            class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                            @click="handelChangePasswordStepOne"
+                            :disabled="passwordLoading"
+                            class="bg-black disabled:bg-gray-600 text-white pl-8 pr-7 py-3 w-fit rounded-full"
                         >
-                            Next
+                            {{ passwordLoading ? "Loading.." : "Next" }}
                             <i class="fas fa-chevron-right ml-2 text-sm"></i>
                         </button>
                     </div>
@@ -201,7 +202,7 @@
                             <p class="text-xs px-4 pt-4 text-gray-700">OTP</p>
                             <input
                                 type="text"
-                                v-model="current_password"
+                                v-model="otp"
                                 placeholder="OTP"
                                 class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                             />
@@ -209,9 +210,11 @@
                     </div>
                     <div class="mb-0 absolute bottom-4 flex justify-end w-full">
                         <button
-                            class="bg-black text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                            @click="handelChangePasswordStepTwo"
+                            :disabled="passwordLoading"
+                            class="bg-black text-white disabled:bg-slate-600 pl-8 pr-7 py-3 w-fit rounded-full"
                         >
-                            Done
+                            {{ passwordLoading ? "Loading..." : "Done" }}
                         </button>
                     </div>
                 </div>
@@ -272,7 +275,7 @@
 
             <div v-show="step == 'changeLang'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -286,7 +289,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -316,7 +319,7 @@
 
             <div v-show="step == 'history'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -332,7 +335,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -436,7 +439,7 @@
         >
             <div
                 data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
+                class="pointer-events-none relative w-full mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
             >
                 <div
                     class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
@@ -498,7 +501,7 @@
                             <button
                                 :disabled="loading"
                                 @click="sendFeedback"
-                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-yellow-100 text-white text-sm rounded-lg w-full"
                             >
                                 {{ loading ? "Sending..." : "Send" }}
                             </button>
@@ -623,6 +626,8 @@ export default {
                 { code: "cn", name: "Chinese" },
                 { code: "th", name: "Thai" },
             ],
+            otp: "",
+            passwordLoading: false,
         };
     },
     computed: {
@@ -714,7 +719,7 @@ export default {
         dateFormat(date_time) {
             return moment(date_time).format("MM DD YYYY");
         },
-        async changePassword() {
+        async handelChangePasswordStepOne() {
             if (
                 this.new_password == "" ||
                 this.current_password == "" ||
@@ -745,13 +750,54 @@ export default {
                 "new_password_confirmation",
                 this.new_password_confirmation
             );
-            this.loading = true;
+            this.passwordLoading = true;
             let response = await postApiData({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
-            this.loading = false;
+            this.passwordLoading = false;
+            if (response.success) {
+                this.$notify({
+                    text: response.message,
+                    type: "info",
+                });
+                this.step = "changePassStepTwo";
+                this.title = "Change Password";
+            } else {
+                this.$notify({
+                    text:
+                        response.message?.new_password ||
+                        response.message?.current_password ||
+                        response.message?.new_password_confirmation,
+                    type: "error",
+                });
+            }
+        },
+        async handelChangePasswordStepTwo() {
+            if (this.otp.length < 6) {
+                this.$notify({
+                    text: "Password must be at least 6 characters long.",
+                    type: "info",
+                });
+                return;
+            }
+            let url = "/api/change_password";
+            let formData = new FormData();
+            formData.append("otp", this.otp);
+            formData.append("current_password", this.current_password);
+            formData.append("new_password", this.new_password);
+            formData.append(
+                "new_password_confirmation",
+                this.new_password_confirmation
+            );
+            this.passwordLoading = true;
+            let response = await postApiData({
+                url: url,
+                form_data: formData,
+                token: this.getToken,
+            });
+            this.passwordLoading = false;
             if (response.success) {
                 this.$notify({
                     text: response.message,
