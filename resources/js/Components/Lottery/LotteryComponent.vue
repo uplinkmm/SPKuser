@@ -182,7 +182,9 @@
                             {{ promotion.additional_qty }} စောင် အပိုရရှိပါမည်
                         </p>
                     </div>
-                    <div v-else>Prmotion မရှိပါ</div>
+                    <div v-else>
+                        <p class="text-lg">Prmotion မရှိပါ</p>
+                    </div>
                 </div>
             </div>
             <div v-if="sub_step == 4" class="px-8 pb-4 mb-8">
