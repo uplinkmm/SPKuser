@@ -7,7 +7,7 @@
             :need-auth="false"
         ></Navbar>
 
-        <div class="px-4 mb-16 relative">
+        <div class="px-4 mb-8 relative">
             <!-- <div class="marquee bg-gray-900 text-white text-sm py-2 absolute top-0 left-4 ring-4">
                 <div class="w-fit whitespace-nowrap">
                     <span class=" w-full inline mr-16 py-2">
@@ -38,7 +38,7 @@
                 <div class="mx-3" v-for="(ads, index) in adses">
                     <img
                         :src="`${img_prefix}${ads.photo}`"
-                        class="w-full aspect-video mb-6"
+                        class="w-full aspect-video mb-3"
                     />
                 </div>
                 <!-- <div class="mx-3">
