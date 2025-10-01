@@ -402,7 +402,7 @@
 
             <div v-show="step == 'termsAndConditions'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -416,13 +416,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
-                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                        class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
                     >
                         စည်းကမ်းသတ်မှတ်ချက်များ
                     </h2>
-                    <div class="mb-0">
+                    <div class="mb-0 mt-4">
                         <p v-html="terms_and_conditions.name"></p>
                     </div>
                 </div>

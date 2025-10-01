@@ -24,7 +24,7 @@
                     ထိုးမည်
                 </button>
             </div>
-            <div class="rounded-lg p-4">
+            <div v-if="1 > 2" class="rounded-lg p-4">
                 <h2
                     class="text-lg font-bold mb-4 dash-under after:!w-8 relative after:!left-0 inline-block pb-3"
                 >
@@ -80,12 +80,12 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-6 h-6 text-gray-600"
+                                class="w-6 h-6 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
+                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                 />
                             </svg>
                             <span class="text-lg"
@@ -149,6 +149,18 @@
                     ကံစမ်းမဲနှင့် ပတ်သတ်သည့်အချက်အလက်များကို သေချာစွာ
                     ဖတ်ရှုပေးပါရန်
                 </p>
+            </div>
+
+            <div v-if="1 < 2" class="px-8 pb-4 mb-8">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                >
+                    စည်းကမ်းသတ်မှတ်ချက်များ
+                </h2>
+                <div class="mb-0 mt-4">
+                    <!-- <p v-html="terms_and_conditions.name"></p> -->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora excepturi consectetur id eveniet? Ad id aliquam assumenda iusto. Reprehenderit, hic et! Voluptatem, doloremque voluptate. Explicabo quaerat quidem sint labore aliquam.</p>
+                </div>
             </div>
         </div>
 
