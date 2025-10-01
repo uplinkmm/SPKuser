@@ -81,7 +81,7 @@
     </div>
 
     <div v-else class="frame-container min-h-[100vh]">
-        <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        <Navbar title="ထိုးမည်" :back-btn="backBtn" class="!px-4"></Navbar>
         <!-- Error page -->
         <div :class="step == 6 ? 'block' : 'hidden'">
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
@@ -127,12 +127,12 @@
                 >
                     <div class="flex-grow py-6">
                         <div class="text-center">
-                            <h1 class="text-3xl font-bold mb-2">2D ထိုးမည်</h1>
-                            <p class="text-lg">ထိုးမည့် အချိန်ကို ရွေးပါ</p>
+                            <h1 class="text-2xl font-bold mb-2">2D ထိုးမည်</h1>
+                            <p class="text-base">ထိုးမည့် အချိန်ကို ရွေးပါ</p>
                         </div>
 
                         <div
-                            class="flex justify-center items-center my-8 space-x-4"
+                            class="flex justify-center items-center mt-8 space-x-4 px-4"
                         >
                             <div
                                 v-for="(twod_setting, index) in twod_settings"
@@ -146,7 +146,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-10 h-10 mx-auto mb-2 text-gray-600"
+                                    class="w-8 h-8 mx-auto mb-2 text-gray-600"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -154,7 +154,7 @@
                                         d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                                     />
                                 </svg>
-                                <p class="text-2xl font-semibold">
+                                <p class="text-lg font-semibold">
                                     {{ formatTime(twod_setting.lottery_time) }}
                                 </p>
                             </div>
@@ -169,12 +169,12 @@
 
                     <div class="rounded-lg p-4">
                         <h2
-                            class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                            class="text-lg font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                         >
                             မှတ်တမ်းများ
                         </h2>
 
-                        <div class="divide-y divide-gray-200">
+                        <div class="divide-y divide-gray-700">
                             <a
                                 href="/2d/live"
                                 class="flex items-center justify-between py-4 cursor-pointer"
@@ -186,7 +186,7 @@
                                         viewBox="0 0 24 24"
                                         stroke-width="1.5"
                                         stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
+                                        class="w-4 h-4 text-gray-600"
                                     >
                                         <path
                                             stroke-linecap="round"
@@ -194,7 +194,7 @@
                                             d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                         />
                                     </svg>
-                                    <span class="text-lg">2D Live</span>
+                                    <span class="text-sm">2D Live</span>
                                 </div>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
+                                    class="w-4 h-4 text-gray-700"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -223,7 +223,7 @@
                                         viewBox="0 0 24 24"
                                         stroke-width="1.5"
                                         stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
+                                        class="w-4 h-4 text-gray-700"
                                     >
                                         <path
                                             stroke-linecap="round"
@@ -231,7 +231,7 @@
                                             d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
                                         />
                                     </svg>
-                                    <span class="text-lg">2D မှတ်တမ်း</span>
+                                    <span class="text-sm">2D မှတ်တမ်း</span>
                                 </div>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -239,7 +239,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
+                                    class="w-4 h-4 text-gray-700"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -260,7 +260,7 @@
                                         viewBox="0 0 24 24"
                                         stroke-width="1.5"
                                         stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
+                                        class="w-4 h-4 text-gray-700"
                                     >
                                         <path
                                             stroke-linecap="round"
@@ -268,7 +268,7 @@
                                             d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                         />
                                     </svg>
-                                    <span class="text-lg">ထီပေါက်သူများ</span>
+                                    <span class="text-sm">ထီပေါက်သူများ</span>
                                 </div>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +276,7 @@
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
+                                    class="w-4 h-4 text-gray-700"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -482,7 +482,7 @@
                 </div>
                 <div class="flex gap-x-4 mb-2">
 
-                    <div class="mb-4">
+                    <div class="mb-4 flex-grow">
                         
                         <input
                             type="number"

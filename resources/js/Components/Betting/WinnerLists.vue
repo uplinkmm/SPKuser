@@ -11,27 +11,27 @@
         >
             <p
                 class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="game_id == 1 ? 'text-white border-b border-gray-700' : ' text-gray-500'"
+                :class="game_id == 1 ? 'text-black border-b border-gray-700' : ' text-gray-500'"
                 @click="changeGame(1)"
             >
                 2D
             </p>
             <p
                 class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="game_id == 2 ? 'text-white border-b border-gray-700' : ' text-gray-500'"
+                :class="game_id == 2 ? 'text-black border-b border-gray-700' : ' text-gray-500'"
                 @click="changeGame(2)"
             >
                 3D
             </p>
         </div>
-        <div class="mb-0">
-            <table class="table-auto w-full bg-white">
+        <div class="mb-0 bg-white px-4">
+            <table class="table-auto w-full">
                 <thead class="w-full">
                     <tr class="w-full rounded-xl border-b bg-white">
                         <th class="py-3 px-1 rounded-tl-lg rounded-bl-lg text-sm">No</th>
                         <th class="py-3 px-1 text-sm">Name</th>
                         <th class="py-3 px-1 text-sm">Wining No</th>
-                        <th class="py-3 px-1 text-sm">Phone Number</th>
+                        <th class="py-3 px-1 text-sm">Phone</th>
                         <th class="py-3 px-1 rounded-tr-lg rounded-br-lg text-smx`">Amount</th>
                     </tr>
                 </thead>
