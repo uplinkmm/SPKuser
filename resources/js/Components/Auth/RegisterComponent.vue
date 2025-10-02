@@ -1,16 +1,14 @@
 <template>
     <main
-        class="w-full h-full min-h-[60vh] mx-auto px-8 pb-2 flex flex-row justify-center relative"
+        class="w-full h-full mx-auto px-0 pb-2 flex flex-row justify-center relative"
     >
-        <div class="">
-            <div class="mb-[10vh] text-center">
-                <p class="text-base mb-3 font-semibold">အကောင့်ဖွင့်ရန်</p>
-                <img
-                    src="../../../../public/img/SPK Logo.png"
-                    class="bg-black p-4 rounded-full w-28 h-28 mb-6 mx-auto"
-                    alt=""
-                />
-                <p class="text-sm mb-4">
+        <div class="w-full">
+            <div class="mb-[5vh] pt-16 text-center">
+                <p class="text-base mb-3 font-semibold">
+                    အကောင့်ဖွင့်ရန်
+                </p>
+                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-6 mx-auto" alt="" />
+                <p class=" text-sm mb-4">
                     OTP ကျမလာပါ Customer Service သို့ ဆက်သွယ်နိုင်ပါသည်
                 </p>
 

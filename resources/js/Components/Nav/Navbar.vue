@@ -1,10 +1,10 @@
 <template lang="">
     <div
-        class="flex relative justify-between py-4 px-0 lg:px-4 mb-4 items-center"
+        class="flex relative justify-between py-4 px-8 lg:px-4 mb-4 items-center"
         :class="
             getUser && isHomePage
-                ? 'bg-[#ffc529] text-white font-semibold -mx-4'
-                : 'bg-[#ffc529] text-white -mx-4'
+                ? 'bg-[#ffc529] text-black font-semibold -mx-4'
+                : 'bg-[#ffc529] text-black -mx-4'
         "
     >
         <div v-if="isHomePage && user" class="flex gap-x-2 text-sm">
@@ -20,7 +20,7 @@
                 <i class="fas fa-chevron-left"></i>
             </a>
         </button>
-        <p :class="textColor" class="text-white text-base ml-12">{{ title }}</p>
+        <p :class="textColor" class="text-black text-base ml-12">{{ title }}</p>
         <div class="flex gap-x-4">
             <button @click="focusSearchInput">
                 <i class="fal fa-search"></i>

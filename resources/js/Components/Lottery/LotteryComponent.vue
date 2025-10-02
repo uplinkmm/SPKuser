@@ -24,16 +24,16 @@
                     ထိုးမည်
                 </button>
             </div>
-            <div class="rounded-lg p-4">
+            <div v-if="sub_step == 1" class="rounded-lg p-4">
                 <h2
-                    class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    class="text-lg font-bold mb-4 dash-under after:!w-8 relative after:!left-0 inline-block pb-3"
                 >
                     ကံစမ်းမဲနှင့် ပတ်သတ်သည့် အကြောင်းအရာများ
                 </h2>
 
                 <div class="divide-y divide-gray-700">
                     <a
-                        href="/2d/live"
+                        @click="sub_step = 2"
                         class="flex items-center justify-between py-4 cursor-pointer"
                     >
                         <div class="flex items-center space-x-4">
@@ -70,7 +70,7 @@
                     </a>
 
                     <a
-                        hreft="/history?game_id=1"
+                        @click="sub_step = 3"
                         class="flex items-center justify-between py-4 cursor-pointer"
                     >
                         <div class="flex items-center space-x-4">
@@ -80,12 +80,12 @@
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                class="w-6 h-6 text-gray-600"
+                                class="w-6 h-6 text-gray-700"
                             >
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
+                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                 />
                             </svg>
                             <span class="text-lg"
@@ -109,7 +109,7 @@
                     </a>
 
                     <a
-                        href="/winner_lists/1"
+                        @click="sub_step = 4"
                         class="flex items-center justify-between py-4 cursor-pointer"
                     >
                         <div class="flex items-center space-x-4">
@@ -150,6 +150,55 @@
                     ဖတ်ရှုပေးပါရန်
                 </p>
             </div>
+
+            <div v-if="sub_step == 2" class="px-8 pb-4 mb-8">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                >
+                    ကံစမ်းမဲအကြောင်း
+                </h2>
+                <div class="mb-0 mt-4">
+                    <p>
+                        {{ game.description }}
+                    </p>
+                </div>
+            </div>
+            <div v-if="sub_step == 3" class="px-8 pb-4 mb-8">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                >
+                    ကံစမ်းမဲ Promotion အကြောင်း
+                </h2>
+                <div class="mb-0 mt-4">
+                    <div v-if="lottery_promotion_tickets.length > 0">
+                        <p
+                            v-for="(
+                                promotion, index
+                            ) in lottery_promotion_tickets"
+                            :key="index"
+                            class="mb-2 text-lg"
+                        >
+                            {{ promotion.qty }} စောင်၀ယ်လျှင်
+                            {{ promotion.additional_qty }} စောင် အပိုရရှိပါမည်
+                        </p>
+                    </div>
+                    <div v-else>
+                        <p class="text-lg">Prmotion မရှိပါ</p>
+                    </div>
+                </div>
+            </div>
+            <div v-if="sub_step == 4" class="px-8 pb-4 mb-8">
+                <h2
+                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                >
+                    စည်းကမ်းသတ်မှတ်ချက်များ
+                </h2>
+                <div class="mb-0 mt-4">
+                    <p>
+                        {{ game.terms_and_condition }}
+                    </p>
+                </div>
+            </div>
         </div>
 
         <!-- select number -->
@@ -168,11 +217,53 @@
                 >
                     ရှေ့ဆက်မည်
                 </button>
-
+                <div
+                    class="grid grid-cols-2 justify-between bg-transparent mb-3 items-start"
+                >
+                    <div class="flex items-center space-x-4 relative w-32">
+                        <select
+                            class="block appearance-none w-160 bg-black text-white px-6 py-2 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            v-model="from_to_value"
+                        >
+                            <option
+                                v-for="(from_to, index) in from_to_numbers"
+                                :key="index"
+                                :value="from_to"
+                            >
+                                {{ from_to.name }}
+                            </option>
+                        </select>
+                        <button
+                            @click="reverseFun"
+                            class="px-6 py-1.5 mt-3 bg-[#e09800] text-black text-base rounded-sm w-80 mb-3"
+                        >
+                            R
+                        </button>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
+                        >
+                            <svg
+                                class="fill-current h-4 w-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M7 10l5 5 5-5H7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mb-4 mt-3">
+                        <button
+                            class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
+                            @click="bet_numbers = []"
+                        >
+                            {{ $t("Clear") }}
+                        </button>
+                    </div>
+                </div>
                 <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
                     <div
                         class="contents"
-                        v-for="(num, index) in numbers"
+                        v-for="(num, index) in numbers100"
                         :key="index"
                     >
                         <div
@@ -199,7 +290,7 @@
 
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full  pb-14"
+            class="relative mb-12 w-full pb-14"
             :class="step == 3 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
         >
@@ -581,6 +672,53 @@ export default {
             promotion_ticket_ids: [],
             promotion_mode: false,
             img_prefix: "",
+            sub_step: 1, //1,2,3,4
+            from_to_numbers: [
+                {
+                    name: "000 - 099",
+                    value: 100,
+                },
+                {
+                    name: "100 - 199",
+                    value: 200,
+                },
+                {
+                    name: "200 - 299",
+                    value: 300,
+                },
+                {
+                    name: "300 - 399",
+                    value: 400,
+                },
+                {
+                    name: "400 - 499",
+                    value: 500,
+                },
+                {
+                    name: "500 - 599",
+                    value: 600,
+                },
+                {
+                    name: "600 - 699",
+                    value: 700,
+                },
+                {
+                    name: "700 - 700",
+                    value: 800,
+                },
+                {
+                    name: "800 - 899",
+                    value: 900,
+                },
+                {
+                    name: "900 - 999",
+                    value: 1000,
+                },
+            ],
+            from_to_value: {
+                name: "000 - 099",
+                value: 100,
+            },
         };
     },
     computed: {
@@ -606,6 +744,12 @@ export default {
             });
             return freeTicketCount;
         },
+        numbers100() {
+            return this.numbers.slice(
+                this.from_to_value.value - 100,
+                this.from_to_value.value
+            );
+        },
     },
 
     mixins: [CheckAuthMixin],
@@ -628,6 +772,10 @@ export default {
             this.numbers = response.data.bet_list_numbers;
             this.wallet_balance = response.data.balance;
             this.game = response.data.game;
+            let temp = this.from_to_numbers.filter(
+                (num) => num.value <= this.numbers.length
+            );
+            this.from_to_numbers = temp;
             this.lottery_promotion_tickets =
                 response.data.promotion.lottery_promotion_tickets.sort(
                     (a, b) => b.qty - a.qty
@@ -667,6 +815,56 @@ export default {
             if (!this.promotion_mode) {
                 this.ticket_counts_without_promoiton = this.bet_numbers.length;
             }
+        },
+        iterativePermutations(str) {
+            let results = [str[0]];
+
+            for (let i = 1; i < str.length; i++) {
+                let currentChar = str[i];
+                let newResults = [];
+
+                results.forEach((permutation) => {
+                    for (let j = 0; j <= permutation.length; j++) {
+                        let newPermutation =
+                            permutation.slice(0, j) +
+                            currentChar +
+                            permutation.slice(j);
+                        const index = this.bet_numbers.findIndex(
+                            (bet) => bet.number === newPermutation
+                        );
+                        if (index === -1) {
+                            newResults.push(newPermutation);
+                        }
+                    }
+                });
+
+                results = newResults;
+            }
+            const removeItself = results.filter((r) => r != str);
+            var temp = this.numbers
+                .filter(
+                    (n) => removeItself.includes(n.number) && n.is_active == 1
+                )
+                .map((n) => ({ ...n, amount: "" }));
+            return temp;
+        },
+        reverseFun() {
+            let result = [];
+            this.bet_numbers.forEach((bet) => {
+                let temp = this.iterativePermutations(bet.number);
+                result = [...result, ...temp];
+            });
+            this.bet_numbers = [...this.bet_numbers, ...result];
+            this.sortBetNumbers();
+            this.$notify({
+                text: "R ပြီးပါပြီ.",
+                type: "info",
+            });
+        },
+        sortBetNumbers() {
+            this.bet_numbers.sort(
+                (a, b) => parseInt(a.number) - parseInt(b.number)
+            );
         },
         deleteBetNumber() {
             const index = this.bet_numbers.findIndex(
@@ -808,7 +1006,22 @@ export default {
             return moment(time, "HH:mm").format("hh:mm A");
         },
         backBtn() {
-            window.history.back();
+            if (this.step == 3) {
+                this.step = 2;
+                return;
+            }
+            if (this.step == 2) {
+                this.step = 1;
+                return;
+            }
+            if (this.step == 1) {
+                if (this.sub_step > 1) {
+                    this.sub_step = 1;
+                    return;
+                } else {
+                    window.history.back();
+                }
+            }
         },
         getFreeTicketCount() {
             let freeTicketCount = 0;
@@ -837,7 +1050,7 @@ export default {
     },
 
     mounted() {
-        if (window.location.href.includes("shweshankan")) {
+        if (window.location.href.includes("shwepaukkan")) {
             this.img_prefix = "https://admin.shwepaukkan.com";
         } else if (window.location.href.includes("test")) {
             this.img_prefix = "http://spkadmin.test";

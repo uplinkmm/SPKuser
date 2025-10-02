@@ -5,7 +5,7 @@
         <div>
             <div v-show="step == 'mainProfile'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -13,11 +13,9 @@
                     <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
-                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
-                            09 797482251
                         </p>
                         <!-- <p class="text-sm mb-1 lg:mb-2">
                             Since
@@ -41,7 +39,7 @@
                         </p>
                     </div> -->
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -275,7 +273,7 @@
 
             <div v-show="step == 'changeLang'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -289,7 +287,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -319,7 +317,7 @@
 
             <div v-show="step == 'history'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -327,15 +325,13 @@
                     <div class="text-left font-inter mb-4">
                         <p class="mb-1 lg:mb-2">
                             {{ user_profile_data?.name }}
-                            Nge Lay
                         </p>
                         <p class="text-sm mb-1 lg:mb-2">
                             {{ user_profile_data?.phone_number }}
-                            09 797482251
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
                         class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
@@ -402,7 +398,7 @@
 
             <div v-show="step == 'termsAndConditions'">
                 <div
-                    class="flex items-center gap-x-4 px-4 py-4 mb-8 text-black font-semibold"
+                    class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
                 >
                     <div class="mb-3">
                         <img src="../../../../public/img/profile.png" alt="" />
@@ -416,13 +412,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="px-8 py-16 mb-8">
+                <div class="px-8 pb-4 mb-8">
                     <h2
-                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                        class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
                     >
                         စည်းကမ်းသတ်မှတ်ချက်များ
                     </h2>
-                    <div class="mb-0">
+                    <div class="mb-0 mt-4">
                         <p v-html="terms_and_conditions.name"></p>
                     </div>
                 </div>
@@ -439,7 +435,7 @@
         >
             <div
                 data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
+                class="pointer-events-none relative w-full mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
             >
                 <div
                     class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"

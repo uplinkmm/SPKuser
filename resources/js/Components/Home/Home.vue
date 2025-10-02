@@ -72,7 +72,7 @@
                 </a>
             </div>
 
-            <ul class="flex space-x-4 mb-6" role="tablist" data-twe-nav-ref>
+            <ul class="flex space-x-1 mb-6" role="tablist" data-twe-nav-ref>
                 <li role="presentation">
                     <a
                         href="#tabs-twoD-threeD"

@@ -2,9 +2,9 @@
     <notifications position="top center" />
     <div class="w-full h-full bg-gray-200">
         <main
-            class="frame-container flex flex-row justify-center items-center relative"
+            class="frame-container  relative"
         >
-            <button @click="isLogin = false" class="text-black text-base absolute top-8 right-4 font-semibold" :class="isLogin ? 'block' : 'hidden'">
+            <button @click="isLogin = false" class="text-black text-base absolute top-8 right-4 font-semibold z-30" :class="isLogin ? 'block' : 'hidden'">
                 အကောင့်ဖွင့်ရန်
             </button>
             <div
@@ -23,17 +23,17 @@
             </div>
             <div
                 v-if="!forgot_password"
-                class="flex justify-center items-center flex-col min-h-screen"
+                class="flex justify-center items-center flex-col min-h-screen w-[93%] mx-auto"
             >
                 
-                <div v-if="isLogin">
+                <div v-if="isLogin" class="w-full">
                     <login-component
                                 :fcm-token="fcmToken"
                                 :change-forgot-password="changeForgotPassword"
                                 :set-error-box="setErrorBox"
                     ></login-component>
                 </div>
-                <div v-else>
+                <div v-else class="w-full">
                     <register-component
                                 :fcm-token="fcmToken"
                                 :set-error-box="setErrorBox"
