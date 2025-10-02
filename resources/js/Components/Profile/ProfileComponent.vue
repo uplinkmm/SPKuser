@@ -123,7 +123,7 @@
                         class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-sm transition-colors duration-300"
                     >
                         <i class="fal fa-phone mr-4 w-4"></i>Customer Service
-                        သို့ ဖုန်းခေါ်ရန်
+                        <span class="hidden sm:inline-block">သို့ ဖုန်းခေါ်ရန်</span>
                     </button>
                 </div>
             </div>
