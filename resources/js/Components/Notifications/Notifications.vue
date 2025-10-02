@@ -147,7 +147,7 @@
                                 <p class="text-sm sm:text-base font-inter mb-0">
                                     {{ transcation.provider_name }}
                                 </p>
-                                <p class="text-sm sm:text-base font-inter mb-0">
+                                <p class="text-sm sm:text-base font-inter mb-0 text-right w-[55%]">
                                     လုပ်ငန်းစဥ်နပါတ်-{{
                                         transcation.payment_transaction_id
                                     }}
