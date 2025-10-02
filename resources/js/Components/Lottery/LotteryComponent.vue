@@ -254,23 +254,23 @@
         >
             <p class="text-center py-4">{{ game?.name }}</p>
             <div
-                class="flex justify-between p-6 bg-[#fff] text-black rounded-tr-lg rounded-tl-lg"
+                class="flex justify-between p-6 bg-[#fff] text-black"
             >
                 <div>
                     <p class="pr-8 py-2">
                         {{ getCurrentDate() }}
                     </p>
-                    <p class="pr-8">
+                    <!-- <p class="pr-8">
                         {{ getCurrentTime() }}
-                    </p>
+                    </p> -->
                 </div>
                 <div>
                     <p class="pr-8 py-2">
                         {{ formatTime(game?.lottery_date_time) }}
                     </p>
-                    <p class="pr-8">
+                    <!-- <p class="pr-8">
                         {{ totalBetAmount?.toLocaleString() }} MMK
-                    </p>
+                    </p> -->
                 </div>
             </div>
             <div class="mb-5 px-4 bg-white pb-12">
@@ -278,26 +278,30 @@
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
+                            <th class="py-2">စဉ်</th>
                             <th class="py-2">{{ $t("No") }}</th>
-                            <th class="py-2">{{ $t("Betting Amount") }}</th>
-                            <th class="py-2">{{ $t("Delete") }}</th>
+                            <th class="py-2 text-right">{{ $t("Betting Amount") }}</th>
+                            <!-- <th class="py-2">{{ $t("Delete") }}</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr
                             v-for="(bet_number, index) in bet_numbers"
-                            :key="index"
+                            :key="index" class="border-b border-gray-400"
                         >
+                            <td class="text-center py-2">
+                                {{ index+1 }}
+                            </td>
                             <td class="text-center py-2">
                                 {{ bet_number.number }}
                             </td>
 
-                            <td class="text-center py-2">
+                            <td class="text-right py-2">
                                 <span>
                                     {{ bet_number.amount?.toLocaleString() }}
                                 </span>
                             </td>
-                            <td class="text-center py-2">
+                            <!-- <td class="text-center py-2">
                                 <button
                                     data-twe-toggle="modal"
                                     data-twe-target="#delete_modal"
@@ -308,7 +312,12 @@
                                 >
                                     <i class="fal fa-trash"></i>
                                 </button>
-                            </td>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="text-center">စုစုပေါင်း</td>
+                            <td class="py-2 text-right">{{ totalBetAmount?.toLocaleString() }}</td>
                         </tr>
                     </tbody>
                 </table>

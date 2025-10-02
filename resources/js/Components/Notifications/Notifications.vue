@@ -1,7 +1,7 @@
 <template>
     <div class="frame-container pb-20 min-h-[100vh] flex flex-col">
         <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
-        <div class=" px-4 rounded-xl flex-grow">
+        <div class=" bg-white px-4 rounded-xl flex-grow">
             <!--Tabs navigation-->
             <ul
                 class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent"
