@@ -557,7 +557,7 @@ class BettingRepository implements BettingInterface
                             ->where('game_setting_id', $gameSettingId);
                     });
             })
-            ->whereRaw('CAST(all_numbers.number AS UNSIGNED) <= ?', [$limit_number])
+            ->whereRaw('CAST(all_numbers.number AS UNSIGNED) < ?', [$limit_number])
             ->select([
                 'all_numbers.number',
                 DB::raw('CASE WHEN lottery_numbers.id IS NULL THEN 1 ELSE 0 END AS is_active')
