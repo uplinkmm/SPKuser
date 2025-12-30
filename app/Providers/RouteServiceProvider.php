@@ -38,9 +38,15 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['api'])
                 ->prefix('api')
                 ->group(base_path('routes/game.php'));
-                Route::middleware(['api'])
+            Route::middleware(['api'])
                 ->prefix('api')
                 ->group(base_path('routes/slot.php'));
+            Route::middleware(['api'])
+                ->prefix('api')
+                ->group(base_path('routes/gsc.php'));
+            Route::middleware(['api'])
+                ->prefix('api')
+                ->group(base_path('routes/buffalo.php'));
         });
     }
 }

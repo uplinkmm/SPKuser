@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Customer;
 use App\Enums\TransactionName;
 use App\Enums\TransactionType;
+use Illuminate\Support\Facades\Log;
 use Bavix\Wallet\External\Dto\Extra;
 use Bavix\Wallet\External\Dto\Option;
 
@@ -85,6 +86,14 @@ class WalletService
     public function deposit(Customer $customer, float $amount, TransactionName $transaction_name, array $meta = [])
     {
         $customer->depositFloat($amount, self::buildDepositMeta($customer, $customer, $transaction_name, $meta));
+        if ($transaction_name === TransactionName::Promotion || $transaction_name === TransactionName::ReferralPromotion) {
+            $wallet = $customer->wallet;
+            $wallet->promotion_balance += $amount * (10 ** $customer->wallet->decimal_places);
+            $wallet->save();
+            Log::info('Promotion Balance is here.', [
+                'amount' => $amount * (10 ** $customer->wallet->decimal_places),
+            ]);
+        }
     }
 
     
@@ -119,11 +128,29 @@ class WalletService
 
     public function withdrawal(Customer $customer, float $amount, TransactionName $transaction_name, array $meta = [])
     {
-        $customer->withdrawFloat($amount, self::buildDepositMeta($customer, $customer, $transaction_name, $meta));
+        try {
+            Log::info("Attempting to withdraw {$amount} from user {$customer->id} for transaction: {$transaction_name->value}");
+            Log::info("User balance before withdrawal: {$customer->balanceFloat}");
+
+            $result = $customer->withdrawFloat($amount, self::buildDepositMeta($customer, $customer, $transaction_name, $meta));
+
+            Log::info("Withdrawal successful. User balance after withdrawal: {$customer->balanceFloat}");
+
+            return $result;
+        } catch (\Exception $e) {
+            Log::error("Withdrawal failed for user {$customer->id}: " . $e->getMessage(), [
+                'amount' => $amount,
+                'transaction_name' => $transaction_name->value,
+                'meta' => $meta,
+                'trace' => $e->getTraceAsString(),
+            ]);
+            throw $e;
+        }
     }
 
     public function depositAmount(Customer $customer, float $amount, TransactionName $transaction_name, array $meta = [])
     {
         $customer->depositFloat($amount, self::buildDepositMeta($customer, $customer, $transaction_name, $meta));
     }
+    
 }

@@ -17,10 +17,11 @@ use App\Models\PersonFcmToken;
 use Illuminate\Support\Facades\DB;
 use App\Actions\Auth\APILoginAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Action\PromotionService;
 use App\Http\Requests\Auth\OTPRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Customer\CustomerRequest;
 use App\Http\Requests\Auth\InitialRegisterRequest;
 use App\Http\Requests\Customer\ForgetPasswordRequest;
@@ -196,6 +197,8 @@ class AuthController extends Controller
                 $this->storeFcmToken($request->fcm_token, $customer->id);
                 #implement agent to user
                 $this->storeAgent($request->code, $customer->id);
+                (new PromotionService())->claimReferralPromotion($request->referral_phone_number, $customer);
+
                 DB::commit();
                 ResponseData($loginResponse, 201, true, 'Successfully registered and verified');
             } catch (Exception $e) {

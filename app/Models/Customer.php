@@ -129,6 +129,21 @@ class Customer extends Authenticatable implements Wallet
         return $this->belongsTo(Agent::class);
     }
 
+    public function gamePromotions()
+    {
+        return $this->morphedByMany(GamePromotion::class, 'promotion', 'customer_promotions')->withTimestamps();
+    }
+
+    public function referralPromotions()
+    {
+        return $this->morphedByMany(ReferralPromotion::class, 'promotion', 'customer_promotions')->withTimestamps();
+    }
+
+    public function userPromotions()
+    {
+        return $this->morphedByMany(UserPromotion::class, 'promotion', 'customer_promotions')->withTimestamps();
+    }
+
     // public function main_wallet()
     // {
     //     return $this->hasOne(Wallet::class, 'customer_id'); // Adjust this as needed

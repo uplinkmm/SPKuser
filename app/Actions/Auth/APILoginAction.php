@@ -2,6 +2,7 @@
 
 namespace App\Actions\Auth;
 
+use App\Services\BuffaloGameService;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -71,6 +72,7 @@ class APILoginAction {
         $login_response["code"] = 200;
         $login_response["success"] = true;
         $login_response["message"] = 'Authenticated';
+        $login_response['auth'] = BuffaloGameService::generateBuffaloAuth($user);
 
         return $login_response;
     }

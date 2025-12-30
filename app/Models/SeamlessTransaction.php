@@ -26,10 +26,14 @@ class SeamlessTransaction extends Model
         'payout_amount',
         'valid_amount',
         'status',
+        'action',
+        'settled_at',
     ];
 
     protected $casts = [
-        'status' => TransactionStatus::class,
+        // 'status' => TransactionStatus::class,
+        'settled_at' => 'datetime',
+
     ];
 
     public function customer()
@@ -44,6 +48,6 @@ class SeamlessTransaction extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        // return $this->hasMany(Transaction::class);
     }
 }

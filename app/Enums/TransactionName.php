@@ -30,4 +30,15 @@ enum TransactionName: string
 
     case MainMoneyTransfer = 'main_money_transfer';
 
+    public static function isValid(string $action): bool
+    {
+        return in_array($action, array_column(self::cases(), 'value'), true);
+    }
+
+    case Promotion = 'promotion';
+    case ReferralPromotion = 'referral_promotion';
+    
+    case GameLoss = 'game_loss';
+    case GAME_BET = 'game_bet';
+    case GameWin = 'game_win';
 }

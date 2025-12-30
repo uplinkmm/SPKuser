@@ -20,6 +20,8 @@ class Wallet extends WalletBase
         'name',
         'default',
         'slug',
+        'decimal_places',
+        'promotion_balance',
     ];
 
     // public function customer()
@@ -27,6 +29,11 @@ class Wallet extends WalletBase
     //     return $this->belongsTo(Customer::class);
     // }
 
+    public function getPromotionBalanceFloatAttribute(): float
+    {
+        return $this->promotion_balance / (10 ** $this->decimal_places);
+    }
+    
     public function holderable(): MorphTo
     {
         return $this->morphTo();

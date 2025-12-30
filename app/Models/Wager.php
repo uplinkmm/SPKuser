@@ -15,6 +15,8 @@ class Wager extends Model
         'seamless_wager_id',
         'seamless_transaction_id',
         'status',
+        'wager_status',
+        'wager_type',
     ];
 
     protected $casts = [
