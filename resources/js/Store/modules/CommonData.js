@@ -9,6 +9,11 @@ export default {
                 : window.location.href.includes("test")
                 ? "http://spkadmin.test"
                 : "http://spkadmin.test",
+            userBalance: {
+                balance: 0,
+                name: "",
+                game_money_balance: 0,
+            },
         };
     },
     getters: {
@@ -24,6 +29,9 @@ export default {
         imgPrefix(state) {
             return state.img_prefix;
         },
+        userBalance(state) {
+            return state.userBalance;
+        },
     },
     mutations: {
         setNotiCount(state, noti) {
@@ -35,6 +43,9 @@ export default {
         setLanguageCode(state, payload) {
             state.language_code = payload;
             localStorage.setItem("appLanguage", payload);
+        },
+        setUserBalance(state, payload) {
+            state.userBalance = payload;
         },
     },
 

@@ -87,12 +87,12 @@ export default {
     data() {
         return {
             rooms: ROOM_CONFIG,
-            current_balance: 400,
+            current_balance: 0,
             loading: false,
         };
     },
     computed: {
-        ...mapGetters(["getToken"]),
+        ...mapGetters(["getToken", "getUser", "userBalance"]),
         available_rooms() {
             return this.rooms.filter((room) => {
                 return room.min_bet <= this.current_balance;
@@ -116,27 +116,39 @@ export default {
             return room.min_bet <= this.current_balance;
         },
         async getGameUrl(game) {
+            console.log(game.room_id);
             this.loading = true;
-            let url = `/api/operators/launch_game`;
+            let url = `/api/buffalo/launch-game`;
             let formData = new FormData();
-            formData.append("product_code", game.product_code);
-            formData.append("game_type", game.game_type);
-            formData.append("game_code", game.code);
+            // formData.append("type_id", API_CONFIG.BUFFALO_TYPE_ID);
+            // formData.append("provider_id", API_CONFIG.BUFFALO_PROVIDER_ID);
+            // formData.append("game_id", API_CONFIG.BUFFALO_GAME_ID);
+            formData.append("room_id", game.room_id);
+            formData.append("type_id", 1);
+            formData.append("provider_id", 23);
+            formData.append("game_id", 23);
 
             let response = await postApiDataSlot({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
-            if (response.status == 200) {
+
+            if (response.status == 200 && response.data.code != 0) {
+                const gameUrl =
+                    response.game_url ||
+                    response.data?.game_url ||
+                    response.Url;
+
                 this.$notify({
                     text: "Loading....",
                     type: "info",
                 });
-                window.location.href = response.data.url;
+                // window.location.href = gameUrl;
             } else {
                 this.$notify({
-                    text: "Something went wrong.Try again!",
+                    text:
+                        response.data.msg || "Something went wrong.Try again!",
                     type: "error",
                 });
                 this.loading = false;
@@ -144,6 +156,7 @@ export default {
         },
     },
     mounted() {
+        this.current_balance = this.userBalance.game_money_balance;
         initTWE({ Modal, Ripple, Dropdown });
     },
 };

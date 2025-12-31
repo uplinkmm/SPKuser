@@ -136,7 +136,7 @@ export default {
         ...mapGetters(["notiCount", "getToken", "getUser"]),
     },
     methods: {
-        ...mapMutations(["setNotiCount", "setUser"]),
+        ...mapMutations(["setNotiCount", "setUser", "setUserBalance"]),
         async getNotis() {
             let response = await getApiData({
                 url: `/api/notification_list?type=betting_win&page=1&is_count=0`,
@@ -145,6 +145,7 @@ export default {
             if (response.success) {
                 this.setNotiCount(response.data.count);
                 this.user = response.data.user;
+                this.setUserBalance(response.data.user);
             } else {
                 if (
                     response.message == "Please login to continue" &&
@@ -156,6 +157,11 @@ export default {
                     !this.needAuth
                 ) {
                     this.setUser("");
+                    this.setUserBalance({
+                        balance: 0,
+                        name: "",
+                        game_money_balance: 0,
+                    });
                 }
             }
         },
