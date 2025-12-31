@@ -5,8 +5,10 @@
 
         <!-- 1st  -->
         <div class="min-h-[100vh]">
-            <div class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white">
-                <div class=" text-sm lg:text-base">
+            <div
+                class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+            >
+                <div class="text-sm lg:text-base">
                     <div class="flex justify-between gap-x-4 mb-4">
                         <p class="flex-grow-0 w-36">
                             <!-- <i class="fal fa-wallet"></i> -->
@@ -80,7 +82,9 @@
                 </div>
 
                 <div class="w-full max-w-md px-4 pb-20 lg:pb-0">
-                    <h2 class=" text-base lg:text-xl font-bold mb-4 text-gray-800 text-left">
+                    <h2
+                        class="text-base lg:text-xl font-bold mb-4 text-gray-800 text-left"
+                    >
                         ငွေသွင်းမည် ပမာဏ
                     </h2>
 
@@ -170,7 +174,9 @@
                 </div>
 
                 <div class="w-full max-w-md px-4">
-                    <h2 class="text-base lg:text-xl font-bold mb-6 text-gray-800 text-left">
+                    <h2
+                        class="text-base lg:text-xl font-bold mb-6 text-gray-800 text-left"
+                    >
                         လုပ်ဆောင်မှု အမှတ် နောက်ဆုံး ဂဏန်း ၆ လုံး
                     </h2>
 
@@ -179,8 +185,15 @@
                             Transaction Number
                         </p>
                         <input
-                            type="number"
+                            type="text"
                             v-model="paymentTrId"
+                            pattern="\\d*"
+                            @input="
+                                paymentTrId = $event.target.value.replace(
+                                    /[^0-9]/g,
+                                    ''
+                                )
+                            "
                             placeholder="Transaction Number"
                             class="w-full p-4 rounded-xl text-sm lg:text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />
