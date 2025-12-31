@@ -1,18 +1,28 @@
 export function checkNumber(text) {
     return text.replace(/[^0-9]/g, "");
 }
-
 // API Configuration
-const API_CONFIG = {
+const envBuffaloProviderId = Number.parseInt(
+    import.meta.env.VITE_BUFFALO_PROVIDER_ID ?? "",
+    10
+);
+
+const envBuffaloGameId = Number.parseInt(
+    import.meta.env.VITE_BUFFALO_GAME_ID ?? "",
+    10
+);
+
+export const BUFFALO_API_CONFIG = {
     // Update this to your API base URL
     BASE_URL: "https://moneyking77.online/api",
 
     // Buffalo Game Provider ID (update if different)
-    BUFFALO_PROVIDER_ID: 23,
+    BUFFALO_PROVIDER_ID: envBuffaloProviderId,
     BUFFALO_TYPE_ID: 1, // Game type ID
-    BUFFALO_GAME_ID: 23, // Game ID
 };
-
+export const BUFFALO_GAME_ID = envBuffaloGameId; // Game ID
+export const BUFFALO_PROVIDER_ID = envBuffaloProviderId; // Game ID
+export const BUFFALO_TYPE_ID = 1; // Game ID
 // Room Configuration (matches backend)
 export const ROOM_CONFIG = [
     {

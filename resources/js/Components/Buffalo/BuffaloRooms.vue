@@ -76,7 +76,12 @@ import {
 import Navbar from "../Nav/Navbar.vue";
 import { mapGetters } from "vuex";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
-import { ROOM_CONFIG } from "../../utilities/common";
+import {
+    ROOM_CONFIG,
+    BUFFALO_GAME_ID,
+    BUFFALO_PROVIDER_ID,
+    BUFFALO_TYPE_ID,
+} from "../../utilities/common";
 import LoadingProgressBar from "../Common/LoadingProgressBar.vue";
 
 export default {
@@ -124,15 +129,21 @@ export default {
             // formData.append("provider_id", API_CONFIG.BUFFALO_PROVIDER_ID);
             // formData.append("game_id", API_CONFIG.BUFFALO_GAME_ID);
             formData.append("room_id", game.room_id);
-            formData.append("type_id", 1);
-            formData.append("provider_id", 23);
-            formData.append("game_id", 23);
+            formData.append("type_id", BUFFALO_TYPE_ID);
+            formData.append("provider_id", BUFFALO_PROVIDER_ID);
+            formData.append("game_id", BUFFALO_GAME_ID);
 
             let response = await postApiDataSlot({
                 url: url,
-                form_data: formData,
+                form_data: {
+                    room_id: game.room_id,
+                    type_id: BUFFALO_TYPE_ID,
+                    provider_id: BUFFALO_PROVIDER_ID,
+                    game_id: BUFFALO_GAME_ID,
+                },
                 token: this.getToken,
             });
+            this.loading = false;
 
             if (response.status == 200 && response.data.code != 0) {
                 const gameUrl =
@@ -140,22 +151,20 @@ export default {
                     response.data?.game_url ||
                     response.Url;
 
-                this.$notify({
-                    text: "Loading....",
-                    type: "info",
-                });
-                // window.location.href = gameUrl;
+                this.loading = true;
+                // console.log("gameUrl", gameUrl);
+                window.location.href = gameUrl;
             } else {
                 this.$notify({
                     text:
                         response.data.msg || "Something went wrong.Try again!",
                     type: "error",
                 });
-                this.loading = false;
             }
         },
     },
     mounted() {
+        console.log("BUFFALO_PROVIDER_ID", BUFFALO_PROVIDER_ID);
         this.current_balance = this.userBalance.game_money_balance;
         initTWE({ Modal, Ripple, Dropdown });
     },

@@ -66,4 +66,4 @@ Route::view('/slots', 'slots.index')->name('slots');
 Route::view('/slots/game_lists', 'slots.slots_games')->name('slots_games');
 Route::view('/slots/providers', 'slots.slots_providers')->name('slots_providers');
 Route::view('/lottery', 'lottery.index')->name('lottery');
-Route::view('/buffalo_rooms', 'buffalo.rooms')->name('buffalo_rooms');
+Route::view('/buffalo_rooms', 'buffalo.rooms')->name('buffalo_rooms'); //buffalo game
