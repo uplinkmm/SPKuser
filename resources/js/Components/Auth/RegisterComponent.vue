@@ -4,11 +4,13 @@
     >
         <div class="w-full">
             <div class="mb-[5vh] pt-16 text-center">
-                <p class="text-base mb-3 font-semibold">
-                    အကောင့်ဖွင့်ရန်
-                </p>
-                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-6 mx-auto" alt="" />
-                <p class=" text-sm mb-4">
+                <p class="text-base mb-3 font-semibold">အကောင့်ဖွင့်ရန်</p>
+                <img
+                    src="../../../../public/img/SPK Logo.png"
+                    class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-6 mx-auto"
+                    alt=""
+                />
+                <p class="text-sm mb-4">
                     OTP ကျမလာပါ Customer Service သို့ ဆက်သွယ်နိုင်ပါသည်
                 </p>
 
@@ -157,7 +159,15 @@
                     class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
                 />
             </div> -->
-
+            <div class="mb-8">
+                <input
+                    type="text"
+                    id="referral_phone_number"
+                    v-model="referral_phone_number"
+                    placeholder="Referral Phone Number(Optional)"
+                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                />
+            </div>
             <div>
                 <button
                     @click="register"
@@ -232,6 +242,8 @@ export default {
             otp: null,
             password: null,
             confirm_password: null,
+            referral_phone_number: null,
+
             // code: null,
             remember: true,
             otpRequested: false,
@@ -315,6 +327,10 @@ export default {
             formData.append("password_confirmation", this.confirm_password);
             formData.append("otp", this.otp);
             // formData.append("code", this.code);
+            formData.append(
+                "referral_phone_number",
+                this.referral_phone_number
+            );
             formData.append("fcm_token", this.fcmToken); //from mixin
             this.register_loading = true;
             let response = await postApiData({ url: url, form_data: formData });
@@ -335,6 +351,7 @@ export default {
                         response.message.password ||
                         response.message.password_confirmation ||
                         response.message.otp ||
+                        response.message.referral_phone_number ||
                         response.message
                 );
                 return false;
