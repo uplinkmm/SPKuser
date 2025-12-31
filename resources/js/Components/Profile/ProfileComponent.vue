@@ -41,11 +41,11 @@
                 </div>
                 <div class="px-8 pb-4 mb-8">
                     <h2
-                        class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                        class="text-lg sm:text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                     >
                         ပရိုဖိုင်
                     </h2>
-                    <div class="flex flex-col gap-y-4 divide-y divide-black">
+                    <div class="flex flex-col gap-y-4 divide-y divide-black text-sm sm:text-base">
                         <button
                             type="button"
                             @click="
@@ -120,15 +120,15 @@
 
                 <div class="px-8">
                     <button
-                        class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-sm transition-colors duration-300"
+                        class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-xs sm:x`text-sm transition-colors duration-300"
                     >
                         <i class="fal fa-phone mr-4 w-4"></i>Customer Service
-                        သို့ ဖုန်းခေါ်ရန်
+                        <span class="hidden sm:inline-block">သို့ ဖုန်းခေါ်ရန်</span>
                     </button>
                 </div>
             </div>
             <!-- Chagne Password -->
-            <div v-show="step == 'changePassStepOne'" class="px-8 py-12 mb-8">
+            <div v-show="step == 'changePassStepOne'" class="px-4 sm:px-8 py-12 mb-8">
                 <div class="relative h-full flex flex-col justify-center">
                     <div class="mb-12 text-center">
                         <p class="text-2xl mb-4 font-semibold">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <div v-show="step == 'changePassStepTwo'" class="px-8 py-12 mb-8">
+            <div v-show="step == 'changePassStepTwo'" class="px-4 sm:px-8 py-12 mb-8">
                 <div class="relative h-full flex flex-col justify-center">
                     <div class="mb-12 text-center">
                         <p class="text-2xl mb-4 font-semibold">

@@ -7,7 +7,7 @@
             :need-auth="false"
         ></Navbar>
 
-        <div class="px-4 mb-16 relative">
+        <div class="px-4 mb-8 relative">
             <!-- <div class="marquee bg-gray-900 text-white text-sm py-2 absolute top-0 left-4 ring-4">
                 <div class="w-fit whitespace-nowrap">
                     <span class=" w-full inline mr-16 py-2">
@@ -38,7 +38,7 @@
                 <div class="mx-3" v-for="(ads, index) in adses">
                     <img
                         :src="`${img_prefix}${ads.photo}`"
-                        class="w-full aspect-video mb-6"
+                        class="w-full aspect-video mb-3"
                     />
                 </div>
                 <!-- <div class="mx-3">
@@ -49,10 +49,10 @@
                 </div> -->
             </div>
 
-            <div
+            <div v-if="!getUser"
                 class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
-                <a v-if="!getUser" href="/login_register">
+                <a href="/login_register">
                     <div
                         class="flex justify-start gap-x-4 w-10/12 mx-auto py-6"
                     >
@@ -330,7 +330,7 @@
 
             <div class="">
                 <ul
-                    class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
+                    class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar pb-4"
                     role="tablist"
                     data-twe-nav-ref
                 >
@@ -341,7 +341,7 @@
                     <li
                         v-for="(type, index) in gameTypes"
                         :key="index"
-                        class="my-2 block pr-4 pb-2 font-semibold pt-4 text-sm  relative whitespace-nowrap cursor-pointer underline-border"
+                        class="my-2 block pr-4 pb-2 font-semibold pt-1 text-sm  relative whitespace-nowrap cursor-pointer underline-border"
                         :class="type == selectedGameType ? 'after:!block text-black' : 'text-gray-600'"
                     >
                         <a

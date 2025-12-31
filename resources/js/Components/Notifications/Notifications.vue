@@ -1,7 +1,7 @@
 <template>
     <div class="frame-container pb-20 min-h-[100vh] flex flex-col">
         <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
-        <div class="bg-[#fff] px-4 rounded-xl flex-grow">
+        <div class=" bg-white px-4 rounded-xl flex-grow">
             <!--Tabs navigation-->
             <ul
                 class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent"
@@ -11,7 +11,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-winning"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-2 block relative pr-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700 after:!left-0"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-winning"
                         data-twe-nav-active
@@ -29,7 +29,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-payment"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-payment"
                         role="tab"
@@ -46,7 +46,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-promotion"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-promotion"
                         role="tab"
@@ -75,7 +75,7 @@
                         <div
                             v-for="(bet_win, index) in betting_win"
                             :key="index"
-                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 bg-white relative border-b border-gray-300 rounded-md"
+                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 relative border-b border-gray-700 "
                         >
                             <div
                                 v-if="bet_win.is_read == 0"
@@ -104,27 +104,27 @@
                         <div
                             v-for="(transcation, index) in topup_transaction"
                             :key="index"
-                            class="pl-6 lg:pl-8 pr-8 py-6 mb-2 bg-white relative border-b border-gray-300 rounded-lg"
+                            class="pl-2 lg:pl-8 pr-2 lg:pr-8 py-3 mb-2  relative border-b border-gray-600 "
                         >
-                            <div class="flex justify-between">
-                                <p class="text-sm mb-1">
+                            <div class="flex justify-between mb-2">
+                                <p class="text-xs sm:text-sm mb-1">
                                     {{ dateFormat(transcation.date_time) }}
                                 </p>
                                 <p
                                     v-if="transcation.status == 'confirmed'"
-                                    class="text-sm text-green-600 mb-1 capitalize"
+                                    class="text-xs sm:text-sm text-green-600 mb-1 capitalize"
                                 >
                                     {{ transcation.status }}
                                 </p>
                                 <p
                                     v-else
-                                    class="text-sm text-red-600 mb-1 capitalize"
+                                    class="text-xs sm:text-sm text-red-600 mb-1 capitalize"
                                 >
                                     {{ transcation.status }}
                                 </p>
                             </div>
-                            <hr class="my-2" />
-                            <div class="flex justify-between">
+                            <!-- <hr class="my-2" /> -->
+                            <div class="flex justify-between mb-2">
                                 <p
                                     class="text-xs text-green-600 mb-1 font-semibold"
                                 >
@@ -135,19 +135,19 @@
                                             : "ငွေထုတ်"
                                     }}
                                 </p>
-                                <p class="text-sm mb-1">
+                                <p class="text-xs sm:text-sm mb-1">
                                     {{
                                         transcation.amount?.toLocaleString()
                                     }}
                                     ကျပ်
                                 </p>
                             </div>
-                            <hr class="mt-2 mb-4" />
+                            <!-- <hr class="mt-2 mb-4" /> -->
                             <div class="flex justify-between">
-                                <p class="text-base font-inter mb-1">
+                                <p class="text-sm sm:text-base font-inter mb-0">
                                     {{ transcation.provider_name }}
                                 </p>
-                                <p class="text-base font-inter mb-1">
+                                <p class="text-sm sm:text-base font-inter mb-0 text-right w-[55%]">
                                     လုပ်ငန်းစဥ်နပါတ်-{{
                                         transcation.payment_transaction_id
                                     }}

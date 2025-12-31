@@ -64,7 +64,7 @@
                             <div>
                                 <a href="/topup">
                                     <img
-                                        src="../../../../public/img/money 1.png"
+                                        src="../../../../public/img/money_receive.png"
                                         class="w-10 lg:w-14 mx-auto mb-2"
                                     />
                                     <p class="text-sm lg:text-base text-center">{{ $t("Deposit") }}</p>
@@ -74,7 +74,7 @@
                             <div class="">
                                 <a href="/cash_withdraw">
                                     <img
-                                        src="../../../../public/img/money 1.png"
+                                        src="../../../../public/img/money_send.png"
                                         class="w-10 lg:w-14 mx-auto mb-2"
                                     />
                                     <p class="text-sm lg:text-base text-center">{{ $t("Withdrawal") }}</p>
@@ -83,12 +83,12 @@
                             <div class="">
                                 <button
                                     @click="wallet_transfer.amount = ''"
-                                    class="flex-grow-0"
+                                    class=""
                                     data-twe-toggle="modal"
                                     data-twe-target="#add_main_money_model"
                                 >
                                     <img
-                                        src="../../../../public/img/money 1.png"
+                                        src="../../../../public/img/exchange.png"
                                         class="w-10 lg:w-14 mx-auto mb-2"
                                     />
                                     <p class="text-sm lg:text-base text-center">ငွေလဲမည်</p>
