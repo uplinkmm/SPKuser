@@ -65,6 +65,7 @@ import Test from "./Components/Test/test.vue";
 import SlotsGames from "./Components/Slots/SlotsGames.vue";
 import SlotsProviders from "./Components/Slots/SlotsProviders.vue";
 import LotteryComponent from "./Components/Lottery/LotteryComponent.vue";
+import BuffaloRooms from "./Components/Buffalo/BuffaloRooms.vue";
 
 app.component("Test", Test);
 app.component("SocialPhoneNumber", SocialPhoneNumber);
@@ -96,6 +97,7 @@ app.component("SlotsComponent", SlotsComponent);
 app.component("SlotsGames", SlotsGames);
 app.component("SlotsProviders", SlotsProviders);
 app.component("LotteryComponent", LotteryComponent);
+app.component("BuffaloRooms", BuffaloRooms);
 
 app.use(store);
 app.use(Notifications);

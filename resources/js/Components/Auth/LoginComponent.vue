@@ -157,7 +157,12 @@ export default {
     // mixins: [fcmMixin],
 
     methods: {
-        ...mapMutations(["setUser", "setToken", "setCsrfToken"]),
+        ...mapMutations([
+            "setUser",
+            "setToken",
+            "setCsrfToken",
+            "setBuffaloAuth",
+        ]),
 
         async login() {
             // if (!this.password || !this.phone_number) {
@@ -186,6 +191,8 @@ export default {
                 this.setToken(this.token);
                 let user = response.data.user;
                 this.setUser(user);
+                let buffaloAuth = response.data.auth;
+                this.setBuffaloAuth(buffaloAuth);
                 this.$refs.signinForm.submit();
 
                 return true;

@@ -3,37 +3,46 @@ export default {
         return {
             user: null,
             token: null,
-            csrfToken: null
-        }
+            csrfToken: null,
+            buffaloAuth: null,
+        };
     },
 
     mutations: {
-        setUser(state, user){
+        setUser(state, user) {
             state.user = user;
         },
 
-        setToken(state, token){
+        setBuffaloAuth(state, buffaloAuth) {
+            state.buffaloAuth = buffaloAuth;
+        },
+
+        setToken(state, token) {
             state.token = token;
         },
 
-        setCsrfToken(state, csrfToken){
+        setCsrfToken(state, csrfToken) {
             state.csrfToken = csrfToken;
-        }
+        },
     },
 
     actions: {},
 
     getters: {
-        getUser(state){
+        getUser(state) {
             return state.user;
         },
 
-        getToken(state){
+        getToken(state) {
             return state.token;
-        },        
+        },
 
-        getCsrfToken(state){
+        getCsrfToken(state) {
             return state.csrfToken;
-        }
-    }
+        },
+
+        getBuffaloAuth(state) {
+            return state.buffaloAuth;
+        },
+    },
 };

@@ -49,7 +49,8 @@
                 </div> -->
             </div>
 
-            <div v-if="!getUser"
+            <div
+                v-if="!getUser"
                 class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a href="/login_register">
@@ -341,8 +342,12 @@
                     <li
                         v-for="(type, index) in gameTypes"
                         :key="index"
-                        class="my-2 block pr-4 pb-2 font-semibold pt-1 text-sm  relative whitespace-nowrap cursor-pointer underline-border"
-                        :class="type == selectedGameType ? 'after:!block text-black' : 'text-gray-600'"
+                        class="my-2 block pr-4 pb-2 font-semibold pt-1 text-sm relative whitespace-nowrap cursor-pointer underline-border"
+                        :class="
+                            type == selectedGameType
+                                ? 'after:!block text-black'
+                                : 'text-gray-600'
+                        "
                     >
                         <a
                             @click="
@@ -389,6 +394,23 @@
                                 <div
                                     class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
                                 >
+                                    <div class="relative">
+                                        <a
+                                            href="/buffalo_rooms"
+                                            class="cursor-pointer"
+                                        >
+                                            <img
+                                                src="../../../../public/img/buffalo/af.png"
+                                                class="w-full aspect-[3/2] rounded-lg"
+                                                alt=""
+                                            />
+                                            <p
+                                                class="text-white text-center pt-1 text-sm"
+                                            >
+                                                Buffalo game
+                                            </p>
+                                        </a>
+                                    </div>
                                     <div
                                         v-for="(product, index) in providers
                                             ?.game_type?.products"
