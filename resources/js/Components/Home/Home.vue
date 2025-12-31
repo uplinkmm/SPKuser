@@ -400,7 +400,7 @@
                                             class="cursor-pointer"
                                         >
                                             <img
-                                                src="../../../../public/img/buffalo/af.png"
+                                                src="../../../../public/img/buffalo/750x500.png"
                                                 class="w-full aspect-[3/2] rounded-lg"
                                                 alt=""
                                             />

@@ -8,8 +8,8 @@
             :title="`${this.selectedGameType?.name} - ${this.selectedProvider?.name}`"
             :back-btn="backBtn"
         ></Navbar>
-
-        <div class="">
+        <LoadingProgressBar :loading="loading"></LoadingProgressBar>
+        <div class="mt-4">
             <div class="mb-6">
                 <div
                     class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
@@ -37,8 +37,11 @@
                                             :src="item.image_url"
                                             alt=""
                                         />
-                                        <p class="text-white text-center pt-1 text-sm"> {{item.name}}</p>
-
+                                        <p
+                                            class="text-white text-center pt-1 text-sm"
+                                        >
+                                            {{ item.name }}
+                                        </p>
                                     </a>
                                 </div>
                             </div>
@@ -59,16 +62,19 @@ import {
 import Navbar from "../Nav/Navbar.vue";
 import { mapGetters } from "vuex";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
+import LoadingProgressBar from "../Common/LoadingProgressBar.vue";
 
 export default {
     components: {
         Navbar,
+        LoadingProgressBar,
     },
     data() {
         return {
             slots: [],
             selectedGameType: "",
             selectedProvider: "",
+            loading: false,
         };
     },
     computed: {
@@ -93,26 +99,25 @@ export default {
             return new Promise((resolve) => setTimeout(resolve, ms));
         },
         async getGameUrl(game) {
-            let url = `/api/game/Seamless/LaunchGame`;
+            this.loading = true;
+            let url = `/api/operators/launch_game`;
             let formData = new FormData();
-            formData.append("productId", this.selectedProvider.code);
-            formData.append("gameType", this.selectedGameType.id);
-            formData.append("gameId", game.code);
+            formData.append("product_code", game.product_code);
+            formData.append("game_type", game.game_type);
+            formData.append("game_code", game.code);
 
             let response = await postApiDataSlot({
                 url: url,
                 form_data: formData,
                 token: this.getToken,
             });
-
-            console.log(game.code);
-            console.log(response.data);
-            if (response?.data?.ErrorCode == 0) {
+            this.loading = false;
+            if (response.status == 200) {
                 this.$notify({
                     text: "Loading....",
                     type: "info",
                 });
-                window.location.href = response.data.Url;
+                window.location.href = response.data.url;
             } else {
                 this.$notify({
                     text: "Something went wrong.Try again!",
@@ -123,6 +128,7 @@ export default {
     },
     mounted() {
         const params = new URLSearchParams(window.location.search);
+        console.log("provider", params.get("provider"));
         this.selectedProvider = JSON.parse(params.get("provider"));
         this.selectedGameType = JSON.parse(params.get("game_type"));
         this.getGameLists();
