@@ -5,8 +5,8 @@
         class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
     >
         <Navbar title="Buffalo Rooms" :back-btn="backBtn"></Navbar>
-
-        <div class="">
+        <LoadingProgressBar :loading="loading"></LoadingProgressBar>
+        <div class="mt-4">
             <div class="mb-6">
                 <div
                     class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
@@ -27,7 +27,13 @@
                                 >
                                     <a
                                         @click="getGameUrl(room)"
-                                        class="cursor-pointer"
+                                        class="cursor-pointer block"
+                                        :class="{
+                                            'pointer-events-none opacity-60':
+                                                !checkAvailableRooms(
+                                                    room.room_id
+                                                ),
+                                        }"
                                     >
                                         <img
                                             class="w-full aspect-[3/2] rounded-lg"
@@ -38,15 +44,19 @@
                                             class="text-white text-center pt-1 text-sm"
                                         >
                                             {{ room.name }}
-                                            {{
-                                                checkAvailableRooms(
-                                                    room.room_id
-                                                )
-                                                    ? ""
-                                                    : "(Not Available)"
-                                            }}
                                         </p>
                                     </a>
+                                    <div
+                                        v-if="
+                                            !checkAvailableRooms(room.room_id)
+                                        "
+                                        class="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center"
+                                    >
+                                        <span
+                                            class="text-white text-sm font-medium"
+                                            >Insufficient Balance</span
+                                        >
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -67,14 +77,18 @@ import Navbar from "../Nav/Navbar.vue";
 import { mapGetters } from "vuex";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 import { ROOM_CONFIG } from "../../utilities/common";
+import LoadingProgressBar from "../Common/LoadingProgressBar.vue";
+
 export default {
     components: {
         Navbar,
+        LoadingProgressBar,
     },
     data() {
         return {
             rooms: ROOM_CONFIG,
             current_balance: 400,
+            loading: false,
         };
     },
     computed: {
@@ -102,6 +116,7 @@ export default {
             return room.min_bet <= this.current_balance;
         },
         async getGameUrl(game) {
+            this.loading = true;
             let url = `/api/operators/launch_game`;
             let formData = new FormData();
             formData.append("product_code", game.product_code);
@@ -124,6 +139,7 @@ export default {
                     text: "Something went wrong.Try again!",
                     type: "error",
                 });
+                this.loading = false;
             }
         },
     },
@@ -132,4 +148,3 @@ export default {
     },
 };
 </script>
-<style lang=""></style>
