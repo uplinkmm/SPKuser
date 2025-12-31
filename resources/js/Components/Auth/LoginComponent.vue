@@ -2,16 +2,15 @@
     <main
         class="w-full h-full min-h-screen mx-auto px-0 pb-2 flex justify-center flex-row relative"
     >
-        
-        <div class=" w-full">
+        <div class="w-full">
             <div class="mb-[10vh] text-center pt-24">
-                <img src="../../../../public/img/SPK Logo.png" class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-4 mx-auto" alt="" />
-                <p class=" mb-2">
-                            ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်
-                </p>
-                <p class="text-2xl font-semibold">
-                            အကောင့်ဝင်ရန်
-                </p>
+                <img
+                    src="../../../../public/img/SPK Logo.png"
+                    class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-4 mx-auto"
+                    alt=""
+                />
+                <p class="mb-2">ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်</p>
+                <p class="text-2xl font-semibold">အကောင့်ဝင်ရန်</p>
             </div>
             <div class="" @keyup.enter="login">
                 <div class="mb-4">
@@ -23,6 +22,13 @@
                             type="text"
                             id="phone_number_login"
                             v-model="phone_number"
+                            pattern="\\d*"
+                            @input="
+                                phone_number = $event.target.value.replace(
+                                    /[^0-9]/g,
+                                    ''
+                                )
+                            "
                             :placeholder="$t('Phone Number')"
                             class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />

@@ -45,6 +45,13 @@
                             id="phone_number"
                             v-model="phone_number"
                             :placeholder="$t('Phone Number')"
+                            pattern="\\d*"
+                            @input="
+                                phone_number = $event.target.value.replace(
+                                    /[^0-9]/g,
+                                    ''
+                                )
+                            "
                             class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />
                         <button
@@ -82,6 +89,10 @@
                         v-model="otp"
                         placeholder="OTP"
                         :disabled="!otpRequested"
+                        pattern="\\d*"
+                        @input="
+                            otp = $event.target.value.replace(/[^0-9]/g, '')
+                        "
                         class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                     />
                 </label>
@@ -160,13 +171,32 @@
                 />
             </div> -->
             <div class="mb-8">
-                <input
-                    type="text"
-                    id="referral_phone_number"
-                    v-model="referral_phone_number"
-                    placeholder="Referral Phone Number(Optional)"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                />
+                <label
+                    class="mb-6 rounded-xl shadow-md bg-white block relative"
+                >
+                    <p class="text-xs px-4 pt-4 text-gray-700">
+                        Referral Phone Number
+                    </p>
+                    <div class="relative">
+                        <button
+                            class="absolute left-4 top-1/2 transform -translate-y-1/2 text-xs border-r border-gray-400 pr-2 py-1"
+                        >
+                            <p class="text-[14px]">09</p>
+                        </button>
+                        <input
+                            type="text"
+                            id="referral_phone_number"
+                            v-model="referral_phone_number"
+                            placeholder="xxxxxxx"
+                            pattern="\\d*"
+                            @input="
+                                referral_phone_number =
+                                    $event.target.value.replace(/[^0-9]/g, '')
+                            "
+                            class="w-full px-4 pt-2 pb-3 pl-12 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                        />
+                    </div>
+                </label>
             </div>
             <div>
                 <button

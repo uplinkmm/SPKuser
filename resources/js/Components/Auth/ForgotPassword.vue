@@ -25,6 +25,13 @@
                         id="phone_number"
                         v-model="phone_number"
                         :placeholder="$t('Phone Number')"
+                        pattern="\\d*"
+                        @input="
+                            phone_number = $event.target.value.replace(
+                                /[^0-9]/g,
+                                ''
+                            )
+                        "
                         class="focus:ring-0 focus:shadow-none focus:outline-none w-full"
                     />
                     <button
@@ -44,6 +51,10 @@
                         v-model="otp"
                         placeholder="OTP"
                         :disabled="!otpRequested"
+                        pattern="\\d*"
+                        @input="
+                            otp = $event.target.value.replace(/[^0-9]/g, '')
+                        "
                         class="block w-full py-2 px-2 pr-16 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-black"
                     />
                     <button
