@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Gsc;
+namespace App\Http\Controllers\API\Gsc;
 
 use App\Enums\CurrencyRate;
 use Illuminate\Http\Request;

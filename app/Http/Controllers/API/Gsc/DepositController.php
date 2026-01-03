@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Gsc;
+namespace App\Http\Controllers\API\Gsc;
 
 use App\Models\User;
 use App\Enums\CurrencyRate;
@@ -17,7 +17,7 @@ use App\Enums\SlotWebhookResponseCode;
 use App\Services\Slot\SlotWebhookService;
 use App\Http\Requests\Gsc\GscWebhookRequest;
 use App\Http\Controllers\Api\V1\Webhook\Traits\GscWebhook;
-use App\Http\Controllers\Api\Gsc\GscWebhook\GscWtihdrawProcess;
+use App\Http\Controllers\API\Gsc\GscWebhook\GscWtihdrawProcess;
 
 class DepositController extends Controller
 {

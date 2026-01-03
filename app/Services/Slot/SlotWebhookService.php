@@ -15,4 +15,21 @@ class SlotWebhookService
             'BeforeBalance' => $before_balance,
         ];
     }
+    public static function buildGscResponse(SlotWebhookResponseCode $responseCode, $memberCode, $productCode, $balance, $before_balance, $currencyRate = 1)
+    {
+
+        $convertedBalance = round($balance / $currencyRate, 4);
+        $convertedBeforeBalance = round($before_balance / $currencyRate, 4);
+        $data = [
+
+            'member_account' => $memberCode,
+            'product_code' => $productCode,
+            'balance' => (float)$convertedBalance,
+            'before_balance' => (float)$convertedBeforeBalance,
+            'code' => $responseCode->value,
+            'message' => $responseCode->name,
+        ];
+        return $data;
+        // return ['data'=>[$data]];
+    }
 }

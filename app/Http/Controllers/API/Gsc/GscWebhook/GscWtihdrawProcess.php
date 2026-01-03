@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Api\Gsc\GscWebhook;
+namespace App\Http\Controllers\API\Gsc\GscWebhook;
 
 use App\Models\Wager;
 use App\Enums\WagerStatus;

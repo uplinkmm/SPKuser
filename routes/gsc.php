@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\Gsc\GameListController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Gsc\GameController;
-use App\Http\Controllers\Api\Gsc\BalanceController;
-use App\Http\Controllers\Api\Gsc\DepositController;
-use App\Http\Controllers\Api\Gsc\PushBetDataController;
-use App\Http\Controllers\Api\Gsc\WithdrawController;
+use App\Http\Controllers\API\Gsc\GameController;
+use App\Http\Controllers\API\Gsc\BalanceController;
+use App\Http\Controllers\API\Gsc\DepositController;
+use App\Http\Controllers\API\Gsc\GameListController;
+use App\Http\Controllers\API\Gsc\WithdrawController;
+use App\Http\Controllers\API\Gsc\PushBetDataController;
 
 Route::get('gameTypeProducts/{id}', [GameListController::class, 'gameTypeProducts']);
 Route::get('allGameProducts', [GameListController::class, 'allGameProducts']);
