@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Game\BuffaloGameController;
+use App\Http\Controllers\API\V1\Game\BuffaloGameController;
 Route::prefix('buffalo')->group(function () {
     // Public webhook endpoints (no authentication required)
     Route::post('/get-user-balance', [BuffaloGameController::class, 'getUserBalance']);

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redis;
 use App\Enums\SlotWebhookResponseCode;
 use App\Services\Slot\SlotWebhookService;
 use App\Http\Requests\Gsc\GscWebhookRequest;
-use App\Http\Controllers\Api\Gsc\GscWebhook\GscWtihdrawProcess;
+use App\Http\Controllers\API\Gsc\GscWebhook\GscWtihdrawProcess;
 
 class WithdrawController extends Controller
 {

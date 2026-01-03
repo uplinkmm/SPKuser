@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Game;
+namespace App\Http\Controllers\API\V1\Game;
 
 use App\Enums\TransactionName;
 use App\Http\Controllers\Controller;
