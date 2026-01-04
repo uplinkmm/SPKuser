@@ -247,7 +247,6 @@ class BuffaloGameController extends Controller
 
         // Find user
         $user = Customer::where('user_name', $userName)->first();
-        
         if (!$user) {
             Log::warning('6TriBet Buffalo - User not found', [
                 'userName' => $userName,

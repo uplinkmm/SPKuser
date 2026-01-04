@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Gsc;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -121,9 +122,13 @@ class GameController extends Controller
             'sign' => $signature,
             'request_time' => $requestTime,
             // 'operator_lobby_url' => Config::get('game.api.url'),
-            'operator_lobby_url' => 'https://shweshankan.com',
+            'operator_lobby_url' => 'https://shwepaukkan.com',
             
         ];
+        Log::info('Payload Data',[
+            'data'=>$data,
+            'api-url'=>$apiUrl
+        ]);
         try {
             // Send the request
             $response = Http::withHeaders([

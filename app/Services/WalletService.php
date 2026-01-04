@@ -85,7 +85,7 @@ class WalletService
 
     public function deposit(Customer $customer, float $amount, TransactionName $transaction_name, array $meta = [])
     {
-        $customer->depositFloat($amount, self::buildDepositMeta($customer, $customer, $transaction_name, $meta));
+        $result = $customer->depositFloat($amount, self::buildDepositMeta($customer, $customer, $transaction_name, $meta));
         if ($transaction_name === TransactionName::Promotion || $transaction_name === TransactionName::ReferralPromotion) {
             $wallet = $customer->wallet;
             $wallet->promotion_balance += $amount * (10 ** $customer->wallet->decimal_places);
@@ -94,6 +94,7 @@ class WalletService
                 'amount' => $amount * (10 ** $customer->wallet->decimal_places),
             ]);
         }
+        return $result;
     }
 
     
