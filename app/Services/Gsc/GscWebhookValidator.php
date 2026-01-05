@@ -51,7 +51,7 @@ class GscWebhookValidator
             $requestTransaction = GscRequestTransaction::from($transaction);
             $this->requestTransactions[] = $requestTransaction;
             if (!TransactionName::isValid($requestTransaction->action)) {
-                return $this->response(SlotWebhookResponseCode::InternalServerError);
+                return $this->response(SlotWebhookResponseCode::BetActionNotExist);
             }
             // if (!$this->request->getMember()) {
             //     return $this->response(SlotWebhookResponseCode::MemberNotExists);

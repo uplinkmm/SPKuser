@@ -123,7 +123,6 @@ class GameController extends Controller
             'request_time' => $requestTime,
             // 'operator_lobby_url' => Config::get('game.api.url'),
             'operator_lobby_url' => 'https://shwepaukkan.com',
-            
         ];
         Log::info('Payload Data',[
             'data'=>$data,
@@ -135,6 +134,10 @@ class GameController extends Controller
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ])->post($apiUrl, $data);
+            Log::info('Response',[
+                'body'=>$response->body(),
+                'status'=>$response->status(),
+            ]);
             if ($response->successful()) {
                 return $response->json();
             }

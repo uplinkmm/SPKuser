@@ -67,7 +67,6 @@ class WithdrawController extends Controller
             //end redis
 
             $validator = $request->check();
-
             if ($validator->fails()) {
                 // Release Redis lock and return validation error response
                 // tem redis

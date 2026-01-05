@@ -16,5 +16,6 @@ enum SlotWebhookResponseCode: int
     case InvalidSign = 1004;
     case NoGetGameList = 1005;
     case BetNotExist = 1006;
+    case BetActionNotExist = 1007;
     case ProductUnderMaintenance = 2000;
 }
