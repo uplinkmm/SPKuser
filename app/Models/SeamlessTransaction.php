@@ -28,6 +28,7 @@ class SeamlessTransaction extends Model
         'status',
         'action',
         'settled_at',
+        'game_code',
     ];
 
     protected $casts = [
