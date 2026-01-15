@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Action;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
 use NotificationChannels\Fcm\FcmChannel;
@@ -14,11 +16,14 @@ class Notifying extends Notification implements ShouldQueue
     private $title;
     private $body;
     private $date_time;
+    private $type;
 
-    public function __construct(array $data ){
-        $this->title=$data['title'];
-        $this->body=$data['body'];
-        $this->date_time=$data['date_time'];
+    public function __construct(array $data)
+    {
+        $this->title = $data['title'];
+        $this->body = $data['body'];
+        $this->date_time = $data['date_time'];
+        $this->type = $data['type'];
     }
     public function via($notifiable)
     {
@@ -37,15 +42,17 @@ class Notifying extends Notification implements ShouldQueue
     {
         Log::info('Send noti successfully');
         return (new FcmMessage(notification: new FcmNotification(
-                title: $this->title,                                            
-                body: $this->body,
-                image: 'http://example.com/url-to-image-here.png'
-            )))
-            // ->data(['data1' => 'value', 'data2' => 'value2']);
+            title: $this->title,
+            body: $this->body,
+            image: 'http://example.com/url-to-image-here.png'
+        )))
+            ->data([
+                'type' => $this->type,
+            ])
             ->custom([
                 'android' => [
                     'notification' => [
-                        'color' => '#0A0A0A',                                                                                                                                                                               
+                        'color' => '#0A0A0A',
                     ],
                     'fcm_options' => [
                         'analytics_label' => 'analytics',

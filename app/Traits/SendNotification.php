@@ -18,6 +18,7 @@ trait SendNotification
     public function send($model, $people, $data)
     {
         $morphMapName = RelationMorphName($model);
+        $data['type'] = $morphMapName;
         // $personMapName = RelationMorphName($people);
         $people = $this->normalizeToCollection($people);
         $notification = Notification::create([
