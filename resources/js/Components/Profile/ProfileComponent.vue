@@ -45,7 +45,9 @@
                     >
                         ပရိုဖိုင်
                     </h2>
-                    <div class="flex flex-col gap-y-4 divide-y divide-black text-sm sm:text-base">
+                    <div
+                        class="flex flex-col gap-y-4 divide-y divide-black text-sm sm:text-base"
+                    >
                         <button
                             type="button"
                             @click="
@@ -123,12 +125,17 @@
                         class="w-full bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-[#FED428] font-bold py-3 rounded-full shadow-md text-xs sm:x`text-sm transition-colors duration-300"
                     >
                         <i class="fal fa-phone mr-4 w-4"></i>Customer Service
-                        <span class="hidden sm:inline-block">သို့ ဖုန်းခေါ်ရန်</span>
+                        <span class="hidden sm:inline-block"
+                            >သို့ ဖုန်းခေါ်ရန်</span
+                        >
                     </button>
                 </div>
             </div>
             <!-- Chagne Password -->
-            <div v-show="step == 'changePassStepOne'" class="px-4 sm:px-8 py-12 mb-8">
+            <div
+                v-show="step == 'changePassStepOne'"
+                class="px-4 sm:px-8 py-12 mb-8"
+            >
                 <div class="relative h-full flex flex-col justify-center">
                     <div class="mb-12 text-center">
                         <p class="text-2xl mb-4 font-semibold">
@@ -179,40 +186,7 @@
                             :disabled="passwordLoading"
                             class="bg-black disabled:bg-gray-600 text-white pl-8 pr-7 py-3 w-fit rounded-full"
                         >
-                            {{ passwordLoading ? "Loading.." : "Next" }}
-                            <i class="fas fa-chevron-right ml-2 text-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div v-show="step == 'changePassStepTwo'" class="px-4 sm:px-8 py-12 mb-8">
-                <div class="relative h-full flex flex-col justify-center">
-                    <div class="mb-12 text-center">
-                        <p class="text-2xl mb-4 font-semibold">
-                            ပက်စ်ဝက်ပြောင်းရန်
-                        </p>
-                        <p class="text-sm mb-2 font-semibold">
-                            ရောက်ရှိလာသော OTP ၆ လုံးကို ထည့်ပါ
-                        </p>
-                    </div>
-                    <div class="pb-16">
-                        <label class="mb-6 rounded-xl shadow-md bg-white block">
-                            <p class="text-xs px-4 pt-4 text-gray-700">OTP</p>
-                            <input
-                                type="text"
-                                v-model="otp"
-                                placeholder="OTP"
-                                class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                            />
-                        </label>
-                    </div>
-                    <div class="mb-0 absolute bottom-4 flex justify-end w-full">
-                        <button
-                            @click="handelChangePasswordStepTwo"
-                            :disabled="passwordLoading"
-                            class="bg-black text-white disabled:bg-slate-600 pl-8 pr-7 py-3 w-fit rounded-full"
-                        >
-                            {{ passwordLoading ? "Loading..." : "Done" }}
+                            {{ passwordLoading ? "Loading.." : "Submit" }}
                         </button>
                     </div>
                 </div>
@@ -622,7 +596,6 @@ export default {
                 { code: "cn", name: "Chinese" },
                 { code: "th", name: "Thai" },
             ],
-            otp: "",
             passwordLoading: false,
         };
     },
@@ -636,14 +609,10 @@ export default {
     methods: {
         ...mapMutations(["setLanguageCode"]),
         clickChangePass() {
-            this.step = "changePass";
+            this.step = "changePassStepOne";
             this.title = "Change Password";
         },
         backBtn() {
-            if (this.step == "changePassStepTwo") {
-                this.step = "changePassStepOne";
-                return;
-            }
             if (
                 this.step == "changePassStepOne" ||
                 this.step == "history" ||
@@ -740,47 +709,6 @@ export default {
             }
             let url = "/api/change_password";
             let formData = new FormData();
-            formData.append("current_password", this.current_password);
-            formData.append("new_password", this.new_password);
-            formData.append(
-                "new_password_confirmation",
-                this.new_password_confirmation
-            );
-            this.passwordLoading = true;
-            let response = await postApiData({
-                url: url,
-                form_data: formData,
-                token: this.getToken,
-            });
-            this.passwordLoading = false;
-            if (response.success) {
-                this.$notify({
-                    text: response.message,
-                    type: "info",
-                });
-                this.step = "changePassStepTwo";
-                this.title = "Change Password";
-            } else {
-                this.$notify({
-                    text:
-                        response.message?.new_password ||
-                        response.message?.current_password ||
-                        response.message?.new_password_confirmation,
-                    type: "error",
-                });
-            }
-        },
-        async handelChangePasswordStepTwo() {
-            if (this.otp.length < 6) {
-                this.$notify({
-                    text: "Password must be at least 6 characters long.",
-                    type: "info",
-                });
-                return;
-            }
-            let url = "/api/change_password";
-            let formData = new FormData();
-            formData.append("otp", this.otp);
             formData.append("current_password", this.current_password);
             formData.append("new_password", this.new_password);
             formData.append(

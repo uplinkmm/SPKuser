@@ -54,70 +54,8 @@
                             "
                             class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                         />
-                        <button
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-2 py-1"
-                            @click="initialRegister"
-                            :disabled="
-                                countdown != 0 || initial_register_loading
-                            "
-                        >
-                            <p v-if="initial_register_loading">
-                                <i class="fal fa-spinner animate-spin w-10"></i>
-                            </p>
-                            <p v-if="countdown > 0">
-                                {{
-                                    countdown.toString().padStart(2, "0") + " s"
-                                }}
-                            </p>
-                            <p
-                                v-if="
-                                    countdown == 0 && !initial_register_loading
-                                "
-                            >
-                                Get OTP
-                            </p>
-                        </button>
                     </div>
                 </label>
-            </div>
-            <div class="mb-4">
-                <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class="text-xs px-4 pt-4 text-gray-700">OTP</p>
-                    <input
-                        type="text"
-                        id="otp"
-                        v-model="otp"
-                        placeholder="OTP"
-                        :disabled="!otpRequested"
-                        pattern="\\d*"
-                        @input="
-                            otp = $event.target.value.replace(/[^0-9]/g, '')
-                        "
-                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                    />
-                </label>
-                <!-- <div class="relative">
-                    <input
-                        type="text"
-                        id="otp"
-                        v-model="otp"
-                        placeholder="OTP"
-                        :disabled="!otpRequested"
-                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                    />
-                    <button
-                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs border-l border-gray-400 pl-8 py-1"
-                    >
-                        <p>
-                            {{
-                                countdown > 0
-                                    ? countdown.toString().padStart(2, "0") +
-                                      " s"
-                                    : "00 s"
-                            }}
-                        </p>
-                    </button>
-                </div> -->
             </div>
 
             <div class="mb-4 relative">
@@ -129,7 +67,6 @@
                         :type="show_password ? 'text' : 'password'"
                         id="password"
                         v-model="password"
-                        :disabled="!otpRequested"
                         placeholder="Password"
                         class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                     />
@@ -156,7 +93,6 @@
                         id="confirm_password"
                         v-model="confirm_password"
                         placeholder="Confirm Password"
-                        :disabled="!otpRequested"
                         class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
                     />
                 </label>
@@ -201,7 +137,7 @@
             <div>
                 <button
                     @click="register"
-                    :disabled="!otpRequested || register_loading"
+                    :disabled="register_loading"
                     class="block w-full py-3 px-2 text-sm rounded-full border border-[#E4BD1B] bg-black text-white focus:ring-0 focus:shadow-none"
                 >
                     <p v-if="register_loading">
@@ -269,17 +205,13 @@ export default {
 
             user_name: null,
             phone_number: null,
-            otp: null,
             password: null,
             confirm_password: null,
             referral_phone_number: null,
 
             // code: null,
             remember: true,
-            otpRequested: false,
             show_password: false,
-            countdown: 0,
-            initial_register_loading: false,
             register_loading: false,
         };
     },
@@ -294,7 +226,7 @@ export default {
     methods: {
         ...mapMutations(["setUser", "setToken", "setCsrfToken"]),
 
-        async initialRegister() {
+        async register() {
             if (!this.user_name || !this.phone_number) {
                 this.setErrorBox(
                     true,
@@ -302,34 +234,6 @@ export default {
                 );
                 return 1;
             }
-            let formData = new FormData();
-            formData.append("phone_number", this.phone_number);
-            formData.append("name", this.user_name);
-            let url = `/api/initial_register`;
-            this.initial_register_loading = true;
-            let response = await postApiData({ url: url, form_data: formData });
-            this.initial_register_loading = false;
-            if (response.success) {
-                this.otpRequested = true;
-                this.setErrorBox(false, response.message);
-                this.startCountdown();
-            } else {
-                this.setErrorBox(true, response.message.phone_number);
-            }
-        },
-
-        async register() {
-            if (!this.otp) {
-                this.setErrorBox(true, "OTP code must be entered");
-
-                return 1;
-            }
-            if (!this.countdown) {
-                this.setErrorBox(true, "OTP code is expired!");
-
-                return 1;
-            }
-
             if (!this.password || !this.confirm_password) {
                 this.setErrorBox(
                     true,
@@ -355,7 +259,6 @@ export default {
             formData.append("phone_number", this.phone_number);
             formData.append("password", this.password);
             formData.append("password_confirmation", this.confirm_password);
-            formData.append("otp", this.otp);
             // formData.append("code", this.code);
             formData.append(
                 "referral_phone_number",
@@ -380,24 +283,10 @@ export default {
                     response.message.phone_number ||
                         response.message.password ||
                         response.message.password_confirmation ||
-                        response.message.otp ||
                         response.message.referral_phone_number ||
                         response.message
                 );
                 return false;
-            }
-        },
-        startCountdown() {
-            if (this.countdown === 0) {
-                this.countdown = 60; // Set countdown to 60 seconds
-
-                let interval = setInterval(() => {
-                    if (this.countdown > 0) {
-                        this.countdown--;
-                    } else {
-                        clearInterval(interval);
-                    }
-                }, 1000);
             }
         },
     },
