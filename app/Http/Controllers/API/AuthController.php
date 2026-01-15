@@ -185,7 +185,8 @@ class AuthController extends Controller
             //claim referral promotion after register verfied by admin
             // (new PromotionService())->claimReferralPromotion($request->referral_phone_number, $customer);
             DB::commit();
-            ResponseData($loginResponse, 201, true, 'Successfully request to register ');
+            \ResponseMessage('Successfully registered, please wait for admin verification', 201);
+            // ResponseData($loginResponse, 201, true, 'Successfully request to register ');
         } catch (Exception $e) {
             DB::rollBack();
             ResponseMessage($e->getMessage(), 500);
