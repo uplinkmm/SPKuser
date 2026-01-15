@@ -177,8 +177,8 @@ class AuthController extends Controller
             #implement agent to user
             $this->storeAgent($request->code, $customer->id);
             //send notification to all users
-            $data['title'] = 'Register';
-            $data['body'] = 'Register Request';
+            $data['title'] = 'New Registration';
+            $data['body'] = "{$customer->name} has requested to register";
             $data['date_time'] = now();
             $users = User::all();
             $this->send($customer, $users, $data);
