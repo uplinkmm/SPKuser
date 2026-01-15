@@ -151,7 +151,7 @@
                                 Old Password
                             </p>
                             <input
-                                type="text"
+                                type="password"
                                 v-model="current_password"
                                 placeholder="Old Password"
                                 class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
@@ -162,7 +162,7 @@
                                 New Password
                             </p>
                             <input
-                                type="text"
+                                type="password"
                                 v-model="new_password"
                                 placeholder="New Password"
                                 class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
@@ -173,7 +173,7 @@
                                 Confirm Password
                             </p>
                             <input
-                                type="text"
+                                type="password"
                                 v-model="new_password_confirmation"
                                 placeholder="Confirm Password"
                                 class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
