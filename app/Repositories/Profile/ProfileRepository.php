@@ -28,13 +28,13 @@ class ProfileRepository implements ProfileInterface
             DB::beginTransaction();
             $customer = Customer::find(UserData()->id);
 
-            if (isset($request->otp)) {
+            // if (isset($request->otp)) {
                 if (!$customer) {
                     ResponseMessage('Customer Not found', 404);
                 }
-                if ($customer->getOtpCode() !== $request->otp) {
-                    ResponseMessage('OTP is incorrect, check SMS message again', 400);
-                }
+                // if ($customer->getOtpCode() !== $request->otp) {
+                //     ResponseMessage('OTP is incorrect, check SMS message again', 400);
+                // }
                 $customer->fill([
                     'password' => $request->new_password,
                 ])->save();
@@ -46,12 +46,12 @@ class ProfileRepository implements ProfileInterface
                 // ResponseData($data, 200, true, 'Password updated successfully');
                 DB::commit();
                 ResponseMessage('Password updated successfully', 200);
-            }
-            $isSuccess = (new SMSPoh($customer))->sendVerifcationCode();
-            if ($isSuccess) {
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
-            }
+            // }
+            // $isSuccess = (new SMSPoh($customer))->sendVerifcationCode();
+            // if ($isSuccess) {
+                // DB::commit();
+            //     return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
+            // }
 
 
 

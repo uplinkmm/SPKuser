@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 use App\Models\PersonFcmToken;
 
+use App\Traits\SendNotification;
 use Illuminate\Support\Facades\DB;
 use App\Actions\Auth\APILoginAction;
 use App\Http\Controllers\Controller;
@@ -30,6 +31,7 @@ use App\Repositories\CustomerMoney\CustomerMoneyRepositoryInterface;
 class AuthController extends Controller
 {
     //
+    use SendNotification;
     private $moneyRepo;
 
     public function __construct(CustomerMoneyRepositoryInterface $repo)
@@ -54,43 +56,6 @@ class AuthController extends Controller
         // dd($request->user()->currentAccessToken()->delete());
         $request->user()->tokens()->delete();
         ResponseMessage('Successfully logged out');
-
-        // auth()->guard('sanctum')->forgetUser();
-        // $token = $request->user()->currentAccessToken();
-        
-        // $bearerToken = $request->bearerToken();
-        // if ($bearerToken) {
-        //     // Extract the token ID from the bearer token (e.g., "53|...").
-        //     [$id, $plainTextToken] = explode('|', $bearerToken, 2);
-        //     // Find the token in the database.
-        //     $token = $request->user()->tokens()->where('id', $id)->first();
-        //     // if ($token && Hash::check($plainTextToken, $token->token)) {
-        //     if ($token) {
-        //         $token->delete(); // Delete the token from the database.
-        //         ResponseMessage('Successfully logged out');
-
-        //         return response()->json(['message' => 'Successfully logged out']);
-        //     }
-        // }
-
-
-        // if ($request->user()->currentAccessToken()) {
-        //     // Ensure it's not a TransientToken
-        //     $bearerToken = $request->bearerToken();
-        //     dd($request->user()->tokens()->first());
-        //     $token = $request->user()->tokens()->where('token', hash('sha256', $bearerToken))->first();
-
-        //     $token = $request->user()->currentAccessToken();
-        //     if (!($token instanceof \Laravel\Sanctum\TransientToken)) {
-        //         $token->delete(); // Delete the database token
-        //         return response()->json(['message' => 'Successfully logged out']);
-        //     } else {
-        //         return response()->json(['message' => 'Cannot delete a transient token.'], 400);
-        //     }
-        // } else {
-        //     return response()->json(['message' => 'No current access token found.'], 400);
-        // }
-        ResponseMessage('Successfully logged out');
     }
 
     public function initialRegister(InitialRegisterRequest $request)
@@ -105,11 +70,13 @@ class AuthController extends Controller
                 ['phone_number' => $request->phone_number, 'is_verified' => 0],
                 $customerData // Default values to create a new user
             );
-            $isSuccess = (new SMSPoh($customer))->sendVerifcationCode();
-            if ($isSuccess) {
-                return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
-            }
-            return response()->json(['success' => false, 'message' => 'Failed to send OTP.'], );
+            //remove opt 
+            // $isSuccess = (new SMSPoh($customer))->sendVerifcationCode();
+            // if ($isSuccess) {
+            //     return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
+            // }
+            //end otp
+            return response()->json(['success' => false, 'message' => 'Failed to send OTP.'],);
         } catch (Exception $e) {
             ResponseMessage($e->getMessage(), 400);
         }
@@ -129,7 +96,7 @@ class AuthController extends Controller
         if ($isSuccess) {
             return response()->json(['success' => true, 'message' => 'OTP sent successfully.']);
         }
-        return response()->json(['success' => false, 'message' => 'Failed to send OTP.'], );
+        return response()->json(['success' => false, 'message' => 'Failed to send OTP.'],);
         // $customer->otp = '000000';
         // $customer->save();
         // ResponseMessage('OTP sent, check SMS message');
@@ -165,47 +132,65 @@ class AuthController extends Controller
             return ResponseMessage($e->getMessage(), 500);
         }
         ResponseMessage('Something went wrong!', 400);
-
     }
     public function register(RegisterRequest $request)
     {
-        $customer = Customer::where('phone_number', $request->phone_number)->first();
-        if (!$customer) {
-            ResponseMessage('Customer not found with given phone number', 400);
-        }
 
-        if ($customer->getOtpCode() != $request->otp) {
-            // $customer->otp = rand(000000, 999999);
-            // $customer->save();
 
-            ResponseMessage('OTP not correct, check SMS message again', 400);
-        }
-        if ($customer->getOtpCode() == $request->otp) {
-            DB::beginTransaction();
-            try {
-                $customer->password = $request->password;
-                $customer->is_verified = 1;
-                // $customer->agggent
-                $customer->verified_at = CurrentTime();
-                $customer->save();
-                // $this->moneyRepo->createPointBag($customer->id);
-                // $this->moneyRepo->createGameWallet($customer);
-                $this->moneyRepo->createWallet($customer->id);
+        // $customer = Customer::where('phone_number', $request->phone_number)->first();
+        // if (!$customer) {
+        //     ResponseMessage('Customer not found with given phone number', 400);
+        // }
 
-                $loginResponse = (new APILoginAction('phone_number', $request->phone_number, $request->password, 'App\Models\Customer'))->run('customer_token');
-                $loginResponse['user']['login_type'] = 'customer';
-                $this->storeFcmToken($request->fcm_token, $customer->id);
-                #implement agent to user
-                $this->storeAgent($request->code, $customer->id);
-                (new PromotionService())->claimReferralPromotion($request->referral_phone_number, $customer);
-
-                DB::commit();
-                ResponseData($loginResponse, 201, true, 'Successfully registered and verified');
-            } catch (Exception $e) {
-                DB::rollBack();
-                ResponseMessage($e->getMessage(), 500);
+        // if ($customer->getOtpCode() != $request->otp) {
+        //     ResponseMessage('OTP not correct, check SMS message again', 400);
+        // }
+        // if ($customer->getOtpCode() == $request->otp) {
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
+            $referralPhoneNumber=$request->referral_phone_number;
+            if ($referralPhoneNumber && $referralPhoneNumber != "" && $referralPhoneNumber != "null") {
+                if (!preg_match('/^09/', $referralPhoneNumber)) {
+                    ResponseMessage('Referral phone number must start with 09 and be a valid format.', 400);
+                }
+                $customer = Customer::where('phone_number', $referralPhoneNumber)
+                    ->where('is_verified', 1)
+                    ->first();
+                if (!$customer) {
+                    ResponseMessage('Referal Customer is invalid with this phone number', 404);
+                }
             }
+            $existingCustomer = Customer::where('phone_number', $request->phone_number)->first();
+            if($existingCustomer){
+                if($existingCustomer->is_verified == 0){
+                    ResponseMessage('Phone number is already registered ,please wait to verify by admin', 409);
+                }
+            }
+            $customer = Customer::create(
+                $data // Default values to create a new user
+            );
+            $this->moneyRepo->createWallet($customer->id);
+            $loginResponse = (new APILoginAction('phone_number', $request->phone_number, $request->password, 'App\Models\Customer'))->run('customer_token');
+            $loginResponse['user']['login_type'] = 'customer';
+            $this->storeFcmToken($request->fcm_token, $customer->id);
+            #implement agent to user
+            $this->storeAgent($request->code, $customer->id);
+            //send notification to all users
+            $data['title'] = 'Register';
+            $data['body'] = 'Register Request';
+            $data['date_time'] = now();
+            $users = User::all();
+            $this->send($customer, $users, $data);
+            //claim referral promotion after register verfied by admin
+            // (new PromotionService())->claimReferralPromotion($request->referral_phone_number, $customer);
+            DB::commit();
+            ResponseData($loginResponse, 201, true, 'Successfully request to register ');
+        } catch (Exception $e) {
+            DB::rollBack();
+            ResponseMessage($e->getMessage(), 500);
         }
+        // }
     }
     public function storeFcmToken($token, $customerId)
     {
@@ -232,10 +217,9 @@ class AuthController extends Controller
     {
         if ($code !== null && $code !== "" && $code !== "null") {
             $agent = Agent::where('code', $code)
-            ->first();
+                ->first();
             if ($agent) {
-                if($agent->is_active== 0|| $agent->is_active=="0")
-                {
+                if ($agent->is_active == 0 || $agent->is_active == "0") {
                     ResponseMessage('Your agent is not active ', 419);
                 }
                 $customer = Customer::find($customer_id);

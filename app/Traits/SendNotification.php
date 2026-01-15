@@ -26,19 +26,10 @@ trait SendNotification
             'date_time' => now(),
             'notificationable_id' => $model->id,
             'notificationable_type' => $morphMapName,
-            'createdable_id' => UserData()->id,
+            'createdable_id' => $morphMapName=='customer' ? $model->id :UserData()->id,
             'createdable_type' => 'customer',
         ]);
-        // $notificationPeopleData = [];
-        // foreach($people as $person){
-        //     $notificationPeopleData[] = [
-        //         'notification_id' => $notification->id,
-        //         'personable_id' => $person->id,
-        //         'personable_type' => 'user',
-        //     ];
-        //     $person->notify(new Notifying($data));
-        // }
-        // NotificationPerson::insert($notificationPeopleData);
+        
 
         $notificationPersons = [];
         foreach ($people as $person) {
