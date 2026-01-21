@@ -471,19 +471,13 @@
                 class="relative block mb-6 w-full rounded-lg shadow-xl bg-white py-4 px-4"
             >
                 <div class="w-full flex justify-between">
-                    <label
-                        for="amount"
-                        class="text-sm mb-3 relative block"
+                    <label for="amount" class="text-sm mb-3 relative block"
                         >Amount</label
                     >
-                    <p class="text-xs">
-                        အနည်းဆုံး ၁၀၀ မှ စ ထိုးပါ
-                    </p>
+                    <p class="text-xs">အနည်းဆုံး ၁၀၀ မှ စ ထိုးပါ</p>
                 </div>
                 <div class="flex gap-x-4 mb-2">
-
                     <div class="mb-4 flex-grow">
-                        
                         <input
                             type="number"
                             id="amount"
@@ -502,20 +496,22 @@
                             ထိုးမည်
                         </button>
                     </div>
-                    <button @click="reverseBetNumbers"
+                    <button
+                        @click="reverseBetNumbers"
                         class="px-4 py-2 lg:py-2 bg-black text-white text-sm rounded-lg w-fit whitespace-nowrap mb-3"
                     >
                         {{ $t("R") }}
                     </button>
-
                 </div>
                 <div class="grid grid-cols-2 gap-x-4 mb-3">
-                    <button @click="roundBet"
+                    <button
+                        @click="roundBet"
                         class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
                     >
                         {{ $t("Round Bet") }}
                     </button>
-                    <button @click="quickBettingBtn"
+                    <button
+                        @click="quickBettingBtn"
                         class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
                     >
                         {{ $t("Quick Bet") }}
@@ -524,7 +520,8 @@
                 <div class="flex justify-between px-4">
                     <div>
                         <p class="text-xs">
-                            {{ $t("Balance") }} : {{ wallet_balance?.toLocaleString() }} MMK
+                            {{ $t("Balance") }} :
+                            {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
                     </div>
                     <div>
@@ -534,9 +531,6 @@
                     </div>
                 </div>
             </div>
-
-
-
 
             <!-- old version -->
             <!-- <div
@@ -627,7 +621,6 @@
                     </div>
                 </div>
             </div> -->
-            
 
             <div>
                 <div class="flex justify-end mb-4">
@@ -654,8 +647,8 @@
                                 num.is_active == 0
                                     ? 'bg-gray-300'
                                     : isBetNumber(num.number)
-                                    ? 'bg-[#FDC652] text-white font-semibold'
-                                    : 'bg-white',
+                                      ? 'bg-[#FDC652] text-white font-semibold'
+                                      : 'bg-white',
                                 'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
                             ]"
                             @click="
@@ -677,12 +670,12 @@
                                         class="bg-[#17b509] h-1.5"
                                         :class="
                                             progressBarClass(
-                                                num.total_bet_percentage
+                                                num.total_bet_percentage,
                                             )
                                         "
                                         :style="{
                                             width: computedWidth(
-                                                num.total_bet_percentage
+                                                num.total_bet_percentage,
                                             ),
                                         }"
                                     ></div>
@@ -861,7 +854,9 @@
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
+                        <h1
+                            class="text-black text-lg font-semibold primary-text"
+                        >
                             ရိုးရိုး
                         </h1>
                     </div>
@@ -911,7 +906,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
+                        <h1
+                            class="text-lg text-black font-semibold primary-text"
+                        >
                             နက္ခတ်ပါဝါ
                         </h1>
                     </div>
@@ -950,7 +947,11 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">ပါတ်</h1>
+                        <h1
+                            class="text-black text-lg font-semibold primary-text"
+                        >
+                            ပါတ်
+                        </h1>
                     </div>
 
                     <div
@@ -1022,7 +1023,11 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">ထိပ်</h1>
+                        <h1
+                            class="text-black text-lg font-semibold primary-text"
+                        >
+                            ထိပ်
+                        </h1>
                     </div>
 
                     <div
@@ -1094,7 +1099,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
+                        <h1
+                            class="text-black text-lg font-semibold primary-text"
+                        >
                             နောက်
                         </h1>
                     </div>
@@ -1168,7 +1175,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
+                        <h1
+                            class="text-black text-lg font-semibold primary-text"
+                        >
                             ဘရိတ်
                         </h1>
                     </div>
@@ -1303,7 +1312,7 @@
                                     @input="
                                         validateNumber(
                                             $event,
-                                            'round_bet_amount'
+                                            'round_bet_amount',
                                         )
                                     "
                                     ref="round_bet_amount"
@@ -1833,7 +1842,7 @@ export default {
                 return;
             }
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === num.number
+                (bet) => bet.number === num.number,
             );
             if (index === -1) {
                 num.amount = "";
@@ -1892,7 +1901,7 @@ export default {
         },
         deleteBetNumber() {
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === this.delete_bet_number
+                (bet) => bet.number === this.delete_bet_number,
             );
             this.bet_numbers.splice(index, 1);
             const button = document.getElementById("modalClose");
@@ -1902,7 +1911,7 @@ export default {
         },
         editBetAmount() {
             const index = this.bet_numbers.find(
-                (bet) => bet.number == this.edit_bet_number.number
+                (bet) => bet.number == this.edit_bet_number.number,
             );
             if (
                 this.edit_bet_number.amount >= this.min &&
@@ -1922,7 +1931,7 @@ export default {
         },
         sortBetNumbers() {
             this.bet_numbers.sort(
-                (a, b) => parseInt(a.number) - parseInt(b.number)
+                (a, b) => parseInt(a.number) - parseInt(b.number),
             );
         },
         reverseBetNumbers() {
@@ -1940,7 +1949,7 @@ export default {
                     ) {
                         const temp = this.numbers.find(
                             (n) =>
-                                n.number == reversedNumber && n.is_active == 1
+                                n.number == reversedNumber && n.is_active == 1,
                         );
                         if (temp) {
                             return temp;
