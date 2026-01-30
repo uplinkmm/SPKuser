@@ -826,7 +826,10 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr class="border-b last:border-0 font-semibold">
+                        <tr
+                            v-if="bet_numbers.length"
+                            class="border-b last:border-0 font-semibold"
+                        >
                             <td class="text-right pr-4" colspan="3">
                                 {{ $t("Total Betting Amount") }}
                             </td>
@@ -1453,7 +1456,10 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr class="border-t font-semibold">
+                            <tr
+                                v-if="bet_numbers.length"
+                                class="border-t font-semibold"
+                            >
                                 <td class="text-right pr-4" colspan="3">
                                     {{ $t("Total Betting Amount") }}
                                 </td>
