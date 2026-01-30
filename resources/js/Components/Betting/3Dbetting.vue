@@ -83,7 +83,8 @@
                                 <p v-if="game" class="mb-3">
                                     {{
                                         formatDateTime(
-                                            game.game_setting?.lottery_date_time
+                                            game.game_setting
+                                                ?.lottery_date_time,
                                         )
                                     }}
                                 </p>
@@ -209,7 +210,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="mb-16">
                 <div class="flex justify-between bg-transparent mb-3">
                     <div class="relative inline-block w-32">
                         <select
@@ -266,8 +267,8 @@
                                 num.is_active == 0
                                     ? 'bg-gray-300'
                                     : isBetNumber(num.number)
-                                    ? 'bg-[#FDC652] text-white'
-                                    : 'bg-white',
+                                      ? 'bg-[#FDC652] text-white'
+                                      : 'bg-white',
                                 'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
                             ]"
                             @click="num.is_active == 1 ? addBetNumber(num) : ''"
@@ -282,13 +283,13 @@
                                     <div
                                         :class="
                                             progressBarClass(
-                                                num.total_bet_percentage
+                                                num.total_bet_percentage,
                                             )
                                         "
                                         class="bg-[#17b509] h-1.5"
                                         :style="{
                                             width: computedWidth(
-                                                num.total_bet_percentage
+                                                num.total_bet_percentage,
                                             ),
                                         }"
                                     ></div>
@@ -799,7 +800,7 @@ export default {
         numbers100() {
             return this.numbers.slice(
                 this.from_to_value.value - 100,
-                this.from_to_value.value
+                this.from_to_value.value,
             );
         },
         errorText() {
@@ -821,7 +822,7 @@ export default {
         },
         closingDateTimeFormat() {
             return moment(this.closing_date_time, "YYYY-MM-DD HH:mm").format(
-                "YYYY-MM-DD hh:mm A"
+                "YYYY-MM-DD hh:mm A",
             );
         },
         checkUserEachLimitError() {
@@ -924,7 +925,7 @@ export default {
                 return;
             }
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === num.number
+                (bet) => bet.number === num.number,
             );
             if (index === -1) {
                 num.amount = "";
@@ -935,7 +936,7 @@ export default {
         },
         deleteBetNumber(num) {
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === this.delete_bet_number
+                (bet) => bet.number === this.delete_bet_number,
             );
             this.bet_numbers.splice(index, 1);
             const button = document.getElementById("modalClose");
@@ -945,7 +946,7 @@ export default {
         },
         editBetAmount() {
             const index = this.bet_numbers.find(
-                (bet) => bet.number == this.edit_bet_number.number
+                (bet) => bet.number == this.edit_bet_number.number,
             );
             if (
                 this.edit_bet_number.amount >= this.min &&
@@ -977,7 +978,7 @@ export default {
                             currentChar +
                             permutation.slice(j);
                         const index = this.bet_numbers.findIndex(
-                            (bet) => bet.number === newPermutation
+                            (bet) => bet.number === newPermutation,
                         );
                         if (index === -1) {
                             newResults.push(newPermutation);
@@ -990,7 +991,7 @@ export default {
             const removeItself = results.filter((r) => r != str);
             var temp = this.numbers
                 .filter(
-                    (n) => removeItself.includes(n.number) && n.is_active == 1
+                    (n) => removeItself.includes(n.number) && n.is_active == 1,
                 )
                 .map((n) => ({ ...n, amount: "" }));
             return temp;
@@ -1010,7 +1011,7 @@ export default {
         },
         sortBetNumbers() {
             this.bet_numbers.sort(
-                (a, b) => parseInt(a.number) - parseInt(b.number)
+                (a, b) => parseInt(a.number) - parseInt(b.number),
             );
         },
         checkBalanced() {
@@ -1043,11 +1044,11 @@ export default {
             this.current_time_status = threeDgame.game_setting.time_status;
             this.opening_date_time = moment(
                 threeDgame.game_setting.opening_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             this.closing_date_time = moment(
                 threeDgame.game_setting.closing_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             this.min = threeDgame.game_setting.min;
             this.max = threeDgame.game_setting.max;
@@ -1153,7 +1154,7 @@ export default {
             const currentTime = moment();
             const f_opening_time = moment(
                 this.opening_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             var alreadyOpen = currentTime.isAfter(f_opening_time);
             return alreadyOpen;
@@ -1162,7 +1163,7 @@ export default {
             const currentTime = moment();
             const f_closing_time = moment(
                 this.closing_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             var alreadyClose = currentTime.isAfter(f_closing_time);
             return alreadyClose;
@@ -1192,11 +1193,11 @@ export default {
             this.current_time_status = "morning";
             this.opening_date_time = moment(
                 "2024-06-18 00:00:00",
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             ).format("YYYY-MM-DD HH:mm A");
             this.closing_date_time = moment(
                 "2024-07-01 03:00:00",
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             ).format("YYYY-MM-DD hh:mm A");
             this.min = 100;
             this.max = 10000;
@@ -1218,7 +1219,7 @@ export default {
                 (win, index) => {
                     const color = colors[index % colors.length];
                     return { ...win, color };
-                }
+                },
             );
             // this.settings = [];
             this.main_game_active = response.data.is_active;

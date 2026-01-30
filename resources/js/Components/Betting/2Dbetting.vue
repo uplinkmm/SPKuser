@@ -826,9 +826,18 @@
                                 </button>
                             </td>
                         </tr>
+                        <tr class="border-b last:border-0 font-semibold">
+                            <td class="text-right pr-4" colspan="3">
+                                {{ $t("Total Betting Amount") }}
+                            </td>
+                            <td class="text-center">
+                                {{ totalBetAmount.toLocaleString() }} MMK
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+
             <div class="absolute bottom-0 mb-4 w-full flex justify-center">
                 <!-- <p class="text-sm pt-2 pr-8">
                     {{ $t("Total Betting Amount") }} : {{ totalBetAmount }} MMK
@@ -1442,6 +1451,14 @@
                                     >
                                         <i class="fal fa-trash"></i>
                                     </button>
+                                </td>
+                            </tr>
+                            <tr class="border-t font-semibold">
+                                <td class="text-right pr-4" colspan="3">
+                                    {{ $t("Total Betting Amount") }}
+                                </td>
+                                <td class="text-center">
+                                    {{ totalBetAmount.toLocaleString() }} MMK
                                 </td>
                             </tr>
                         </tbody>
