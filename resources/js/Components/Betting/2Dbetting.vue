@@ -1240,7 +1240,7 @@
                             6
                         </button>
                         <button
-                            @click="breakNumbers(1, 17)"
+                            @click="breakNumbers(7, 17)"
                             class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
                         >
                             7
