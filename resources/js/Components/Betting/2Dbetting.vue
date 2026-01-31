@@ -841,7 +841,7 @@
                 </table>
             </div>
 
-            <div class="absolute bottom-0 mb-4 w-full flex justify-center">
+            <div class="mb-4 w-full flex justify-center">
                 <!-- <p class="text-sm pt-2 pr-8">
                     {{ $t("Total Betting Amount") }} : {{ totalBetAmount }} MMK
                 </p> -->
