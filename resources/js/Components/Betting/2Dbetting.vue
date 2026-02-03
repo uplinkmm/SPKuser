@@ -866,9 +866,7 @@
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
-                        <h1
-                            class="text-black text-lg font-semibold primary-text"
-                        >
+                        <h1 class="text-black text-lg font-semibold">
                             ရိုးရိုး
                         </h1>
                     </div>
@@ -959,11 +957,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1
-                            class="text-black text-lg font-semibold primary-text"
-                        >
-                            ပါတ်
-                        </h1>
+                        <h1 class="text-black text-lg font-semibold">ပါတ်</h1>
                     </div>
 
                     <div
@@ -1035,11 +1029,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1
-                            class="text-black text-lg font-semibold primary-text"
-                        >
-                            ထိပ်
-                        </h1>
+                        <h1 class="text-black text-lg font-semibold">ထိပ်</h1>
                     </div>
 
                     <div
@@ -1111,11 +1101,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1
-                            class="text-black text-lg font-semibold primary-text"
-                        >
-                            နောက်
-                        </h1>
+                        <h1 class="text-black text-lg font-semibold">နောက်</h1>
                     </div>
 
                     <div
@@ -1187,11 +1173,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1
-                            class="text-black text-lg font-semibold primary-text"
-                        >
-                            ဘရိတ်
-                        </h1>
+                        <h1 class="text-black text-lg font-semibold">ဘရိတ်</h1>
                     </div>
 
                     <div
