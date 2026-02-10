@@ -337,136 +337,246 @@
                 </div> -->
 
                 <div v-show="step == 'changeLang'">
-                    <div
-                        class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
-                    >
-                        <div class="mb-3">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                            />
-                        </div>
-                        <div class="text-left font-inter mb-4">
-                            <p class="mb-1 lg:mb-2">
-                                {{ user_profile_data?.name }}
-                            </p>
-                            <p class="text-sm mb-1 lg:mb-2">
-                                {{ user_profile_data?.phone_number }}
-                            </p>
+                    <div class="pt-2 pb-6 bg-black">
+                        <div
+                            class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
+                        >
+                            <div class="col-span-1 relative">
+                                <img
+                                    src="../../../../public/img/profile.png"
+                                    alt=""
+                                    class="w-26 h-26 rounded-full"
+                                />
+                                <button
+                                    type="button"
+                                    class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
+                                >
+                                    <i class="fas fa-pen text-xs"></i>
+                                </button>
+                            </div>
+
+                            <div
+                                class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
+                            >
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>နာမည် :</p>
+                                    <p>
+                                        {{ user_profile_data?.name }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>ဖုန်းနံပါတ် :</p>
+                                    <p>
+                                        {{ user_profile_data?.phone_number }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="px-8 pb-4 mb-8 text-white">
-                        <h2
-                            class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
-                        >
-                            ဘာသာစကား ပြောင်းလဲရန်
-                        </h2>
-                        <div
-                            class="flex flex-col gap-y-4 divide-y divide-black"
-                        >
-                            <button
-                                v-for="language in languages"
-                                :key="language.code"
-                                type="button"
-                                @click="changeLocale(language.code)"
-                                class="flex items-center justify-between pt-3"
-                            >
-                                <div class="flex items-center">
-                                    <i class="fal fa-sort-alt mr-4 w-4"></i>
-                                    <p class="">{{ language.name }}</p>
-                                </div>
 
-                                <i
-                                    v-if="language.code == currentLocale"
-                                    class="fas fa-check"
-                                ></i>
-                            </button>
+                    <div class="pb-6">
+                        <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
+                            <p
+                                class="text-center text-black text-lg font-semibold mb-4"
+                            >
+                                ဘာသာစကားပြောင်းရန်
+                            </p>
+
+                            <div class="flex flex-col pl-3">
+                                <button
+                                    v-for="language in languages"
+                                    :key="language.code"
+                                    type="button"
+                                    @click="selectedLocale = language.code"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <p class="text-black">
+                                        {{ language.name }}
+                                    </p>
+                                    <div
+                                        class="w-5 h-5 border border-black rounded-sm"
+                                        :class="
+                                            selectedLocale === language.code
+                                                ? 'bg-[#5271FF] border-[#5271FF]'
+                                                : ''
+                                        "
+                                    ></div>
+                                </button>
+                            </div>
+
+                            <div class="mt-6 mb-16">
+                                <button
+                                    type="button"
+                                    @click="confirmChangeLocale"
+                                    class="w-full bg-[#5271FF] text-white font-semibold py-4 rounded-2xl"
+                                >
+                                    အတည်ပြုမည်
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div v-show="step == 'history'">
-                    <div
-                        class="flex items-center gap-x-4 px-4 py-4 mb-1 text-black font-semibold"
-                    >
-                        <div class="mb-3">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                            />
-                        </div>
-                        <div class="text-left font-inter mb-4">
-                            <p class="mb-1 lg:mb-2">
-                                {{ user_profile_data?.name }}
-                            </p>
-                            <p class="text-sm mb-1 lg:mb-2">
-                                {{ user_profile_data?.phone_number }}
-                            </p>
+                    <div class="pt-2 pb-6 bg-black">
+                        <div
+                            class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
+                        >
+                            <div class="col-span-1 relative">
+                                <img
+                                    src="../../../../public/img/profile.png"
+                                    alt=""
+                                    class="w-26 h-26 rounded-full"
+                                />
+                                <button
+                                    type="button"
+                                    class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
+                                >
+                                    <i class="fas fa-pen text-xs"></i>
+                                </button>
+                            </div>
+
+                            <div
+                                class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
+                            >
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>နာမည် :</p>
+                                    <p>
+                                        {{ user_profile_data?.name }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>ဖုန်းနံပါတ် :</p>
+                                    <p>
+                                        {{ user_profile_data?.phone_number }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="px-8 pb-4 mb-8 text-white">
-                        <h2
-                            class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
-                        >
-                            မှတ်တမ်းများ
-                        </h2>
-                        <div
-                            class="flex flex-col gap-y-4 divide-y divide-black"
-                        >
-                            <a
-                                href="/deposit_withdrawal_histories"
-                                class="flex items-center"
-                            >
-                                <i class="fal fa-key mr-4 w-4"></i>
-                                <p class="">ငွေသွင်းငွေထုတ် မှတ်တမ်းများ</p>
-                            </a>
-                            <a
-                                href="/history?game_id=1"
-                                class="cursor-pointer flex items-center pt-3"
-                            >
-                                <i class="fal fa-sort-alt mr-4 w-4"></i>
-                                <p>2D မှတ်တမ်း</p>
-                            </a>
-                            <!-- <a href="/history" class="flex items-center">
-                            <i class="fal fa-book mr-4 w-4"></i>
-                            <p>{{ $t("History") }}</p>
-                        </a> -->
-                            <a
-                                href="/history?game_id=2"
-                                class="flex items-center pt-3"
-                            >
-                                <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                                <p>3D မှတ်တမ်း</p>
-                            </a>
-                            <a
-                                href="/winner_lists/1"
-                                class="flex items-center pt-3"
-                            >
-                                <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                                <p>ထီပေါက်သူများ</p>
-                            </a>
-                            <a
-                                href="/lottery_history"
-                                class="flex items-center pt-3"
-                            >
-                                <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                                <p>ထီပေါက်စဉ်</p>
-                            </a>
-                            <a
-                                href="/deposit_withdrawal_histories"
-                                class="flex items-center pt-3"
-                            >
-                                <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                                <p>ကံစမ်းမဲ မှတ်တမ်း</p>
-                            </a>
 
-                            <a
-                                href="/deposit_withdrawal_histories"
-                                class="flex items-center pt-3"
+                    <div class="pb-6">
+                        <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
+                            <p
+                                class="text-center text-black text-lg font-semibold mb-4"
                             >
-                                <i class="fal fa-money-check-alt mr-4 w-4"></i>
-                                <p>ကံစမ်းမဲ ပေါက်မှတ်တမ်း</p>
-                            </a>
+                                မှတ်တမ်းများ
+                            </p>
+
+                            <div class="flex flex-col">
+                                <a
+                                    href="/deposit_withdrawal_histories"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">
+                                            ငွေသွင်းငွေထုတ် မှတ်တမ်းများ
+                                        </p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                                <a
+                                    href="/history?game_id=1"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">2D မှတ်တမ်း</p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                                <a
+                                    href="/history?game_id=2"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">3D မှတ်တမ်း</p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                                <a
+                                    href="/winner_lists/1"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">ထီပေါက်သူများ</p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                                <a
+                                    href="/lottery_history"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">ထီပေါက်စဉ်</p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                                <a
+                                    href="/deposit_withdrawal_histories"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">
+                                            ကံစမ်းမဲ မှတ်တမ်း
+                                        </p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                                <a
+                                    href="/deposit_withdrawal_histories"
+                                    class="flex items-center justify-between py-3"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <i
+                                            class="fal fa-file-alt text-black text-xl w-6"
+                                        ></i>
+                                        <p class="text-black">
+                                            ကံစမ်းမဲ ပေါက်မှတ်တမ်း
+                                        </p>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-right text-black"
+                                    ></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -690,6 +800,7 @@ export default {
             step: "mainProfile", //changePassStepOne, changePassStepTwo , changeLang
             title: "Profile",
             user_profile_data: {},
+            selectedLocale: null,
             current_password: "",
             new_password: "",
             new_password_confirmation: "",
@@ -856,6 +967,12 @@ export default {
             });
             return;
         },
+        confirmChangeLocale() {
+            if (!this.selectedLocale) {
+                return;
+            }
+            this.changeLocale(this.selectedLocale);
+        },
         async logOut() {
             let url = "/api/logout";
 
@@ -880,6 +997,7 @@ export default {
         initTWE({ Modal, Ripple, Dropdown });
         this.getProfile();
         this.getTermsAndConditions();
+        this.selectedLocale = this.currentLocale;
     },
 };
 </script>
