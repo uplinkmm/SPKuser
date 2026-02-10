@@ -1,6 +1,8 @@
 <template>
-    <div class="frame-container px-4 bg-white min-h-[100vh]">
-        <Navbar title="2D" :need-auth="false" :back-btn="backBtn"></Navbar>
+    <div class="frame-container bg-black min-h-[100vh] pb-20">
+        <div class="px-4">
+            <Navbar title="" :need-auth="false" :back-btn="backBtn"></Navbar>
+        </div>
 
         <!-- <div
             class="primary-bg flex justify-center mt-2 rounded-lg gap-2 items-center text-sm lg:text-base"
@@ -24,95 +26,124 @@
                 </a>
             </div>
         </div> -->
-        <div class="flex justify-center mt-2">
-            <p class="text-[96px] w-fit text-white font-semibold">
-                {{ twoDList?.twod }}
+        <div class="bg-white rounded-t-2xl shadow-lg p-4">
+            <p class="text-center text-black font-semibold text-base mb-3">
+                2D Live
             </p>
-            <!-- <p class="text-[96px] w-fit text-green-600 font-semibold">
-                {{ twoDList?.twod }}
-            </p> -->
-        </div>
-        <div class="flex justify-center mt-2 mb-4">
-            <p class="text-base text-black">
-                Updated :
-                <span v-if="twoDList && twoDList.time">
-                    {{ convertDatetimeToLongDate12Hour(twoDList.time) }}
-                </span>
-            </p>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-1 gap-x-4 mb-0 lg:mb-4">
-            <div
-                v-for="(twoD, index) in twoDList.results"
-                :key="index"
-                class="bg-[#FF0000] text-white px-6 py-4 rounded-md mb-3"
-            >
-                <div class="text-center">
-                    <p class="inline-block pr-2">
-                        {{ convertTo12HourFormat(twoD.open_time) }}
+
+            <div class="flex justify-center">
+                <p
+                    class="text-[160px] leading-none w-fit text-green-700 font-extrabold drop-shadow-sm"
+                >
+                    {{ twoDList?.twod }}
+                </p>
+            </div>
+
+            <div class="flex justify-center mt-2 mb-3">
+                <div class="flex items-center gap-x-2 text-black">
+                    <div
+                        class="w-5 h-5 rounded-full bg-green-700 flex items-center justify-center"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            class="w-4 h-4 text-white"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M16.704 5.29a1 1 0 010 1.42l-7.5 7.5a1 1 0 01-1.415 0l-3.5-3.5a1 1 0 011.414-1.414l2.793 2.793 6.793-6.793a1 1 0 011.415-.006z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </div>
+                    <p class="text-base font-semibold mb-0">
+                        Updated
+                        <span v-if="twoDList && twoDList.time">
+                            {{ twoDList.time }}
+                        </span>
                     </p>
-                    <span class="inline-block uppercase">
-                        {{ twoD.day_part }}
-                    </span>
-                    <hr class="mt-2 mb-4" />
                 </div>
-                <div class="grid grid-cols-5">
-                    <div class="col-span-2">
-                        <p>Set</p>
-                        <p v-if="twoD.set == '--'">
-                            {{ twoDList.set }}
+            </div>
+
+            <div class="grid grid-cols-1 gap-x-4 mb-4">
+                <div
+                    v-for="(twoD, index) in twoDList?.results || []"
+                    :key="index"
+                    class="bg-[#D20000] text-white px-6 py-4 rounded-lg mb-4 shadow-md"
+                >
+                    <div class="text-center">
+                        <p class="font-semibold mb-2">
+                            {{ formatOpenTime(twoD.open_time) }}
                         </p>
-                        <p v-else>
-                            {{ twoD.set }}
-                        </p>
+                        <hr class="border-white/60" />
                     </div>
-                    <div class="col-span-2">
-                        <p>Value</p>
-                        <p v-if="twoD.value == '--'">
-                            {{ twoDList.value }}
-                        </p>
-                        <p v-else>
-                            {{ twoD.value }}
-                        </p>
+
+                    <div class="grid grid-cols-3 text-center mt-4">
+                        <div>
+                            <p class="opacity-95 mb-1">Set</p>
+                            <p class="mb-0">
+                                {{ twoD.set == "--" ? twoDList.set : twoD.set }}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="opacity-95 mb-1">Value</p>
+                            <p class="mb-0">
+                                {{
+                                    twoD.value == "--"
+                                        ? twoDList.value
+                                        : twoD.value
+                                }}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="opacity-95 mb-1">2D</p>
+                            <p class="text-[#F6E271] font-semibold mb-0">
+                                {{ twoD.twod }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-span-1">
-                        <p>2D</p>
-                        <p class="text-[#F6E271] font-semibold">
-                            {{ twoD.twod }}
-                        </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-y-4 mt-1">
+                <div
+                    v-for="(row, index) in twoDList?.modern_internet?.numbers ||
+                    []"
+                    :key="index"
+                    class="bg-[#D20000] text-white px-6 py-4 rounded-lg shadow-md"
+                >
+                    <div class="grid grid-cols-4 gap-x-2 items-center">
+                        <div class="text-left">
+                            <p class="text-lg font-semibold mb-1 leading-none">
+                                {{ formatMiTime(row.time).time }}
+                            </p>
+                            <p class="text-base font-semibold mb-0">
+                                {{ formatMiTime(row.time).meridiem }}
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p class="opacity-95 mb-1">Modern</p>
+                            <p class="text-[#F6E271] font-semibold mb-0">
+                                {{ row.Modern }}
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p class="opacity-95 mb-1">Internet</p>
+                            <p class="text-[#F6E271] font-semibold mb-0">
+                                {{ row.Internet }}
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p class="opacity-95 mb-1">TW</p>
+                            <p class="text-[#F6E271] font-semibold mb-0">
+                                {{ row.TW }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <hr class="mb-4 block lg:hidden" />
-
-        <!-- <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mb-0 lg:mb-1">
-            <div
-                v-for="(twoD, index) in twoDList?.modern_internet?.numbers"
-                class="primary-bg text-white px-6 py-4 rounded-md mb-3"
-            >
-                <div class="text-center">
-                    <p class="inline-block pr-2">
-                        {{ twoD.time }}
-                    </p>
-                    <hr class="mt-2 mb-4" />
-                </div>
-                <div class="grid grid-cols-5">
-                    <div class="col-span-3">
-                        <p>Morden</p>
-                        <p>
-                            {{ twoD.Modern }}
-                        </p>
-                    </div>
-                    <div class="col-span-2">
-                        <p>Internet</p>
-                        <p>
-                            {{ twoD.Internet }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -170,6 +201,39 @@ export default {
             return `${String(hour12).padStart(2, "0")}:${String(
                 minute,
             ).padStart(2, "0")}:${String(second).padStart(2, "0")}`;
+        },
+
+        formatOpenTime(timeStr) {
+            if (!timeStr || timeStr === "--") return "--";
+            const [hour, minute] = timeStr.split(":").slice(0, 2).map(Number);
+            const ampm = hour >= 12 ? "PM" : "AM";
+            const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+            return `${hour12}:${String(minute).padStart(2, "0")} ${ampm}`;
+        },
+
+        formatMiTime(timeStr) {
+            if (!timeStr || timeStr === "--") {
+                return { time: "--", meridiem: "" };
+            }
+
+            const [timePart, meridiemPart] = String(timeStr).split(" ");
+            if (meridiemPart) {
+                const [h, m] = timePart.split(":");
+                return {
+                    time: `${Number(h)}:${String(m).padStart(2, "0")}`,
+                    meridiem: meridiemPart.toUpperCase(),
+                };
+            }
+
+            const parts = String(timeStr).split(":");
+            if (parts.length < 2) return { time: timeStr, meridiem: "" };
+            const [hour, minute] = parts.map(Number);
+            const ampm = hour >= 12 ? "PM" : "AM";
+            const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+            return {
+                time: `${hour12}:${String(minute).padStart(2, "0")}`,
+                meridiem: ampm,
+            };
         },
 
         convertDatetimeToLongDate12Hour(datetimeStr) {

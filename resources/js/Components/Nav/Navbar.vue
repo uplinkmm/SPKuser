@@ -3,16 +3,21 @@
         class="flex relative justify-between py-4 px-8 lg:px-4 items-center -mx-4"
         :class="
             isHomePage
-                ? 'bg-[#29261D] text-white]'
+                ? 'bg-[#29261D] text-white'
                 : 'bg-[#29261D] text-white mb-4'
         "
     >
         <FcmNotification :get-noti="getNotis"></FcmNotification>
 
-        <template v-if="isHomePage">
+        <template v-if="getUser">
             <div class="flex items-center w-full">
                 <template v-if="getUser">
                     <div class="flex items-center gap-x-3 flex-1 min-w-0">
+                        <button v-if="hideBackBtn == false">
+                            <a @click="backBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </button>
                         <img
                             src="../../../../public/icons/logo_transparent.png"
                             class="w-10 h-10 object-contain shrink-0"
@@ -36,7 +41,7 @@
                             <p
                                 class="text-gray-200 text-2xl font-semibold mb-0"
                             >
-                                {{ (getUser?.balance ?? 0).toLocaleString() }}
+                                {{ (user?.balance ?? 0).toLocaleString() }}
                             </p>
                         </div>
 
