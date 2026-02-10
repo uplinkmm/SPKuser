@@ -5,10 +5,11 @@
         <main class="frame-container relative">
             <div class="mx-4">
                 <Navbar
-                    title=""
+                    title="ရွှေပေါက်ကံ"
                     :is-home-page="true"
                     :hide-back-btn="false"
                     :need-auth="false"
+                    :back-btn="backBtn"
                 ></Navbar>
             </div>
 
@@ -258,6 +259,22 @@ export default {
         },
         setIsLogin(value) {
             this.isLogin = value;
+        },
+        backBtn() {
+            // If on forgot password, go back to login view
+            if (this.forgot_password) {
+                this.forgot_password = false;
+                return;
+            }
+
+            // If on register tab, go back to login tab
+            if (!this.isLogin) {
+                this.isLogin = true;
+                return;
+            }
+
+            // Otherwise, fallback to browser back (e.g. home screen)
+            window.history.back();
         },
         modalOpen() {
             const button = document.getElementById("error_modal_btn");

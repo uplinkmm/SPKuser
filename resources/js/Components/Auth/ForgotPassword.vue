@@ -18,13 +18,6 @@
 
             <div class="bg-[#FFC529] rounded-3xl px-6 py-6">
                 <div class="relative mb-6">
-                    <button
-                        type="button"
-                        @click="changeForgotPassword(false)"
-                        class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-700"
-                    >
-                        <i class="fas fa-chevron-left text-xl"></i>
-                    </button>
                     <p
                         class="text-center text-black text-xl font-semibold mb-0"
                     >
