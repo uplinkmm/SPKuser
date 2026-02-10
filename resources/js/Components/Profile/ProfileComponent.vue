@@ -718,27 +718,125 @@
                             </p>
 
                             <div class="flex flex-col">
+                                <!-- Viber -->
                                 <button
-                                    v-for="item in customerServiceItems"
-                                    :key="item.key"
                                     type="button"
-                                    @click="openCustomerServiceLink(item.url)"
+                                    @click="
+                                        openCustomerServiceLink(
+                                            'viber://chat?number=%2B959XXXXXXXXX',
+                                        )
+                                    "
                                     class="flex items-center justify-between py-4"
                                 >
-                                    <div class="flex items-center gap-x-4">
+                                    <div
+                                        class="flex items-center gap-x-4 ml-[-10px]"
+                                    >
                                         <img
-                                            :src="item.icon"
-                                            :alt="item.label"
-                                            class="w-10 h-10 rounded-full"
+                                            src="../../../../public/icons/viber.png"
+                                            alt="Viber"
+                                            class="w-16 h-16 rounded-full"
                                         />
                                         <p class="text-black font-semibold">
-                                            {{ item.label }}
+                                            Viber
                                         </p>
                                     </div>
 
                                     <div class="flex items-center gap-x-3">
                                         <p class="text-[#1d4ed8] font-medium">
-                                            {{ item.value }}
+                                            09 XXX XXX XXX
+                                        </p>
+                                        <i
+                                            class="fas fa-chevron-right text-black"
+                                        ></i>
+                                    </div>
+                                </button>
+
+                                <!-- Telegram -->
+                                <button
+                                    type="button"
+                                    @click="
+                                        openCustomerServiceLink(
+                                            'https://t.me/shwepaukkan',
+                                        )
+                                    "
+                                    class="flex items-center justify-between py-4"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <img
+                                            src="../../../../public/icons/telegram.png"
+                                            alt="Telegram"
+                                            class="w-10 h-10 rounded-full"
+                                        />
+                                        <p class="text-black font-semibold">
+                                            Telegram
+                                        </p>
+                                    </div>
+
+                                    <div class="flex items-center gap-x-3">
+                                        <p class="text-[#1d4ed8] font-medium">
+                                            t.me/shwepaukkan
+                                        </p>
+                                        <i
+                                            class="fas fa-chevron-right text-black"
+                                        ></i>
+                                    </div>
+                                </button>
+
+                                <!-- Phone -->
+                                <button
+                                    type="button"
+                                    @click="
+                                        openCustomerServiceLink(
+                                            'tel:09XXXXXXXXX',
+                                        )
+                                    "
+                                    class="flex items-center justify-between py-4"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <img
+                                            src="../../../../public/icons/phone.png"
+                                            alt="Phone Number"
+                                            class="w-10 h-10 rounded-full"
+                                        />
+                                        <p class="text-black font-semibold">
+                                            Phone Number
+                                        </p>
+                                    </div>
+
+                                    <div class="flex items-center gap-x-3">
+                                        <p class="text-[#1d4ed8] font-medium">
+                                            09 XXX XXX XXX
+                                        </p>
+                                        <i
+                                            class="fas fa-chevron-right text-black"
+                                        ></i>
+                                    </div>
+                                </button>
+
+                                <!-- Facebook -->
+                                <button
+                                    type="button"
+                                    @click="
+                                        openCustomerServiceLink(
+                                            'https://www.facebook.com',
+                                        )
+                                    "
+                                    class="flex items-center justify-between py-4"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <img
+                                            src="../../../../public/icons/facebook.png"
+                                            alt="Facebook"
+                                            class="w-10 h-10 rounded-full"
+                                        />
+                                        <p class="text-black font-semibold">
+                                            Facebook
+                                        </p>
+                                    </div>
+
+                                    <div class="flex items-center gap-x-3">
+                                        <p class="text-[#1d4ed8] font-medium">
+                                            facebook.com
                                         </p>
                                         <i
                                             class="fas fa-chevron-right text-black"
@@ -936,35 +1034,35 @@ export default {
                     label: "Viber",
                     value: "09 XXX XXX XXX",
                     url: "viber://chat?number=%2B959XXXXXXXXX",
-                    icon: "https://api.iconify.design/simple-icons:viber.svg?color=%237c3aed",
+                    icon: "../../../../public/icons/viber.png",
                 },
                 {
                     key: "telegram",
                     label: "Telegram",
                     value: "t.me/shwepaukkan",
                     url: "https://t.me/shwepaukkan",
-                    icon: "https://api.iconify.design/simple-icons:telegram.svg?color=%230ea5e9",
+                    icon: "../../../../public/icons/telegram.png",
                 },
                 {
                     key: "signal",
                     label: "Signal",
                     value: "signal.org",
                     url: "https://signal.org",
-                    icon: "https://api.iconify.design/simple-icons:signal.svg?color=%232563eb",
+                    icon: "../../../../public/icons/signal.png",
                 },
                 {
                     key: "facebook",
                     label: "Facebook",
                     value: "facebook.com",
                     url: "https://www.facebook.com",
-                    icon: "https://api.iconify.design/simple-icons:facebook.svg?color=%232563eb",
+                    icon: "../../../../public/icons/facebook.png",
                 },
                 {
                     key: "phone",
                     label: "Phone Number",
                     value: "09 XXX XXX XXX",
                     url: "tel:09XXXXXXXXX",
-                    icon: "https://api.iconify.design/mdi:phone.svg?color=%23111827",
+                    icon: "../../../../public/icons/phone.png",
                 },
             ],
         };
