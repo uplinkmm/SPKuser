@@ -1,10 +1,12 @@
 <template>
     <notifications position="top center" />
     <div class="w-full h-full bg-gray-200">
-        <main
-            class="frame-container  relative"
-        >
-            <button @click="isLogin = false" class="text-black text-base absolute top-8 right-4 font-semibold z-30" :class="isLogin ? 'block' : 'hidden'">
+        <main class="frame-container px-4 relative">
+            <button
+                @click="isLogin = false"
+                class="text-black text-base absolute top-8 right-4 font-semibold z-30"
+                :class="isLogin ? 'block' : 'hidden'"
+            >
                 အကောင့်ဖွင့်ရန်
             </button>
             <div
@@ -25,18 +27,17 @@
                 v-if="!forgot_password"
                 class="flex justify-center items-center flex-col min-h-screen w-[93%] mx-auto"
             >
-                
                 <div v-if="isLogin" class="w-full">
                     <login-component
-                                :fcm-token="fcmToken"
-                                :change-forgot-password="changeForgotPassword"
-                                :set-error-box="setErrorBox"
+                        :fcm-token="fcmToken"
+                        :change-forgot-password="changeForgotPassword"
+                        :set-error-box="setErrorBox"
                     ></login-component>
                 </div>
                 <div v-else class="w-full">
                     <register-component
-                                :fcm-token="fcmToken"
-                                :set-error-box="setErrorBox"
+                        :fcm-token="fcmToken"
+                        :set-error-box="setErrorBox"
                     ></register-component>
                 </div>
 
@@ -189,7 +190,8 @@
         </div>
     </div>
     <button
-        data-twe-toggle="modal" class=" hidden"
+        data-twe-toggle="modal"
+        class="hidden"
         data-twe-target="#error_modal"
         id="error_modal_btn"
     ></button>

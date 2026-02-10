@@ -36,7 +36,7 @@
             </table>
         </div>
     </div>
-    <div v-else class="frame-container min-h-[100vh]">
+    <div v-else class="frame-container px-4 min-h-[100vh]">
         <!-- <div
         class="frame-container min-h-[100vh]"
     > -->

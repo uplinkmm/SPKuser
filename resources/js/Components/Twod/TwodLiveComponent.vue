@@ -1,5 +1,5 @@
 <template>
-    <div class="frame-container bg-white min-h-[100vh]">
+    <div class="frame-container px-4 bg-white min-h-[100vh]">
         <Navbar title="2D" :need-auth="false" :back-btn="backBtn"></Navbar>
 
         <!-- <div
@@ -168,7 +168,7 @@ export default {
             const [hour, minute, second] = timeStr.split(":").map(Number);
             const hour12 = hour % 12 === 0 ? 12 : hour % 12;
             return `${String(hour12).padStart(2, "0")}:${String(
-                minute
+                minute,
             ).padStart(2, "0")}:${String(second).padStart(2, "0")}`;
         },
 
@@ -201,7 +201,7 @@ export default {
             const monthName = monthNames[month - 1];
             const formattedDate = `${monthName} ${day}, ${year}`;
             const formattedTime = `${String(hour12).padStart(2, "0")}:${String(
-                minute
+                minute,
             ).padStart(2, "0")}:${String(second).padStart(2, "0")} ${ampm}`;
 
             return `${formattedDate} ${formattedTime}`;

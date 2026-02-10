@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="frame-container min-h-[100vh] bg-[#FFC529]">
+    <div class="frame-container px-4 min-h-[100vh] bg-[#FFC529]">
         <Navbar
             title=""
             :is-home-page="true"
@@ -7,7 +7,7 @@
             :need-auth="false"
         ></Navbar>
 
-        <div class="px-4 mb-8 relative">
+        <div class="mb-8 relative">
             <!-- <div class="marquee bg-gray-900 text-white text-sm py-2 absolute top-0 left-4 ring-4">
                 <div class="w-fit whitespace-nowrap">
                     <span class=" w-full inline mr-16 py-2">
@@ -34,18 +34,29 @@
                 </div>
             </div>
 
-            <div class="-mx-3" id="ad_slick">
-                <div class="mx-3" v-for="(ads, index) in adses">
+            <div class="relative" id="ad_slick">
+                <div class="mx-3" v-for="(ads, index) in adses" :key="index">
                     <img
                         :src="`${img_prefix}${ads.photo}`"
                         class="w-full aspect-video mb-3 rounded-2xl object-cover"
                     />
                 </div>
-                <!-- <div class="mx-3">
+
+                <div class="mx-3" v-if="!adses?.length">
                     <img
                         src="https://admin.shweshankan.com/storage/img/dyt40RFxWQTLfiBoxWeWV7BWqjASiHTCHtI7l9kJ.jpg"
-                        class="w-full aspect-video mb-6"
+                        class="w-full aspect-video mb-6 rounded-2xl object-cover"
                     />
+                </div>
+
+                <!-- <div class="absolute left-3 right-3 bottom-3">
+                    <div class="background-black/90 rounded-xl py-2 px-3">
+                        <p
+                            class="text-gray-200 text-center text-sm font-semibold mb-0"
+                        >
+                            မင်္ဂလာပါ ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်။
+                        </p>
+                    </div>
                 </div> -->
             </div>
 
@@ -71,14 +82,6 @@
                         </div>
                     </div>
                 </a>
-            </div>
-
-            <div class="background-black rounded-xl mb-3">
-                <p
-                    class="text-gray-200 text-center text-sm font-semibold py-2 mb-0"
-                >
-                    မင်္ဂလာပါ ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်။
-                </p>
             </div>
 
             <div class="bg-[#FFC529] rounded-t-3xl rounded-b-2xl pt-1">

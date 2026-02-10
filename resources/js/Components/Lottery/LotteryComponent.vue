@@ -1,6 +1,6 @@
 <template>
     <notifications position="top center" />
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar title="Lottery" :back-btn="backBtn"></Navbar>
 
         <div :class="step == 1 ? 'block' : 'hidden'" class="px-2 mb-12">

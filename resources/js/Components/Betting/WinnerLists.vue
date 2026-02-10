@@ -1,24 +1,28 @@
 <template>
     <notifications position="top center" />
 
-    <div
-        class="frame-container min-h-[100vh]"
-    >
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
 
-        <div
-            class="flex w-full rounded-xl bg-transparent pt-4 pb-2 px-4 mb-4"
-        >
+        <div class="flex w-full rounded-xl bg-transparent pt-4 pb-2 px-4 mb-4">
             <p
                 class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="game_id == 1 ? 'text-black border-b border-gray-700' : ' text-gray-500'"
+                :class="
+                    game_id == 1
+                        ? 'text-black border-b border-gray-700'
+                        : ' text-gray-500'
+                "
                 @click="changeGame(1)"
             >
                 2D
             </p>
             <p
                 class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="game_id == 2 ? 'text-black border-b border-gray-700' : ' text-gray-500'"
+                :class="
+                    game_id == 2
+                        ? 'text-black border-b border-gray-700'
+                        : ' text-gray-500'
+                "
                 @click="changeGame(2)"
             >
                 3D
@@ -28,30 +32,50 @@
             <table class="table-auto w-full">
                 <thead class="w-full">
                     <tr class="w-full rounded-xl border-b bg-white">
-                        <th class="py-3 px-1 rounded-tl-lg rounded-bl-lg text-sm">No</th>
+                        <th
+                            class="py-3 px-1 rounded-tl-lg rounded-bl-lg text-sm"
+                        >
+                            No
+                        </th>
                         <th class="py-3 px-1 text-sm">Name</th>
                         <th class="py-3 px-1 text-sm">Wining No</th>
                         <th class="py-3 px-1 text-sm">Phone</th>
-                        <th class="py-3 px-1 rounded-tr-lg rounded-br-lg text-smx`">Amount</th>
+                        <th
+                            class="py-3 px-1 rounded-tr-lg rounded-br-lg text-smx`"
+                        >
+                            Amount
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-if="!winners.length">
-                        <td colspan="5" class="text-center py-4 text-sm">No winners yet.</td>
+                        <td colspan="5" class="text-center py-4 text-sm">
+                            No winners yet.
+                        </td>
                     </tr>
-                    
+
                     <tr
-                        class="w-fulll "
+                        class="w-fulll"
                         v-for="(winner, index) in winners"
                         :key="index"
                     >
-                        <td class="py-3 text-center text-sm rounded-tl-lg rounded-bl-lg !border-gray-300">{{ ++index }}</td>
-                        <td class="py-3 text-center text-sm">{{ winner.name }}</td>
-                        <td class="py-3 text-center text-sm">{{ winner.number }}</td>
+                        <td
+                            class="py-3 text-center text-sm rounded-tl-lg rounded-bl-lg !border-gray-300"
+                        >
+                            {{ ++index }}
+                        </td>
+                        <td class="py-3 text-center text-sm">
+                            {{ winner.name }}
+                        </td>
+                        <td class="py-3 text-center text-sm">
+                            {{ winner.number }}
+                        </td>
                         <td class="py-3 text-center text-sm">
                             {{ winner.phone_number }}
                         </td>
-                        <td class="py-3 text-center text-sm rounded-tr-lg rounded-br-lg">
+                        <td
+                            class="py-3 text-center text-sm rounded-tr-lg rounded-br-lg"
+                        >
                             {{ winner.total_amount?.toLocaleString() }}
                         </td>
                     </tr>

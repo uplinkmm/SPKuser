@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div v-else class="frame-container min-h-[100vh]">
+    <div v-else class="frame-container px-4 min-h-[100vh]">
         <Navbar title="ထိုးမည်" :back-btn="backBtn" class="!px-4"></Navbar>
         <!-- Error page -->
         <div :class="step == 6 ? 'block' : 'hidden'">

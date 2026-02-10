@@ -1,5 +1,5 @@
 <template>
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar
             :title="$t('Wallet')"
             :textColor="'text-white font-semibold'"
@@ -34,7 +34,7 @@
                     <div
                         class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
                     >
-                        <div class=" text-sm lg:text-base">
+                        <div class="text-sm lg:text-base">
                             <div class="flex justify-between gap-x-4 mb-4">
                                 <p class="flex-grow-0 w-36">
                                     <!-- <i class="fal fa-wallet"></i> -->
@@ -67,7 +67,9 @@
                                         src="../../../../public/img/money_receive.png"
                                         class="w-10 lg:w-14 mx-auto mb-2"
                                     />
-                                    <p class="text-sm lg:text-base text-center">{{ $t("Deposit") }}</p>
+                                    <p class="text-sm lg:text-base text-center">
+                                        {{ $t("Deposit") }}
+                                    </p>
                                 </a>
                             </div>
 
@@ -77,7 +79,9 @@
                                         src="../../../../public/img/money_send.png"
                                         class="w-10 lg:w-14 mx-auto mb-2"
                                     />
-                                    <p class="text-sm lg:text-base text-center">{{ $t("Withdrawal") }}</p>
+                                    <p class="text-sm lg:text-base text-center">
+                                        {{ $t("Withdrawal") }}
+                                    </p>
                                 </a>
                             </div>
                             <div class="">
@@ -91,7 +95,9 @@
                                         src="../../../../public/img/exchange.png"
                                         class="w-10 lg:w-14 mx-auto mb-2"
                                     />
-                                    <p class="text-sm lg:text-base text-center">ငွေလဲမည်</p>
+                                    <p class="text-sm lg:text-base text-center">
+                                        ငွေလဲမည်
+                                    </p>
                                 </button>
                             </div>
                         </div>
@@ -126,7 +132,7 @@
                                         d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
                                     />
                                 </svg>
-                                <span class=" text-sm lg:text-lg"
+                                <span class="text-sm lg:text-lg"
                                     >ငွေသွင်း ငွေထုတ် မှတ်တမ်းများ</span
                                 >
                             </div>
@@ -448,7 +454,7 @@ export default {
             formData.append("amount", this.wallet_transfer.amount);
             formData.append(
                 "transfer_type",
-                this.wallet_transfer.transfer_type
+                this.wallet_transfer.transfer_type,
             );
             this.loading = true;
             let response = await postApiData({

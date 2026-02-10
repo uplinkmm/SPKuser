@@ -1,6 +1,6 @@
 <template>
     <notifications position="top center" />
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar :title="$t('Withdrawal')" :back-btn="backBtn"></Navbar>
 
         <!-- 1st  -->
@@ -276,7 +276,7 @@ export default {
                 return 1;
             }
             var temp = this.accounts.find(
-                (n) => n.account_type == this.payment_provider
+                (n) => n.account_type == this.payment_provider,
             );
             if (
                 this.amount < temp.withdrawal.min ||
@@ -362,7 +362,7 @@ export default {
         },
         checkAccount(type) {
             var temp = this.accounts.find(
-                (n) => n.account_type == type && n.withdrawal.is_active == 1
+                (n) => n.account_type == type && n.withdrawal.is_active == 1,
             );
             if (temp) {
                 return true;

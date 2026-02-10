@@ -1,7 +1,7 @@
 <template>
-    <div class="frame-container pb-20 min-h-[100vh] flex flex-col">
+    <div class="frame-container px-4 pb-20 min-h-[100vh] flex flex-col">
         <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
-        <div class=" bg-white px-4 rounded-xl flex-grow">
+        <div class="bg-white px-4 rounded-xl flex-grow">
             <!--Tabs navigation-->
             <ul
                 class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent"
@@ -75,7 +75,7 @@
                         <div
                             v-for="(bet_win, index) in betting_win"
                             :key="index"
-                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 relative border-b border-gray-700 "
+                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 relative border-b border-gray-700"
                         >
                             <div
                                 v-if="bet_win.is_read == 0"
@@ -104,7 +104,7 @@
                         <div
                             v-for="(transcation, index) in topup_transaction"
                             :key="index"
-                            class="pl-2 lg:pl-8 pr-2 lg:pr-8 py-3 mb-2  relative border-b border-gray-600 "
+                            class="pl-2 lg:pl-8 pr-2 lg:pr-8 py-3 mb-2 relative border-b border-gray-600"
                         >
                             <div class="flex justify-between mb-2">
                                 <p class="text-xs sm:text-sm mb-1">
@@ -136,9 +136,7 @@
                                     }}
                                 </p>
                                 <p class="text-xs sm:text-sm mb-1">
-                                    {{
-                                        transcation.amount?.toLocaleString()
-                                    }}
+                                    {{ transcation.amount?.toLocaleString() }}
                                     ကျပ်
                                 </p>
                             </div>
@@ -147,7 +145,9 @@
                                 <p class="text-sm sm:text-base font-inter mb-0">
                                     {{ transcation.provider_name }}
                                 </p>
-                                <p class="text-sm sm:text-base font-inter mb-0 text-right w-[55%]">
+                                <p
+                                    class="text-sm sm:text-base font-inter mb-0 text-right w-[55%]"
+                                >
                                     လုပ်ငန်းစဥ်နပါတ်-{{
                                         transcation.payment_transaction_id
                                     }}

@@ -1,6 +1,6 @@
 <template>
     <notifications position="top center" />
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar title="ငွေသွင်းမည်" :back-btn="backBtn"></Navbar>
 
         <!-- 1st  -->
@@ -191,7 +191,7 @@
                             @input="
                                 paymentTrId = $event.target.value.replace(
                                     /[^0-9]/g,
-                                    ''
+                                    '',
                                 )
                             "
                             placeholder="Transaction Number"
@@ -304,7 +304,7 @@ export default {
         },
         checkAccount(type) {
             var temp = this.accounts.find(
-                (n) => n.account_type == type && n.deposit.is_active == 1
+                (n) => n.account_type == type && n.deposit.is_active == 1,
             );
             if (temp) {
                 return true;
@@ -331,7 +331,7 @@ export default {
                 return 1;
             }
             var temp = this.accounts.find(
-                (n) => n.account_type == this.paymentProvider
+                (n) => n.account_type == this.paymentProvider,
             );
             if (
                 this.amount < temp.deposit.min ||

@@ -1,5 +1,5 @@
 <template>
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar :title="$t(title)" :back-btn="backBtn"></Navbar>
 
         <div>
@@ -713,7 +713,7 @@ export default {
             formData.append("new_password", this.new_password);
             formData.append(
                 "new_password_confirmation",
-                this.new_password_confirmation
+                this.new_password_confirmation,
             );
             this.passwordLoading = true;
             let response = await postApiData({

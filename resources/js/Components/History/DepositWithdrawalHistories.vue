@@ -1,13 +1,9 @@
 <template>
-    <div
-        class="frame-container min-h-[100vh]"
-    >
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar title="Payment History" :back-btn="backBtn"></Navbar>
 
         <div>
-            <p class=" text-center mb-2 font-semibold text-2xl">
-                မှတ်တမ်း
-            </p>
+            <p class="text-center mb-2 font-semibold text-2xl">မှတ်တမ်း</p>
         </div>
         <div class="">
             <ul
@@ -67,11 +63,11 @@
                             <div class="grid grid-cols-3 mb-2 border-b pb-2">
                                 <p class="text-sm">
                                     <!-- {{ dateFormat(history.date) }} -->
-                                    {{ history.date.slice(0,10) }}
+                                    {{ history.date.slice(0, 10) }}
                                 </p>
                                 <p class="text-sm">
                                     <!-- {{ dateFormat(history.date) }} -->
-                                    {{ dateFormat(history.date).slice(11,19) }}
+                                    {{ dateFormat(history.date).slice(11, 19) }}
                                 </p>
                                 <p
                                     class="text-sm text-yellow-600 text-right"
@@ -103,14 +99,11 @@
                                 <p class="text-sm">
                                     {{ history.account.account_type }}
                                 </p>
-                                <p class="text-sm">
-                                    လုပ်ငန်းစဉ် နံပတ်
-                                </p>
+                                <p class="text-sm">လုပ်ငန်းစဉ် နံပတ်</p>
                                 <p class="text-sm text-right">
                                     {{ history.account.phone_number }}
                                 </p>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -128,16 +121,14 @@
                             :key="index"
                             class="pl-6 lg:pl-8 pr-8 py-4 shadow-lg rounded-2xl mb-8 bg-white relative"
                         >
-
-                        
                             <div class="grid grid-cols-3 mb-2 border-b pb-2">
                                 <p class="text-sm">
                                     <!-- {{ dateFormat(history.date) }} -->
-                                    {{ history.date.slice(0,10) }}
+                                    {{ history.date.slice(0, 10) }}
                                 </p>
                                 <p class="text-sm">
                                     <!-- {{ dateFormat(history.date) }} -->
-                                    {{ dateFormat(history.date).slice(11,19) }}
+                                    {{ dateFormat(history.date).slice(11, 19) }}
                                 </p>
                                 <p
                                     class="text-sm text-yellow-600 text-right"
@@ -169,14 +160,11 @@
                                 <p class="text-sm">
                                     {{ history.account.account_type }}
                                 </p>
-                                <p class="text-sm">
-                                    လုပ်ငန်းစဉ် နံပတ်
-                                </p>
+                                <p class="text-sm">လုပ်ငန်းစဉ် နံပတ်</p>
                                 <p class="text-sm text-right">
                                     {{ history.account.phone_number }}
                                 </p>
                             </div>
-
 
                             <!-- <div class="flex justify-between mb-3">
                                 <p class="text-base font-semibold">ငွေထုတ်</p>

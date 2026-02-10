@@ -1,5 +1,5 @@
 <template>
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container px-4 min-h-[100vh]">
         <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
 
         <div class="">
