@@ -1,14 +1,17 @@
 <template>
     <notifications position="top center" />
-    <div class="w-full h-full bg-gray-200">
-        <main class="frame-container px-4 relative">
-            <button
-                @click="isLogin = false"
-                class="text-black text-base absolute top-8 right-4 font-semibold z-30"
-                :class="isLogin ? 'block' : 'hidden'"
-            >
-                အကောင့်ဖွင့်ရန်
-            </button>
+
+    <div class="w-full h-full bg-black bg-img">
+        <main class="frame-container relative">
+            <div class="mx-4">
+                <Navbar
+                    title=""
+                    :is-home-page="true"
+                    :hide-back-btn="false"
+                    :need-auth="false"
+                ></Navbar>
+            </div>
+
             <div
                 v-if="forgot_password"
                 class="flex justify-center items-center flex-col min-h-screen"
@@ -25,19 +28,21 @@
             </div>
             <div
                 v-if="!forgot_password"
-                class="flex justify-center items-center flex-col min-h-screen w-[93%] mx-auto"
+                class="flex justify-center items-center flex-col min-h-screen w-full mx-auto"
             >
                 <div v-if="isLogin" class="w-full">
                     <login-component
                         :fcm-token="fcmToken"
                         :change-forgot-password="changeForgotPassword"
                         :set-error-box="setErrorBox"
+                        :set-is-login="setIsLogin"
                     ></login-component>
                 </div>
                 <div v-else class="w-full">
                     <register-component
                         :fcm-token="fcmToken"
                         :set-error-box="setErrorBox"
+                        :set-is-login="setIsLogin"
                     ></register-component>
                 </div>
 
@@ -203,6 +208,7 @@ import { postApiData } from "../../utilities/ajax-helpers";
 import fcmMixin from "../../mixins/fcmMixin";
 import LoginComponent from "./LoginComponent.vue";
 import RegisterComponent from "./RegisterComponent.vue";
+import Navbar from "../Nav/Navbar.vue";
 import {
     Collapse,
     Carousel,
@@ -220,6 +226,7 @@ export default {
     components: {
         LoginComponent,
         RegisterComponent,
+        Navbar,
         ForgotPassword,
     },
     data() {
@@ -248,6 +255,9 @@ export default {
             this.error_box.error = error;
             this.error_box.message = message;
             this.modalOpen();
+        },
+        setIsLogin(value) {
+            this.isLogin = value;
         },
         modalOpen() {
             const button = document.getElementById("error_modal_btn");
