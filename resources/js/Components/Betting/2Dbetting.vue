@@ -127,35 +127,59 @@
                 </div> -->
                 <div
                     v-if="twod_settings.length && main_game_active"
-                    class="flex items-center justify-center mb-8 px-4"
+                    class="items-center justify-center mb-8 px-4"
                 >
+                    <h1 class="text-center text-xl font-bold mb-3">
+                        2D ထိုးမည်
+                    </h1>
+
                     <div
                         class="w-full max-w-md bg-[#06000040] rounded-3xl px-6 py-6 shadow-lg"
                     >
                         <div class="text-center">
-                            <h1 class="text-xl font-bold mb-1">2D ထိုးမည်</h1>
                             <p class="text-sm font-medium">
                                 ထိုးမည့်အချိန် ရွေးချယ်ပါ
                             </p>
                         </div>
 
-                        <div
-                            class="mt-6 flex justify-center items-end space-x-8"
-                        >
+                        <div class="mt-6 justify-center items-end space-x-8">
                             <div
                                 v-for="(twod_setting, index) in twod_settings"
                                 :key="index"
-                                @click="chooseTime(twod_setting)"
-                                class="flex flex-col items-center cursor-pointer"
+                                @click="pendingGameSetting = twod_setting"
+                                :class="[
+                                    'flex flex-col items-center cursor-pointer transition',
+                                    pendingGameSetting &&
+                                    pendingGameSetting.id === twod_setting.id
+                                        ? 'opacity-100'
+                                        : 'opacity-100',
+                                ]"
                             >
                                 <div
-                                    class="w-28 h-28 rounded-2xl border-2 border-[#9A6C1F] bg-[#D9A63A]"
+                                    :class="[
+                                        'w-28 h-28 rounded-2xl border-2',
+                                        pendingGameSetting &&
+                                        pendingGameSetting.id ===
+                                            twod_setting.id
+                                            ? 'border-[#1d4ed8] bg-[#e5e7eb]'
+                                            : 'border-[#9A6C1F] bg-[#D9A63A]',
+                                    ]"
                                 ></div>
                                 <p class="mt-3 text-base font-semibold">
                                     {{ formatTime(twod_setting.lottery_time) }}
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div class="mt-6">
+                        <button
+                            type="button"
+                            class="w-full bg-[#5271FF] text-white font-semibold py-3 rounded-xl disabled:opacity-50"
+                            :disabled="!pendingGameSetting"
+                            @click="confirmTimeSelection"
+                        >
+                            ရှေ့ဆက်ရန်
+                        </button>
                     </div>
                 </div>
 
@@ -1623,6 +1647,7 @@ export default {
             showSpinner: false,
             winners: [],
             selectedGameSetting: "",
+            pendingGameSetting: null,
             delete_bet_number: "",
             error_modal_text: "",
         };
@@ -2296,10 +2321,17 @@ export default {
             }
         },
         chooseTime(type) {
+            // keep shared logic here if needed elsewhere
             this.bet_numbers = [];
             this.game_setting_id = type.id;
             this.selectedGameSetting = type;
             this.getBetNumbers();
+        },
+        confirmTimeSelection() {
+            if (!this.pendingGameSetting) {
+                return;
+            }
+            this.chooseTime(this.pendingGameSetting);
             this.step = 1;
         },
         async checkGameActive() {
