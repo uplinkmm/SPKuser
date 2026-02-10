@@ -223,23 +223,12 @@
                             class="flex items-center justify-between px-4 py-4 cursor-pointer"
                         >
                             <div class="flex items-center space-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-6 h-6 text-gray-800"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                    />
-                                </svg>
-                                <span class="text-base font-semibold"
-                                    >2D Live</span
-                                >
+                                <i
+                                    class="fas fa-broadcast-tower pt-1 w-6 h-6 text-gray-800"
+                                ></i>
+                                <span class="text-base font-semibold">
+                                    2D Live
+                                </span>
                             </div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -262,23 +251,12 @@
                             class="flex items-center justify-between px-4 py-4 cursor-pointer"
                         >
                             <div class="flex items-center space-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-6 h-6 text-gray-800"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
-                                    />
-                                </svg>
-                                <span class="text-base font-semibold"
-                                    >2D မှတ်တမ်း</span
-                                >
+                                <i
+                                    class="fas pt-1 fa-file-alt w-6 h-6 text-gray-800"
+                                ></i>
+                                <span class="text-base font-semibold">
+                                    2D မှတ်တမ်း
+                                </span>
                             </div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -301,23 +279,12 @@
                             class="flex items-center justify-between px-4 py-4 cursor-pointer"
                         >
                             <div class="flex items-center space-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-6 h-6 text-gray-800"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                    />
-                                </svg>
-                                <span class="text-base font-semibold"
-                                    >ထီပေါက်သူများ</span
-                                >
+                                <i
+                                    class="fas pt-1 fa-trophy w-6 h-6 text-gray-800"
+                                ></i>
+                                <span class="text-base font-semibold">
+                                    ထီပေါက်သူများ
+                                </span>
                             </div>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
