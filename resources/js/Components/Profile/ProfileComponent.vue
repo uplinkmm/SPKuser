@@ -24,7 +24,6 @@
                                     <i class="fas fa-pen text-xs"></i>
                                 </button>
                             </div>
-
                             <div
                                 class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
                             >
@@ -143,8 +142,11 @@
                                             ></i>
                                         </div>
                                         <button
-                                            data-twe-toggle="modal"
-                                            data-twe-target="#add_feedback_modal"
+                                            type="button"
+                                            @click="
+                                                step = 'feedback';
+                                                title = 'Feedback';
+                                            "
                                             class="text-black font-semibold"
                                         >
                                             {{ $t("Feedback") }}
@@ -581,114 +583,140 @@
                     </div>
                 </div>
 
-                <div v-show="step == 'termsAndConditions'">
-                    <div
-                        class="flex items-center gap-x-4 px-4 py-4 mb-1 text-white font-semibold"
-                    >
-                        <div class="mb-3">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                            />
-                        </div>
-                        <div class="text-left font-inter mb-4">
-                            <p class="mb-1 lg:mb-2">
-                                {{ user_profile_data?.name }}
-                            </p>
-                            <p class="text-sm mb-1 lg:mb-2">
-                                {{ user_profile_data?.phone_number }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="px-8 pb-4 mb-8 text-white">
-                        <h2
-                            class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
-                        >
-                            စည်းကမ်းသတ်မှတ်ချက်များ
-                        </h2>
-                        <div class="mb-0 mt-4">
-                            <p v-html="terms_and_conditions.name"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                data-twe-modal-init
-                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                id="add_feedback_modal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div
-                    data-twe-modal-dialog-ref
-                    class="pointer-events-none relative w-full mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
-                >
-                    <div
-                        class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
-                    >
+                <div v-show="step == 'feedback'">
+                    <div class="pt-2 pb-6 bg-black">
                         <div
-                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
+                            class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
                         >
-                            <h4
-                                class="text-xl font-medium leading-normal text-surface text-center w-full"
-                                id="exampleModalLabel"
-                            >
-                                {{ $t("Feedback") }}
-                            </h4>
-                            <button
-                                type="button"
-                                id="close_feedback"
-                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                                data-twe-modal-dismiss
-                                aria-label="Close"
-                            >
-                                <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div
-                            class="relative flex-auto pb-6 px-16"
-                            data-twe-modal-body-ref
-                        >
-                            <div class="mb-8">
-                                <label
-                                    for="feedback"
-                                    class="text-sm mb-3 relative block"
-                                    >{{ $t("Feedback") }}</label
+                            <div class="col-span-1 relative">
+                                <img
+                                    src="../../../../public/img/profile.png"
+                                    alt=""
+                                    class="w-26 h-26 rounded-full"
+                                />
+                                <button
+                                    type="button"
+                                    class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
                                 >
-                                <textarea
-                                    v-model="feedback"
-                                    type="text"
-                                    rows="8"
-                                    id="feedback"
-                                    placeholder="Feed Back"
-                                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
-                                ></textarea>
+                                    <i class="fas fa-pen text-xs"></i>
+                                </button>
                             </div>
 
-                            <div class="mb-4">
+                            <div
+                                class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
+                            >
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>နာမည် :</p>
+                                    <p>
+                                        {{ user_profile_data?.name }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>ဖုန်းနံပါတ် :</p>
+                                    <p>
+                                        {{ user_profile_data?.phone_number }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pb-6">
+                        <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
+                            <p
+                                class="text-center text-black text-lg font-semibold mb-4"
+                            >
+                                အကြံပြုစာ
+                            </p>
+
+                            <div
+                                class="flex items-center justify-between text-black mb-3"
+                            >
+                                <p class="font-semibold">
+                                    {{ dateFormat(new Date()) }}
+                                </p>
+                                <p class="font-semibold">
+                                    {{ timeFormat(new Date()) }}
+                                </p>
+                            </div>
+
+                            <textarea
+                                v-model="feedback"
+                                rows="10"
+                                class="w-full bg-[#D9D9D9] rounded-xl p-4 text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
+                            ></textarea>
+
+                            <div class="mt-6 mb-16">
                                 <button
                                     :disabled="loading"
                                     @click="sendFeedback"
-                                    class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-yellow-100 text-white text-sm rounded-lg w-full"
+                                    class="w-full bg-[#5271FF] disabled:bg-gray-600 text-white font-semibold py-4 rounded-2xl"
                                 >
-                                    {{ loading ? "Sending..." : "Send" }}
+                                    အတည်ပြုမည်
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-show="step == 'termsAndConditions'">
+                    <div class="pt-2 pb-6 bg-black">
+                        <div
+                            class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
+                        >
+                            <div class="col-span-1 relative">
+                                <img
+                                    src="../../../../public/img/profile.png"
+                                    alt=""
+                                    class="w-26 h-26 rounded-full"
+                                />
+                                <button
+                                    type="button"
+                                    class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
+                                >
+                                    <i class="fas fa-pen text-xs"></i>
+                                </button>
+                            </div>
+
+                            <div
+                                class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
+                            >
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>နာမည် :</p>
+                                    <p>
+                                        {{ user_profile_data?.name }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>ဖုန်းနံပါတ် :</p>
+                                    <p>
+                                        {{ user_profile_data?.phone_number }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pb-6">
+                        <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
+                            <p
+                                class="text-center text-black text-lg font-semibold mb-4"
+                            >
+                                စည်းကမ်းသတ်မှတ်ချက်များ
+                            </p>
+
+                            <div
+                                class="bg-[#D9D9D9] rounded-xl p-4 border border-black/30 text-black h-[60vh] overflow-y-auto"
+                            >
+                                <div v-html="terms_and_conditions.name"></div>
                             </div>
                         </div>
                     </div>
@@ -835,6 +863,7 @@ export default {
                 this.step == "changePassStepOne" ||
                 this.step == "history" ||
                 this.step == "changeLang" ||
+                this.step == "feedback" ||
                 this.step == "contacts" ||
                 this.step == "termsAndConditions"
             ) {
@@ -885,7 +914,8 @@ export default {
                     type: "info",
                 });
                 this.feedback = "";
-                this.modalClose("close_feedback");
+                this.step = "mainProfile";
+                this.title = "Profile";
             } else {
                 this.$notify({
                     text: response.message?.text,
@@ -893,14 +923,11 @@ export default {
                 });
             }
         },
-        modalClose(id) {
-            const button = document.getElementById(id);
-            if (button) {
-                button.click();
-            }
-        },
         dateFormat(date_time) {
-            return moment(date_time).format("MM DD YYYY");
+            return moment(date_time).format("MM/DD/YYYY");
+        },
+        timeFormat(date_time) {
+            return moment(date_time).format("hh:mm:ss A");
         },
         async handelChangePasswordStepOne() {
             if (
