@@ -1,8 +1,10 @@
 <template lang="">
     <div
-        class="flex relative justify-between py-4 px-8 lg:px-4 mb-4 items-center -mx-4"
+        class="flex relative justify-between py-4 px-8 lg:px-4 items-center -mx-4"
         :class="
-            isHomePage ? 'bg-[#29261D] text-white]' : 'bg-[#29261D] text-white'
+            isHomePage
+                ? 'bg-[#29261D] text-white]'
+                : 'bg-[#29261D] text-white mb-4'
         "
     >
         <FcmNotification :get-noti="getNotis"></FcmNotification>

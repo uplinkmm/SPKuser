@@ -10,10 +10,10 @@
         @apply text-center py-2 border-t-4 border-[#FDC652] text-sm;
     }
     .dash-under::after {
-        @apply absolute left-4 bottom-1 bg-gray-600 h-0.5 w-1/4 content-[''];
+        @apply absolute left-4 bottom-1 bg-gray-600 h-0.5 w-1/2 content-[''];
     }
     .underline-border::after {
-        @apply absolute left-0 -bottom-0.5 bg-[#1d4ed8] h-0.5 w-2/5 hidden content-[''];
+        @apply absolute left-0 -bottom-0.5 bg-[#1d4ed8] h-0.5 w-full hidden content-[''];
     }
     /* .underline-border::after{
         @apply absolute left-0 -bottom-0.5 bg-[#FDC652] h-0.5 w-2/5 hidden
