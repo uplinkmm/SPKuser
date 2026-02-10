@@ -321,7 +321,7 @@
                     v-else
                     class="bg-transparent items-center justify-center mb-8"
                 >
-                    <div class="flex-grow py-12 bg-[#F2B50F] -mx-4">
+                    <div class="flex-grow py-12 bg-[#FFC529] -mx-4">
                         <div class="text-center">
                             <h1 class="text-3xl font-bold mb-4">2D ထိုးမည်</h1>
                             <div class="w-full flex justify-center mb-4">
@@ -333,7 +333,7 @@
                         </div>
                     </div>
 
-                    <div class="rounded-lg p-4 bg-[#ffc529]">
+                    <div class="rounded-lg p-4 bg-[#FFC529]">
                         <h2
                             class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
                         >
@@ -647,7 +647,7 @@
                                 num.is_active == 0
                                     ? 'bg-gray-300'
                                     : isBetNumber(num.number)
-                                      ? 'bg-[#FDC652] text-white font-semibold'
+                                      ? 'bg-[#FFC529] text-white font-semibold'
                                       : 'bg-white',
                                 'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
                             ]"
@@ -696,7 +696,7 @@
                 <p class="text-center mb-2 text-lg">2D ထိုးမည်</p>
             </div>
             <div
-                class="flex justify-between px-6 bg-[#ffc529] text-black rounded-tr-lg rounded-tl-lg"
+                class="flex justify-between px-6 bg-[#FFC529] text-black rounded-tr-lg rounded-tl-lg"
             >
                 <div class="flex text-sm">
                     <p class="pr-8 py-2">
@@ -1275,7 +1275,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#DDA33F] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#FFC529] text-white px-4 py-2 w-full rounded-lg text-sm"
                                     @click="getTwoDigitCombinations(false)"
                                 >
                                     အပူးမပါ
@@ -1315,7 +1315,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#C67D06] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#FFC529] text-white px-4 py-2 w-full rounded-lg text-sm"
                                     @click="getTwoDigitCombinations(true)"
                                 >
                                     အပူးပါ
@@ -1455,7 +1455,7 @@
                 <div class="absolute mb-6 w-full flex justify-center">
                     <button
                         :disabled="calling_api"
-                        class="bg-[#FDC652] text-white px-12 py-2 rounded-lg text-sm font-semibold"
+                        class="bg-[#FFC529] text-white px-12 py-2 rounded-lg text-sm font-semibold"
                         @click="sendBetting"
                     >
                         {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}

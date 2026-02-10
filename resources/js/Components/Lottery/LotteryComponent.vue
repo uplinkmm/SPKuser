@@ -271,8 +271,8 @@
                                 num.is_active == 0
                                     ? 'bg-gray-400'
                                     : isBetNumber(num.number)
-                                    ? 'bg-[#FDC652] text-white'
-                                    : 'bg-white',
+                                      ? 'bg-[#FFC529] text-white'
+                                      : 'bg-white',
                                 'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
                             ]"
                             @click="num.is_active == 1 ? addBetNumber(num) : ''"
@@ -295,9 +295,7 @@
             style="min-height: calc(100vh - 168px)"
         >
             <p class="text-center py-4">{{ game?.name }}</p>
-            <div
-                class="flex justify-between p-6 bg-[#fff] text-black"
-            >
+            <div class="flex justify-between p-6 bg-[#fff] text-black">
                 <div>
                     <p class="pr-8 py-2">
                         {{ getCurrentDate() }}
@@ -322,17 +320,20 @@
                         <tr>
                             <th class="py-2">စဉ်</th>
                             <th class="py-2">{{ $t("No") }}</th>
-                            <th class="py-2 text-right">{{ $t("Betting Amount") }}</th>
+                            <th class="py-2 text-right">
+                                {{ $t("Betting Amount") }}
+                            </th>
                             <!-- <th class="py-2">{{ $t("Delete") }}</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr
                             v-for="(bet_number, index) in bet_numbers"
-                            :key="index" class="border-b border-gray-400"
+                            :key="index"
+                            class="border-b border-gray-400"
                         >
                             <td class="text-center py-2">
-                                {{ index+1 }}
+                                {{ index + 1 }}
                             </td>
                             <td class="text-center py-2">
                                 {{ bet_number.number }}
@@ -359,7 +360,9 @@
                         <tr>
                             <td></td>
                             <td class="text-center">စုစုပေါင်း</td>
-                            <td class="py-2 text-right">{{ totalBetAmount?.toLocaleString() }}</td>
+                            <td class="py-2 text-right">
+                                {{ totalBetAmount?.toLocaleString() }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -756,7 +759,7 @@ export default {
         numbers100() {
             return this.numbers.slice(
                 this.from_to_value.value - 100,
-                this.from_to_value.value
+                this.from_to_value.value,
             );
         },
     },
@@ -782,17 +785,17 @@ export default {
             this.wallet_balance = response.data.balance;
             this.game = response.data.game;
             let temp = this.from_to_numbers.filter(
-                (num) => num.value <= this.numbers.length
+                (num) => num.value <= this.numbers.length,
             );
             this.from_to_numbers = temp;
             this.lottery_promotion_tickets =
                 response.data.promotion.lottery_promotion_tickets.sort(
-                    (a, b) => b.qty - a.qty
+                    (a, b) => b.qty - a.qty,
                 );
         },
         addBetNumber(num) {
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === num.number
+                (bet) => bet.number === num.number,
             );
             if (index === -1) {
                 //add
@@ -839,7 +842,7 @@ export default {
                             currentChar +
                             permutation.slice(j);
                         const index = this.bet_numbers.findIndex(
-                            (bet) => bet.number === newPermutation
+                            (bet) => bet.number === newPermutation,
                         );
                         if (index === -1) {
                             newResults.push(newPermutation);
@@ -852,7 +855,7 @@ export default {
             const removeItself = results.filter((r) => r != str);
             var temp = this.numbers
                 .filter(
-                    (n) => removeItself.includes(n.number) && n.is_active == 1
+                    (n) => removeItself.includes(n.number) && n.is_active == 1,
                 )
                 .map((n) => ({ ...n, amount: "" }));
             return temp;
@@ -872,12 +875,12 @@ export default {
         },
         sortBetNumbers() {
             this.bet_numbers.sort(
-                (a, b) => parseInt(a.number) - parseInt(b.number)
+                (a, b) => parseInt(a.number) - parseInt(b.number),
             );
         },
         deleteBetNumber() {
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === this.delete_bet_number
+                (bet) => bet.number === this.delete_bet_number,
             );
             this.bet_numbers.splice(index, 1);
             const button = document.getElementById("modalClose");
@@ -919,16 +922,16 @@ export default {
             formData.append(
                 "promotion_ticket_ids",
                 JSON.stringify(
-                    [...new Set(this.promotion_ticket_ids)].map(String)
-                )
+                    [...new Set(this.promotion_ticket_ids)].map(String),
+                ),
             );
             formData.append(
                 "lottery_quantity",
-                this.ticket_counts_without_promoiton
+                this.ticket_counts_without_promoiton,
             );
             formData.append(
                 "promotion_ticket_quantity",
-                this.bet_numbers.length - this.ticket_counts_without_promoiton
+                this.bet_numbers.length - this.ticket_counts_without_promoiton,
             );
             formData.append("total_ticket_quantity", this.bet_numbers.length);
 
@@ -1039,7 +1042,7 @@ export default {
                 : this.bet_numbers.length;
             console.log(
                 "ticket_counts_without_promoiton",
-                this.ticket_counts_without_promoiton
+                this.ticket_counts_without_promoiton,
             );
             this.promotion_ticket_ids = [];
             this.lottery_promotion_tickets.forEach((rule) => {

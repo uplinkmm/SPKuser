@@ -8,7 +8,7 @@
             class="relative mb-0 w-full rounded-lg bg-white pt-0 lg:pt-4 pb-14 px-0 lg:px-0"
         >
             <table class="table-auto w-full">
-                <thead class="bg-[#FDC652] text-white">
+                <thead class="bg-[#FFC529] text-white">
                     <tr>
                         <th class="py-4 pl-8 text-left">No</th>
                         <th class="py-4">Name</th>
@@ -49,7 +49,7 @@
                 <div class="grid grid-cols-2 gap-x-4 mb-8">
                     <a
                         href="history?game_id=2"
-                        class="bg-[#FDC652] rounded-xl shadow-md text-center text-white py-8"
+                        class="bg-[#FFC529] rounded-xl shadow-md text-center text-white py-8"
                     >
                         <a>
                             <i class="fal fa-file text-3xl pb-1"></i>
@@ -190,7 +190,7 @@
                                 {{ $t("R") }}
                             </button>
                             <button
-                                class="px-4 py-2 lg:py-3 bg-[#FDC652] text-white text-base rounded-lg w-80 mb-3"
+                                class="px-4 py-2 lg:py-3 bg-[#FFC529] text-white text-base rounded-lg w-80 mb-3"
                                 @click="changeToStep2(1)"
                             >
                                 ထိုးမည်
@@ -267,7 +267,7 @@
                                 num.is_active == 0
                                     ? 'bg-gray-300'
                                     : isBetNumber(num.number)
-                                      ? 'bg-[#FDC652] text-white'
+                                      ? 'bg-[#FFC529] text-white'
                                       : 'bg-white',
                                 'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
                             ]"
@@ -423,7 +423,7 @@
                     <button
                         :disabled="calling_api"
                         @click="sendBetting"
-                        class="bg-[#FDC652] text-white px-12 py-2 rounded-lg text-sm font-semibold"
+                        class="bg-[#FFC529] text-white px-12 py-2 rounded-lg text-sm font-semibold"
                     >
                         {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
                     </button>

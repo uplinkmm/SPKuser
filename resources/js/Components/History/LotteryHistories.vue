@@ -61,7 +61,7 @@
                             class="pb-4 mb-4 bg-white relative group"
                         >
                             <div
-                                class="flex justify-start mb-1 bg-[#FDC652] py-4 px-8 text-white"
+                                class="flex justify-start mb-1 bg-[#FFC529] py-4 px-8 text-white"
                             >
                                 <p class="text-base font-semibold">
                                     {{ formatDate(list.stock_datetime) }}
@@ -155,7 +155,7 @@
                     <div class="mx-0 pb-8">
                         <table class="table-auto w-full bg-white">
                             <thead>
-                                <tr class="bg-[#FDC652] text-white">
+                                <tr class="bg-[#FFC529] text-white">
                                     <th
                                         class="py-4 text-left font-semibold px-8"
                                     >

@@ -40,7 +40,7 @@
 
                         <a
                             href="/wallet"
-                            class="w-7 h-7 rounded-full bg-[#D3A12A] text-black flex items-center justify-center"
+                            class="w-7 h-7 rounded-full bg-[#FFC529] text-black flex items-center justify-center"
                         >
                             <i class="fas fa-plus text-sm"></i>
                         </a>
@@ -123,7 +123,7 @@
             style="height: calc(100vh - 60px)"
         >
             <div
-                class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4"
+                class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#FFC529] text-white -mx-4"
             >
                 <div>
                     <button>

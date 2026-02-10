@@ -1,11 +1,8 @@
 <template>
-    <div
-        class="frame-container min-h-[100vh]"
-    >
+    <div class="frame-container min-h-[100vh]">
         <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
 
         <div class="">
-
             <div class="mb-6">
                 <!-- 2D History Section -->
                 <div
@@ -15,16 +12,21 @@
                     role="tabpanel"
                 >
                     <div class="mx-0 pb-8">
-                        <div v-if="two_d_histories.length === 0" class="text-center text-white py-8">
+                        <div
+                            v-if="two_d_histories.length === 0"
+                            class="text-center text-white py-8"
+                        >
                             No history found
                         </div>
 
                         <div
                             v-for="(history, index) in two_d_histories"
                             :key="index"
-                            class=" pb-4 rounded-lg mb-8 bg-white relative"
+                            class="pb-4 rounded-lg mb-8 bg-white relative"
                         >
-                            <div class="flex justify-between mb-0 bg-[#FDC652] py-4 px-4 text-white">
+                            <div
+                                class="flex justify-between mb-0 bg-[#FFC529] py-4 px-4 text-white"
+                            >
                                 <p class="text-base font-semibold">
                                     {{ dateFormat(history.date_time) }}
                                 </p>
@@ -33,17 +35,21 @@
                                 </p>
                             </div>
                             <hr />
-                            <div class=" pt-2">
+                            <div class="pt-2">
                                 <div>
                                     <table class="table-auto w-full">
                                         <thead>
-                                            <tr class="border-b !border-gray-300">
+                                            <tr
+                                                class="border-b !border-gray-300"
+                                            >
                                                 <th
                                                     class="py-4 text-left font-normal pr-4 pl-12"
                                                 >
                                                     ID
                                                 </th>
-                                                <th class="py-4 font-normal px-4">
+                                                <th
+                                                    class="py-4 font-normal px-4"
+                                                >
                                                     Number
                                                 </th>
                                                 <th
@@ -60,25 +66,39 @@
                                                 ) in history.betting_numbers"
                                                 :key="index"
                                             >
-                                                <td class="text-left py-4 pr-4 pl-12">
+                                                <td
+                                                    class="text-left py-4 pr-4 pl-12"
+                                                >
                                                     {{ ++index }}
                                                 </td>
-                                                <td class="text-center py-4 px-4">
+                                                <td
+                                                    class="text-center py-4 px-4"
+                                                >
                                                     {{ bet_number.number }}
                                                 </td>
-                                                <td class="py-4 text-right pl-4 pr-12">
-                                                    {{ bet_number.amount?.toLocaleString() }}
+                                                <td
+                                                    class="py-4 text-right pl-4 pr-12"
+                                                >
+                                                    {{
+                                                        bet_number.amount?.toLocaleString()
+                                                    }}
                                                 </td>
                                             </tr>
-                                            <tr class="border-t !border-gray-300">
+                                            <tr
+                                                class="border-t !border-gray-300"
+                                            >
                                                 <td></td>
-                                                <td class="text-center text-base font-semibold py-3 pb-2">
+                                                <td
+                                                    class="text-center text-base font-semibold py-3 pb-2"
+                                                >
                                                     Total
                                                 </td>
                                                 <td
                                                     class="text-right text-base font-semibold pl-4 pr-12 py-3"
                                                 >
-                                                    {{ history.total_amount?.toLocaleString() }}
+                                                    {{
+                                                        history.total_amount?.toLocaleString()
+                                                    }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -97,15 +117,20 @@
                     role="tabpanel"
                 >
                     <div class="mx-0 pb-8">
-                        <div v-if="three_d_histories.length === 0" class="text-center text-white py-8">
+                        <div
+                            v-if="three_d_histories.length === 0"
+                            class="text-center text-white py-8"
+                        >
                             No history found
                         </div>
                         <div
                             v-for="(history, index) in three_d_histories"
                             :key="index"
-                            class=" pb-4 rounded-2xl mb-8 bg-white relative"
+                            class="pb-4 rounded-2xl mb-8 bg-white relative"
                         >
-                            <div class="flex justify-between mb-0 bg-[#FDC652] py-4 px-4 text-white">
+                            <div
+                                class="flex justify-between mb-0 bg-[#FFC529] py-4 px-4 text-white"
+                            >
                                 <p class="text-base font-semibold">
                                     {{ dateFormat(history.date_time) }}
                                 </p>
@@ -113,23 +138,27 @@
                                     {{
                                         dateFormat(
                                             history.game_setting
-                                                .lottery_date_time
+                                                .lottery_date_time,
                                         )
                                     }}
                                 </p>
                             </div>
                             <hr />
-                            <div class=" pt-2">
+                            <div class="pt-2">
                                 <div>
                                     <table class="table-auto w-full">
                                         <thead>
-                                            <tr class="border-b !border-gray-300">
+                                            <tr
+                                                class="border-b !border-gray-300"
+                                            >
                                                 <th
                                                     class="py-4 text-left font-normal pr-4 pl-12"
                                                 >
                                                     ID
                                                 </th>
-                                                <th class="py-4 font-normal px-4">
+                                                <th
+                                                    class="py-4 font-normal px-4"
+                                                >
                                                     Number
                                                 </th>
                                                 <th
@@ -146,25 +175,39 @@
                                                 ) in history.betting_numbers"
                                                 :key="index"
                                             >
-                                                <td class="text-left py-4 pr-4 pl-12">
+                                                <td
+                                                    class="text-left py-4 pr-4 pl-12"
+                                                >
                                                     {{ ++index }}
                                                 </td>
-                                                <td class="text-center py-4 px-4">
+                                                <td
+                                                    class="text-center py-4 px-4"
+                                                >
                                                     {{ bet_number.number }}
                                                 </td>
-                                                <td class=" py-4 pl-4 text-right pr-12">
-                                                    {{ bet_number.amount?.toLocaleString() }}
+                                                <td
+                                                    class="py-4 pl-4 text-right pr-12"
+                                                >
+                                                    {{
+                                                        bet_number.amount?.toLocaleString()
+                                                    }}
                                                 </td>
                                             </tr>
-                                            <tr class="border-t !border-gray-300">
+                                            <tr
+                                                class="border-t !border-gray-300"
+                                            >
                                                 <td></td>
-                                                <td class="text-center text-base font-semibold py-3 pb-2">
+                                                <td
+                                                    class="text-center text-base font-semibold py-3 pb-2"
+                                                >
                                                     Total
                                                 </td>
                                                 <td
                                                     class="text-right text-base font-semibold py-3 pr-12"
                                                 >
-                                                    {{ history.total_amount?.toLocaleString() }}
+                                                    {{
+                                                        history.total_amount?.toLocaleString()
+                                                    }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -233,7 +276,7 @@ export default {
             return moment(date_time).format("YYYY-MM-DD hh:mm A");
         },
         timeFormat(time) {
-            return moment(time,"HH:mm:ss").format("hh:mm A");
+            return moment(time, "HH:mm:ss").format("hh:mm A");
         },
         updateURLAndFetch() {
             this.scrollToTop();

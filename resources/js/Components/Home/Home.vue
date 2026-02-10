@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="frame-container min-h-[100vh] bg-[#D3A12A]">
+    <div class="frame-container min-h-[100vh] bg-[#FFC529]">
         <Navbar
             title=""
             :is-home-page="true"
@@ -51,7 +51,7 @@
 
             <div
                 v-if="!getUser"
-                class="bg-[#C67D06] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
+                class="bg-[#FFC529] mb-6 rounded-2xl shadow-lg flex justify-center flex-col"
             >
                 <a href="/login_register">
                     <div
@@ -73,7 +73,15 @@
                 </a>
             </div>
 
-            <div class="bg-[#D3A12A] rounded-2xl">
+            <div class="background-black rounded-xl mb-3">
+                <p
+                    class="text-gray-200 text-center text-sm font-semibold py-2 mb-0"
+                >
+                    မင်္ဂလာပါ ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်။
+                </p>
+            </div>
+
+            <div class="bg-[#FFC529] rounded-t-3xl rounded-b-2xl pt-1">
                 <ul
                     class="flex space-x-4 px-2 mb-3"
                     role="tablist"
