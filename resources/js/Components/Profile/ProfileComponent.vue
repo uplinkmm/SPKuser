@@ -184,6 +184,10 @@
 
                                 <button
                                     type="button"
+                                    @click="
+                                        step = 'customerService';
+                                        title = 'Customer Service';
+                                    "
                                     class="flex items-center justify-between py-4"
                                 >
                                     <div class="flex items-center gap-x-4">
@@ -663,6 +667,89 @@
                     </div>
                 </div>
 
+                <div v-show="step == 'customerService'">
+                    <div class="pt-2 pb-6 bg-black">
+                        <div
+                            class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
+                        >
+                            <div class="col-span-1 relative">
+                                <img
+                                    src="../../../../public/img/profile.png"
+                                    alt=""
+                                    class="w-26 h-26 rounded-full"
+                                />
+                                <button
+                                    type="button"
+                                    class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
+                                >
+                                    <i class="fas fa-pen text-xs"></i>
+                                </button>
+                            </div>
+
+                            <div
+                                class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
+                            >
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>နာမည် :</p>
+                                    <p>
+                                        {{ user_profile_data?.name }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center gap-x-4"
+                                >
+                                    <p>ဖုန်းနံပါတ် :</p>
+                                    <p>
+                                        {{ user_profile_data?.phone_number }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pb-6">
+                        <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
+                            <p
+                                class="text-center text-black text-lg font-semibold mb-4"
+                            >
+                                Customer Service သို့ ဆက်သွယ်ရန်
+                            </p>
+
+                            <div class="flex flex-col">
+                                <button
+                                    v-for="item in customerServiceItems"
+                                    :key="item.key"
+                                    type="button"
+                                    @click="openCustomerServiceLink(item.url)"
+                                    class="flex items-center justify-between py-4"
+                                >
+                                    <div class="flex items-center gap-x-4">
+                                        <img
+                                            :src="item.icon"
+                                            :alt="item.label"
+                                            class="w-10 h-10 rounded-full"
+                                        />
+                                        <p class="text-black font-semibold">
+                                            {{ item.label }}
+                                        </p>
+                                    </div>
+
+                                    <div class="flex items-center gap-x-3">
+                                        <p class="text-[#1d4ed8] font-medium">
+                                            {{ item.value }}
+                                        </p>
+                                        <i
+                                            class="fas fa-chevron-right text-black"
+                                        ></i>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div v-show="step == 'termsAndConditions'">
                     <div class="pt-2 pb-6 bg-black">
                         <div
@@ -843,6 +930,43 @@ export default {
                 { code: "th", name: "Thai" },
             ],
             passwordLoading: false,
+            customerServiceItems: [
+                {
+                    key: "viber",
+                    label: "Viber",
+                    value: "09 XXX XXX XXX",
+                    url: "viber://chat?number=%2B959XXXXXXXXX",
+                    icon: "https://api.iconify.design/simple-icons:viber.svg?color=%237c3aed",
+                },
+                {
+                    key: "telegram",
+                    label: "Telegram",
+                    value: "t.me/shwepaukkan",
+                    url: "https://t.me/shwepaukkan",
+                    icon: "https://api.iconify.design/simple-icons:telegram.svg?color=%230ea5e9",
+                },
+                {
+                    key: "signal",
+                    label: "Signal",
+                    value: "signal.org",
+                    url: "https://signal.org",
+                    icon: "https://api.iconify.design/simple-icons:signal.svg?color=%232563eb",
+                },
+                {
+                    key: "facebook",
+                    label: "Facebook",
+                    value: "facebook.com",
+                    url: "https://www.facebook.com",
+                    icon: "https://api.iconify.design/simple-icons:facebook.svg?color=%232563eb",
+                },
+                {
+                    key: "phone",
+                    label: "Phone Number",
+                    value: "09 XXX XXX XXX",
+                    url: "tel:09XXXXXXXXX",
+                    icon: "https://api.iconify.design/mdi:phone.svg?color=%23111827",
+                },
+            ],
         };
     },
     computed: {
@@ -864,6 +988,7 @@ export default {
                 this.step == "history" ||
                 this.step == "changeLang" ||
                 this.step == "feedback" ||
+                this.step == "customerService" ||
                 this.step == "contacts" ||
                 this.step == "termsAndConditions"
             ) {
@@ -999,6 +1124,16 @@ export default {
                 return;
             }
             this.changeLocale(this.selectedLocale);
+        },
+        openCustomerServiceLink(url) {
+            if (!url) {
+                return;
+            }
+            if (url.startsWith("http://") || url.startsWith("https://")) {
+                window.open(url, "_blank");
+                return;
+            }
+            window.location.href = url;
         },
         async logOut() {
             let url = "/api/logout";
