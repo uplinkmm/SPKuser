@@ -46,7 +46,7 @@
                         </a>
 
                         <a href="/notifications" class="relative pl-2">
-                            <i class="far fa-bell text-gray-200 text-3xl"></i>
+                            <i class="far fa-bell text-gray-200 text-2xl"></i>
                             <span
                                 v-if="notiCount > 0"
                                 class="absolute -top-2 -right-1 text-white rounded px-1 bg-red-700 font-semibold text-xs"
@@ -61,20 +61,20 @@
                     <div class="w-10 flex items-center justify-start">
                         <img
                             src="../../../../public/icons/logo_transparent.png"
-                            class="w-8 h-8 object-contain"
+                            class="w-10 h-10 object-contain"
                             alt=""
                         />
                     </div>
 
                     <div class="flex-1 text-center">
-                        <p class="text-base font-semibold text-[#d7a92a]">
+                        <p class="text-2xl font-semibold text-white">
                             ရွှေပေါက်ကန်
                         </p>
                     </div>
 
                     <div class="w-10 flex items-center justify-end">
                         <a href="/notifications" class="relative">
-                            <i class="far fa-bell text-[#d7a92a]"></i>
+                            <i class="far fa-bell text-white text-2xl"></i>
                             <span
                                 v-if="notiCount > 0"
                                 class="absolute -top-2 -right-2 text-white rounded px-1 bg-red-700 font-semibold text-xs"
@@ -93,15 +93,18 @@
                     <i class="fas fa-chevron-left"></i>
                 </a>
             </button>
-            <p :class="textColor" class="text-black text-base ml-12">
+            <p
+                :class="textColor"
+                class="text-2xl font-semibold text-white ml-12"
+            >
                 {{ title }}
             </p>
             <div class="flex gap-x-4">
                 <button @click="focusSearchInput">
-                    <i class="fal fa-search"></i>
+                    <i class="fal fa-search text-white text-2xl"></i>
                 </button>
                 <a href="/notifications">
-                    <i class="far fa-bell"></i>
+                    <i class="far fa-bell text-white text-2xl"></i>
                     <span
                         v-if="notiCount > 0"
                         class="ml-2 text-white rounded pl-0.5 pr-1 bg-red-700 font-semibold text-sm"
@@ -138,7 +141,7 @@
                 </div>
                 <div class="flex gap-x-4">
                     <button @click="searchSlots">
-                        <i class="fal fa-search"></i>
+                        <i class="fal fa-search text-white text-2xl"></i>
                     </button>
                 </div>
             </div>
