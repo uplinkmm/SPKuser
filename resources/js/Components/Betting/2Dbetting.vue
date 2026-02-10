@@ -2,7 +2,9 @@
     <notifications position="top center" />
 
     <div v-if="step == 7" class="frame-container min-h-[100vh]">
-        <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
+        <div class="px-4">
+            <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
+        </div>
         <!-- <div class="mb-3 flex justify-end px-4">
             <select
                 v-model="setting_value"
@@ -80,8 +82,10 @@
         </div>
     </div>
 
-    <div v-else class="frame-container px-4 min-h-[100vh]">
-        <Navbar title="ထိုးမည်" :back-btn="backBtn" class="!px-4"></Navbar>
+    <div v-else class="frame-container min-h-[100vh]">
+        <div class="px-4">
+            <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        </div>
         <!-- Error page -->
         <div :class="step == 6 ? 'block' : 'hidden'">
             <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
@@ -123,198 +127,36 @@
                 </div> -->
                 <div
                     v-if="twod_settings.length && main_game_active"
-                    class="bg-transparent items-center justify-center mb-8"
+                    class="flex items-center justify-center mb-8 px-4"
                 >
-                    <div class="flex-grow py-6">
+                    <div
+                        class="w-full max-w-md bg-[#06000040] rounded-3xl px-6 py-6 shadow-lg"
+                    >
                         <div class="text-center">
-                            <h1 class="text-2xl font-bold mb-2">2D ထိုးမည်</h1>
-                            <p class="text-base">ထိုးမည့် အချိန်ကို ရွေးပါ</p>
+                            <h1 class="text-xl font-bold mb-1">2D ထိုးမည်</h1>
+                            <p class="text-sm font-medium">
+                                ထိုးမည့်အချိန် ရွေးချယ်ပါ
+                            </p>
                         </div>
 
                         <div
-                            class="flex justify-center items-center mt-8 space-x-4 px-4"
+                            class="mt-6 flex justify-center items-end space-x-8"
                         >
                             <div
                                 v-for="(twod_setting, index) in twod_settings"
                                 :key="index"
                                 @click="chooseTime(twod_setting)"
-                                class="bg-white p-6 rounded-2xl shadow-lg w-48 text-center cursor-pointer"
+                                class="flex flex-col items-center cursor-pointer"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-8 h-8 mx-auto mb-2 text-gray-600"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                                    />
-                                </svg>
-                                <p class="text-lg font-semibold">
+                                <div
+                                    class="w-28 h-28 rounded-2xl border-2 border-[#9A6C1F] bg-[#D9A63A]"
+                                ></div>
+                                <p class="mt-3 text-base font-semibold">
                                     {{ formatTime(twod_setting.lottery_time) }}
                                 </p>
                             </div>
-                            <!-- <div class="bg-white p-6 rounded-2xl shadow-lg w-48 text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mx-auto mb-2 text-gray-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                <p class="text-2xl font-semibold">4:30 PM</p>
-                            </div> -->
                         </div>
                     </div>
-
-                    <div class="rounded-lg p-4">
-                        <h2
-                            class="text-lg font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
-                        >
-                            မှတ်တမ်းများ
-                        </h2>
-
-                        <div class="divide-y divide-gray-700">
-                            <a
-                                href="/2d/live"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-4 h-4 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-sm">2D Live</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="/history?game_id=1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-4 h-4 text-gray-700"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
-                                        />
-                                    </svg>
-                                    <span class="text-sm">2D မှတ်တမ်း</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="/winner_lists/1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-4 h-4 text-gray-700"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-sm">ထီပေါက်သူများ</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- <div class="text-center mb-4">
-                        <h1 class="text-white py-5 text-lg font-semibold">
-                            ထိုးမည့်အချိန်ကို ရွေးပါ
-                        </h1>
-                    </div>
-
-                    <div>
-                        <div
-                            v-for="(twod_setting, index) in twod_settings"
-                            :key="index"
-                            @click="chooseTime(twod_setting)"
-                            class="first:bg-[#40403E] last:bg-[#DDA33F] text-white rounded-lg cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
-                        >
-                            <i
-                                class="far fa-stopwatch"
-                                style="font-size: 24px"
-                            ></i>
-
-                            <span>
-                                {{ formatTime(twod_setting.lottery_time) }}
-                            </span>
-                            <i
-                                class="far fa-angle-right"
-                                style="font-size: 24px"
-                            ></i>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div
@@ -333,126 +175,6 @@
                         </div>
                     </div>
 
-                    <div class="rounded-lg p-4 bg-[#FFC529]">
-                        <h2
-                            class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
-                        >
-                            မှတ်တမ်းများ
-                        </h2>
-
-                        <div class="divide-y divide-gray-200">
-                            <a
-                                href="/2d/live"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-lg">2D Live</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                hreft="/history?game_id=1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
-                                        />
-                                    </svg>
-                                    <span class="text-lg">2D မှတ်တမ်း</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="/winner_lists/1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-lg">ထီပေါက်သူများ</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
                     <!-- <div
                         class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-16 flex justify-center"
                     >
@@ -462,6 +184,133 @@
                         ></i>
                         <span class="pl-16">2D ခေတ္တ ပိတ်ထားပါသည် </span>
                     </div> -->
+                </div>
+
+                <div class="mt-4 overflow-hidde">
+                    <div class="bg-white text-center py-2">
+                        <span class="text-base font-semibold"
+                            >မှတ်တမ်းများ</span
+                        >
+                    </div>
+
+                    <div class="bg-[#FFC529] px-4 divide-y divide-black/10">
+                        <a
+                            href="/2d/live"
+                            class="flex items-center justify-between px-4 py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center space-x-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-6 h-6 text-gray-800"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
+                                    />
+                                </svg>
+                                <span class="text-base font-semibold"
+                                    >2D Live</span
+                                >
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 text-gray-900"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+
+                        <a
+                            href="/history?game_id=1"
+                            class="flex items-center justify-between px-4 py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center space-x-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-6 h-6 text-gray-800"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
+                                    />
+                                </svg>
+                                <span class="text-base font-semibold"
+                                    >2D မှတ်တမ်း</span
+                                >
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 text-gray-900"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+
+                        <a
+                            href="/winner_lists/1"
+                            class="flex items-center justify-between px-4 py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center space-x-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-6 h-6 text-gray-800"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
+                                    />
+                                </svg>
+                                <span class="text-base font-semibold"
+                                    >ထီပေါက်သူများ</span
+                                >
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 text-gray-900"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
