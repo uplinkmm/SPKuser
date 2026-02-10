@@ -23,20 +23,28 @@
         </div>
 
         <div
-            class="block w-full sm:w-3/12 sm:min-w-[480px] mx-auto rounded-none shadow-lg fixed left-0 right-0 bottom-0 z-50 bg-[#fedc23] border-t border-[#C67D06]"
+            class="block w-full sm:w-3/12 sm:min-w-[480px] mx-auto rounded-none shadow-lg fixed left-0 right-0 bottom-0 z-50 bg-[#29261D] border-t border-[#29261D]"
         >
             <div class="grid grid-cols-4 px-[2%] pt-1">
                 <div class="text-center">
                     <a
                         href="/home"
-                        class="py-3 text-xs w-full relative flex flex-col"
+                        class="py-3 text-xs w-full relative flex flex-col pt-4"
                         :class="
                             checkActiveUrl(['home'])
-                                ? 'text-[#C67D06]'
-                                : 'text-black'
+                                ? 'text-[#3b82f6]'
+                                : 'text-[#d1d5db]'
                         "
                     >
-                        <i class="fal fa-home-lg-alt block pb-1"></i>
+                        <span
+                            class="absolute top-0 left-1/2 -translate-x-1/2 h-1 w-16 rounded-b"
+                            :class="
+                                checkActiveUrl(['home'])
+                                    ? 'bg-[#3b82f6]'
+                                    : 'bg-transparent'
+                            "
+                        ></span>
+                        <i class="fal fa-home-lg-alt block pb-1 text-2xl"></i>
                         {{ $t("Home") }}
                     </a>
                 </div>
@@ -51,44 +59,72 @@
               </div> -->
                 <div class="text-center">
                     <a
-                        href="/wallet"
-                        class="py-3 text-xs w-full relative flex flex-col"
+                        href="/notifications"
+                        class="py-3 text-xs w-full relative flex flex-col pt-4"
                         :class="
-                            checkActiveUrl(['wallet', 'topup', 'cash_withdraw'])
-                                ? 'text-[#C67D06]'
-                                : 'text-black'
+                            checkActiveUrl(['notifications'])
+                                ? 'text-[#3b82f6]'
+                                : 'text-[#d1d5db]'
                         "
                     >
-                        <i class="fal fa-wallet block pb-1"></i>
+                        <span
+                            class="absolute top-0 left-1/2 -translate-x-1/2 h-1 w-16 rounded-b"
+                            :class="
+                                checkActiveUrl(['notifications'])
+                                    ? 'bg-[#3b82f6]'
+                                    : 'bg-transparent'
+                            "
+                        ></span>
+                        <i class="fal fa-bell block pb-1 text-2xl"></i>
+                        {{ $t("Notification") }}
+                    </a>
+                </div>
+                <div class="text-center">
+                    <a
+                        href="/wallet"
+                        class="py-3 text-xs w-full relative flex flex-col pt-4"
+                        :class="
+                            checkActiveUrl(['wallet', 'topup', 'cash_withdraw'])
+                                ? 'text-[#3b82f6]'
+                                : 'text-[#d1d5db]'
+                        "
+                    >
+                        <span
+                            class="absolute top-0 left-1/2 -translate-x-1/2 h-1 w-16 rounded-b"
+                            :class="
+                                checkActiveUrl([
+                                    'wallet',
+                                    'topup',
+                                    'cash_withdraw',
+                                ])
+                                    ? 'bg-[#3b82f6]'
+                                    : 'bg-transparent'
+                            "
+                        ></span>
+                        <i class="fal fa-wallet block pb-1 text-2xl"></i>
                         {{ $t("Wallet") }}
                     </a>
                 </div>
                 <div class="text-center">
                     <a
                         href="/profile"
-                        class="py-3 text-xs w-full relative flex flex-col"
+                        class="py-3 text-xs w-full relative flex flex-col pt-4"
                         :class="
                             checkActiveUrl(['profile'])
-                                ? 'text-[#C67D06]'
-                                : 'text-black'
+                                ? 'text-[#3b82f6]'
+                                : 'text-[#d1d5db]'
                         "
                     >
-                        <i class="fal fa-user-alt block pb-1"></i>
+                        <span
+                            class="absolute top-0 left-1/2 -translate-x-1/2 h-1 w-16 rounded-b"
+                            :class="
+                                checkActiveUrl(['profile'])
+                                    ? 'bg-[#3b82f6]'
+                                    : 'bg-transparent'
+                            "
+                        ></span>
+                        <i class="fal fa-user-alt block pb-1 text-2xl"></i>
                         {{ $t("Profile") }}
-                    </a>
-                </div>
-                <div class="text-center">
-                    <a
-                        href="/notifications"
-                        class="py-3 text-xs w-full relative flex flex-col"
-                        :class="
-                            checkActiveUrl(['notifications'])
-                                ? 'text-[#C67D06]'
-                                : 'text-black'
-                        "
-                    >
-                        <i class="fal fa-bell block pb-1"></i>
-                        {{ $t("Notification") }}
                     </a>
                 </div>
             </div>

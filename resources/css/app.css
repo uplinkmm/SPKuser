@@ -3,14 +3,17 @@
 @tailwind utilities;
 
 @layer components {
-    .frame-container{
-        @apply w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 pb-0
+    .frame-container {
+        @apply w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 pb-0;
     }
-    .table-td{
-        @apply text-center py-2 border-t-4 border-[#FDC652] text-sm
+    .table-td {
+        @apply text-center py-2 border-t-4 border-[#FDC652] text-sm;
     }
-    .dash-under::after{
-        @apply absolute left-4 bottom-1 bg-gray-600 h-0.5 w-1/4 content-['']
+    .dash-under::after {
+        @apply absolute left-4 bottom-1 bg-gray-600 h-0.5 w-1/4 content-[''];
+    }
+    .underline-border::after {
+        @apply absolute left-0 -bottom-0.5 bg-[#1d4ed8] h-0.5 w-2/5 hidden content-[''];
     }
     /* .underline-border::after{
         @apply absolute left-0 -bottom-0.5 bg-[#FDC652] h-0.5 w-2/5 hidden

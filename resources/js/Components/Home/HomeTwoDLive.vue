@@ -1,7 +1,7 @@
 <template lang="">
     <a
         href="/2d/live"
-        class="background-black rounded-2xl shadow-lg flex justify-center flex-col"
+        class="background-black rounded-2xl shadow-lg flex justify-center flex-col overflow-hidden"
     >
         <!-- <div class="w-fit mx-auto">
                         <div>
@@ -12,35 +12,84 @@
                             <p class="text-white text-xl pl-2">2D Live</p>
                         </div>
                     </div> -->
-        <div class="w-full mx-auto flex flex-col justify-between h-full py-16">
-            <div>
-                <p class="text-white text-xl font-semibold text-center">
-                    {{ twoDList?.twod }}
+        <div class="w-full mx-auto flex flex-col h-full py-4 px-5">
+            <p class="text-[#D3A12A] text-2xl font-semibold text-center mb-2">
+                2D Live
+            </p>
+
+            <div class="flex items-center justify-between mb-2 gap-x-3 min-w-0">
+                <div class="text-left min-w-0 flex-1">
+                    <p
+                        class="text-white text-3xl font-medium leading-none mb-2 break-words"
+                    >
+                        {{ displayTime }}
+                    </p>
+                    <p
+                        class="text-white text-2xl font-medium leading-none mb-0"
+                    >
+                        {{ displayMeridiem }}
+                    </p>
+                </div>
+
+                <div class="shrink-0 text-right">
+                    <p
+                        class="text-white font-semibold leading-none whitespace-nowrap"
+                        style="font-size: clamp(56px, 18vw, 92px)"
+                    >
+                        {{ twoDList?.twod }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-4 mb-1">
+                <p
+                    class="text-[#D3A12A] text-lg font-semibold text-center mb-0"
+                >
+                    {{ twoDList?.set }}
+                </p>
+                <p
+                    class="text-[#D3A12A] text-lg font-semibold text-center mb-0"
+                >
+                    {{ twoDList?.value }}
                 </p>
             </div>
-            <div class="flex justify-between w-full px-[8%]">
-                <div class="text-center">
-                    <p class="text-white text-xs">
-                        {{ twoDList?.set }}
-                    </p>
-                    <p class="text-white text-xs">Modern</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-white text-xs">
-                        {{ twoDList?.value }}
-                    </p>
-                    <p class="text-white text-xs">Internet</p>
-                </div>
-            </div>
-            <div>
-                <p class="text-white text-lg font-semibold text-center">
-                    2D Live
+
+            <div class="grid grid-cols-2 gap-x-4 mb-2">
+                <p
+                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
+                >
+                    Set
                 </p>
+                <p
+                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
+                >
+                    Value
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-4">
+                <div class="text-center">
+                    <p class="text-white text-base font-semibold mb-1">
+                        Modern
+                    </p>
+                    <p class="text-white text-base font-semibold mb-0">
+                        {{ twoDList?.modern }}
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="text-white text-base font-semibold mb-1">
+                        Internet
+                    </p>
+                    <p class="text-white text-base font-semibold mb-0">
+                        {{ twoDList?.internet }}
+                    </p>
+                </div>
             </div>
         </div>
     </a>
 </template>
 <script>
+import moment from "moment";
 import { getApiData } from "../../utilities/ajax-helpers";
 export default {
     data() {
@@ -49,6 +98,28 @@ export default {
             intervalId: null,
             loading: false,
         };
+    },
+    computed: {
+        displayMoment() {
+            const raw = this.twoDList?.time;
+            if (!raw) return null;
+            const m = moment(
+                raw,
+                [moment.ISO_8601, "YYYY-MM-DD HH:mm:ss", "YYYY-MM-DDTHH:mm:ss"],
+                true,
+            );
+            return m.isValid() ? m : moment(raw);
+        },
+        displayTime() {
+            const m = this.displayMoment;
+            if (!m || !m.isValid()) return "";
+            return m.format("h:mm");
+        },
+        displayMeridiem() {
+            const m = this.displayMoment;
+            if (!m || !m.isValid()) return "";
+            return m.format("A");
+        },
     },
     methods: {
         async get2DList() {

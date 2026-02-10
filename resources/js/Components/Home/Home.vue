@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="frame-container min-h-[100vh]">
+    <div class="frame-container min-h-[100vh] bg-[#D3A12A]">
         <Navbar
             title=""
             :is-home-page="true"
@@ -38,7 +38,7 @@
                 <div class="mx-3" v-for="(ads, index) in adses">
                     <img
                         :src="`${img_prefix}${ads.photo}`"
-                        class="w-full aspect-video mb-3"
+                        class="w-full aspect-video mb-3 rounded-2xl object-cover"
                     />
                 </div>
                 <!-- <div class="mx-3">
@@ -73,33 +73,57 @@
                 </a>
             </div>
 
-            <ul class="flex space-x-1 mb-6" role="tablist" data-twe-nav-ref>
-                <li role="presentation">
-                    <a
-                        href="#tabs-twoD-threeD"
-                        class="my-2 block pr-4 pb-2 font-semibold pt-4 text-md text-black data-[twe-nav-active]:after:!block underline-border relative"
-                        data-twe-toggle="pill"
-                        data-twe-target="#tabs-twoD-threeD"
-                        data-twe-nav-active
-                        role="tab"
-                        aria-controls="tabs-twoD-threeD"
-                        aria-selected="true"
-                        >2D 3D</a
-                    >
-                </li>
-                <li role="presentation">
-                    <a
-                        href="#lottery"
-                        class="my-2 block pr-4 pb-2 font-semibold pt-4 text-md text-black data-[twe-nav-active]:after:!block underline-border relative"
-                        data-twe-toggle="pill"
-                        data-twe-target="#lottery"
-                        role="tab"
-                        aria-controls="lottery"
-                        aria-selected="false"
-                        >ကံစမ်းမဲ</a
-                    >
-                </li>
-            </ul>
+            <div class="bg-[#D3A12A] rounded-2xl">
+                <ul
+                    class="flex space-x-4 px-2 mb-3"
+                    role="tablist"
+                    data-twe-nav-ref
+                >
+                    <li role="presentation">
+                        <a
+                            href="#tabs-twoD-threeD"
+                            class="my-1 block px-2 pb-2 font-semibold pt-3 text-md text-black data-[twe-nav-active]:after:!block underline-border relative"
+                            data-twe-toggle="pill"
+                            data-twe-target="#tabs-twoD-threeD"
+                            data-twe-nav-active
+                            role="tab"
+                            aria-controls="tabs-twoD-threeD"
+                            aria-selected="true"
+                            >2D 3D</a
+                        >
+                    </li>
+                    <li role="presentation">
+                        <a
+                            href="#lottery"
+                            class="my-1 block px-2 pb-2 font-semibold pt-3 text-md text-black data-[twe-nav-active]:after:!block underline-border relative"
+                            data-twe-toggle="pill"
+                            data-twe-target="#lottery"
+                            role="tab"
+                            aria-controls="lottery"
+                            aria-selected="false"
+                            >ကံစမ်းမဲ</a
+                        >
+                    </li>
+                    <li role="presentation">
+                        <a
+                            href="#"
+                            class="my-1 block px-2 pb-2 font-semibold pt-3 text-md text-black"
+                            role="tab"
+                            aria-selected="false"
+                            >ကံထူးမဲ</a
+                        >
+                    </li>
+                    <li role="presentation">
+                        <a
+                            href="#"
+                            class="my-1 block px-2 pb-2 font-semibold pt-3 text-md text-black"
+                            role="tab"
+                            aria-selected="false"
+                            >Games</a
+                        >
+                    </li>
+                </ul>
+            </div>
 
             <div class="tab-content w-full">
                 <div
@@ -109,43 +133,43 @@
                     aria-labelledby="tabs-twoD-threeD-tab"
                     data-twe-tab-active
                 >
-                    <div class="grid grid-cols-2 gap-x-4 mb-4">
-                        <HomeTwoDLive />
-                        <div>
+                    <div
+                        class="grid grid-cols-2 gap-4 mb-4 items-stretch h-[320px]"
+                    >
+                        <HomeTwoDLive class="h-full" />
+                        <div class="flex flex-col gap-4 h-full">
                             <a
                                 href="/2D_betting"
-                                class="background-black aspect-[1/0.8] mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                                class="background-black flex-1 rounded-2xl shadow-lg flex items-center justify-center"
                             >
-                                <div class="w-fit mx-auto flex">
-                                    <div>
-                                        <img
-                                            class="w-4/12 mb-4 pt-4 lg:pt-0"
-                                            src="../../../../public/img/image 2.png"
-                                        />
-                                        <p
-                                            class="text-white text-xl self-end pb-6 pl-4"
-                                        >
-                                            2D ထိုးမည်
-                                        </p>
-                                    </div>
+                                <div class="text-center">
+                                    <p
+                                        class="text-[#D3A12A] text-3xl font-bold mb-2"
+                                    >
+                                        2D
+                                    </p>
+                                    <p
+                                        class="text-[#D3A12A] text-2xl font-bold mb-0"
+                                    >
+                                        ထိုးမည်
+                                    </p>
                                 </div>
                             </a>
                             <a
                                 href="/3D_betting"
-                                class="background-black aspect-[1/0.8] rounded-2xl shadow-xl flex justify-center flex-col"
+                                class="background-black flex-1 rounded-2xl shadow-xl flex items-center justify-center"
                             >
-                                <div class="w-fit mx-auto flex">
-                                    <div>
-                                        <img
-                                            class="w-4/12 mb-4 pt-4 lg:pt-0"
-                                            src="../../../../public/img/Map_fill.png"
-                                        />
-                                        <p
-                                            class="text-white text-xl self-end pb-6 pl-4"
-                                        >
-                                            3D ထိုးမည်
-                                        </p>
-                                    </div>
+                                <div class="text-center">
+                                    <p
+                                        class="text-[#D3A12A] text-3xl font-bold mb-2"
+                                    >
+                                        3D
+                                    </p>
+                                    <p
+                                        class="text-[#D3A12A] text-2xl font-bold mb-0"
+                                    >
+                                        ထိုးမည်
+                                    </p>
                                 </div>
                             </a>
                         </div>
@@ -154,24 +178,13 @@
                     <div
                         class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
                     >
-                        <a href="/winner_lists/1">
-                            <div
-                                class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
-                            >
-                                <img
-                                    class="w-16 my-4"
-                                    src="../../../../public/img/Chart_white.png"
-                                />
-                                <div class="flex justify-center flex-col">
-                                    <p
-                                        class="text-white text-xl pb-0 pl-2 mb-1"
-                                    >
-                                        ထီပေါက်သူများ
-                                    </p>
-                                    <p class="text-white text-sm pb-0 pl-2">
-                                        ထီပေါက်သူများ
-                                    </p>
-                                </div>
+                        <a href="/winner_lists/1" class="w-full">
+                            <div class="py-3 text-center">
+                                <p
+                                    class="text-white text-base font-semibold mb-0"
+                                >
+                                    ထီပေါက်သူများ
+                                </p>
                             </div>
                         </a>
                     </div>
@@ -179,24 +192,13 @@
                     <div
                         class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
                     >
-                        <a href="/lottery_history">
-                            <div
-                                class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
-                            >
-                                <img
-                                    class="w-16 my-4"
-                                    src="../../../../public/img/Chart_white.png"
-                                />
-                                <div class="flex justify-center flex-col">
-                                    <p
-                                        class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
-                                    >
-                                        ထီပေါက်စဉ်များ
-                                    </p>
-                                    <p class="text-white text-sm pb-0 pl-2">
-                                        ထွက်ခဲ့သော နံပတ်များ
-                                    </p>
-                                </div>
+                        <a href="/lottery_history" class="w-full">
+                            <div class="py-3 text-center">
+                                <p
+                                    class="text-white text-base font-semibold mb-0"
+                                >
+                                    ထီပေါက်စဉ်များ
+                                </p>
                             </div>
                         </a>
                     </div>
@@ -423,7 +425,7 @@
                                                     id: product.id,
                                                     name: product.name,
                                                     code: product.code,
-                                                }
+                                                },
                                             )}&game_type=${JSON.stringify({
                                                 id: selectedGameType.id,
                                                 name: selectedGameType.name,
@@ -695,7 +697,7 @@ export default {
                             function () {
                                 // Reset the animation
                                 animateMarquee();
-                            }
+                            },
                         );
                     }
 
