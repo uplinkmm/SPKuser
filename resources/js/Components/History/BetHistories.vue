@@ -1,6 +1,8 @@
 <template>
     <div class="frame-container min-h-[100vh] bg-black">
-        <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
+        <div class="px-4">
+            <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
+        </div>
 
         <div class="bg-[#FFC529] rounded-t-xl min-h-[calc(100vh-120px)]">
             <div class="mb-6">
