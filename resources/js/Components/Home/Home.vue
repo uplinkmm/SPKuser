@@ -100,14 +100,14 @@
             <div class="bg-[#FFC529] rounded-t-3xl pt-1 px-6 pb-8">
                 <div class="">
                     <ul
-                        class="flex space-x-4 px-2 mb-3"
+                        class="flex list-none flex-row flex-wrap border-b-0 ps-0 px-2 pb-2 mb-2"
                         role="tablist"
                         data-twe-nav-ref
                     >
                         <li role="presentation">
                             <a
                                 href="#tabs-twoD-threeD"
-                                class="my-1 block px-2 pb-2 font-semibold pt-3 text-md text-black data-[twe-nav-active]:after:!block underline-border relative"
+                                class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-blue-600 font-semibold"
                                 data-twe-toggle="pill"
                                 data-twe-target="#tabs-twoD-threeD"
                                 data-twe-nav-active
@@ -120,7 +120,7 @@
                         <li role="presentation">
                             <a
                                 href="#lottery"
-                                class="my-1 block px-2 pb-2 font-semibold pt-3 text-md text-black data-[twe-nav-active]:after:!block underline-border relative"
+                                class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-blue-600 font-semibold"
                                 data-twe-toggle="pill"
                                 data-twe-target="#lottery"
                                 role="tab"
