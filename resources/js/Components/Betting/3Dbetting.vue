@@ -331,13 +331,13 @@
                             </button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-6 gap-x-2 gap-y-3">
+                    <div class="grid grid-cols-10 gap-x-1 gap-y-3">
                         <div
                             class="contents"
                             v-for="(num, index) in numbers100"
                             :key="index"
                         >
-                            <div v-if="index == '96'" class="opacity-0"></div>
+                            <!-- <div v-if="index == '96'" class="opacity-0"></div> -->
 
                             <div
                                 :class="[
@@ -359,7 +359,7 @@
                                         {{ num.number }}
                                     </p>
                                     <div
-                                        class="mt-2 w-11 h-4 bg-[#d9d9d9] rounded-full flex items-center border border-white shadow-sm overflow-hidden mx-auto"
+                                        class="mt-2 w-10 h-4 bg-[#d9d9d9] rounded-full flex items-center border border-white shadow-sm overflow-hidden mx-auto"
                                     >
                                         <div
                                             :class="
