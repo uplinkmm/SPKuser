@@ -16,11 +16,8 @@ class NotificationRepository implements NotificationInterface
         $authToken=checkAuthToken($request);
         $userId = $authToken ? UserData()->id : null;
         if($request->type=='topup_transaction'){
-            $type=['topup_transaction', ];
-        }else if($request->type=='cash_withdrawl_transaction'){
-            $type=[ 'cash_withdrawl_transaction'];
-        }
-        elseif($request->type=='betting_win'){
+            $type=['topup_transaction', 'cash_withdrawl_transaction'];
+        }elseif($request->type=='betting_win'){
             $type=['betting_win', 'twist_win_number'];
         }else{
             $type=['ads'] ;
