@@ -1095,7 +1095,7 @@
         <div
             :class="step == 4 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
-            class="bg-[#FFC529] rounded-t-xl"
+            class="bg-[#FFC529] rounded-t-xl mb-20"
         >
             <div
                 class="relative mb-4 w-full rounded-2xl shadow-md bg-[#F3F4F6] pt-4 pb-4 px-4"
@@ -1106,7 +1106,7 @@
                             <div class="mb-4">
                                 <label
                                     for="round_digits"
-                                    class="text-sm mb-2 relative block font-semibold"
+                                    class="text-lg mb-2 relative block font-semibold"
                                     >3/4 Numbers</label
                                 >
                                 <input
@@ -1123,17 +1123,13 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FFC529] text-black px-4 h-12 w-full rounded-lg text-base font-semibold"
+                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold"
                                     @click="getTwoDigitCombinations(false)"
                                 >
                                     အပူးမပါ
                                 </button>
                             </div>
                         </div>
-                        <p class="text-sm font-semibold">
-                            {{ $t("Total Betting Amount") }} :
-                            {{ totalBetAmount?.toLocaleString() }} MMK
-                        </p>
                     </div>
 
                     <div class="flex justify-between flex-col pt-4 pb-3">
@@ -1141,7 +1137,7 @@
                             <div class="mb-4">
                                 <label
                                     for="amount"
-                                    class="text-sm mb-2 relative block font-semibold"
+                                    class="text-lg mb-2 relative block font-semibold"
                                     >Amount</label
                                 >
                                 <input
@@ -1163,7 +1159,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FFC529] text-black px-4 h-12 w-full rounded-lg text-base font-semibold"
+                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold"
                                     @click="getTwoDigitCombinations(true)"
                                 >
                                     အပူးပါ
@@ -1172,150 +1168,153 @@
                         </div>
                     </div>
                     <div class="flex justify-between col-span-2 mb-8">
-                        <p class="text-sm font-semibold">
+                        <p class="text-lg font-semibold">
                             လက်ကျန်ငွေ :
                             {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
-                        <p class="text-sm font-semibold">
+                        <p class="text-lg font-semibold">
                             {{ $t("Closing Time") }} :
                             {{ closingTimeFormat }}
                         </p>
                     </div>
                 </div>
             </div>
-            <div
-                class="relative mb-0 w-full rounded-2xl shadow-md bg-white pt-4 pb-14 px-4"
-            >
-                <div class="">
-                    <table class="table-fixed w-full text-lg">
-                        <thead>
-                            <tr>
-                                <th class="py-3 w-3/12 text-center">
-                                    {{ $t("No") }}
-                                </th>
-                                <th class="py-3 w-2/12 text-center">
-                                    {{ $t("Multiplier") }}
-                                </th>
-                                <th class="py-3 w-5/12 text-right pr-2">
-                                    {{ $t("Betting Amount") }}
-                                </th>
-                                <th class="py-3 w-2/12 text-center"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(bet_number, index) in bet_numbers"
-                                :key="index"
-                                class="border-b last:border-0"
-                            >
-                                <td
-                                    :class="
-                                        checkAvailableAmount(bet_number)
-                                            ? ''
-                                            : 'text-red-600'
-                                    "
-                                    class="text-center py-2"
-                                >
-                                    {{ bet_number.number }}
-                                </td>
-                                <td
-                                    :class="
-                                        checkAvailableAmount(bet_number)
-                                            ? ''
-                                            : 'text-red-600'
-                                    "
-                                    class="text-center py-2"
-                                >
-                                    {{ bet_multiplier }}
-                                </td>
-                                <td
-                                    :class="
-                                        checkAvailableAmount(bet_number)
-                                            ? ''
-                                            : 'text-red-600'
-                                    "
-                                    class="text-right py-2 pr-2"
-                                >
-                                    <span
-                                        v-show="
-                                            bet_number.number !=
-                                            edit_bet_number.number
-                                        "
-                                        class="font-semibold"
-                                    >
-                                        {{
-                                            bet_number.amount?.toLocaleString()
-                                        }}
-                                    </span>
-                                    <input
-                                        v-show="
-                                            bet_number.number ==
-                                            edit_bet_number.number
-                                        "
-                                        type="number"
-                                        class="w-24 h-10 bg-white px-2 text-base rounded-lg border border-black focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
-                                        v-model="edit_bet_number.amount"
-                                        placeholder=""
-                                    />
-                                </td>
-                                <td class="text-center py-3">
-                                    <button
-                                        v-show="
-                                            bet_number.number ==
-                                            edit_bet_number.number
-                                        "
-                                        @click="editBetAmount"
-                                        class="w-10 h-10 rounded-lg bg-[#0C7A18] text-white inline-flex items-center justify-center"
-                                    >
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <!-- Edit Button (Blue) -->
-                                    <button
-                                        v-show="
-                                            bet_number.number !=
-                                            edit_bet_number.number
-                                        "
-                                        @click="edit_bet_number = bet_number"
-                                        class="w-10 h-10 rounded-lg bg-white border border-black text-[#5271FF] inline-flex items-center justify-center"
-                                    >
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <!-- Delete Button (Red) -->
-                                    <button
-                                        data-twe-toggle="modal"
-                                        data-twe-target="#delete_modal"
-                                        @click="
-                                            delete_bet_number =
-                                                bet_number.number
-                                        "
-                                        class="w-10 h-10 rounded-lg bg-white border border-black text-red-500 inline-flex items-center justify-center"
-                                    >
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr
-                                v-if="bet_numbers.length"
-                                class="border-t font-semibold"
-                            >
-                                <td class="text-right pr-4" colspan="3">
-                                    {{ $t("Total Betting Amount") }}
-                                </td>
-                                <td class="text-right pr-2">
-                                    {{ totalBetAmount.toLocaleString() }} MMK
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="mt-6 w-full flex justify-center">
-                    <button
-                        :disabled="calling_api"
-                        class="bg-[#FFC529] text-black px-16 h-12 rounded-lg text-base font-semibold"
-                        @click="sendBetting"
+            <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
+                <div
+                    class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                >
+                    <div
+                        class="px-4 pt-2 overflow-y-auto small-scrollbar"
+                        style="max-height: calc(100vh - 320px)"
                     >
-                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
-                    </button>
+                        <table class="table-fixed w-full text-lg mb-16">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 w-3/12 text-center">
+                                        {{ $t("No") }}
+                                    </th>
+                                    <th class="py-3 w-2/12 text-center">
+                                        {{ $t("Multiplier") }}
+                                    </th>
+                                    <th class="py-3 w-5/12 text-right pr-2">
+                                        {{ $t("Betting Amount") }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(bet_number, index) in bet_numbers"
+                                    :key="index"
+                                    class="border-b last:border-0"
+                                >
+                                    <td
+                                        :class="
+                                            checkAvailableAmount(bet_number)
+                                                ? ''
+                                                : 'text-red-600'
+                                        "
+                                        class="text-center py-2"
+                                    >
+                                        {{ bet_number.number }}
+                                    </td>
+                                    <td
+                                        :class="
+                                            checkAvailableAmount(bet_number)
+                                                ? ''
+                                                : 'text-red-600'
+                                        "
+                                        class="text-center py-2"
+                                    >
+                                        {{ bet_multiplier }}
+                                    </td>
+                                    <td
+                                        :class="
+                                            checkAvailableAmount(bet_number)
+                                                ? ''
+                                                : 'text-red-600'
+                                        "
+                                        class="text-right py-2 pr-2 space-x-1"
+                                    >
+                                        <span
+                                            v-show="
+                                                bet_number.number !=
+                                                edit_bet_number.number
+                                            "
+                                            class="font-semibold"
+                                        >
+                                            {{
+                                                bet_number.amount?.toLocaleString()
+                                            }}
+                                        </span>
+                                        <input
+                                            v-show="
+                                                bet_number.number ==
+                                                edit_bet_number.number
+                                            "
+                                            type="number"
+                                            class="w-24 h-10 bg-white px-2 text-base rounded-lg border border-black focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
+                                            v-model="edit_bet_number.amount"
+                                            placeholder=""
+                                        />
+                                        <button
+                                            v-show="
+                                                bet_number.number ==
+                                                edit_bet_number.number
+                                            "
+                                            @click="editBetAmount"
+                                            class="w-10 h-10 rounded-lg bg-[#0C7A18] text-white inline-flex items-center justify-center"
+                                        >
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button
+                                            v-show="
+                                                bet_number.number !=
+                                                edit_bet_number.number
+                                            "
+                                            @click="
+                                                edit_bet_number = bet_number
+                                            "
+                                            class="w-10 h-10 bg-white text-[#5271FF] inline-flex items-center justify-center"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button
+                                            data-twe-toggle="modal"
+                                            data-twe-target="#delete_modal"
+                                            @click="
+                                                delete_bet_number =
+                                                    bet_number.number
+                                            "
+                                            class="w-10 h-10 bg-white text-red-500 inline-flex items-center justify-center"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr
+                                    v-if="bet_numbers.length"
+                                    class="border-t font-semibold"
+                                >
+                                    <td class="text-right pr-4" colspan="2">
+                                        {{ $t("Total Betting Amount") }}
+                                    </td>
+                                    <td class="text-right pr-2">
+                                        {{ totalBetAmount.toLocaleString() }}
+                                        MMK
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="w-full flex justify-center">
+                            <button
+                                :disabled="calling_api"
+                                class="bg-[#5271FF] text-white w-full mb-12 px-16 h-12 rounded-lg text-base font-semibold disabled:bg-[#9CA3AF] disabled:text-white disabled:opacity-70 disabled:cursor-not-allowed"
+                                @click="sendBetting"
+                            >
+                                {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
