@@ -271,38 +271,59 @@
                         <div class="flex items-center gap-x-4">
                             <div class="flex-grow relative">
                                 <div
-                                    class="flex items-center bg-white rounded-xl overflow-hidden border border-black/30"
+                                    class="flex items-center bg-[#E5E7EB] rounded-2xl overflow-hidden border-2 border-black"
+                                    style="height: 60px"
                                 >
                                     <div
-                                        class="w-16 h-14 flex items-center justify-center text-black font-bold text-2xl border-r border-black/20"
+                                        class="shrink-0 px-6 items-center gap-x-4 text-black"
                                     >
-                                        123
-                                    </div>
-                                    <select
-                                        class="block appearance-none w-full bg-transparent text-black px-4 h-14 text-xl font-semibold focus:outline-none focus:ring-0"
-                                        v-model="from_to_value"
-                                    >
-                                        <option
-                                            v-for="(
-                                                from_to, index
-                                            ) in from_to_numbers"
-                                            :key="index"
-                                            :value="from_to"
+                                        <p
+                                            class="block text-xl font-bold leading-none"
                                         >
-                                            {{ from_to.name }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-black"
-                                >
-                                    <svg
-                                        class="fill-current h-5 w-5"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path d="M7 10l5 5 5-5H7z" />
-                                    </svg>
+                                            123
+                                        </p>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            class="w-8 h-8"
+                                        >
+                                            <path
+                                                d="M3 12a1 1 0 0 1 1-1h11.586l-3.293-3.293a1 1 0 1 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 1 1-1.414-1.414L15.586 13H4a1 1 0 0 1-1-1z"
+                                            />
+                                        </svg>
+                                    </div>
+
+                                    <div class="relative flex-grow h-full">
+                                        <select
+                                            class="block appearance-none w-full h-full bg-transparent text-black text-xl font-medium text-center pr-20 pl-2 focus:outline-none focus:ring-0"
+                                            v-model="from_to_value"
+                                        >
+                                            <option
+                                                v-for="(
+                                                    from_to, index
+                                                ) in from_to_numbers"
+                                                :key="index"
+                                                :value="from_to"
+                                            >
+                                                {{ from_to.name }}
+                                            </option>
+                                        </select>
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8 text-black"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                class="w-8 h-8"
+                                            >
+                                                <path
+                                                    d="M6.707 9.293a1 1 0 0 1 1.414 0L12 13.172l3.879-3.879a1 1 0 1 1 1.414 1.414l-4.586 4.586a1 1 0 0 1-1.414 0L6.707 10.707a1 1 0 0 1 0-1.414z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
