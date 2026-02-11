@@ -2,11 +2,19 @@
     <notifications position="top center" />
 
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
+        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto pb-24 min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
     >
-        <Navbar title="Buffalo Rooms" :back-btn="backBtn"></Navbar>
+        <div class="bg-black px-4">
+            <Navbar title="Buffalo Rooms" :back-btn="backBtn"></Navbar>
+        </div>
         <LoadingProgressBar :loading="loading"></LoadingProgressBar>
-        <div class="mt-4">
+        <div
+            class="mt-4 pt-4 px-4 bg-[#FFC529] rounded-t-3xl min-h-[calc(100vh-10px)]"
+        >
             <div class="mb-6">
                 <div
                     class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
@@ -31,7 +39,7 @@
                                         :class="{
                                             'pointer-events-none opacity-60':
                                                 !checkAvailableRooms(
-                                                    room.room_id
+                                                    room.room_id,
                                                 ),
                                         }"
                                     >
@@ -41,7 +49,7 @@
                                             alt=""
                                         />
                                         <p
-                                            class="text-white text-center pt-1 text-sm"
+                                            class="text-black text-semibold text-center pt-1 text-lg"
                                         >
                                             {{ room.name }}
                                         </p>

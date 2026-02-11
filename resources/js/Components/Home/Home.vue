@@ -347,9 +347,9 @@
                         <p class="text-sm text-white font-bold mb-0"></p>
                         <a
                             href="/slots"
-                            class="text-xs text-white font-semibold mb-0"
+                            class="text-md text-black hover:underline font-semibold mb-0"
                         >
-                            See All
+                            See All Games
                         </a>
                     </div>
 
