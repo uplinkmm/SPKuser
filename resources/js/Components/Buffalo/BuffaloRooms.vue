@@ -26,7 +26,7 @@
                     <div class="mb-8">
                         <div class="w-full">
                             <div
-                                class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
+                                class="w-full grid grid-cols-2 gap-x-4 gap-y-6"
                             >
                                 <div
                                     v-for="(room, index) in rooms"
@@ -44,12 +44,12 @@
                                         }"
                                     >
                                         <img
-                                            class="w-full aspect-[3/2] rounded-lg"
+                                            class="w-full aspect-square rounded-2xl object-cover"
                                             :src="'/img/buffalo/' + room.image"
                                             alt=""
                                         />
                                         <p
-                                            class="text-black text-semibold text-center pt-1 text-lg"
+                                            class="text-black font-semibold text-center text-left pt-2 text-lg leading-tight truncate"
                                         >
                                             {{ room.name }}
                                         </p>
@@ -58,7 +58,7 @@
                                         v-if="
                                             !checkAvailableRooms(room.room_id)
                                         "
-                                        class="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center"
+                                        class="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center"
                                     >
                                         <span
                                             class="text-white text-sm font-medium"
