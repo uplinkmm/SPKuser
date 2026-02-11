@@ -44,7 +44,8 @@
                                     </div>
                                 </div>
                                 <p class="font-semibold text-xl">
-                                    {{ mainMoneyBalance.toLocaleString() }} ကျပ်
+                                    {{ mainMoneyBalance?.toLocaleString() }}
+                                    ကျပ်
                                 </p>
                             </div>
 
@@ -71,7 +72,8 @@
                                     </div>
                                 </div>
                                 <p class="font-semibold text-xl">
-                                    {{ gameMoneyBalance.toLocaleString() }} ကျပ်
+                                    {{ gameMoneyBalance?.toLocaleString() }}
+                                    ကျပ်
                                 </p>
                             </div>
                         </div>
@@ -208,105 +210,217 @@
                 </div>
             </div>
             <div v-show="step == 2" class="contents">
-                <div class="px-8 pt-8 pb-4 shadow-lg rounded-2xl mb-8 bg-white">
-                    <div
-                        v-if="paymentProvider == 'kpay'"
-                        class="flex justify-between w-full items-center mb-2"
-                    >
-                        <div class="flex text-left">
-                            <img
-                                src="../../../../public/img/wave.png"
-                                alt=""
-                                class="w-14 h-14 aspect-square mr-4"
-                            />
-                            <div class="text-sm">
-                                <p class="flex items-center">
-                                    {{ kpayAccount.name }}
-                                </p>
-                                <p>{{ kpayAccount.phone_number }}</p>
+                <div class="-mt-2 pb-24">
+                    <div class="bg-[#FDC652] rounded-b-2xl px-4 pb-6 shadow-lg">
+                        <div
+                            class="rounded-2xl border border-black/30 bg-[#C89A1E] px-4 pt-4 pb-6"
+                        >
+                            <p
+                                class="text-left text-black font-semibold text-xl mb-4"
+                            >
+                                ဘဏ်အကောင့်အား သေချာစွာစစ်ဆေးပါ
+                            </p>
+
+                            <div class="px-4 py-4">
+                                <div
+                                    v-if="paymentProvider == 'kpay'"
+                                    class="flex items-center justify-between gap-x-4"
+                                >
+                                    <div
+                                        class="flex items-center gap-x-4 min-w-0"
+                                    >
+                                        <div
+                                            class="w-24 h-24 rounded-xl bg-[#7A5D10] border border-black/40 overflow-hidden flex items-center justify-center"
+                                        >
+                                            <img
+                                                src="../../../../public/img/kpay.png"
+                                                class="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p
+                                                class="text-black font-semibold text-lg truncate"
+                                            >
+                                                {{ kpayAccount.name }}
+                                            </p>
+                                            <p
+                                                class="text-black font-semibold text-lg truncate"
+                                            >
+                                                {{ kpayAccount.phone_number }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        @click="
+                                            copyPhoneNumber(
+                                                kpayAccount.phone_number,
+                                            )
+                                        "
+                                        class="shrink-0 bg-[#5271FF] text-white font-semibold px-5 py-3 rounded-lg"
+                                    >
+                                        ကူးယူမည်
+                                    </button>
+                                </div>
+
+                                <div
+                                    v-if="paymentProvider == 'wave'"
+                                    class="flex items-center justify-between gap-x-4"
+                                >
+                                    <div
+                                        class="flex items-center gap-x-4 min-w-0"
+                                    >
+                                        <div
+                                            class="w-24 h-24 rounded-xl bg-[#7A5D10] border border-black/40 overflow-hidden flex items-center justify-center"
+                                        >
+                                            <img
+                                                src="../../../../public/img/wave.png"
+                                                class="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p
+                                                class="text-black font-semibold text-lg truncate"
+                                            >
+                                                {{ waveAccount.name }}
+                                            </p>
+                                            <p
+                                                class="text-black font-semibold text-lg truncate"
+                                            >
+                                                {{ waveAccount.phone_number }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        @click="
+                                            copyPhoneNumber(
+                                                waveAccount.phone_number,
+                                            )
+                                        "
+                                        class="shrink-0 bg-[#5271FF] text-white font-semibold px-5 py-3 rounded-xl"
+                                    >
+                                        ကူးယူမည်
+                                    </button>
+                                </div>
+
+                                <div
+                                    v-if="paymentProvider == 'aya_pay'"
+                                    class="flex items-center justify-between gap-x-4"
+                                >
+                                    <div
+                                        class="flex items-center gap-x-4 min-w-0"
+                                    >
+                                        <div
+                                            class="w-24 h-24 rounded-xl bg-[#7A5D10] border border-black/40 overflow-hidden flex items-center justify-center"
+                                        >
+                                            <img
+                                                src="../../../../public/img/aya_pay.png"
+                                                class="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p
+                                                class="text-black font-semibold text-lg truncate"
+                                            >
+                                                {{ ayaAccount.name }}
+                                            </p>
+                                            <p
+                                                class="text-black font-semibold text-lg truncate"
+                                            >
+                                                {{ ayaAccount.phone_number }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        @click="
+                                            copyPhoneNumber(
+                                                ayaAccount.phone_number,
+                                            )
+                                        "
+                                        class="shrink-0 bg-[#5271FF] text-white font-semibold px-5 py-3 rounded-xl"
+                                    >
+                                        ကူးယူမည်
+                                    </button>
+                                </div>
+
+                                <div
+                                    class="grid grid-cols-3 gap-x-3 mt-4 text-black font-semibold"
+                                >
+                                    <p class="text-left pl-4">
+                                        {{
+                                            paymentProvider == "kpay"
+                                                ? "KBZ PAY"
+                                                : paymentProvider == "wave"
+                                                  ? "WAVE PAY"
+                                                  : "AYA PAY"
+                                        }}
+                                    </p>
+                                    <p class="text-center">ငွေပမာဏ</p>
+                                    <p class="text-right">
+                                        {{ amount?.toLocaleString() }} ကျပ်
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <button
-                            @click="copyPhoneNumber(kpayAccount.phone_number)"
-                            class="text-xs"
-                        >
-                            <i class="fal fa-copy text-2xl"></i>
-                            <p>ကူးယူမည်</p>
-                        </button>
-                    </div>
-                    <div
-                        v-if="paymentProvider == 'wave'"
-                        class="flex justify-between w-full items-center mb-2"
-                    >
-                        <div class="flex text-left">
-                            <img
-                                src="../../../../public/img/wave.png"
-                                alt=""
-                                class="w-14 h-14 aspect-square mr-4"
-                            />
-                            <div class="text-sm">
-                                <p class="flex items-center">
-                                    {{ waveAccount.name }}
-                                </p>
-                                <p>{{ waveAccount.phone_number }}</p>
-                            </div>
+                        <div class="mt-6">
+                            <p
+                                class="text-center text-black font-semibold text-xl mb-3"
+                            >
+                                လုပ်ဆောင်မှုအမှတ်၏ နောက်ဆုံးဂဏန်း ၆ လုံး
+                            </p>
+
+                            <label
+                                class="block rounded-xl bg-[#E5E7EB] overflow-hidden"
+                            >
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-14 h-14 flex items-center justify-center bg-[#D1D5DB]"
+                                    >
+                                        <div
+                                            class="w-9 h-9 rounded-full bg-gray-600 flex items-center justify-center"
+                                        >
+                                            <i
+                                                class="fas fa-check text-white"
+                                            ></i>
+                                        </div>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        v-model="paymentTrId"
+                                        pattern="\\d*"
+                                        @input="
+                                            paymentTrId =
+                                                $event.target.value.replace(
+                                                    /[^0-9]/g,
+                                                    '',
+                                                )
+                                        "
+                                        placeholder="နောက်ဆုံး:လက်ကျန် ၆ လုံး ထည့်ပါ"
+                                        class="w-full h-14 bg-transparent px-4 text-lg text-black placeholder-gray-400 focus:outline-none focus:ring-0"
+                                    />
+                                </div>
+                            </label>
                         </div>
 
                         <button
-                            @click="copyPhoneNumber(waveAccount.phone_number)"
-                            class="text-xs"
+                            @click="makeTopupTransactionBtnClicked"
+                            :disabled="loading"
+                            class="w-full bg-[#5271FF] disabled:bg-[#5271FF] disabled:text-gray-300 text-white font-semibold py-4 rounded-xl text-xl mt-6"
                         >
-                            <i class="fal fa-copy text-2xl"></i>
-                            <p>ကူးယူမည်</p>
+                            {{ loading ? "Loading..." : "အတည်ပြုပါ" }}
                         </button>
-                    </div>
 
-                    <p class="text-sm text-center">
-                        ငွေသွင်းမည့် ပမာဏ : {{ amount }} Kyats
-                    </p>
-                </div>
-
-                <div class="w-full max-w-md px-4">
-                    <h2
-                        class="text-base lg:text-xl font-bold mb-6 text-gray-800 text-left"
-                    >
-                        လုပ်ဆောင်မှု အမှတ် နောက်ဆုံး ဂဏန်း ၆ လုံး
-                    </h2>
-
-                    <label class="mb-6 rounded-xl shadow-md bg-white block">
-                        <p class="text-xs px-4 pt-4 text-gray-700">
-                            Transaction Number
+                        <p
+                            class="text-center mt-8 text-red-600 text-xl font-semibold leading-relaxed"
+                        >
+                            ငွေသွင်း ငွေထုတ် မြန်ဆန်စေရန်အတွက် <br />
+                            ဖော်ပြပါ ငွေသွင်းအကောင့်များကိုသာ <br />
+                            ငွေလွှဲပေးပါရန်
                         </p>
-                        <input
-                            type="text"
-                            v-model="paymentTrId"
-                            pattern="\\d*"
-                            @input="
-                                paymentTrId = $event.target.value.replace(
-                                    /[^0-9]/g,
-                                    '',
-                                )
-                            "
-                            placeholder="Transaction Number"
-                            class="w-full p-4 rounded-xl text-sm lg:text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                        />
-                    </label>
-
-                    <button
-                        @click="makeTopupTransactionBtnClicked"
-                        :disabled="loading"
-                        class="w-full bg-blue-500 disabled:bg-blue-500 disabled:text-gray-300 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-sm lg:text-xl transition-colors duration-300"
-                    >
-                        {{ loading ? "Loading..." : "ငွေသွင်းမည်" }}
-                    </button>
-
-                    <p
-                        class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold"
-                    >
-                        ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br />ဖော်ပြပါ
-                        အကောင့်များသို့သာ ငွေလွှဲရန်
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -345,6 +459,10 @@ export default {
         },
         waveAccount() {
             var temp = this.accounts.find((n) => n.account_type == "wave");
+            return temp;
+        },
+        ayaAccount() {
+            var temp = this.accounts.find((n) => n.account_type == "aya_pay");
             return temp;
         },
     },
