@@ -223,65 +223,78 @@
                 <!-- Chagne Password -->
                 <div
                     v-show="step == 'changePassStepOne'"
-                    class="px-4 sm:px-8 py-12 mb-8"
+                    class="sm:px-8 bg-[#FFC529] rounded-3xl min-h-[calc(100vh-100px)]"
                 >
-                    <div class="relative h-full flex flex-col justify-center">
-                        <div class="mb-12 text-center">
-                            <p class="text-2xl mb-4 font-semibold">
+                    <div class="px-6 py-6">
+                        <div class="relative mb-6">
+                            <p
+                                class="text-center text-black text-xl font-semibold mb-1"
+                            >
                                 ပက်စ်ဝက်ပြောင်းရန်
                             </p>
-                            <p class="text-sm mb-2 font-semibold">
+                            <p
+                                class="text-center text-black text-md font-semibold"
+                            >
                                 အသစ်ထည့်လိုသော Password ထည့်သွင်းရန်
                             </p>
                         </div>
-                        <div class="pb-16">
-                            <label
-                                class="mb-6 rounded-xl shadow-md bg-white block"
-                            >
-                                <p class="text-xs px-4 pt-4 text-gray-700">
-                                    Old Password
-                                </p>
+
+                        <div class="mb-5">
+                            <p class="text-black font-semibold mb-2">
+                                Old Password
+                            </p>
+                            <div class="relative">
+                                <i
+                                    class="fas fa-lock text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                                ></i>
                                 <input
                                     type="password"
                                     v-model="current_password"
                                     placeholder="Old Password"
-                                    class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                                    class="w-full bg-white pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                                 />
-                            </label>
-                            <label
-                                class="mb-6 rounded-xl shadow-md bg-white block"
-                            >
-                                <p class="text-xs px-4 pt-4 text-gray-700">
-                                    New Password
-                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <p class="text-black font-semibold mb-2">
+                                New Password
+                            </p>
+                            <div class="relative">
+                                <i
+                                    class="fas fa-lock text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                                ></i>
                                 <input
                                     type="password"
                                     v-model="new_password"
                                     placeholder="New Password"
-                                    class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                                    class="w-full bg-white pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                                 />
-                            </label>
-                            <label
-                                class="mb-6 rounded-xl shadow-md bg-white block"
-                            >
-                                <p class="text-xs px-4 pt-4 text-gray-700">
-                                    Confirm Password
-                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mb-10">
+                            <p class="text-black font-semibold mb-2">
+                                Confirm Password
+                            </p>
+                            <div class="relative">
+                                <i
+                                    class="fas fa-lock text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                                ></i>
                                 <input
                                     type="password"
                                     v-model="new_password_confirmation"
                                     placeholder="Confirm Password"
-                                    class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                                    class="w-full bg-white pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                                 />
-                            </label>
+                            </div>
                         </div>
-                        <div
-                            class="mb-0 absolute bottom-4 flex justify-end w-full"
-                        >
+
+                        <div>
                             <button
                                 @click="handelChangePasswordStepOne"
                                 :disabled="passwordLoading"
-                                class="bg-black disabled:bg-gray-600 text-white pl-8 pr-7 py-3 w-fit rounded-full"
+                                class="block disabled:bg-gray-600 w-full py-4 px-2 text-base rounded-xl bg-[#5271FF] text-white font-semibold focus:ring-0 focus:shadow-none focus:outline-none"
                             >
                                 {{ passwordLoading ? "Loading.." : "Submit" }}
                             </button>
