@@ -333,7 +333,7 @@
 
                                         <div class="relative flex-grow h-full">
                                             <select
-                                                class="block appearance-none w-full h-full bg-transparent text-black text-xl font-medium text-center pr-20 pl-2 focus:outline-none focus:ring-0"
+                                                class="block appearance-none w-full h-full bg-transparent text-black text-xl font-medium text-center pr-16 pl-2 focus:outline-none focus:ring-0"
                                                 v-model="from_to_value"
                                             >
                                                 <option
