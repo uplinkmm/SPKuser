@@ -353,7 +353,7 @@
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="lucide lucide-arrow-left-right-icon lucide-arrow-left-right hover:text-[#FED428]"
+                                class="lucide lucide-arrow-left-right-icon lucide-arrow-left-right hover:text-red-700"
                             >
                                 <path d="M8 3 4 7l4 4" />
                                 <path d="M4 7h16" />
