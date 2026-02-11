@@ -11,19 +11,45 @@
                     id="tabs-twoD"
                     role="tabpanel"
                 >
-                    <div class="text-center text-black text-lg py-4 font-bold">
-                        2D history
+                    <div class="text-center text-black pt-4 pb-2 font-bold">
+                        <p class="text-xl">2D မှတ်တမ်း</p>
+                        <div class="flex justify-center gap-x-10 mt-3">
+                            <button
+                                type="button"
+                                class="text-lg font-semibold pb-2"
+                                :class="
+                                    selectedTwoDTab == 'morning'
+                                        ? 'border-b-4 border-[#5271FF]'
+                                        : 'border-b-4 border-transparent'
+                                "
+                                @click="selectedTwoDTab = 'morning'"
+                            >
+                                12:01 PM
+                            </button>
+                            <button
+                                type="button"
+                                class="text-lg font-semibold pb-2"
+                                :class="
+                                    selectedTwoDTab == 'evening'
+                                        ? 'border-b-4 border-[#5271FF]'
+                                        : 'border-b-4 border-transparent'
+                                "
+                                @click="selectedTwoDTab = 'evening'"
+                            >
+                                4:30 PM
+                            </button>
+                        </div>
                     </div>
                     <div class="mx-0 pb-8 pt-4">
                         <div
-                            v-if="two_d_histories.length === 0"
+                            v-if="filteredTwoDHistories.length === 0"
                             class="text-center text-white py-8"
                         >
                             No history found
                         </div>
 
                         <div
-                            v-for="(history, index) in two_d_histories"
+                            v-for="(history, index) in filteredTwoDHistories"
                             :key="index"
                             class="mb-6"
                         >
@@ -262,6 +288,7 @@ export default {
             game_id: 1, // Default to 2D
             two_d_histories: [],
             three_d_histories: [],
+            selectedTwoDTab: "morning",
         };
     },
     components: {
@@ -269,6 +296,18 @@ export default {
     },
     computed: {
         ...mapGetters(["getToken"]),
+        filteredTwoDHistories() {
+            const morningTime = "12:01:00";
+            const eveningTime = "16:30:00";
+
+            return (this.two_d_histories || []).filter((h) => {
+                const t = h?.lottery_time;
+                if (this.selectedTwoDTab === "morning") {
+                    return t === morningTime || h?.time_status === "morning";
+                }
+                return t === eveningTime || h?.time_status === "evening";
+            });
+        },
     },
     mixins: [CheckAuthMixin],
 
@@ -281,10 +320,13 @@ export default {
                 url: `api/betting_history?game_id=${this.game_id}`,
                 token: this.getToken,
             });
+            const histories = Array.isArray(response?.data?.data)
+                ? response.data.data
+                : response?.data?.data?.data || [];
             if (this.game_id === 1) {
-                this.two_d_histories = response.data.data;
+                this.two_d_histories = histories;
             } else if (this.game_id === 2) {
-                this.three_d_histories = response.data.data;
+                this.three_d_histories = histories;
             }
             this.scrollToTop();
         },
