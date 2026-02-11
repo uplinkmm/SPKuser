@@ -538,7 +538,7 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full px-4 pb-14 bg-[#FFC529]"
+            class="relative mb-12 w-full px-4 pb-14 bg-[#FFC529] rounded-t-xl min-h-[calc(100vh-100px)]"
             :class="step == 2 ? 'block' : 'hidden'"
         >
             <div class="w-full rounded-3xl bg-[#FFC529] pt-4 pb-2">

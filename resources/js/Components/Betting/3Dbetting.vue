@@ -384,10 +384,10 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-0 w-full px-4 pb-14"
+            class="relative mb-12 w-full rounded-t-xl px-4 pb-14 bg-[#FFC529] min-h-[calc(100vh-100px)]"
             :class="step == 2 ? 'block' : 'hidden'"
         >
-            <div class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6">
+            <div class="w-full rounded-3xl bg-[#FFC529] pt-4 pb-2">
                 <p class="text-center mb-3 text-lg font-bold">3D ထိုးမည်</p>
 
                 <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
@@ -395,21 +395,26 @@
                         class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
                     >
                         <div
-                            class="px-4 pb-3 pt-2 overflow-y-auto small-scrollbar"
-                            style="max-height: calc(100vh - 300px)"
+                            class="flex justify-between items-center px-4 py-2 bg-[#F4F4F4] text-lg"
                         >
-                            <table class="table-auto w-full text-base">
+                            <p>{{ currentDate }}</p>
+                            <p>{{ getCurrentTime() }}</p>
+                            <p class="text-[#FF9900] font-semibold">
+                                {{ closingDateTimeFormat }}
+                            </p>
+                        </div>
+
+                        <div
+                            class="px-4 pb-3 pt-2 overflow-y-auto small-scrollbar"
+                            style="max-height: calc(100vh - 260px)"
+                        >
+                            <table class="table-auto w-full text-lg">
                                 <thead>
                                     <tr>
+                                        <th class="py-3">စဉ်</th>
                                         <th class="py-3">{{ $t("No") }}</th>
                                         <th class="py-3">
-                                            {{ $t("Multiplier") }}
-                                        </th>
-                                        <th class="py-3">
                                             {{ $t("Betting Amount") }}
-                                        </th>
-                                        <th class="py-3">
-                                            {{ $t("Edit Delete") }}
                                         </th>
                                     </tr>
                                 </thead>
@@ -429,6 +434,16 @@
                                                     : 'text-red-600'
                                             "
                                         >
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
                                             {{ bet_number.number }}
                                         </td>
                                         <td
@@ -437,17 +452,7 @@
                                                     ? ''
                                                     : 'text-red-600'
                                             "
-                                            class="text-center py-2"
-                                        >
-                                            {{ bet_multiplier }}
-                                        </td>
-                                        <td
-                                            :class="
-                                                checkAvailableAmount(bet_number)
-                                                    ? ''
-                                                    : 'text-red-600'
-                                            "
-                                            class="text-center py-2"
+                                            class="text-center py-2 space-x-1"
                                         >
                                             <span
                                                 v-show="
@@ -459,15 +464,6 @@
                                                     bet_number.amount?.toLocaleString()
                                                 }}
                                             </span>
-                                            <!-- <input
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    type="number"
-                                    class="px-4 py-2 text-black"
-                                    v-model="edit_bet_number.amount"
-                                /> -->
                                             <input
                                                 v-show="
                                                     bet_number.number ==
@@ -478,8 +474,6 @@
                                                 v-model="edit_bet_number.amount"
                                                 placeholder="Enter amount"
                                             />
-                                        </td>
-                                        <td class="text-center py-2">
                                             <button
                                                 v-show="
                                                     bet_number.number ==
@@ -502,7 +496,7 @@
                                                 "
                                                 class="text-[#5271FF] hover:text-[#5271FF]/80 transition duration-150 ease-in-out"
                                             >
-                                                <i class="fal fa-edit mr-2"></i>
+                                                <i class="fas fa-edit mr-2"></i>
                                             </button>
                                             <button
                                                 data-twe-toggle="modal"
@@ -513,8 +507,22 @@
                                                 "
                                                 class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
                                             >
-                                                <i class="fal fa-trash"></i>
+                                                <i class="fas fa-trash"></i>
                                             </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        v-if="bet_numbers.length"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td class="text-right pr-4" colspan="2">
+                                            {{ $t("Total Betting Amount") }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{
+                                                totalBetAmount?.toLocaleString()
+                                            }}
+                                            ကျပ်
                                         </td>
                                     </tr>
                                 </tbody>
@@ -523,20 +531,14 @@
                     </div>
                 </div>
 
-                <div class="pt-4">
-                    <p class="text-sm pt-2 text-right pr-2 mb-4 font-semibold">
-                        {{ $t("Total Betting Amount") }} :
-                        {{ totalBetAmount?.toLocaleString() }} MMK
-                    </p>
-                    <div class="w-full flex justify-center">
-                        <button
-                            :disabled="calling_api"
-                            @click="sendBetting"
-                            class="bg-[#5271FF] text-white px-12 py-3 rounded-xl text-base font-semibold disabled:opacity-60"
-                        >
-                            {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
-                        </button>
-                    </div>
+                <div class="mt-6">
+                    <button
+                        :disabled="calling_api"
+                        class="w-full bg-[#5271FF] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                        @click="sendBetting"
+                    >
+                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -949,6 +951,9 @@ export default {
     mixins: [CheckAuthMixin],
 
     methods: {
+        getCurrentTime() {
+            return moment().format("hh:mm A");
+        },
         backBtn() {
             if (this.step == 0 || this.step == 3) {
                 // window.location.href = "/home";
