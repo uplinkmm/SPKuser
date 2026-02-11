@@ -226,7 +226,7 @@
                             ငွေသွင်း ငွေထုတ်မှတ်တမ်းများ:
                         </p>
                     </div>
-                    <i class="fas fa-chevron-right text-black"></i>
+                    <i class="fas fa-chevron-right mr-4 text-black"></i>
                 </a>
 
                 <p
