@@ -724,37 +724,37 @@
                     >
                         <button
                             @click="simpleBet('sone_sone')"
-                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             စုံစုံ
                         </button>
                         <button
                             @click="simpleBet('ma_ma')"
-                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             မမ
                         </button>
                         <button
                             @click="simpleBet('sone_ma')"
-                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             စုံမ
                         </button>
                         <button
                             @click="simpleBet('ma_sone')"
-                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             မစုံ
                         </button>
                         <button
                             @click="simpleBet('sone_puu')"
-                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             စုံပူး
                         </button>
                         <button
                             @click="simpleBet('ma_puu')"
-                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             မပူး
                         </button>
@@ -776,25 +776,25 @@
                     >
                         <button
                             @click="natKhatPower('nat')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             နက်
                         </button>
                         <button
                             @click="natKhatPower('power')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             ပါ၀ါ
                         </button>
                         <button
                             @click="natKhatPower('a_puu')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             အပူး
                         </button>
                         <button
                             @click="natKhatPower('nyi_naung')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             ညီအကို
                         </button>
@@ -813,61 +813,61 @@
                     >
                         <button
                             @click="patNumberBet('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="patNumberBet('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="patNumberBet('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="patNumberBet('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="patNumberBet('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="patNumberBet('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="patNumberBet('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="patNumberBet('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="patNumberBet('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="patNumberBet('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -885,37 +885,37 @@
                     >
                         <button
                             @click="numbersStartingWith('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="numbersStartingWith('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="numbersStartingWith('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="numbersStartingWith('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="numbersStartingWith('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="numbersStartingWith('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
