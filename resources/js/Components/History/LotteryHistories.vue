@@ -130,41 +130,55 @@
                     class="opacity-100 transition-opacity duration-150 ease-linear"
                 >
                     <div class="mx-0 pb-8">
-                        <table class="table-auto w-full bg-white">
-                            <thead>
-                                <tr class="bg-[#FFC529] text-white">
-                                    <th
-                                        class="py-4 text-left font-semibold px-8"
-                                    >
-                                        Date
-                                    </th>
-                                    <th class="py-4 font-semibold px-8">3D</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-if="!data?.length">
-                                    <td
-                                        colspan="2"
-                                        class="text-center py-4 px-8"
-                                    >
-                                        No 3D History Found
-                                    </td>
-                                </tr>
+                        <div
+                            v-if="!data?.length"
+                            class="text-center text-black/80 py-10"
+                        >
+                            No 3D History Found
+                        </div>
 
-                                <tr
-                                    v-for="num in data"
-                                    :key="num.id"
-                                    class="border-b !border-gray-300"
+                        <div v-else class="space-y-4">
+                            <div
+                                v-for="num in data"
+                                :key="num.date_time + '-' + num.number"
+                                class="rounded-xl bg-[#0C7A18] text-white shadow-md overflow-hidden"
+                            >
+                                <div
+                                    class="grid grid-cols-3 items-center px-4 py-3 border-b border-white/40"
                                 >
-                                    <td class="text-left py-4 px-8">
+                                    <div
+                                        class="text-left text-base font-semibold"
+                                    >
                                         {{ formatDate(num.date_time) }}
-                                    </td>
-                                    <td class="text-center py-4 px-8">
+                                    </div>
+                                    <div
+                                        class="text-center text-xl font-extrabold text-[#FFC529]"
+                                    >
                                         {{ num.number }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </div>
+                                    <div
+                                        class="text-right text-base font-semibold"
+                                    >
+                                        {{ formatDayDiff(num.date_time) }}
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="grid grid-cols-2 items-center px-4 py-3"
+                                >
+                                    <div
+                                        class="text-left text-lg font-semibold"
+                                    >
+                                        တွတ်
+                                    </div>
+                                    <div
+                                        class="text-right text-lg font-semibold"
+                                    >
+                                        {{ num.number }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -231,133 +245,31 @@ export default {
                 url: url,
             });
             if (response.data) {
-                // this.data = response.data;
-                this.data = [
-                    {
-                        id: 659,
-                        history_id: 2435189,
-                        stock_datetime: "2026-02-05 12:01:00",
-                        stock_date: "2026-02-05",
-                        open_time: "12:01:00",
-                        day_part: "pm",
-                        set: "1338.91",
-                        value: "32345.64",
-                        twod: "15",
-                        created_at: "2026-02-05T05:32:03.000000Z",
-                        updated_at: "2026-02-05T17:30:00.000000Z",
-                    },
-                    {
-                        id: 661,
-                        history_id: 2436633,
-                        stock_datetime: "2026-02-05 16:30:09",
-                        stock_date: "2026-02-05",
-                        open_time: "16:30:00",
-                        day_part: "pm",
-                        set: "1346.23",
-                        value: "57388.58",
-                        twod: "38",
-                        created_at: "2026-02-05T10:01:03.000000Z",
-                        updated_at: "2026-02-05T17:30:00.000000Z",
-                    },
-                    {
-                        id: 663,
-                        history_id: 2437709,
-                        stock_datetime: "2026-02-06 12:01:02",
-                        stock_date: "2026-02-06",
-                        open_time: "12:01:00",
-                        day_part: "pm",
-                        set: "1356.44",
-                        value: "25149.99",
-                        twod: "49",
-                        created_at: "2026-02-06T05:32:04.000000Z",
-                        updated_at: "2026-02-06T17:30:01.000000Z",
-                    },
-                    {
-                        id: 665,
-                        history_id: 2439110,
-                        stock_datetime: "2026-02-06 16:30:04",
-                        stock_date: "2026-02-06",
-                        open_time: "16:30:00",
-                        day_part: "pm",
-                        set: "1354.01",
-                        value: "47476.09",
-                        twod: "16",
-                        created_at: "2026-02-06T10:01:02.000000Z",
-                        updated_at: "2026-02-06T17:30:01.000000Z",
-                    },
-                    {
-                        id: 667,
-                        history_id: 2440206,
-                        stock_datetime: "2026-02-09 12:01:03",
-                        stock_date: "2026-02-09",
-                        open_time: "12:01:00",
-                        day_part: "pm",
-                        set: "1398.96",
-                        value: "66811.98",
-                        twod: "61",
-                        created_at: "2026-02-09T05:32:03.000000Z",
-                        updated_at: "2026-02-09T17:30:01.000000Z",
-                    },
-                    {
-                        id: 669,
-                        history_id: 2441621,
-                        stock_datetime: "2026-02-09 16:30:03",
-                        stock_date: "2026-02-09",
-                        open_time: "16:30:00",
-                        day_part: "pm",
-                        set: "1400.89",
-                        value: "102112.04",
-                        twod: "92",
-                        created_at: "2026-02-09T10:01:03.000000Z",
-                        updated_at: "2026-02-09T17:30:01.000000Z",
-                    },
-                    {
-                        id: 671,
-                        history_id: 2442675,
-                        stock_datetime: "2026-02-10 12:01:05",
-                        stock_date: "2026-02-10",
-                        open_time: "12:01:00",
-                        day_part: "pm",
-                        set: "1405.75",
-                        value: "40230.85",
-                        twod: "50",
-                        created_at: "2026-02-10T08:32:03.000000Z",
-                        updated_at: "2026-02-10T17:30:01.000000Z",
-                    },
-                    {
-                        id: 673,
-                        history_id: 2444097,
-                        stock_datetime: "2026-02-10 16:30:10",
-                        stock_date: "2026-02-10",
-                        open_time: "16:30:00",
-                        day_part: "pm",
-                        set: "1410.44",
-                        value: "72261.36",
-                        twod: "41",
-                        created_at: "2026-02-10T10:01:02.000000Z",
-                        updated_at: "2026-02-10T17:30:01.000000Z",
-                    },
-                    {
-                        id: 675,
-                        history_id: 2445176,
-                        stock_datetime: "2026-02-11 12:01:00",
-                        stock_date: "2026-02-11",
-                        open_time: "12:01:00",
-                        day_part: "pm",
-                        set: "1,415.04",
-                        value: "35,232.30",
-                        twod: "42",
-                        created_at: "2026-02-11T05:32:06.000000Z",
-                        updated_at: "2026-02-11T05:32:06.000000Z",
-                    },
-                ];
+                this.data = response.data;
             }
         },
         formatDate(date) {
-            return moment(date, "YYYY-MM-DD HH:mm").format("YYYY-MM-DD");
+            if (!date) return "";
+
+            let d = moment(date, "YYYY-MM-DD HH:mm:ss", true);
+            if (!d.isValid()) d = moment(date, "YYYY-MM-DD HH:mm", true);
+            if (!d.isValid()) d = moment(date);
+            if (!d.isValid()) return "";
+
+            return d.format("YYYY-MM-DD");
         },
         formatDateWithDay(date) {
             return moment(date, "YYYY-MM-DD").format("YYYY-MM-DD dddd");
+        },
+        formatDayDiff(dateTime) {
+            if (!dateTime) return "";
+
+            // Extract the day number from the date string
+            const date = new Date(dateTime);
+            if (isNaN(date.getTime())) return "";
+
+            const day = date.getDate();
+            return `${day} ရက်နေ့`;
         },
         formatTime(time) {
             return moment(time, "HH:mm").format("hh:mm A");
