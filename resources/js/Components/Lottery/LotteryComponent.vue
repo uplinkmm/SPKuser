@@ -57,20 +57,11 @@
                             class="flex items-center justify-between py-4 cursor-pointer border-b border-black/20"
                         >
                             <div class="flex items-center gap-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-7 h-7 text-black"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M18.364 5.636 5.636 18.364M5.636 5.636l12.728 12.728"
-                                    />
-                                </svg>
+                                <img
+                                    src="../../../../public/icons/cross.png"
+                                    alt=""
+                                    class="w-7"
+                                />
                                 <span class="text-lg text-black font-semibold"
                                     >ကံစမ်းမဲ အကြောင်း</span
                                 >
@@ -96,20 +87,11 @@
                             class="flex items-center justify-between py-4 cursor-pointer border-b border-black/20"
                         >
                             <div class="flex items-center gap-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-7 h-7 text-black"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M18.364 5.636 5.636 18.364M5.636 5.636l12.728 12.728"
-                                    />
-                                </svg>
+                                <img
+                                    src="../../../../public/icons/cross.png"
+                                    alt=""
+                                    class="w-7"
+                                />
                                 <span class="text-lg text-black font-semibold"
                                     >ကံစမ်းမဲ ပရိုမိုးရှင်းများ:</span
                                 >
@@ -135,20 +117,11 @@
                             class="flex items-center justify-between py-4 cursor-pointer"
                         >
                             <div class="flex items-center gap-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-7 h-7 text-black"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M18.364 5.636 5.636 18.364M5.636 5.636l12.728 12.728"
-                                    />
-                                </svg>
+                                <img
+                                    src="../../../../public/icons/cross.png"
+                                    alt=""
+                                    class="w-7"
+                                />
                                 <span class="text-lg text-black font-semibold"
                                     >ကံစမ်းမဲ စည်းကမ်းသတ်မှတ်ချက်များ:</span
                                 >
