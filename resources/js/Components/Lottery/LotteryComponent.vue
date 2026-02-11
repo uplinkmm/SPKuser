@@ -1,350 +1,385 @@
 <template>
     <notifications position="top center" />
-    <div class="frame-container px-4 min-h-[100vh]">
-        <Navbar title="Lottery" :back-btn="backBtn"></Navbar>
-
-        <div :class="step == 1 ? 'block' : 'hidden'" class="px-2 mb-12">
-            <div class="mb-8">
-                <div class="px-2 mb-2 w-full h-28 overflow-hidden">
-                    <img
-                        :src="img_prefix + game?.photo"
-                        class="w-full object-cover"
-                    />
-                </div>
-                <p class="mb-4 text-sm">
-                    {{ game?.name }}
-                </p>
-            </div>
-
-            <div class="flex items-center justify-center">
-                <button
-                    class="bg-[#0978D3] w-full py-3 rounded-3xl text-white mb-8"
-                    @click="step = 2"
-                >
-                    ထိုးမည်
-                </button>
-            </div>
-            <div v-if="sub_step == 1" class="rounded-lg p-4">
-                <h2
-                    class="text-lg font-bold mb-4 dash-under after:!w-8 relative after:!left-0 inline-block pb-3"
-                >
-                    ကံစမ်းမဲနှင့် ပတ်သတ်သည့် အကြောင်းအရာများ
-                </h2>
-
-                <div class="divide-y divide-gray-700">
-                    <a
-                        @click="sub_step = 2"
-                        class="flex items-center justify-between py-4 cursor-pointer"
-                    >
-                        <div class="flex items-center space-x-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-6 h-6 text-gray-700"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                />
-                            </svg>
-                            <span class="text-lg">ကံစမ်းမဲအကြောင်း</span>
-                        </div>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-5 h-5 text-gray-700"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                            />
-                        </svg>
-                    </a>
-
-                    <a
-                        @click="sub_step = 3"
-                        class="flex items-center justify-between py-4 cursor-pointer"
-                    >
-                        <div class="flex items-center space-x-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-6 h-6 text-gray-700"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                />
-                            </svg>
-                            <span class="text-lg"
-                                >ကံစမ်းမဲ Promotion အကြောင်း</span
-                            >
-                        </div>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-5 h-5 text-gray-700"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                            />
-                        </svg>
-                    </a>
-
-                    <a
-                        @click="sub_step = 4"
-                        class="flex items-center justify-between py-4 cursor-pointer"
-                    >
-                        <div class="flex items-center space-x-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-6 h-6 text-gray-700"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                />
-                            </svg>
-                            <span class="text-lg">စည်းကမ်းသတ်မှတ်ချက်များ</span>
-                        </div>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-5 h-5 text-gray-400"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                            />
-                        </svg>
-                    </a>
-                </div>
-                <p class="text-sm mt-6">
-                    ကံစမ်းမဲနှင့် ပတ်သတ်သည့်အချက်အလက်များကို သေချာစွာ
-                    ဖတ်ရှုပေးပါရန်
-                </p>
-            </div>
-
-            <div v-if="sub_step == 2" class="px-8 pb-4 mb-8">
-                <h2
-                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
-                >
-                    ကံစမ်းမဲအကြောင်း
-                </h2>
-                <div class="mb-0 mt-4">
-                    <p>
-                        {{ game.description }}
-                    </p>
-                </div>
-            </div>
-            <div v-if="sub_step == 3" class="px-8 pb-4 mb-8">
-                <h2
-                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
-                >
-                    ကံစမ်းမဲ Promotion အကြောင်း
-                </h2>
-                <div class="mb-0 mt-4">
-                    <div v-if="lottery_promotion_tickets.length > 0">
-                        <p
-                            v-for="(
-                                promotion, index
-                            ) in lottery_promotion_tickets"
-                            :key="index"
-                            class="mb-2 text-lg"
-                        >
-                            {{ promotion.qty }} စောင်၀ယ်လျှင်
-                            {{ promotion.additional_qty }} စောင် အပိုရရှိပါမည်
-                        </p>
-                    </div>
-                    <div v-else>
-                        <p class="text-lg">Prmotion မရှိပါ</p>
-                    </div>
-                </div>
-            </div>
-            <div v-if="sub_step == 4" class="px-8 pb-4 mb-8">
-                <h2
-                    class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
-                >
-                    စည်းကမ်းသတ်မှတ်ချက်များ
-                </h2>
-                <div class="mb-0 mt-4">
-                    <p>
-                        {{ game.terms_and_condition }}
-                    </p>
-                </div>
-            </div>
+    <div
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="Lottery" :back-btn="backBtn"></Navbar>
         </div>
 
-        <!-- select number -->
-        <div :class="step == 2 ? 'block' : 'hidden'" class="px-2 mb-12 pb-12">
-            <div class="px-2 mb-12">
-                <p class="px-8 py-2">
-                    {{ game?.name }}
+        <div class="bg-[#FDC652] rounded-t-2xl">
+            <div :class="step == 1 ? 'block' : 'hidden'" class="pt-6 pb-10">
+                <p class="text-center text-black font-semibold text-xl mb-4">
+                    ကံစမ်းမဲ
                 </p>
-                <p class="px-8 py-2">ကမ်းစမ်းမဲ</p>
-                <p class="px-8 py-2">တစ်စောင် - {{ game?.price }} ကျပ်</p>
-            </div>
-            <div class="px-4">
-                <button
-                    class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-fit mb-8"
-                    @click="chooseNumber"
-                >
-                    ရှေ့ဆက်မည်
-                </button>
+
                 <div
-                    class="grid grid-cols-2 justify-between bg-transparent mb-3 items-start"
+                    class="rounded-2xl bg-black overflow-hidden shadow-lg mb-6 px-4 mx-4"
                 >
-                    <div class="flex items-center space-x-4 relative w-32">
-                        <select
-                            class="block appearance-none w-160 bg-black text-white px-6 py-2 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            v-model="from_to_value"
-                        >
-                            <option
-                                v-for="(from_to, index) in from_to_numbers"
-                                :key="index"
-                                :value="from_to"
-                            >
-                                {{ from_to.name }}
-                            </option>
-                        </select>
-                        <button
-                            @click="reverseFun"
-                            class="px-6 py-1.5 mt-3 bg-[#e09800] text-black text-base rounded-sm w-80 mb-3"
-                        >
-                            R
-                        </button>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
-                        >
-                            <svg
-                                class="fill-current h-4 w-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                            >
-                                <path d="M7 10l5 5 5-5H7z" />
-                            </svg>
-                        </div>
+                    <div class="w-full h-44 overflow-hidden">
+                        <img
+                            :src="img_prefix + game?.photo"
+                            class="w-full h-full object-cover"
+                        />
                     </div>
-                    <div class="flex justify-end mb-4 mt-3">
-                        <button
-                            class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
-                            @click="bet_numbers = []"
-                        >
-                            {{ $t("Clear") }}
-                        </button>
+                    <div class="px-4 py-4 text-center">
+                        <p class="text-white text-lg font-medium mb-0">
+                            {{ game?.name }}
+                        </p>
                     </div>
                 </div>
-                <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
-                    <div
-                        class="contents"
-                        v-for="(num, index) in numbers100"
-                        :key="index"
+
+                <div class="flex items-center justify-center mb-6 px-4">
+                    <button
+                        class="bg-[#5271FF] w-full py-3 rounded-xl text-white text-xl"
+                        @click="step = 2"
                     >
-                        <div
-                            :class="[
-                                num.is_active == 0
-                                    ? 'bg-gray-400'
-                                    : isBetNumber(num.number)
-                                      ? 'bg-[#FFC529] text-white'
-                                      : 'bg-white',
-                                'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
-                            ]"
-                            @click="num.is_active == 1 ? addBetNumber(num) : ''"
+                        ရှေ့ဆက်ရန်
+                    </button>
+                </div>
+
+                <div v-if="sub_step == 1" class="pb-2 mb-16">
+                    <div class="bg-white py-2 mb-2">
+                        <p
+                            class="text-black text-lg text-center font-semibold mb-0"
                         >
-                            <div class="w-full">
-                                <p class="text-xs lg:text-base font-inter">
-                                    {{ num.number }}
-                                </p>
+                            ကံစမ်းမဲ နှင့် ပတ်သတ်သေ့ာ အကြောင်းအရာများ:
+                        </p>
+                    </div>
+
+                    <div class="space-y-0 mx-4">
+                        <a
+                            @click="sub_step = 2"
+                            class="flex items-center justify-between py-4 cursor-pointer border-b border-black/20"
+                        >
+                            <div class="flex items-center gap-x-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-7 h-7 text-black"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M18.364 5.636 5.636 18.364M5.636 5.636l12.728 12.728"
+                                    />
+                                </svg>
+                                <span class="text-lg text-black font-semibold"
+                                    >ကံစမ်းမဲ အကြောင်း</span
+                                >
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-black"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+
+                        <a
+                            @click="sub_step = 3"
+                            class="flex items-center justify-between py-4 cursor-pointer border-b border-black/20"
+                        >
+                            <div class="flex items-center gap-x-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-7 h-7 text-black"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M18.364 5.636 5.636 18.364M5.636 5.636l12.728 12.728"
+                                    />
+                                </svg>
+                                <span class="text-lg text-black font-semibold"
+                                    >ကံစမ်းမဲ ပရိုမိုးရှင်းများ:</span
+                                >
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-black"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+
+                        <a
+                            @click="sub_step = 4"
+                            class="flex items-center justify-between py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center gap-x-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-7 h-7 text-black"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M18.364 5.636 5.636 18.364M5.636 5.636l12.728 12.728"
+                                    />
+                                </svg>
+                                <span class="text-lg text-black font-semibold"
+                                    >ကံစမ်းမဲ စည်းကမ်းသတ်မှတ်ချက်များ:</span
+                                >
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-black"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <p
+                        class="text-center text-red-600 font-semibold text-lg mt-6 mx-4"
+                    >
+                        ကံစမ်းမဲ နှင့် ပတ်သတ်သော အကြောင်းအရာများကို
+                        သေချာစွာဖတ်ရှုပေးပါရန်
+                    </p>
+                </div>
+
+                <div v-if="sub_step == 2" class="px-8 pb-4 mb-8">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                    >
+                        ကံစမ်းမဲအကြောင်း
+                    </h2>
+                    <div class="mb-0 mt-4">
+                        <p>
+                            {{ game.description }}
+                        </p>
+                    </div>
+                </div>
+                <div v-if="sub_step == 3" class="px-8 pb-4 mb-8">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                    >
+                        ကံစမ်းမဲ Promotion အကြောင်း
+                    </h2>
+                    <div class="mb-0 mt-4">
+                        <div v-if="lottery_promotion_tickets.length > 0">
+                            <p
+                                v-for="(
+                                    promotion, index
+                                ) in lottery_promotion_tickets"
+                                :key="index"
+                                class="mb-2 text-lg"
+                            >
+                                {{ promotion.qty }} စောင်၀ယ်လျှင်
+                                {{ promotion.additional_qty }} စောင်
+                                အပိုရရှိပါမည်
+                            </p>
+                        </div>
+                        <div v-else>
+                            <p class="text-lg">Prmotion မရှိပါ</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="sub_step == 4" class="px-8 pb-4 mb-8">
+                    <h2
+                        class="text-xl font-bold mb-4 dash-under after:!-bottom-1 relative after:!left-0 inline-block pb-3"
+                    >
+                        စည်းကမ်းသတ်မှတ်ချက်များ
+                    </h2>
+                    <div class="mb-0 mt-4">
+                        <p>
+                            {{ game.terms_and_condition }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- select number -->
+            <div
+                :class="step == 2 ? 'block' : 'hidden'"
+                class="px-2 mb-12 pb-12"
+            >
+                <div class="px-2 mb-12">
+                    <p class="px-8 py-2">
+                        {{ game?.name }}
+                    </p>
+                    <p class="px-8 py-2">ကမ်းစမ်းမဲ</p>
+                    <p class="px-8 py-2">တစ်စောင် - {{ game?.price }} ကျပ်</p>
+                </div>
+                <div class="px-4">
+                    <button
+                        class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-fit mb-8"
+                        @click="chooseNumber"
+                    >
+                        ရှေ့ဆက်မည်
+                    </button>
+                    <div
+                        class="grid grid-cols-2 justify-between bg-transparent mb-3 items-start"
+                    >
+                        <div class="flex items-center space-x-4 relative w-32">
+                            <select
+                                class="block appearance-none w-160 bg-black text-white px-6 py-2 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                v-model="from_to_value"
+                            >
+                                <option
+                                    v-for="(from_to, index) in from_to_numbers"
+                                    :key="index"
+                                    :value="from_to"
+                                >
+                                    {{ from_to.name }}
+                                </option>
+                            </select>
+                            <button
+                                @click="reverseFun"
+                                class="px-6 py-1.5 mt-3 bg-[#e09800] text-black text-base rounded-sm w-80 mb-3"
+                            >
+                                R
+                            </button>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
+                            >
+                                <svg
+                                    class="fill-current h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path d="M7 10l5 5 5-5H7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex justify-end mb-4 mt-3">
+                            <button
+                                class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
+                                @click="bet_numbers = []"
+                            >
+                                {{ $t("Clear") }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
+                        <div
+                            class="contents"
+                            v-for="(num, index) in numbers100"
+                            :key="index"
+                        >
+                            <div
+                                :class="[
+                                    num.is_active == 0
+                                        ? 'bg-gray-400'
+                                        : isBetNumber(num.number)
+                                          ? 'bg-[#FFC529] text-white'
+                                          : 'bg-white',
+                                    'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
+                                ]"
+                                @click="
+                                    num.is_active == 1 ? addBetNumber(num) : ''
+                                "
+                            >
+                                <div class="w-full">
+                                    <p class="text-xs lg:text-base font-inter">
+                                        {{ num.number }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Result Page-->
-        <div
-            class="relative mb-12 w-full pb-14"
-            :class="step == 3 ? 'block' : 'hidden'"
-            style="min-height: calc(100vh - 168px)"
-        >
-            <p class="text-center py-4">{{ game?.name }}</p>
-            <div class="flex justify-between p-6 bg-[#fff] text-black">
-                <div>
-                    <p class="pr-8 py-2">
-                        {{ getCurrentDate() }}
-                    </p>
-                    <!-- <p class="pr-8">
+            <!-- Result Page-->
+            <div
+                class="relative mb-12 w-full pb-14"
+                :class="step == 3 ? 'block' : 'hidden'"
+                style="min-height: calc(100vh - 168px)"
+            >
+                <p class="text-center py-4">{{ game?.name }}</p>
+                <div class="flex justify-between p-6 bg-[#fff] text-black">
+                    <div>
+                        <p class="pr-8 py-2">
+                            {{ getCurrentDate() }}
+                        </p>
+                        <!-- <p class="pr-8">
                         {{ getCurrentTime() }}
                     </p> -->
-                </div>
-                <div>
-                    <p class="pr-8 py-2">
-                        {{ formatTime(game?.lottery_date_time) }}
-                    </p>
-                    <!-- <p class="pr-8">
+                    </div>
+                    <div>
+                        <p class="pr-8 py-2">
+                            {{ formatTime(game?.lottery_date_time) }}
+                        </p>
+                        <!-- <p class="pr-8">
                         {{ totalBetAmount?.toLocaleString() }} MMK
                     </p> -->
+                    </div>
                 </div>
-            </div>
-            <div class="mb-5 px-4 bg-white pb-12">
-                <div class="flex justify-end mb-4"></div>
-                <table class="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-2">စဉ်</th>
-                            <th class="py-2">{{ $t("No") }}</th>
-                            <th class="py-2 text-right">
-                                {{ $t("Betting Amount") }}
-                            </th>
-                            <!-- <th class="py-2">{{ $t("Delete") }}</th> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="(bet_number, index) in bet_numbers"
-                            :key="index"
-                            class="border-b border-gray-400"
-                        >
-                            <td class="text-center py-2">
-                                {{ index + 1 }}
-                            </td>
-                            <td class="text-center py-2">
-                                {{ bet_number.number }}
-                            </td>
+                <div class="mb-5 px-4 bg-white pb-12">
+                    <div class="flex justify-end mb-4"></div>
+                    <table class="table-auto w-full">
+                        <thead>
+                            <tr>
+                                <th class="py-2">စဉ်</th>
+                                <th class="py-2">{{ $t("No") }}</th>
+                                <th class="py-2 text-right">
+                                    {{ $t("Betting Amount") }}
+                                </th>
+                                <!-- <th class="py-2">{{ $t("Delete") }}</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="(bet_number, index) in bet_numbers"
+                                :key="index"
+                                class="border-b border-gray-400"
+                            >
+                                <td class="text-center py-2">
+                                    {{ index + 1 }}
+                                </td>
+                                <td class="text-center py-2">
+                                    {{ bet_number.number }}
+                                </td>
 
-                            <td class="text-right py-2">
-                                <span>
-                                    {{ bet_number.amount?.toLocaleString() }}
-                                </span>
-                            </td>
-                            <!-- <td class="text-center py-2">
+                                <td class="text-right py-2">
+                                    <span>
+                                        {{
+                                            bet_number.amount?.toLocaleString()
+                                        }}
+                                    </span>
+                                </td>
+                                <!-- <td class="text-center py-2">
                                 <button
                                     data-twe-toggle="modal"
                                     data-twe-target="#delete_modal"
@@ -356,19 +391,19 @@
                                     <i class="fal fa-trash"></i>
                                 </button>
                             </td> -->
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="text-center">စုစုပေါင်း</td>
-                            <td class="py-2 text-right">
-                                {{ totalBetAmount?.toLocaleString() }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="absolute bottom-0 mb-4 w-full flex justify-center">
-                <!-- <button
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-center">စုစုပေါင်း</td>
+                                <td class="py-2 text-right">
+                                    {{ totalBetAmount?.toLocaleString() }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="absolute bottom-0 mb-4 w-full flex justify-center">
+                    <!-- <button
                     class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
                     @click="
                         step = 2;
@@ -377,277 +412,278 @@
                 >
                     Cancel
                 </button> -->
-                <button
-                    class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-full mb-8 mx-8"
-                    @click="sendBetting"
-                    :disabled="calling_api"
-                >
-                    <span v-if="!calling_api"> ထိုးမည် </span>
-                    <i v-else class="fas fa-spinner fa-spin px-4"></i>
-                </button>
+                    <button
+                        class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-full mb-8 mx-8"
+                        @click="sendBetting"
+                        :disabled="calling_api"
+                    >
+                        <span v-if="!calling_api"> ထိုးမည် </span>
+                        <i v-else class="fas fa-spinner fa-spin px-4"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <button
-            data-twe-toggle="modal"
-            class="hidden"
-            data-twe-target="#promotion_modal"
-            id="promotion_modal_btn"
-        ></button>
-        <!-- promotion modal -->
-        <div
-            data-twe-modal-init
-            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-            id="promotion_modal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
+            <button
+                data-twe-toggle="modal"
+                class="hidden"
+                data-twe-target="#promotion_modal"
+                id="promotion_modal_btn"
+            ></button>
+            <!-- promotion modal -->
             <div
-                data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
+                data-twe-modal-init
+                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                id="promotion_modal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
             >
                 <div
-                    class="pt-4 pb-8 pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                    data-twe-modal-dialog-ref
+                    class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
                 >
                     <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
+                        class="pt-4 pb-8 pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
                     >
-                        <h4
-                            class="text-xl font-medium leading-normal text-surface text-center w-full"
-                            id="exampleModalLabel"
-                        ></h4>
-                        <button
-                            type="button"
-                            id="close_promotion_modal"
-                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                            data-twe-modal-dismiss
-                            aria-label="Close"
+                        <div
+                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
                         >
-                            <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                    <div
-                        class="relative flex-auto pt-2 pb-6 px-16"
-                        data-twe-modal-body-ref
-                    >
-                        <div class="mb-8">
-                            <svg
-                                class="w-16 h-16 mx-auto mb-6"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 640 640"
-                            >
-                                <path
-                                    d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"
-                                />
-                            </svg>
-                            <p class="pb-10 mb-4">
-                                ကံစမ်းမဲ {{ bet_numbers.length }} စောင်
-                                ဝယ်သည့်အတွက် Free {{ freeTicketCount }} စောင်
-                                ရရှိမည်ဖြစ်သည်
-                            </p>
-                            <p class="text-sm">
-                                Free {{ freeTicketCount }} စောင်
-                                ရွေးချယ်ပေးပါရန်
-                            </p>
-                        </div>
-                        <div class="mb-4">
+                            <h4
+                                class="text-xl font-medium leading-normal text-surface text-center w-full"
+                                id="exampleModalLabel"
+                            ></h4>
                             <button
-                                class="px-4 py-2 lg:py-3 bg-[#0978D3] text-white text-sm rounded-3xl w-full"
+                                type="button"
+                                id="close_promotion_modal"
+                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
                                 data-twe-modal-dismiss
                                 aria-label="Close"
                             >
-                                ရှေ့ဆက်မည်
+                                <span class="[&>svg]:h-6 [&>svg]:w-6">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        <div
+                            class="relative flex-auto pt-2 pb-6 px-16"
+                            data-twe-modal-body-ref
+                        >
+                            <div class="mb-8">
+                                <svg
+                                    class="w-16 h-16 mx-auto mb-6"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 640 640"
+                                >
+                                    <path
+                                        d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"
+                                    />
+                                </svg>
+                                <p class="pb-10 mb-4">
+                                    ကံစမ်းမဲ {{ bet_numbers.length }} စောင်
+                                    ဝယ်သည့်အတွက် Free
+                                    {{ freeTicketCount }} စောင် ရရှိမည်ဖြစ်သည်
+                                </p>
+                                <p class="text-sm">
+                                    Free {{ freeTicketCount }} စောင်
+                                    ရွေးချယ်ပေးပါရန်
+                                </p>
+                            </div>
+                            <div class="mb-4">
+                                <button
+                                    class="px-4 py-2 lg:py-3 bg-[#0978D3] text-white text-sm rounded-3xl w-full"
+                                    data-twe-modal-dismiss
+                                    aria-label="Close"
+                                >
+                                    ရှေ့ဆက်မည်
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Delete Modal -->
+            <div
+                data-twe-modal-init
+                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                id="delete_modal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div
+                    data-twe-modal-dialog-ref
+                    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+                >
+                    <div
+                        class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                    >
+                        <div
+                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                        >
+                            <h4
+                                class="text-xl font-medium leading-normal text-surface"
+                                id="exampleModalLabel"
+                            >
+                                Confirm Delete
+                            </h4>
+                            <button
+                                type="button"
+                                id="close"
+                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                data-twe-modal-dismiss
+                                aria-label="Close"
+                            >
+                                <span class="[&>svg]:h-6 [&>svg]:w-6">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        <div
+                            class="relative flex-auto py-6 px-6"
+                            data-twe-modal-body-ref
+                        >
+                            <p class="text-lg">Are You Sure ?</p>
+                        </div>
+
+                        <div
+                            class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
+                        >
+                            <button
+                                type="button"
+                                id="modalClose"
+                                class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
+                                data-twe-modal-dismiss
+                                data-twe-ripple-init
+                                data-twe-ripple-color="light"
+                            >
+                                Close
+                            </button>
+                            <button
+                                @click="deleteBetNumber"
+                                type="button"
+                                class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                            >
+                                Delete
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--Delete Modal -->
-        <div
-            data-twe-modal-init
-            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-            id="delete_modal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
+            <button
+                data-twe-toggle="modal"
+                class="hidden"
+                data-twe-target="#error_modal"
+                id="error_modal_btn"
+            ></button>
+            <!--Error Modal Box -->
             <div
-                data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+                data-twe-modal-init
+                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                id="error_modal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
             >
                 <div
-                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                    data-twe-modal-dialog-ref
+                    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
                 >
                     <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                        class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
                     >
-                        <h4
-                            class="text-xl font-medium leading-normal text-surface"
-                            id="exampleModalLabel"
+                        <div
+                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
                         >
-                            Confirm Delete
-                        </h4>
-                        <button
-                            type="button"
-                            id="close"
-                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                            data-twe-modal-dismiss
-                            aria-label="Close"
+                            <h4
+                                class="text-xl text-red-600 font-medium leading-normal text-surface"
+                                id="exampleModalLabel"
+                            >
+                                Error
+                            </h4>
+                            <button
+                                type="button"
+                                id="close"
+                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                data-twe-modal-dismiss
+                                aria-label="Close"
+                            >
+                                <span class="[&>svg]:h-6 [&>svg]:w-6">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        <div
+                            class="relative flex-auto py-6 px-6"
+                            data-twe-modal-body-ref
                         >
-                            <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                    <div
-                        class="relative flex-auto py-6 px-6"
-                        data-twe-modal-body-ref
-                    >
-                        <p class="text-lg">Are You Sure ?</p>
-                    </div>
+                            <p class="text-lg">{{ error_modal_text }}</p>
+                        </div>
 
-                    <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
-                    >
-                        <button
-                            type="button"
-                            id="modalClose"
-                            class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
-                            data-twe-modal-dismiss
-                            data-twe-ripple-init
-                            data-twe-ripple-color="light"
+                        <div
+                            class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
                         >
-                            Close
-                        </button>
-                        <button
-                            @click="deleteBetNumber"
-                            type="button"
-                            class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
-                        >
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button
-            data-twe-toggle="modal"
-            class="hidden"
-            data-twe-target="#error_modal"
-            id="error_modal_btn"
-        ></button>
-        <!--Error Modal Box -->
-        <div
-            data-twe-modal-init
-            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-            id="error_modal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
-            <div
-                data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
-            >
-                <div
-                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
-                >
-                    <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
-                    >
-                        <h4
-                            class="text-xl text-red-600 font-medium leading-normal text-surface"
-                            id="exampleModalLabel"
-                        >
-                            Error
-                        </h4>
-                        <button
-                            type="button"
-                            id="close"
-                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                            data-twe-modal-dismiss
-                            aria-label="Close"
-                        >
-                            <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                    <div
-                        class="relative flex-auto py-6 px-6"
-                        data-twe-modal-body-ref
-                    >
-                        <p class="text-lg">{{ error_modal_text }}</p>
-                    </div>
-
-                    <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
-                    >
-                        <button
-                            v-if="
-                                error_modal_text ==
-                                'No more tickets for promotions.'
-                            "
-                            data-twe-modal-dismiss
-                            data-twe-ripple-init
-                            data-twe-ripple-color="light"
-                            type="button"
-                            @click="resetPromotion"
-                            class="rounded bg-red-600/50 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
-                        >
-                            Reset Promotions
-                        </button>
-                        <button
-                            data-twe-modal-dismiss
-                            data-twe-ripple-init
-                            data-twe-ripple-color="light"
-                            type="button"
-                            class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
-                        >
-                            OK
-                        </button>
+                            <button
+                                v-if="
+                                    error_modal_text ==
+                                    'No more tickets for promotions.'
+                                "
+                                data-twe-modal-dismiss
+                                data-twe-ripple-init
+                                data-twe-ripple-color="light"
+                                type="button"
+                                @click="resetPromotion"
+                                class="rounded bg-red-600/50 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                            >
+                                Reset Promotions
+                            </button>
+                            <button
+                                data-twe-modal-dismiss
+                                data-twe-ripple-init
+                                data-twe-ripple-color="light"
+                                type="button"
+                                class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                            >
+                                OK
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
