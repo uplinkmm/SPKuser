@@ -6,7 +6,9 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
+        <div class="px-4">
+            <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
+        </div>
         <div
             class="bg-[#FDC652] px-4 pt-3 pb-6 mt-4 rounded-2xl shadow-lg flex-grow"
         >
