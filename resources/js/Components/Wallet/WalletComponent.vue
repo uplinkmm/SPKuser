@@ -278,25 +278,25 @@
         <!-- exchange money modal -->
         <div
             data-twe-modal-init
-            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black/80 flex items-center justify-center p-4"
             id="add_main_money_model"
             tabindex="-1"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="addMainMoneyLabel"
             aria-hidden="true"
         >
             <div
                 data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
+                class="pointer-events-none w-full h-full opacity-0 transition-all duration-300 ease-in-out"
             >
                 <div
-                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                    class="pointer-events-auto fixed left-1/2 top-1/3 w-full max-w-[420px] -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-3xl border-none bg-[#FFC529] text-current shadow-4 outline-none overflow-hidden"
                 >
                     <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
+                        class="flex flex-shrink-0 items-center justify-between py-5 px-6"
                     >
                         <h4
-                            class="text-xl font-medium leading-normal text-surface text-center w-full"
-                            id="exampleModalLabel"
+                            class="text-xl font-semibold leading-normal text-black text-center w-full"
+                            id="addMainMoneyLabel"
                         >
                             {{
                                 wallet_transfer.transfer_type == "to_wallet"
@@ -307,7 +307,7 @@
                         <button
                             type="button"
                             id="close_main_money_model"
-                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 bg-white/60 text-black/70 hover:text-black focus:text-black focus:opacity-100 focus:shadow-none focus:outline-none"
                             data-twe-modal-dismiss
                             aria-label="Close"
                         >
@@ -329,10 +329,12 @@
                         </button>
                     </div>
                     <div
-                        class="relative flex-auto py-6 px-16"
+                        class="relative flex-auto pb-6 px-8"
                         data-twe-modal-body-ref
                     >
-                        <div class="flex justify-between text-3xl mb-12 px-4">
+                        <div
+                            class="flex justify-between text-3xl mb-10 px-2 items-center"
+                        >
                             <i
                                 v-if="
                                     wallet_transfer.transfer_type == 'to_wallet'
@@ -343,8 +345,8 @@
                             <svg
                                 @click="changeTransferType"
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
+                                width="28"
+                                height="28"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
@@ -367,10 +369,10 @@
                             <i v-else class="far fa-gamepad"></i>
                         </div>
 
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <label
                                 for="amount"
-                                class="text-sm mb-3 relative block"
+                                class="text-sm mb-2 relative block font-semibold text-black"
                                 >Amount ({{
                                     wallet_transfer.transfer_type == "to_wallet"
                                         ? gameMoneyBalance
@@ -383,7 +385,7 @@
                                 v-model="wallet_transfer.amount"
                                 id="amount"
                                 :placeholder="$t('Amount')"
-                                class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none focus:outline-none"
+                                class="block w-full py-3 px-3 border border-gray-300 text-sm rounded-xl bg-white focus:ring-0 focus:shadow-none focus:outline-none"
                             />
                         </div>
 
@@ -391,13 +393,15 @@
                             <button
                                 :disabled="loading"
                                 @click="transferWallet"
-                                class="px-4 py-2 lg:py-3 bg-[#FFBF33] disabled:bg-yellow-100 disabled:text-gray-300 hover:bg-[#FFBF33] text-white text-sm rounded-lg w-full"
+                                class="w-full px-4 py-3 bg-[#5271FF] disabled:bg-[#9CA3AF] disabled:text-white disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#5271FF]/90 text-white text-sm font-semibold rounded-2xl"
                             >
                                 {{ loading ? "Loading.." : "Transfer" }}
                             </button>
                         </div>
-                        <div class="mb-12">
-                            <p class="text-sm">Minimum Amount : 100 MMK</p>
+                        <div class="mb-2">
+                            <p class="text-xs text-black/80">
+                                Minimum Amount : 100 MMK
+                            </p>
                         </div>
                     </div>
                 </div>

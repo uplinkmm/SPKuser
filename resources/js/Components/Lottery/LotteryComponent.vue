@@ -505,87 +505,6 @@
                 </div>
             </div>
 
-            <!--Delete Modal -->
-            <div
-                data-twe-modal-init
-                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                id="delete_modal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div
-                    data-twe-modal-dialog-ref
-                    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
-                >
-                    <div
-                        class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
-                    >
-                        <div
-                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
-                        >
-                            <h4
-                                class="text-xl font-medium leading-normal text-surface"
-                                id="exampleModalLabel"
-                            >
-                                Confirm Delete
-                            </h4>
-                            <button
-                                type="button"
-                                id="close"
-                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                                data-twe-modal-dismiss
-                                aria-label="Close"
-                            >
-                                <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div
-                            class="relative flex-auto py-6 px-6"
-                            data-twe-modal-body-ref
-                        >
-                            <p class="text-lg">Are You Sure ?</p>
-                        </div>
-
-                        <div
-                            class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
-                        >
-                            <button
-                                type="button"
-                                id="modalClose"
-                                class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
-                                data-twe-modal-dismiss
-                                data-twe-ripple-init
-                                data-twe-ripple-color="light"
-                            >
-                                Close
-                            </button>
-                            <button
-                                @click="deleteBetNumber"
-                                type="button"
-                                class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <button
                 data-twe-toggle="modal"
                 class="hidden"
@@ -595,32 +514,32 @@
             <!--Error Modal Box -->
             <div
                 data-twe-modal-init
-                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black/80 flex items-center justify-center p-4"
                 id="error_modal"
                 tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                aria-labelledby="errorModalLabel"
                 aria-hidden="true"
             >
                 <div
                     data-twe-modal-dialog-ref
-                    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+                    class="pointer-events-none w-full h-full opacity-0 transition-all duration-300 ease-in-out"
                 >
                     <div
-                        class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                        class="pointer-events-auto fixed left-1/2 top-1/3 w-full max-w-[420px] -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-3xl border-none bg-[#FFC529] text-current shadow-4 outline-none overflow-hidden"
                     >
                         <div
-                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                            class="flex flex-shrink-0 items-center justify-between py-5 px-6"
                         >
                             <h4
-                                class="text-xl text-red-600 font-medium leading-normal text-surface"
-                                id="exampleModalLabel"
+                                class="text-xl font-semibold leading-normal text-red-600"
+                                id="errorModalLabel"
                             >
                                 Error
                             </h4>
                             <button
                                 type="button"
                                 id="close"
-                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 bg-white/60 text-black/70 hover:text-black focus:text-black focus:opacity-100 focus:shadow-none focus:outline-none"
                                 data-twe-modal-dismiss
                                 aria-label="Close"
                             >
@@ -642,14 +561,18 @@
                             </button>
                         </div>
                         <div
-                            class="relative flex-auto py-6 px-6"
+                            class="relative flex-auto pb-6 px-6"
                             data-twe-modal-body-ref
                         >
-                            <p class="text-lg">{{ error_modal_text }}</p>
+                            <p
+                                class="text-lg font-semibold text-red-600 text-center"
+                            >
+                                {{ error_modal_text }}
+                            </p>
                         </div>
 
                         <div
-                            class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
+                            class="flex flex-shrink-0 flex-wrap items-center justify-end px-6 pb-6 gap-x-3"
                         >
                             <button
                                 v-if="
@@ -661,7 +584,7 @@
                                 data-twe-ripple-color="light"
                                 type="button"
                                 @click="resetPromotion"
-                                class="rounded bg-red-600/50 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                                class="rounded-2xl bg-red-600/80 px-6 py-4 text-sm text-white font-semibold focus:outline-none focus:ring-0"
                             >
                                 Reset Promotions
                             </button>
@@ -670,9 +593,9 @@
                                 data-twe-ripple-init
                                 data-twe-ripple-color="light"
                                 type="button"
-                                class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                                class="rounded-2xl bg-white/70 px-6 py-4 text-sm text-black font-semibold focus:outline-none focus:ring-0"
                             >
-                                OK
+                                Close
                             </button>
                         </div>
                     </div>
