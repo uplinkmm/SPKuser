@@ -13,8 +13,10 @@
             <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         </div>
 
-        <div class="mt-4 px-4 pb-14">
-            <div class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6">
+        <div class="mt-4 pb-14">
+            <div
+                class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6 min-h-[calc(100vh-100px)]"
+            >
                 <p class="text-center text-xl font-bold mb-4">ထီပေါက်သူ</p>
 
                 <div class="rounded-2xl bg-[#C58A1F] px-3 pt-3 pb-4">
@@ -32,6 +34,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr v-if="!winners.length">
+                                    <td
+                                        colspan="5"
+                                        class="text-center py-10 text-black font-semibold"
+                                    >
+                                        No winners found
+                                    </td>
+                                </tr>
                                 <tr
                                     v-for="(winner, index) in winners"
                                     :key="index"
