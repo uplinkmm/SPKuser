@@ -7,11 +7,13 @@
         }"
     >
         <div class="pt-0 pb-6 bg-black">
-            <Navbar
-                :title="$t('Wallet')"
-                :textColor="'text-white font-semibold'"
-                :back-btn="backBtn"
-            ></Navbar>
+            <div class="px-4">
+                <Navbar
+                    :title="$t('Wallet')"
+                    :textColor="'text-white font-semibold'"
+                    :back-btn="backBtn"
+                ></Navbar>
+            </div>
 
             <div class="mt-3 px-4 py-6">
                 <div class="flex items-center gap-x-4">
