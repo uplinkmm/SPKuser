@@ -1,86 +1,102 @@
 <template>
     <notifications position="top center" />
 
-    <div class="frame-container px-4 min-h-[100vh]">
-        <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
-
-        <div class="flex w-full rounded-xl bg-transparent pt-4 pb-2 px-4 mb-4">
-            <p
-                class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="
-                    game_id == 1
-                        ? 'text-black border-b border-gray-700'
-                        : ' text-gray-500'
-                "
-                @click="changeGame(1)"
-            >
-                2D
-            </p>
-            <p
-                class="font-semibold px-1 mr-4 hover:isolate focus:isolate cursor-pointer text-lg"
-                :class="
-                    game_id == 2
-                        ? 'text-black border-b border-gray-700'
-                        : ' text-gray-500'
-                "
-                @click="changeGame(2)"
-            >
-                3D
-            </p>
+    <div
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         </div>
-        <div class="mb-0 bg-white px-4">
-            <table class="table-auto w-full">
-                <thead class="w-full">
-                    <tr class="w-full rounded-xl border-b bg-white">
-                        <th
-                            class="py-3 px-1 rounded-tl-lg rounded-bl-lg text-sm"
-                        >
-                            No
-                        </th>
-                        <th class="py-3 px-1 text-sm">Name</th>
-                        <th class="py-3 px-1 text-sm">Wining No</th>
-                        <th class="py-3 px-1 text-sm">Phone</th>
-                        <th
-                            class="py-3 px-1 rounded-tr-lg rounded-br-lg text-smx`"
-                        >
-                            Amount
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-if="!winners.length">
-                        <td colspan="5" class="text-center py-4 text-sm">
-                            No winners yet.
-                        </td>
-                    </tr>
 
-                    <tr
-                        class="w-fulll"
-                        v-for="(winner, index) in winners"
-                        :key="index"
+        <div class="mt-4 pb-14">
+            <div
+                class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6 min-h-[calc(100vh-100px)]"
+            >
+                <p class="text-center text-xl font-bold mb-4">ထီပေါက်သူ</p>
+
+                <div class="flex w-full rounded-xl bg-transparent pb-2 mb-2">
+                    <button
+                        type="button"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-md underline-border relative"
+                        :class="
+                            game_id == 1
+                                ? 'after:!block text-black'
+                                : 'text-gray-500'
+                        "
+                        @click="changeGame(1)"
                     >
-                        <td
-                            class="py-3 text-center text-sm rounded-tl-lg rounded-bl-lg !border-gray-300"
-                        >
-                            {{ ++index }}
-                        </td>
-                        <td class="py-3 text-center text-sm">
-                            {{ winner.name }}
-                        </td>
-                        <td class="py-3 text-center text-sm">
-                            {{ winner.number }}
-                        </td>
-                        <td class="py-3 text-center text-sm">
-                            {{ winner.phone_number }}
-                        </td>
-                        <td
-                            class="py-3 text-center text-sm rounded-tr-lg rounded-br-lg"
-                        >
-                            {{ winner.total_amount?.toLocaleString() }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        2D ပေါက်သူများ
+                    </button>
+                    <button
+                        type="button"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-md underline-border relative"
+                        :class="
+                            game_id == 2
+                                ? 'after:!block text-black'
+                                : 'text-gray-500'
+                        "
+                        @click="changeGame(2)"
+                    >
+                        3D ပေါက်သူများ
+                    </button>
+                </div>
+
+                <div class="rounded-2xl bg-[#C58A1F] px-3 pt-3 pb-4">
+                    <div
+                        class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                    >
+                        <table class="table-auto w-full">
+                            <thead class="bg-[#F4F4F4] text-black">
+                                <tr>
+                                    <th class="py-3">No</th>
+                                    <th class="py-3">Name</th>
+                                    <th class="py-3">Wining No</th>
+                                    <th class="py-3">Phone</th>
+                                    <th class="py-3">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="!winners.length">
+                                    <td
+                                        colspan="5"
+                                        class="text-center py-10 text-black font-semibold"
+                                    >
+                                        No winners found
+                                    </td>
+                                </tr>
+
+                                <tr
+                                    v-for="(winner, index) in winners"
+                                    :key="index"
+                                    class="border-b last:border-0 border-black/10"
+                                >
+                                    <td class="text-center text-sm py-3">
+                                        {{ index + 1 }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{ winner.name }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{ winner.number }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{ winner.phone_number }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{
+                                            winner.total_amount?.toLocaleString()
+                                        }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
