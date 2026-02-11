@@ -142,7 +142,9 @@
                             </p>
                         </div>
 
-                        <div class="mt-6 justify-center items-end space-x-8">
+                        <div
+                            class="flex mt-6 justify-center items-end space-x-8"
+                        >
                             <div
                                 v-for="(twod_setting, index) in twod_settings"
                                 :key="index"
