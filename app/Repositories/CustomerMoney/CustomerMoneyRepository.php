@@ -15,6 +15,8 @@ use App\Models\CashWithdrawlTransaction;
 use App\Http\Action\CustomerPointBalance;
 use App\Http\Action\CustomerWalletBalance;
 use App\Http\Action\WalletTransactionCommon;
+use App\Http\Resources\WalletTransfer\WalletTransferListResource;
+use App\Models\WalletTransfer;
 
 class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
 {
@@ -109,7 +111,27 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
     public function getTransactionHistory($request)
     {
         $customerId = UserData()->id;
+
         $className = $request->type == 'topup_transaction' ? TopupTransaction::class : CashWithdrawlTransaction::class;
+        if ($request->type == 'topup_transaction') {
+            $className = TopupTransaction::class;
+        } else if ($request->type == 'cash_withdrawl_transaction') {
+            $className = CashWithdrawlTransaction::class;
+        } else if ($request->type == 'wallet_transfer') {
+            $transactions = WalletTransfer::where('customer_id', $customerId)->select(
+                'id',
+                'customer_id',
+                'amount',
+                'transfer_type',
+                'created_at',
+            )
+                ->take(11)
+                ->latest()
+                ->get();
+            return WalletTransferListResource::collection($transactions);
+        }
+
+
         $transactions = $className::with(['account:id,account_type,phone_number'])
             ->orderBy('id', 'desc')
             ->where('customer_id', $customerId)
@@ -131,6 +153,7 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
             ->take(11)
             ->latest()
             ->get();
+
         return $transactions;
     }
 }

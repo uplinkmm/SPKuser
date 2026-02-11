@@ -137,7 +137,6 @@ class WalletTransferRepository implements WalletTransferInterface
                 $this->actionOfWalletTransaction($walletTransfer, $amount, 'out');
                 // app(WalletService::class)->transfer($customer, $customer, $amount, TransactionName::GameMoneyTransfer);
 
-
             } elseif ($transferType === 'to_wallet') {
                 // Ensure sufficient balance in the game wallet
                 if ($gameWalletBalance < $amount) {
