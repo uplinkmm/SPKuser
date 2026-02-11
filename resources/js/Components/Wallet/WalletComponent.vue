@@ -6,7 +6,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="pt-0 pb-6 bg-black">
+        <div class="pt-0 pb-6">
             <div class="px-4">
                 <Navbar
                     :title="$t('Wallet')"
