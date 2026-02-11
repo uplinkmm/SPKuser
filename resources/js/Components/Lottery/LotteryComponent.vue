@@ -253,65 +253,76 @@
                         </div>
                     </div>
 
-                    <div class="mt-6">
-                        <button
-                            class="bg-[#5271FF] w-full py-4 rounded-xl text-white text-xl font-semibold"
-                            @click="chooseNumber"
+                    <div
+                        v-if="promotion_notice_shown"
+                        class="mt-6 rounded-2xl border border-black/30 bg-[#C89A1E] px-4 pt-4 pb-5"
+                    >
+                        <div
+                            class="rounded-2xl bg-[#E5E7EB] border-2 border-black/60 px-4 pt-5 pb-6 text-center"
                         >
-                            ရှေ့ဆက်မည်
-                        </button>
+                            <svg
+                                class="w-14 h-14 mx-auto mb-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 640 640"
+                            >
+                                <path
+                                    d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"
+                                />
+                            </svg>
+
+                            <p class="text-black text-lg font-semibold mb-2">
+                                ကံစမ်းမဲ
+                                {{ ticket_counts_without_promoiton }}
+                                စောင်ဝယ်သည့်အတွက်
+                            </p>
+                            <p class="text-black text-lg font-semibold mb-3">
+                                Free Ticket {{ freeTicketCount }} စောင်ရရှိမည်
+                            </p>
+                            <p class="text-red-600 text-lg font-semibold mb-5">
+                                Free Ticket
+                                {{ freeTicketCount }} စောင်ရွေးချယ်ပေးပါရန်
+                            </p>
+
+                            <button
+                                type="button"
+                                class="bg-[#5271FF] w-full py-4 rounded-xl text-white text-xl font-semibold"
+                                @click="promotion_notice_shown = false"
+                            >
+                                ရှေ့ဆက်မည်
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="mt-6">
-                        <p
-                            class="text-left text-black font-semibold text-xl mb-3"
-                        >
-                            ထိပ်စီး နံပါတ်ရွေးပါ
-                        </p>
-                        <div class="flex items-center gap-x-4">
-                            <div class="flex-grow relative">
-                                <div
-                                    class="flex items-center bg-[#E5E7EB] rounded-2xl overflow-hidden border-2 border-black"
-                                    style="height: 60px"
-                                >
-                                    <div
-                                        class="shrink-0 px-6 items-center gap-x-4 text-black"
-                                    >
-                                        <p
-                                            class="block text-xl font-bold leading-none"
-                                        >
-                                            123
-                                        </p>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            class="w-8 h-8"
-                                        >
-                                            <path
-                                                d="M3 12a1 1 0 0 1 1-1h11.586l-3.293-3.293a1 1 0 1 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 1 1-1.414-1.414L15.586 13H4a1 1 0 0 1-1-1z"
-                                            />
-                                        </svg>
-                                    </div>
+                    <div v-if="!promotion_notice_shown" class="contents">
+                        <div class="mt-6">
+                            <button
+                                class="bg-[#5271FF] w-full py-4 rounded-xl text-white text-xl font-semibold"
+                                @click="chooseNumber"
+                            >
+                                ရှေ့ဆက်မည်
+                            </button>
+                        </div>
 
-                                    <div class="relative flex-grow h-full">
-                                        <select
-                                            class="block appearance-none w-full h-full bg-transparent text-black text-xl font-medium text-center pr-20 pl-2 focus:outline-none focus:ring-0"
-                                            v-model="from_to_value"
-                                        >
-                                            <option
-                                                v-for="(
-                                                    from_to, index
-                                                ) in from_to_numbers"
-                                                :key="index"
-                                                :value="from_to"
-                                            >
-                                                {{ from_to.name }}
-                                            </option>
-                                        </select>
+                        <div class="mt-6">
+                            <p
+                                class="text-left text-black font-semibold text-xl mb-3"
+                            >
+                                ထိပ်စီး နံပါတ်ရွေးပါ
+                            </p>
+                            <div class="flex items-center gap-x-4">
+                                <div class="flex-grow relative">
+                                    <div
+                                        class="flex items-center bg-[#E5E7EB] rounded-2xl overflow-hidden border-2 border-black"
+                                        style="height: 60px"
+                                    >
                                         <div
-                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8 text-black"
+                                            class="shrink-0 px-6 items-center gap-x-4 text-black"
                                         >
+                                            <p
+                                                class="block text-xl font-bold leading-none"
+                                            >
+                                                123
+                                            </p>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
@@ -319,55 +330,88 @@
                                                 class="w-8 h-8"
                                             >
                                                 <path
-                                                    d="M6.707 9.293a1 1 0 0 1 1.414 0L12 13.172l3.879-3.879a1 1 0 1 1 1.414 1.414l-4.586 4.586a1 1 0 0 1-1.414 0L6.707 10.707a1 1 0 0 1 0-1.414z"
+                                                    d="M3 12a1 1 0 0 1 1-1h11.586l-3.293-3.293a1 1 0 1 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 1 1-1.414-1.414L15.586 13H4a1 1 0 0 1-1-1z"
                                                 />
                                             </svg>
                                         </div>
+
+                                        <div class="relative flex-grow h-full">
+                                            <select
+                                                class="block appearance-none w-full h-full bg-transparent text-black text-xl font-medium text-center pr-20 pl-2 focus:outline-none focus:ring-0"
+                                                v-model="from_to_value"
+                                            >
+                                                <option
+                                                    v-for="(
+                                                        from_to, index
+                                                    ) in from_to_numbers"
+                                                    :key="index"
+                                                    :value="from_to"
+                                                >
+                                                    {{ from_to.name }}
+                                                </option>
+                                            </select>
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8 text-black"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    fill="currentColor"
+                                                    class="w-8 h-8"
+                                                >
+                                                    <path
+                                                        d="M6.707 9.293a1 1 0 0 1 1.414 0L12 13.172l3.879-3.879a1 1 0 1 1 1.414 1.414l-4.586 4.586a1 1 0 0 1-1.414 0L6.707 10.707a1 1 0 0 1 0-1.414z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <button
+                                    @click="reverseFun"
+                                    class="w-14 h-14 bg-[#d9d9d9] text-black text-xl font-semibold rounded-xl border border-black/20"
+                                >
+                                    R
+                                </button>
+
+                                <button
+                                    class="bg-[#b23434] text-white px-4 h-14 rounded-xl text-sm font-semibold"
+                                    @click="bet_numbers = []"
+                                >
+                                    {{ $t("Clear") }}
+                                </button>
                             </div>
-
-                            <button
-                                @click="reverseFun"
-                                class="w-14 h-14 bg-[#d9d9d9] text-black text-xl font-semibold rounded-xl border border-black/20"
-                            >
-                                R
-                            </button>
-
-                            <button
-                                class="bg-[#b23434] text-white px-4 h-14 rounded-xl text-sm font-semibold"
-                                @click="bet_numbers = []"
-                            >
-                                {{ $t("Clear") }}
-                            </button>
                         </div>
-                    </div>
 
-                    <div class="mt-6 grid grid-cols-10 gap-x-2 gap-y-3">
-                        <div
-                            class="contents"
-                            v-for="(num, index) in numbers100"
-                            :key="index"
-                        >
+                        <div class="mt-6 grid grid-cols-10 gap-x-2 gap-y-3">
                             <div
-                                :class="[
-                                    num.is_active == 0
-                                        ? 'bg-[#cfcfcf] text-white'
-                                        : isBetNumber(num.number)
-                                          ? 'bg-[#5271FF] text-white'
-                                          : 'bg-[#FF9900] text-white',
-                                    'rounded-lg py-5 shadow-lg aspect-square flex flex-col items-center justify-center border border-white',
-                                ]"
-                                @click="
-                                    num.is_active == 1 ? addBetNumber(num) : ''
-                                "
+                                class="contents"
+                                v-for="(num, index) in numbers100"
+                                :key="index"
                             >
-                                <div class="w-full">
-                                    <p
-                                        class="text-base font-bold text-center leading-none"
-                                    >
-                                        {{ num.number }}
-                                    </p>
+                                <div
+                                    :class="[
+                                        num.is_active == 0
+                                            ? 'bg-[#cfcfcf] text-white'
+                                            : isBetNumber(num.number)
+                                              ? 'bg-[#5271FF] text-white'
+                                              : 'bg-[#FF9900] text-white',
+                                        'rounded-lg py-5 shadow-lg aspect-square flex flex-col items-center justify-center border border-white',
+                                    ]"
+                                    @click="
+                                        num.is_active == 1
+                                            ? addBetNumber(num)
+                                            : ''
+                                    "
+                                >
+                                    <div class="w-full">
+                                        <p
+                                            class="text-base font-bold text-center leading-none"
+                                        >
+                                            {{ num.number }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -474,97 +518,6 @@
                         <span v-if="!calling_api"> ထိုးမည် </span>
                         <i v-else class="fas fa-spinner fa-spin px-4"></i>
                     </button>
-                </div>
-            </div>
-
-            <button
-                data-twe-toggle="modal"
-                class="hidden"
-                data-twe-target="#promotion_modal"
-                id="promotion_modal_btn"
-            ></button>
-            <!-- promotion modal -->
-            <div
-                data-twe-modal-init
-                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                id="promotion_modal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div
-                    data-twe-modal-dialog-ref
-                    class="pointer-events-none relative w-[400px] mx-auto mt-[15%] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[400px]"
-                >
-                    <div
-                        class="pt-4 pb-8 pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
-                    >
-                        <div
-                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-neutral-100 py-8 px-6"
-                        >
-                            <h4
-                                class="text-xl font-medium leading-normal text-surface text-center w-full"
-                                id="exampleModalLabel"
-                            ></h4>
-                            <button
-                                type="button"
-                                id="close_promotion_modal"
-                                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
-                                data-twe-modal-dismiss
-                                aria-label="Close"
-                            >
-                                <span class="[&>svg]:h-6 [&>svg]:w-6">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div
-                            class="relative flex-auto pt-2 pb-6 px-16"
-                            data-twe-modal-body-ref
-                        >
-                            <div class="mb-8">
-                                <svg
-                                    class="w-16 h-16 mx-auto mb-6"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 640 640"
-                                >
-                                    <path
-                                        d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"
-                                    />
-                                </svg>
-                                <p class="pb-10 mb-4">
-                                    ကံစမ်းမဲ {{ bet_numbers.length }} စောင်
-                                    ဝယ်သည့်အတွက် Free
-                                    {{ freeTicketCount }} စောင် ရရှိမည်ဖြစ်သည်
-                                </p>
-                                <p class="text-sm">
-                                    Free {{ freeTicketCount }} စောင်
-                                    ရွေးချယ်ပေးပါရန်
-                                </p>
-                            </div>
-                            <div class="mb-4">
-                                <button
-                                    class="px-4 py-2 lg:py-3 bg-[#0978D3] text-white text-sm rounded-3xl w-full"
-                                    data-twe-modal-dismiss
-                                    aria-label="Close"
-                                >
-                                    ရှေ့ဆက်မည်
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -773,6 +726,7 @@ export default {
             lottery_promotion_tickets: [],
             promotion_ticket_ids: [],
             promotion_mode: false,
+            promotion_notice_shown: false,
             img_prefix: "",
             sub_step: 1, //1,2,3,4
             from_to_numbers: [
@@ -986,6 +940,7 @@ export default {
             this.promotion_ticket_counts = 0;
             this.promotion_ticket_ids = [];
             this.promotion_mode = false;
+            this.promotion_notice_shown = false;
         },
         async sendBetting() {
             if (this.calling_api) {
@@ -1045,20 +1000,19 @@ export default {
         },
         chooseNumber() {
             if (this.bet_numbers.length > 0) {
-                if (this.getFreeTicketCount()) {
-                    console.log(this.getFreeTicketCount());
+                const freeCount = this.getFreeTicketCount();
+                if (freeCount) {
                     if (this.promotion_mode && !this.promotion_ticket_counts) {
                         //after choose promotions
                         this.step = 3;
                     } else {
-                        // show modal free tickets amount
+                        // show promotion notice (no modal)
                         this.ticket_counts_without_promoiton =
                             this.bet_numbers.length; // 30
 
-                        this.promotion_ticket_counts =
-                            this.getFreeTicketCount(); //9
+                        this.promotion_ticket_counts = freeCount; //9
                         this.promotion_mode = true;
-                        this.clickModalHiddenBtn("promotion_modal_btn");
+                        this.promotion_notice_shown = true;
                     }
                 } else {
                     //no free tickets
@@ -1155,14 +1109,11 @@ export default {
         if (window.location.href.includes("shwepaukkan")) {
             this.img_prefix = "https://admin.shwepaukkan.com";
         } else if (window.location.href.includes("test")) {
-            this.img_prefix = "http://spkadmin.test";
-        } else {
-            this.img_prefix = "http://localhost:8001";
+            this.img_prefix = "https://spkadmin.test";
         }
         const urlParams = new URLSearchParams(window.location.search);
         this.game_setting_id = urlParams.get("id");
         this.getBetNumbers();
-        this.getFreeTicketCount();
         initTWE({ Modal, Ripple, Dropdown });
     },
 };
