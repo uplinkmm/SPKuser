@@ -211,17 +211,29 @@
                                     :href="`/lottery?id=${lottery.id}`"
                                     v-for="(lottery, index) in lottery_lists"
                                     :key="index"
+                                    class="block mb-6"
                                 >
-                                    <div class="mb-4">
+                                    <div
+                                        class="w-full rounded-3xl overflow-hidden bg-black shadow-lg"
+                                    >
                                         <div
-                                            class="w-full h-36 overflow-hidden border"
+                                            class="w-full h-44 overflow-hidden"
                                         >
                                             <img
                                                 :src="`${img_prefix}${lottery.photo}`"
-                                                class="w-full object-cover mb-6 rounded"
+                                                class="w-full h-full object-cover"
                                             />
                                         </div>
-                                        <p class="mt-2">{{ lottery.name }}</p>
+
+                                        <div
+                                            class="bg-black py-4 px-4 text-center"
+                                        >
+                                            <p
+                                                class="text-white text-lg font-thin mb-0"
+                                            >
+                                                {{ lottery.name }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
