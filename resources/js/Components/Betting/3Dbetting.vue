@@ -36,108 +36,147 @@
             </table>
         </div>
     </div>
-    <div v-else class="frame-container px-4 min-h-[100vh]">
-        <!-- <div
+    <div
+        v-else
         class="frame-container min-h-[100vh]"
-    > -->
-        <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        </div>
         <!-- choose time -->
-        <div :class="step == 0 ? 'block' : 'hidden'">
+        <div :class="step == 0 ? 'block' : 'hidden'" class="mt-4 pb-14">
             <div
-                class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0 lg:px-4"
+                class="items-center justify-center bg-[#FFC529] rounded-t-3xl shadow-lg"
             >
-                <div class="grid grid-cols-2 gap-x-4 mb-8">
-                    <a
-                        href="history?game_id=2"
-                        class="bg-[#FFC529] rounded-xl shadow-md text-center text-white py-8"
-                    >
-                        <a>
-                            <i class="fal fa-file text-3xl pb-1"></i>
-                            <p>မှတ်တမ်း</p>
-                        </a>
-                    </a>
-                    <div
-                        @click="step = 4"
-                        class="bg-[#29261D] rounded-xl shadow-md text-center text-white py-8"
-                    >
-                        <a>
-                            <i class="fal fa-users text-3xl pb-1"></i>
-                            <p>ထီပေါက်သူ</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="contents" v-if="!showSpinner">
-                    <div
-                        v-if="
-                            settings.length > 0 &&
-                            main_game_active &&
-                            settings[0]?.is_active
-                        "
-                        class="bg-transparent items-center justify-center mb-8"
-                    >
-                        <div
-                            @click="step = 1"
-                            class="bg-green-400 text-white rounded-xl cursor-pointer shadow-md pt-10 pb-8 px-6 flex justify-between items-end mb-5"
+                <div class="pt-4 pb-4">
+                    <div class="grid px-4 grid-cols-2 gap-x-4 mb-6">
+                        <a
+                            href="history?game_id=2"
+                            class="bg-[#29261D] rounded-xl shadow-md text-center text-white py-6"
                         >
-                            <div class="block">
-                                <p v-if="game" class="mb-3">
-                                    {{
-                                        formatDateTime(
-                                            game.game_setting
-                                                ?.lottery_date_time,
-                                        )
-                                    }}
-                                </p>
-
-                                <i
-                                    class="fal fa-check-circle"
-                                    style="font-size: 24px"
-                                ></i>
+                            <div>
+                                <i class="fal fa-file text-3xl pb-1"></i>
+                                <p>မှတ်တမ်း</p>
                             </div>
-
-                            <div class="block">
-                                <p class="text-right mb-3">3D</p>
-                                <p class="text-xl font-semibold">ထိုးမည်</p>
-                            </div>
-                            <!-- <i
-                            class="far fa-angle-right"
-                            style="font-size: 24px"
-                        ></i> -->
-                        </div>
-                    </div>
-                    <div
-                        v-else
-                        class="bg-transparent items-center justify-center mb-8"
-                    >
+                        </a>
                         <div
-                            class="bg-white rounded-xl cursor-pointer shadow-md py-20 px-12 flex"
+                            @click="step = 4"
+                            class="bg-[#FDC652] rounded-xl shadow-md text-center text-black py-6 cursor-pointer"
                         >
-                            <i
-                                class="fas fa-exclamation text-red-700"
-                                style="font-size: 24px"
-                            ></i>
-                            <span class="pl-8">3D ခေတ္တ ပိတ်ထားပါသည် </span>
+                            <div>
+                                <i class="fal fa-users text-3xl pb-1"></i>
+                                <p>ထီပေါက်သူ</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="bg-transparent items-center justify-center mb-8">
+                    <h1 class="text-center text-xl font-bold mb-3">
+                        3D ထိုးမည်
+                    </h1>
+
                     <div
-                        v-for="(winning, index) in winning_numbers"
-                        :key="index"
-                        :style="{ backgroundColor: winning.color }"
-                        class="text-white rounded-xl cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
+                        class="w-full max-w-md mx-auto bg-[#06000040] rounded-3xl px-6 py-6 shadow-lg"
                     >
-                        <div>
-                            <i
-                                class="far fa-flame mr-3"
-                                style="font-size: 24px"
-                            ></i>
-                            <span> {{ winning.number }}</span>
+                        <div class="contents" v-if="!showSpinner">
+                            <div
+                                v-if="
+                                    settings.length > 0 &&
+                                    main_game_active &&
+                                    settings[0]?.is_active
+                                "
+                                class="items-center justify-center mb-4"
+                            >
+                                <div
+                                    @click="step = 1"
+                                    class="bg-white/95 text-black rounded-2xl cursor-pointer shadow-md pt-6 pb-5 px-5 flex justify-between items-center transition duration-150 ease-out hover:shadow-lg hover:-translate-y-1 hover:bg-white"
+                                >
+                                    <div class="block text-left">
+                                        <p v-if="game" class="mb-3 text-sm">
+                                            {{
+                                                formatDateTime(
+                                                    game.game_setting
+                                                        ?.lottery_date_time,
+                                                )
+                                            }}
+                                        </p>
+
+                                        <i
+                                            class="fas fa-check-circle text-[#15862E]"
+                                            style="font-size: 24px"
+                                        ></i>
+                                    </div>
+
+                                    <div class="block text-right">
+                                        <p class="mb-1 text-xl font-semibold">
+                                            3D
+                                        </p>
+                                        <p class="text-xl font-semibold">
+                                            ထိုးမည်
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                v-else
+                                class="items-center justify-center mb-4"
+                            >
+                                <div
+                                    class="bg-white rounded-2xl cursor-pointer shadow-md py-8 px-6 flex items-center"
+                                >
+                                    <i
+                                        class="fas fa-exclamation text-red-700 mr-4"
+                                        style="font-size: 24px"
+                                    ></i>
+                                    <span class="text-sm">
+                                        3D ခေတ္တ ပိတ်ထားပါသည်
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <span>{{
-                            formatDate2(winning.lottery_date_time)
-                        }}</span>
+                        <div v-else class="text-center text-white py-4">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="bg-white text-center py-2">
+                            <span class="text-base font-semibold">
+                                ပေါက်နံပါတ်များ
+                            </span>
+                        </div>
+                        <div
+                            class="px-4 pb-6 pt-4 max-h-[260px] overflow-y-auto small-scrollbar"
+                        >
+                            <div
+                                v-for="(winning, index) in winning_numbers"
+                                :key="index"
+                                :style="{ backgroundColor: winning.color }"
+                                class="text-black rounded-xl cursor-pointer shadow-md px-6 py-6 flex justify-between items-center mb-4"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="far fa-flame mr-3"
+                                        style="font-size: 24px"
+                                    ></i>
+                                    <span class="text-lg font-semibold">
+                                        {{ winning.number }}
+                                    </span>
+                                </div>
+                                <span class="text-sm font-medium">
+                                    {{ formatDate2(winning.lottery_date_time) }}
+                                </span>
+                            </div>
+                            <div
+                                v-if="!winning_numbers.length"
+                                class="text-center text-white/90 py-6 text-sm"
+                            >
+                                ထီပေါက်နံပါတ် မရှိသေးပါ
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
