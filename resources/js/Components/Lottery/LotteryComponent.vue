@@ -232,66 +232,97 @@
             <!-- select number -->
             <div
                 :class="step == 2 ? 'block' : 'hidden'"
-                class="px-2 mb-12 pb-12"
+                class="pb-16 rounded-3xl bg-[#FFC529]"
             >
-                <div class="px-2 mb-12">
-                    <p class="px-8 py-2">
+                <div class="px-4 pt-6">
+                    <p class="font-semibold text-center text-xl mb-1">
+                        ကံစမ်းမဲ
+                    </p>
+
+                    <p class="text-lg mb-1 text-center">
                         {{ game?.name }}
                     </p>
-                    <p class="px-8 py-2">ကမ်းစမ်းမဲ</p>
-                    <p class="px-8 py-2">တစ်စောင် - {{ game?.price }} ကျပ်</p>
-                </div>
-                <div class="px-4">
-                    <button
-                        class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-fit mb-8"
-                        @click="chooseNumber"
-                    >
-                        ရှေ့ဆက်မည်
-                    </button>
                     <div
-                        class="grid grid-cols-2 justify-between bg-transparent mb-3 items-start"
+                        class="rounded-2xl border border-black/30 bg-[#C89A1E] px-4 py-4"
                     >
-                        <div class="flex items-center space-x-4 relative w-32">
-                            <select
-                                class="block appearance-none w-160 bg-black text-white px-6 py-2 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                v-model="from_to_value"
-                            >
-                                <option
-                                    v-for="(from_to, index) in from_to_numbers"
-                                    :key="index"
-                                    :value="from_to"
+                        <div class="text-center text-black">
+                            <p class="text-lg mb-0 flex justify-between">
+                                <span> ကံစမ်းမဲ တစ်စောင် </span>
+                                <span> {{ game?.price }} ကျပ် </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <button
+                            class="bg-[#5271FF] w-full py-4 rounded-xl text-white text-xl font-semibold"
+                            @click="chooseNumber"
+                        >
+                            ရှေ့ဆက်မည်
+                        </button>
+                    </div>
+
+                    <div class="mt-6">
+                        <p
+                            class="text-left text-black font-semibold text-xl mb-3"
+                        >
+                            ထိပ်စီး နံပါတ်ရွေးပါ
+                        </p>
+                        <div class="flex items-center gap-x-4">
+                            <div class="flex-grow relative">
+                                <div
+                                    class="flex items-center bg-white rounded-xl overflow-hidden border border-black/30"
                                 >
-                                    {{ from_to.name }}
-                                </option>
-                            </select>
+                                    <div
+                                        class="w-16 h-14 flex items-center justify-center text-black font-bold text-2xl border-r border-black/20"
+                                    >
+                                        123
+                                    </div>
+                                    <select
+                                        class="block appearance-none w-full bg-transparent text-black px-4 h-14 text-xl font-semibold focus:outline-none focus:ring-0"
+                                        v-model="from_to_value"
+                                    >
+                                        <option
+                                            v-for="(
+                                                from_to, index
+                                            ) in from_to_numbers"
+                                            :key="index"
+                                            :value="from_to"
+                                        >
+                                            {{ from_to.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-black"
+                                >
+                                    <svg
+                                        class="fill-current h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path d="M7 10l5 5 5-5H7z" />
+                                    </svg>
+                                </div>
+                            </div>
+
                             <button
                                 @click="reverseFun"
-                                class="px-6 py-1.5 mt-3 bg-[#e09800] text-black text-base rounded-sm w-80 mb-3"
+                                class="w-14 h-14 bg-[#d9d9d9] text-black text-xl font-semibold rounded-xl border border-black/20"
                             >
                                 R
                             </button>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
-                            >
-                                <svg
-                                    class="fill-current h-4 w-4"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path d="M7 10l5 5 5-5H7z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="flex justify-end mb-4 mt-3">
+
                             <button
-                                class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
+                                class="bg-[#b23434] text-white px-4 h-14 rounded-xl text-sm font-semibold"
                                 @click="bet_numbers = []"
                             >
                                 {{ $t("Clear") }}
                             </button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
+
+                    <div class="mt-6 grid grid-cols-10 gap-x-2 gap-y-3">
                         <div
                             class="contents"
                             v-for="(num, index) in numbers100"
@@ -300,18 +331,20 @@
                             <div
                                 :class="[
                                     num.is_active == 0
-                                        ? 'bg-gray-400'
+                                        ? 'bg-[#cfcfcf] text-white'
                                         : isBetNumber(num.number)
-                                          ? 'bg-[#FFC529] text-white'
-                                          : 'bg-white',
-                                    'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
+                                          ? 'bg-[#5271FF] text-white'
+                                          : 'bg-[#FF9900] text-white',
+                                    'rounded-lg py-5 shadow-lg aspect-square flex flex-col items-center justify-center border border-white',
                                 ]"
                                 @click="
                                     num.is_active == 1 ? addBetNumber(num) : ''
                                 "
                             >
                                 <div class="w-full">
-                                    <p class="text-xs lg:text-base font-inter">
+                                    <p
+                                        class="text-base font-bold text-center leading-none"
+                                    >
                                         {{ num.number }}
                                     </p>
                                 </div>
