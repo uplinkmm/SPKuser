@@ -20,7 +20,7 @@
             <div class="flex items-center justify-between mb-2 gap-x-3 min-w-0">
                 <div class="text-left min-w-0 flex-1">
                     <p
-                        class="text-white text-3xl font-medium leading-none mb-2 break-words"
+                        class="text-white text-2xl font-medium leading-none mb-2"
                     >
                         {{ displayTime }}
                     </p>
@@ -73,7 +73,7 @@
                         Modern
                     </p>
                     <p class="text-white text-base font-semibold mb-0">
-                        {{ twoDList?.modern }}
+                        {{ modernInternetLatest?.Modern ?? "--" }}
                     </p>
                 </div>
                 <div class="text-center">
@@ -81,7 +81,7 @@
                         Internet
                     </p>
                     <p class="text-white text-base font-semibold mb-0">
-                        {{ twoDList?.internet }}
+                        {{ modernInternetLatest?.Internet ?? "--" }}
                     </p>
                 </div>
             </div>
@@ -100,6 +100,11 @@ export default {
         };
     },
     computed: {
+        modernInternetLatest() {
+            const list = this.twoDList?.modern_internet?.numbers;
+            if (!Array.isArray(list) || list.length === 0) return null;
+            return list[list.length - 1];
+        },
         displayMoment() {
             const raw = this.twoDList?.time;
             if (!raw) return null;
