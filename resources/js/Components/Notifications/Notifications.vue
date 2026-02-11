@@ -1,17 +1,25 @@
 <template>
-    <div class="frame-container px-4 pb-20 min-h-[100vh] flex flex-col">
+    <div
+        class="frame-container pb-20 min-h-[100vh] flex flex-col"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
         <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
-        <div class="bg-white px-4 rounded-xl flex-grow">
+        <div
+            class="bg-[#FDC652] px-4 pt-3 pb-6 mt-4 rounded-2xl shadow-lg flex-grow"
+        >
             <!--Tabs navigation-->
             <ul
-                class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent"
+                class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent justify-center"
                 role="tablist"
                 data-twe-nav-ref
             >
                 <li role="presentation">
                     <a
                         href="#tabs-winning"
-                        class="my-2 block relative pr-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700 after:!left-0"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-sm text-black data-[twe-nav-active]:after:!block underline-border relative"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-winning"
                         data-twe-nav-active
@@ -29,7 +37,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-payment"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-sm text-black data-[twe-nav-active]:after:!block underline-border relative"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-payment"
                         role="tab"
@@ -46,7 +54,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-promotion"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-sm text-black data-[twe-nav-active]:after:!block underline-border relative"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-promotion"
                         role="tab"
@@ -75,7 +83,7 @@
                         <div
                             v-for="(bet_win, index) in betting_win"
                             :key="index"
-                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 relative border-b border-gray-700"
+                            class="mb-4 relative rounded-xl bg-white border border-gray-400 px-4 py-3 shadow-sm"
                         >
                             <div
                                 v-if="bet_win.is_read == 0"
@@ -87,6 +95,12 @@
                             <p class="text-xs font-inter mb-1">
                                 {{ dateFormat(bet_win.date_time) }}
                             </p>
+                        </div>
+                        <div
+                            v-if="!betting_win.length && !showSpinner"
+                            class="text-center py-8 text-black font-semibold"
+                        >
+                            No notifications found
                         </div>
                     </div>
                     <div v-if="showSpinner">
@@ -104,7 +118,7 @@
                         <div
                             v-for="(transcation, index) in topup_transaction"
                             :key="index"
-                            class="pl-2 lg:pl-8 pr-2 lg:pr-8 py-3 mb-2 relative border-b border-gray-600"
+                            class="mb-4 relative rounded-xl bg-white border border-gray-400 px-4 py-3 shadow-sm"
                         >
                             <div class="flex justify-between mb-2">
                                 <p class="text-xs sm:text-sm mb-1">
@@ -142,13 +156,13 @@
                             </div>
                             <!-- <hr class="mt-2 mb-4" /> -->
                             <div class="flex justify-between">
-                                <p class="text-sm sm:text-base font-inter mb-0">
+                                <p class="text-sm sm:text-base mb-0">
                                     {{ transcation.provider_name }}
                                 </p>
                                 <p
-                                    class="text-sm sm:text-base font-inter mb-0 text-right w-[55%]"
+                                    class="text-sm sm:text-base mb-0 text-right w-[55%]"
                                 >
-                                    လုပ်ငန်းစဥ်နပါတ်-{{
+                                    လုပ်ငန်းစဥ်နံပါတ်-{{
                                         transcation.payment_transaction_id
                                     }}
                                 </p>
@@ -165,6 +179,12 @@
                                 {{ dateFormat(transcation.date_time) }}
                             </p> -->
                         </div>
+                        <div
+                            v-if="!topup_transaction.length && !showSpinner"
+                            class="text-center py-8 text-black font-semibold"
+                        >
+                            No transactions found
+                        </div>
                     </div>
                 </div>
                 <div
@@ -177,7 +197,7 @@
                         <div
                             v-for="(promo, index) in promotion"
                             :key="index"
-                            class="pl-6 lg:pl-8 pr-8 py-6 mb-0 bg-white relative border-b border-gray-300 flex items-start"
+                            class="mb-4 bg-white relative rounded-xl border border-gray-300 flex items-start px-4 py-4 shadow-sm"
                         >
                             <!-- Image in front -->
                             <img
@@ -200,6 +220,12 @@
                                     {{ dateFormat(promo.date_time) }}
                                 </p>
                             </div>
+                        </div>
+                        <div
+                            v-if="!promotion.length && !showSpinner"
+                            class="text-center py-8 text-black font-semibold"
+                        >
+                            No promotions found
                         </div>
                     </div>
                     <div v-if="showSpinner">
