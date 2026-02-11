@@ -47,7 +47,7 @@
                         <p
                             class="text-black text-lg text-center font-semibold mb-0"
                         >
-                            ကံစမ်းမဲ နှင့် ပတ်သတ်သေ့ာ အကြောင်းအရာများ:
+                            ကံစမ်းမဲ နှင့် ပတ်သတ်သော အကြောင်းအရာများ
                         </p>
                     </div>
 
