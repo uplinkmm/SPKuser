@@ -74,7 +74,7 @@
                     <div class="mb-8">
                         <div class="w-full">
                             <div
-                                class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
+                                class="w-full grid grid-cols-3 gap-x-4 gap-y-6"
                             >
                                 <div
                                     v-for="(item, index) in slots"
@@ -83,15 +83,15 @@
                                 >
                                     <a
                                         @click="getGameUrl(item)"
-                                        class="cursor-pointer"
+                                        class="cursor-pointer block"
                                     >
                                         <img
-                                            class="w-full aspect-[3/2] rounded-lg"
+                                            class="w-full aspect-square rounded-2xl object-cover"
                                             :src="item.image_url"
                                             alt=""
                                         />
                                         <p
-                                            class="text-white text-center pt-1 text-sm"
+                                            class="text-white text-left pt-2 text-lg leading-tight truncate"
                                         >
                                             {{ item.name }}
                                         </p>
