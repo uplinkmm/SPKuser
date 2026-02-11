@@ -253,44 +253,40 @@
                         </div>
                     </div>
 
-                    <div
-                        v-if="promotion_notice_shown"
-                        class="mt-6 rounded-2xl border border-black/30 bg-[#C89A1E] px-4 pt-4 pb-5"
-                    >
+                    <div v-if="promotion_notice_shown" class="mt-6">
                         <div
-                            class="rounded-2xl bg-[#E5E7EB] border-2 border-black/60 px-4 pt-5 pb-6 text-center"
+                            class="px-4 pt-4 pb-5 rounded-2xl border border-black/30 bg-[#C89A1E]"
                         >
-                            <svg
-                                class="w-14 h-14 mx-auto mb-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 640 640"
+                            <div
+                                class="rounded-2xl bg-[#E5E7EB] border-2 border-black/60 px-4 pt-5 pb-6 text-center"
                             >
-                                <path
-                                    d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"
-                                />
-                            </svg>
-
-                            <p class="text-black text-lg font-semibold mb-2">
-                                ကံစမ်းမဲ
-                                {{ ticket_counts_without_promoiton }}
-                                စောင်ဝယ်သည့်အတွက်
-                            </p>
-                            <p class="text-black text-lg font-semibold mb-3">
-                                Free Ticket {{ freeTicketCount }} စောင်ရရှိမည်
-                            </p>
-                            <p class="text-red-600 text-lg font-semibold mb-5">
-                                Free Ticket
-                                {{ freeTicketCount }} စောင်ရွေးချယ်ပေးပါရန်
-                            </p>
-
-                            <button
-                                type="button"
-                                class="bg-[#5271FF] w-full py-4 rounded-xl text-white text-xl font-semibold"
-                                @click="promotion_notice_shown = false"
-                            >
-                                ရှေ့ဆက်မည်
-                            </button>
+                                <p
+                                    class="text-black text-lg font-semibold mb-2"
+                                >
+                                    ကံစမ်းမဲ
+                                    {{ ticket_counts_without_promoiton }}
+                                    စောင်ဝယ်ယူတိုင်း
+                                </p>
+                                <p
+                                    class="text-black text-lg font-semibold mb-3"
+                                >
+                                    Free Ticket {{ freeTicketCount }} ခုရရှိမည်
+                                </p>
+                                <p
+                                    class="text-red-600 text-lg font-semibold mb-5"
+                                >
+                                    Free Ticket
+                                    {{ freeTicketCount }} ခုရွေးခြယ်ပေးပါရန်
+                                </p>
+                            </div>
                         </div>
+                        <button
+                            type="button"
+                            class="bg-[#5271FF] mt-4 w-full py-4 rounded-xl text-white text-xl font-semibold"
+                            @click="promotion_notice_shown = false"
+                        >
+                            ရှေ့ဆက်ရန်
+                        </button>
                     </div>
 
                     <div v-if="!promotion_notice_shown" class="contents">
@@ -425,99 +421,114 @@
                 :class="step == 3 ? 'block' : 'hidden'"
                 style="min-height: calc(100vh - 168px)"
             >
-                <p class="text-center py-4">{{ game?.name }}</p>
-                <div class="flex justify-between p-6 bg-[#fff] text-black">
-                    <div>
-                        <p class="pr-8 py-2">
-                            {{ getCurrentDate() }}
-                        </p>
-                        <!-- <p class="pr-8">
-                        {{ getCurrentTime() }}
-                    </p> -->
-                    </div>
-                    <div>
-                        <p class="pr-8 py-2">
-                            {{ formatTime(game?.lottery_date_time) }}
-                        </p>
-                        <!-- <p class="pr-8">
-                        {{ totalBetAmount?.toLocaleString() }} MMK
-                    </p> -->
-                    </div>
-                </div>
-                <div class="mb-5 px-4 bg-white pb-12">
-                    <div class="flex justify-end mb-4"></div>
-                    <table class="table-auto w-full">
-                        <thead>
-                            <tr>
-                                <th class="py-2">စဉ်</th>
-                                <th class="py-2">{{ $t("No") }}</th>
-                                <th class="py-2 text-right">
-                                    {{ $t("Betting Amount") }}
-                                </th>
-                                <!-- <th class="py-2">{{ $t("Delete") }}</th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(bet_number, index) in bet_numbers"
-                                :key="index"
-                                class="border-b border-gray-400"
-                            >
-                                <td class="text-center py-2">
-                                    {{ index + 1 }}
-                                </td>
-                                <td class="text-center py-2">
-                                    {{ bet_number.number }}
-                                </td>
+                <div class="px-4 pt-4 pb-16 bg-[#FFC529] rounded-t-3xl">
+                    <p class="text-center text-xl font-semibold mb-2">
+                        ကံစမ်းမဲ
+                    </p>
+                    <p class="text-center text-lg mb-4">
+                        {{ game?.name }}
+                    </p>
 
-                                <td class="text-right py-2">
-                                    <span>
-                                        {{
-                                            bet_number.amount?.toLocaleString()
-                                        }}
-                                    </span>
-                                </td>
-                                <!-- <td class="text-center py-2">
-                                <button
-                                    data-twe-toggle="modal"
-                                    data-twe-target="#delete_modal"
-                                    @click="
-                                        delete_bet_number = bet_number.number
-                                    "
-                                    class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-trash"></i>
-                                </button>
-                            </td> -->
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td class="text-center">စုစုပေါင်း</td>
-                                <td class="py-2 text-right">
-                                    {{ totalBetAmount?.toLocaleString() }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="absolute bottom-0 mb-4 w-full flex justify-center">
-                    <!-- <button
-                    class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
-                    @click="
-                        step = 2;
-                        resetPromotion();
-                    "
-                >
-                    Cancel
-                </button> -->
-                    <button
-                        class="bg-[#0978D3] px-4 py-3 rounded-3xl text-white w-full mb-8 mx-8"
-                        @click="sendBetting"
-                        :disabled="calling_api"
+                    <div
+                        class="rounded-2xl bg-[#C89A1E] px-3 pt-3 pb-4 border border-black/40"
                     >
-                        <span v-if="!calling_api"> ထိုးမည် </span>
-                        <i v-else class="fas fa-spinner fa-spin px-4"></i>
-                    </button>
+                        <div
+                            class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                        >
+                            <div
+                                class="flex justify-between items-center px-4 py-2 bg-[#F4F4F4] text-base md:text-lg"
+                            >
+                                <p>{{ getCurrentDate() }}</p>
+                                <p>
+                                    {{ getCurrentTime() }}
+                                </p>
+                            </div>
+
+                            <div class="px-4 pb-3 pt-2 overflow-y-auto">
+                                <table class="table-auto w-full text-base">
+                                    <thead>
+                                        <tr class="border-b !border-gray-300">
+                                            <th class="py-3 text-left">စဉ်</th>
+                                            <th class="py-3 text-center">
+                                                {{ $t("No") }}
+                                            </th>
+                                            <th class="py-3 text-right">
+                                                {{ $t("Betting Amount") }}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            v-for="(
+                                                bet_number, index
+                                            ) in bet_numbers"
+                                            :key="index"
+                                            class="border-b last:border-0"
+                                        >
+                                            <td class="py-3 text-left">
+                                                {{ index + 1 }}
+                                            </td>
+                                            <td class="py-3 text-center">
+                                                {{ bet_number.number }}
+                                            </td>
+                                            <td class="py-3 text-right">
+                                                {{
+                                                    bet_number.amount?.toLocaleString()
+                                                }}
+                                                ကျပ်
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-t !border-gray-300"
+                                            v-if="bet_numbers.length"
+                                        >
+                                            <td></td>
+                                            <td
+                                                class="text-center text-base font-semibold py-3 pb-2"
+                                            >
+                                                စုစုပေါင်း
+                                            </td>
+                                            <td
+                                                class="text-right text-base font-semibold py-3"
+                                            >
+                                                {{
+                                                    totalBetAmount?.toLocaleString()
+                                                }}
+                                                ကျပ်
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p
+                            v-if="
+                                bet_numbers.length -
+                                    ticket_counts_without_promoiton >
+                                0
+                            "
+                            class="mt-4 text-right text-base font-semibold text-black"
+                        >
+                            Free Ticket
+                            {{
+                                bet_numbers.length -
+                                ticket_counts_without_promoiton
+                            }}
+                            စောင် ရရှိပါသည်
+                        </p>
+                    </div>
+
+                    <div class="mt-6">
+                        <button
+                            class="bg-[#5271FF] w-full py-4 rounded-xl text-white text-xl font-semibold"
+                            @click="sendBetting"
+                            :disabled="calling_api"
+                        >
+                            <span v-if="!calling_api"> အတည်ပြုမည် </span>
+                            <i v-else class="fas fa-spinner fa-spin px-4"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
