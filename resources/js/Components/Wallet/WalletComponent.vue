@@ -1,237 +1,268 @@
 <template>
-    <div class="frame-container px-4 min-h-[100vh]">
-        <Navbar
-            :title="$t('Wallet')"
-            :textColor="'text-white font-semibold'"
-            :back-btn="backBtn"
-        ></Navbar>
+    <div
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="pt-0 pb-6 bg-black">
+            <Navbar
+                :title="$t('Wallet')"
+                :textColor="'text-white font-semibold'"
+                :back-btn="backBtn"
+            ></Navbar>
 
-        <div class="mb-16">
-            <div class="px-2">
-                <div class="mb-4">
-                    <div
-                        class="flex items-center justify-center p-4 bg-transparent"
-                    >
-                        <div class="flex-shrink-0 mr-4">
+            <div class="mt-3 px-4 py-6">
+                <div class="flex items-center gap-x-4">
+                    <div class="shrink-0">
+                        <div
+                            class="w-[96px] h-[96px] rounded-full bg-white/90 flex items-center justify-center"
+                        >
                             <img
                                 src="../../../../public/img/profile.png"
                                 alt="Profile Picture"
-                                class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm"
+                                class="w-[86px] h-[86px] rounded-full object-cover"
                             />
                         </div>
+                    </div>
 
-                        <div class="h-full">
-                            <p class="text-xl font-semibold text-gray-800 mb-2">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between gap-x-3">
+                            <p
+                                class="text-white font-semibold text-xl truncate"
+                            >
+                                နာမည်
+                            </p>
+                            <p
+                                class="text-white font-semibold text-xl truncate"
+                            >
                                 {{ getUser.name }}
                             </p>
-                            <p class="text-sm text-gray-700">
+                        </div>
+                        <div
+                            class="mt-3 flex items-center justify-between gap-x-3"
+                        >
+                            <p
+                                class="text-white/90 font-semibold text-xl truncate"
+                            >
+                                ဖုန်းနံပါတ်
+                            </p>
+                            <p
+                                class="text-white/90 font-semibold text-xl truncate"
+                            >
                                 {{ getUser.phone_number }}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div
-                        class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+            </div>
+        </div>
+
+        <div class="-mt-6 mb-16 bg-black">
+            <div class="">
+                <div
+                    class="bg-[#FDC652] rounded-t-2xl px-4 pt-5 pb-4 shadow-lg"
+                >
+                    <p
+                        class="text-center text-black font-semibold text-lg mb-4"
                     >
-                        <div class="text-sm lg:text-base">
-                            <div class="flex justify-between gap-x-4 mb-4">
-                                <p class="flex-grow-0 w-36">
-                                    <!-- <i class="fal fa-wallet"></i> -->
-                                    ပင်မ ပိုက်ဆံအိတ်
-                                </p>
-                                <p class="flex-grow text-right flex-shrink-0">
-                                    {{ mainMoneyBalance.toLocaleString() }} MMK
+                        ပိုက်ဆံအိတ်
+                    </p>
+
+                    <div
+                        class="rounded-2xl border border-black/30 bg-[#E1B234] px-4 py-4"
+                    >
+                        <div class="space-y-4 text-black">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-x-3 min-w-0">
+                                    <img
+                                        src="../../../../public/icons/Wallet.png"
+                                        class="w-7 h-7"
+                                    />
+                                    <p class="font-semibold truncate">
+                                        ပင်မပိုက်ဆံအိတ်
+                                    </p>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white text-sm font-bold"
+                                    >
+                                        ?
+                                    </div>
+                                </div>
+                                <p class="font-semibold">
+                                    {{ mainMoneyBalance.toLocaleString() }} ကျပ်
                                 </p>
                             </div>
-                            <div class="flex justify-between gap-x-4">
-                                <p class="flex-grow-0 w-36">
-                                    <!-- <i class="fal fa-wallet"></i> -->
-                                    Game ပိုက်ဆံအိတ်
-                                </p>
-                                <p class="flex-grow text-right flex-shrink-0">
-                                    {{ gameMoneyBalance.toLocaleString() }} MMK
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-x-3 min-w-0">
+                                    <img
+                                        src="../../../../public/icons/Wallet.png"
+                                        class="w-7 h-7"
+                                    />
+                                    <p class="font-semibold truncate">
+                                        ဂိမ်းပိုက်ဆံအိတ်
+                                    </p>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white text-sm font-bold"
+                                    >
+                                        ?
+                                    </div>
+                                </div>
+                                <p class="font-semibold">
+                                    {{ gameMoneyBalance.toLocaleString() }} ကျပ်
                                 </p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
+
                     <div
-                        class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
+                        class="mt-4 rounded-2xl border border-black/30 bg-[#C89A1E] p-4"
                     >
                         <div class="grid grid-cols-3 gap-x-4">
-                            <div>
-                                <a href="/topup">
-                                    <img
-                                        src="../../../../public/img/money_receive.png"
-                                        class="w-10 lg:w-14 mx-auto mb-2"
-                                    />
-                                    <p class="text-sm lg:text-base text-center">
-                                        {{ $t("Deposit") }}
-                                    </p>
-                                </a>
-                            </div>
-
-                            <div class="">
-                                <a href="/cash_withdraw">
-                                    <img
-                                        src="../../../../public/img/money_send.png"
-                                        class="w-10 lg:w-14 mx-auto mb-2"
-                                    />
-                                    <p class="text-sm lg:text-base text-center">
-                                        {{ $t("Withdrawal") }}
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="">
-                                <button
-                                    @click="wallet_transfer.amount = ''"
-                                    class=""
-                                    data-twe-toggle="modal"
-                                    data-twe-target="#add_main_money_model"
+                            <a href="/topup" class="block text-center">
+                                <div class="relative mx-auto w-[96px]">
+                                    <div class="py-5">
+                                        <img
+                                            src="../../../../public/icons/Wallet.png"
+                                            class="w-24 mx-auto"
+                                        />
+                                    </div>
+                                    <div
+                                        class="absolute -left-2 top-3/4 -translate-y-1/2 w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                                    >
+                                        <span
+                                            class="text-white text-3xl leading-none"
+                                            >+</span
+                                        >
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-3 text-black font-semibold text-sm"
                                 >
-                                    <img
-                                        src="../../../../public/img/exchange.png"
-                                        class="w-10 lg:w-14 mx-auto mb-2"
-                                    />
-                                    <p class="text-sm lg:text-base text-center">
-                                        ငွေလဲမည်
-                                    </p>
-                                </button>
-                            </div>
+                                    {{ $t("Deposit") }}
+                                </p>
+                            </a>
+
+                            <button
+                                @click="wallet_transfer.amount = ''"
+                                class="block text-center"
+                                data-twe-toggle="modal"
+                                data-twe-target="#add_main_money_model"
+                                type="button"
+                            >
+                                <div class="relative mx-auto w-[96px]">
+                                    <div class="py-5">
+                                        <img
+                                            src="../../../../public/icons/Wallet.png"
+                                            class="w-24 mx-auto"
+                                        />
+                                    </div>
+                                    <div
+                                        class="absolute -left-2 top-3/4 -translate-y-1/2 w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                                    >
+                                        <i
+                                            class="fas fa-sync-alt text-white text-lg"
+                                        ></i>
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-3 text-black font-semibold text-sm"
+                                >
+                                    ငွေလဲမည်
+                                </p>
+                            </button>
+                            <a href="/cash_withdraw" class="block text-center">
+                                <div class="relative mx-auto w-[96px]">
+                                    <div class="py-5">
+                                        <img
+                                            src="../../../../public/icons/Wallet.png"
+                                            class="w-24 mx-auto"
+                                        />
+                                    </div>
+                                    <div
+                                        class="absolute -left-2 top-3/4 -translate-y-1/2 w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                                    >
+                                        <i
+                                            class="fas fa-arrow-up text-white text-lg"
+                                        ></i>
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-3 text-black font-semibold text-sm"
+                                >
+                                    {{ $t("Withdrawal") }}
+                                </p>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="px-0 lg:px-6">
-                <div class="rounded-lg p-4">
-                    <h2
-                        class="text-base lg:text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
-                    >
-                        မှတ်တမ်းများ
-                    </h2>
 
-                    <div class="divide-y divide-gray-700">
-                        <a
-                            href="/deposit_withdrawal_histories"
-                            class="flex items-center justify-between py-4 cursor-pointer"
-                        >
-                            <div class="flex items-center space-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                    />
-                                </svg>
-                                <span class="text-sm lg:text-lg"
-                                    >ငွေသွင်း ငွေထုတ် မှတ်တမ်းများ</span
-                                >
-                            </div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-4 h-4 text-gray-700"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                />
-                            </svg>
-                        </a>
+            <div class="pt-4 bg-white">
+                <p class="text-center text-black font-semibold text-lg mb-3">
+                    မှတ်တမ်းများ
+                </p>
 
-                        <a
-                            href="https://www.youtube.com/shorts/4jtKqT-Jm3E"
-                            target="_blank"
-                            class="flex items-center justify-between py-4 cursor-pointer"
+                <a
+                    href="/deposit_withdrawal_histories"
+                    class="flex items-center justify-between bg-[#FDC652] py-4"
+                >
+                    <div class="flex items-center gap-x-3 px-4">
+                        <div
+                            class="w-8 h-8 rounded-lg border border-black flex items-center justify-center"
                         >
-                            <div class="flex items-center space-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
-                                    />
-                                </svg>
-                                <span class="text-sm lg:text-lg"
-                                    >ငွေဖြည့်နည်း ကြည့်ရန်</span
-                                >
-                            </div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-4 h-4 text-gray-700"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                />
-                            </svg>
-                        </a>
-
-                        <a
-                            href="https://www.youtube.com/shorts/cFvmsnfVNF0?si=UmA6F83Rhm5lnzpT"
-                            target="_blank"
-                            class="flex items-center justify-between py-4 cursor-pointer"
-                        >
-                            <div class="flex items-center space-x-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                    />
-                                </svg>
-                                <span class="text-sm lg:text-lg"
-                                    >ငွေထုတ်နည်း ကြည့်ရန်</span
-                                >
-                            </div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-4 h-4 text-gray-700"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                />
-                            </svg>
-                        </a>
+                            <i class="fas fa-receipt text-black"></i>
+                        </div>
+                        <p class="font-semibold text-black">
+                            ငွေသွင်း ငွေထုတ်မှတ်တမ်းများ:
+                        </p>
                     </div>
+                    <i class="fas fa-chevron-right text-black"></i>
+                </a>
+
+                <p
+                    class="text-center text-black font-semibold text-lg mt-5 mb-3"
+                >
+                    အကူညီ
+                </p>
+
+                <div class="bg-[#FDC652] overflow-hidden">
+                    <a
+                        href="https://www.youtube.com/shorts/4jtKqT-Jm3E"
+                        target="_blank"
+                        class="flex items-center justify-between px-4 py-4"
+                    >
+                        <div class="flex items-center gap-x-3">
+                            <div
+                                class="w-10 h-10 bg-black flex items-center justify-center"
+                            >
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                            <p class="font-semibold text-black">
+                                ငွေဖြည့်နည်း ကြည့်ရန်
+                            </p>
+                        </div>
+                        <i class="fas fa-chevron-right text-black"></i>
+                    </a>
+                    <div class="h-[1px] bg-black/20"></div>
+                    <a
+                        href="https://www.youtube.com/shorts/cFvmsnfVNF0?si=UmA6F83Rhm5lnzpT"
+                        target="_blank"
+                        class="flex items-center justify-between px-4 py-4"
+                    >
+                        <div class="flex items-center gap-x-3">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-black flex items-center justify-center"
+                            >
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                            <p class="font-semibold text-black">
+                                ငွေထုတ်နည်း ကြည့်ရန်
+                            </p>
+                        </div>
+                        <i class="fas fa-chevron-right text-black"></i>
+                    </a>
                 </div>
             </div>
         </div>
