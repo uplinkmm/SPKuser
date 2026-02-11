@@ -142,6 +142,7 @@ class CustomerMoneyRepository implements CustomerMoneyRepositoryInterface
                 'status',
                 'confirmed_at',
                 'rejected_at',
+                'payment_transaction_id',
                 'remark',
                 'account_id',
                 DB::raw("CASE 
