@@ -91,7 +91,7 @@
                                             alt=""
                                         />
                                         <p
-                                            class="text-white text-left pt-2 text-lg leading-tight truncate"
+                                            class="text-white text-left pt-2 text-md leading-tight truncate"
                                         >
                                             {{ item.name }}
                                         </p>
