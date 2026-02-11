@@ -709,7 +709,9 @@
 
         <!-- quick betting -->
         <div :class="step == 3 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pb-14 px-4">
+            <div
+                class="relative mb-0 w-full bg-[#FFC529] rounded-t-xl pb-14 px-4"
+            >
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
                         <h1 class="text-black text-lg font-semibold">
@@ -722,37 +724,37 @@
                     >
                         <button
                             @click="simpleBet('sone_sone')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
                         >
                             စုံစုံ
                         </button>
                         <button
                             @click="simpleBet('ma_ma')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
                         >
                             မမ
                         </button>
                         <button
                             @click="simpleBet('sone_ma')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
                         >
                             စုံမ
                         </button>
                         <button
                             @click="simpleBet('ma_sone')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
                         >
                             မစုံ
                         </button>
                         <button
                             @click="simpleBet('sone_puu')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
                         >
                             စုံပူး
                         </button>
                         <button
                             @click="simpleBet('ma_puu')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1"
                         >
                             မပူး
                         </button>
@@ -774,25 +776,25 @@
                     >
                         <button
                             @click="natKhatPower('nat')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             နက်
                         </button>
                         <button
                             @click="natKhatPower('power')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             ပါ၀ါ
                         </button>
                         <button
                             @click="natKhatPower('a_puu')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             အပူး
                         </button>
                         <button
                             @click="natKhatPower('nyi_naung')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             ညီအကို
                         </button>
@@ -811,61 +813,61 @@
                     >
                         <button
                             @click="patNumberBet('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             0
                         </button>
                         <button
                             @click="patNumberBet('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             1
                         </button>
                         <button
                             @click="patNumberBet('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             2
                         </button>
                         <button
                             @click="patNumberBet('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             3
                         </button>
                         <button
                             @click="patNumberBet('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             4
                         </button>
                         <button
                             @click="patNumberBet('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             5
                         </button>
                         <button
                             @click="patNumberBet('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             6
                         </button>
                         <button
                             @click="patNumberBet('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             7
                         </button>
                         <button
                             @click="patNumberBet('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             8
                         </button>
                         <button
                             @click="patNumberBet('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             9
                         </button>
@@ -883,37 +885,37 @@
                     >
                         <button
                             @click="numbersStartingWith('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             0
                         </button>
                         <button
                             @click="numbersStartingWith('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             1
                         </button>
                         <button
                             @click="numbersStartingWith('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             2
                         </button>
                         <button
                             @click="numbersStartingWith('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             3
                         </button>
                         <button
                             @click="numbersStartingWith('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             4
                         </button>
                         <button
                             @click="numbersStartingWith('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             5
                         </button>
@@ -937,7 +939,7 @@
                         </button>
                         <button
                             @click="numbersStartingWith('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             9
                         </button>
@@ -955,61 +957,61 @@
                     >
                         <button
                             @click="numbersEndingWith('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             0
                         </button>
                         <button
                             @click="numbersEndingWith('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             1
                         </button>
                         <button
                             @click="numbersEndingWith('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             2
                         </button>
                         <button
                             @click="numbersEndingWith('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             3
                         </button>
                         <button
                             @click="numbersEndingWith('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             4
                         </button>
                         <button
                             @click="numbersEndingWith('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             5
                         </button>
                         <button
                             @click="numbersEndingWith('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             6
                         </button>
                         <button
                             @click="numbersEndingWith('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             7
                         </button>
                         <button
                             @click="numbersEndingWith('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             8
                         </button>
                         <button
                             @click="numbersEndingWith('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             9
                         </button>
@@ -1027,61 +1029,61 @@
                     >
                         <button
                             @click="breakNumbers(0, 10)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             0
                         </button>
                         <button
                             @click="breakNumbers(1, 11)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             1
                         </button>
                         <button
                             @click="breakNumbers(2, 12)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             2
                         </button>
                         <button
                             @click="breakNumbers(3, 13)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             3
                         </button>
                         <button
                             @click="breakNumbers(4, 14)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             4
                         </button>
                         <button
                             @click="breakNumbers(5, 15)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             5
                         </button>
                         <button
                             @click="breakNumbers(6, 16)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             6
                         </button>
                         <button
                             @click="breakNumbers(7, 17)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             7
                         </button>
                         <button
                             @click="breakNumbers(8, 18)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             8
                         </button>
                         <button
                             @click="breakNumbers(9, 19)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
                         >
                             9
                         </button>
