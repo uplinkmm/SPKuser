@@ -174,7 +174,7 @@
                     <div class="mt-6">
                         <button
                             type="button"
-                            class="w-full bg-[#5271FF] text-white font-semibold py-3 rounded-xl disabled:opacity-50"
+                            class="w-full bg-[#5271FF] text-white font-semibold py-3 rounded-xl hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                             :disabled="!pendingGameSetting"
                             @click="confirmTimeSelection"
                         >
@@ -353,7 +353,7 @@
                     </div>
 
                     <button
-                        class="bg-[#5271FF] text-white px-8 h-14 rounded-r-lg text-base font-semibold whitespace-nowrap"
+                        class="bg-[#5271FF] text-white px-8 h-14 rounded-r-lg text-base font-semibold whitespace-nowrap hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150"
                         @click="changeToStep2(1)"
                     >
                         ထိုးမည်
@@ -370,13 +370,13 @@
                 <div class="mt-4 grid grid-cols-2 gap-3">
                     <button
                         @click="roundBet"
-                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3"
+                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3 hover:bg-[#0C7A18]/90 active:bg-[#0C7A18]/80 transition duration-150"
                     >
                         {{ $t("Round Bet") }}
                     </button>
                     <button
                         @click="quickBettingBtn"
-                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3"
+                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3 hover:bg-[#0C7A18]/90 active:bg-[#0C7A18]/80 transition duration-150"
                     >
                         {{ $t("Quick Bet") }}
                     </button>
@@ -698,7 +698,7 @@
                 <div class="mt-6">
                     <button
                         :disabled="calling_api"
-                        class="w-full bg-[#5271FF] text-white py-4 rounded-lg text-lg font-semibold"
+                        class="w-full bg-[#5271FF] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                         @click="sendBetting"
                     >
                         {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
@@ -921,25 +921,25 @@
                         </button>
                         <button
                             @click="numbersStartingWith('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="numbersStartingWith('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="numbersStartingWith('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="numbersStartingWith('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -957,61 +957,61 @@
                     >
                         <button
                             @click="numbersEndingWith('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="numbersEndingWith('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="numbersEndingWith('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="numbersEndingWith('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="numbersEndingWith('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="numbersEndingWith('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="numbersEndingWith('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="numbersEndingWith('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="numbersEndingWith('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="numbersEndingWith('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -1029,61 +1029,61 @@
                     >
                         <button
                             @click="breakNumbers(0, 10)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="breakNumbers(1, 11)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="breakNumbers(2, 12)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="breakNumbers(3, 13)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="breakNumbers(4, 14)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="breakNumbers(5, 15)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="breakNumbers(6, 16)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="breakNumbers(7, 17)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="breakNumbers(8, 18)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="breakNumbers(9, 19)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-md"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -1125,7 +1125,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold"
+                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold hover:bg-[#FFC529]/90 active:bg-[#FFC529]/80 transition duration-150"
                                     @click="getTwoDigitCombinations(false)"
                                 >
                                     အပူးမပါ
@@ -1161,7 +1161,7 @@
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold"
+                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold hover:bg-[#FFC529]/90 active:bg-[#FFC529]/80 transition duration-150"
                                     @click="getTwoDigitCombinations(true)"
                                 >
                                     အပူးပါ
@@ -1310,7 +1310,7 @@
                         <div class="w-full flex justify-center">
                             <button
                                 :disabled="calling_api"
-                                class="bg-[#5271FF] text-white w-full mb-12 px-16 h-12 rounded-lg text-base font-semibold disabled:bg-[#9CA3AF] disabled:text-white disabled:opacity-70 disabled:cursor-not-allowed"
+                                class="bg-[#5271FF] text-white w-full mb-12 px-16 h-12 rounded-lg text-base font-semibold hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:bg-[#9CA3AF] disabled:text-white disabled:opacity-70 disabled:cursor-not-allowed"
                                 @click="sendBetting"
                             >
                                 {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
