@@ -1,116 +1,210 @@
 <template>
     <notifications position="top center" />
-    <div class="frame-container px-4 min-h-[100vh]">
-        <Navbar title="ငွေသွင်းမည်" :back-btn="backBtn"></Navbar>
+    <div
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ငွေသွင်းမည်" :back-btn="backBtn"></Navbar>
+        </div>
 
         <!-- 1st  -->
         <div class="min-h-[100vh]">
-            <div
-                class="px-6 lg:px-12 py-8 shadow-lg rounded-3xl mb-6 lg:mb-8 bg-white"
-            >
-                <div class="text-sm lg:text-base">
-                    <div class="flex justify-between gap-x-4 mb-4">
-                        <p class="flex-grow-0 w-36">
-                            <!-- <i class="fal fa-wallet"></i> -->
-                            ပင်မ ပိုက်ဆံအိတ်
-                        </p>
-                        <p class="flex-grow text-right flex-shrink-0">
-                            {{ mainMoneyBalance.toLocaleString() }} MMK
-                        </p>
-                    </div>
-                    <div class="flex justify-between gap-x-4">
-                        <p class="flex-grow-0 w-36">
-                            <!-- <i class="fal fa-wallet"></i> -->
-                            Game ပိုက်ဆံအိတ်
-                        </p>
-                        <p class="flex-grow text-right flex-shrink-0">
-                            {{ gameMoneyBalance.toLocaleString() }} MMK
-                        </p>
+            <div class="pt-4">
+                <div
+                    class="bg-[#FDC652] rounded-t-2xl px-4 pt-5 pb-6 shadow-lg"
+                >
+                    <p
+                        class="text-center text-black font-semibold text-2xl mb-4"
+                    >
+                        ငွေသွင်းမည်
+                    </p>
+
+                    <div
+                        class="rounded-2xl border border-black/30 bg-[#C89A1E] px-4 py-4"
+                    >
+                        <div class="space-y-4 text-black">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-x-3 min-w-0">
+                                    <img
+                                        src="../../../../public/icons/Wallet.png"
+                                        class="w-11 pl-1"
+                                    />
+                                    <p class="font-semibold truncate">
+                                        <!-- <i class="fal fa-wallet"></i> -->
+                                        ပင်မပိုက်ဆံအိတ်
+                                    </p>
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white text-2xl font-bold"
+                                    >
+                                        ?
+                                    </div>
+                                </div>
+                                <p class="font-semibold text-xl">
+                                    {{ mainMoneyBalance.toLocaleString() }} ကျပ်
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-x-3 min-w-0">
+                                    <div class="relative w-12 h-9 shrink-0">
+                                        <img
+                                            src="../../../../public/icons/Wallet.png"
+                                            class="w-full h-full object-contain"
+                                        />
+                                        <img
+                                            src="../../../../public/icons/joystick.png"
+                                            class="absolute left-0 top-3/4 -translate-y-1/2 w-7 h-7 object-contain"
+                                        />
+                                    </div>
+                                    <p class="font-semibold truncate">
+                                        <!-- <i class="fal fa-wallet"></i> -->
+                                        ဂိမ်းပိုက်ဆံအိတ်
+                                    </p>
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white text-2xl font-bold"
+                                    >
+                                        ?
+                                    </div>
+                                </div>
+                                <p class="font-semibold text-xl">
+                                    {{ gameMoneyBalance.toLocaleString() }} ကျပ်
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div v-show="step == 1" class="contents">
-                <div
-                    class="px-6 lg:px-12 pt-6 pb-8 shadow-lg rounded-3xl mb-8 lg:mb-8 bg-white"
-                >
-                    <div class="grid grid-cols-3 gap-x-6">
+                <div class="-mt-2 pb-24">
+                    <div class="bg-[#FDC652] rounded-b-2xl px-4 pb-6 shadow-lg">
                         <div
-                            @click="paymentProviderBtnClicked('kpay')"
-                            class="text-center pt-4"
-                            :class="{
-                                'bg-gray-200 shadow-md rounded-xl':
-                                    paymentProvider == 'kpay',
-                            }"
+                            class="rounded-2xl border border-black/30 bg-[#C89A1E] px-4 pt-4 pb-6"
                         >
-                            <img
-                                src="../../../../public/img/kpay.png"
-                                class="w-14 mx-auto mb-2"
-                            />
-                            <p class="text-sm lg:text-base">Kpay</p>
+                            <p
+                                class="text-center text-black font-semibold text-xl mb-4"
+                            >
+                                ငွေသွင်းမည် အကောင့် ရွေးချယ်ပါ
+                            </p>
+
+                            <div class="grid grid-cols-3 gap-x-4">
+                                <button
+                                    type="button"
+                                    @click="paymentProviderBtnClicked('kpay')"
+                                    class="text-center"
+                                >
+                                    <div
+                                        class="h-28 rounded-xl border border-black/30 flex items-center justify-center overflow-hidden"
+                                        :class="{
+                                            'ring-2 ring-black':
+                                                paymentProvider == 'kpay',
+                                        }"
+                                    >
+                                        <img
+                                            src="../../../../public/img/kpay.png"
+                                            class="w-full mx-auto"
+                                        />
+                                    </div>
+                                    <p class="mt-3 font-semibold text-black">
+                                        KBZ PAY
+                                    </p>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    @click="paymentProviderBtnClicked('wave')"
+                                    class="text-center"
+                                >
+                                    <div
+                                        class="h-28 rounded-xl border border-black/30 flex items-center justify-center overflow-hidden"
+                                        :class="{
+                                            'ring-2 ring-black':
+                                                paymentProvider == 'wave',
+                                        }"
+                                    >
+                                        <img
+                                            src="../../../../public/img/wave.png"
+                                            class="w-full mx-auto"
+                                        />
+                                    </div>
+                                    <p class="mt-3 font-semibold text-black">
+                                        WAVE PAY
+                                    </p>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    @click="
+                                        paymentProviderBtnClicked('aya_pay')
+                                    "
+                                    class="text-center"
+                                >
+                                    <div
+                                        class="h-28 rounded-xl border border-black/30 flex items-center justify-center overflow-hidden"
+                                        :class="{
+                                            'ring-2 ring-black':
+                                                paymentProvider == 'aya_pay',
+                                        }"
+                                    >
+                                        <img
+                                            src="../../../../public/img/aya_pay.png"
+                                            class="w-full mx-auto"
+                                        />
+                                    </div>
+                                    <p class="mt-3 font-semibold text-black">
+                                        AYA PAY
+                                    </p>
+                                </button>
+                            </div>
                         </div>
 
-                        <div
-                            @click="paymentProviderBtnClicked('wave')"
-                            class="text-center pt-4"
-                            :class="{
-                                'bg-gray-200 shadow-md rounded-xl':
-                                    paymentProvider == 'wave',
-                            }"
-                        >
-                            <img
-                                src="../../../../public/img/wave.png"
-                                class="w-14 mx-auto mb-2"
-                            />
-                            <p class="text-sm lg:text-base">Wave</p>
+                        <div class="mt-6">
+                            <p
+                                class="text-left text-black font-semibold text-xl mb-3"
+                            >
+                                ငွေဖြည့်မည့်ပမာဏ
+                            </p>
+
+                            <label
+                                class="block rounded-xl bg-[#E5E7EB] overflow-hidden"
+                            >
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-14 h-14 flex items-center justify-center bg-[#D1D5DB]"
+                                    >
+                                        <span class="text-3xl text-white/80"
+                                            >$</span
+                                        >
+                                    </div>
+                                    <input
+                                        type="number"
+                                        placeholder="ငွေပမာဏထည့်ပါ"
+                                        v-model="amount"
+                                        class="w-full h-14 bg-transparent px-4 text-lg text-black placeholder-gray-400 focus:outline-none focus:ring-0"
+                                    />
+                                </div>
+                            </label>
                         </div>
-                        <div
-                            @click="paymentProviderBtnClicked('aya_pay')"
-                            class="text-center pt-4"
-                            :class="{
-                                'bg-gray-200 shadow-md rounded-xl':
-                                    paymentProvider == 'aya_pay',
-                            }"
+
+                        <button
+                            @click="changeStepTwo"
+                            class="w-full bg-[#5271FF] text-white font-semibold py-4 rounded-xl text-xl mt-6"
                         >
-                            <img
-                                src="../../../../public/img/aya_pay.png"
-                                class="w-14 mx-auto mb-2"
-                            />
-                            <p class="text-sm lg:text-base">AYA Pay</p>
-                        </div>
+                            ရှေ့ဆက်ရန်
+                        </button>
+
+                        <p
+                            class="text-center mt-8 text-red-600 text-xl font-semibold leading-relaxed"
+                        >
+                            ငွေသွင်း ငွေထုတ် မြန်ဆန်စေရန်အတွက် <br />
+                            ဖော်ပြပါ ငွေသွင်းအကောင့်များကိုသာ <br />
+                            ငွေလွှဲပေးပါရန်
+                        </p>
                     </div>
-                </div>
-
-                <div class="w-full max-w-md px-4 pb-20 lg:pb-0">
-                    <h2
-                        class="text-base lg:text-xl font-bold mb-4 text-gray-800 text-left"
-                    >
-                        ငွေသွင်းမည် ပမာဏ
-                    </h2>
-
-                    <label class="mb-6 rounded-xl shadow-md bg-white block">
-                        <p class="text-xs px-4 pt-4 text-gray-700">Amount</p>
-                        <input
-                            type="number"
-                            placeholder="Amount"
-                            v-model="amount"
-                            class="w-full p-4 rounded-xl text-sm lg:text-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                        />
-                    </label>
-
-                    <button
-                        @click="changeStepTwo"
-                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full shadow-md text-sm lg:text-xl transition-colors duration-300"
-                    >
-                        လုပ်ဆောင်မည်
-                    </button>
-
-                    <p
-                        class="text-center text-gray-700 mt-8 text-base leading-relaxed font-semibold"
-                    >
-                        ငွေသွင်းငွေထုတ် မြန်ဆန်စေရန်အတွက် <br />ဖော်ပြပါ
-                        အကောင့်များသို့သာ ငွေလွှဲရန်
-                    </p>
                 </div>
             </div>
             <div v-show="step == 2" class="contents">
