@@ -7,15 +7,24 @@
         <Navbar title="Games" :back-btn="backBtn"></Navbar>
 
         <div class="">
-            <ul class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
-                role="tablist" data-twe-nav-ref>
-                <li v-for="(type, index) in gameTypes" :key="index" class="tab-list-item"
-                    :class="type == selectedGameType ? 'active-tabs' : ''">
-                    <a @click="selectedGameType = type;
-                                getProviders();
-                            "
+            <ul
+                class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar py-8"
+                role="tablist"
+                data-twe-nav-ref
+            >
+                <li
+                    v-for="(type, index) in gameTypes"
+                    :key="index"
+                    class="tab-list-item"
+                    :class="type == selectedGameType ? 'active-tabs' : ''"
+                >
+                    <a
+                        @click="
+                            selectedGameType = type;
+                            getProviders();
+                        "
                         class="tab-list-item-text"
-                        >
+                    >
                         {{ type.name }}
                     </a>
                 </li>
@@ -68,7 +77,8 @@
                                                 id: product.id,
                                                 name: product.name,
                                                 code: product.code,
-                                            }
+                                                image: product.pivot.image,
+                                            },
                                         )}&game_type=${JSON.stringify({
                                             id: selectedGameType.id,
                                             name: selectedGameType.name,
@@ -80,7 +90,11 @@
                                             :src="product.imgUrl"
                                             alt=""
                                         />
-                                        <p class="text-white text-center pt-1 text-sm"> {{product.name}}</p>
+                                        <p
+                                            class="text-white text-center pt-1 text-sm"
+                                        >
+                                            {{ product.name }}
+                                        </p>
                                     </a>
                                 </div>
                             </div>

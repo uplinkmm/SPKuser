@@ -449,6 +449,8 @@
                                                             id: product.id,
                                                             name: product.name,
                                                             code: product.code,
+                                                            image: product.pivot
+                                                                .image,
                                                         },
                                                     )}&game_type=${JSON.stringify(
                                                         {
