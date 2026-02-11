@@ -71,14 +71,14 @@
                     </p>
 
                     <div
-                        class="rounded-2xl border border-black/30 bg-[#E1B234] px-4 py-4"
+                        class="rounded-2xl border border-black/30 bg-[#C89A1E] px-4 py-4"
                     >
                         <div class="space-y-4 text-black">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-x-3 min-w-0">
                                     <img
                                         src="../../../../public/icons/Wallet.png"
-                                        class="w-7 h-7"
+                                        class="w-11 pl-1"
                                     />
                                     <p class="font-semibold truncate">
                                         ပင်မပိုက်ဆံအိတ်
@@ -96,10 +96,16 @@
 
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-x-3 min-w-0">
-                                    <img
-                                        src="../../../../public/icons/Wallet.png"
-                                        class="w-7 h-7"
-                                    />
+                                    <div class="relative w-12 h-9 shrink-0">
+                                        <img
+                                            src="../../../../public/icons/Wallet.png"
+                                            class="w-full h-full object-contain"
+                                        />
+                                        <img
+                                            src="../../../../public/icons/joystick.png"
+                                            class="absolute left-[-0px] top-3/4 -translate-y-1/2 w-7 h-7 object-contain"
+                                        />
+                                    </div>
                                     <p class="font-semibold truncate">
                                         ဂိမ်းပိုက်ဆံအိတ်
                                     </p>
@@ -199,7 +205,7 @@
                 </div>
             </div>
 
-            <div class="pt-4 bg-white">
+            <div class="pt-4 bg-white pb-16">
                 <p class="text-center text-black font-semibold text-lg mb-3">
                     မှတ်တမ်းများ
                 </p>
@@ -224,7 +230,7 @@
                 <p
                     class="text-center text-black font-semibold text-lg mt-5 mb-3"
                 >
-                    အကူညီ
+                    အကူအညီ
                 </p>
 
                 <div class="bg-[#FDC652] overflow-hidden">
