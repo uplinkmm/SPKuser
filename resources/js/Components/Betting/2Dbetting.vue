@@ -1,8 +1,15 @@
 <template lang="">
     <notifications position="top center" />
 
-    <div v-if="step == 7" class="frame-container min-h-[100vh] bg-black">
-        <div class="px-4">
+    <div
+        v-if="step == 7"
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
             <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         </div>
         <!-- <div class="mb-3 flex justify-end px-4">
@@ -82,8 +89,15 @@
         </div>
     </div>
 
-    <div v-else class="frame-container min-h-[100vh] bg-black">
-        <div class="px-4">
+    <div
+        v-else
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
             <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         </div>
         <!-- Error page -->

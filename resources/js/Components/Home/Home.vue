@@ -1,6 +1,12 @@
 <template lang="">
-    <div class="frame-container min-h-[100vh] bg-[#000]">
-        <div class="px-4">
+    <div
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
             <Navbar
                 title=""
                 :is-home-page="true"
