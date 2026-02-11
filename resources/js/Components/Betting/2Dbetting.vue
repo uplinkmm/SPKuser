@@ -307,68 +307,71 @@
         </div>
 
         <div :class="step == 1 ? 'block' : 'hidden'" class="pb-16">
-            <div
-                class="relative block mb-6 w-full rounded-lg shadow-xl bg-white py-4 px-4"
-            >
-                <div class="w-full flex justify-between">
-                    <label for="amount" class="text-sm mb-3 relative block"
-                        >Amount</label
-                    >
-                    <p class="text-xs">အနည်းဆုံး ၁၀၀ မှ စ ထိုးပါ</p>
+            <div class="mb-4 rounded-3xl bg-[#FFC529] px-4">
+                <p class="text-lg text-center font-bold">2D ထိုးမည်</p>
+
+                <div class="flex justify-between items-center">
+                    <p class="text-lg font-bold text-[#FF9900]">
+                        {{ formatTime(selectedGameSetting?.lottery_time) }}
+                    </p>
+                    <div class="w-10"></div>
                 </div>
-                <div class="flex gap-x-4 mb-2">
-                    <div class="mb-4 flex-grow">
-                        <input
-                            type="number"
-                            id="amount"
-                            placeholder="Amount"
-                            v-model="each_amount"
-                            @input="validateNumber($event, 'amount')"
-                            ref="amount"
-                            class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <button
-                            class="bg-[#0978D3] text-white px-4 py-2 lg:py-2 w-fit whitespace-nowrap rounded-lg text-base"
-                            @click="changeToStep2(1)"
+
+                <p class="mt-2 text-base font-semibold">
+                    ငွေပမာဏ
+                    <span class="text-red-600"> ( ၁၀၀ ကျပ်မှစထိုးပါ )</span>
+                </p>
+
+                <div class="mt-3 flex items-center">
+                    <div class="flex-grow">
+                        <div
+                            class="flex items-center bg-white rounded-l-lg overflow-hidden border border-black focus-within:ring-2 focus-within:ring-[#FF9900] focus-within:ring-opacity-70"
                         >
-                            ထိုးမည်
-                        </button>
+                            <div
+                                class="w-14 h-12 flex items-center justify-center text-[#7a7a7a]"
+                            >
+                                <i class="fas fa-dollar-sign text-2xl"></i>
+                            </div>
+                            <input
+                                type="number"
+                                id="amount"
+                                placeholder="အနည်းဆုံး ၁၀၀"
+                                v-model="each_amount"
+                                @input="validateNumber($event, 'amount')"
+                                ref="amount"
+                                class="block w-full h-14 bg-transparent px-2 text-lg focus:ring-0 focus:shadow-none outline-none"
+                            />
+                        </div>
                     </div>
+
+                    <button
+                        class="bg-[#5271FF] text-white px-8 h-14 rounded-r-lg text-base font-semibold whitespace-nowrap"
+                        @click="changeToStep2(1)"
+                    >
+                        ထိုးမည်
+                    </button>
+
                     <button
                         @click="reverseBetNumbers"
-                        class="px-4 py-2 lg:py-2 bg-black text-white text-sm rounded-lg w-fit whitespace-nowrap mb-3"
+                        class="w-12 h-14 bg-[#d9d9d9] text-black text-lg font-semibold rounded-lg ml-4"
                     >
-                        {{ $t("R") }}
+                        R
                     </button>
                 </div>
-                <div class="grid grid-cols-2 gap-x-4 mb-3">
+
+                <div class="mt-4 grid grid-cols-2 gap-3">
                     <button
                         @click="roundBet"
-                        class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
+                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3"
                     >
                         {{ $t("Round Bet") }}
                     </button>
                     <button
                         @click="quickBettingBtn"
-                        class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
+                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3"
                     >
                         {{ $t("Quick Bet") }}
                     </button>
-                </div>
-                <div class="flex justify-between px-4">
-                    <div>
-                        <p class="text-xs">
-                            {{ $t("Balance") }} :
-                            {{ wallet_balance?.toLocaleString() }} MMK
-                        </p>
-                    </div>
-                    <div>
-                        <p class="text-xs">
-                            {{ $t("Closing Time") }} : {{ closingTimeFormat }}
-                        </p>
-                    </div>
                 </div>
             </div>
 
@@ -462,7 +465,7 @@
                 </div>
             </div> -->
 
-            <div>
+            <div class="px-2 mb-16">
                 <div class="flex justify-end mb-4">
                     <button
                         class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
@@ -474,22 +477,22 @@
                         {{ $t("Clear") }}
                     </button>
                 </div>
-                <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
+                <div class="grid grid-cols-10 gap-x-1 gap-y-2">
                     <div
                         class="contents"
                         v-for="(num, index) in numbers"
                         :key="index"
                     >
-                        <div v-if="index == '96'" class="opacity-0"></div>
+                        <!-- <div v-if="index == '96'" class="opacity-0"></div> -->
 
                         <div
                             :class="[
                                 num.is_active == 0
-                                    ? 'bg-gray-300'
+                                    ? 'bg-[#cfcfcf] text-white'
                                     : isBetNumber(num.number)
-                                      ? 'bg-[#FFC529] text-white font-semibold'
-                                      : 'bg-white',
-                                'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
+                                      ? 'bg-[#5271FF] text-white'
+                                      : 'bg-[#FF9900] text-white',
+                                'rounded-lg pt-3 shadow-md aspect-square flex flex-col items-center justify-center border border-white',
                             ]"
                             @click="
                                 no_more_bet == false && num.is_active == 1
@@ -497,29 +500,26 @@
                                     : ''
                             "
                         >
-                            <div class="w-full">
-                                <p class="text-xs lg:text-2xl mb-2 font-inter">
-                                    {{ num.number }}
-                                </p>
-                                <div
-                                    class="w-8 lg:w-8 mx-auto bg-[#9C9C9C] h-1.5"
-                                >
-                                    <!-- class="bg-[#7a2985] h-1.5" -->
+                            <p class="text-xl font-bold leading-none">
+                                {{ num.number }}
+                            </p>
 
-                                    <div
-                                        class="bg-[#17b509] h-1.5"
-                                        :class="
-                                            progressBarClass(
-                                                num.total_bet_percentage,
-                                            )
-                                        "
-                                        :style="{
-                                            width: computedWidth(
-                                                num.total_bet_percentage,
-                                            ),
-                                        }"
-                                    ></div>
-                                </div>
+                            <div
+                                class="mt-2 w-11 h-4 bg-[#d9d9d9] rounded-full flex items-center border border-white shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="h-3 rounded-full"
+                                    :class="
+                                        progressBarClass(
+                                            num.total_bet_percentage,
+                                        )
+                                    "
+                                    :style="{
+                                        width: computedWidth(
+                                            num.total_bet_percentage,
+                                        ),
+                                    }"
+                                ></div>
                             </div>
                         </div>
                     </div>
@@ -2278,13 +2278,13 @@ export default {
         },
         progressBarClass(percentage) {
             if (percentage === 100) {
-                return "bg-[#c7080e] h-1-5";
+                return "bg-[#c7080e]";
             } else if (percentage > 70 && percentage < 100) {
-                return "bg-[#f7db07] h-1-5";
+                return "bg-[#f7db07]";
             } else if (percentage < 70) {
-                return "bg-[#17b509] h-1-5";
+                return "bg-[#17b509]";
             } else {
-                return "bg-[#7a2985] h-1-5"; // Default color
+                return "bg-[#7a2985]"; // Default color
             }
         },
         chooseTime(type) {
