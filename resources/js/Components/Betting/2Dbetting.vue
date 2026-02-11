@@ -1091,12 +1091,14 @@
         </div>
 
         <!-- ခွေထိုးမည် -->
+        <!-- ခွေထိုးမည် -->
         <div
             :class="step == 4 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
+            class="bg-[#FFC529] rounded-t-xl"
         >
             <div
-                class="relative mb-8 w-full rounded-lg shadow-xl bg-white pt-4 pb-0 px-8"
+                class="relative mb-4 w-full rounded-2xl shadow-md bg-[#F3F4F6] pt-4 pb-4 px-4"
             >
                 <div class="grid grid-cols-2 gap-x-4">
                     <div class="flex justify-between flex-col pt-4 pb-3">
@@ -1104,7 +1106,7 @@
                             <div class="mb-4">
                                 <label
                                     for="round_digits"
-                                    class="text-sm mb-3 relative block"
+                                    class="text-sm mb-2 relative block font-semibold"
                                     >3/4 Numbers</label
                                 >
                                 <input
@@ -1116,19 +1118,19 @@
                                         validateNumber($event, 'round_digits')
                                     "
                                     ref="round_digits"
-                                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                                    class="block w-full h-12 px-3 border border-black text-base rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
                                 />
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FFC529] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#FFC529] text-black px-4 h-12 w-full rounded-lg text-base font-semibold"
                                     @click="getTwoDigitCombinations(false)"
                                 >
                                     အပူးမပါ
                                 </button>
                             </div>
                         </div>
-                        <p class="text-sm">
+                        <p class="text-sm font-semibold">
                             {{ $t("Total Betting Amount") }} :
                             {{ totalBetAmount?.toLocaleString() }} MMK
                         </p>
@@ -1139,7 +1141,7 @@
                             <div class="mb-4">
                                 <label
                                     for="amount"
-                                    class="text-sm mb-3 relative block"
+                                    class="text-sm mb-2 relative block font-semibold"
                                     >Amount</label
                                 >
                                 <input
@@ -1156,12 +1158,12 @@
                                         )
                                     "
                                     ref="round_bet_amount"
-                                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                                    class="block w-full h-12 px-3 border border-black text-base rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
                                 />
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#FFC529] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#FFC529] text-black px-4 h-12 w-full rounded-lg text-base font-semibold"
                                     @click="getTwoDigitCombinations(true)"
                                 >
                                     အပူးပါ
@@ -1170,11 +1172,11 @@
                         </div>
                     </div>
                     <div class="flex justify-between col-span-2 mb-8">
-                        <p class="text-sm">
+                        <p class="text-sm font-semibold">
                             လက်ကျန်ငွေ :
                             {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
-                        <p class="text-sm">
+                        <p class="text-sm font-semibold">
                             {{ $t("Closing Time") }} :
                             {{ closingTimeFormat }}
                         </p>
@@ -1182,22 +1184,29 @@
                 </div>
             </div>
             <div
-                class="relative mb-0 w-full rounded-lg shadow-xl bg-white pt-4 pb-14 px-4"
+                class="relative mb-0 w-full rounded-2xl shadow-md bg-white pt-4 pb-14 px-4"
             >
                 <div class="">
-                    <table class="table-auto w-full">
+                    <table class="table-fixed w-full text-lg">
                         <thead>
                             <tr>
-                                <th class="py-2">{{ $t("No") }}</th>
-                                <th class="py-2">{{ $t("Multiplier") }}</th>
-                                <th class="py-2">{{ $t("Betting Amount") }}</th>
-                                <th class="py-2">{{ $t("Edit Delete") }}</th>
+                                <th class="py-3 w-3/12 text-center">
+                                    {{ $t("No") }}
+                                </th>
+                                <th class="py-3 w-2/12 text-center">
+                                    {{ $t("Multiplier") }}
+                                </th>
+                                <th class="py-3 w-5/12 text-right pr-2">
+                                    {{ $t("Betting Amount") }}
+                                </th>
+                                <th class="py-3 w-2/12 text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 v-for="(bet_number, index) in bet_numbers"
                                 :key="index"
+                                class="border-b last:border-0"
                             >
                                 <td
                                     :class="
@@ -1225,13 +1234,14 @@
                                             ? ''
                                             : 'text-red-600'
                                     "
-                                    class="text-center py-2"
+                                    class="text-right py-2 pr-2"
                                 >
                                     <span
                                         v-show="
                                             bet_number.number !=
                                             edit_bet_number.number
                                         "
+                                        class="font-semibold"
                                     >
                                         {{
                                             bet_number.amount?.toLocaleString()
@@ -1243,21 +1253,21 @@
                                             edit_bet_number.number
                                         "
                                         type="number"
-                                        class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                                        class="w-24 h-10 bg-white px-2 text-base rounded-lg border border-black focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
                                         v-model="edit_bet_number.amount"
-                                        placeholder="Enter amount"
+                                        placeholder=""
                                     />
                                 </td>
-                                <td class="text-center py-2">
+                                <td class="text-center py-3">
                                     <button
                                         v-show="
                                             bet_number.number ==
                                             edit_bet_number.number
                                         "
                                         @click="editBetAmount"
-                                        class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
+                                        class="w-10 h-10 rounded-lg bg-[#0C7A18] text-white inline-flex items-center justify-center"
                                     >
-                                        <i class="fas fa-check mr-2"></i>
+                                        <i class="fas fa-check"></i>
                                     </button>
                                     <!-- Edit Button (Blue) -->
                                     <button
@@ -1266,9 +1276,9 @@
                                             edit_bet_number.number
                                         "
                                         @click="edit_bet_number = bet_number"
-                                        class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
+                                        class="w-10 h-10 rounded-lg bg-white border border-black text-[#5271FF] inline-flex items-center justify-center"
                                     >
-                                        <i class="fal fa-edit mr-2"></i>
+                                        <i class="fas fa-edit"></i>
                                     </button>
                                     <!-- Delete Button (Red) -->
                                     <button
@@ -1278,9 +1288,9 @@
                                             delete_bet_number =
                                                 bet_number.number
                                         "
-                                        class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
+                                        class="w-10 h-10 rounded-lg bg-white border border-black text-red-500 inline-flex items-center justify-center"
                                     >
-                                        <i class="fal fa-trash"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -1291,17 +1301,17 @@
                                 <td class="text-right pr-4" colspan="3">
                                     {{ $t("Total Betting Amount") }}
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right pr-2">
                                     {{ totalBetAmount.toLocaleString() }} MMK
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="absolute mb-6 w-full flex justify-center">
+                <div class="mt-6 w-full flex justify-center">
                     <button
                         :disabled="calling_api"
-                        class="bg-[#FFC529] text-white px-12 py-2 rounded-lg text-sm font-semibold"
+                        class="bg-[#FFC529] text-black px-16 h-12 rounded-lg text-base font-semibold"
                         @click="sendBetting"
                     >
                         {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
