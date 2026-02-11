@@ -6,7 +6,9 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <Navbar title="Payment History" :back-btn="backBtn"></Navbar>
+        <div class="px-4">
+            <Navbar title="Payment History" :back-btn="backBtn"></Navbar>
+        </div>
 
         <div
             class="bg-[#FDC652] rounded-t-3xl shadow-lg px-4 pt-4 pb-6 mt-4 min-h-[calc(100vh-120px)]"
@@ -26,7 +28,7 @@
                     <li role="presentation">
                         <a
                             href="#tabs-twoD"
-                            class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-black font-semibold ml-3"
+                            class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-green-600 font-semibold ml-3"
                             data-twe-toggle="pill"
                             data-twe-target="#tabs-twoD"
                             data-twe-nav-active
@@ -44,7 +46,7 @@
                     <li role="presentation">
                         <a
                             href="#tabs-threeD"
-                            class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-black font-semibold"
+                            class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-green-600 font-semibold"
                             data-twe-toggle="pill"
                             data-twe-target="#tabs-threeD"
                             role="tab"
@@ -61,7 +63,7 @@
                     <li role="presentation">
                         <a
                             href="#tabs-transfer"
-                            class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-black font-semibold"
+                            class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-green-600 font-semibold"
                             data-twe-toggle="pill"
                             data-twe-target="#tabs-transfer"
                             role="tab"
