@@ -21,7 +21,7 @@
                 </div>
                 
             </div> -->
-            <div
+            <!-- <div
                 v-if="marqueeAds"
                 class="overflow-hidden mb-5 z-50 whitespace-nowrap bg-[#354ebd70] absolute top-0 left-4 right-4"
             >
@@ -34,7 +34,7 @@
                         {{ marqueeAds?.name }}
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="relative" id="ad_slick">
                 <div class="" v-for="(ads, index) in adses" :key="index">
@@ -51,15 +51,20 @@
                     />
                 </div>
 
-                <!-- <div class="absolute left-3 right-3 bottom-3">
-                    <div class="background-black/90 rounded-xl py-2 px-3">
-                        <p
-                            class="text-gray-200 text-center text-sm font-semibold mb-0"
+                <div
+                    v-if="marqueeAds"
+                    class="overflow-hidden z-50 whitespace-nowrap py-2 bg-[#00000090] absolute left-3 right-3 -bottom-5 rounded-xl"
+                >
+                    <div style="position: relative; min-height: 20px">
+                        <div
+                            id="marquee-text"
+                            class="block text-gray-200 text-center text-sm font-semibold py-1"
+                            style="position: absolute; white-space: nowrap"
                         >
-                            မင်္ဂလာပါ ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်။
-                        </p>
+                            {{ marqueeAds?.name }}
+                        </div>
                     </div>
-                </div> -->
+                </div>
             </div>
 
             <div
