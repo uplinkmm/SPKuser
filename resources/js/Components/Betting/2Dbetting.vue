@@ -1,7 +1,7 @@
 <template lang="">
     <notifications position="top center" />
 
-    <div v-if="step == 7" class="frame-container min-h-[100vh]">
+    <div v-if="step == 7" class="frame-container min-h-[100vh] bg-black">
         <div class="px-4">
             <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         </div>
@@ -82,13 +82,13 @@
         </div>
     </div>
 
-    <div v-else class="frame-container min-h-[100vh]">
+    <div v-else class="frame-container min-h-[100vh] bg-black">
         <div class="px-4">
             <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         </div>
         <!-- Error page -->
         <div :class="step == 6 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
+            <div class="relative mb-0 w-full bg-transparent pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div
                         class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-16 flex justify-center"
@@ -104,7 +104,7 @@
         </div>
         <!-- choose time -->
         <div :class="step == 5 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0">
+            <div class="relative mb-0 w-full bg-transparent pb-14 px-0">
                 <!-- <div class="grid grid-cols-2 gap-x-4 mb-8">
                     <a
                         href="history?game_id=1"
@@ -127,7 +127,7 @@
                 </div> -->
                 <div
                     v-if="twod_settings.length && main_game_active"
-                    class="items-center justify-center mb-8 px-4"
+                    class="items-center justify-center px-4 bg-[#FFC529] rounded-t-3xl shadow-lg"
                 >
                     <h1 class="text-center text-xl font-bold mb-3">
                         2D ထိုးမည်
@@ -183,19 +183,22 @@
                     </div>
                 </div>
 
-                <div
-                    v-else
-                    class="bg-transparent items-center justify-center mb-8"
-                >
-                    <div class="flex-grow py-12 bg-[#FFC529] -mx-4">
+                <div v-else class="items-center justify-center">
+                    <div
+                        class="flex-grow py-0 bg-[#FFC529] rounded-t-3xl shadow-lg"
+                    >
+                        <p class="text-center text-lg">2D ထိုးမည်</p>
+
                         <div class="text-center">
-                            <h1 class="text-3xl font-bold mb-4">2D ထိုးမည်</h1>
-                            <div class="w-full flex justify-center mb-4">
+                            <h1 class="text-4xl text-red-600 font-bold py-20">
+                                 ထီ ပိတ်ပါသည်
+                            </h1>
+                            <!-- <div class="w-full flex justify-center mb-4">
                                 <img
                                     src="../../../../public/img/apologize 1.png"
                                 />
-                            </div>
-                            <p class="text-lg">ယနေ့ 2D ပိတ်ပါသည်</p>
+                            </div> -->
+                            <!-- <p class="text-lg">ယနေ့ 2D ပိတ်ပါသည်</p> -->
                         </div>
                     </div>
 
@@ -210,7 +213,9 @@
                     </div> -->
                 </div>
 
-                <div class="mt-4 overflow-hidde">
+                <div
+                    class="overflow-hidde bg-[#FFC529] min-h-[calc(100vh-100px)] pt-6"
+                >
                     <div class="bg-white text-center py-2">
                         <span class="text-base font-semibold"
                             >မှတ်တမ်းများ</span
@@ -306,8 +311,11 @@
             </div>
         </div>
 
-        <div :class="step == 1 ? 'block' : 'hidden'" class="pb-16">
-            <div class="mb-4 rounded-3xl bg-[#FFC529] px-4">
+        <div
+            :class="step == 1 ? 'block' : 'hidden'"
+            class="pb-16 rounded-3xl bg-[#FFC529]"
+        >
+            <div class="mb-4 px-4">
                 <p class="text-lg text-center font-bold">2D ထိုးမည်</p>
 
                 <div class="flex justify-between items-center">
@@ -528,75 +536,72 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full rounded-lg pb-14"
+            class="relative mb-12 w-full px-4 pb-14 bg-[#FFC529]"
             :class="step == 2 ? 'block' : 'hidden'"
-            style="min-height: calc(100vh - 132px)"
         >
-            <div>
-                <p class="text-center mb-2 text-lg">2D ထိုးမည်</p>
-            </div>
-            <div
-                class="flex justify-between px-6 bg-[#FFC529] text-black rounded-tr-lg rounded-tl-lg"
-            >
-                <div class="flex text-sm">
-                    <p class="pr-8 py-2">
-                        {{ getCurrentDate() }}
-                    </p>
-                    <p class="pr-8 py-2">
-                        {{ getCurrentTime() }}
-                    </p>
-                </div>
-                <div>
-                    <p class="pr-8 py-2">
-                        {{ formatTime(selectedGameSetting.lottery_time) }}
-                    </p>
-                    <!-- <p class="pr-8">
-                        {{ totalBetAmount?.toLocaleString() }} MMK
-                    </p> -->
-                </div>
-            </div>
-            <div
-                class="mb-5 px-4 bg-white pb-3 overflow-y-auto small-scrollbar"
-                style="height: calc(100% - 80px)"
-            >
-                <div class="flex justify-end mb-4"></div>
-                <table class="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-3">စဉ်</th>
-                            <th class="py-3">{{ $t("No") }}</th>
-                            <!-- <th class="py-2">{{ $t("Multiplier") }}</th> -->
-                            <th class="py-3">{{ $t("Betting Amount") }}</th>
-                            <th class="py-3">{{ $t("Edit Delete") }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="(bet_number, index) in bet_numbers"
-                            :key="index"
-                            class="border-b last:border-0"
+            <div class="w-full rounded-3xl bg-[#FFC529] pt-4 pb-2">
+                <p class="text-center mb-3 text-lg font-bold">2D ထိုးမည်</p>
+
+                <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
+                    <div
+                        class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                    >
+                        <div
+                            class="flex justify-between items-center px-4 py-2 bg-[#F4F4F4] text-lg"
                         >
-                            <td
-                                class="text-center py-2"
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                            >
-                                {{ index + 1 }}
-                            </td>
-                            <td
-                                class="text-center py-2"
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                            >
-                                {{ bet_number.number }}
-                            </td>
-                            <!-- <td
+                            <p>{{ getCurrentDate() }}</p>
+                            <p>{{ getCurrentTime() }}</p>
+                            <p class="text-[#FF9900] font-semibold">
+                                {{
+                                    formatTime(selectedGameSetting.lottery_time)
+                                }}
+                            </p>
+                        </div>
+
+                        <div
+                            class="px-4 pb-3 pt-2 overflow-y-auto small-scrollbar"
+                            style="max-height: calc(100vh - 260px)"
+                        >
+                            <table class="table-auto w-full text-lg">
+                                <thead>
+                                    <tr>
+                                        <th class="py-3">စဉ်</th>
+                                        <th class="py-3">{{ $t("No") }}</th>
+                                        <!-- <th class="py-2">{{ $t("Multiplier") }}</th> -->
+                                        <th class="py-3">
+                                            {{ $t("Betting Amount") }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(
+                                            bet_number, index
+                                        ) in bet_numbers"
+                                        :key="index"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
+                                            {{ bet_number.number }}
+                                        </td>
+                                        <!-- <td
                                 :class="
                                     checkAvailableAmount(bet_number)
                                         ? ''
@@ -606,104 +611,105 @@
                             >
                                 {{ bet_multiplier }}
                             </td> -->
-                            <td
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                                class="text-center py-2"
-                            >
-                                <span
-                                    v-show="
-                                        bet_number.number !=
-                                        edit_bet_number.number
-                                    "
-                                >
-                                    {{ bet_number.amount?.toLocaleString() }}
-                                </span>
-                                <input
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    type="number"
-                                    class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-                                    v-model="edit_bet_number.amount"
-                                    placeholder="Enter amount"
-                                />
-                            </td>
-                            <td class="text-center py-2">
-                                <button
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    @click="editBetAmount"
-                                    class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
-                                >
-                                    <i class="fas fa-check mr-2"></i>
-                                </button>
-                                <button
-                                    v-show="
-                                        bet_number.number !=
-                                        edit_bet_number.number
-                                    "
-                                    @click="edit_bet_number = bet_number"
-                                    class="text-black hover:text-black transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-edit mr-2"></i>
-                                </button>
-                                <button
-                                    data-twe-toggle="modal"
-                                    data-twe-target="#delete_modal"
-                                    @click="
-                                        delete_bet_number = bet_number.number
-                                    "
-                                    class="text-black hover:text-black transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr
-                            v-if="bet_numbers.length"
-                            class="border-b last:border-0 font-semibold"
-                        >
-                            <td class="text-right pr-4" colspan="3">
-                                {{ $t("Total Betting Amount") }}
-                            </td>
-                            <td class="text-center">
-                                {{ totalBetAmount.toLocaleString() }} MMK
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="mb-4 w-full flex justify-center">
-                <!-- <p class="text-sm pt-2 pr-8">
-                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount }} MMK
-                </p> -->
-                <button
-                    class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
-                    @click="step = 1"
-                >
-                    Cancel
-                </button>
-                <button
-                    :disabled="calling_api"
-                    class="bg-[#0978D3] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
-                    @click="sendBetting"
-                >
-                    {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
-                </button>
+                                        <td
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                            class="text-center py-2 space-x-1"
+                                        >
+                                            <span
+                                                v-show="
+                                                    bet_number.number !=
+                                                    edit_bet_number.number
+                                                "
+                                            >
+                                                {{
+                                                    bet_number.amount?.toLocaleString()
+                                                }}
+                                            </span>
+                                            <input
+                                                v-show="
+                                                    bet_number.number ==
+                                                    edit_bet_number.number
+                                                "
+                                                type="number"
+                                                class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                                                v-model="edit_bet_number.amount"
+                                                placeholder="Enter amount"
+                                            />
+                                            <button
+                                                v-show="
+                                                    bet_number.number ==
+                                                    edit_bet_number.number
+                                                "
+                                                @click="editBetAmount"
+                                                class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
+                                            >
+                                                <i
+                                                    class="fas fa-check mr-2"
+                                                ></i>
+                                            </button>
+                                            <button
+                                                v-show="
+                                                    bet_number.number !=
+                                                    edit_bet_number.number
+                                                "
+                                                @click="
+                                                    edit_bet_number = bet_number
+                                                "
+                                                class="text-[#5271FF] hover:text-[#5271FF]/80 transition duration-150 ease-in-out"
+                                            >
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button
+                                                data-twe-toggle="modal"
+                                                data-twe-target="#delete_modal"
+                                                @click="
+                                                    delete_bet_number =
+                                                        bet_number.number
+                                                "
+                                                class="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
+                                            >
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        v-if="bet_numbers.length"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td class="text-right pr-4" colspan="2">
+                                            {{ $t("Total Betting Amount") }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{
+                                                totalBetAmount.toLocaleString()
+                                            }}
+                                            ကျပ်
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button
+                        :disabled="calling_api"
+                        class="w-full bg-[#5271FF] text-white py-4 rounded-lg text-lg font-semibold"
+                        @click="sendBetting"
+                    >
+                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- quick betting -->
         <div :class="step == 3 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
+            <div class="relative mb-0 w-full bg-transparent pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
                         <h1 class="text-black text-lg font-semibold">
@@ -2361,7 +2367,7 @@ export default {
             }
         },
         getCurrentDate() {
-            return moment().format("MMM DD, YYYY");
+            return moment().format("DD-MM-YYYY");
         },
         getCurrentTime() {
             return moment().format("hh:mm A");

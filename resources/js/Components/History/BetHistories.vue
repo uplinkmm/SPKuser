@@ -1,8 +1,8 @@
 <template>
-    <div class="frame-container px-4 min-h-[100vh]">
+    <div class="frame-container min-h-[100vh] bg-black">
         <Navbar title="Bet History" :back-btn="backBtn"></Navbar>
 
-        <div class="">
+        <div class="bg-[#FFC529] rounded-t-xl min-h-[calc(100vh-120px)]">
             <div class="mb-6">
                 <!-- 2D History Section -->
                 <div
@@ -11,7 +11,10 @@
                     id="tabs-twoD"
                     role="tabpanel"
                 >
-                    <div class="mx-0 pb-8">
+                    <div class="text-center text-black text-lg py-4 font-bold">
+                        2D history
+                    </div>
+                    <div class="mx-0 pb-8 pt-4">
                         <div
                             v-if="two_d_histories.length === 0"
                             class="text-center text-white py-8"
@@ -22,87 +25,100 @@
                         <div
                             v-for="(history, index) in two_d_histories"
                             :key="index"
-                            class="pb-4 rounded-lg mb-8 bg-white relative"
+                            class="mb-6"
                         >
-                            <div
-                                class="flex justify-between mb-0 bg-[#FFC529] py-4 px-4 text-white"
-                            >
-                                <p class="text-base font-semibold">
-                                    {{ dateFormat(history.date_time) }}
-                                </p>
-                                <p class="text-base font-semibold">
-                                    {{ timeFormat(history.lottery_time) }}
-                                </p>
-                            </div>
-                            <hr />
-                            <div class="pt-2">
-                                <div>
-                                    <table class="table-auto w-full">
-                                        <thead>
-                                            <tr
-                                                class="border-b !border-gray-300"
-                                            >
-                                                <th
-                                                    class="py-4 text-left font-normal pr-4 pl-12"
+                            <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
+                                <div
+                                    class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                                >
+                                    <div
+                                        class="flex justify-between items-center px-4 py-2 bg-[#F4F4F4] text-lg"
+                                    >
+                                        <p>{{ dateOnly(history.date_time) }}</p>
+                                        <p>
+                                            {{
+                                                timeFromDateTime(
+                                                    history.date_time,
+                                                )
+                                            }}
+                                        </p>
+                                        <p class="text-[#FF9900] font-semibold">
+                                            {{
+                                                timeFormat(history.lottery_time)
+                                            }}
+                                        </p>
+                                    </div>
+
+                                    <div
+                                        class="px-4 pb-3 pt-2 overflow-y-auto small-scrollbar"
+                                    >
+                                        <table
+                                            class="table-auto w-full text-base"
+                                        >
+                                            <thead>
+                                                <tr
+                                                    class="border-b !border-gray-300"
                                                 >
-                                                    ID
-                                                </th>
-                                                <th
-                                                    class="py-4 font-normal px-4"
+                                                    <th class="py-3 text-left">
+                                                        စဉ်
+                                                    </th>
+                                                    <th
+                                                        class="py-3 text-center"
+                                                    >
+                                                        ဂဏန်း
+                                                    </th>
+                                                    <th class="py-3 text-right">
+                                                        ငွေပမာဏ
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    v-for="(
+                                                        bet_number, index
+                                                    ) in history.betting_numbers"
+                                                    :key="index"
+                                                    class="border-b last:border-0"
                                                 >
-                                                    Number
-                                                </th>
-                                                <th
-                                                    class="py-4 text-right font-normal pl-4 pr-12"
+                                                    <td class="py-3 text-left">
+                                                        {{ index + 1 }}
+                                                    </td>
+                                                    <td
+                                                        class="py-3 text-center"
+                                                    >
+                                                        {{ bet_number.number }}
+                                                    </td>
+                                                    <td class="py-3 text-right">
+                                                        {{
+                                                            bet_number.amount?.toLocaleString()
+                                                        }}
+                                                    </td>
+                                                </tr>
+                                                <tr
+                                                    class="border-t !border-gray-300"
+                                                    v-if="
+                                                        history.betting_numbers
+                                                            ?.length
+                                                    "
                                                 >
-                                                    Amount
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                v-for="(
-                                                    bet_number, index
-                                                ) in history.betting_numbers"
-                                                :key="index"
-                                            >
-                                                <td
-                                                    class="text-left py-4 pr-4 pl-12"
-                                                >
-                                                    {{ ++index }}
-                                                </td>
-                                                <td
-                                                    class="text-center py-4 px-4"
-                                                >
-                                                    {{ bet_number.number }}
-                                                </td>
-                                                <td
-                                                    class="py-4 text-right pl-4 pr-12"
-                                                >
-                                                    {{
-                                                        bet_number.amount?.toLocaleString()
-                                                    }}
-                                                </td>
-                                            </tr>
-                                            <tr
-                                                class="border-t !border-gray-300"
-                                            >
-                                                <td></td>
-                                                <td
-                                                    class="text-center text-base font-semibold py-3 pb-2"
-                                                >
-                                                    Total
-                                                </td>
-                                                <td
-                                                    class="text-right text-base font-semibold pl-4 pr-12 py-3"
-                                                >
-                                                    {{
-                                                        history.total_amount?.toLocaleString()
-                                                    }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                    <td></td>
+                                                    <td
+                                                        class="text-center text-base font-semibold py-3 pb-2"
+                                                    >
+                                                        စုစုပေါင်း
+                                                    </td>
+                                                    <td
+                                                        class="text-right text-base font-semibold py-3"
+                                                    >
+                                                        {{
+                                                            history.total_amount?.toLocaleString()
+                                                        }}
+                                                        ကျပ်
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -274,6 +290,12 @@ export default {
         },
         dateFormat(date_time) {
             return moment(date_time).format("YYYY-MM-DD hh:mm A");
+        },
+        dateOnly(date_time) {
+            return moment(date_time).format("DD-MM-YYYY");
+        },
+        timeFromDateTime(date_time) {
+            return moment(date_time).format("hh:mm A");
         },
         timeFormat(time) {
             return moment(time, "HH:mm:ss").format("hh:mm A");
