@@ -1,145 +1,122 @@
 <template>
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
+        class="bg-black w-full sm:w-3/12 sm:min-w-[480px] mx-auto bg-img pb-24 min-h-[100vh]"
     >
-        <Navbar
-            title="History"
-            :back-btn="backBtn"
-            class="!px-8 !mb-0"
-            :need-auth="false"
-        ></Navbar>
+        <div class="mx-4">
+            <Navbar
+                title="History"
+                :back-btn="backBtn"
+                class="!px-8 !mb-0"
+                :need-auth="false"
+            ></Navbar>
+        </div>
 
-        <div class="">
+        <div class="bg-white min-h-[calc(100vh)] rounded-t-xl">
             <ul
-                class="flex list-none flex-row justify-center flex-wrap border-b-0 ps-0 px-4 py-0 mb-4 bg-transparent top-0 z-10"
+                class="flex list-none flex-row justify-center border-b-0 ps-0 px-2 py-2 mb-4 rounded-2xl top-0 z-10 mx-4"
                 role="tablist"
             >
-                <li role="presentation">
+                <li role="presentation" class="flex-1">
                     <button
                         :class="[
-                            'my-2 block px-4 pb-3.5 pt-2 text-sm',
+                            'w-full text-center px-3 py-3 text-md font-semibold transition',
                             game_id === 1
-                                ? 'text-white border-b-2 border-white'
-                                : 'text-neutral-500 ',
+                                ? 'text-black border-b-2 border-[#1D4ED8]'
+                                : 'text-neutral-500 border-b-2 border-transparent',
                         ]"
                         @click="
                             game_id = 1;
                             getHistory();
                         "
                     >
-                        2D
+                        2D ထီပေါက်စဉ်
                     </button>
                 </li>
 
-                <li role="presentation">
+                <li role="presentation" class="flex-1">
                     <button
                         :class="[
-                            'my-2 block px-4 pb-3.5 pt-2 text-sm',
+                            'w-full text-center px-3 py-3 text-md font-semibold transition',
                             game_id === 2
-                                ? 'text-white border-b-2 border-white'
-                                : 'text-neutral-500 ',
+                                ? 'text-black border-b-2 border-[#1D4ED8]'
+                                : 'text-neutral-500 border-b-2 border-transparent',
                         ]"
                         @click="
                             game_id = 2;
                             getHistory();
                         "
                     >
-                        3D
+                        3D ထီပေါက်စဉ်
                     </button>
                 </li>
             </ul>
 
-            <div class="mb-6">
+            <div class="mb-6 mx-4">
                 <div
                     v-show="game_id === 1"
                     class="opacity-100 transition-opacity duration-150 ease-linear"
                 >
                     <div class="mx-0 pb-8">
                         <div
-                            v-for="(list, index) in data"
-                            :key="index"
-                            class="pb-4 mb-4 bg-white relative group"
+                            v-if="!grouped2d?.length"
+                            class="text-center text-black/80 py-10"
                         >
-                            <div
-                                class="flex justify-start mb-1 bg-[#FFC529] py-4 px-8 text-white"
-                            >
-                                <p class="text-base font-semibold">
-                                    {{ formatDate(list.stock_datetime) }}
-                                </p>
+                            No 2D History Found
+                        </div>
+
+                        <div
+                            v-else
+                            v-for="group in grouped2d"
+                            :key="group.date"
+                        >
+                            <div class="flex justify-center mb-4">
+                                <div
+                                    class="bg-[#0C7A18] text-white px-8 py-2 rounded-xl text-base font-semibold"
+                                >
+                                    {{ formatDateWithDay(group.date) }}
+                                </div>
                             </div>
-                            <div
-                                class="border-b last:border-none pb-6 border-gray-300 bg-white"
-                            >
-                                <div class="px-8 py-2">
-                                    <div class="mb-4 pt-2">
-                                        <p>
-                                            {{ formatTime(list.open_time) }}
-                                        </p>
+
+                            <div class="space-y-4 mb-6">
+                                <div
+                                    v-for="item in group.items"
+                                    :key="item.id"
+                                    class="rounded-xl bg-[#D10A0A] text-white shadow-md overflow-hidden"
+                                >
+                                    <div
+                                        class="text-center text-xl font-semibold py-3 border-b border-white/50"
+                                    >
+                                        {{ formatTime(item.open_time) }}
                                     </div>
                                     <div
-                                        class="grid grid-cols-3 gap-x-3 gap-y-6"
+                                        class="grid grid-cols-3 text-center py-4"
                                     >
                                         <div>
-                                            <p
-                                                class="font-semibold text-neutral-600 mb-2"
-                                            >
+                                            <p class="text-base font-semibold">
                                                 Set
                                             </p>
-                                            <p class="text-gray-500">
-                                                {{ list.set }}
+                                            <p class="mt-2 text-base">
+                                                {{ item.set }}
                                             </p>
                                         </div>
                                         <div>
-                                            <p
-                                                class="font-semibold text-neutral-600 mb-2"
-                                            >
+                                            <p class="text-base font-semibold">
                                                 Value
                                             </p>
-                                            <p class="text-gray-500">
-                                                {{ list.value }}
+                                            <p class="mt-2 text-base">
+                                                {{ item.value }}
                                             </p>
                                         </div>
                                         <div>
-                                            <p
-                                                class="font-semibold text-neutral-600 mb-2"
-                                            >
+                                            <p class="text-base font-semibold">
                                                 2D
                                             </p>
-                                            <p class="text-gray-500">
-                                                {{ list.twod }}
+                                            <p
+                                                class="mt-2 text-lg font-bold text-[#FFC529]"
+                                            >
+                                                {{ item.twod }}
                                             </p>
                                         </div>
-
-                                        <!-- <div>
-                                            <p
-                                                class="font-semibold text-neutral-600 mb-2"
-                                            >
-                                                Modern
-                                            </p>
-                                            <p class="text-gray-500">
-                                                {{ list.modern }}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p
-                                                class="font-semibold text-neutral-600 mb-2"
-                                            >
-                                                Internet
-                                            </p>
-                                            <p class="text-gray-500">
-                                                {{ list.internet }}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p
-                                                class="font-semibold text-neutral-600 mb-2"
-                                            >
-                                                TW
-                                            </p>
-                                            <p class="text-gray-500">
-                                                {{ list.tw }}
-                                            </p>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +193,7 @@ import {
 export default {
     data() {
         return {
-            game_id: 2,
+            game_id: 1,
             data: null,
         };
     },
@@ -225,6 +202,22 @@ export default {
     },
     computed: {
         ...mapGetters(["getToken"]),
+        grouped2d() {
+            if (!this.data?.length) return [];
+
+            let map = new Map();
+
+            for (let item of this.data) {
+                let date =
+                    item.stock_date || this.formatDate(item.stock_datetime);
+                if (!map.has(date)) map.set(date, []);
+                map.get(date).push(item);
+            }
+
+            return Array.from(map.entries())
+                .map(([date, items]) => ({ date, items }))
+                .sort((a, b) => (a.date < b.date ? 1 : -1));
+        },
     },
     mixins: [CheckAuthMixin],
 
@@ -238,11 +231,133 @@ export default {
                 url: url,
             });
             if (response.data) {
-                this.data = response.data;
+                // this.data = response.data;
+                this.data = [
+                    {
+                        id: 659,
+                        history_id: 2435189,
+                        stock_datetime: "2026-02-05 12:01:00",
+                        stock_date: "2026-02-05",
+                        open_time: "12:01:00",
+                        day_part: "pm",
+                        set: "1338.91",
+                        value: "32345.64",
+                        twod: "15",
+                        created_at: "2026-02-05T05:32:03.000000Z",
+                        updated_at: "2026-02-05T17:30:00.000000Z",
+                    },
+                    {
+                        id: 661,
+                        history_id: 2436633,
+                        stock_datetime: "2026-02-05 16:30:09",
+                        stock_date: "2026-02-05",
+                        open_time: "16:30:00",
+                        day_part: "pm",
+                        set: "1346.23",
+                        value: "57388.58",
+                        twod: "38",
+                        created_at: "2026-02-05T10:01:03.000000Z",
+                        updated_at: "2026-02-05T17:30:00.000000Z",
+                    },
+                    {
+                        id: 663,
+                        history_id: 2437709,
+                        stock_datetime: "2026-02-06 12:01:02",
+                        stock_date: "2026-02-06",
+                        open_time: "12:01:00",
+                        day_part: "pm",
+                        set: "1356.44",
+                        value: "25149.99",
+                        twod: "49",
+                        created_at: "2026-02-06T05:32:04.000000Z",
+                        updated_at: "2026-02-06T17:30:01.000000Z",
+                    },
+                    {
+                        id: 665,
+                        history_id: 2439110,
+                        stock_datetime: "2026-02-06 16:30:04",
+                        stock_date: "2026-02-06",
+                        open_time: "16:30:00",
+                        day_part: "pm",
+                        set: "1354.01",
+                        value: "47476.09",
+                        twod: "16",
+                        created_at: "2026-02-06T10:01:02.000000Z",
+                        updated_at: "2026-02-06T17:30:01.000000Z",
+                    },
+                    {
+                        id: 667,
+                        history_id: 2440206,
+                        stock_datetime: "2026-02-09 12:01:03",
+                        stock_date: "2026-02-09",
+                        open_time: "12:01:00",
+                        day_part: "pm",
+                        set: "1398.96",
+                        value: "66811.98",
+                        twod: "61",
+                        created_at: "2026-02-09T05:32:03.000000Z",
+                        updated_at: "2026-02-09T17:30:01.000000Z",
+                    },
+                    {
+                        id: 669,
+                        history_id: 2441621,
+                        stock_datetime: "2026-02-09 16:30:03",
+                        stock_date: "2026-02-09",
+                        open_time: "16:30:00",
+                        day_part: "pm",
+                        set: "1400.89",
+                        value: "102112.04",
+                        twod: "92",
+                        created_at: "2026-02-09T10:01:03.000000Z",
+                        updated_at: "2026-02-09T17:30:01.000000Z",
+                    },
+                    {
+                        id: 671,
+                        history_id: 2442675,
+                        stock_datetime: "2026-02-10 12:01:05",
+                        stock_date: "2026-02-10",
+                        open_time: "12:01:00",
+                        day_part: "pm",
+                        set: "1405.75",
+                        value: "40230.85",
+                        twod: "50",
+                        created_at: "2026-02-10T08:32:03.000000Z",
+                        updated_at: "2026-02-10T17:30:01.000000Z",
+                    },
+                    {
+                        id: 673,
+                        history_id: 2444097,
+                        stock_datetime: "2026-02-10 16:30:10",
+                        stock_date: "2026-02-10",
+                        open_time: "16:30:00",
+                        day_part: "pm",
+                        set: "1410.44",
+                        value: "72261.36",
+                        twod: "41",
+                        created_at: "2026-02-10T10:01:02.000000Z",
+                        updated_at: "2026-02-10T17:30:01.000000Z",
+                    },
+                    {
+                        id: 675,
+                        history_id: 2445176,
+                        stock_datetime: "2026-02-11 12:01:00",
+                        stock_date: "2026-02-11",
+                        open_time: "12:01:00",
+                        day_part: "pm",
+                        set: "1,415.04",
+                        value: "35,232.30",
+                        twod: "42",
+                        created_at: "2026-02-11T05:32:06.000000Z",
+                        updated_at: "2026-02-11T05:32:06.000000Z",
+                    },
+                ];
             }
         },
         formatDate(date) {
             return moment(date, "YYYY-MM-DD HH:mm").format("YYYY-MM-DD");
+        },
+        formatDateWithDay(date) {
+            return moment(date, "YYYY-MM-DD").format("YYYY-MM-DD dddd");
         },
         formatTime(time) {
             return moment(time, "HH:mm").format("hh:mm A");
