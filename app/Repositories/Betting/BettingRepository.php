@@ -681,90 +681,16 @@ class BettingRepository implements BettingInterface
                 ResponseMessage('Game Id is invalid');
             }
             if ($game->type == '3d') {
-                return BettingWin::orderBy('betting_wins.id', 'desc')
+                return BettingWin::with('twist')->orderBy('betting_wins.id', 'desc')
                     ->join('game_settings', 'betting_wins.game_setting_id', 'game_settings.id')
                     ->join('games', 'game_settings.game_id', 'games.id')
                     ->where('game_settings.game_id', $request->game_id)
                     ->where('betting_wins.date_time', '>=', Carbon::now()->subMonths(6)) // Last 6 months
-                    ->select('betting_wins.number', 'game_settings.id as game_setting_id', 'betting_wins.date_time', 'games.type as type')
+                    ->select('betting_wins.id', 'betting_wins.number', 'game_settings.id as game_setting_id', 'betting_wins.date_time', 'games.type as type')
                     ->get();
+                    
             }
             if ($game->type == '2d') {
-                // $response = Http::get('https://admin.2dmyanmarpro.com/api/2d/live');
-                // $jsonResult = $response->json();
-                // // return $jsonResult;
-                // // dd($jsonResult['data']['results']);
-                // $today = Carbon::now();
-                // if ($today->isSaturday() || $today->isSunday()) {
-                //     Log::info("No winning numbers stored today because it's a weekend.");
-                //     return; // Exit the script without storing any data
-                // }
-                // // return $jsonResult['data']['results'];
-                // if (isset($jsonResult['data']['results'])) {
-                //     DB::beginTransaction(); // Start the transaction
-                //     try {
-                //         foreach ($jsonResult['data']['results'] as $lottery) {
-                //             if ($lottery['history_id'] != null) {
-                //                 $lotteryTime = Carbon::parse($lottery['stock_datetime']);
-                //                 $lotteryDate = convertDateFormat($lottery['stock_datetime']);
-                //                 // Store the result in the database
-                //                 $winningNumber = WinningNumber::firstOrCreate(
-                //                     [
-                //                         'lottery_time' => $lottery['open_time'],
-                //                         'date' => $lotteryDate,
-                //                         'type' => 'two_d',
-
-                //                     ],  // Unique identifier for the record
-                //                     [
-                //                         'two_d' => $lottery['twod'],
-                //                         'modern' => null,  // Add appropriate value if needed
-                //                         'internet' => null,  // Add appropriate value if needed
-                //                         'tw' => null,  // Add appropriate value if needed
-                //                         'set' => $lottery['set'],
-                //                         'value' => $lottery['value'],
-                //                         'date_time' => $lotteryTime,
-                //                         'lottery_time' => $lottery['open_time'],
-                //                         'type' => 'two_d',
-                //                     ]
-                //                 );
-
-                //                 Log::info("Winning number for time {$lottery['open_time']} stored successfully.");
-                //             }
-                //             // Parse the open time and current time to determine if it's time to store
-
-                //         }
-
-                //         foreach ($jsonResult['data']['modern_internet']['numbers'] as $number) {
-                //             $convertedTime = Carbon::parse($number['time'])->format('H:i');
-                //             $convertedDate = convertDateFormat('now');
-                //             // return $number;
-                //             // if ($number['Modern'] != '--') {
-                //                 $winningNumber = WinningNumber::updateOrCreate(
-                //                     [
-                //                         'lottery_time' => $convertedTime,
-                //                         'date' => $convertedDate,
-                //                         'type' => 'internet_modern',
-                //                     ],  // Unique identifier for the record
-                //                     [
-                //                         'modern' => $number['Modern'] != '--' ? $number['Modern'] : null,  // Add appropriate value if needed
-                //                         'internet' => $number['Internet'] != '--' ? $number['Internet'] : null,  // Add appropriate value if needed
-                //                         'date_time' => $convertedDate,
-                //                         'lottery_time' => $convertedTime,
-                //                         'date' => $convertedDate,
-                //                         'type' => 'internet_modern',
-                //                     ]
-                //                 );
-                //             // }
-                //         }
-                //         // return $jsonResult['data']['modern_internet']['numbers'];
-
-                //         DB::commit(); // Commit the transaction if everything is successful
-                //     } catch (\Exception $e) {
-                //         DB::rollBack(); // Rollback the transaction if any error occurs
-                //         Log::error('Failed to store winning numbers: ' . $e->getMessage());
-                //         throw $e; // Optionally rethrow the exception to handle it further up the chain
-                //     }
-                // }
                 return TwoDResult::orderBy('stock_datetime', 'asc')
                     // ->where('date_time',Carbon::now()->subDays(6))
                     ->whereIn('open_time', ['12:01:00', '16:30:00'])
@@ -773,16 +699,6 @@ class BettingRepository implements BettingInterface
             }
         }
 
-        // // Check if the request was successful
-        // if ($response->successful()) {
-        //     // Return the response data (as JSON, for example)
-        //     $data = $response->json();
-        //     dd($data['data']);
-        //     return response()->json($response->json());
-        // } else {
-        //     // Handle the error
-        //     return response()->json(['error' => 'Failed to fetch live data'], 500);
-        // }
     }
 
 }
