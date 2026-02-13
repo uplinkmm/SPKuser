@@ -50,12 +50,12 @@
                     />
                 </div>
 
-                <div class="" v-if="!adses?.length">
+                <!-- <div class="" v-if="!adses?.length">
                     <img
                         src="https://admin.shweshankan.com/storage/img/dyt40RFxWQTLfiBoxWeWV7BWqjASiHTCHtI7l9kJ.jpg"
                         class="w-full aspect-video mb-6 object-cover"
                     />
-                </div>
+                </div> -->
 
                 <div
                     v-if="marqueeAds"
@@ -217,7 +217,10 @@
                         aria-labelledby="lottery-tab"
                     >
                         <div class="w-full">
-                            <div class="mb-12">
+                            <div
+                                v-if="lottery_lists && lottery_lists.length"
+                                class="mb-12"
+                            >
                                 <a
                                     :href="`/lottery?id=${lottery.id}`"
                                     v-for="(lottery, index) in lottery_lists"
@@ -247,6 +250,14 @@
                                         </div>
                                     </div>
                                 </a>
+                            </div>
+                            <div
+                                v-else
+                                class="mb-12 flex items-center justify-center py-12 text-center"
+                            >
+                                <p class="text-sm text-gray-300">
+                                    No lottery available.
+                                </p>
                             </div>
                         </div>
                     </div>
