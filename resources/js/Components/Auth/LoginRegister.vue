@@ -1,7 +1,7 @@
 <template>
     <notifications position="top center" />
 
-    <div class="w-full h-full bg-black bg-img">
+    <div class="w-full h-full bg-gray-200 bg-img">
         <main class="frame-container relative">
             <div class="mx-4">
                 <Navbar
