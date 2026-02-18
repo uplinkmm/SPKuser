@@ -29,11 +29,11 @@ use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('gameTypeProducts/{id}', [GameController::class, 'gameTypeProducts']);
-Route::get('allGameProducts', [GameController::class, 'allGameProducts']);
-Route::get('gameType', [GameController::class, 'gameType']);
-Route::get('hotgamelist', [GameController::class, 'HotgameList']);
-Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
+// Route::get('gameTypeProducts/{id}', [GameController::class, 'gameTypeProducts']);
+// Route::get('allGameProducts', [GameController::class, 'allGameProducts']);
+// Route::get('gameType', [GameController::class, 'gameType']);
+// Route::get('hotgamelist', [GameController::class, 'HotgameList']);
+// Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
 
 Route::group(['prefix' => 'Seamless'], function () {
     Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
