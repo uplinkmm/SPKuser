@@ -530,7 +530,7 @@
                                     </div>
                                     <div class="text-sm font-semibold">
                                         <p>Facebook :</p>
-                                        <p>/shwe.shan.kan</p>
+                                        <p>/shwepauk.kan</p>
                                     </div>
                                 </a>
                             </li>
