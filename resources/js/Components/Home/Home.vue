@@ -596,7 +596,7 @@
                             </li>
                             <li class="mb-4 group">
                                 <a
-                                    href="tg://resolve?domain=shweshankan_gaming"
+                                    href="tg://resolve?domain=shwepaukkan_gaming"
                                     target="_blank"
                                     class="flex gap-x-4"
                                 >
