@@ -129,6 +129,19 @@
                                 >ကံစမ်းမဲ</a
                             >
                         </li>
+                        <li role="presentation">
+                            <a
+                                href="#slot_games"
+                                class="my-2 block px-2 pb-3.5 pt-4 text-sm text-black hover:isolate focus:isolate data-[twe-nav-active]:border-b-2 border-blue-600 font-semibold"
+                                data-twe-toggle="pill"
+                                data-twe-target="#slot_games"
+                                role="tab"
+                                aria-controls="slot_games"
+                                aria-selected="false"
+                                @click="selectGameTypeById(1)"
+                                >Games</a
+                            >
+                        </li>
                     </ul>
                 </div>
 
@@ -258,6 +271,53 @@
                                 <p class="text-sm text-gray-300">
                                     No lottery available.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="hidden data-[twe-tab-active]:block"
+                        id="slot_games"
+                        role="tabpanel"
+                        aria-labelledby="slot_games-tab"
+                    >
+                        <div class="mb-12">
+                            <div class="w-full">
+                                <div
+                                    class="w-full grid grid-cols-3 gap-x-4 gap-y-6"
+                                >
+                                    <div
+                                        v-for="(product, index) in providers
+                                            ?.game_type?.products"
+                                        :key="index"
+                                        class="relative"
+                                    >
+                                        <a
+                                            :href="`/slots/game_lists?provider=${JSON.stringify(
+                                                {
+                                                    id: product.id,
+                                                    name: product.name,
+                                                    code: product.code,
+                                                    image: product.pivot.image,
+                                                },
+                                            )}&game_type=${JSON.stringify({
+                                                id: selectedGameType.id,
+                                                name: selectedGameType.name,
+                                            })}`"
+                                            class="cursor-pointer block"
+                                        >
+                                            <img
+                                                class="w-full aspect-square rounded-2xl object-cover"
+                                                :src="product.pivot.image"
+                                                alt=""
+                                            />
+                                            <p
+                                                class="text-white text-left pt-2 text-lg leading-tight truncate"
+                                            >
+                                                {{ product.name }}
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -666,6 +726,14 @@ export default {
         ...mapGetters(["getUser", "getToken"]),
     },
     methods: {
+        selectGameTypeById(id) {
+            const found = this.gameTypes?.find((t) => t?.id === id);
+            console.log("game", found);
+            if (found) {
+                this.selectedGameType = found;
+                this.getProviders();
+            }
+        },
         async getAds() {
             let url = `/api/get_ads`;
             let response = await getApiData({
@@ -715,7 +783,8 @@ export default {
                 token: this.getToken,
             });
             this.providers = response.data;
-            this.selectedProvider = response.data.game_type.products[0];
+            this.selectedProvider =
+                response.data?.game_type?.products?.[0] ?? "";
         },
         async getActiveLotteryLists() {
             let url = `/api/lottery_list`;
