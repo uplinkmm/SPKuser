@@ -268,9 +268,7 @@
                                 v-else
                                 class="mb-12 flex items-center justify-center py-12 text-center"
                             >
-                                <p class="text-sm text-gray-300">
-                                    No lottery available.
-                                </p>
+                                <p class="text-sm text-black">Coming Soon...</p>
                             </div>
                         </div>
                     </div>
