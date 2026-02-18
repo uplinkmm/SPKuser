@@ -620,7 +620,7 @@
                                     </div>
                                     <div class="text-sm font-semibold">
                                         <p>Telegram :</p>
-                                        <p>t.me/shweshankan_gaming</p>
+                                        <p>t.me/shwepaukkan_gaming</p>
                                     </div>
                                 </a>
                             </li>
