@@ -64,6 +64,20 @@ class GameListController extends Controller
 
         return $this->success($gameTypes);
     }
+
+    public function hotGameList(Request $request)
+    {
+        $search = $request->input('search_input');
+        $gameLists = GameList::with('product', 'gameType')
+            ->when($search, function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            })
+            ->where('status', 1)
+            ->where('hot_status', 1)
+            ->get();
+        return $this->success(GameDetailResource::collection($gameLists), 'Hot Game List Successfully');
+    }
+
     public function gameList(Request $request, $product_id, $game_type_id)
     {
         $search = $request->input('search_input');

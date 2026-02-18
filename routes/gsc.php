@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Gsc\PushBetDataController;
 Route::get('gameTypeProducts/{id}', [GameListController::class, 'gameTypeProducts']);
 Route::get('allGameProducts', [GameListController::class, 'allGameProducts']);
 Route::get('gameType', [GameListController::class, 'gameType']);
+Route::get('hotGameList', [GameListController::class, 'hotGameList']);
 
 Route::middleware('auth:api')->group(callback: function () {
     Route::group(['prefix' => 'operators'], function () {
