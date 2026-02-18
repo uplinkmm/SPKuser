@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div
         class="frame-container min-h-[100vh]"
         :style="{
@@ -425,266 +425,200 @@
                     </div>
 
                     <div class="">
-                        <ul
-                            class="flex items-center justify-start overflow-auto w-full mb-1 hidden-scrollbar pb-4"
-                            role="tablist"
-                            data-twe-nav-ref
+                        <div
+                            class="flex items-center justify-between px-4 mb-3"
                         >
-                            <!-- <li class="tab-list-item-first active-tabs"  v-for="(type, index) in gameTypes" :key="index">
-                        <span class="tab-list-item-text">All</span>
-                    </li> -->
+                            <p class="text-md text-black font-semibold mb-0">
+                                အဆော့များသော ဂိမ်းများ
+                            </p>
+                        </div>
 
-                            <li
-                                v-for="(type, index) in gameTypes"
+                        <div class="grid grid-cols-3 gap-4 px-4">
+                            <div class="relative">
+                                <a
+                                    href="/buffalo_rooms"
+                                    class="cursor-pointer block"
+                                >
+                                    <img
+                                        src="../../../../public/img/buffalo/750x500.png"
+                                        class="w-full aspect-square rounded-2xl object-cover"
+                                        alt=""
+                                    />
+                                    <p
+                                        class="text-white text-left pt-2 text-lg leading-tight truncate"
+                                    >
+                                        Buffalo game
+                                    </p>
+                                </a>
+                            </div>
+                            <div
+                                v-for="(game, index) in hotGames"
                                 :key="index"
-                                class="my-2 block pr-4 pb-2 font-semibold pt-1 text-sm relative whitespace-nowrap cursor-pointer underline-border"
-                                :class="
-                                    type == selectedGameType
-                                        ? 'after:!block text-black'
-                                        : 'text-gray-600'
-                                "
+                                class="relative"
                             >
                                 <a
-                                    @click="
-                                        selectedGameType = type;
-                                        getProviders();
-                                    "
-                                    class=""
-                                    >{{ type.name }}</a
+                                    @click.prevent="getGameUrl(game)"
+                                    class="cursor-pointer block"
+                                    :class="{
+                                        'opacity-70': loading === game.code,
+                                    }"
                                 >
-                            </li>
-                        </ul>
-                        <!-- <ul
-                    class="mb-0 flex gap-x-3 list-none flex-row flex-wrap border-b-0"
-                    role="tablist"
-                    data-twe-nav-ref
-                >
-                    <li v-for="(type, index) in gameTypes" :key="index">
-                        <a
-                            @click="
-                                selectedGameType = type;
-                                getProviders();
-                            "
-                            :class="
-                                type?.name == selectedGameType?.name
-                                    ? 'text-md'
-                                    : 'text-xs'
-                            "
-                            class="my-2 block text-white border-x-0 border-b-2 border-t-0 border-transparent font-normal uppercase leading-tight hover:isolate hover:border-transparent focus:isolate focus:border-transparent data-[twe-nav-active]:border-none data-[twe-nav-active]:text-black data-[twe-nav-active]:font-semibold"
-                            >{{ type.name }}</a
-                        >
-                    </li>
-                </ul> -->
-
-                        <div class="mb-6">
-                            <div
-                                class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-                                id="tabs-home"
-                                role="tabpanel"
-                                aria-labelledby="tabs-home-tab"
-                                data-twe-tab-active
-                            >
-                                <div class="mb-12">
-                                    <div class="w-full">
+                                    <div
+                                        v-if="loading === game.code"
+                                        class="absolute inset-0 flex top-10 justify-center"
+                                    >
                                         <div
-                                            class="w-full grid grid-cols-3 gap-x-4 gap-y-6"
-                                        >
-                                            <div class="relative">
-                                                <a
-                                                    href="/buffalo_rooms"
-                                                    class="cursor-pointer block"
-                                                >
-                                                    <img
-                                                        src="../../../../public/img/buffalo/750x500.png"
-                                                        class="w-full aspect-square rounded-2xl object-cover"
-                                                        alt=""
-                                                    />
-                                                    <p
-                                                        class="text-white text-left pt-2 text-lg leading-tight truncate"
-                                                    >
-                                                        Buffalo game
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <div
-                                                v-for="(
-                                                    product, index
-                                                ) in providers?.game_type
-                                                    ?.products"
-                                                :key="index"
-                                                class="relative"
-                                            >
-                                                <a
-                                                    :href="`/slots/game_lists?provider=${JSON.stringify(
-                                                        {
-                                                            id: product.id,
-                                                            name: product.name,
-                                                            code: product.code,
-                                                            image: product.pivot
-                                                                .image,
-                                                        },
-                                                    )}&game_type=${JSON.stringify(
-                                                        {
-                                                            id: selectedGameType.id,
-                                                            name: selectedGameType.name,
-                                                        },
-                                                    )}`"
-                                                    class="cursor-pointer block"
-                                                >
-                                                    <img
-                                                        class="w-full aspect-square rounded-2xl object-cover"
-                                                        :src="
-                                                            product.pivot.image
-                                                        "
-                                                        alt=""
-                                                    />
-                                                    <p
-                                                        class="text-white text-left pt-2 text-lg leading-tight truncate"
-                                                    >
-                                                        {{ product.name }}
-                                                    </p>
-                                                </a>
-                                            </div>
-                                        </div>
+                                            class="animate-spin rounded-full h-8 w-8 border-b-2 border-white pb-8"
+                                        ></div>
                                     </div>
-                                </div>
+                                    <img
+                                        :src="game.image_url"
+                                        class="w-full aspect-square rounded-2xl object-cover"
+                                        alt=""
+                                    />
+                                    <p
+                                        class="text-white text-left pt-2 text-lg leading-tight truncate"
+                                    >
+                                        {{ game.name }}
+                                    </p>
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="mb-16 px-4">
-                    <div>
-                        <p
-                            class="w-full text-[#eb5c00] text-2xl text-center mb-4"
-                        >
-                            CONTACT <span class="font-bold">US</span>
-                        </p>
-                    </div>
-                    <div>
-                        <ul class="text-white">
-                            <li class="mb-4 group">
-                                <a
-                                    href="https://www.facebook.com/share/1Qj3PFFJiD/"
-                                    class="flex gap-x-4"
-                                >
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
+                    <div class="mb-16 px-4">
+                        <div>
+                            <p
+                                class="w-full text-[#eb5c00] text-2xl text-center mb-4"
+                            >
+                                CONTACT <span class="font-bold">US</span>
+                            </p>
+                        </div>
+                        <div>
+                            <ul class="text-white">
+                                <li class="mb-4 group">
+                                    <a
+                                        href="https://www.facebook.com/share/1Qj3PFFJiD/"
+                                        class="flex gap-x-4"
                                     >
-                                        <svg
-                                            stroke="currentColor"
-                                            fill="none"
-                                            stroke-width="2"
-                                            viewBox="0 0 24 24"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
-                                            height="1em"
-                                            width="1em"
-                                            xmlns="http://www.w3.org/2000/svg"
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                                         >
-                                            <path
-                                                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                    <div class="text-sm font-semibold">
-                                        <p>Facebook :</p>
-                                        <p>/shwepauk.kan</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mb-4 group">
-                                <a
-                                    href="viber://chat/?number=09955511333"
-                                    class="flex gap-x-4"
-                                >
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
+                                            <svg
+                                                stroke="currentColor"
+                                                fill="none"
+                                                stroke-width="2"
+                                                viewBox="0 0 24 24"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
+                                                height="1em"
+                                                width="1em"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="text-sm font-semibold">
+                                            <p>Facebook :</p>
+                                            <p>/shwepauk.kan</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-4 group">
+                                    <a
+                                        href="viber://chat/?number=09955511333"
+                                        class="flex gap-x-4"
                                     >
-                                        <svg
-                                            stroke="currentColor"
-                                            fill="currentColor"
-                                            stroke-width="0"
-                                            viewBox="0 0 512 512"
-                                            class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
-                                            height="1em"
-                                            width="1em"
-                                            xmlns="http://www.w3.org/2000/svg"
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                                         >
-                                            <path
-                                                d="M444 49.9C431.3 38.2 379.9.9 265.3.4c0 0-135.1-8.1-200.9 52.3C27.8 89.3 14.9 143 13.5 209.5c-1.4 66.5-3.1 191.1 117 224.9h.1l-.1 51.6s-.8 20.9 13 25.1c16.6 5.2 26.4-10.7 42.3-27.8 8.7-9.4 20.7-23.2 29.8-33.7 82.2 6.9 145.3-8.9 152.5-11.2 16.6-5.4 110.5-17.4 125.7-142 15.8-128.6-7.6-209.8-49.8-246.5zM457.9 287c-12.9 104-89 110.6-103 115.1-6 1.9-61.5 15.7-131.2 11.2 0 0-52 62.7-68.2 79-5.3 5.3-11.1 4.8-11-5.7 0-6.9.4-85.7.4-85.7-.1 0-.1 0 0 0-101.8-28.2-95.8-134.3-94.7-189.8 1.1-55.5 11.6-101 42.6-131.6 55.7-50.5 170.4-43 170.4-43 96.9.4 143.3 29.6 154.1 39.4 35.7 30.6 53.9 103.8 40.6 211.1zm-139-80.8c.4 8.6-12.5 9.2-12.9.6-1.1-22-11.4-32.7-32.6-33.9-8.6-.5-7.8-13.4.7-12.9 27.9 1.5 43.4 17.5 44.8 46.2zm20.3 11.3c1-42.4-25.5-75.6-75.8-79.3-8.5-.6-7.6-13.5.9-12.9 58 4.2 88.9 44.1 87.8 92.5-.1 8.6-13.1 8.2-12.9-.3zm47 13.4c.1 8.6-12.9 8.7-12.9.1-.6-81.5-54.9-125.9-120.8-126.4-8.5-.1-8.5-12.9 0-12.9 73.7.5 133 51.4 133.7 139.2zM374.9 329v.2c-10.8 19-31 40-51.8 33.3l-.2-.3c-21.1-5.9-70.8-31.5-102.2-56.5-16.2-12.8-31-27.9-42.4-42.4-10.3-12.9-20.7-28.2-30.8-46.6-21.3-38.5-26-55.7-26-55.7-6.7-20.8 14.2-41 33.3-51.8h.2c9.2-4.8 18-3.2 23.9 3.9 0 0 12.4 14.8 17.7 22.1 5 6.8 11.7 17.7 15.2 23.8 6.1 10.9 2.3 22-3.7 26.6l-12 9.6c-6.1 4.9-5.3 14-5.3 14s17.8 67.3 84.3 84.3c0 0 9.1.8 14-5.3l9.6-12c4.6-6 15.7-9.8 26.6-3.7 14.7 8.3 33.4 21.2 45.8 32.9 7 5.7 8.6 14.4 3.8 23.6z"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                    <div class="text-sm font-semibold">
-                                        <p>Viber :</p>
-                                        <p>09955511333</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mb-4 group">
-                                <a
-                                    href="tel:+959955511333"
-                                    class="flex gap-x-4"
-                                >
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
+                                            <svg
+                                                stroke="currentColor"
+                                                fill="currentColor"
+                                                stroke-width="0"
+                                                viewBox="0 0 512 512"
+                                                class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
+                                                height="1em"
+                                                width="1em"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M444 49.9C431.3 38.2 379.9.9 265.3.4c0 0-135.1-8.1-200.9 52.3C27.8 89.3 14.9 143 13.5 209.5c-1.4 66.5-3.1 191.1 117 224.9h.1l-.1 51.6s-.8 20.9 13 25.1c16.6 5.2 26.4-10.7 42.3-27.8 8.7-9.4 20.7-23.2 29.8-33.7 82.2 6.9 145.3-8.9 152.5-11.2 16.6-5.4 110.5-17.4 125.7-142 15.8-128.6-7.6-209.8-49.8-246.5zM457.9 287c-12.9 104-89 110.6-103 115.1-6 1.9-61.5 15.7-131.2 11.2 0 0-52 62.7-68.2 79-5.3 5.3-11.1 4.8-11-5.7 0-6.9.4-85.7.4-85.7-.1 0-.1 0 0 0-101.8-28.2-95.8-134.3-94.7-189.8 1.1-55.5 11.6-101 42.6-131.6 55.7-50.5 170.4-43 170.4-43 96.9.4 143.3 29.6 154.1 39.4 35.7 30.6 53.9 103.8 40.6 211.1zm-139-80.8c.4 8.6-12.5 9.2-12.9.6-1.1-22-11.4-32.7-32.6-33.9-8.6-.5-7.8-13.4.7-12.9 27.9 1.5 43.4 17.5 44.8 46.2zm20.3 11.3c1-42.4-25.5-75.6-75.8-79.3-8.5-.6-7.6-13.5.9-12.9 58 4.2 88.9 44.1 87.8 92.5-.1 8.6-13.1 8.2-12.9-.3zm47 13.4c.1 8.6-12.9 8.7-12.9.1-.6-81.5-54.9-125.9-120.8-126.4-8.5-.1-8.5-12.9 0-12.9 73.7.5 133 51.4 133.7 139.2zM374.9 329v.2c-10.8 19-31 40-51.8 33.3l-.2-.3c-21.1-5.9-70.8-31.5-102.2-56.5-16.2-12.8-31-27.9-42.4-42.4-10.3-12.9-20.7-28.2-30.8-46.6-21.3-38.5-26-55.7-26-55.7-6.7-20.8 14.2-41 33.3-51.8h.2c9.2-4.8 18-3.2 23.9 3.9 0 0 12.4 14.8 17.7 22.1 5 6.8 11.7 17.7 15.2 23.8 6.1 10.9 2.3 22-3.7 26.6l-12 9.6c-6.1 4.9-5.3 14-5.3 14s17.8 67.3 84.3 84.3c0 0 9.1.8 14-5.3l9.6-12c4.6-6 15.7-9.8 26.6-3.7 14.7 8.3 33.4 21.2 45.8 32.9 7 5.7 8.6 14.4 3.8 23.6z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="text-sm font-semibold">
+                                            <p>Viber :</p>
+                                            <p>09955511333</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-4 group">
+                                    <a
+                                        href="tel:+959955511333"
+                                        class="flex gap-x-4"
                                     >
-                                        <svg
-                                            stroke="currentColor"
-                                            fill="none"
-                                            stroke-width="2"
-                                            viewBox="0 0 24 24"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
-                                            height="1em"
-                                            width="1em"
-                                            xmlns="http://www.w3.org/2000/svg"
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                                         >
-                                            <path
-                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                    <div class="text-sm font-semibold">
-                                        <p>Call :</p>
-                                        <p>09955511333</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mb-4 group">
-                                <a
-                                    href="tg://resolve?domain=shwepaukkan_gaming"
-                                    target="_blank"
-                                    class="flex gap-x-4"
-                                >
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
+                                            <svg
+                                                stroke="currentColor"
+                                                fill="none"
+                                                stroke-width="2"
+                                                viewBox="0 0 24 24"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
+                                                height="1em"
+                                                width="1em"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="text-sm font-semibold">
+                                            <p>Call :</p>
+                                            <p>09955511333</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-4 group">
+                                    <a
+                                        href="tg://resolve?domain=shwepaukkan_gaming"
+                                        target="_blank"
+                                        class="flex gap-x-4"
                                     >
-                                        <svg
-                                            stroke="currentColor"
-                                            fill="currentColor"
-                                            stroke-width="0"
-                                            viewBox="0 0 24 24"
-                                            class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
-                                            height="1em"
-                                            width="1em"
-                                            xmlns="http://www.w3.org/2000/svg"
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                                         >
-                                            <path
-                                                d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                    <div class="text-sm font-semibold">
-                                        <p>Telegram :</p>
-                                        <p>t.me/shwepaukkan_gaming</p>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+                                            <svg
+                                                stroke="currentColor"
+                                                fill="currentColor"
+                                                stroke-width="0"
+                                                viewBox="0 0 24 24"
+                                                class="text-[#1d1848] text-xl lg:text-2xl group-hover:text-[#FFF] transition duration-700 ease-in-out"
+                                                height="1em"
+                                                width="1em"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="text-sm font-semibold">
+                                            <p>Telegram :</p>
+                                            <p>t.me/shwepaukkan_gaming</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -709,6 +643,7 @@ export default {
     },
     data() {
         return {
+            loading: null,
             adses: [],
             img_prefix: "",
             twoDList: "",
@@ -720,6 +655,7 @@ export default {
             providers: [],
             marqueeAds: null,
             lottery_lists: [],
+            hotGames: [],
         };
     },
     computed: {
@@ -728,11 +664,20 @@ export default {
     methods: {
         selectGameTypeById(id) {
             const found = this.gameTypes?.find((t) => t?.id === id);
-            console.log("game", found);
             if (found) {
                 this.selectedGameType = found;
                 this.getProviders();
             }
+        },
+        async getHotGames(searchInput = "") {
+            let url = `/api/hotGameList?search_input=${encodeURIComponent(
+                searchInput,
+            )}`;
+            let response = await getApiData({
+                url: url,
+                token: this.getToken,
+            });
+            this.hotGames = response.data ?? [];
         },
         async getAds() {
             let url = `/api/get_ads`;
@@ -753,6 +698,7 @@ export default {
             }
         },
         async getGameTypes() {
+            return;
             let url = `/api/gameType`;
 
             let response = await getApiData({
@@ -793,6 +739,43 @@ export default {
                 token: this.getToken,
             });
             this.lottery_lists = response.data;
+        },
+
+        async getGameUrl(game) {
+            this.loading = game.code;
+            try {
+                let url = `/api/operators/launch_game`;
+                let formData = new FormData();
+                formData.append("product_code", game.product_code);
+                formData.append("game_type", game.game_type);
+                formData.append("game_code", game.code);
+
+                let response = await postApiDataSlot({
+                    url: url,
+                    form_data: formData,
+                    token: this.getToken,
+                });
+
+                if (response.status === 200) {
+                    this.$notify({
+                        text: "Loading....",
+                        type: "info",
+                    });
+                    window.open(response.data.url, "_blank");
+                } else {
+                    this.$notify({
+                        text: "Something went wrong. Please try again!",
+                        type: "error",
+                    });
+                }
+            } catch (error) {
+                this.$notify({
+                    text: "Failed to launch game. Please try again.",
+                    type: "error",
+                });
+            } finally {
+                this.loading = null;
+            }
         },
     },
     watch: {
@@ -868,6 +851,7 @@ export default {
     mounted() {
         // this.getGameLists();
         this.getGameTypes();
+        this.getHotGames();
         this.getMarqueeAds();
         this.getActiveLotteryLists();
 
