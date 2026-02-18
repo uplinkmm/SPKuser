@@ -2,11 +2,19 @@
     <notifications position="top center" />
 
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto px-4 bg-img pb-24 min-h-[100vh]"
+        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto pb-24 min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
     >
-        <Navbar title="Buffalo Rooms" :back-btn="backBtn"></Navbar>
+        <div class="bg-black px-4">
+            <Navbar title="Buffalo Rooms" :back-btn="backBtn"></Navbar>
+        </div>
         <LoadingProgressBar :loading="loading"></LoadingProgressBar>
-        <div class="mt-4">
+        <div
+            class="mt-4 pt-4 px-4 bg-[#FFC529] rounded-t-3xl min-h-[calc(100vh-10px)]"
+        >
             <div class="mb-6">
                 <div
                     class="transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
@@ -18,7 +26,7 @@
                     <div class="mb-8">
                         <div class="w-full">
                             <div
-                                class="w-full grid grid-cols-2 gap-x-4 lg:gap-x-6 gap-y-4"
+                                class="w-full grid grid-cols-2 gap-x-4 gap-y-6"
                             >
                                 <div
                                     v-for="(room, index) in rooms"
@@ -31,17 +39,17 @@
                                         :class="{
                                             'pointer-events-none opacity-60':
                                                 !checkAvailableRooms(
-                                                    room.room_id
+                                                    room.room_id,
                                                 ),
                                         }"
                                     >
                                         <img
-                                            class="w-full aspect-[3/2] rounded-lg"
+                                            class="w-full aspect-square rounded-2xl object-cover"
                                             :src="'/img/buffalo/' + room.image"
                                             alt=""
                                         />
                                         <p
-                                            class="text-white text-center pt-1 text-sm"
+                                            class="text-black font-semibold text-center text-left pt-2 text-lg leading-tight truncate"
                                         >
                                             {{ room.name }}
                                         </p>
@@ -50,7 +58,7 @@
                                         v-if="
                                             !checkAvailableRooms(room.room_id)
                                         "
-                                        class="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center"
+                                        class="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center"
                                     >
                                         <span
                                             class="text-white text-sm font-medium"

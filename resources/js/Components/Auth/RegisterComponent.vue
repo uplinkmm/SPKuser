@@ -1,45 +1,55 @@
 <template>
     <main
-        class="w-full h-full mx-auto px-0 pb-2 flex flex-row justify-center relative"
+        class="w-full h-full min-h-screen px-0 flex justify-center flex-row relative bg-black"
     >
         <div class="w-full">
-            <div class="mb-[5vh] pt-16 text-center">
-                <p class="text-base mb-3 font-semibold">အကောင့်ဖွင့်ရန်</p>
+            <div
+                class="flex items-center justify-between text-center pt-8 pb-6 px-20"
+            >
                 <img
                     src="../../../../public/img/SPK Logo.png"
-                    class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-6 mx-auto"
+                    class="bg-slate-800 p-4 rounded-full w-25 h-25 mb-4"
                     alt=""
                 />
-                <p class="text-sm mb-4">
-                    OTP ကျမလာပါ Customer Service သို့ ဆက်သွယ်နိုင်ပါသည်
+                <h3 class="mb-2 text-white text-4xl font-semibold">
+                    မင်္ဂလာပါ
+                </h3>
+            </div>
+
+            <div
+                class="bg-[#FFC529] rounded-3xl px-6 py-6"
+                @keyup.enter="register"
+            >
+                <p class="text-center text-black text-xl font-semibold mb-6">
+                    အကောင့်အသစ်ဖွင့်ရန်
                 </p>
 
-                <button
-                    class="w-fit px-8 bg-black disabled:bg-black disabled:text-gray-300 hover:bg-black text-white font-bold py-3 rounded-md shadow-md text-sm transition-colors duration-300"
-                >
-                    <i class="fal fa-phone mr-4 w-4"></i>Call Customer Service
-                </button>
-            </div>
-            <div class="mb-4">
-                <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class="text-xs px-4 pt-4 text-gray-700">
+                <div class="mb-5">
+                    <p class="text-black font-semibold mb-2">
                         {{ $t("Name") }}
                     </p>
-                    <input
-                        type="text"
-                        id="user_name"
-                        v-model="user_name"
-                        :placeholder="$t('Name')"
-                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                    />
-                </label>
-            </div>
-            <div class="mb-4">
-                <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class="text-xs px-4 pt-4 text-gray-700">
+                    <div class="relative">
+                        <i
+                            class="fas fa-user text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
+                        <input
+                            type="text"
+                            id="user_name"
+                            v-model="user_name"
+                            :placeholder="$t('Name')"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
+                        />
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <p class="text-black font-semibold mb-2">
                         {{ $t("Phone Number") }}
                     </p>
                     <div class="relative">
+                        <i
+                            class="fas fa-phone-alt text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
                         <input
                             type="text"
                             id="phone_number"
@@ -49,102 +59,109 @@
                             @input="
                                 phone_number = $event.target.value.replace(
                                     /[^0-9]/g,
-                                    ''
+                                    '',
                                 )
                             "
-                            class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                         />
                     </div>
-                </label>
-            </div>
+                </div>
 
-            <div class="mb-4 relative">
-                <label
-                    class="mb-6 rounded-xl shadow-md bg-white block relative"
-                >
-                    <p class="text-xs px-4 pt-4 text-gray-700">Password</p>
-                    <input
-                        :type="show_password ? 'text' : 'password'"
-                        id="password"
-                        v-model="password"
-                        placeholder="Password"
-                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                    />
-                    <i
-                        v-if="!show_password"
-                        @click="show_password = !show_password"
-                        class="far fa-eye text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
-                    ></i>
-                    <i
-                        v-if="show_password"
-                        @click="show_password = !show_password"
-                        class="far fa-eye-slash text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
-                    ></i>
-                </label>
-            </div>
+                <div class="mb-5">
+                    <p class="text-black font-semibold mb-2">Password</p>
+                    <div class="relative">
+                        <i
+                            class="fas fa-lock text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
+                        <input
+                            :type="show_password ? 'text' : 'password'"
+                            id="password"
+                            v-model="password"
+                            placeholder="Password"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-12 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
+                        />
+                        <button
+                            type="button"
+                            @click="show_password = !show_password"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600"
+                        >
+                            <i
+                                v-if="!show_password"
+                                class="far fa-eye text-lg"
+                            ></i>
+                            <i v-else class="far fa-eye-slash text-lg"></i>
+                        </button>
+                    </div>
+                </div>
 
-            <div class="mb-4">
-                <label class="mb-6 rounded-xl shadow-md bg-white block">
-                    <p class="text-xs px-4 pt-4 text-gray-700">
+                <div class="mb-6">
+                    <p class="text-black font-semibold mb-2">
                         Confirm Password
                     </p>
-                    <input
-                        :type="show_password ? 'text' : 'password'"
-                        id="confirm_password"
-                        v-model="confirm_password"
-                        placeholder="Confirm Password"
-                        class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
-                    />
-                </label>
-            </div>
-            <!-- <div class="mb-8">
-                <input
-                    type="text"
-                    id="agent_code"
-                    v-model="code"
-                    placeholder="Agent Code(Optional)"
-                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                />
-            </div> -->
-            <div class="mb-8">
-                <label
-                    class="mb-6 rounded-xl shadow-md bg-white block relative"
-                >
-                    <p class="text-xs px-4 pt-4 text-gray-700">
+                    <div class="relative">
+                        <i
+                            class="fas fa-lock text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
+                        <input
+                            :type="show_password ? 'text' : 'password'"
+                            id="confirm_password"
+                            v-model="confirm_password"
+                            placeholder="Confirm Password"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
+                        />
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-black font-semibold mb-2">
                         Referral Phone Number
                     </p>
                     <div class="relative">
-                        <button
-                            class="absolute left-4 top-1/2 transform -translate-y-1/2 text-xs border-r border-gray-400 pr-2 py-1"
-                        >
-                            <p class="text-[14px]">09</p>
-                        </button>
+                        <i
+                            class="fas fa-user-friends text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
                         <input
                             type="text"
                             id="referral_phone_number"
                             v-model="referral_phone_number"
-                            placeholder="xxxxxxx"
+                            placeholder="09 XXX XXX XXX"
                             pattern="\\d*"
                             @input="
                                 referral_phone_number =
                                     $event.target.value.replace(/[^0-9]/g, '')
                             "
-                            class="w-full px-4 pt-2 pb-3 pl-12 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                         />
                     </div>
-                </label>
-            </div>
-            <div>
+                </div>
+
+                <div class="mb-10">
+                    <button
+                        :disabled="register_loading"
+                        @click="register"
+                        class="block disabled:bg-gray-600 w-full py-4 px-2 text-base rounded-xl bg-[#5271FF] text-white font-semibold focus:ring-0 focus:shadow-none focus:outline-none"
+                    >
+                        <span v-if="!register_loading">Sign Up</span>
+                        <i v-else class="fal fa-spinner animate-spin w-10"></i>
+                    </button>
+                </div>
+
+                <p class="text-center text-black text-sm mb-6">
+                    OTP ကျမလာပါ Customer Service သို့ ဆက်သွယ်နိုင်ပါသည်
+                </p>
+
                 <button
-                    @click="register"
-                    :disabled="register_loading"
-                    class="block w-full py-3 px-2 text-sm rounded-full border border-[#E4BD1B] bg-black text-white focus:ring-0 focus:shadow-none"
+                    class="text-base w-full text-center text-[#1d4ed8] font-medium"
+                    @click="setIsLogin(true)"
                 >
-                    <p v-if="register_loading">
-                        <i class="fal fa-spinner animate-spin"></i>
-                    </p>
-                    <p v-else>Sign Up</p>
+                    အကောင့်ဝင်ပါ
                 </button>
+
+                <div class="mt-10 text-center">
+                    <p class="text-black font-semibold mb-0">
+                        www.shwepaukkan.com
+                    </p>
+                </div>
             </div>
         </div>
         <form method="POST" id="signin-form" ref="signinForm" action="/login">
@@ -217,6 +234,9 @@ export default {
     },
     props: {
         fcmToken: {},
+        setIsLogin: {
+            type: Function,
+        },
         setErrorBox: {
             type: Function,
         },
@@ -230,14 +250,14 @@ export default {
             if (!this.user_name || !this.phone_number) {
                 this.setErrorBox(
                     true,
-                    "You forgot to enter name and phone number"
+                    "You forgot to enter name and phone number",
                 );
                 return 1;
             }
             if (!this.password || !this.confirm_password) {
                 this.setErrorBox(
                     true,
-                    "Password and confirm password must be entered"
+                    "Password and confirm password must be entered",
                 );
                 return 1;
             }
@@ -248,7 +268,7 @@ export default {
             if (this.password.length < 6 || this.confirm_password.length < 6) {
                 this.setErrorBox(
                     true,
-                    "Password must be at least 6 characters long."
+                    "Password must be at least 6 characters long.",
                 );
 
                 return;
@@ -262,7 +282,7 @@ export default {
             // formData.append("code", this.code);
             formData.append(
                 "referral_phone_number",
-                this.referral_phone_number
+                this.referral_phone_number,
             );
             formData.append("fcm_token", this.fcmToken); //from mixin
             this.register_loading = true;
@@ -284,7 +304,7 @@ export default {
                         response.message.password ||
                         response.message.password_confirmation ||
                         response.message.referral_phone_number ||
-                        response.message
+                        response.message,
                 );
                 return false;
             }

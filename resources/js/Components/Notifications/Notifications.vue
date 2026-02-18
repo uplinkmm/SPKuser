@@ -1,17 +1,27 @@
 <template>
-    <div class="frame-container pb-20 min-h-[100vh] flex flex-col">
-        <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
-        <div class=" bg-white px-4 rounded-xl flex-grow">
+    <div
+        class="frame-container pb-20 min-h-[100vh] flex flex-col"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
+        </div>
+        <div
+            class="bg-[#FDC652] px-4 pt-3 pb-6 mt-4 rounded-2xl shadow-lg flex-grow"
+        >
             <!--Tabs navigation-->
             <ul
-                class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent"
+                class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent justify-center"
                 role="tablist"
                 data-twe-nav-ref
             >
                 <li role="presentation">
                     <a
                         href="#tabs-winning"
-                        class="my-2 block relative pr-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700 after:!left-0"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-sm text-black data-[twe-nav-active]:after:!block underline-border relative"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-winning"
                         data-twe-nav-active
@@ -29,7 +39,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-payment"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-sm text-black data-[twe-nav-active]:after:!block underline-border relative"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-payment"
                         role="tab"
@@ -46,7 +56,7 @@
                 <li role="presentation">
                     <a
                         href="#tabs-promotion"
-                        class="my-2 block relative px-4 pb-3.5 mb-1 pt-4 text-xs sm:text-sm text-neutral-500 hover:isolate focus:isolate data-[twe-nav-active]:text-black data-[twe-nav-active]:dash-under hover:dash-under hover:text-gray-700"
+                        class="my-1 block px-2 pb-2 font-semibold pt-3 text-sm text-black data-[twe-nav-active]:after:!block underline-border relative"
                         data-twe-toggle="pill"
                         data-twe-target="#tabs-promotion"
                         role="tab"
@@ -65,96 +75,111 @@
 
             <div class="mb-6">
                 <div
-                    class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-                    id="tabs-winning"
-                    role="tabpanel"
-                    aria-labelledby="tabs-winning-tab"
-                    data-twe-tab-active
+                    class="rounded-2xl border border-black/40 bg-[#C89A1E] px-3 pt-3 pb-4"
                 >
-                    <div class="mx-0 pb-8">
-                        <div
-                            v-for="(bet_win, index) in betting_win"
-                            :key="index"
-                            class="pl-4 lg:pl-4 pr-4 py-6 mb-2 relative border-b border-gray-700 "
-                        >
+                    <div
+                        class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
+                        id="tabs-winning"
+                        role="tabpanel"
+                        aria-labelledby="tabs-winning-tab"
+                        data-twe-tab-active
+                    >
+                        <div class="mx-0 pb-8">
                             <div
-                                v-if="bet_win.is_read == 0"
-                                class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
-                            ></div>
-                            <p class="text-base text-black mb-3 font-semibold">
-                                {{ bet_win.preview }}
-                            </p>
-                            <p class="text-xs font-inter mb-1">
-                                {{ dateFormat(bet_win.date_time) }}
-                            </p>
+                                v-for="(bet_win, index) in betting_win"
+                                :key="index"
+                                class="mb-4 relative rounded-xl bg-white border border-gray-400 px-4 py-3 shadow-sm"
+                            >
+                                <div
+                                    v-if="bet_win.is_read == 0"
+                                    class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
+                                ></div>
+                                <p
+                                    class="text-base text-black mb-3 font-semibold"
+                                >
+                                    {{ bet_win.preview }}
+                                </p>
+                                <p class="text-xs font-inter mb-1">
+                                    {{ dateFormat(bet_win.date_time) }}
+                                </p>
+                            </div>
+                            <div
+                                v-if="!betting_win.length && !showSpinner"
+                                class="text-center py-8 text-black font-semibold"
+                            >
+                                No notifications found
+                            </div>
+                        </div>
+                        <div v-if="showSpinner">
+                            Loading...
+                            <!-- <circle2 background="#000" color="#fff"></circle2> -->
                         </div>
                     </div>
-                    <div v-if="showSpinner">
-                        Loading...
-                        <!-- <circle2 background="#000" color="#fff"></circle2> -->
-                    </div>
-                </div>
-                <div
-                    class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-                    id="tabs-payment"
-                    role="tabpanel"
-                    aria-labelledby="tabs-payment-tab"
-                >
-                    <div class="mx-0 pb-8">
-                        <div
-                            v-for="(transcation, index) in topup_transaction"
-                            :key="index"
-                            class="pl-2 lg:pl-8 pr-2 lg:pr-8 py-3 mb-2  relative border-b border-gray-600 "
-                        >
-                            <div class="flex justify-between mb-2">
-                                <p class="text-xs sm:text-sm mb-1">
-                                    {{ dateFormat(transcation.date_time) }}
-                                </p>
-                                <p
-                                    v-if="transcation.status == 'confirmed'"
-                                    class="text-xs sm:text-sm text-green-600 mb-1 capitalize"
-                                >
-                                    {{ transcation.status }}
-                                </p>
-                                <p
-                                    v-else
-                                    class="text-xs sm:text-sm text-red-600 mb-1 capitalize"
-                                >
-                                    {{ transcation.status }}
-                                </p>
-                            </div>
-                            <!-- <hr class="my-2" /> -->
-                            <div class="flex justify-between mb-2">
-                                <p
-                                    class="text-xs text-green-600 mb-1 font-semibold"
-                                >
-                                    {{
-                                        transcation.notificationable_type ==
-                                        "topup_transaction"
-                                            ? "ငွေသွင်း"
-                                            : "ငွေထုတ်"
-                                    }}
-                                </p>
-                                <p class="text-xs sm:text-sm mb-1">
-                                    {{
-                                        transcation.amount?.toLocaleString()
-                                    }}
-                                    ကျပ်
-                                </p>
-                            </div>
-                            <!-- <hr class="mt-2 mb-4" /> -->
-                            <div class="flex justify-between">
-                                <p class="text-sm sm:text-base font-inter mb-0">
-                                    {{ transcation.provider_name }}
-                                </p>
-                                <p class="text-sm sm:text-base font-inter mb-0 text-right w-[55%]">
-                                    လုပ်ငန်းစဥ်နပါတ်-{{
-                                        transcation.payment_transaction_id
-                                    }}
-                                </p>
-                            </div>
+                    <div
+                        class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
+                        id="tabs-payment"
+                        role="tabpanel"
+                        aria-labelledby="tabs-payment-tab"
+                    >
+                        <div class="mx-0 pb-8">
+                            <div
+                                v-for="(
+                                    transcation, index
+                                ) in topup_transaction"
+                                :key="index"
+                                class="mb-4 relative rounded-xl bg-white border border-gray-400 px-4 py-3 shadow-sm"
+                            >
+                                <div class="flex justify-between mb-2">
+                                    <p class="text-xs sm:text-sm mb-1">
+                                        {{ dateFormat(transcation.date_time) }}
+                                    </p>
+                                    <p
+                                        v-if="transcation.status == 'confirmed'"
+                                        class="text-xs sm:text-sm text-green-600 mb-1 capitalize"
+                                    >
+                                        {{ transcation.status }}
+                                    </p>
+                                    <p
+                                        v-else
+                                        class="text-xs sm:text-sm text-red-600 mb-1 capitalize"
+                                    >
+                                        {{ transcation.status }}
+                                    </p>
+                                </div>
+                                <!-- <hr class="my-2" /> -->
+                                <div class="flex justify-between mb-2">
+                                    <p
+                                        class="text-xs text-green-600 mb-1 font-semibold"
+                                    >
+                                        {{
+                                            transcation.notificationable_type ==
+                                            "topup_transaction"
+                                                ? "ငွေသွင်း"
+                                                : "ငွေထုတ်"
+                                        }}
+                                    </p>
+                                    <p class="text-xs sm:text-sm mb-1">
+                                        {{
+                                            transcation.amount?.toLocaleString()
+                                        }}
+                                        ကျပ်
+                                    </p>
+                                </div>
+                                <!-- <hr class="mt-2 mb-4" /> -->
+                                <div class="flex justify-between">
+                                    <p class="text-sm sm:text-base mb-0">
+                                        {{ transcation.provider_name }}
+                                    </p>
+                                    <p
+                                        class="text-sm sm:text-base mb-0 text-right w-[55%]"
+                                    >
+                                        လုပ်ငန်းစဥ်နံပါတ်-{{
+                                            transcation.payment_transaction_id
+                                        }}
+                                    </p>
+                                </div>
 
-                            <!-- <div
+                                <!-- <div
                                 v-if="transcation.is_read == 0"
                                 class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
                             ></div>
@@ -164,47 +189,60 @@
                             <p class="text-xs font-inter">
                                 {{ dateFormat(transcation.date_time) }}
                             </p> -->
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
-                    id="tabs-promotion"
-                    role="tabpanel"
-                    aria-labelledby="tabs-promotion-tab"
-                >
-                    <div class="mx-0 pb-8">
-                        <div
-                            v-for="(promo, index) in promotion"
-                            :key="index"
-                            class="pl-6 lg:pl-8 pr-8 py-6 mb-0 bg-white relative border-b border-gray-300 flex items-start"
-                        >
-                            <!-- Image in front -->
-                            <img
-                                :src="`${img_prefix}${promo.photo}`"
-                                class="w-12 h-12 rounded-full mr-4"
-                            />
-
-                            <!-- Promotion Content -->
-                            <div class="flex-1">
-                                <div
-                                    class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
-                                ></div>
-                                <p class="text-base text-black mb-3">
-                                    {{ promo.title }}
-                                </p>
-                                <p class="text-sm text-black mb-3">
-                                    {{ promo.preview }}
-                                </p>
-                                <p class="text-xs font-inter">
-                                    {{ dateFormat(promo.date_time) }}
-                                </p>
+                            </div>
+                            <div
+                                v-if="!topup_transaction.length && !showSpinner"
+                                class="text-center py-8 text-black font-semibold"
+                            >
+                                No transactions found
                             </div>
                         </div>
                     </div>
-                    <div v-if="showSpinner">
-                        Loading...
-                        <!-- <circle2 background="#000" color="#fff"></circle2> -->
+                    <div
+                        class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
+                        id="tabs-promotion"
+                        role="tabpanel"
+                        aria-labelledby="tabs-promotion-tab"
+                    >
+                        <div class="mx-0 pb-8">
+                            <div
+                                v-for="(promo, index) in promotion"
+                                :key="index"
+                                class="mb-4 bg-white relative rounded-xl border border-gray-300 flex items-start px-4 py-4 shadow-sm"
+                            >
+                                <!-- Image in front -->
+                                <img
+                                    :src="`${img_prefix}${promo.photo}`"
+                                    class="w-12 h-12 rounded-full mr-4"
+                                />
+
+                                <!-- Promotion Content -->
+                                <div class="flex-1">
+                                    <div
+                                        class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
+                                    ></div>
+                                    <p class="text-base text-black mb-3">
+                                        {{ promo.title }}
+                                    </p>
+                                    <p class="text-sm text-black mb-3">
+                                        {{ promo.preview }}
+                                    </p>
+                                    <p class="text-xs font-inter">
+                                        {{ dateFormat(promo.date_time) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                v-if="!promotion.length && !showSpinner"
+                                class="text-center py-8 text-black font-semibold"
+                            >
+                                No promotions found
+                            </div>
+                        </div>
+                        <div v-if="showSpinner">
+                            Loading...
+                            <!-- <circle2 background="#000" color="#fff"></circle2> -->
+                        </div>
                     </div>
                 </div>
             </div>

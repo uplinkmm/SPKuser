@@ -18,7 +18,7 @@
 
     <!-- iOS splash and meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Shwe Shan Kan" />
+    <meta name="apple-mobile-web-app-title" content="Shwe Pauk Kan" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <link rel="icon" type="image/png" href="/icons/pwa_icon.png">

@@ -1,242 +1,330 @@
 <template lang="">
     <notifications position="top center" />
 
-    <div v-if="step == 4" class="frame-container min-h-[100vh]">
-        <Navbar title="ထီပေါက်သူ" :back-btn="backBtn" class="!px-8"></Navbar>
+    <div
+        v-if="step == 4"
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
+        </div>
 
-        <div
-            class="relative mb-0 w-full rounded-lg bg-white pt-0 lg:pt-4 pb-14 px-0 lg:px-0"
-        >
-            <table class="table-auto w-full">
-                <thead class="bg-[#FDC652] text-white">
-                    <tr>
-                        <th class="py-4 pl-8 text-left">No</th>
-                        <th class="py-4">Name</th>
-                        <th class="py-4">Date</th>
-                        <th class="py-4">Phone</th>
-                        <th class="py-4 pr-8">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(winner, index) in winners" :key="index">
-                        <td class="text-left pl-8 py-4">{{ ++index }}</td>
-                        <td class="text-center py-4">{{ winner.name }}</td>
-                        <td class="text-center py-4">
-                            {{ formatDate(winner.lottery_date_time) }}
-                        </td>
-                        <td class="text-center py-4">
-                            <span class="font-bold mt-4">*****</span>
-                            {{ winner.phone_number }}
-                        </td>
-                        <td class="text-center pr-8 py-4">
-                            {{ winner.total_amount?.toLocaleString() }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="mt-4 pb-14">
+            <div
+                class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6 min-h-[calc(100vh-100px)]"
+            >
+                <p class="text-center text-xl font-bold mb-4">ထီပေါက်သူ</p>
+
+                <div class="rounded-2xl bg-[#C58A1F] px-3 pt-3 pb-4">
+                    <div
+                        class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                    >
+                        <table class="table-auto w-full">
+                            <thead class="bg-[#F4F4F4] text-black">
+                                <tr>
+                                    <th class="py-3">No</th>
+                                    <th class="py-3">Name</th>
+                                    <th class="py-3">Date</th>
+                                    <th class="py-3">Phone</th>
+                                    <th class="py-3">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="!winners.length">
+                                    <td
+                                        colspan="5"
+                                        class="text-center py-10 text-black font-semibold"
+                                    >
+                                        No winners found
+                                    </td>
+                                </tr>
+                                <tr
+                                    v-for="(winner, index) in winners"
+                                    :key="index"
+                                    class="border-b last:border-0 border-black/10"
+                                >
+                                    <td class="text-center text-sm py-3">
+                                        {{ index + 1 }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{ winner.name }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{
+                                            formatDate(winner.lottery_date_time)
+                                        }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        <span class="font-bold mt-4"
+                                            >*****</span
+                                        >
+                                        {{ winner.phone_number }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{
+                                            winner.total_amount?.toLocaleString()
+                                        }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div v-else class="frame-container min-h-[100vh]">
-        <!-- <div
+    <div
+        v-else
         class="frame-container min-h-[100vh]"
-    > -->
-        <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        </div>
         <!-- choose time -->
-        <div :class="step == 0 ? 'block' : 'hidden'">
+        <div :class="step == 0 ? 'block' : 'hidden'" class="mt-4 pb-14">
             <div
-                class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0 lg:px-4"
+                class="items-center justify-center bg-[#FFC529] rounded-t-3xl shadow-lg"
             >
-                <div class="grid grid-cols-2 gap-x-4 mb-8">
-                    <a
-                        href="history?game_id=2"
-                        class="bg-[#FDC652] rounded-xl shadow-md text-center text-white py-8"
-                    >
-                        <a>
-                            <i class="fal fa-file text-3xl pb-1"></i>
-                            <p>မှတ်တမ်း</p>
-                        </a>
-                    </a>
-                    <div
-                        @click="step = 4"
-                        class="bg-[#29261D] rounded-xl shadow-md text-center text-white py-8"
-                    >
-                        <a>
-                            <i class="fal fa-users text-3xl pb-1"></i>
-                            <p>ထီပေါက်သူ</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="contents" v-if="!showSpinner">
-                    <div
-                        v-if="
-                            settings.length > 0 &&
-                            main_game_active &&
-                            settings[0]?.is_active
-                        "
-                        class="bg-transparent items-center justify-center mb-8"
-                    >
-                        <div
-                            @click="step = 1"
-                            class="bg-green-400 text-white rounded-xl cursor-pointer shadow-md pt-10 pb-8 px-6 flex justify-between items-end mb-5"
+                <div class="pt-4 pb-4">
+                    <div class="grid px-4 grid-cols-2 gap-x-4 mb-6">
+                        <a
+                            href="history?game_id=2"
+                            class="bg-[#29261D] rounded-xl shadow-md text-center text-white py-6"
                         >
-                            <div class="block">
-                                <p v-if="game" class="mb-3">
-                                    {{
-                                        formatDateTime(
-                                            game.game_setting?.lottery_date_time
-                                        )
-                                    }}
-                                </p>
-
-                                <i
-                                    class="fal fa-check-circle"
-                                    style="font-size: 24px"
-                                ></i>
+                            <div>
+                                <i class="fal fa-file text-3xl pb-1"></i>
+                                <p>မှတ်တမ်း</p>
                             </div>
-
-                            <div class="block">
-                                <p class="text-right mb-3">3D</p>
-                                <p class="text-xl font-semibold">ထိုးမည်</p>
-                            </div>
-                            <!-- <i
-                            class="far fa-angle-right"
-                            style="font-size: 24px"
-                        ></i> -->
-                        </div>
-                    </div>
-                    <div
-                        v-else
-                        class="bg-transparent items-center justify-center mb-8"
-                    >
+                        </a>
                         <div
-                            class="bg-white rounded-xl cursor-pointer shadow-md py-20 px-12 flex"
+                            @click="step = 4"
+                            class="bg-[#FDC652] rounded-xl shadow-md text-center text-black py-6 cursor-pointer"
                         >
-                            <i
-                                class="fas fa-exclamation text-red-700"
-                                style="font-size: 24px"
-                            ></i>
-                            <span class="pl-8">3D ခေတ္တ ပိတ်ထားပါသည် </span>
+                            <div>
+                                <i class="fal fa-users text-3xl pb-1"></i>
+                                <p>ထီပေါက်သူ</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="bg-transparent items-center justify-center mb-8">
+                    <h1 class="text-center text-xl font-bold mb-3">
+                        3D ထိုးမည်
+                    </h1>
+
                     <div
-                        v-for="(winning, index) in winning_numbers"
-                        :key="index"
-                        :style="{ backgroundColor: winning.color }"
-                        class="text-white rounded-xl cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
+                        class="w-full max-w-md mx-auto bg-[#06000040] rounded-3xl px-6 py-6 shadow-lg"
                     >
-                        <div>
-                            <i
-                                class="far fa-flame mr-3"
-                                style="font-size: 24px"
-                            ></i>
-                            <span> {{ winning.number }}</span>
+                        <div class="contents" v-if="!showSpinner">
+                            <div
+                                v-if="
+                                    settings.length > 0 &&
+                                    main_game_active &&
+                                    settings[0]?.is_active
+                                "
+                                class="items-center justify-center mb-4"
+                            >
+                                <div
+                                    @click="step = 1"
+                                    class="bg-white/95 text-black rounded-2xl cursor-pointer shadow-md pt-6 pb-5 px-5 flex justify-between items-center transition duration-150 ease-out hover:shadow-lg hover:-translate-y-1 hover:bg-white"
+                                >
+                                    <div class="block text-left">
+                                        <p v-if="game" class="mb-3 text-sm">
+                                            {{
+                                                formatDateTime(
+                                                    game.game_setting
+                                                        ?.lottery_date_time,
+                                                )
+                                            }}
+                                        </p>
+
+                                        <i
+                                            class="fas fa-check-circle text-[#15862E]"
+                                            style="font-size: 24px"
+                                        ></i>
+                                    </div>
+
+                                    <div class="block text-right">
+                                        <p class="mb-1 text-xl font-semibold">
+                                            3D
+                                        </p>
+                                        <p class="text-xl font-semibold">
+                                            ထိုးမည်
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                v-else
+                                class="items-center justify-center mb-4"
+                            >
+                                <div
+                                    class="bg-white rounded-2xl cursor-pointer shadow-md py-8 px-6 flex items-center"
+                                >
+                                    <i
+                                        class="fas fa-exclamation text-red-700 mr-4"
+                                        style="font-size: 24px"
+                                    ></i>
+                                    <span class="text-sm">
+                                        3D ခေတ္တ ပိတ်ထားပါသည်
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <span>{{
-                            formatDate2(winning.lottery_date_time)
-                        }}</span>
+                        <div v-else class="text-center text-white py-4">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="bg-white text-center py-2">
+                            <span class="text-base font-semibold">
+                                ပေါက်နံပါတ်များ
+                            </span>
+                        </div>
+                        <div
+                            class="px-4 pb-6 pt-4 max-h-[260px] overflow-y-auto small-scrollbar"
+                        >
+                            <div
+                                v-for="(winning, index) in winning_numbers"
+                                :key="index"
+                                :style="{ backgroundColor: winning.color }"
+                                class="text-black rounded-xl cursor-pointer shadow-md px-6 py-6 flex justify-between items-center mb-4"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="far fa-flame mr-3"
+                                        style="font-size: 24px"
+                                    ></i>
+                                    <span class="text-lg font-semibold">
+                                        {{ winning.number }}
+                                    </span>
+                                </div>
+                                <span class="text-sm font-medium">
+                                    {{ formatDate2(winning.lottery_date_time) }}
+                                </span>
+                            </div>
+                            <div
+                                v-if="!winning_numbers.length"
+                                class="text-center text-white/90 py-6 text-sm"
+                            >
+                                ထီပေါက်နံပါတ် မရှိသေးပါ
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Error page -->
-        <div :class="step == 3 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
-                <div class="bg-transparent items-center justify-center mb-8">
+        <div :class="step == 3 ? 'block' : 'hidden'" class="mt-4 px-4 pb-14">
+            <div class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6">
+                <p class="text-center text-xl font-bold mb-3">3D ထိုးမည်</p>
+                <div class="rounded-2xl bg-[#C58A1F] px-4 pt-4 pb-5">
                     <div
-                        class="bg-white rounded-xl cursor-pointer shadow-md px-32 py-32 flex"
+                        class="bg-white rounded-2xl shadow-md py-10 px-6 flex items-center justify-center"
                     >
                         <i
-                            class="fas fa-exclamation text-red-700"
+                            class="fas fa-exclamation text-red-700 mr-4"
                             style="font-size: 24px"
                         ></i>
-                        <span class="pl-32">3D ခေတ္တ ပိတ်ထားပါသည် </span>
+                        <span class="text-sm font-semibold">
+                            3D ခေတ္တ ပိတ်ထားပါသည်
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div :class="step == 1 ? 'block' : 'hidden'">
-            <div
-                class="relative block mb-6 w-full rounded-xl shadow-xl bg-white"
-            >
-                <div class="">
-                    <div class="w-full py-4 px-4">
-                        <div>
-                            <div class="mb-4">
-                                <label
-                                    for="amount"
-                                    class="text-sm mb-3 relative block"
-                                    >Amount</label
+        <div :class="step == 1 ? 'block' : 'hidden'" class="mt-4 pb-14">
+            <div class="bg-[#FFC529] rounded-t-3xl shadow-lg px-4 pt-4 pb-6">
+                <p class="text-center text-xl font-bold mb-3">3D ထိုးမည်</p>
+
+                <div class="pt-4 pb-5">
+                    <p class="mt-2 text-base font-semibold mb-3">
+                        ငွေပမာဏ
+                        <span class="text-red-600"> ( ၁၀၀ ကျပ်မှစထိုးပါ )</span>
+                    </p>
+                    <div class="flex items-center">
+                        <div class="flex-grow">
+                            <div
+                                class="flex items-center bg-white rounded-l-lg overflow-hidden border border-black focus-within:ring-2 focus-within:ring-[#FF9900] focus-within:ring-opacity-70"
+                            >
+                                <div
+                                    class="w-14 h-12 flex items-center justify-center text-[#7a7a7a]"
                                 >
+                                    <i class="fas fa-dollar-sign text-2xl"></i>
+                                </div>
                                 <input
                                     type="number"
                                     id="amount"
-                                    placeholder="Amount"
+                                    placeholder="အနည်းဆုံး ၁၀၀"
                                     v-model="each_amount"
                                     @input="validateNumber($event, 'amount')"
                                     ref="amount"
-                                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                                    class="block w-full h-14 bg-transparent px-2 text-lg focus:ring-0 focus:shadow-none outline-none"
                                 />
                             </div>
                         </div>
-                        <div class="flex justify-between gap-x-4">
-                            <button
-                                @click="reverseFun"
-                                class="px-4 py-2 lg:py-3 bg-[#15862E] text-white text-base rounded-lg w-80 mb-3"
-                            >
-                                {{ $t("R") }}
-                            </button>
-                            <button
-                                class="px-4 py-2 lg:py-3 bg-[#FDC652] text-white text-base rounded-lg w-80 mb-3"
-                                @click="changeToStep2(1)"
-                            >
-                                ထိုးမည်
-                            </button>
-                        </div>
-                        <div class="block lg:flex justify-between">
-                            <p class="text-sm mb-1">
-                                {{ $t("Balance") }} :
-                                {{ wallet_balance?.toLocaleString() }} MMK
-                            </p>
-                            <p class="text-sm">
-                                {{ $t("Closing Time") }} :
-                                {{ closingDateTimeFormat }}
-                            </p>
-                        </div>
+
+                        <button
+                            class="bg-[#5271FF] text-white px-8 h-14 rounded-r-lg text-base font-semibold whitespace-nowrap hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150"
+                            @click="changeToStep2(1)"
+                        >
+                            ထိုးမည်
+                        </button>
+
+                        <button
+                            @click="reverseFun"
+                            class="w-12 h-14 bg-[#d9d9d9] text-black text-lg font-semibold rounded-lg ml-4"
+                        >
+                            R
+                        </button>
+                    </div>
+
+                    <div
+                        class="mt-4 flex justify-between text-sm text-black font-semibold"
+                    >
+                        <p>
+                            {{ $t("Closing Time") }} :
+                            {{ closingDateTimeFormat }}
+                        </p>
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="flex justify-between bg-transparent mb-3">
-                    <div class="relative inline-block w-32">
-                        <select
-                            class="block appearance-none w-full bg-blue-500 text-white px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            v-model="from_to_value"
-                        >
-                            <option
-                                v-for="(from_to, index) in from_to_numbers"
-                                :key="index"
-                                :value="from_to"
+                <div class="mb-0 mt-6">
+                    <div class="flex justify-between bg-transparent mb-3">
+                        <div class="relative inline-block w-32">
+                            <select
+                                class="block appearance-none w-full bg-blue-500 text-white px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                v-model="from_to_value"
                             >
-                                {{ from_to.name }}
-                            </option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
-                        >
-                            <svg
-                                class="fill-current h-4 w-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
+                                <option
+                                    v-for="(from_to, index) in from_to_numbers"
+                                    :key="index"
+                                    :value="from_to"
+                                >
+                                    {{ from_to.name }}
+                                </option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white"
                             >
-                                <path d="M7 10l5 5 5-5H7z" />
-                            </svg>
+                                <svg
+                                    class="fill-current h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path d="M7 10l5 5 5-5H7z" />
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                    <!-- <div class="flex justify-end mb-4">
+                        <!-- <div class="flex justify-end mb-4">
                         <button
                             @click="step = 4"
                             class="bg-[#8b5656] text-white px-4 py-2 rounded-lg text-sm"
@@ -244,54 +332,59 @@
                             Winners
                         </button>
                     </div> -->
-                    <div class="flex justify-end mb-4">
-                        <button
-                            class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
-                            @click="bet_numbers = []"
-                        >
-                            {{ $t("Clear") }}
-                        </button>
+                        <div class="flex justify-end mb-4">
+                            <button
+                                class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
+                                @click="bet_numbers = []"
+                            >
+                                {{ $t("Clear") }}
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
-                    <div
-                        class="contents"
-                        v-for="(num, index) in numbers100"
-                        :key="index"
-                    >
-                        <div v-if="index == '96'" class="opacity-0"></div>
-
+                    <div class="grid grid-cols-10 gap-x-1 gap-y-3">
                         <div
-                            :class="[
-                                num.is_active == 0
-                                    ? 'bg-gray-300'
-                                    : isBetNumber(num.number)
-                                    ? 'bg-[#FDC652] text-white'
-                                    : 'bg-white',
-                                'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
-                            ]"
-                            @click="num.is_active == 1 ? addBetNumber(num) : ''"
+                            class="contents"
+                            v-for="(num, index) in numbers100"
+                            :key="index"
                         >
-                            <div class="w-full">
-                                <p class="text-xs lg:text-2xl mb-2 font-inter">
-                                    {{ num.number }}
-                                </p>
-                                <div
-                                    class="w-8 lg:w-8 mx-auto bg-[#9C9C9C] h-1.5"
-                                >
+                            <!-- <div v-if="index == '96'" class="opacity-0"></div> -->
+
+                            <div
+                                :class="[
+                                    num.is_active == 0
+                                        ? 'bg-[#cfcfcf] text-white'
+                                        : isBetNumber(num.number)
+                                          ? 'bg-[#5271FF] text-white'
+                                          : 'bg-[#FF9900] text-white',
+                                    'rounded-lg pt-3 shadow-md aspect-square flex flex-col items-center justify-center border border-white transition duration-150',
+                                ]"
+                                @click="
+                                    num.is_active == 1 ? addBetNumber(num) : ''
+                                "
+                            >
+                                <div class="w-full">
+                                    <p
+                                        class="text-lg font-bold leading-none text-center"
+                                    >
+                                        {{ num.number }}
+                                    </p>
                                     <div
-                                        :class="
-                                            progressBarClass(
-                                                num.total_bet_percentage
-                                            )
-                                        "
-                                        class="bg-[#17b509] h-1.5"
-                                        :style="{
-                                            width: computedWidth(
-                                                num.total_bet_percentage
-                                            ),
-                                        }"
-                                    ></div>
+                                        class="mt-2 w-10 h-4 bg-[#d9d9d9] rounded-full flex items-center border border-white shadow-sm overflow-hidden mx-auto"
+                                    >
+                                        <div
+                                            :class="
+                                                progressBarClass(
+                                                    num.total_bet_percentage,
+                                                )
+                                            "
+                                            class="h-3 rounded-full"
+                                            :style="{
+                                                width: computedWidth(
+                                                    num.total_bet_percentage,
+                                                ),
+                                            }"
+                                        ></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -301,128 +394,158 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-0 w-full rounded-xl shadow-xl bg-white pt-4 pb-6 px-4"
+            class="relative mb-12 w-full rounded-t-xl px-4 pb-14 bg-[#FFC529] min-h-[calc(100vh-100px)]"
             :class="step == 2 ? 'block' : 'hidden'"
-            style="min-height: calc(100vh - 168px)"
         >
-            <div class="mb-3">
-                <table class="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-2">{{ $t("No") }}</th>
-                            <th class="py-2">{{ $t("Multiplier") }}</th>
-                            <th class="py-2">{{ $t("Betting Amount") }}</th>
-                            <th class="py-2">{{ $t("Edit Delete") }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="(bet_number, index) in bet_numbers"
-                            :key="index"
+            <div class="w-full rounded-3xl bg-[#FFC529] pt-4 pb-2">
+                <p class="text-center mb-3 text-lg font-bold">3D ထိုးမည်</p>
+
+                <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
+                    <div
+                        class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                    >
+                        <div
+                            class="flex justify-between items-center px-4 py-2 bg-[#F4F4F4] text-lg"
                         >
-                            <td
-                                class="text-center py-2"
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                            >
-                                {{ bet_number.number }}
-                            </td>
-                            <td
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                                class="text-center py-2"
-                            >
-                                {{ bet_multiplier }}
-                            </td>
-                            <td
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                                class="text-center py-2"
-                            >
-                                <span
-                                    v-show="
-                                        bet_number.number !=
-                                        edit_bet_number.number
-                                    "
-                                >
-                                    {{ bet_number.amount?.toLocaleString() }}
-                                </span>
-                                <!-- <input
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    type="number"
-                                    class="px-4 py-2 text-black"
-                                    v-model="edit_bet_number.amount"
-                                /> -->
-                                <input
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    type="number"
-                                    class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-                                    v-model="edit_bet_number.amount"
-                                    placeholder="Enter amount"
-                                />
-                            </td>
-                            <td class="text-center py-2">
-                                <button
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    @click="editBetAmount"
-                                    class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
-                                >
-                                    <i class="fas fa-check mr-2"></i>
-                                </button>
-                                <button
-                                    v-show="
-                                        bet_number.number !=
-                                        edit_bet_number.number
-                                    "
-                                    @click="edit_bet_number = bet_number"
-                                    class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-edit mr-2"></i>
-                                </button>
-                                <button
-                                    data-twe-toggle="modal"
-                                    data-twe-target="#delete_modal"
-                                    @click="
-                                        delete_bet_number = bet_number.number
-                                    "
-                                    class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <hr />
-            <div class="pt-2 mb-0 w-full block">
-                <p class="text-sm pt-2 text-right pr-2 mb-4">
-                    {{ $t("Total Betting Amount") }} :
-                    {{ totalBetAmount?.toLocaleString() }} MMK
-                </p>
-                <div class="w-full flex justify-center">
+                            <p>{{ currentDate }}</p>
+                            <p>{{ getCurrentTime() }}</p>
+                            <p class="text-[#FF9900] font-semibold">
+                                {{ closingDateTimeFormat }}
+                            </p>
+                        </div>
+
+                        <div
+                            class="px-4 pb-3 pt-2 overflow-y-auto small-scrollbar"
+                            style="max-height: calc(100vh - 260px)"
+                        >
+                            <table class="table-auto w-full text-lg">
+                                <thead>
+                                    <tr>
+                                        <th class="py-3">စဉ်</th>
+                                        <th class="py-3">{{ $t("No") }}</th>
+                                        <th class="py-3">
+                                            {{ $t("Betting Amount") }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(
+                                            bet_number, index
+                                        ) in bet_numbers"
+                                        :key="index"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
+                                            {{ bet_number.number }}
+                                        </td>
+                                        <td
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                            class="text-center py-2 space-x-1"
+                                        >
+                                            <span
+                                                v-show="
+                                                    bet_number.number !=
+                                                    edit_bet_number.number
+                                                "
+                                            >
+                                                {{
+                                                    bet_number.amount?.toLocaleString()
+                                                }}
+                                            </span>
+                                            <input
+                                                v-show="
+                                                    bet_number.number ==
+                                                    edit_bet_number.number
+                                                "
+                                                type="number"
+                                                class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                                                v-model="edit_bet_number.amount"
+                                                placeholder="Enter amount"
+                                            />
+                                            <button
+                                                v-show="
+                                                    bet_number.number ==
+                                                    edit_bet_number.number
+                                                "
+                                                @click="editBetAmount"
+                                                class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
+                                            >
+                                                <i
+                                                    class="fas fa-check mr-2"
+                                                ></i>
+                                            </button>
+                                            <button
+                                                v-show="
+                                                    bet_number.number !=
+                                                    edit_bet_number.number
+                                                "
+                                                @click="
+                                                    edit_bet_number = bet_number
+                                                "
+                                                class="text-[#5271FF] hover:text-[#5271FF]/80 transition duration-150 ease-in-out"
+                                            >
+                                                <i class="fas fa-edit mr-2"></i>
+                                            </button>
+                                            <button
+                                                data-twe-toggle="modal"
+                                                data-twe-target="#delete_modal"
+                                                @click="
+                                                    delete_bet_number =
+                                                        bet_number.number
+                                                "
+                                                class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
+                                            >
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        v-if="bet_numbers.length"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td class="text-right pr-4" colspan="2">
+                                            {{ $t("Total Betting Amount") }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{
+                                                totalBetAmount?.toLocaleString()
+                                            }}
+                                            ကျပ်
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
                     <button
                         :disabled="calling_api"
+                        class="w-full bg-[#5271FF] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                         @click="sendBetting"
-                        class="bg-[#FDC652] text-white px-12 py-2 rounded-lg text-sm font-semibold"
                     >
                         {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
                     </button>
@@ -432,32 +555,32 @@
         <!-- Modal -->
         <div
             data-twe-modal-init
-            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black/80 flex items-center justify-center p-4"
             id="delete_modal"
             tabindex="-1"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="deleteModalLabel"
             aria-hidden="true"
         >
             <div
                 data-twe-modal-dialog-ref
-                class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+                class="pointer-events-none w-full h-full opacity-0 transition-all duration-300 ease-in-out"
             >
                 <div
-                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                    class="pointer-events-auto fixed left-1/2 top-1/3 w-full max-w-[420px] -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-3xl border-none bg-[#FFC529] text-current shadow-4 outline-none overflow-hidden"
                 >
                     <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                        class="flex flex-shrink-0 items-center justify-between py-5 px-6"
                     >
                         <h4
-                            class="text-xl font-medium leading-normal text-surface"
-                            id="exampleModalLabel"
+                            class="text-xl font-semibold leading-normal text-black"
+                            id="deleteModalLabel"
                         >
                             Confirm Delete
                         </h4>
                         <button
                             type="button"
                             id="close"
-                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 bg-white/60 text-black/70 hover:text-black focus:text-black focus:opacity-100 focus:shadow-none focus:outline-none"
                             data-twe-modal-dismiss
                             aria-label="Close"
                         >
@@ -479,19 +602,21 @@
                         </button>
                     </div>
                     <div
-                        class="relative flex-auto py-6 px-6"
+                        class="relative flex-auto pb-6 px-6"
                         data-twe-modal-body-ref
                     >
-                        <p class="text-lg">Are You Sure ?</p>
+                        <p class="text-lg font-semibold text-black text-center">
+                            Are You Sure ?
+                        </p>
                     </div>
 
                     <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
+                        class="flex flex-shrink-0 flex-wrap items-center justify-end px-6 pb-6 gap-x-3"
                     >
                         <button
                             type="button"
                             id="modalClose"
-                            class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
+                            class="inline-block rounded-2xl bg-white/70 px-6 py-4 text-sm text-black font-semibold focus:outline-none focus:ring-0"
                             data-twe-modal-dismiss
                             data-twe-ripple-init
                             data-twe-ripple-color="light"
@@ -501,7 +626,7 @@
                         <button
                             @click="deleteBetNumber"
                             type="button"
-                            class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                            class="rounded-2xl bg-red-600 px-8 py-4 text-sm text-white font-semibold focus:outline-none focus:ring-0"
                         >
                             Delete
                         </button>
@@ -521,32 +646,32 @@
     <!--Error Modal Box -->
     <div
         data-twe-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black/80 flex items-center justify-center p-4"
         id="error_modal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="errorModalLabel"
         aria-hidden="true"
     >
         <div
             data-twe-modal-dialog-ref
-            class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+            class="pointer-events-none w-full h-full opacity-0 transition-all duration-300 ease-in-out"
         >
             <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                class="pointer-events-auto fixed left-1/2 top-1/3 w-full max-w-[420px] -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-3xl border-none bg-[#FFC529] text-current shadow-4 outline-none overflow-hidden"
             >
                 <div
-                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                    class="flex flex-shrink-0 items-center justify-between py-5 px-6"
                 >
                     <h4
-                        class="text-xl text-red-600 font-medium leading-normal text-surface"
-                        id="exampleModalLabel"
+                        class="text-xl font-semibold leading-normal text-black"
+                        id="errorModalLabel"
                     >
                         Error
                     </h4>
                     <button
                         type="button"
                         id="close"
-                        class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                        class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 bg-white/60 text-black/70 hover:text-black focus:text-black focus:opacity-100 focus:shadow-none focus:outline-none"
                         data-twe-modal-dismiss
                         aria-label="Close"
                     >
@@ -568,109 +693,21 @@
                     </button>
                 </div>
                 <div
-                    class="relative flex-auto py-6 px-6"
+                    class="relative flex-auto pb-6 px-6"
                     data-twe-modal-body-ref
                 >
-                    <p class="text-lg">{{ error_modal_text }}</p>
+                    <p class="text-lg font-semibold text-black text-center">
+                        {{ error_modal_text }}
+                    </p>
                 </div>
 
                 <div
-                    class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
+                    class="flex flex-shrink-0 flex-wrap items-center justify-end px-6 pb-6 gap-x-3"
                 >
-                    <!-- <button
+                    <button
                         type="button"
                         id="modalClose"
-                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
-                        data-twe-modal-dismiss
-                        data-twe-ripple-init
-                        data-twe-ripple-color="light"
-                    >
-                        Close
-                    </button> -->
-                    <button
-                        data-twe-modal-dismiss
-                        data-twe-ripple-init
-                        data-twe-ripple-color="light"
-                        type="button"
-                        class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
-                    >
-                        Ok
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button
-        hidden
-        disabled
-        type="button"
-        class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-        data-twe-toggle="modal"
-        data-twe-target="#exampleModal"
-        data-twe-ripple-init
-        data-twe-ripple-color="light"
-    >
-        Launch demo modal
-    </button>
-
-    <div
-        data-twe-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-    >
-        <div
-            data-twe-modal-dialog-ref
-            class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
-        >
-            <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark"
-            >
-                <div
-                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 p-4 dark:border-white/10"
-                >
-                    <h5
-                        class="text-xl font-medium leading-normal text-surface dark:text-white"
-                        id="exampleModalLabel"
-                    >
-                        Modal title
-                    </h5>
-                    <button
-                        type="button"
-                        class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                        data-twe-modal-dismiss
-                        aria-label="Close"
-                    >
-                        <span class="[&>svg]:h-6 [&>svg]:w-6">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-
-                <div class="relative flex-auto p-4" data-twe-modal-body-ref>
-                    Modal body text goes here.
-                </div>
-
-                <div
-                    class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10"
-                >
-                    <button
-                        type="button"
-                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400"
+                        class="inline-block rounded-2xl bg-white/70 px-6 py-4 text-sm text-black font-semibold focus:outline-none focus:ring-0"
                         data-twe-modal-dismiss
                         data-twe-ripple-init
                         data-twe-ripple-color="light"
@@ -678,12 +715,13 @@
                         Close
                     </button>
                     <button
-                        type="button"
-                        class="ms-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                        data-twe-modal-dismiss
                         data-twe-ripple-init
                         data-twe-ripple-color="light"
+                        type="button"
+                        class="rounded-2xl bg-red-600 px-8 py-4 text-sm text-white font-semibold focus:outline-none focus:ring-0"
                     >
-                        Save changes
+                        OK
                     </button>
                 </div>
             </div>
@@ -799,7 +837,7 @@ export default {
         numbers100() {
             return this.numbers.slice(
                 this.from_to_value.value - 100,
-                this.from_to_value.value
+                this.from_to_value.value,
             );
         },
         errorText() {
@@ -821,7 +859,7 @@ export default {
         },
         closingDateTimeFormat() {
             return moment(this.closing_date_time, "YYYY-MM-DD HH:mm").format(
-                "YYYY-MM-DD hh:mm A"
+                "YYYY-MM-DD hh:mm A",
             );
         },
         checkUserEachLimitError() {
@@ -838,6 +876,9 @@ export default {
     mixins: [CheckAuthMixin],
 
     methods: {
+        getCurrentTime() {
+            return moment().format("hh:mm A");
+        },
         backBtn() {
             if (this.step == 0 || this.step == 3) {
                 // window.location.href = "/home";
@@ -924,7 +965,7 @@ export default {
                 return;
             }
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === num.number
+                (bet) => bet.number === num.number,
             );
             if (index === -1) {
                 num.amount = "";
@@ -935,7 +976,7 @@ export default {
         },
         deleteBetNumber(num) {
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === this.delete_bet_number
+                (bet) => bet.number === this.delete_bet_number,
             );
             this.bet_numbers.splice(index, 1);
             const button = document.getElementById("modalClose");
@@ -945,7 +986,7 @@ export default {
         },
         editBetAmount() {
             const index = this.bet_numbers.find(
-                (bet) => bet.number == this.edit_bet_number.number
+                (bet) => bet.number == this.edit_bet_number.number,
             );
             if (
                 this.edit_bet_number.amount >= this.min &&
@@ -977,7 +1018,7 @@ export default {
                             currentChar +
                             permutation.slice(j);
                         const index = this.bet_numbers.findIndex(
-                            (bet) => bet.number === newPermutation
+                            (bet) => bet.number === newPermutation,
                         );
                         if (index === -1) {
                             newResults.push(newPermutation);
@@ -990,7 +1031,7 @@ export default {
             const removeItself = results.filter((r) => r != str);
             var temp = this.numbers
                 .filter(
-                    (n) => removeItself.includes(n.number) && n.is_active == 1
+                    (n) => removeItself.includes(n.number) && n.is_active == 1,
                 )
                 .map((n) => ({ ...n, amount: "" }));
             return temp;
@@ -1010,7 +1051,7 @@ export default {
         },
         sortBetNumbers() {
             this.bet_numbers.sort(
-                (a, b) => parseInt(a.number) - parseInt(b.number)
+                (a, b) => parseInt(a.number) - parseInt(b.number),
             );
         },
         checkBalanced() {
@@ -1043,11 +1084,11 @@ export default {
             this.current_time_status = threeDgame.game_setting.time_status;
             this.opening_date_time = moment(
                 threeDgame.game_setting.opening_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             this.closing_date_time = moment(
                 threeDgame.game_setting.closing_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             this.min = threeDgame.game_setting.min;
             this.max = threeDgame.game_setting.max;
@@ -1153,7 +1194,7 @@ export default {
             const currentTime = moment();
             const f_opening_time = moment(
                 this.opening_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             var alreadyOpen = currentTime.isAfter(f_opening_time);
             return alreadyOpen;
@@ -1162,7 +1203,7 @@ export default {
             const currentTime = moment();
             const f_closing_time = moment(
                 this.closing_date_time,
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             );
             var alreadyClose = currentTime.isAfter(f_closing_time);
             return alreadyClose;
@@ -1192,11 +1233,11 @@ export default {
             this.current_time_status = "morning";
             this.opening_date_time = moment(
                 "2024-06-18 00:00:00",
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             ).format("YYYY-MM-DD HH:mm A");
             this.closing_date_time = moment(
                 "2024-07-01 03:00:00",
-                "YYYY-MM-DD HH:mm"
+                "YYYY-MM-DD HH:mm",
             ).format("YYYY-MM-DD hh:mm A");
             this.min = 100;
             this.max = 10000;
@@ -1218,7 +1259,7 @@ export default {
                 (win, index) => {
                     const color = colors[index % colors.length];
                     return { ...win, color };
-                }
+                },
             );
             // this.settings = [];
             this.main_game_active = response.data.is_active;

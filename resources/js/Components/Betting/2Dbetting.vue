@@ -1,8 +1,17 @@
 <template lang="">
     <notifications position="top center" />
 
-    <div v-if="step == 7" class="frame-container min-h-[100vh]">
-        <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
+    <div
+        v-if="step == 7"
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
+        </div>
         <!-- <div class="mb-3 flex justify-end px-4">
             <select
                 v-model="setting_value"
@@ -80,11 +89,20 @@
         </div>
     </div>
 
-    <div v-else class="frame-container min-h-[100vh]">
-        <Navbar title="ထိုးမည်" :back-btn="backBtn" class="!px-4"></Navbar>
+    <div
+        v-else
+        class="frame-container min-h-[100vh]"
+        :style="{
+            backgroundImage: `url(/icons/bgfour.png)`,
+            backgroundRepeat: 'repeat',
+        }"
+    >
+        <div class="bg-black px-4">
+            <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
+        </div>
         <!-- Error page -->
         <div :class="step == 6 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
+            <div class="relative mb-0 w-full bg-transparent pb-14 px-4">
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div
                         class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-16 flex justify-center"
@@ -100,7 +118,7 @@
         </div>
         <!-- choose time -->
         <div :class="step == 5 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-0">
+            <div class="relative mb-0 w-full bg-transparent pb-14 px-0">
                 <!-- <div class="grid grid-cols-2 gap-x-4 mb-8">
                     <a
                         href="history?game_id=1"
@@ -123,336 +141,83 @@
                 </div> -->
                 <div
                     v-if="twod_settings.length && main_game_active"
-                    class="bg-transparent items-center justify-center mb-8"
+                    class="items-center justify-center px-4 bg-[#FFC529] rounded-t-3xl shadow-lg"
                 >
-                    <div class="flex-grow py-6">
+                    <h1 class="text-center text-xl font-bold mb-3">
+                        2D ထိုးမည်
+                    </h1>
+
+                    <div
+                        class="w-full max-w-md bg-[#06000040] rounded-3xl px-6 py-6 shadow-lg"
+                    >
                         <div class="text-center">
-                            <h1 class="text-2xl font-bold mb-2">2D ထိုးမည်</h1>
-                            <p class="text-base">ထိုးမည့် အချိန်ကို ရွေးပါ</p>
+                            <p class="text-sm font-medium">
+                                ထိုးမည့်အချိန် ရွေးချယ်ပါ
+                            </p>
                         </div>
 
                         <div
-                            class="flex justify-center items-center mt-8 space-x-4 px-4"
+                            class="flex mt-6 justify-center items-end space-x-8"
                         >
                             <div
                                 v-for="(twod_setting, index) in twod_settings"
                                 :key="index"
-                                @click="chooseTime(twod_setting)"
-                                class="bg-white p-6 rounded-2xl shadow-lg w-48 text-center cursor-pointer"
+                                @click="pendingGameSetting = twod_setting"
+                                :class="[
+                                    'flex flex-col items-center cursor-pointer transition',
+                                    pendingGameSetting &&
+                                    pendingGameSetting.id === twod_setting.id
+                                        ? 'opacity-100'
+                                        : 'opacity-100',
+                                ]"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-8 h-8 mx-auto mb-2 text-gray-600"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                                    />
-                                </svg>
-                                <p class="text-lg font-semibold">
+                                <div
+                                    :class="[
+                                        'w-28 h-28 rounded-2xl border-2',
+                                        pendingGameSetting &&
+                                        pendingGameSetting.id ===
+                                            twod_setting.id
+                                            ? 'border-[#1d4ed8] bg-[#e5e7eb]'
+                                            : 'border-[#9A6C1F] bg-[#D9A63A]',
+                                    ]"
+                                ></div>
+                                <p class="mt-3 text-base font-semibold">
                                     {{ formatTime(twod_setting.lottery_time) }}
                                 </p>
                             </div>
-                            <!-- <div class="bg-white p-6 rounded-2xl shadow-lg w-48 text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mx-auto mb-2 text-gray-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                <p class="text-2xl font-semibold">4:30 PM</p>
-                            </div> -->
                         </div>
                     </div>
-
-                    <div class="rounded-lg p-4">
-                        <h2
-                            class="text-lg font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
+                    <div class="mt-6">
+                        <button
+                            type="button"
+                            class="w-full bg-[#5271FF] text-white font-semibold py-3 rounded-xl hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                            :disabled="!pendingGameSetting"
+                            @click="confirmTimeSelection"
                         >
-                            မှတ်တမ်းများ
-                        </h2>
-
-                        <div class="divide-y divide-gray-700">
-                            <a
-                                href="/2d/live"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-4 h-4 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-sm">2D Live</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="/history?game_id=1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-4 h-4 text-gray-700"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
-                                        />
-                                    </svg>
-                                    <span class="text-sm">2D မှတ်တမ်း</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="/winner_lists/1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-4 h-4 text-gray-700"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-sm">ထီပေါက်သူများ</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-4 h-4 text-gray-700"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-                        </div>
+                            ရှေ့ဆက်ရန်
+                        </button>
                     </div>
-
-                    <!-- <div class="text-center mb-4">
-                        <h1 class="text-white py-5 text-lg font-semibold">
-                            ထိုးမည့်အချိန်ကို ရွေးပါ
-                        </h1>
-                    </div>
-
-                    <div>
-                        <div
-                            v-for="(twod_setting, index) in twod_settings"
-                            :key="index"
-                            @click="chooseTime(twod_setting)"
-                            class="first:bg-[#40403E] last:bg-[#DDA33F] text-white rounded-lg cursor-pointer shadow-md px-8 py-10 flex justify-between mb-5"
-                        >
-                            <i
-                                class="far fa-stopwatch"
-                                style="font-size: 24px"
-                            ></i>
-
-                            <span>
-                                {{ formatTime(twod_setting.lottery_time) }}
-                            </span>
-                            <i
-                                class="far fa-angle-right"
-                                style="font-size: 24px"
-                            ></i>
-                        </div>
-                    </div> -->
                 </div>
 
-                <div
-                    v-else
-                    class="bg-transparent items-center justify-center mb-8"
-                >
-                    <div class="flex-grow py-12 bg-[#F2B50F] -mx-4">
+                <div v-else class="items-center justify-center">
+                    <div
+                        class="flex-grow py-0 bg-[#FFC529] rounded-t-3xl shadow-lg"
+                    >
+                        <p class="text-center text-lg">2D ထိုးမည်</p>
+
                         <div class="text-center">
-                            <h1 class="text-3xl font-bold mb-4">2D ထိုးမည်</h1>
-                            <div class="w-full flex justify-center mb-4">
+                            <h1 class="text-4xl text-red-600 font-bold py-20">
+                                 ထီ ပိတ်ပါသည်
+                            </h1>
+                            <!-- <div class="w-full flex justify-center mb-4">
                                 <img
                                     src="../../../../public/img/apologize 1.png"
                                 />
-                            </div>
-                            <p class="text-lg">ယနေ့ 2D ပိတ်ပါသည်</p>
+                            </div> -->
+                            <!-- <p class="text-lg">ယနေ့ 2D ပိတ်ပါသည်</p> -->
                         </div>
                     </div>
 
-                    <div class="rounded-lg p-4 bg-[#ffc529]">
-                        <h2
-                            class="text-xl font-bold mb-4 dash-under relative after:!left-0 inline-block pb-3"
-                        >
-                            မှတ်တမ်းများ
-                        </h2>
-
-                        <div class="divide-y divide-gray-200">
-                            <a
-                                href="/2d/live"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-lg">2D Live</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                hreft="/history?game_id=1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M19.5 14.25v-2.25a.75.75 0 0 0-.75-.75H12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 .75-.75Z"
-                                        />
-                                    </svg>
-                                    <span class="text-lg">2D မှတ်တမ်း</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="/winner_lists/1"
-                                class="flex items-center justify-between py-4 cursor-pointer"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-6 h-6 text-gray-600"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
-                                        />
-                                    </svg>
-                                    <span class="text-lg">ထီပေါက်သူများ</span>
-                                </div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
                     <!-- <div
                         class="bg-white rounded-lg cursor-pointer shadow-md px-8 py-16 flex justify-center"
                     >
@@ -463,80 +228,176 @@
                         <span class="pl-16">2D ခေတ္တ ပိတ်ထားပါသည် </span>
                     </div> -->
                 </div>
+
+                <div
+                    class="overflow-hidde bg-[#FFC529] min-h-[calc(100vh-100px)] pt-6"
+                >
+                    <div class="bg-white text-center py-2">
+                        <span class="text-base font-semibold"
+                            >မှတ်တမ်းများ</span
+                        >
+                    </div>
+
+                    <div class="bg-[#FFC529] px-4 divide-y divide-black/10">
+                        <a
+                            href="/2d/live"
+                            class="flex items-center justify-between px-4 py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center space-x-4">
+                                <i
+                                    class="fas fa-broadcast-tower pt-1 w-6 h-6 text-gray-800"
+                                ></i>
+                                <span class="text-base font-semibold">
+                                    2D Live
+                                </span>
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 text-gray-900"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+
+                        <a
+                            href="/history?game_id=1"
+                            class="flex items-center justify-between px-4 py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center space-x-4">
+                                <i
+                                    class="fas pt-1 fa-file-alt w-6 h-6 text-gray-800"
+                                ></i>
+                                <span class="text-base font-semibold">
+                                    2D မှတ်တမ်း
+                                </span>
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 text-gray-900"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+
+                        <a
+                            href="/winner_lists/1"
+                            class="flex items-center justify-between px-4 py-4 cursor-pointer"
+                        >
+                            <div class="flex items-center space-x-4">
+                                <i
+                                    class="fas pt-1 fa-trophy w-6 h-6 text-gray-800"
+                                ></i>
+                                <span class="text-base font-semibold">
+                                    ထီပေါက်သူများ
+                                </span>
+                            </div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 text-gray-900"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div :class="step == 1 ? 'block' : 'hidden'" class="pb-16">
-            <div
-                class="relative block mb-6 w-full rounded-lg shadow-xl bg-white py-4 px-4"
-            >
-                <div class="w-full flex justify-between">
-                    <label
-                        for="amount"
-                        class="text-sm mb-3 relative block"
-                        >Amount</label
-                    >
-                    <p class="text-xs">
-                        အနည်းဆုံး ၁၀၀ မှ စ ထိုးပါ
-                    </p>
-                </div>
-                <div class="flex gap-x-4 mb-2">
+        <div
+            :class="step == 1 ? 'block' : 'hidden'"
+            class="pb-16 rounded-3xl bg-[#FFC529]"
+        >
+            <div class="mb-4 px-4">
+                <p class="text-lg text-center font-bold">2D ထိုးမည်</p>
 
-                    <div class="mb-4 flex-grow">
-                        
-                        <input
-                            type="number"
-                            id="amount"
-                            placeholder="Amount"
-                            v-model="each_amount"
-                            @input="validateNumber($event, 'amount')"
-                            ref="amount"
-                            class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <button
-                            class="bg-[#0978D3] text-white px-4 py-2 lg:py-2 w-fit whitespace-nowrap rounded-lg text-base"
-                            @click="changeToStep2(1)"
+                <div class="flex justify-between items-center">
+                    <p class="text-lg font-bold text-[#FF9900]">
+                        {{ formatTime(selectedGameSetting?.lottery_time) }}
+                    </p>
+                    <div class="w-10"></div>
+                </div>
+
+                <p class="mt-2 text-base font-semibold">
+                    ငွေပမာဏ
+                    <span class="text-red-600"> ( ၁၀၀ ကျပ်မှစထိုးပါ )</span>
+                </p>
+
+                <div class="mt-3 flex items-center">
+                    <div class="flex-grow">
+                        <div
+                            class="flex items-center bg-white rounded-l-lg overflow-hidden border border-black focus-within:ring-2 focus-within:ring-[#FF9900] focus-within:ring-opacity-70"
                         >
-                            ထိုးမည်
-                        </button>
+                            <div
+                                class="w-14 h-12 flex items-center justify-center text-[#7a7a7a]"
+                            >
+                                <i class="fas fa-dollar-sign text-2xl"></i>
+                            </div>
+                            <input
+                                type="number"
+                                id="amount"
+                                placeholder="အနည်းဆုံး ၁၀၀"
+                                v-model="each_amount"
+                                @input="validateNumber($event, 'amount')"
+                                ref="amount"
+                                class="block w-full h-14 bg-transparent px-2 text-lg focus:ring-0 focus:shadow-none outline-none"
+                            />
+                        </div>
                     </div>
-                    <button @click="reverseBetNumbers"
-                        class="px-4 py-2 lg:py-2 bg-black text-white text-sm rounded-lg w-fit whitespace-nowrap mb-3"
+
+                    <button
+                        class="bg-[#5271FF] text-white px-8 h-14 rounded-r-lg text-base font-semibold whitespace-nowrap hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150"
+                        @click="changeToStep2(1)"
                     >
-                        {{ $t("R") }}
+                        ထိုးမည်
                     </button>
 
+                    <button
+                        @click="reverseBetNumbers"
+                        class="w-12 h-14 bg-[#d9d9d9] text-black text-lg font-semibold rounded-lg ml-4"
+                    >
+                        R
+                    </button>
                 </div>
-                <div class="grid grid-cols-2 gap-x-4 mb-3">
-                    <button @click="roundBet"
-                        class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
+
+                <div class="mt-4 grid grid-cols-2 gap-3">
+                    <button
+                        @click="roundBet"
+                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3 hover:bg-[#0C7A18]/90 active:bg-[#0C7A18]/80 transition duration-150"
                     >
                         {{ $t("Round Bet") }}
                     </button>
-                    <button @click="quickBettingBtn"
-                        class="px-4 py-2 lg:py-3 bg-black text-white text-sm rounded-lg w-full mb-3"
+                    <button
+                        @click="quickBettingBtn"
+                        class="bg-[#0C7A18] text-white text-lg font-semibold rounded-lg h-14 py-3 hover:bg-[#0C7A18]/90 active:bg-[#0C7A18]/80 transition duration-150"
                     >
                         {{ $t("Quick Bet") }}
                     </button>
                 </div>
-                <div class="flex justify-between px-4">
-                    <div>
-                        <p class="text-xs">
-                            {{ $t("Balance") }} : {{ wallet_balance?.toLocaleString() }} MMK
-                        </p>
-                    </div>
-                    <div>
-                        <p class="text-xs">
-                            {{ $t("Closing Time") }} : {{ closingTimeFormat }}
-                        </p>
-                    </div>
-                </div>
             </div>
-
-
-
 
             <!-- old version -->
             <!-- <div
@@ -627,9 +488,8 @@
                     </div>
                 </div>
             </div> -->
-            
 
-            <div>
+            <div class="px-2 mb-16">
                 <div class="flex justify-end mb-4">
                     <button
                         class="bg-[#b23434] text-white px-4 py-2 rounded-lg text-sm"
@@ -641,22 +501,22 @@
                         {{ $t("Clear") }}
                     </button>
                 </div>
-                <div class="grid grid-cols-6 gap-x-1 lg:gap-x-4 gap-y-4">
+                <div class="grid grid-cols-10 gap-x-1 gap-y-2">
                     <div
                         class="contents"
                         v-for="(num, index) in numbers"
                         :key="index"
                     >
-                        <div v-if="index == '96'" class="opacity-0"></div>
+                        <!-- <div v-if="index == '96'" class="opacity-0"></div> -->
 
                         <div
                             :class="[
                                 num.is_active == 0
-                                    ? 'bg-gray-300'
+                                    ? 'bg-[#cfcfcf] text-white'
                                     : isBetNumber(num.number)
-                                    ? 'bg-[#FDC652] text-white font-semibold'
-                                    : 'bg-white',
-                                'py-2 px-1 lg:px-2 text-center shadow-xl aspect-square flex items-center justify-center border border-gray-200 rounded-md',
+                                      ? 'bg-[#5271FF] text-white'
+                                      : 'bg-[#FF9900] text-white',
+                                'rounded-lg pt-3 shadow-md aspect-square flex flex-col items-center justify-center border border-white',
                             ]"
                             @click="
                                 no_more_bet == false && num.is_active == 1
@@ -664,29 +524,26 @@
                                     : ''
                             "
                         >
-                            <div class="w-full">
-                                <p class="text-xs lg:text-2xl mb-2 font-inter">
-                                    {{ num.number }}
-                                </p>
-                                <div
-                                    class="w-8 lg:w-8 mx-auto bg-[#9C9C9C] h-1.5"
-                                >
-                                    <!-- class="bg-[#7a2985] h-1.5" -->
+                            <p class="text-xl font-bold leading-none">
+                                {{ num.number }}
+                            </p>
 
-                                    <div
-                                        class="bg-[#17b509] h-1.5"
-                                        :class="
-                                            progressBarClass(
-                                                num.total_bet_percentage
-                                            )
-                                        "
-                                        :style="{
-                                            width: computedWidth(
-                                                num.total_bet_percentage
-                                            ),
-                                        }"
-                                    ></div>
-                                </div>
+                            <div
+                                class="mt-2 w-11 h-4 bg-[#d9d9d9] rounded-full flex items-center border border-white shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="h-3 rounded-full"
+                                    :class="
+                                        progressBarClass(
+                                            num.total_bet_percentage,
+                                        )
+                                    "
+                                    :style="{
+                                        width: computedWidth(
+                                            num.total_bet_percentage,
+                                        ),
+                                    }"
+                                ></div>
                             </div>
                         </div>
                     </div>
@@ -695,75 +552,72 @@
         </div>
         <!-- Result Page-->
         <div
-            class="relative mb-12 w-full rounded-lg pb-14"
+            class="relative mb-12 w-full px-4 pb-14 bg-[#FFC529] rounded-t-xl min-h-[calc(100vh-100px)]"
             :class="step == 2 ? 'block' : 'hidden'"
-            style="min-height: calc(100vh - 132px)"
         >
-            <div>
-                <p class="text-center mb-2 text-lg">2D ထိုးမည်</p>
-            </div>
-            <div
-                class="flex justify-between px-6 bg-[#ffc529] text-black rounded-tr-lg rounded-tl-lg"
-            >
-                <div class="flex text-sm">
-                    <p class="pr-8 py-2">
-                        {{ getCurrentDate() }}
-                    </p>
-                    <p class="pr-8 py-2">
-                        {{ getCurrentTime() }}
-                    </p>
-                </div>
-                <div>
-                    <p class="pr-8 py-2">
-                        {{ formatTime(selectedGameSetting.lottery_time) }}
-                    </p>
-                    <!-- <p class="pr-8">
-                        {{ totalBetAmount?.toLocaleString() }} MMK
-                    </p> -->
-                </div>
-            </div>
-            <div
-                class="mb-5 px-4 bg-white pb-3 overflow-y-auto small-scrollbar"
-                style="height: calc(100% - 80px)"
-            >
-                <div class="flex justify-end mb-4"></div>
-                <table class="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-3">စဉ်</th>
-                            <th class="py-3">{{ $t("No") }}</th>
-                            <!-- <th class="py-2">{{ $t("Multiplier") }}</th> -->
-                            <th class="py-3">{{ $t("Betting Amount") }}</th>
-                            <th class="py-3">{{ $t("Edit Delete") }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="(bet_number, index) in bet_numbers"
-                            :key="index"
-                            class="border-b last:border-0"
+            <div class="w-full rounded-3xl bg-[#FFC529] pt-4 pb-2">
+                <p class="text-center mb-3 text-lg font-bold">2D ထိုးမည်</p>
+
+                <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
+                    <div
+                        class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                    >
+                        <div
+                            class="flex justify-between items-center px-4 py-2 bg-[#F4F4F4] text-lg"
                         >
-                            <td
-                                class="text-center py-2"
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                            >
-                                {{ index + 1 }}
-                            </td>
-                            <td
-                                class="text-center py-2"
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                            >
-                                {{ bet_number.number }}
-                            </td>
-                            <!-- <td
+                            <p>{{ getCurrentDate() }}</p>
+                            <p>{{ getCurrentTime() }}</p>
+                            <p class="text-[#FF9900] font-semibold">
+                                {{
+                                    formatTime(selectedGameSetting.lottery_time)
+                                }}
+                            </p>
+                        </div>
+
+                        <div
+                            class="px-4 pb-3 pt-2 overflow-y-auto small-scrollbar"
+                            style="max-height: calc(100vh - 260px)"
+                        >
+                            <table class="table-auto w-full text-lg">
+                                <thead>
+                                    <tr>
+                                        <th class="py-3">စဉ်</th>
+                                        <th class="py-3">{{ $t("No") }}</th>
+                                        <!-- <th class="py-2">{{ $t("Multiplier") }}</th> -->
+                                        <th class="py-3">
+                                            {{ $t("Betting Amount") }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(
+                                            bet_number, index
+                                        ) in bet_numbers"
+                                        :key="index"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td
+                                            class="text-center py-2"
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                        >
+                                            {{ bet_number.number }}
+                                        </td>
+                                        <!-- <td
                                 :class="
                                     checkAvailableAmount(bet_number)
                                         ? ''
@@ -773,95 +627,110 @@
                             >
                                 {{ bet_multiplier }}
                             </td> -->
-                            <td
-                                :class="
-                                    checkAvailableAmount(bet_number)
-                                        ? ''
-                                        : 'text-red-600'
-                                "
-                                class="text-center py-2"
-                            >
-                                <span
-                                    v-show="
-                                        bet_number.number !=
-                                        edit_bet_number.number
-                                    "
-                                >
-                                    {{ bet_number.amount?.toLocaleString() }}
-                                </span>
-                                <input
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    type="number"
-                                    class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-                                    v-model="edit_bet_number.amount"
-                                    placeholder="Enter amount"
-                                />
-                            </td>
-                            <td class="text-center py-2">
-                                <button
-                                    v-show="
-                                        bet_number.number ==
-                                        edit_bet_number.number
-                                    "
-                                    @click="editBetAmount"
-                                    class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
-                                >
-                                    <i class="fas fa-check mr-2"></i>
-                                </button>
-                                <button
-                                    v-show="
-                                        bet_number.number !=
-                                        edit_bet_number.number
-                                    "
-                                    @click="edit_bet_number = bet_number"
-                                    class="text-black hover:text-black transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-edit mr-2"></i>
-                                </button>
-                                <button
-                                    data-twe-toggle="modal"
-                                    data-twe-target="#delete_modal"
-                                    @click="
-                                        delete_bet_number = bet_number.number
-                                    "
-                                    class="text-black hover:text-black transition duration-150 ease-in-out"
-                                >
-                                    <i class="fal fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="absolute bottom-0 mb-4 w-full flex justify-center">
-                <!-- <p class="text-sm pt-2 pr-8">
-                    {{ $t("Total Betting Amount") }} : {{ totalBetAmount }} MMK
-                </p> -->
-                <button
-                    class="bg-[#e2e5e9] text-black px-12 py-2 rounded-lg text-sm font-semibold"
-                    @click="step = 1"
-                >
-                    Cancel
-                </button>
-                <button
-                    :disabled="calling_api"
-                    class="bg-[#0978D3] ml-3 text-white px-12 py-2 rounded-lg text-sm font-semibold"
-                    @click="sendBetting"
-                >
-                    {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
-                </button>
+                                        <td
+                                            :class="
+                                                checkAvailableAmount(bet_number)
+                                                    ? ''
+                                                    : 'text-red-600'
+                                            "
+                                            class="text-center py-2 space-x-1"
+                                        >
+                                            <span
+                                                v-show="
+                                                    bet_number.number !=
+                                                    edit_bet_number.number
+                                                "
+                                            >
+                                                {{
+                                                    bet_number.amount?.toLocaleString()
+                                                }}
+                                            </span>
+                                            <input
+                                                v-show="
+                                                    bet_number.number ==
+                                                    edit_bet_number.number
+                                                "
+                                                type="number"
+                                                class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                                                v-model="edit_bet_number.amount"
+                                                placeholder="Enter amount"
+                                            />
+                                            <button
+                                                v-show="
+                                                    bet_number.number ==
+                                                    edit_bet_number.number
+                                                "
+                                                @click="editBetAmount"
+                                                class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
+                                            >
+                                                <i
+                                                    class="fas fa-check mr-2"
+                                                ></i>
+                                            </button>
+                                            <button
+                                                v-show="
+                                                    bet_number.number !=
+                                                    edit_bet_number.number
+                                                "
+                                                @click="
+                                                    edit_bet_number = bet_number
+                                                "
+                                                class="text-[#5271FF] hover:text-[#5271FF]/80 transition duration-150 ease-in-out"
+                                            >
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button
+                                                data-twe-toggle="modal"
+                                                data-twe-target="#delete_modal"
+                                                @click="
+                                                    delete_bet_number =
+                                                        bet_number.number
+                                                "
+                                                class="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
+                                            >
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        v-if="bet_numbers.length"
+                                        class="border-b last:border-0"
+                                    >
+                                        <td class="text-right pr-4" colspan="2">
+                                            {{ $t("Total Betting Amount") }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{
+                                                totalBetAmount.toLocaleString()
+                                            }}
+                                            ကျပ်
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button
+                        :disabled="calling_api"
+                        class="w-full bg-[#5271FF] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                        @click="sendBetting"
+                    >
+                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- quick betting -->
         <div :class="step == 3 ? 'block' : 'hidden'">
-            <div class="relative mb-0 w-full bg-transparent pt-4 pb-14 px-4">
+            <div
+                class="relative mb-0 w-full bg-[#FFC529] rounded-t-xl pb-14 px-4"
+            >
                 <div class="bg-transparent items-center justify-center mb-8">
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
+                        <h1 class="text-black text-lg font-semibold">
                             ရိုးရိုး
                         </h1>
                     </div>
@@ -871,37 +740,37 @@
                     >
                         <button
                             @click="simpleBet('sone_sone')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             စုံစုံ
                         </button>
                         <button
                             @click="simpleBet('ma_ma')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             မမ
                         </button>
                         <button
                             @click="simpleBet('sone_ma')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             စုံမ
                         </button>
                         <button
                             @click="simpleBet('ma_sone')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             မစုံ
                         </button>
                         <button
                             @click="simpleBet('sone_puu')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             စုံပူး
                         </button>
                         <button
                             @click="simpleBet('ma_puu')"
-                            class="border border-gray-400 text-sm rounded-lg py-3 px-1"
+                            class="border border-gray-400 text-md rounded-lg py-3 px-1 bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             မပူး
                         </button>
@@ -911,7 +780,9 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
+                        <h1
+                            class="text-lg text-black font-semibold primary-text"
+                        >
                             နက္ခတ်ပါဝါ
                         </h1>
                     </div>
@@ -921,25 +792,25 @@
                     >
                         <button
                             @click="natKhatPower('nat')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             နက်
                         </button>
                         <button
                             @click="natKhatPower('power')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             ပါ၀ါ
                         </button>
                         <button
                             @click="natKhatPower('a_puu')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             အပူး
                         </button>
                         <button
                             @click="natKhatPower('nyi_naung')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             ညီအကို
                         </button>
@@ -950,7 +821,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">ပါတ်</h1>
+                        <h1 class="text-black text-lg font-semibold">ပါတ်</h1>
                     </div>
 
                     <div
@@ -958,61 +829,61 @@
                     >
                         <button
                             @click="patNumberBet('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="patNumberBet('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="patNumberBet('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="patNumberBet('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="patNumberBet('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="patNumberBet('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="patNumberBet('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="patNumberBet('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="patNumberBet('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="patNumberBet('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -1022,7 +893,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">ထိပ်</h1>
+                        <h1 class="text-black text-lg font-semibold">ထိပ်</h1>
                     </div>
 
                     <div
@@ -1030,61 +901,61 @@
                     >
                         <button
                             @click="numbersStartingWith('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="numbersStartingWith('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="numbersStartingWith('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="numbersStartingWith('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="numbersStartingWith('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="numbersStartingWith('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="numbersStartingWith('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="numbersStartingWith('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="numbersStartingWith('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="numbersStartingWith('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -1094,9 +965,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
-                            နောက်
-                        </h1>
+                        <h1 class="text-black text-lg font-semibold">နောက်</h1>
                     </div>
 
                     <div
@@ -1104,61 +973,61 @@
                     >
                         <button
                             @click="numbersEndingWith('0')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="numbersEndingWith('1')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="numbersEndingWith('2')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="numbersEndingWith('3')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="numbersEndingWith('4')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="numbersEndingWith('5')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="numbersEndingWith('6')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
                             @click="numbersEndingWith('7')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="numbersEndingWith('8')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="numbersEndingWith('9')"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -1168,9 +1037,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1 class="text-lg font-semibold primary-text">
-                            ဘရိတ်
-                        </h1>
+                        <h1 class="text-black text-lg font-semibold">ဘရိတ်</h1>
                     </div>
 
                     <div
@@ -1178,61 +1045,61 @@
                     >
                         <button
                             @click="breakNumbers(0, 10)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             0
                         </button>
                         <button
                             @click="breakNumbers(1, 11)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             1
                         </button>
                         <button
                             @click="breakNumbers(2, 12)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             2
                         </button>
                         <button
                             @click="breakNumbers(3, 13)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             3
                         </button>
                         <button
                             @click="breakNumbers(4, 14)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             4
                         </button>
                         <button
                             @click="breakNumbers(5, 15)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             5
                         </button>
                         <button
                             @click="breakNumbers(6, 16)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             6
                         </button>
                         <button
-                            @click="breakNumbers(1, 17)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            @click="breakNumbers(7, 17)"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             7
                         </button>
                         <button
                             @click="breakNumbers(8, 18)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             8
                         </button>
                         <button
                             @click="breakNumbers(9, 19)"
-                            class="border border-gray-400 rounded-lg py-3 px-1 text-sm"
+                            class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
                             9
                         </button>
@@ -1242,12 +1109,14 @@
         </div>
 
         <!-- ခွေထိုးမည် -->
+        <!-- ခွေထိုးမည် -->
         <div
             :class="step == 4 ? 'block' : 'hidden'"
             style="min-height: calc(100vh - 168px)"
+            class="bg-[#FFC529] rounded-t-xl mb-20"
         >
             <div
-                class="relative mb-8 w-full rounded-lg shadow-xl bg-white pt-4 pb-0 px-8"
+                class="relative mb-4 w-full rounded-2xl shadow-md bg-[#F3F4F6] pt-4 pb-4 px-4"
             >
                 <div class="grid grid-cols-2 gap-x-4">
                     <div class="flex justify-between flex-col pt-4 pb-3">
@@ -1255,7 +1124,7 @@
                             <div class="mb-4">
                                 <label
                                     for="round_digits"
-                                    class="text-sm mb-3 relative block"
+                                    class="text-lg mb-2 relative block font-semibold"
                                     >3/4 Numbers</label
                                 >
                                 <input
@@ -1267,22 +1136,18 @@
                                         validateNumber($event, 'round_digits')
                                     "
                                     ref="round_digits"
-                                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                                    class="block w-full h-12 px-3 border border-black text-base rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
                                 />
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#DDA33F] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold hover:bg-[#FFC529]/90 active:bg-[#FFC529]/80 transition duration-150"
                                     @click="getTwoDigitCombinations(false)"
                                 >
                                     အပူးမပါ
                                 </button>
                             </div>
                         </div>
-                        <p class="text-sm">
-                            {{ $t("Total Betting Amount") }} :
-                            {{ totalBetAmount?.toLocaleString() }} MMK
-                        </p>
                     </div>
 
                     <div class="flex justify-between flex-col pt-4 pb-3">
@@ -1290,7 +1155,7 @@
                             <div class="mb-4">
                                 <label
                                     for="amount"
-                                    class="text-sm mb-3 relative block"
+                                    class="text-lg mb-2 relative block font-semibold"
                                     >Amount</label
                                 >
                                 <input
@@ -1303,16 +1168,16 @@
                                     @input="
                                         validateNumber(
                                             $event,
-                                            'round_bet_amount'
+                                            'round_bet_amount',
                                         )
                                     "
                                     ref="round_bet_amount"
-                                    class="block w-full py-2 px-2 border border-gray-400 text-sm rounded-md bg-white focus:ring-0 focus:shadow-none"
+                                    class="block w-full h-12 px-3 border border-black text-base rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
                                 />
                             </div>
                             <div class="mb-4">
                                 <button
-                                    class="bg-[#C67D06] text-white px-4 py-2 w-full rounded-lg text-sm"
+                                    class="bg-[#FFC529] text-black px-4 h-14 w-full rounded-lg text-base font-semibold hover:bg-[#FFC529]/90 active:bg-[#FFC529]/80 transition duration-150"
                                     @click="getTwoDigitCombinations(true)"
                                 >
                                     အပူးပါ
@@ -1321,131 +1186,153 @@
                         </div>
                     </div>
                     <div class="flex justify-between col-span-2 mb-8">
-                        <p class="text-sm">
+                        <p class="text-lg font-semibold">
                             လက်ကျန်ငွေ :
                             {{ wallet_balance?.toLocaleString() }} MMK
                         </p>
-                        <p class="text-sm">
+                        <p class="text-lg font-semibold">
                             {{ $t("Closing Time") }} :
                             {{ closingTimeFormat }}
                         </p>
                     </div>
                 </div>
             </div>
-            <div
-                class="relative mb-0 w-full rounded-lg shadow-xl bg-white pt-4 pb-14 px-4"
-            >
-                <div class="">
-                    <table class="table-auto w-full">
-                        <thead>
-                            <tr>
-                                <th class="py-2">{{ $t("No") }}</th>
-                                <th class="py-2">{{ $t("Multiplier") }}</th>
-                                <th class="py-2">{{ $t("Betting Amount") }}</th>
-                                <th class="py-2">{{ $t("Edit Delete") }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(bet_number, index) in bet_numbers"
-                                :key="index"
-                            >
-                                <td
-                                    :class="
-                                        checkAvailableAmount(bet_number)
-                                            ? ''
-                                            : 'text-red-600'
-                                    "
-                                    class="text-center py-2"
-                                >
-                                    {{ bet_number.number }}
-                                </td>
-                                <td
-                                    :class="
-                                        checkAvailableAmount(bet_number)
-                                            ? ''
-                                            : 'text-red-600'
-                                    "
-                                    class="text-center py-2"
-                                >
-                                    {{ bet_multiplier }}
-                                </td>
-                                <td
-                                    :class="
-                                        checkAvailableAmount(bet_number)
-                                            ? ''
-                                            : 'text-red-600'
-                                    "
-                                    class="text-center py-2"
-                                >
-                                    <span
-                                        v-show="
-                                            bet_number.number !=
-                                            edit_bet_number.number
-                                        "
-                                    >
-                                        {{
-                                            bet_number.amount?.toLocaleString()
-                                        }}
-                                    </span>
-                                    <input
-                                        v-show="
-                                            bet_number.number ==
-                                            edit_bet_number.number
-                                        "
-                                        type="number"
-                                        class="w-24 shadow appearance-none border border-gray-300 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-                                        v-model="edit_bet_number.amount"
-                                        placeholder="Enter amount"
-                                    />
-                                </td>
-                                <td class="text-center py-2">
-                                    <button
-                                        v-show="
-                                            bet_number.number ==
-                                            edit_bet_number.number
-                                        "
-                                        @click="editBetAmount"
-                                        class="text-green-600 hover:text-green-800 transition duration-150 ease-in-out"
-                                    >
-                                        <i class="fas fa-check mr-2"></i>
-                                    </button>
-                                    <!-- Edit Button (Blue) -->
-                                    <button
-                                        v-show="
-                                            bet_number.number !=
-                                            edit_bet_number.number
-                                        "
-                                        @click="edit_bet_number = bet_number"
-                                        class="text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
-                                    >
-                                        <i class="fal fa-edit mr-2"></i>
-                                    </button>
-                                    <!-- Delete Button (Red) -->
-                                    <button
-                                        data-twe-toggle="modal"
-                                        data-twe-target="#delete_modal"
-                                        @click="
-                                            delete_bet_number =
-                                                bet_number.number
-                                        "
-                                        class="text-red-600 hover:text-red-800 transition duration-150 ease-in-out"
-                                    >
-                                        <i class="fal fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="absolute mb-6 w-full flex justify-center">
-                    <button
-                        :disabled="calling_api"
-                        class="bg-[#FDC652] text-white px-12 py-2 rounded-lg text-sm font-semibold"
-                        @click="sendBetting"
+            <div class="rounded-xl bg-[#C58A1F] py-3 px-2">
+                <div
+                    class="rounded-xl bg-white border-2 border-gray-700 overflow-hidden"
+                >
+                    <div
+                        class="px-4 pt-2 overflow-y-auto small-scrollbar"
+                        style="max-height: calc(100vh - 320px)"
                     >
-                        {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
-                    </button>
+                        <table class="table-fixed w-full text-lg mb-16">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 w-3/12 text-center">
+                                        {{ $t("No") }}
+                                    </th>
+                                    <th class="py-3 w-2/12 text-center">
+                                        {{ $t("Multiplier") }}
+                                    </th>
+                                    <th class="py-3 w-5/12 text-right pr-2">
+                                        {{ $t("Betting Amount") }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(bet_number, index) in bet_numbers"
+                                    :key="index"
+                                    class="border-b last:border-0"
+                                >
+                                    <td
+                                        :class="
+                                            checkAvailableAmount(bet_number)
+                                                ? ''
+                                                : 'text-red-600'
+                                        "
+                                        class="text-center py-2"
+                                    >
+                                        {{ bet_number.number }}
+                                    </td>
+                                    <td
+                                        :class="
+                                            checkAvailableAmount(bet_number)
+                                                ? ''
+                                                : 'text-red-600'
+                                        "
+                                        class="text-center py-2"
+                                    >
+                                        {{ bet_multiplier }}
+                                    </td>
+                                    <td
+                                        :class="
+                                            checkAvailableAmount(bet_number)
+                                                ? ''
+                                                : 'text-red-600'
+                                        "
+                                        class="text-right py-2 pr-2 space-x-1"
+                                    >
+                                        <span
+                                            v-show="
+                                                bet_number.number !=
+                                                edit_bet_number.number
+                                            "
+                                            class="font-semibold"
+                                        >
+                                            {{
+                                                bet_number.amount?.toLocaleString()
+                                            }}
+                                        </span>
+                                        <input
+                                            v-show="
+                                                bet_number.number ==
+                                                edit_bet_number.number
+                                            "
+                                            type="number"
+                                            class="w-24 h-10 bg-white px-2 text-base rounded-lg border border-black focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:ring-opacity-70"
+                                            v-model="edit_bet_number.amount"
+                                            placeholder=""
+                                        />
+                                        <button
+                                            v-show="
+                                                bet_number.number ==
+                                                edit_bet_number.number
+                                            "
+                                            @click="editBetAmount"
+                                            class="w-10 h-10 rounded-lg bg-[#0C7A18] text-white inline-flex items-center justify-center"
+                                        >
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button
+                                            v-show="
+                                                bet_number.number !=
+                                                edit_bet_number.number
+                                            "
+                                            @click="
+                                                edit_bet_number = bet_number
+                                            "
+                                            class="w-10 h-10 bg-white text-[#5271FF] inline-flex items-center justify-center"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button
+                                            data-twe-toggle="modal"
+                                            data-twe-target="#delete_modal"
+                                            @click="
+                                                delete_bet_number =
+                                                    bet_number.number
+                                            "
+                                            class="w-10 h-10 bg-white text-red-500 inline-flex items-center justify-center"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr
+                                    v-if="bet_numbers.length"
+                                    class="border-t font-semibold"
+                                >
+                                    <td class="text-right pr-4" colspan="2">
+                                        {{ $t("Total Betting Amount") }}
+                                    </td>
+                                    <td class="text-right pr-2">
+                                        {{ totalBetAmount.toLocaleString() }}
+                                        MMK
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="w-full flex justify-center">
+                            <button
+                                :disabled="calling_api"
+                                class="bg-[#5271FF] text-white w-full mb-12 px-16 h-12 rounded-lg text-base font-semibold hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:bg-[#9CA3AF] disabled:text-white disabled:opacity-70 disabled:cursor-not-allowed"
+                                @click="sendBetting"
+                            >
+                                {{ calling_api ? "ထိုးနေသည်" : "ထိုးမည်" }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1454,7 +1341,7 @@
     <!-- Modal -->
     <div
         data-twe-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black/70 flex items-center justify-center p-4"
         id="delete_modal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
@@ -1462,16 +1349,16 @@
     >
         <div
             data-twe-modal-dialog-ref
-            class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+            class="pointer-events-none w-full h-full opacity-0 transition-all duration-300 ease-in-out"
         >
             <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                class="pointer-events-auto fixed left-1/2 top-1/3 w-full max-w-[420px] -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-3xl border-none bg-[#FFC529] text-current shadow-4 outline-none overflow-hidden"
             >
                 <div
-                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                    class="flex flex-shrink-0 items-center justify-between py-5 px-6"
                 >
                     <h4
-                        class="text-xl font-medium leading-normal text-surface"
+                        class="text-xl font-semibold leading-normal text-black"
                         id="exampleModalLabel"
                     >
                         Confirm Delete
@@ -1479,7 +1366,7 @@
                     <button
                         type="button"
                         id="close"
-                        class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                        class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 bg-white/60 text-black/70 hover:text-black focus:text-black focus:opacity-100 focus:shadow-none focus:outline-none"
                         data-twe-modal-dismiss
                         aria-label="Close"
                     >
@@ -1501,19 +1388,21 @@
                     </button>
                 </div>
                 <div
-                    class="relative flex-auto py-6 px-6"
+                    class="relative flex-auto pb-6 px-6"
                     data-twe-modal-body-ref
                 >
-                    <p class="text-lg">Are You Sure ?</p>
+                    <p class="text-lg font-semibold text-black text-center">
+                        Are You Sure ?
+                    </p>
                 </div>
 
                 <div
-                    class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
+                    class="flex flex-shrink-0 flex-wrap items-center justify-end px-6 pb-6 gap-x-3"
                 >
                     <button
                         type="button"
                         id="modalClose"
-                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
+                        class="inline-block rounded-2xl bg-white/70 px-6 py-4 text-sm text-black font-semibold focus:outline-none focus:ring-0"
                         data-twe-modal-dismiss
                         data-twe-ripple-init
                         data-twe-ripple-color="light"
@@ -1523,7 +1412,7 @@
                     <button
                         @click="deleteBetNumber"
                         type="button"
-                        class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                        class="rounded-2xl bg-red-600 px-8 py-4 text-sm text-white font-semibold focus:outline-none focus:ring-0"
                     >
                         Delete
                     </button>
@@ -1541,32 +1430,32 @@
     <!--Error Modal Box -->
     <div
         data-twe-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        class="fixed inset-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none bg-black/80 flex items-center justify-center p-4"
         id="error_modal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="errorModalLabel"
         aria-hidden="true"
     >
         <div
             data-twe-modal-dialog-ref
-            class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]"
+            class="pointer-events-none w-full h-full opacity-0 transition-all duration-300 ease-in-out"
         >
             <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none"
+                class="pointer-events-auto fixed left-1/2 top-1/3 w-full max-w-[420px] -translate-x-1/2 -translate-y-1/2 flex flex-col rounded-3xl border-none bg-[#FFC529] text-current shadow-4 outline-none overflow-hidden"
             >
                 <div
-                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 py-4 px-6"
+                    class="flex flex-shrink-0 items-center justify-between py-5 px-6"
                 >
                     <h4
-                        class="text-xl text-red-600 font-medium leading-normal text-surface"
-                        id="exampleModalLabel"
+                        class="text-xl font-semibold leading-normal text-black"
+                        id="errorModalLabel"
                     >
                         Error
                     </h4>
                     <button
                         type="button"
                         id="close"
-                        class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
+                        class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 bg-white/60 text-black/70 hover:text-black focus:text-black focus:opacity-100 focus:shadow-none focus:outline-none"
                         data-twe-modal-dismiss
                         aria-label="Close"
                     >
@@ -1588,33 +1477,34 @@
                     </button>
                 </div>
                 <div
-                    class="relative flex-auto py-6 px-6"
+                    class="relative flex-auto pb-6 px-6"
                     data-twe-modal-body-ref
                 >
-                    <p class="text-lg">{{ error_modal_text }}</p>
+                    <p class="text-lg font-semibold text-black text-center">
+                        {{ error_modal_text }}
+                    </p>
                 </div>
-
                 <div
-                    class="flex flex-shrink-0 flex-wrap items-center justify-end border-t-2 border-neutral-100 py-4 px-6 gap-x-4"
+                    class="flex flex-shrink-0 flex-wrap items-center justify-end px-6 pb-6 gap-x-3"
                 >
-                    <!-- <button
+                    <button
                         type="button"
                         id="modalClose"
-                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-black focus:outline-none focus:ring-00"
+                        class="inline-block rounded-2xl bg-white/70 px-6 py-4 text-sm text-black font-semibold focus:outline-none focus:ring-0"
                         data-twe-modal-dismiss
                         data-twe-ripple-init
                         data-twe-ripple-color="light"
                     >
                         Close
-                    </button> -->
+                    </button>
                     <button
                         data-twe-modal-dismiss
                         data-twe-ripple-init
                         data-twe-ripple-color="light"
                         type="button"
-                        class="rounded bg-red-600 px-8 pb-2 pt-2.5 text-xs text-white focus:outline-none focus:ring-0"
+                        class="rounded-2xl bg-red-600 px-8 py-4 text-sm text-white font-semibold focus:outline-none focus:ring-0"
                     >
-                        Ok
+                        OK
                     </button>
                 </div>
             </div>
@@ -1760,6 +1650,7 @@ export default {
             showSpinner: false,
             winners: [],
             selectedGameSetting: "",
+            pendingGameSetting: null,
             delete_bet_number: "",
             error_modal_text: "",
         };
@@ -1833,7 +1724,7 @@ export default {
                 return;
             }
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === num.number
+                (bet) => bet.number === num.number,
             );
             if (index === -1) {
                 num.amount = "";
@@ -1892,7 +1783,7 @@ export default {
         },
         deleteBetNumber() {
             const index = this.bet_numbers.findIndex(
-                (bet) => bet.number === this.delete_bet_number
+                (bet) => bet.number === this.delete_bet_number,
             );
             this.bet_numbers.splice(index, 1);
             const button = document.getElementById("modalClose");
@@ -1902,7 +1793,7 @@ export default {
         },
         editBetAmount() {
             const index = this.bet_numbers.find(
-                (bet) => bet.number == this.edit_bet_number.number
+                (bet) => bet.number == this.edit_bet_number.number,
             );
             if (
                 this.edit_bet_number.amount >= this.min &&
@@ -1922,7 +1813,7 @@ export default {
         },
         sortBetNumbers() {
             this.bet_numbers.sort(
-                (a, b) => parseInt(a.number) - parseInt(b.number)
+                (a, b) => parseInt(a.number) - parseInt(b.number),
             );
         },
         reverseBetNumbers() {
@@ -1940,7 +1831,7 @@ export default {
                     ) {
                         const temp = this.numbers.find(
                             (n) =>
-                                n.number == reversedNumber && n.is_active == 1
+                                n.number == reversedNumber && n.is_active == 1,
                         );
                         if (temp) {
                             return temp;
@@ -2423,20 +2314,27 @@ export default {
         },
         progressBarClass(percentage) {
             if (percentage === 100) {
-                return "bg-[#c7080e] h-1-5";
+                return "bg-[#c7080e]";
             } else if (percentage > 70 && percentage < 100) {
-                return "bg-[#f7db07] h-1-5";
+                return "bg-[#f7db07]";
             } else if (percentage < 70) {
-                return "bg-[#17b509] h-1-5";
+                return "bg-[#17b509]";
             } else {
-                return "bg-[#7a2985] h-1-5"; // Default color
+                return "bg-[#7a2985]"; // Default color
             }
         },
         chooseTime(type) {
+            // keep shared logic here if needed elsewhere
             this.bet_numbers = [];
             this.game_setting_id = type.id;
             this.selectedGameSetting = type;
             this.getBetNumbers();
+        },
+        confirmTimeSelection() {
+            if (!this.pendingGameSetting) {
+                return;
+            }
+            this.chooseTime(this.pendingGameSetting);
             this.step = 1;
         },
         async checkGameActive() {
@@ -2499,7 +2397,7 @@ export default {
             }
         },
         getCurrentDate() {
-            return moment().format("MMM DD, YYYY");
+            return moment().format("DD-MM-YYYY");
         },
         getCurrentTime() {
             return moment().format("hh:mm A");

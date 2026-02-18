@@ -1,23 +1,34 @@
 <template>
     <main
-        class="w-full h-full min-h-screen mx-auto px-0 pb-2 flex justify-center flex-row relative"
+        class="w-full h-full min-h-screen px-0 flex justify-center flex-row relative bg-black"
     >
         <div class="w-full">
-            <div class="mb-[10vh] text-center pt-24">
+            <div
+                class="flex items-center justify-between text-center pt-8 pb-6 px-20"
+            >
                 <img
                     src="../../../../public/img/SPK Logo.png"
-                    class="bg-black p-4 rounded-full w-20 lg:w-28 h-20 lg:h-28 mb-4 mx-auto"
+                    class="bg-slate-800 p-4 rounded-full w-25 h-25 mb-4"
                     alt=""
                 />
-                <p class="mb-2">ရွှေပေါက်ကံမှ ကြိုဆိုပါတယ်</p>
-                <p class="text-2xl font-semibold">အကောင့်ဝင်ရန်</p>
+                <h3 class="mb-2 text-white text-4xl font-semibold">
+                    မင်္ဂလာပါ
+                </h3>
             </div>
-            <div class="" @keyup.enter="login">
-                <div class="mb-4">
-                    <label class="mb-6 rounded-xl shadow-md bg-white block">
-                        <p class="text-xs px-4 pt-4 text-gray-700">
-                            {{ $t("Phone Number") }}
-                        </p>
+            <div
+                class="bg-[#FFC529] rounded-3xl px-6 py-6"
+                @keyup.enter="login"
+            >
+                <p class="text-center text-black text-xl font-semibold mb-6">
+                    အကောင့်ဝင်ပါ
+                </p>
+
+                <div class="mb-5">
+                    <p class="text-black font-semibold mb-2">ဖုန်းနံပါတ်</p>
+                    <div class="relative">
+                        <i
+                            class="fas fa-phone-alt text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
                         <input
                             type="text"
                             id="phone_number_login"
@@ -26,58 +37,71 @@
                             @input="
                                 phone_number = $event.target.value.replace(
                                     /[^0-9]/g,
-                                    ''
+                                    '',
                                 )
                             "
-                            :placeholder="$t('Phone Number')"
-                            class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            placeholder="09 XXX XXX XXX"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-4 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                         />
-                    </label>
+                    </div>
                 </div>
-                <div class="mb-8 relative">
-                    <label
-                        class="mb-6 rounded-xl shadow-md bg-white block relative"
-                    >
-                        <p class="text-xs px-4 pt-4 text-gray-700">Password</p>
+
+                <div class="mb-6">
+                    <p class="text-black font-semibold mb-2">စကားဝှက်</p>
+                    <div class="relative">
+                        <i
+                            class="fas fa-lock text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"
+                        ></i>
                         <input
                             :type="show_password ? 'text' : 'password'"
                             id="password_login"
                             v-model="password"
-                            placeholder="Password"
-                            class="w-full px-4 pt-2 pb-3 rounded-xl text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                            placeholder="စကားဝှက်ထည့်ပါ"
+                            class="w-full bg-[#D9D9D9] pl-12 pr-12 py-4 rounded-xl text-base text-black placeholder-gray-500 border border-black/30 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                         />
-                        <i
-                            v-if="!show_password"
+                        <button
+                            type="button"
                             @click="show_password = !show_password"
-                            class="far fa-eye text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
-                        ></i>
-                        <i
-                            v-if="show_password"
-                            @click="show_password = !show_password"
-                            class="far fa-eye-slash text-lg absolute right-3 bottom-6 transform translate-y-4 cursor-pointer"
-                        ></i>
-                    </label>
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600"
+                        >
+                            <i
+                                v-if="!show_password"
+                                class="far fa-eye text-lg"
+                            ></i>
+                            <i v-else class="far fa-eye-slash text-lg"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-10">
                     <button
                         :disabled="loading"
                         @click="login"
-                        class="block disabled:bg-gray-600 w-full py-3 px-2 text-sm rounded-full bg-[#000] border border-[#E4BD1B] text-white focus:ring-0 focus:shadow-none focus:outline-none"
+                        class="block disabled:bg-gray-600 w-full py-4 px-2 text-base rounded-xl bg-[#5271FF] text-white font-semibold focus:ring-0 focus:shadow-none focus:outline-none"
                     >
-                        <p v-if="!loading">Login</p>
-                        <i
-                            v-if="loading"
-                            class="fal fa-spinner animate-spin w-10"
-                        ></i>
+                        <span v-if="!loading">အကောင့်ဝင်ပါ</span>
+                        <i v-else class="fal fa-spinner animate-spin w-10"></i>
                     </button>
                 </div>
+
                 <button
-                    class="text-sm w-full text-center text-black hover:underline"
+                    class="text-base w-full text-center mb-8 text-[#1d4ed8] font-medium"
                     @click="changeForgotPassword(true)"
                 >
-                    Forgot password?
+                    စကားဝှက်မေ့နေလား ?
                 </button>
+                <button
+                    class="text-base w-full text-center text-[#1d4ed8] font-medium"
+                    @click="setIsLogin(false)"
+                >
+                    အကောင့်အသစ်ဖွင့်မည်
+                </button>
+
+                <div class="mt-10 text-center">
+                    <p class="text-black font-semibold mb-0">
+                        www.shwepaukkan.com
+                    </p>
+                </div>
             </div>
         </div>
         <form
@@ -153,6 +177,9 @@ export default {
         setErrorBox: {
             type: Function,
         },
+        setIsLogin: {
+            type: Function,
+        },
     },
     // mixins: [fcmMixin],
 
@@ -201,7 +228,7 @@ export default {
                     true,
                     response.message ||
                         response.message.phone_number ||
-                        response.message.password
+                        response.message.password,
                 );
 
                 return false;

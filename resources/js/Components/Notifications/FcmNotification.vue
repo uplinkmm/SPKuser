@@ -62,7 +62,7 @@ export default {
                     // console.log(`permission granted`);
                     this.firebaseMessaging = firebase.messaging();
                     this.fcmToken = await this.firebaseMessaging.getToken();
-                    // console.log(this.fcmToken);
+                    console.log(this.fcmToken);
                     this.startOnMessageListener();
                 }
             } catch (error) {

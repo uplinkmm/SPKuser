@@ -1,40 +1,126 @@
 <template lang="">
     <div
-        class="flex relative justify-between py-4 px-8 lg:px-4 mb-4 items-center"
+        class="flex relative justify-between py-4 px-8 lg:px-4 items-center -mx-4"
         :class="
-            getUser && isHomePage
-                ? 'bg-[#ffc529] text-black font-semibold -mx-4'
-                : 'bg-[#ffc529] text-black -mx-4'
+            isHomePage
+                ? 'bg-[#29261D] text-white'
+                : 'bg-[#29261D] text-white mb-4'
         "
     >
-        <div v-if="isHomePage && user" class="flex gap-x-2 text-sm">
-            <p>{{ user.name }}</p>
-            <i class="far fa-wallet pl-2 mt-1"></i>
-            <p>{{ user.balance?.toLocaleString() }}</p>
-            <i class="far fa-gamepad pl-4 mt-1"></i>
-            <p>{{ user.game_money_balance?.toLocaleString() }}</p>
-        </div>
         <FcmNotification :get-noti="getNotis"></FcmNotification>
-        <button v-if="hideBackBtn == false">
-            <a @click="backBtn">
-                <i class="fas fa-chevron-left"></i>
-            </a>
-        </button>
-        <p :class="textColor" class="text-black text-base ml-12">{{ title }}</p>
-        <div class="flex gap-x-4">
-            <button @click="focusSearchInput">
-                <i class="fal fa-search"></i>
+
+        <template v-if="getUser">
+            <div class="flex items-center w-full">
+                <template v-if="getUser">
+                    <div class="flex items-center gap-x-3 flex-1 min-w-0">
+                        <button v-if="hideBackBtn == false">
+                            <a @click="backBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </button>
+                        <img
+                            src="../../../../public/icons/logo_transparent.png"
+                            class="w-10 h-10 object-contain shrink-0"
+                            alt=""
+                        />
+                        <div class="flex items-center gap-x-2 min-w-0">
+                            <i
+                                class="far fa-user-circle text-gray-300 text-xl"
+                            ></i>
+                            <p
+                                class="text-gray-200 text-lg font-semibold truncate mb-0"
+                            >
+                                {{ getUser?.name }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-x-3 shrink-0">
+                        <div class="flex items-center gap-x-2">
+                            <i class="far fa-wallet text-gray-200 text-2xl"></i>
+                            <p
+                                class="text-gray-200 text-2xl font-semibold mb-0"
+                            >
+                                {{ (user?.balance ?? 0).toLocaleString() }}
+                            </p>
+                        </div>
+
+                        <a
+                            href="/wallet"
+                            class="w-7 h-7 rounded-full bg-[#FFC529] text-black flex items-center justify-center"
+                        >
+                            <i class="fas fa-plus text-sm"></i>
+                        </a>
+
+                        <a href="/notifications" class="relative pl-2">
+                            <i class="far fa-bell text-gray-200 text-2xl"></i>
+                            <span
+                                v-if="notiCount > 0"
+                                class="absolute -top-2 -right-1 text-white rounded px-1 bg-red-700 font-semibold text-xs"
+                            >
+                                {{ notiCount }}
+                            </span>
+                        </a>
+                    </div>
+                </template>
+
+                <template v-else>
+                    <div class="w-10 flex items-center justify-start">
+                        <img
+                            src="../../../../public/icons/logo_transparent.png"
+                            class="w-10 h-10 object-contain"
+                            alt=""
+                        />
+                    </div>
+
+                    <div class="flex-1 text-center">
+                        <p class="text-2xl font-semibold text-white">
+                            ရွှေပေါက်ကန်
+                        </p>
+                    </div>
+
+                    <div class="w-10 flex items-center justify-end">
+                        <a href="/notifications" class="relative">
+                            <i class="far fa-bell text-white text-2xl"></i>
+                            <span
+                                v-if="notiCount > 0"
+                                class="absolute -top-2 -right-2 text-white rounded px-1 bg-red-700 font-semibold text-xs"
+                            >
+                                {{ notiCount }}
+                            </span>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template v-else>
+            <button v-if="hideBackBtn == false">
+                <a @click="backBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
             </button>
-            <a href="/notifications" :class="isHomePage ? 'pt-0' : ''">
-                <i class="far fa-bell"></i>
-                <span
-                    v-if="notiCount > 0"
-                    class="ml-2 text-white rounded pl-0.5 pr-1 bg-red-700 font-semibold text-sm"
-                >
-                    {{ notiCount }}
-                </span>
-            </a>
-        </div>
+            <p
+                :class="textColor"
+                class="text-2xl font-semibold text-white ml-12"
+            >
+                {{ title }}
+            </p>
+            <div class="flex gap-x-4">
+                <button @click="focusSearchInput">
+                    <i class="fal fa-search text-white text-2xl"></i>
+                </button>
+                <a href="/notifications">
+                    <i class="far fa-bell text-white text-2xl"></i>
+                    <span
+                        v-if="notiCount > 0"
+                        class="ml-2 text-white rounded pl-0.5 pr-1 bg-red-700 font-semibold text-sm"
+                    >
+                        {{ notiCount }}
+                    </span>
+                </a>
+            </div>
+        </template>
     </div>
     <transition name="fade-in">
         <!-- search -->
@@ -44,7 +130,7 @@
             style="height: calc(100vh - 60px)"
         >
             <div
-                class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#DDA33F] text-white -mx-4"
+                class="flex relative justify-between py-3 px-0 lg:px-4 mb-4 items-center bg-[#FFC529] text-white -mx-4"
             >
                 <div>
                     <button>
@@ -62,7 +148,7 @@
                 </div>
                 <div class="flex gap-x-4">
                     <button @click="searchSlots">
-                        <i class="fal fa-search"></i>
+                        <i class="fal fa-search text-white text-2xl"></i>
                     </button>
                 </div>
             </div>
