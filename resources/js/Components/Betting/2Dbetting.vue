@@ -180,10 +180,30 @@
                                             ? 'border-[#1d4ed8] bg-[#e5e7eb]'
                                             : 'border-[#9A6C1F] bg-[#D9A63A]',
                                     ]"
-                                ></div>
-                                <p class="mt-3 text-base font-semibold">
-                                    {{ formatTime(twod_setting.lottery_time) }}
-                                </p>
+                                >
+                                    <div
+                                        class="w-full h-full flex flex-col items-center justify-center text-gray-900"
+                                    >
+                                        <span
+                                            class="text-2xl font-semibold leading-tight"
+                                        >
+                                            {{
+                                                formatTime(
+                                                    twod_setting.lottery_time,
+                                                ).split(" ")[0]
+                                            }}
+                                        </span>
+                                        <span
+                                            class="text-2xl font-bold leading-tight"
+                                        >
+                                            {{
+                                                formatTime(
+                                                    twod_setting.lottery_time,
+                                                ).split(" ")[1]
+                                            }}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
