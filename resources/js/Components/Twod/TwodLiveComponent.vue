@@ -33,7 +33,7 @@
 
             <div class="flex justify-center">
                 <p
-                    class="text-[160px] leading-none w-fit text-green-700 font-extrabold drop-shadow-sm"
+                    class="text-[160px] leading-none w-fit text-green-700 font-extrabold drop-shadow-sm animate-pulse"
                 >
                     {{ twoDList?.twod }}
                 </p>
