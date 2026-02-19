@@ -7,7 +7,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-20">
             <Navbar :title="$t('Withdrawal')" :back-btn="backBtn"></Navbar>
         </div>
 

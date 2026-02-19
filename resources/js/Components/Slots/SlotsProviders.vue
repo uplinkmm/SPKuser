@@ -8,10 +8,12 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <Navbar
-            :title="`${this.selectedGameType?.name}`"
-            :back-btn="backBtn"
-        ></Navbar>
+        <div class="mb-20">
+            <Navbar
+                :title="`${this.selectedGameType?.name}`"
+                :back-btn="backBtn"
+            ></Navbar>
+        </div>
 
         <div class="mb-4">
             <p class="text-white text-lg font-semibold mb-2">

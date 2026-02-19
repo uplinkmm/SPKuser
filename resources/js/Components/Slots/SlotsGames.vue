@@ -8,7 +8,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-20">
             <Navbar
                 :title="`${this.selectedGameType?.name} - ${this.selectedProvider?.name}`"
                 :back-btn="backBtn"

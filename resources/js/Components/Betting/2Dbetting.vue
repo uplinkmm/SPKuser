@@ -9,7 +9,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-20">
             <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         </div>
         <!-- <div class="mb-3 flex justify-end px-4">
@@ -97,7 +97,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-20">
             <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         </div>
         <!-- Error page -->
@@ -119,26 +119,6 @@
         <!-- choose time -->
         <div :class="step == 5 ? 'block' : 'hidden'">
             <div class="relative mb-0 w-full bg-transparent pb-14 px-0">
-                <!-- <div class="grid grid-cols-2 gap-x-4 mb-8">
-                    <a
-                        href="history?game_id=1"
-                        class="bg-[#29261D] rounded-lg shadow-md text-center text-white py-8"
-                    >
-                        <a>
-                            <i class="fal fa-file text-3xl pb-1"></i>
-                            <p>မှတ်တမ်း</p>
-                        </a>
-                    </a>
-                    <div
-                        @click="step = 7"
-                        class="bg-[#FDC652] rounded-lg shadow-md text-center text-white py-8"
-                    >
-                        <a>
-                            <i class="fal fa-users text-3xl pb-1"></i>
-                            <p>ထီပေါက်သူ</p>
-                        </a>
-                    </div>
-                </div> -->
                 <div
                     v-if="twod_settings.length && main_game_active"
                     class="items-center justify-center px-4 bg-[#FFC529] rounded-t-3xl shadow-lg"

@@ -1,6 +1,6 @@
 <template>
     <div class="frame-container bg-black min-h-[100vh] pb-20">
-        <div class="px-4">
+        <div class="px-4 mb-20">
             <Navbar title="" :need-auth="false" :back-btn="backBtn"></Navbar>
         </div>
 

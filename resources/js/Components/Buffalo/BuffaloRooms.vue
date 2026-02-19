@@ -2,13 +2,13 @@
     <notifications position="top center" />
 
     <div
-        class="w-full sm:w-3/12 sm:min-w-[480px] mx-auto pb-24 min-h-[100vh]"
+        class="bg-black w-full sm:w-3/12 sm:min-w-[480px] mx-auto pb-24 min-h-[100vh]"
         :style="{
             backgroundImage: `url(/icons/bgfour.png)`,
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-20">
             <Navbar title="Buffalo Rooms" :back-btn="backBtn"></Navbar>
         </div>
         <LoadingProgressBar :loading="loading"></LoadingProgressBar>

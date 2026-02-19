@@ -2,7 +2,7 @@
     <div
         class="bg-black w-full sm:w-3/12 sm:min-w-[480px] mx-auto bg-img pb-24 min-h-[100vh]"
     >
-        <div class="mx-4">
+        <div class="mx-4 mb-20">
             <Navbar
                 title="History"
                 :back-btn="backBtn"

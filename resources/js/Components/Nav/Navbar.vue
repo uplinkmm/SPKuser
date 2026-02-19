@@ -1,6 +1,6 @@
 <template lang="">
     <div
-        class="flex relative justify-between py-4 px-8 lg:px-4 items-center -mx-4"
+        class="fixed top-0 left-0 right-0 z-50 w-full sm:w-3/12 sm:min-w-[480px] mx-auto flex justify-between py-4 px-8 lg:px-4 items-center"
         :class="
             isHomePage
                 ? 'bg-[#29261D] text-white'

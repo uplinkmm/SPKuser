@@ -8,7 +8,9 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <Navbar title="Games" :back-btn="backBtn"></Navbar>
+        <div class="mb-20">
+            <Navbar title="Games" :back-btn="backBtn"></Navbar>
+        </div>
 
         <div class="mb-4">
             <div class="rounded-2xl overflow-hidden bg-black/30">

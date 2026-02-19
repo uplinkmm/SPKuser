@@ -6,11 +6,11 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-20">
             <Navbar :title="$t('Notification')" :back-btn="backBtn"></Navbar>
         </div>
         <div
-            class="bg-[#FDC652] px-4 pt-3 pb-6 mt-4 rounded-2xl shadow-lg flex-grow"
+            class="bg-[#FDC652] px-4 pb-6 mt-4 rounded-2xl shadow-lg flex-grow"
         >
             <!--Tabs navigation-->
             <ul

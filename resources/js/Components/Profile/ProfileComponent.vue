@@ -6,7 +6,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="px-4">
+        <div class="px-4 mb-20">
             <Navbar :title="$t(title)" :back-btn="backBtn"></Navbar>
         </div>
 

@@ -7,7 +7,7 @@
         }"
     >
         <div class="pt-0 pb-6">
-            <div class="px-4">
+            <div class="px-4 mb-20">
                 <Navbar
                     :title="$t('Wallet')"
                     :textColor="'text-white font-semibold'"

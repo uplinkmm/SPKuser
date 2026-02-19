@@ -3,7 +3,7 @@
 
     <div class="w-full h-full bg-gray-200 bg-img">
         <main class="frame-container relative">
-            <div class="mx-4">
+            <div class="mx-4 mb-16">
                 <Navbar
                     title="ရွှေပေါက်ကံ"
                     :is-home-page="true"

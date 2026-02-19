@@ -9,7 +9,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-24">
             <Navbar title="ထီပေါက်သူ" :back-btn="backBtn"></Navbar>
         </div>
 
@@ -85,7 +85,7 @@
             backgroundRepeat: 'repeat',
         }"
     >
-        <div class="bg-black px-4">
+        <div class="bg-black px-4 mb-24">
             <Navbar title="ထိုးမည်" :back-btn="backBtn"></Navbar>
         </div>
         <!-- choose time -->
