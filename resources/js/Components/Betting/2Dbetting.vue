@@ -2195,13 +2195,15 @@ export default {
             this.quickBetting(Array.from(digitsSet));
         },
         numbersEndingWith(num) {
-            const digits = [];
+            const digitsSet = new Set();
             for (let i = 0; i < 100; i++) {
-                if (String(i).endsWith(num)) {
-                    digits.push(String(i).padStart(2, "0"));
+                const padded = String(i).padStart(2, "0");
+                if (padded.endsWith(String(num))) {
+                    digitsSet.add(padded);
+                    digitsSet.add(padded.split("").reverse().join(""));
                 }
             }
-            this.quickBetting(digits);
+            this.quickBetting(Array.from(digitsSet));
         },
         breakNumbers(sum1, sum2) {
             const digits = [];
