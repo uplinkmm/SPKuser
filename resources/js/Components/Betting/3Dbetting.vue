@@ -352,10 +352,10 @@
                             <div
                                 :class="[
                                     num.is_active == 0
-                                        ? 'bg-[#cfcfcf] text-white'
+                                        ? 'bg-[#d4d4d4] text-gray-400 cursor-not-allowed'
                                         : isBetNumber(num.number)
-                                          ? 'bg-[#5271FF] text-white'
-                                          : 'bg-[#FF9900] text-white',
+                                          ? 'bg-[#D9A63A] text-white'
+                                          : 'bg-[#e5e7eb] text-black',
                                     'rounded-lg pt-3 shadow-md aspect-square flex flex-col items-center justify-center border border-white transition duration-150',
                                 ]"
                                 @click="
