@@ -162,7 +162,10 @@
                             <div
                                 v-for="(twod_setting, index) in twod_settings"
                                 :key="index"
-                                @click="pendingGameSetting = twod_setting"
+                                @click="
+                                    pendingGameSetting = twod_setting;
+                                    confirmTimeSelection();
+                                "
                                 :class="[
                                     'flex flex-col items-center cursor-pointer transition',
                                     pendingGameSetting &&
@@ -206,16 +209,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-6">
-                        <button
-                            type="button"
-                            class="w-full bg-[#5271FF] text-white font-semibold py-3 rounded-xl hover:bg-[#5271FF]/90 active:bg-[#5271FF]/80 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
-                            :disabled="!pendingGameSetting"
-                            @click="confirmTimeSelection"
-                        >
-                            ရှေ့ဆက်ရန်
-                        </button>
                     </div>
                 </div>
 
