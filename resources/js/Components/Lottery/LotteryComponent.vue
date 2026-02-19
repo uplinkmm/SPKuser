@@ -364,8 +364,8 @@
                                         num.is_active == 0
                                             ? 'bg-[#cfcfcf] text-white'
                                             : isBetNumber(num.number)
-                                              ? 'bg-[#5271FF] text-white'
-                                              : 'bg-[#FF9900] text-white',
+                                              ? 'bg-[#D9A63A] text-white'
+                                              : 'bg-white text-black',
                                         'rounded-lg py-5 shadow-lg aspect-square flex flex-col items-center justify-center border border-white',
                                     ]"
                                     @click="
