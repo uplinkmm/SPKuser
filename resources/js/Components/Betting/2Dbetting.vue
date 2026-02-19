@@ -794,7 +794,7 @@
                             @click="natKhatPower('nat')"
                             class="border border-gray-400 rounded-lg py-3 px-1 text-md bg-white shadow-sm hover:shadow-md hover:bg-gray-50 active:bg-gray-100 transition duration-150"
                         >
-                            နက်
+                            နက္ခတ်
                         </button>
                         <button
                             @click="natKhatPower('power')"
