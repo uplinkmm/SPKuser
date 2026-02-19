@@ -2184,13 +2184,15 @@ export default {
             this.quickBetting(Array.from(digitsSet));
         },
         numbersStartingWith(num) {
-            const digits = [];
+            const digitsSet = new Set();
             const start = parseInt(num + "0"); // Get the starting number based on 'num'
             for (let i = start; i < start + 10; i++) {
                 // Loop through numbers starting from 'start' to 'start + 10'
-                digits.push(String(i).padStart(2, "0"));
+                const padded = String(i).padStart(2, "0");
+                digitsSet.add(padded);
+                digitsSet.add(padded.split("").reverse().join(""));
             }
-            this.quickBetting(digits);
+            this.quickBetting(Array.from(digitsSet));
         },
         numbersEndingWith(num) {
             const digits = [];
