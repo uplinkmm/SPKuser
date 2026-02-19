@@ -2166,13 +2166,22 @@ export default {
             this.quickBetting(digits);
         },
         patNumberBet(num) {
-            const digits = [];
+            // const digits = [];
+            // for (let i = 0; i < 100; i++) {
+            //     if (String(i).includes(num)) {
+            //         digits.push(String(i).padStart(2, "0"));
+            //     }
+            // }
+            // this.quickBetting(digits);
+            const digitsSet = new Set();
             for (let i = 0; i < 100; i++) {
-                if (String(i).includes(num)) {
-                    digits.push(String(i).padStart(2, "0"));
+                const padded = String(i).padStart(2, "0");
+                if (padded.includes(String(num))) {
+                    digitsSet.add(padded);
+                    digitsSet.add(padded.split("").reverse().join(""));
                 }
             }
-            this.quickBetting(digits);
+            this.quickBetting(Array.from(digitsSet));
         },
         numbersStartingWith(num) {
             const digits = [];
