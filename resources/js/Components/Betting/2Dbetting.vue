@@ -176,7 +176,7 @@
                             >
                                 <div
                                     :class="[
-                                        'w-28 h-28 rounded-2xl border-2',
+                                        'w-28 h-28 rounded-2xl border-2 border-[#1d4ed8] bg-[#e5e7eb]',
                                         pendingGameSetting &&
                                         pendingGameSetting.id ===
                                             twod_setting.id
