@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Betting;
 
 use stdClass;
@@ -84,7 +85,6 @@ class BettingRepository implements BettingInterface
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
-
             }
             BettingNumber::insert($bettingNumbersData);
             #store Wallet
@@ -215,7 +215,6 @@ class BettingRepository implements BettingInterface
             'total_bet_amount' => $result->total_bet_amount,
             'closing_amount' => $closingAmount,
         ];
-
     }
 
     public function getBettingNumberList($request)
@@ -254,7 +253,7 @@ class BettingRepository implements BettingInterface
         return $new_data;
     }
 
-    
+
 
     public function get2dBettingNumberList($gameSetting)
     {
@@ -532,7 +531,7 @@ class BettingRepository implements BettingInterface
     public function getLotteryBettingNumberList($gameSetting)
     {
         // dd($game);
-        $limit_number = $gameSetting->limitation_quantity;//50
+        $limit_number = $gameSetting->limitation_quantity; //50
         $d1 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) as d1'));
         $d2 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) as d2'));
         $d3 = DB::table(DB::raw('(SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) as d3'));
@@ -617,9 +616,7 @@ class BettingRepository implements BettingInterface
                     ->select('id', 'date_time', 'total_amount', 'time_status', 'customer_id', 'game_id', 'game_setting_id')
                     ->paginate(20);
             }
-
         }
-
     }
 
     public function getWinningList($request)
@@ -660,13 +657,14 @@ class BettingRepository implements BettingInterface
                     'customers.id',
                     'customers.name',
                     'bettings.date_time',
+                    'betting_numbers.number',
                     DB::raw('RIGHT(customers.phone_number, 3) as phone_number'), // Get the last 3 characters
                     'game_settings.lottery_date_time',
                     'game_settings.lottery_time',
                     'games.type',
                     DB::raw('SUM(betting_numbers.amount) as total_amount')
                 )
-                ->groupBy('customers.id', 'customers.name', 'bettings.date_time','betting_numbers.number',  'customers.phone_number', 'game_settings.lottery_date_time', 'game_settings.lottery_time', 'games.type')
+                ->groupBy('customers.id', 'customers.name', 'bettings.date_time', 'betting_numbers.number',  'customers.phone_number', 'game_settings.lottery_date_time', 'game_settings.lottery_time', 'games.type')
                 ->paginate(20);
             return $winning_list;
         }
@@ -688,7 +686,6 @@ class BettingRepository implements BettingInterface
                     ->where('betting_wins.date_time', '>=', Carbon::now()->subMonths(6)) // Last 6 months
                     ->select('betting_wins.id', 'betting_wins.number', 'game_settings.id as game_setting_id', 'betting_wins.date_time', 'games.type as type')
                     ->get();
-                    
             }
             if ($game->type == '2d') {
                 return TwoDResult::orderBy('stock_datetime', 'asc')
@@ -698,7 +695,5 @@ class BettingRepository implements BettingInterface
                     ->get();
             }
         }
-
     }
-
 }
