@@ -77,7 +77,7 @@ class GameController extends Controller
     }
     public function getPreviousWinningNumber($gameId)
     {
-        $winningNumber = BettingWin::join('game_settings', 'betting_wins.game_setting_id', 'game_settings.id')
+        $winningNumber = BettingWin::with('twist')->join('game_settings', 'betting_wins.game_setting_id', 'game_settings.id')
             ->join('games', 'game_settings.game_id', 'games.id')
             ->where('games.id', $gameId)
             ->where('betting_wins.date_time', '>=', Carbon::now()->subMonths(6)) // Filter for the last 6 months
