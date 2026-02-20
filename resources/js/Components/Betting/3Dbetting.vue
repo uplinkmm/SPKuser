@@ -189,27 +189,42 @@
                                 ပေါက်နံပါတ်များ
                             </span>
                         </div>
-                        <div
-                            class="px-4 pb-6 pt-4 max-h-[260px] overflow-y-auto small-scrollbar"
-                        >
+                        <div class="px-4 pb-6 pt-4">
                             <div
                                 v-for="(winning, index) in winning_numbers"
                                 :key="index"
                                 :style="{ backgroundColor: winning.color }"
-                                class="text-black rounded-xl cursor-pointer shadow-md px-6 py-6 flex justify-between items-center mb-4"
+                                class="text-black rounded-xl cursor-pointer shadow-md px-6 py-6 mb-4"
                             >
-                                <div class="flex items-center">
-                                    <i
-                                        class="far fa-flame mr-3"
-                                        style="font-size: 24px"
-                                    ></i>
-                                    <span class="text-lg font-semibold">
-                                        {{ winning.number }}
+                                <div class="flex justify-between w-full">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="far fa-flame mr-3"
+                                            style="font-size: 24px"
+                                        ></i>
+                                        <span class="text-lg font-semibold">
+                                            {{ winning.number }}
+                                        </span>
+                                    </div>
+                                    <span class="text-sm font-medium">
+                                        {{
+                                            formatDate2(
+                                                winning.lottery_date_time,
+                                            )
+                                        }}
                                     </span>
                                 </div>
-                                <span class="text-sm font-medium">
-                                    {{ formatDate2(winning.lottery_date_time) }}
-                                </span>
+                                <div
+                                    v-if="winning.twist && winning.twist.length"
+                                    class="mt-1 text-sm font-medium"
+                                >
+                                    တွတ်:
+                                    {{
+                                        winning.twist
+                                            .map((t) => t.number)
+                                            .join(", ")
+                                    }}
+                                </div>
                             </div>
                             <div
                                 v-if="!winning_numbers.length"
