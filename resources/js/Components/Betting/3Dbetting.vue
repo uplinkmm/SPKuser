@@ -30,6 +30,7 @@
                                     <th class="py-3">Name</th>
                                     <th class="py-3">Date</th>
                                     <th class="py-3">Phone</th>
+                                    <th class="py-3">Number</th>
                                     <th class="py-3">Amount</th>
                                 </tr>
                             </thead>
@@ -63,6 +64,9 @@
                                             >*****</span
                                         >
                                         {{ winner.phone_number }}
+                                    </td>
+                                    <td class="text-center text-sm py-3">
+                                        {{ winner.number }}
                                     </td>
                                     <td class="text-center text-sm py-3">
                                         {{
