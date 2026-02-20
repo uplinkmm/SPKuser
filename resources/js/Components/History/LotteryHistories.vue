@@ -174,7 +174,13 @@
                                     <div
                                         class="text-right text-lg font-semibold"
                                     >
-                                        {{ num.number }}
+                                        {{
+                                            num.twist
+                                                ? num.twist
+                                                      .map((t) => t.number)
+                                                      .join(", ")
+                                                : ""
+                                        }}
                                     </div>
                                 </div>
                             </div>
