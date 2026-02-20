@@ -666,7 +666,7 @@ class BettingRepository implements BettingInterface
                     'games.type',
                     DB::raw('SUM(betting_numbers.amount) as total_amount')
                 )
-                ->groupBy('customers.id', 'customers.name', 'bettings.date_time', 'customers.phone_number', 'game_settings.lottery_date_time', 'game_settings.lottery_time', 'games.type')
+                ->groupBy('customers.id', 'customers.name', 'bettings.date_time','betting_numbers.number',  'customers.phone_number', 'game_settings.lottery_date_time', 'game_settings.lottery_time', 'games.type')
                 ->paginate(20);
             return $winning_list;
         }
