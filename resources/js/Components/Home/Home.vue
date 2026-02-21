@@ -696,7 +696,6 @@ export default {
             }
         },
         async getGameTypes() {
-            return;
             let url = `/api/gameType`;
 
             let response = await getApiData({
