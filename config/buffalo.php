@@ -61,7 +61,7 @@ return [
     |
     */
     'provider_launch' => [
-        'url' => env('BUFFALO_PROVIDER_LAUNCH_URL', 'https://maxwinmyanmar.pro/api/buffalo/launch-game'),
+        'url' => env('BUFFALO_PROVIDER_LAUNCH_URL', 'https://spiderman77.site/api/buffalo/launch-game'),
         'type_id' => (int) env('BUFFALO_DEFAULT_TYPE_ID', 1),
         'provider_id' => (int) env('BUFFALO_DEFAULT_PROVIDER_ID', 23),
         'timeout' => (int) env('BUFFALO_PROVIDER_TIMEOUT', 30),
