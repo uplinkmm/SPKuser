@@ -423,7 +423,7 @@ class BuffaloGameController extends Controller
                 'balance' => $user->balanceFloat,
             ]);
 
-            //current remove 
+            //current remove for game report
             // GameReport::create([
             //         'user_id' => $user->id,
             //         'agent_id' =>  $user->agent_id,
@@ -638,7 +638,6 @@ class BuffaloGameController extends Controller
             ]);
         }
     }
-
     /**
      * Buffalo Game - Launch Game (Frontend Integration)
      * Compatible with existing frontend LaunchGame hook
