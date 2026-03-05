@@ -33,10 +33,11 @@
                                     ← Back to Rooms
                                 </button>
                             </div>
-                            <div
-                                class="w-full grid grid-cols-2 gap-x-4 gap-y-6"
-                            >
-                                <template v-if="!selectedRoom">
+                            <div class="w-full">
+                                <div
+                                    v-if="!selectedRoom"
+                                    class="grid grid-cols-2 gap-x-4 gap-y-6"
+                                >
                                     <div
                                         v-for="(room, index) in rooms"
                                         :key="index"
@@ -79,28 +80,32 @@
                                             >
                                         </div>
                                     </div>
-                                </template>
+                                </div>
                                 <template v-else>
                                     <div
-                                        v-for="item in selectedRoom.games"
-                                        :key="item.id"
-                                        class="relative"
+                                        class="w-full grid grid-cols-3 gap-x-4 gap-y-6"
                                     >
-                                        <a
-                                            @click="getGameUrl(item)"
-                                            class="cursor-pointer block"
+                                        <div
+                                            v-for="item in selectedRoom.games"
+                                            :key="item.id"
+                                            class="relative"
                                         >
-                                            <img
-                                                class="w-full aspect-square rounded-2xl object-cover"
-                                                :src="item.image"
-                                                alt=""
-                                            />
-                                            <p
-                                                class="text-black font-semibold text-center pt-2 text-lg leading-tight truncate"
+                                            <a
+                                                @click="getGameUrl(item)"
+                                                class="cursor-pointer block"
                                             >
-                                                {{ item.name }}
-                                            </p>
-                                        </a>
+                                                <img
+                                                    class="w-full aspect-square rounded-2xl object-cover"
+                                                    src="../../../../public/img/buffalo/50-200x200.png"
+                                                    alt=""
+                                                />
+                                                <p
+                                                    class="text-white text-left pt-2 text-md leading-tight truncate"
+                                                >
+                                                    {{ item.name }}
+                                                </p>
+                                            </a>
+                                        </div>
                                     </div>
                                 </template>
                             </div>
@@ -125,7 +130,6 @@ import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 import {
     ROOM_CONFIG,
     BUFFALO_GAME_ID,
-    BUFFALO_PROVIDER_ID,
     BUFFALO_TYPE_ID,
 } from "../../utilities/common";
 import LoadingProgressBar from "../Common/LoadingProgressBar.vue";
@@ -179,12 +183,9 @@ export default {
             this.loading = true;
             let url = `/api/buffalo/launch-game`;
             let formData = new FormData();
-            // formData.append("type_id", API_CONFIG.BUFFALO_TYPE_ID);
-            // formData.append("provider_id", API_CONFIG.BUFFALO_PROVIDER_ID);
-            // formData.append("game_id", API_CONFIG.BUFFALO_GAME_ID);
             formData.append("room_id", this.selectedRoom.roomId);
+            formData.append("provider_id", game.id);
             formData.append("type_id", BUFFALO_TYPE_ID);
-            formData.append("provider_id", BUFFALO_PROVIDER_ID);
             formData.append("game_id", game.gameId);
 
             let response = await postApiDataSlot({
@@ -192,7 +193,7 @@ export default {
                 form_data: {
                     room_id: this.selectedRoom.roomId,
                     type_id: BUFFALO_TYPE_ID,
-                    provider_id: BUFFALO_PROVIDER_ID,
+                    provider_id: game.id,
                     game_id: game.gameId,
                 },
                 token: this.getToken,
@@ -218,7 +219,6 @@ export default {
         },
     },
     mounted() {
-        console.log("BUFFALO_PROVIDER_ID", BUFFALO_PROVIDER_ID);
         this.current_balance = this.userBalance.game_money_balance;
         initTWE({ Modal, Ripple, Dropdown });
         //    this.loading = true;
