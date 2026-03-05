@@ -221,30 +221,280 @@ export default {
         console.log("BUFFALO_PROVIDER_ID", BUFFALO_PROVIDER_ID);
         this.current_balance = this.userBalance.game_money_balance;
         initTWE({ Modal, Ripple, Dropdown });
-
-        this.loading = true;
-        getApiData({
-            url: "/api/buffalo/providers/grouped-by-room",
-            token: this.getToken,
-        })
-            .then((response) => {
-                this.loading = false;
-                if (response.status == 200 && response.data.code == 1) {
-                    this.roomsData = response.data.data.rooms;
-                } else {
-                    this.$notify({
-                        text: response.data?.msg || "Failed to load rooms",
-                        type: "error",
-                    });
-                }
-            })
-            .catch((error) => {
-                this.loading = false;
-                this.$notify({
-                    text: "Network error",
-                    type: "error",
-                });
-            });
+        //    this.loading = true;
+        //         getApiData({
+        //             url: "/api/buffalo/providers/grouped-by-room",
+        //             token: this.getToken,
+        //         })
+        //             .then((response) => {
+        //                 this.loading = false;
+        //                 if (response.status == 200 && response.data.code == 1) {
+        //                     this.roomsData = response.data.data.rooms;
+        //                 } else {
+        //                     this.$notify({
+        //                         text: response.data?.msg || "Failed to load rooms",
+        //                         type: "error",
+        //                     });
+        //                 }
+        //             })
+        //             .catch((error) => {
+        //                 this.loading = false;
+        //                 this.$notify({
+        //                     text: "Network error",
+        //                     type: "error",
+        //                 });
+        //             });
+        // For testing, set static data
+        this.roomsData = [
+            {
+                roomId: 1,
+                room_info: {
+                    min_bet: 50,
+                    name: "African Buffalo (50)",
+                    level: "Low",
+                },
+                games: [
+                    {
+                        id: 1,
+                        name: "African Buffalo (50)",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/50",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 23,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 5,
+                        name: "African Buffalo Scatter (50)",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/50",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 42,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: true,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 15,
+                        name: "Grand Dragons",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/gd",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 119,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 7,
+                        name: "Fortune Cat",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/FC",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 122,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 8,
+                        name: "Autumn Moon",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/AM",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 123,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 9,
+                        name: "Golden Century",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/GC",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 124,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 10,
+                        name: "Autumn Moon 88",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/am",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 125,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 11,
+                        name: "Golden Century 88",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/gc&",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 126,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 12,
+                        name: "LuxuryLine Buffalo",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/llb",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 128,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 13,
+                        name: "Peace LongLife",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/pll",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 134,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 14,
+                        name: "Happy Prosperous",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/hp",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 158,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 16,
+                        name: "African Buffalo Megaways",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/mg",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 204,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                ],
+            },
+            {
+                roomId: 2,
+                room_info: {
+                    min_bet: 500,
+                    name: "African Buffalo (500)",
+                    level: "Medium",
+                },
+                games: [
+                    {
+                        id: 2,
+                        name: "African Buffalo (500)",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/50",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 23,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                    {
+                        id: 6,
+                        name: "African Buffalo Scatter (500)",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/50",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 42,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: true,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                ],
+            },
+            {
+                roomId: 3,
+                room_info: {
+                    min_bet: 5000,
+                    name: "African Buffalo (5000)",
+                    level: "High",
+                },
+                games: [
+                    {
+                        id: 3,
+                        name: "African Buffalo (5000)",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/50",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 23,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                ],
+            },
+            {
+                roomId: 4,
+                room_info: {
+                    min_bet: 10000,
+                    name: "African Buffalo (10000)",
+                    level: "VIP",
+                },
+                games: [
+                    {
+                        id: 4,
+                        name: "African Buffalo (10000)",
+                        image: "https://buffalo-555.s3.ap-southeast-1.amazonaws.com/50",
+                        type: "slot",
+                        provider: "African Buffalo",
+                        gameId: 23,
+                        jackpot: true,
+                        rtp: 95,
+                        BuyFreeSpin: false,
+                        transfer_wallet: true,
+                        seamless: true,
+                    },
+                ],
+            },
+        ];
     },
 };
 </script>
