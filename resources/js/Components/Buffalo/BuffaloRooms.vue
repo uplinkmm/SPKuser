@@ -25,14 +25,6 @@
                 >
                     <div class="mb-8">
                         <div class="w-full">
-                            <div v-if="selectedRoom" class="mb-4">
-                                <button
-                                    @click="selectedRoom = null"
-                                    class="text-black font-semibold text-lg"
-                                >
-                                    ← Back to Rooms
-                                </button>
-                            </div>
                             <div class="w-full">
                                 <div
                                     v-if="!selectedRoom"
@@ -160,7 +152,11 @@ export default {
 
     methods: {
         backBtn() {
-            window.history.back();
+            if (this.selectedRoom) {
+                this.selectedRoom = null;
+            } else {
+                window.history.back();
+            }
         },
         delay(ms) {
             return new Promise((resolve) => setTimeout(resolve, ms));
