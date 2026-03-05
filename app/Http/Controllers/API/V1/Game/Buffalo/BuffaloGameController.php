@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\Game\Buffalo;
 use App\Models\Customer;
 use App\Models\GameReport;
 use App\Models\FugoProvider;
-use App\Models\FugoGameList;
 use Illuminate\Http\Request;
 use App\Models\LogBuffaloBet;
 use App\Enums\TransactionName;
