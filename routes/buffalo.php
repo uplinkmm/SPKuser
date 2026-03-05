@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Game\Buffalo\BuffaloGameController;
+use App\Http\Controllers\API\V1\Game\Buffalo\BuffaloGameController;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\API\V1\Game\BuffaloGameController;
 // Route::prefix('buffalo')->group(function () {

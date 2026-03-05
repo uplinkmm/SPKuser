@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Game\Buffalo;
+namespace App\Http\Controllers\API\V1\Game\Buffalo;
 
 use App\Models\Customer;
 use App\Models\GameReport;
