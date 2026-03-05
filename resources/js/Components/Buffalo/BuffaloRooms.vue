@@ -48,7 +48,8 @@
                                             <img
                                                 class="w-full aspect-square rounded-2xl object-cover"
                                                 :src="
-                                                    '/img/buffalo/' + room.image
+                                                    '/img/buffalo/' +
+                                                    getRoomImage(room.room_id)
                                                 "
                                                 alt=""
                                             />
@@ -88,7 +89,12 @@
                                             >
                                                 <img
                                                     class="w-full aspect-square rounded-2xl object-cover"
-                                                    src="../../../../public/img/buffalo/50-200x200.png"
+                                                    :src="
+                                                        '../../../img/buffalo/' +
+                                                        getRoomImage(
+                                                            selectedRoom.roomId,
+                                                        )
+                                                    "
                                                     alt=""
                                                 />
                                                 <p
@@ -165,6 +171,15 @@ export default {
             this.selectedRoom = this.roomsData.find(
                 (r) => r.roomId == room.room_id,
             );
+        },
+        getRoomImage(roomId) {
+            const map = {
+                1: "50-200x200.png",
+                2: "500-200x200.png",
+                3: "5000-200x200.png",
+                4: "10000-200x200.png",
+            };
+            return map[roomId] || "50-200x200.png";
         },
         checkAvailableRooms(room_id) {
             //return true false
