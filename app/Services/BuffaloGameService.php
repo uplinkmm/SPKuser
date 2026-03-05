@@ -20,10 +20,10 @@ class BuffaloGameService
     // private const SITE_PREFIX = 'bm8';
     // private const SITE_URL = 'https://ag.burmar888.online'; // Used for token generation - must match provider config
     // private const SITE_LOBBY_URL = 'https://m.burmar888.site'; // Used for lobby redirects
-    private const SITE_NAME = 'ShweShanKan';
-    private const SITE_PREFIX = 'shw';
-    private const SITE_URL = 'https://shweshankan.com';
-    private const SITE_LOBBY_URL = 'https://shweshankan.com';
+    private const SITE_NAME = 'ShwePaukKan';
+    private const SITE_PREFIX = 'spk';
+    private const SITE_URL = 'https://shwepaukkan.com';
+    private const SITE_LOBBY_URL = 'https://shwepaukkan.com';
 
     /**
      * Resolve site configuration for the provided prefix.
