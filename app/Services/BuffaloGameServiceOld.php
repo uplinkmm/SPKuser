@@ -3,12 +3,10 @@
 namespace App\Services;
 
 use App\Models\Customer;
-use App\Models\FugoGameList;
-use App\Models\FugoProvider;
 use App\Models\User;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Config;
 
 class BuffaloGameService
 {
@@ -18,15 +16,19 @@ class BuffaloGameService
      * Kept as constants for backward compatibility
      * IMPORTANT: site_url is used for token generation, lobby_url is for redirects
      */
+    // private const SITE_NAME = 'Burma888';
+    // private const SITE_PREFIX = 'bm8';
+    // private const SITE_URL = 'https://ag.burmar888.online'; // Used for token generation - must match provider config
+    // private const SITE_LOBBY_URL = 'https://m.burmar888.site'; // Used for lobby redirects
     private const SITE_NAME = 'ShwePaukKan';
     private const SITE_PREFIX = 'spk';
     private const SITE_URL = 'https://shwepaukkan.com';
     private const SITE_LOBBY_URL = 'https://shwepaukkan.com';
 
-
     /**
      * Resolve site configuration for the provided prefix.
-     * IMPORTANT: For 'sym' prefix, site_url MUST be 'https://ag.shanyoma789.com/' for token generation
+     * https://ag.burmar888.online
+     * IMPORTANT: For 'bm8' prefix, site_url MUST be 'https://ag.burmar888.online' for token generation
      */
     private static function getResolvedSiteConfig(?string $sitePrefix = null): array
     {
@@ -39,7 +41,7 @@ class BuffaloGameService
                 Config::get('app.url', self::SITE_LOBBY_URL)
             ) ?: self::SITE_LOBBY_URL,
         ];
-
+ 
         $targetPrefix = $sitePrefix ?? Config::get('buffalo.default_site', $default['prefix']);
         $sites = Config::get('buffalo.sites', []);
 
@@ -53,14 +55,14 @@ class BuffaloGameService
                         'lobby_url' => $config['lobby_url'] ?? $default['lobby_url'],
                     ], $config);
                     
-                    // CRITICAL FIX: Force correct site_url for 'sym' prefix (must match provider config)
-                    if (strtolower($targetPrefix) === 'sym') {
+                    // CRITICAL FIX: Force correct site_url for 'bm8' prefix (must match provider config)
+                    if (strtolower($targetPrefix) === 'bm8') {
                         $originalSiteUrl = $resolvedConfig['site_url'] ?? 'not set';
-                        $resolvedConfig['site_url'] = 'https://ag.shanyoma789.com/';
-                        if ($originalSiteUrl !== 'https://ag.shanyoma789.com/') {
-                            Log::warning('Buffalo Game Service - Overriding site_url for sym prefix', [
+                        $resolvedConfig['site_url'] = 'https://ag.burmar888.online';
+                        if ($originalSiteUrl !== 'https://ag.burmar888.online') {
+                            Log::warning('Buffalo Game Service - Overriding site_url for bm8 prefix', [
                                 'original_site_url' => $originalSiteUrl,
-                                'corrected_site_url' => 'https://ag.shanyoma789.com/',
+                                'corrected_site_url' => 'https://ag.burmar888.online',
                                 'reason' => 'Token generation must match provider config'
                             ]);
                         }
@@ -75,14 +77,14 @@ class BuffaloGameService
             $default['prefix'] = $sitePrefix;
         }
         
-        // CRITICAL FIX: Force correct site_url for 'sym' prefix (must match provider config)
-        if (strtolower($default['prefix']) === 'sym') {
+        // CRITICAL FIX: Force correct site_url for 'bm8' prefix (must match provider config)
+        if (strtolower($default['prefix']) === 'bm8') {
             $originalSiteUrl = $default['site_url'] ?? 'not set';
-            $default['site_url'] = 'https://ag.shanyoma789.com/';
-            if ($originalSiteUrl !== 'https://ag.shanyoma789.com/') {
-                Log::warning('Buffalo Game Service - Overriding site_url for sym prefix (default)', [
+            $default['site_url'] = 'https://ag.burmar888.online';
+            if ($originalSiteUrl !== 'https://ag.burmar888.online') {
+                Log::warning('Buffalo Game Service - Overriding site_url for bm8 prefix (default)', [
                     'original_site_url' => $originalSiteUrl,
-                    'corrected_site_url' => 'https://ag.shanyoma789.com/',
+                    'corrected_site_url' => 'https://ag.burmar888.online',
                     'reason' => 'Token generation must match provider config'
                 ]);
             }
@@ -103,7 +105,7 @@ class BuffaloGameService
         $encoded = rtrim(strtr(base64_encode($userName), '+/', '-_'), '=');
         
         // Create a 32-character UID: prefix + encoded username + hash padding
-        $prefix = $siteConfig['prefix']; // e.g. "ShanYoMa"
+        $prefix = $siteConfig['prefix']; // e.g. "ttt"
         $remaining = 32 - strlen($prefix);
         
         // If encoded username is longer than available space, use hash instead
@@ -158,10 +160,10 @@ class BuffaloGameService
             }
 
             // Find user
-            $user = User::where('user_name', $userName)->first();
+            $user = Customer::where('user_name', $userName)->first();
             
             if (!$user) {
-                Log::warning('ShanYoMa Buffalo - User not found for token verification', [
+                Log::warning('ShweShanKan Buffalo - User not found for token verification', [
                     'userName' => $userName,
                     'uid' => $uid
                 ]);
@@ -187,7 +189,7 @@ class BuffaloGameService
             $uidMatches = ($uid === $expectedUid || strtolower($uid) === strtolower($expectedUid));
 
             if ($isValid) {
-                Log::info('TriBet Buffalo - Token verified successfully', [
+                Log::info('Burma88 Buffalo - Token verified successfully', [
                     'user' => $userName,
                     'uid_match' => $uidMatches,
                     'uid_received' => $uid,
@@ -195,7 +197,7 @@ class BuffaloGameService
                     'site_prefix' => $sitePrefix,
                 ]);
             } else {
-                Log::warning('ShanYoMa Buffalo - Token verification failed', [
+                Log::warning('ShweShanKan Buffalo - Token verification failed', [
                     'user' => $userName,
                     'site' => $siteConfig['name'] ?? 'Unknown',
                     'prefix' => $sitePrefix ?? 'default',
@@ -212,7 +214,7 @@ class BuffaloGameService
             return $isValid;
 
         } catch (\Exception $e) {
-            Log::error('ShanYoMa Buffalo - Token verification error', [
+            Log::error('ShweShanKan Buffalo - Token verification error', [
                 'error' => $e->getMessage(),
                 'uid' => $uid,
                 'trace' => $e->getTraceAsString()
@@ -265,7 +267,7 @@ class BuffaloGameService
         
         // Validate UID starts with prefix
         if (substr($uid, 0, $prefixLength) !== $prefix) {
-            Log::warning('ShanYoMa Buffalo - UID does not start with expected prefix', [
+            Log::warning('ShweShanKan Buffalo - UID does not start with expected prefix', [
                 'uid' => $uid,
                 'expected_prefix' => $prefix,
                 'actual_prefix' => substr($uid, 0, $prefixLength)
@@ -297,7 +299,7 @@ class BuffaloGameService
                         // Check if this username exists (use cleaned string)
                         $user = Customer::where('user_name', $cleaned)->first();
                         if ($user) {
-                            Log::info('ShanYoMa Buffalo - Successfully extracted username from UID', [
+                            Log::info('ShweShanKan Buffalo - Successfully extracted username from UID', [
                                 'uid' => $uid,
                                 'extracted_username' => $cleaned
                             ]);
@@ -328,7 +330,7 @@ class BuffaloGameService
         // This is more reliable but slower - use caching if needed
         // Also handle case-insensitive matching (game server might lowercase UID)
         try {
-            Log::info('ShanYoMa Buffalo - Using fallback UID search', [
+            Log::info('ShweShanKan Buffalo - Using fallback UID search', [
                 'uid' => $uid,
                 'uid_length' => strlen($uid)
             ]);
@@ -345,7 +347,7 @@ class BuffaloGameService
                     $generatedUid = self::generateUid($user->user_name);
                     // Case-sensitive match first (most common)
                     if ($generatedUid === $uid) {
-                        Log::info('ShanYoMa Buffalo - Found username via fallback search (exact match)', [
+                        Log::info('ShweShanKan Buffalo - Found username via fallback search (exact match)', [
                             'uid' => $uid,
                             'username' => $user->user_name
                         ]);
@@ -364,13 +366,13 @@ class BuffaloGameService
                 }
             }
         } catch (\Exception $e) {
-            Log::error('ShanYoMa Buffalo - Error in fallback UID search', [
+            Log::error('ShweShanKan Buffalo - Error in fallback UID search', [
                 'uid' => $uid,
                 'error' => $e->getMessage()
             ]);
         }
 
-        Log::warning('ShanYoMa Buffalo - Could not extract username from UID', [
+        Log::warning('ShweShanKan Buffalo - Could not extract username from UID', [
             'uid' => $uid,
             'uid_length' => strlen($uid),
             'prefix' => $prefix
@@ -624,56 +626,8 @@ class BuffaloGameService
 
     
 
-    /**
-     * Get room configuration from database or fallback to static config
-     */
     public static function getRoomConfig(): array
     {
-        // Try to get room config from FugoProvider database
-        try {
-            $providers = FugoProvider::where('provider', 'African Buffalo')
-                ->select('roomId', 'gameId', 'name')
-                ->distinct()
-                ->orderBy('roomId')
-                ->get();
-
-            if ($providers->isNotEmpty()) {
-                $roomConfig = [];
-                $minBetMap = [
-                    1 => 50,
-                    2 => 500,
-                    3 => 5000,
-                    4 => 10000,
-                ];
-                $levelMap = [
-                    1 => 'Low',
-                    2 => 'Medium',
-                    3 => 'High',
-                    4 => 'VIP',
-                ];
-
-                foreach ($providers as $provider) {
-                    $roomId = $provider->roomId;
-                    if (!isset($roomConfig[$roomId])) {
-                        $roomConfig[$roomId] = [
-                            'min_bet' => $minBetMap[$roomId] ?? 50,
-                            'name' => $provider->name ?? ($minBetMap[$roomId] ?? 50) . ' အခန်း',
-                            'level' => $levelMap[$roomId] ?? 'Low',
-                        ];
-                    }
-                }
-
-                if (!empty($roomConfig)) {
-                    return $roomConfig;
-                }
-            }
-        } catch (\Exception $e) {
-            Log::warning('Buffalo Game Service - Failed to get room config from database, using fallback', [
-                'error' => $e->getMessage()
-            ]);
-        }
-
-        // Fallback to static configuration
         return [
             1 => ['min_bet' => 50, 'name' => '50 အခန်း', 'level' => 'Low'],
             2 => ['min_bet' => 500, 'name' => '500 အခန်း', 'level' => 'Medium'],
@@ -717,163 +671,5 @@ class BuffaloGameService
         ];
     }
 
-    /**
-     * Get game provider by gameId and roomId
-     */
-    public static function getGameProvider(?int $gameId, ?int $roomId): ?FugoProvider
-    {
-        if (!$gameId || !$roomId) {
-            return null;
-        }
-
-        try {
-            return FugoProvider::where('gameId', $gameId)
-                ->where('roomId', $roomId)
-                ->where('provider', 'African Buffalo')
-                ->first();
-        } catch (\Exception $e) {
-            Log::error('Buffalo Game Service - Failed to get game provider', [
-                'game_id' => $gameId,
-                'room_id' => $roomId,
-                'error' => $e->getMessage()
-            ]);
-            return null;
-        }
-    }
-
-    /**
-     * Validate if gameId and roomId combination exists
-     */
-    public static function validateGameRoom(?int $gameId, ?int $roomId): bool
-    {
-        if (!$gameId || !$roomId) {
-            return false;
-        }
-
-        try {
-            return FugoProvider::where('gameId', $gameId)
-                ->where('roomId', $roomId)
-                ->where('provider', 'African Buffalo')
-                ->exists();
-        } catch (\Exception $e) {
-            Log::error('Buffalo Game Service - Failed to validate game room', [
-                'game_id' => $gameId,
-                'room_id' => $roomId,
-                'error' => $e->getMessage()
-            ]);
-            return false;
-        }
-    }
-
-    /**
-     * Get all available games from FugoGameList
-     */
-    public static function getAvailableGames(?string $provider = 'African Buffalo'): array
-    {
-        try {
-            $games = FugoGameList::where('provider', $provider ?? 'African Buffalo')
-                ->with('fugoProvider')
-                ->orderBy('gameId')
-                ->orderBy('roomId')
-                ->get();
-
-            return $games->map(function ($game) {
-                return [
-                    'id' => $game->id,
-                    'name' => $game->name,
-                    'image' => $game->image,
-                    'type' => $game->type,
-                    'provider' => $game->provider,
-                    'gameId' => $game->gameId,
-                    'roomId' => $game->roomId,
-                    'provider_info' => $game->fugoProvider ? [
-                        'jackpot' => $game->fugoProvider->jackpot,
-                        'rtp' => $game->fugoProvider->rtp,
-                        'BuyFreeSpin' => $game->fugoProvider->BuyFreeSpin,
-                        'transfer_wallet' => $game->fugoProvider->transfer_wallet,
-                        'seamless' => $game->fugoProvider->seamless,
-                    ] : null,
-                ];
-            })->toArray();
-        } catch (\Exception $e) {
-            Log::error('Buffalo Game Service - Failed to get available games', [
-                'provider' => $provider,
-                'error' => $e->getMessage()
-            ]);
-            return [];
-        }
-    }
-
-    /**
-     * Get games grouped by gameId
-     */
-    public static function getGamesByGameId(?int $gameId = null): array
-    {
-        try {
-            $query = FugoGameList::where('provider', 'African Buffalo')
-                ->with('fugoProvider');
-
-            if ($gameId) {
-                $query->where('gameId', $gameId);
-            }
-
-            $games = $query->orderBy('gameId')
-                ->orderBy('roomId')
-                ->get();
-
-            return $games->map(function ($game) {
-                return [
-                    'id' => $game->id,
-                    'name' => $game->name,
-                    'image' => $game->image,
-                    'type' => $game->type,
-                    'provider' => $game->provider,
-                    'gameId' => $game->gameId,
-                    'roomId' => $game->roomId,
-                ];
-            })->toArray();
-        } catch (\Exception $e) {
-            Log::error('Buffalo Game Service - Failed to get games by gameId', [
-                'game_id' => $gameId,
-                'error' => $e->getMessage()
-            ]);
-            return [];
-        }
-    }
-
-    /**
-     * Get room configuration with game information from database
-     */
-    public static function getRoomConfigWithGames(): array
-    {
-        $roomConfig = self::getRoomConfig();
-        
-        try {
-            $providers = FugoProvider::where('provider', 'African Buffalo')
-                ->select('roomId', 'gameId', 'name', 'image')
-                ->orderBy('roomId')
-                ->orderBy('gameId')
-                ->get();
-
-            foreach ($providers as $provider) {
-                $roomId = $provider->roomId;
-                if (isset($roomConfig[$roomId])) {
-                    if (!isset($roomConfig[$roomId]['games'])) {
-                        $roomConfig[$roomId]['games'] = [];
-                    }
-                    $roomConfig[$roomId]['games'][] = [
-                        'gameId' => $provider->gameId,
-                        'name' => $provider->name,
-                        'image' => $provider->image,
-                    ];
-                }
-            }
-        } catch (\Exception $e) {
-            Log::warning('Buffalo Game Service - Failed to get room config with games', [
-                'error' => $e->getMessage()
-            ]);
-        }
-
-        return $roomConfig;
-    }
+    
 }
