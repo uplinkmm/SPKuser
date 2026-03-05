@@ -1,5 +1,5 @@
 <template lang="">
-    <div v-if="loading" class="w-full -mt-4">
+    <div v-if="loading" class="w-full -mt-2">
         <div
             class="relative w-full h-1 bg-slate-700/30 overflow-hidden rounded"
         >
