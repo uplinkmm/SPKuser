@@ -158,7 +158,7 @@ class BuffaloGameService
             }
 
             // Find user
-            $user = User::where('user_name', $userName)->first();
+            $user = Customer::where('user_name', $userName)->first();
             
             if (!$user) {
                 Log::warning('ShanYoMa Buffalo - User not found for token verification', [
