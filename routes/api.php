@@ -1,23 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AdsController;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\GameController;
-use App\Http\Controllers\API\SlotController;
-use App\Http\Controllers\API\TestController;
-use App\Http\Controllers\API\CommonController;
 use App\Http\Controllers\API\BettingController;
-use App\Http\Controllers\API\LotteryController;
-use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\API\FeedbackController;
-use App\Http\Controllers\API\NotificationController;
-use App\Http\Controllers\API\WalletTransferController;
-use App\Http\Controllers\API\TermAndConditionController;
 use App\Http\Controllers\API\BettingTransactionController;
-use App\Http\Controllers\API\TopupTransactionAPIController;
-use App\Http\Controllers\API\CustomerMoneyBalanceController;
 use App\Http\Controllers\API\CashWithdrawlTransactionAPIController;
+use App\Http\Controllers\API\CommonController;
+use App\Http\Controllers\API\ContactUsController;
+use App\Http\Controllers\API\CustomerMoneyBalanceController;
+use App\Http\Controllers\API\DepositWithdrawController;
+use App\Http\Controllers\API\FeedbackController;
+use App\Http\Controllers\API\GameController;
+use App\Http\Controllers\API\LotteryController;
+use App\Http\Controllers\API\NotificationController;
+use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\SlotController;
+use App\Http\Controllers\API\TermAndConditionController;
+use App\Http\Controllers\API\TestController;
+use App\Http\Controllers\API\TopupTransactionAPIController;
+use App\Http\Controllers\API\WalletTransferController;
+use App\Models\ContactUs;
+use App\Models\DepositWithdrawTutorial;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +48,8 @@ Route::controller(AdsController::class)->group(function () {
     Route::get('get_ads', 'index');
     Route::get('get_marquee_ads', 'getMarqueeAds');
 });
+Route::get('contact_us',[ContactUsController::class,'index']);
+Route::get('deposit_withdraw_tutorials', [DepositWithdrawTutorialController::class, 'index']);
 Route::controller(TermAndConditionController::class)->group(function () {
     Route::get('get_term_and_condition', 'index');
 });

@@ -28,11 +28,13 @@ class NotificationRepository implements NotificationInterface
             NotificationPerson::where('personable_type', 'customer')
                 ->where('personable_id', $userId)
                 ->where('is_read_count', 0)
+                ->where('deleted_at', null)
                 ->update(['is_read_count' => 1]);
         }
         $notificationQuery = NotificationPerson::orderBy('notification_people.id', 'desc')
             ->where('personable_type', 'customer')
             ->where('personable_id', $userId)
+            ->where('notification_people.deleted_at', null)
             ->join('notifications', 'notification_people.notification_id', 'notifications.id')
             ->select('notification_people.id', 'title', 'preview', 'date_time', 'is_read', 'is_read_count', 'notifications.notificationable_type');
         // Adding status for topup_transaction and cash_withdrawl_transaction
