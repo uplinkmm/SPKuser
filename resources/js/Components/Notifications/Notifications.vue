@@ -14,6 +14,7 @@
         >
             <!--Tabs navigation-->
             <ul
+                v-if="!showPromotionDetail && !promotionDetailLoading"
                 class="flex list-none flex-row flex-wrap border-b-0 px-2 pt-2 mb-2 bg-transparent justify-center"
                 role="tablist"
                 data-twe-nav-ref
@@ -31,6 +32,8 @@
                         @click="
                             type = 'betting_win';
                             page = 1;
+                            selectedPromotion = null;
+                            showPromotionDetail = false;
                             getNotis();
                         "
                         >Winning</a
@@ -48,6 +51,8 @@
                         @click="
                             type = 'topup_transaction';
                             page = 1;
+                            selectedPromotion = null;
+                            showPromotionDetail = false;
                             getNotis();
                         "
                         >Payment</a
@@ -65,7 +70,8 @@
                         @click="
                             type = 'ads';
                             page = 1;
-
+                            selectedPromotion = null;
+                            showPromotionDetail = false;
                             getNotis();
                         "
                         >Promotion</a
@@ -75,7 +81,7 @@
 
             <div class="mb-6">
                 <div
-                    class="rounded-2xl border border-black/40 bg-[#C89A1E] px-3 pt-3 pb-4"
+                    class="rounded-2xl border border-black/40 bg-[#C89A1E] px-3 pt-3 pb-4 mt-3"
                 >
                     <div
                         class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
@@ -206,40 +212,77 @@
                     >
                         <div class="mx-0 pb-8">
                             <div
-                                v-for="(promo, index) in promotion"
-                                :key="index"
-                                class="mb-4 bg-white relative rounded-xl border border-gray-300 flex items-start px-4 py-4 shadow-sm"
-                            >
-                                <!-- Image in front -->
-                                <img
-                                    :src="`${img_prefix}${promo.photo}`"
-                                    class="w-12 h-12 rounded-full mr-4"
-                                />
-
-                                <!-- Promotion Content -->
-                                <div class="flex-1">
-                                    <div
-                                        class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
-                                    ></div>
-                                    <p class="text-base text-black mb-3">
-                                        {{ promo.title }}
-                                    </p>
-                                    <p class="text-sm text-black mb-3">
-                                        {{ promo.preview }}
-                                    </p>
-                                    <p class="text-xs font-inter">
-                                        {{ dateFormat(promo.date_time) }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div
-                                v-if="!promotion.length && !showSpinner"
+                                v-if="promotionDetailLoading"
                                 class="text-center py-8 text-black font-semibold"
                             >
-                                No promotions found
+                                Loading detail...
                             </div>
+                            <div
+                                v-else-if="showPromotionDetail"
+                                class="bg-white rounded-xl border border-gray-300 px-4 py-4 shadow-sm"
+                            >
+                                <img
+                                    :src="`${img_prefix}${selectedPromotion.photo}`"
+                                    class="w-full h-48 rounded-xl mb-4 object-cover"
+                                />
+                                <p
+                                    class="text-lg text-black font-semibold mb-3"
+                                >
+                                    {{ selectedPromotion.title }}
+                                </p>
+                                <p
+                                    class="text-sm text-black whitespace-pre-line mb-3"
+                                >
+                                    {{
+                                        selectedPromotion.description ||
+                                        selectedPromotion.preview ||
+                                        "-"
+                                    }}
+                                </p>
+                                <p class="text-xs font-inter">
+                                    {{
+                                        dateFormat(selectedPromotion.date_time)
+                                    }}
+                                </p>
+                            </div>
+                            <template v-else>
+                                <div
+                                    v-for="(promo, index) in promotion"
+                                    :key="index"
+                                    class="mb-4 bg-white relative rounded-xl border border-gray-300 flex items-start px-4 py-4 shadow-sm cursor-pointer"
+                                    @click="openPromotionDetail(promo)"
+                                >
+                                    <!-- Image in front -->
+                                    <img
+                                        :src="`${img_prefix}${promo.photo}`"
+                                        class="w-12 h-12 rounded-full mr-4"
+                                    />
+
+                                    <!-- Promotion Content -->
+                                    <div class="flex-1">
+                                        <div
+                                            class="w-2 h-2 bg-red-600 rounded-full absolute top-6 right-4"
+                                        ></div>
+                                        <p class="text-base text-black mb-3">
+                                            {{ promo.title }}
+                                        </p>
+                                        <p class="text-sm text-black mb-3">
+                                            {{ promo.preview }}
+                                        </p>
+                                        <p class="text-xs font-inter">
+                                            {{ dateFormat(promo.date_time) }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    v-if="!promotion.length && !showSpinner"
+                                    class="text-center py-8 text-black font-semibold"
+                                >
+                                    No promotions found
+                                </div>
+                            </template>
                         </div>
-                        <div v-if="showSpinner">
+                        <div v-if="showSpinner && !selectedPromotion">
                             Loading...
                             <!-- <circle2 background="#000" color="#fff"></circle2> -->
                         </div>
@@ -279,6 +322,9 @@ export default {
             page: 1,
             last_page: 0,
             img_prefix: "",
+            selectedPromotion: null,
+            promotionDetailLoading: false,
+            showPromotionDetail: false,
         };
     },
     components: {
@@ -292,11 +338,18 @@ export default {
     methods: {
         ...mapMutations(["setNotiCount"]),
         backBtn() {
-            // window.location.href = "/home";
+            if (this.selectedPromotion) {
+                this.closePromotionDetail();
+                return;
+            }
             window.history.back();
         },
         async getNotis() {
             this.showSpinner = true;
+            if (this.type !== "ads") {
+                this.selectedPromotion = null;
+                this.showPromotionDetail = false;
+            }
 
             let response = await getApiData({
                 url: `api/notification_list?type=${this.type}&page=${this.page}&is_count=1`,
@@ -347,6 +400,45 @@ export default {
         dateFormat(date_time) {
             return moment(date_time).format("YYYY-MM-DD hh:mm A");
         },
+        async openPromotionDetail(promo) {
+            const adId = promo.notificationable_id || promo.id;
+            this.showPromotionDetail = true;
+            if (!adId) {
+                this.showPromotionDetail = false;
+                this.$notify({
+                    text: "Invalid promotion detail.",
+                    type: "error",
+                });
+                return;
+            }
+            this.promotionDetailLoading = true;
+            let response = await getApiData({
+                url: `/api/ads/${adId}`,
+                token: this.getToken,
+            });
+            this.promotionDetailLoading = false;
+            if (!response.success || !response.data) {
+                this.showPromotionDetail = false;
+                this.$notify({
+                    text: response.message || "Promotion detail not available.",
+                    type: "error",
+                });
+                return;
+            }
+            this.selectedPromotion = {
+                ...promo,
+                ...response.data,
+                title: response.data.title || promo.title,
+                preview: response.data.preview || promo.preview,
+                description: response.data.description || promo.description,
+                photo: response.data.photo || promo.photo,
+                date_time: response.data.date_time || promo.date_time,
+            };
+        },
+        closePromotionDetail() {
+            this.selectedPromotion = null;
+            this.showPromotionDetail = false;
+        },
         handleScroll() {
             const bottomOfWindow =
                 document.documentElement.scrollTop + window.innerHeight;
@@ -358,6 +450,7 @@ export default {
                 endlessScroll &&
                 this.page >= 1 &&
                 this.page < this.last_page &&
+                !this.showPromotionDetail &&
                 !this.showSpinner
             ) {
                 this.page += 1;
@@ -380,7 +473,7 @@ export default {
         if (window.location.href.includes("shwepaukkan")) {
             this.img_prefix = "https://admin.shwepaukkan.com";
         } else {
-            this.img_prefix = "http://localhost:8001";
+            this.img_prefix = "http://spkadmin.test";
         }
         this.getNotis();
         window.addEventListener("scroll", this.handleScroll);
