@@ -498,7 +498,9 @@
                             <ul class="text-white">
                                 <li class="mb-4 group">
                                     <a
-                                        href="https://www.facebook.com/share/1Qj3PFFJiD/"
+                                        :href="contactUs?.facebook_link || '#'"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         class="flex gap-x-4"
                                     >
                                         <div
@@ -523,15 +525,18 @@
                                         </div>
                                         <div class="text-sm font-semibold">
                                             <p>Facebook :</p>
-                                            <p>/shwepauk.kan</p>
+                                            <p>
+                                                {{
+                                                    compactLink(
+                                                        contactUs?.facebook_link,
+                                                    )
+                                                }}
+                                            </p>
                                         </div>
                                     </a>
                                 </li>
                                 <li class="mb-4 group">
-                                    <a
-                                        href="viber://chat/?number=09955511333"
-                                        class="flex gap-x-4"
-                                    >
+                                    <a :href="viberLink()" class="flex gap-x-4">
                                         <div
                                             class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                                         >
@@ -552,15 +557,17 @@
                                         </div>
                                         <div class="text-sm font-semibold">
                                             <p>Viber :</p>
-                                            <p>09955511333</p>
+                                            <p>
+                                                {{
+                                                    contactUs?.viber_number ||
+                                                    "-"
+                                                }}
+                                            </p>
                                         </div>
                                     </a>
                                 </li>
                                 <li class="mb-4 group">
-                                    <a
-                                        href="tel:+959955511333"
-                                        class="flex gap-x-4"
-                                    >
+                                    <a :href="phoneLink()" class="flex gap-x-4">
                                         <div
                                             class="w-12 h-12 rounded-full bg-neutral-200 group-hover:bg-[#eb5c00] transition duration-700 ease-in-out flex items-center justify-center"
                                         >
@@ -583,14 +590,20 @@
                                         </div>
                                         <div class="text-sm font-semibold">
                                             <p>Call :</p>
-                                            <p>09955511333</p>
+                                            <p>
+                                                {{
+                                                    contactUs?.phone_number ||
+                                                    "-"
+                                                }}
+                                            </p>
                                         </div>
                                     </a>
                                 </li>
                                 <li class="mb-4 group">
                                     <a
-                                        href="tg://resolve?domain=shwepaukkan_gaming"
+                                        :href="contactUs?.telegram_link || '#'"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         class="flex gap-x-4"
                                     >
                                         <div
@@ -613,7 +626,13 @@
                                         </div>
                                         <div class="text-sm font-semibold">
                                             <p>Telegram :</p>
-                                            <p>t.me/shwepaukkan_gaming</p>
+                                            <p>
+                                                {{
+                                                    compactLink(
+                                                        contactUs?.telegram_link,
+                                                    )
+                                                }}
+                                            </p>
                                         </div>
                                     </a>
                                 </li>
@@ -656,6 +675,7 @@ export default {
             marqueeAds: null,
             lottery_lists: [],
             hotGames: [],
+            contactUs: null,
         };
     },
     computed: {
@@ -716,6 +736,62 @@ export default {
                 token: this.getToken,
             });
             this.marqueeAds = response.data;
+        },
+        async getContactUs() {
+            let response = await getApiData({
+                url: `/api/contact_us`,
+                token: this.getToken,
+            });
+            const contactList = Array.isArray(response.data)
+                ? response.data
+                : [];
+            this.contactUs =
+                contactList.find((item) => Number(item.is_active) === 1) ||
+                contactList[0] ||
+                null;
+        },
+        compactLink(url) {
+            if (!url) {
+                return "-";
+            }
+            return String(url)
+                .replace(/^https?:\/\//, "")
+                .replace(/\/$/, "");
+        },
+        normalizePhoneNumber(phoneNumber) {
+            const raw = String(phoneNumber || "").trim();
+            if (!raw) {
+                return "";
+            }
+            if (raw.startsWith("+")) {
+                return raw;
+            }
+            const digits = raw.replace(/\D/g, "");
+            if (!digits) {
+                return "";
+            }
+            if (digits.startsWith("959") || digits.startsWith("95")) {
+                return `+${digits}`;
+            }
+            if (digits.startsWith("09")) {
+                return `+95${digits.slice(1)}`;
+            }
+            if (digits.startsWith("9")) {
+                return `+95${digits}`;
+            }
+            return `+${digits}`;
+        },
+        viberLink() {
+            const phone = this.normalizePhoneNumber(
+                this.contactUs?.viber_number || this.contactUs?.phone_number,
+            );
+            return phone
+                ? `viber://chat?number=${encodeURIComponent(phone)}`
+                : "#";
+        },
+        phoneLink() {
+            const phone = String(this.contactUs?.phone_number || "").trim();
+            return phone ? `tel:${phone}` : "#";
         },
         async getProviders() {
             if (this.selectedGameType.id == 0) {
@@ -831,6 +907,7 @@ export default {
         this.getGameTypes();
         this.getHotGames();
         this.getMarqueeAds();
+        this.getContactUs();
         this.getActiveLotteryLists();
 
         if (window.location.href.includes("shwepaukkan")) {
