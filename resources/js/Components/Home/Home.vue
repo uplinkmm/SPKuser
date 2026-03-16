@@ -42,20 +42,22 @@
                 </div>
             </div> -->
 
-            <div class="relative" id="ad_slick">
-                <div class="" v-for="ads in adses" :key="ads.id">
-                    <img
-                        :src="`${img_prefix}${ads.photo}`"
-                        class="w-full aspect-video object-cover"
-                    />
-                </div>
+            <div class="relative">
+                <div id="ad_slick">
+                    <div class="" v-for="ads in adses" :key="ads.id">
+                        <img
+                            :src="`${img_prefix}${ads.photo}`"
+                            class="w-full aspect-video object-cover"
+                        />
+                    </div>
 
-                <!-- <div class="" v-if="!adses?.length">
-                    <img
-                        src="https://admin.shweshankan.com/storage/img/dyt40RFxWQTLfiBoxWeWV7BWqjASiHTCHtI7l9kJ.jpg"
-                        class="w-full aspect-video mb-6 object-cover"
-                    />
-                </div> -->
+                    <!-- <div class="" v-if="!adses?.length">
+                        <img
+                            src="https://admin.shweshankan.com/storage/img/dyt40RFxWQTLfiBoxWeWV7BWqjASiHTCHtI7l9kJ.jpg"
+                            class="w-full aspect-video mb-6 object-cover"
+                        />
+                    </div> -->
+                </div>
 
                 <div
                     v-if="marqueeAds"
@@ -806,39 +808,18 @@ export default {
             if (newVal.length > 0) {
                 this.$nextTick(() => {
                     if ($("#ad_slick").length) {
+                        if ($("#ad_slick").hasClass("slick-initialized")) {
+                            $("#ad_slick").slick("unslick");
+                        }
                         $("#ad_slick").slick({
                             slidesToShow: 1,
                             slidesToScroll: 1,
+                            infinite: true,
                             autoplay: true,
                             autoplaySpeed: 2000,
                             dots: false,
                             arrows: false,
-                            responsive: [
-                                {
-                                    breakpoint: 1024,
-                                    settings: {
-                                        slidesToShow: 4,
-                                    },
-                                },
-                                {
-                                    breakpoint: 768,
-                                    settings: {
-                                        slidesToShow: 3,
-                                    },
-                                },
-                                {
-                                    breakpoint: 640,
-                                    settings: {
-                                        slidesToShow: 3,
-                                    },
-                                },
-                                {
-                                    breakpoint: 480,
-                                    settings: {
-                                        slidesToShow: 1,
-                                    },
-                                },
-                            ],
+                            pauseOnHover: false,
                         });
                     }
                 });
