@@ -25,4 +25,9 @@ class AdsController extends Controller
         ResponseData($data);
     }
 
+    public function detail($id){
+        $data= $this->adsRepo->detail($id);
+        ResponseData($data);
+    }
+
 }

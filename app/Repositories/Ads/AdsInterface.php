@@ -6,5 +6,7 @@ interface AdsInterface {
 
     public function getMarqueeAds($request);
 
+    public function detail($id);
+
 
 }

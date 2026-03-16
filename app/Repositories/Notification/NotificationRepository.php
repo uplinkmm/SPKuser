@@ -36,7 +36,7 @@ class NotificationRepository implements NotificationInterface
             ->where('personable_id', $userId)
             ->where('notification_people.deleted_at', null)
             ->join('notifications', 'notification_people.notification_id', 'notifications.id')
-            ->select('notification_people.id', 'title', 'preview', 'date_time', 'is_read', 'is_read_count', 'notifications.notificationable_type');
+            ->select('notification_people.id', 'title', 'preview', 'date_time', 'is_read', 'is_read_count', 'notifications.notificationable_type','notifications.notificationable_id');
         // Adding status for topup_transaction and cash_withdrawl_transaction
         $notificationQuery->leftJoin('topup_transactions', function ($join) {
             $join->on('notifications.notificationable_id', '=', 'topup_transactions.id')
@@ -63,6 +63,9 @@ class NotificationRepository implements NotificationInterface
     DB::raw("CASE 
     WHEN notifications.notificationable_type = 'ads' THEN ads.photo 
     ELSE null END as photo"),
+            DB::raw("CASE 
+    WHEN notifications.notificationable_type = 'ads' THEN ads.description 
+    ELSE null END as description"),
     DB::raw("
             CASE 
                 WHEN notifications.notificationable_type = 'topup_transaction' AND topup_transactions.status = 'confirmed' THEN topup_transactions.confirmed_at

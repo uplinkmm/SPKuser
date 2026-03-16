@@ -9,6 +9,7 @@ use App\Http\Controllers\API\CommonController;
 use App\Http\Controllers\API\ContactUsController;
 use App\Http\Controllers\API\CustomerMoneyBalanceController;
 use App\Http\Controllers\API\DepositWithdrawController;
+use App\Http\Controllers\API\DepositWithdrawTutorialController;
 use App\Http\Controllers\API\FeedbackController;
 use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\LotteryController;
@@ -47,6 +48,7 @@ Route::post('/forget_password', [AuthController::class, 'forgetPassword']);
 Route::controller(AdsController::class)->group(function () {
     Route::get('get_ads', 'index');
     Route::get('get_marquee_ads', 'getMarqueeAds');
+    Route::get('ads/{id}', 'detail');
 });
 Route::get('contact_us',[ContactUsController::class,'index']);
 Route::get('deposit_withdraw_tutorials', [DepositWithdrawTutorialController::class, 'index']);

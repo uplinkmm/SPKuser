@@ -22,5 +22,8 @@ class AdsRepository implements AdsInterface
         ->orderBy('id','desc')
         ->first();                                  
     }
-    
+
+    public function detail($id){
+        return Ads::findOrFail($id);
+    }
 }
