@@ -43,7 +43,7 @@
             </div> -->
 
             <div class="relative" id="ad_slick">
-                <div class="" v-for="(ads, index) in adses" :key="index">
+                <div class="" v-for="ads in adses" :key="ads.id">
                     <img
                         :src="`${img_prefix}${ads.photo}`"
                         class="w-full aspect-video object-cover"

@@ -231,6 +231,11 @@
                                     {{ selectedPromotion.title }}
                                 </p>
                                 <p
+                                    class="text-md text-black font-semibold mb-3"
+                                >
+                                    {{ selectedPromotion.body }}
+                                </p>
+                                <p
                                     class="text-sm text-black whitespace-pre-line mb-3"
                                 >
                                     {{
