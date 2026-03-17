@@ -236,41 +236,41 @@
                 </p>
 
                 <div class="bg-[#FDC652] overflow-hidden">
-                    <a
-                        href="https://www.youtube.com/shorts/4jtKqT-Jm3E"
-                        target="_blank"
-                        class="flex items-center justify-between px-4 py-4"
+                    <template
+                        v-for="(tutorial, index) in activeDepositWithdrawTutorials"
+                        :key="tutorial.id"
                     >
-                        <div class="flex items-center gap-x-3">
-                            <div
-                                class="w-10 h-10 bg-black flex items-center justify-center"
-                            >
-                                <i class="fas fa-play text-white"></i>
+                        <a
+                            :href="tutorial.youtube_link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center justify-between px-4 py-4"
+                        >
+                            <div class="flex items-center gap-x-3">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-black flex items-center justify-center"
+                                >
+                                    <i class="fas fa-play text-white"></i>
+                                </div>
+                                <p class="font-semibold text-black">
+                                    {{
+                                        tutorial.title ||
+                                        (tutorial.type == "deposit"
+                                            ? "ငွေဖြည့်နည်း ကြည့်ရန်"
+                                            : "ငွေထုတ်နည်း ကြည့်ရန်")
+                                    }}
+                                </p>
                             </div>
-                            <p class="font-semibold text-black">
-                                ငွေဖြည့်နည်း ကြည့်ရန်
-                            </p>
-                        </div>
-                        <i class="fas fa-chevron-right text-black"></i>
-                    </a>
-                    <div class="h-[1px] bg-black/20"></div>
-                    <a
-                        href="https://www.youtube.com/shorts/cFvmsnfVNF0?si=UmA6F83Rhm5lnzpT"
-                        target="_blank"
-                        class="flex items-center justify-between px-4 py-4"
-                    >
-                        <div class="flex items-center gap-x-3">
-                            <div
-                                class="w-10 h-10 rounded-lg bg-black flex items-center justify-center"
-                            >
-                                <i class="fas fa-play text-white"></i>
-                            </div>
-                            <p class="font-semibold text-black">
-                                ငွေထုတ်နည်း ကြည့်ရန်
-                            </p>
-                        </div>
-                        <i class="fas fa-chevron-right text-black"></i>
-                    </a>
+                            <i class="fas fa-chevron-right text-black"></i>
+                        </a>
+                        <div
+                            v-if="
+                                index !==
+                                activeDepositWithdrawTutorials.length - 1
+                            "
+                            class="h-[1px] bg-black/20"
+                        ></div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -424,6 +424,7 @@ export default {
         return {
             mainMoneyBalance: 0,
             gameMoneyBalance: 0,
+            depositWithdrawTutorials: [],
             wallet_transfer: {
                 amount: "",
                 transfer_type: "to_wallet", //to_game ,to_wallet
@@ -433,6 +434,19 @@ export default {
     },
     computed: {
         ...mapGetters(["getToken", "getUser"]),
+        activeDepositWithdrawTutorials() {
+            const tutorialTypeOrder = {
+                deposit: 0,
+                withdraw: 1,
+            };
+            return this.depositWithdrawTutorials
+                .filter((tutorial) => tutorial.is_active == 1)
+                .sort(
+                    (a, b) =>
+                        (tutorialTypeOrder[a.type] ?? 99) -
+                        (tutorialTypeOrder[b.type] ?? 99),
+                );
+        },
     },
     methods: {
         async getBalances() {
@@ -527,6 +541,17 @@ export default {
                 button.click();
             }
         },
+        async getDepositWithdrawTutorials() {
+            let url = `/api/deposit_withdraw_tutorials`;
+            let response = await getApiData({
+                url: url,
+                token: this.getToken,
+            });
+            if (response.data) {
+                this.depositWithdrawTutorials = response.data;
+            }
+            console.log("deposit_withdraw_tutorials response:", response);
+        },
         backBtn() {
             window.location.href = "/home";
         },
@@ -538,6 +563,7 @@ export default {
 
     mounted() {
         initTWE({ Modal, Ripple, Dropdown });
+        this.getDepositWithdrawTutorials();
     },
 };
 </script>
