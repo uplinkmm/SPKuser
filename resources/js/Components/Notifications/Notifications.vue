@@ -179,7 +179,11 @@
                                     <p
                                         class="text-sm sm:text-base mb-0 text-right w-[55%]"
                                     >
-                                        လုပ်ငန်းစဥ်နံပါတ်-{{
+                                        {{
+                                            transcation.payment_transaction_id
+                                                ? "လုပ်ငန်းစဥ်နံပါတ်-"
+                                                : ""
+                                        }}{{
                                             transcation.payment_transaction_id
                                         }}
                                     </p>
