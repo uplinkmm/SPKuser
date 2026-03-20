@@ -34,7 +34,7 @@
                 <div class="shrink-0 text-right">
                     <p
                         class="text-white font-semibold leading-none whitespace-nowrap"
-                        style="font-size: clamp(56px, 18vw, 92px)"
+                        style="font-size: clamp(40px, 12vw, 64px)"
                     >
                         {{ twoDList?.twod }}
                     </p>
