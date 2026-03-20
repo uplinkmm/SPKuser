@@ -40,6 +40,23 @@ const PROVIDER_IMAGE_MAP = {
     spadegaming: "/providers/slots/spade-gaming.png",
     advantplay: "/providers/slots/advantplay.png",
     joker: "/providers/slots/joker.png",
+    wmcasino: "/providers/slots/wm-casino.png",
+    sexygaming: "/providers/slots/sexy-gaming.png",
+    aesexy: "/providers/slots/sexy-gaming.png",
+    ailivecasino: "/providers/slots/ai-live-casino.png",
+    yeebet: "/providers/slots/yeebet.png",
+    yeebetgaming: "/providers/slots/yeebet.png",
+    dreamgaming: "/providers/slots/dreamgaming.png",
+    worldentertainment: "/providers/slots/world-entertainment.png",
+    sagaming: "/providers/slots/sa-gaming.png",
+    king855: "/providers/slots/ct855.png",
+    ct855: "/providers/slots/ct855.png",
+    fbgames: "/providers/slots/fb-games.png",
+    prettygaming: "/providers/slots/pretty-gaming.png",
+    astar: "/providers/slots/astar.png",
+    allbet: "/providers/slots/allbet.png",
+    sbo: "/providers/slots/sbo.png",
+    sbobet: "/providers/slots/sbo.png",
 };
 
 function normalizeProviderImageKey(value) {
