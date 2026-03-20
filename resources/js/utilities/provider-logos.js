@@ -51,6 +51,7 @@ const PROVIDER_IMAGE_MAP = {
     sagaming: "/providers/slots/sa-gaming.png",
     king855: "/providers/slots/ct855.png",
     ct855: "/providers/slots/ct855.png",
+    king855ct855: "/providers/slots/ct855.png",
     fbgames: "/providers/slots/fb-games.png",
     prettygaming: "/providers/slots/pretty-gaming.png",
     astar: "/providers/slots/astar.png",
