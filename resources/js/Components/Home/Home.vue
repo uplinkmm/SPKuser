@@ -314,7 +314,7 @@
                                                         product,
                                                     )
                                                         ? 'bg-[#101828]'
-                                                        : 'bg-[#FFF7E8]',
+                                                        : 'bg-[radial-gradient(circle_at_top,_#FFFDF8_0%,_#FFF2DA_54%,_#E9CF92_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]',
                                                 ]"
                                             >
                                                 <img
