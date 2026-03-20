@@ -106,7 +106,7 @@
                             </a>
 
                             <button
-                                @click="wallet_transfer.amount = ''"
+                                @click="openTransferModal"
                                 class="block text-center"
                                 data-twe-toggle="modal"
                                 data-twe-target="#add_main_money_model"
@@ -190,7 +190,9 @@
 
                 <div class="bg-[#FDC652] overflow-hidden">
                     <template
-                        v-for="(tutorial, index) in activeDepositWithdrawTutorials"
+                        v-for="(
+                            tutorial, index
+                        ) in activeDepositWithdrawTutorials"
                         :key="tutorial.id"
                     >
                         <a
@@ -336,10 +338,22 @@
                             <input
                                 type="number"
                                 v-model="wallet_transfer.amount"
+                                @input="clearWalletTransferError"
                                 id="amount"
                                 :placeholder="$t('Amount')"
-                                class="block w-full py-3 px-3 border border-gray-300 text-sm rounded-xl bg-white focus:ring-0 focus:shadow-none focus:outline-none"
+                                :class="[
+                                    'block w-full py-3 px-3 border text-sm rounded-xl bg-white focus:ring-0 focus:shadow-none focus:outline-none',
+                                    walletTransferError
+                                        ? 'border-red-500'
+                                        : 'border-gray-300',
+                                ]"
                             />
+                            <p
+                                v-if="walletTransferError"
+                                class="mt-2 text-sm font-medium text-red-600"
+                            >
+                                {{ walletTransferError }}
+                            </p>
                         </div>
 
                         <div class="mb-4">
@@ -384,6 +398,7 @@ export default {
                 amount: "",
                 transfer_type: "to_wallet", //to_game ,to_wallet
             },
+            walletTransferError: "",
             loading: false,
         };
     },
@@ -404,6 +419,16 @@ export default {
         },
     },
     methods: {
+        clearWalletTransferError() {
+            this.walletTransferError = "";
+        },
+        setWalletTransferError(message) {
+            this.walletTransferError = message;
+        },
+        openTransferModal() {
+            this.wallet_transfer.amount = "";
+            this.clearWalletTransferError();
+        },
         async getBalances() {
             let url = `/api/money_balances`;
             let response = await postApiData({
@@ -422,18 +447,19 @@ export default {
                 this.wallet_transfer.transfer_type = "to_wallet";
             }
             this.wallet_transfer.amount = "";
+            this.clearWalletTransferError();
         },
         async transferWallet() {
+            this.clearWalletTransferError();
             if (
                 !this.wallet_transfer.amount ||
                 this.wallet_transfer.amount < 100
             ) {
-                this.$notify({
-                    text: !this.wallet_transfer.amount
+                this.setWalletTransferError(
+                    !this.wallet_transfer.amount
                         ? "Amount is required!"
                         : "Minium amount is 100 MMK!",
-                    type: "error",
-                });
+                );
                 return;
             }
             if (this.wallet_transfer.transfer_type == "to_game") {
@@ -441,10 +467,7 @@ export default {
                     this.mainMoneyBalance == 0 ||
                     this.wallet_transfer.amount > this.mainMoneyBalance
                 ) {
-                    this.$notify({
-                        text: "Amount is insufficient",
-                        type: "error",
-                    });
+                    this.setWalletTransferError("Amount is insufficient");
                     return;
                 }
             } else {
@@ -453,10 +476,7 @@ export default {
                     this.gameMoneyBalance == 0 ||
                     this.wallet_transfer.amount > this.gameMoneyBalance
                 ) {
-                    this.$notify({
-                        text: "Amount is insufficient",
-                        type: "error",
-                    });
+                    this.setWalletTransferError("Amount is insufficient");
                     return;
                 }
             }
@@ -476,6 +496,7 @@ export default {
             });
             this.loading = false;
             if (response.success) {
+                this.clearWalletTransferError();
                 this.$notify({
                     text: "Success transfer.",
                     type: "info",
@@ -483,13 +504,11 @@ export default {
                 this.getBalances();
                 this.modalClose();
             } else {
-                this.$notify({
-                    text: response.message,
-                    type: "error",
-                });
+                this.setWalletTransferError(response.message);
             }
         },
         modalClose() {
+            this.clearWalletTransferError();
             var id = "close_main_money_model";
             const button = document.getElementById(id);
             if (button) {
