@@ -370,6 +370,15 @@ export default {
                 type: "warn",
             });
         },
+        notifyInsufficientAmount() {
+            this.$notify({
+                text: "Amount is insufficient",
+                type: "error",
+            });
+        },
+        hasEnoughMainMoney(amount) {
+            return Number(this.mainMoneyBalance ?? 0) >= Number(amount ?? 0);
+        },
 
         async getBalances() {
             let url = `/api/money_balances`;
@@ -385,6 +394,10 @@ export default {
         changeStepTwo() {
             if (!this.payment_provider || !this.amount) {
                 this.alertValidationMessage(`payment provider or amount`);
+                return;
+            }
+            if (!this.hasEnoughMainMoney(this.amount)) {
+                this.notifyInsufficientAmount();
                 return;
             }
             this.step = 2;
@@ -405,6 +418,10 @@ export default {
             if (!this.password) {
                 this.alertValidationMessage(`password`);
                 return 1;
+            }
+            if (!this.hasEnoughMainMoney(this.amount)) {
+                this.notifyInsufficientAmount();
+                return;
             }
             var temp = this.accounts.find(
                 (n) => n.account_type == this.payment_provider,
