@@ -23,61 +23,10 @@
                         ငွေသွင်းမည်
                     </p>
 
-                    <div
-                        class="rounded-2xl border border-black/30 bg-[#C89A1E] px-4 py-4"
-                    >
-                        <div class="space-y-4 text-black">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-x-3 min-w-0">
-                                    <img
-                                        src="../../../../public/icons/Wallet.png"
-                                        class="w-11 pl-1"
-                                    />
-                                    <p class="font-semibold truncate">
-                                        <!-- <i class="fal fa-wallet"></i> -->
-                                        ပင်မပိုက်ဆံအိတ်
-                                    </p>
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white text-2xl font-bold"
-                                    >
-                                        ?
-                                    </div>
-                                </div>
-                                <p class="font-semibold text-xl">
-                                    {{ mainMoneyBalance?.toLocaleString() }}
-                                    ကျပ်
-                                </p>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-x-3 min-w-0">
-                                    <div class="relative w-12 h-9 shrink-0">
-                                        <img
-                                            src="../../../../public/icons/Wallet.png"
-                                            class="w-full h-full object-contain"
-                                        />
-                                        <img
-                                            src="../../../../public/icons/joystick.png"
-                                            class="absolute left-0 top-3/4 -translate-y-1/2 w-7 h-7 object-contain"
-                                        />
-                                    </div>
-                                    <p class="font-semibold truncate">
-                                        <!-- <i class="fal fa-wallet"></i> -->
-                                        ဂိမ်းပိုက်ဆံအိတ်
-                                    </p>
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white text-2xl font-bold"
-                                    >
-                                        ?
-                                    </div>
-                                </div>
-                                <p class="font-semibold text-xl">
-                                    {{ gameMoneyBalance?.toLocaleString() }}
-                                    ကျပ်
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <WalletBalancesCard
+                        :main-balance="mainMoneyBalance"
+                        :game-balance="gameMoneyBalance"
+                    />
                 </div>
             </div>
 
@@ -431,6 +380,7 @@
 import { mapGetters } from "vuex";
 import { getApiData, postApiData } from "../../utilities/ajax-helpers";
 import Navbar from "../Nav/Navbar.vue";
+import WalletBalancesCard from "../Wallet/WalletBalancesCard.vue";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 
 export default {
@@ -450,6 +400,7 @@ export default {
     },
     components: {
         Navbar,
+        WalletBalancesCard,
     },
     mixins: [CheckAuthMixin],
     computed: {
