@@ -121,7 +121,9 @@
                                                 id: product.id,
                                                 name: product.name,
                                                 code: product.code,
-                                                image: product.pivot.image,
+                                                image: providerLocalImage(
+                                                    product,
+                                                ),
                                             },
                                         )}&game_type=${JSON.stringify({
                                             id: selectedGameType.id,
@@ -129,11 +131,24 @@
                                         })}`"
                                         class="cursor-pointer block"
                                     >
-                                        <img
-                                            class="w-full aspect-square rounded-xl object-cover"
-                                            :src="product.pivot.image"
-                                            alt=""
-                                        />
+                                        <div
+                                            :class="[
+                                                'w-full aspect-square rounded-xl p-3 flex items-center justify-center overflow-hidden shadow-sm',
+                                                providerLogoNeedsDarkBackground(
+                                                    product,
+                                                )
+                                                    ? 'bg-[#101828]'
+                                                    : 'bg-white',
+                                            ]"
+                                        >
+                                            <img
+                                                class="w-full h-full object-contain"
+                                                :src="
+                                                    providerLocalImage(product)
+                                                "
+                                                :alt="product.name"
+                                            />
+                                        </div>
                                         <p
                                             class="text-white text-center pt-2 text-md leading-tight truncate"
                                         >
@@ -156,6 +171,10 @@ import {
     getApiData,
     postApiDataSlot,
 } from "../../utilities/ajax-helpers";
+import {
+    getProviderLocalImage,
+    providerLogoNeedsDarkBackground as shouldUseDarkProviderLogoBackground,
+} from "../../utilities/provider-logos";
 import Navbar from "../Nav/Navbar.vue";
 import { mapGetters } from "vuex";
 import moment from "moment";
@@ -215,6 +234,12 @@ export default {
             this._searchTimeoutId = setTimeout(() => {
                 this.getProviders();
             }, 400);
+        },
+        providerLocalImage(product) {
+            return getProviderLocalImage(product);
+        },
+        providerLogoNeedsDarkBackground(product) {
+            return shouldUseDarkProviderLogoBackground(product);
         },
     },
     mounted() {
