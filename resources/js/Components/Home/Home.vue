@@ -314,7 +314,7 @@
                                                         product,
                                                     )
                                                         ? 'bg-[#101828]'
-                                                        : 'bg-white',
+                                                        : 'bg-[#FFF7E8]',
                                                 ]"
                                             >
                                                 <img

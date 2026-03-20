@@ -129,7 +129,7 @@
                                             id: selectedGameType.id,
                                             name: selectedGameType.name,
                                         })}`"
-                                        class="cursor-pointer block"
+                                        class="block"
                                     >
                                         <div
                                             :class="[
@@ -138,11 +138,11 @@
                                                     product,
                                                 )
                                                     ? 'bg-[#101828]'
-                                                    : 'bg-white',
+                                                    : 'bg-[#FFF7E8]',
                                             ]"
                                         >
                                             <img
-                                                class="w-full h-full object-contain"
+                                                class="h-full w-full object-contain"
                                                 :src="
                                                     providerLocalImage(product)
                                                 "
