@@ -2183,7 +2183,7 @@ export default {
                 // Loop through numbers starting from 'start' to 'start + 10'
                 const padded = String(i).padStart(2, "0");
                 digitsSet.add(padded);
-                digitsSet.add(padded.split("").reverse().join(""));
+                // digitsSet.add(padded.split("").reverse().join(""));
             }
             this.quickBetting(Array.from(digitsSet));
         },
@@ -2193,7 +2193,7 @@ export default {
                 const padded = String(i).padStart(2, "0");
                 if (padded.endsWith(String(num))) {
                     digitsSet.add(padded);
-                    digitsSet.add(padded.split("").reverse().join(""));
+                    // digitsSet.add(padded.split("").reverse().join(""));
                 }
             }
             this.quickBetting(Array.from(digitsSet));
