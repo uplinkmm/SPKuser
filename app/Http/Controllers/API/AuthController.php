@@ -27,6 +27,7 @@ use App\Http\Requests\Customer\CustomerRequest;
 use App\Http\Requests\Auth\InitialRegisterRequest;
 use App\Http\Requests\Customer\ForgetPasswordRequest;
 use App\Repositories\CustomerMoney\CustomerMoneyRepositoryInterface;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -149,6 +150,8 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
             $data = $request->all();
+            $data['is_verified']=true;
+            $data['verified_at']=now();
             $referralPhoneNumber=$request->referral_phone_number;
             if ($referralPhoneNumber && $referralPhoneNumber != "" && $referralPhoneNumber != "null") {
                 if (!preg_match('/^09/', $referralPhoneNumber)) {
@@ -176,14 +179,14 @@ class AuthController extends Controller
             $this->storeFcmToken($request->fcm_token, $customer->id);
             #implement agent to user
             $this->storeAgent($request->code, $customer->id);
+            //claim referral promotion after register verfied by admin
+            (new PromotionService())->claimReferralPromotion($request->referral_phone_number, $customer);
             //send notification to all users
             $data['title'] = 'New Registration';
             $data['body'] = "{$customer->name} has requested to register";
             $data['date_time'] = now();
             $users = User::all();
             $this->send($customer, $users, $data);
-            //claim referral promotion after register verfied by admin
-            // (new PromotionService())->claimReferralPromotion($request->referral_phone_number, $customer);
             DB::commit();
             \ResponseMessage('Successfully registered, please wait for admin verification', 201);
             // ResponseData($loginResponse, 201, true, 'Successfully request to register ');
