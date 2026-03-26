@@ -1,6 +1,6 @@
 <template>
     <div
-        class="frame-container min-h-[100vh]"
+        class="frame-container profile-frame-container min-h-[100vh]"
         :style="{
             backgroundImage: `url(/icons/bgfour.png)`,
             backgroundRepeat: 'repeat',
@@ -930,3 +930,12 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.profile-frame-container {
+    height: 100dvh;
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(88px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+}
+</style>
