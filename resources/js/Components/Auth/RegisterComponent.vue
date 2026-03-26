@@ -164,12 +164,6 @@
                 </div>
             </div>
         </div>
-        <form method="POST" id="signin-form" ref="signinForm" action="/login">
-            <input type="hidden" v-model="csrfToken" name="_token" />
-            <input type="hidden" v-model="phone_number" name="phone_number" />
-            <input type="hidden" v-model="password" name="password" />
-            <input type="hidden" name="remember" value="true" />
-        </form>
     </main>
     <!-- <div class="contents">
         <div
@@ -209,17 +203,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import { getApiData, postApiData } from "../../utilities/ajax-helpers";
-import fcmMixin from "../../mixins/fcmMixin";
+import { postApiData } from "../../utilities/ajax-helpers";
 
 export default {
     name: "RegisterComponent",
     data() {
         return {
-            token: null,
-            csrfToken: null,
-
             user_name: null,
             phone_number: null,
             password: null,
@@ -227,7 +216,6 @@ export default {
             referral_phone_number: null,
 
             // code: null,
-            remember: true,
             show_password: false,
             register_loading: false,
         };
@@ -241,11 +229,7 @@ export default {
             type: Function,
         },
     },
-    // mixins: [fcmMixin],
-
     methods: {
-        ...mapMutations(["setUser", "setToken", "setCsrfToken"]),
-
         async register() {
             if (!this.user_name || !this.phone_number) {
                 this.setErrorBox(
@@ -290,11 +274,9 @@ export default {
             this.register_loading = false;
             if (response.success) {
                 this.setErrorBox(false, response.message);
-                this.token = response.data.token;
-                this.setToken(this.token);
-                let user = response.data.user;
-                this.setUser(user);
-                this.$refs.signinForm.submit();
+                setTimeout(() => {
+                    this.setIsLogin(true);
+                }, 1000);
 
                 return true;
             } else {
@@ -309,11 +291,6 @@ export default {
                 return false;
             }
         },
-    },
-
-    created() {
-        this.csrfToken = $('meta[name="csrf-token"]').attr("content");
-        this.setCsrfToken(this.csrfToken);
     },
 };
 </script>
