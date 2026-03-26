@@ -12,45 +12,7 @@
 
         <div>
             <div v-show="step == 'mainProfile'">
-                <div class="pt-2 pb-6">
-                    <div
-                        class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
-                    >
-                        <div class="col-span-1">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                                class="w-26 h-26 rounded-full"
-                            />
-                            <button
-                                type="button"
-                                class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
-                            >
-                                <i class="fas fa-pen text-xs"></i>
-                            </button>
-                        </div>
-                        <div
-                            class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
-                        >
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>နာမည် :</p>
-                                <p>
-                                    {{ user_profile_data?.name }}
-                                </p>
-                            </div>
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>ဖုန်းနံပါတ် :</p>
-                                <p>
-                                    {{ user_profile_data?.phone_number }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileUserCard :user="user_profile_data" />
 
                 <div class="pb-6">
                     <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
@@ -347,46 +309,7 @@
                 </div> -->
 
             <div v-show="step == 'changeLang'">
-                <div class="pt-2 pb-6">
-                    <div
-                        class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
-                    >
-                        <div class="col-span-1 relative">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                                class="w-26 h-26 rounded-full"
-                            />
-                            <button
-                                type="button"
-                                class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
-                            >
-                                <i class="fas fa-pen text-xs"></i>
-                            </button>
-                        </div>
-
-                        <div
-                            class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
-                        >
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>နာမည် :</p>
-                                <p>
-                                    {{ user_profile_data?.name }}
-                                </p>
-                            </div>
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>ဖုန်းနံပါတ် :</p>
-                                <p>
-                                    {{ user_profile_data?.phone_number }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileUserCard :user="user_profile_data" />
 
                 <div class="pb-6">
                     <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
@@ -432,46 +355,7 @@
             </div>
 
             <div v-show="step == 'history'">
-                <div class="pt-2 pb-6">
-                    <div
-                        class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
-                    >
-                        <div class="col-span-1 relative">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                                class="w-26 h-26 rounded-full"
-                            />
-                            <button
-                                type="button"
-                                class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
-                            >
-                                <i class="fas fa-pen text-xs"></i>
-                            </button>
-                        </div>
-
-                        <div
-                            class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
-                        >
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>နာမည် :</p>
-                                <p>
-                                    {{ user_profile_data?.name }}
-                                </p>
-                            </div>
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>ဖုန်းနံပါတ် :</p>
-                                <p>
-                                    {{ user_profile_data?.phone_number }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileUserCard :user="user_profile_data" />
 
                 <div class="pb-6">
                     <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
@@ -576,46 +460,7 @@
             </div>
 
             <div v-show="step == 'feedback'">
-                <div class="pt-2 pb-6">
-                    <div
-                        class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
-                    >
-                        <div class="col-span-1 relative">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                                class="w-26 h-26 rounded-full"
-                            />
-                            <button
-                                type="button"
-                                class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
-                            >
-                                <i class="fas fa-pen text-xs"></i>
-                            </button>
-                        </div>
-
-                        <div
-                            class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
-                        >
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>နာမည် :</p>
-                                <p>
-                                    {{ user_profile_data?.name }}
-                                </p>
-                            </div>
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>ဖုန်းနံပါတ် :</p>
-                                <p>
-                                    {{ user_profile_data?.phone_number }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileUserCard :user="user_profile_data" />
 
                 <div class="pb-6">
                     <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
@@ -656,46 +501,7 @@
             </div>
 
             <div v-show="step == 'customerService'">
-                <div class="pt-2 pb-6">
-                    <div
-                        class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
-                    >
-                        <div class="col-span-1 relative">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                                class="w-26 h-26 rounded-full"
-                            />
-                            <button
-                                type="button"
-                                class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
-                            >
-                                <i class="fas fa-pen text-xs"></i>
-                            </button>
-                        </div>
-
-                        <div
-                            class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
-                        >
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>နာမည် :</p>
-                                <p>
-                                    {{ user_profile_data?.name }}
-                                </p>
-                            </div>
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>ဖုန်းနံပါတ် :</p>
-                                <p>
-                                    {{ user_profile_data?.phone_number }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileUserCard :user="user_profile_data" />
 
                 <div class="pb-6">
                     <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
@@ -835,46 +641,7 @@
             </div>
 
             <div v-show="step == 'termsAndConditions'">
-                <div class="pt-2 pb-6">
-                    <div
-                        class="grid grid-cols-3 gap-3 text-white font-semibold px-12"
-                    >
-                        <div class="col-span-1 relative">
-                            <img
-                                src="../../../../public/img/profile.png"
-                                alt=""
-                                class="w-26 h-26 rounded-full"
-                            />
-                            <button
-                                type="button"
-                                class="absolute right-0 bottom-0 w-7 h-7 rounded-full bg-[#5271FF] text-white flex items-center justify-center"
-                            >
-                                <i class="fas fa-pen text-xs"></i>
-                            </button>
-                        </div>
-
-                        <div
-                            class="col-span-2 space-y-5 font-inter mt-6 pl-4 pr-8"
-                        >
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>နာမည် :</p>
-                                <p>
-                                    {{ user_profile_data?.name }}
-                                </p>
-                            </div>
-                            <div
-                                class="flex justify-between items-center gap-x-4"
-                            >
-                                <p>ဖုန်းနံပါတ် :</p>
-                                <p>
-                                    {{ user_profile_data?.phone_number }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileUserCard :user="user_profile_data" />
 
                 <div class="pb-6">
                     <div class="bg-[#FFC529] rounded-3xl px-5 py-5">
@@ -901,12 +668,14 @@ import { Modal, Ripple, Dropdown, initTWE } from "tw-elements";
 import { mapGetters, mapMutations } from "vuex";
 import { getApiData, postApiData } from "../../utilities/ajax-helpers";
 import Navbar from "../Nav/Navbar.vue";
+import ProfileUserCard from "./ProfileUserCard.vue";
 import moment from "moment";
 import CheckAuthMixin from "../../mixins/CheckAuthMixin";
 
 export default {
     components: {
         Navbar,
+        ProfileUserCard,
     },
     data() {
         return {
