@@ -2340,6 +2340,15 @@ export default {
             if (!this.pendingGameSetting) {
                 return;
             }
+            if (Number(this.pendingGameSetting.is_active) === 0) {
+                const isMorning =
+                    this.pendingGameSetting.time_status === "morning";
+                this.error_modal_text = isMorning
+                    ? "မနက်ပိုင်း ထီ ပိတ်ပါသည်"
+                    : "ညနေပိုင်း ထီ ပိတ်ပါသည်";
+                this.showErrorModal();
+                return;
+            }
             this.chooseTime(this.pendingGameSetting);
             this.step = 1;
         },
@@ -2352,8 +2361,8 @@ export default {
                 this.settings = response.data.settings;
                 this.setting_value = response.data.settings[0].id;
 
-                if (response.data.settings.length) {
-                    this.twod_settings = response.data.settings;
+                if (response.data.twod_settings.length) {
+                    this.twod_settings = response.data.twod_settings;
                     this.main_game_active = response.data.is_active;
                     this.step = 5;
                 } else {
