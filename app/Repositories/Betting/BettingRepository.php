@@ -362,6 +362,33 @@ class BettingRepository implements BettingInterface
                     WHEN cn.amount IS NOT NULL AND COALESCE(SUM(fb.total_amount_all), 0) < cn.amount THEN 1
                     ELSE 1
                 END AS is_active'),
+            DB::raw('
+    CASE
+        WHEN ROUND(
+            LEAST(
+                IF(
+                    ' . $max . ' > 0,
+                    COALESCE(
+                        SUM(
+                            CASE
+                                WHEN cn.id IS NOT NULL AND fb.total_amount_all IS NULL
+                                    THEN (' . $max . ' - cn.amount)
+                                WHEN cn.id IS NOT NULL
+                                    THEN (' . $max . ' - cn.amount) + fb.total_amount_all
+                                ELSE fb.total_amount_all
+                            END
+                        ), 0
+                    ) / ' . $max . ' * 100,
+                    0
+                ),
+                100
+            ),
+            2
+        ) >= 100
+        THEN 0
+        ELSE 1
+    END AS is_active
+'),
                 DB::raw('
    ROUND(
        LEAST(
