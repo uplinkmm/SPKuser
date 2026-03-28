@@ -19,11 +19,22 @@ class GameController extends Controller
         $current_time = Carbon::now()->format('H:i:s');
         $game = Game::with([
             'twodSettings' => function ($q) use ($current_time) {
-                $q
-                    ->where('is_active', 1)
-                    ->where('opening_time', '<=', $current_time)
-                    ->where('closing_time', '>=', $current_time);
+                $q->select('*')
+                    ->selectRaw("
+              CASE 
+                  WHEN opening_time <= ? 
+                   AND closing_time >= ? 
+                  THEN 1 
+                  ELSE 0 
+              END as is_active
+          ", [$current_time, $current_time]);
             }
+            // 'twodSettings' => function ($q) use ($current_time) {
+                // $q
+                    // ->where('is_active', 1)
+                    // ->where('opening_time', '<=', $current_time)
+                    // ->where('closing_time', '>=', $current_time);
+            // }
         ])
             ->find($request->game_id);
         if ($game) {
