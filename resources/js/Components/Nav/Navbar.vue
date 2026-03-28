@@ -100,11 +100,12 @@
                     <i class="fas fa-chevron-left"></i>
                 </a>
             </button>
+            <p v-if="hideBackBtn"></p>
             <p
                 :class="textColor"
                 class="text-2xl font-semibold text-white ml-12"
             >
-                {{ title }}
+                ရွှေပေါက်ကံ
             </p>
             <div class="flex gap-x-4">
                 <button @click="focusSearchInput">
