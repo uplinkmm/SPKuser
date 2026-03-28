@@ -2352,8 +2352,8 @@ export default {
                 this.settings = response.data.settings;
                 this.setting_value = response.data.settings[0].id;
 
-                if (response.data.twod_settings.length) {
-                    this.twod_settings = response.data.twod_settings;
+                if (response.data.settings.length) {
+                    this.twod_settings = response.data.settings;
                     this.main_game_active = response.data.is_active;
                     this.step = 5;
                 } else {

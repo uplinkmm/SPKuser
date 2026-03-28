@@ -33,8 +33,8 @@
 
                 <div class="shrink-0 text-right">
                     <p
-                        class="text-white font-semibold leading-none whitespace-nowrap"
-                        style="font-size: clamp(40px, 12vw, 64px)"
+                        class="font-semibold leading-none whitespace-nowrap animate-pulse text-green-500"
+                        style="font-size: clamp(48px, 14vw, 72px)"
                     >
                         {{ twoDList?.twod }}
                     </p>
@@ -43,12 +43,12 @@
 
             <div class="grid grid-cols-2 gap-x-4 mb-1">
                 <p
-                    class="text-[#D3A12A] text-lg font-semibold text-center mb-0"
+                    class="text-[#D3A12A] text-md font-semibold text-center mb-0"
                 >
                     {{ twoDList?.set }}
                 </p>
                 <p
-                    class="text-[#D3A12A] text-lg font-semibold text-center mb-0"
+                    class="text-[#D3A12A] text-md font-semibold text-center mb-0"
                 >
                     {{ twoDList?.value }}
                 </p>
@@ -67,7 +67,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 gap-x-4">
+            <!-- <div class="grid grid-cols-2 gap-x-4">
                 <div class="text-center">
                     <p class="text-white text-base font-semibold mb-1">
                         Modern
@@ -84,7 +84,7 @@
                         {{ modernInternetLatest?.Internet ?? "--" }}
                     </p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </a>
 </template>
