@@ -12,7 +12,7 @@
                             <p class="text-white text-xl pl-2">2D Live</p>
                         </div>
                     </div> -->
-        <div class="w-full mx-auto flex flex-col h-full py-4 px-5">
+        <div class="w-full mx-auto flex flex-col h-full py-10 px-5">
             <p class="text-[#D3A12A] text-2xl font-semibold text-center mb-2">
                 2D Live
             </p>
