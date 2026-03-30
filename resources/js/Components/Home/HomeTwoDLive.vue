@@ -43,12 +43,12 @@
 
             <div class="grid grid-cols-2 gap-x-4 mb-1">
                 <p
-                    class="text-[#D3A12A] text-md font-semibold text-center mb-0"
+                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
                 >
                     {{ twoDList?.set }}
                 </p>
                 <p
-                    class="text-[#D3A12A] text-md font-semibold text-center mb-0"
+                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
                 >
                     {{ twoDList?.value }}
                 </p>
