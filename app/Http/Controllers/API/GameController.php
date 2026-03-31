@@ -17,27 +17,35 @@ class GameController extends Controller
     public function index(Request $request)
     {
         $current_time = Carbon::now()->format('H:i:s');
+
+        $current_time = Carbon::now()->format('H:i:s');
         $game = Game::with([
-            'twodSettings' => function ($q) use ($current_time) {
-                $q->select('*')
-                    ->selectRaw("
-              CASE 
-                  WHEN opening_time <= ? 
-                   AND closing_time >= ? 
-                  THEN 1 
-                  ELSE 0 
-              END as is_active
-          ", [$current_time, $current_time]);
-            }
+            'twodSettings'
+        //     'twodSettings' => function ($q) use ($current_time) {
+        //         $q->select('*')
+        //             ->selectRaw("
+        //       CASE 
+        //           WHEN opening_time <= ? 
+        //            AND closing_time >= ? 
+        //           THEN 1 
+        //           ELSE 0 
+        //       END as is_active
+        //   ", [$current_time, $current_time]);
+        //     }
             // 'twodSettings' => function ($q) use ($current_time) {
-                // $q
-                    // ->where('is_active', 1)
-                    // ->where('opening_time', '<=', $current_time)
-                    // ->where('closing_time', '>=', $current_time);
+            // $q
+            // ->where('is_active', 1)
+            // ->where('opening_time', '<=', $current_time)
+            // ->where('closing_time', '>=', $current_time);
             // }
         ])
             ->find($request->game_id);
         if ($game) {
+            foreach($game->twodSettings as $setting) {
+                if($setting->is_active==1){
+                    $setting->is_active = $this->isGameActive($setting->opening_time, $setting->closing_time);
+                }
+            }
             $currentTime = Carbon::now();
             $day = Carbon::now()->day;
             $now = Carbon::now();
@@ -61,7 +69,7 @@ class GameController extends Controller
                 ->orderBy('id', 'desc');
             if ($game->type == '2d') {
                 if ($currentTime->isSaturday() || $currentTime->isSunday()) {
-                    $game->is_active=0;
+                    $game->is_active = 0;
                 }
                 $game->settings = $game_setting->get();
             }
@@ -86,6 +94,13 @@ class GameController extends Controller
 
         ResponseMessage('Game Not Found', 404);
     }
+    private function isGameActive($opening, $closing)
+    {
+        $current = now()->format('H:i:s');
+
+        return ($opening <= $current && $closing >= $current) ? 1 : 0;
+    }
+
     public function getPreviousWinningNumber($gameId)
     {
         $winningNumber = BettingWin::with('twist')->join('game_settings', 'betting_wins.game_setting_id', 'game_settings.id')
@@ -99,8 +114,5 @@ class GameController extends Controller
         return $winningNumber;
     }
 
-    public function getGameSetting(Request $request)
-    {
-
-    }
+    public function getGameSetting(Request $request) {}
 }

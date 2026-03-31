@@ -40,8 +40,12 @@ class GameData
 
     public function get2dGame($gameSettingId)
     {
-        $gameSetting = GameSetting::with('game')->where('is_active', 1)
+        $gameSetting = GameSetting::with('game')
+        // ->where('is_active', 1)
             ->find($gameSettingId);
+        if($gameSetting->is_active==0){
+            ResponseMessage('Game is invalid',419);
+        }
         $gameSetting->game_type=$gameSetting->game->type;
         return $gameSetting;
         // $game= \App\Models\Game::orderBy('id','asc')
@@ -65,6 +69,9 @@ class GameData
             unset($game['threedSetting']);
         }
         // Combine and rename the settings in the game object
+        if ($setting && $setting->is_active == 0) {
+            ResponseMessage('Game is invalid', 419);
+        }
         $game->game_type=$game->type;
         $game->game_setting = $setting;
         $game->three_d_setting = null;

@@ -1035,11 +1035,10 @@ class BuffaloGameController extends Controller
             $gameId = $request->input('game_id');
 
             $query = FugoProvider::where('provider', $provider);
-
+            
             if ($gameId) {
                 $query->where('gameId', $gameId);
             }
-
             $providers = $query->orderBy('roomId')
                 ->orderBy('gameId')
                 ->get()
@@ -1069,7 +1068,6 @@ class BuffaloGameController extends Controller
                     ];
                 })
                 ->values();
-
             return response()->json([
                 'code' => 1,
                 'msg' => 'Success',
