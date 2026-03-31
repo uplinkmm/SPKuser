@@ -14,17 +14,17 @@
                     </div> -->
         <div class="w-full mx-auto flex flex-col items-center h-full gap-6">
             <div class="text-center">
-                <p class="text-[#D3A12A] text-2xl font-semibold leading-tight">
+                <p class="text-[#D3A12A] text-3xl font-semibold leading-tight">
                     2D Live
                 </p>
-                <p class="text-[#9CC3FF] text-xl font-medium leading-tight">
+                <p class="text-white text-xl font-medium leading-tight">
                     {{ displayTime }} {{ displayMeridiem }}
                 </p>
             </div>
 
             <div class="flex items-center justify-center w-full">
                 <p
-                    class="font-semibold leading-none whitespace-nowrap text-green-500 drop-shadow-lg"
+                    class="font-semibold animate-pulse leading-none whitespace-nowrap text-green-500 drop-shadow-lg"
                     style="font-size: clamp(72px, 22vw, 110px)"
                 >
                     {{ twoDList?.twod }}
@@ -33,18 +33,26 @@
 
             <div class="w-full space-y-2">
                 <div class="grid grid-cols-2 gap-x-4">
-                    <p class="text-[#D3A12A] text-base font-semibold text-center mb-0">
+                    <p
+                        class="text-[#D3A12A] text-base font-semibold text-center mb-0"
+                    >
                         {{ twoDList?.set }}
                     </p>
-                    <p class="text-[#D3A12A] text-base font-semibold text-center mb-0">
+                    <p
+                        class="text-[#D3A12A] text-base font-semibold text-center mb-0"
+                    >
                         {{ twoDList?.value }}
                     </p>
                 </div>
                 <div class="grid grid-cols-2 gap-x-4">
-                    <p class="text-[#D3A12A] text-sm font-semibold text-center mb-0">
+                    <p
+                        class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
+                    >
                         Set
                     </p>
-                    <p class="text-[#D3A12A] text-sm font-semibold text-center mb-0">
+                    <p
+                        class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
+                    >
                         Value
                     </p>
                 </div>
