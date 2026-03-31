@@ -773,9 +773,7 @@
                     class="bg-transparent items-center justify-center rounded-lg shadow-xl mb-8"
                 >
                     <div class="text-left mb-4">
-                        <h1
-                            class="text-lg text-black font-semibold primary-text"
-                        >
+                        <h1 class="text-lg text-black font-semibold">
                             နက္ခတ်ပါဝါ
                         </h1>
                     </div>
