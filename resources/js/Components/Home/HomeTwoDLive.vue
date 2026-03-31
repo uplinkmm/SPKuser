@@ -1,7 +1,7 @@
 <template lang="">
     <a
         href="/2d/live"
-        class="background-black rounded-2xl shadow-lg flex flex-col items-center justify-between overflow-hidden p-6 h-full"
+        class="background-black rounded-2xl shadow-lg flex flex-col items-center justify-between overflow-hidden p-4 h-full"
     >
         <!-- <div class="w-fit mx-auto">
                         <div>
@@ -12,7 +12,7 @@
                             <p class="text-white text-xl pl-2">2D Live</p>
                         </div>
                     </div> -->
-        <div class="w-full mx-auto flex flex-col items-center h-full gap-6">
+        <div class="w-full mx-auto flex flex-col items-center h-full gap-3">
             <div class="text-center">
                 <p class="text-[#D3A12A] text-3xl font-semibold leading-tight">
                     2D Live

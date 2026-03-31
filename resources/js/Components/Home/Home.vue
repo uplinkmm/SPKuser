@@ -156,7 +156,7 @@
                         data-twe-tab-active
                     >
                         <div
-                            class="grid grid-cols-2 gap-4 mb-4 items-stretch h-[320px]"
+                            class="grid grid-cols-2 gap-4 mb-4 items-stretch h-[280px]"
                         >
                             <HomeTwoDLive class="h-full" />
                             <div class="flex flex-col gap-4 h-full">
@@ -194,33 +194,33 @@
                                         </p>
                                     </div>
                                 </a>
-                        </div>
-                    </div>
-
-                    <div
-                        class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-                    >
-                        <a href="/winner_lists/1" class="w-full">
-                            <div class="py-3 text-center">
-                                <p
-                                    class="text-white text-base font-semibold mb-0"
-                                >
-                                    ထီပေါက်သူများ
-                                </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
 
-                    <div
-                        class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-                    >
-                        <a href="/lottery_history" class="w-full">
-                            <div class="py-3 text-center">
-                                <p
-                                    class="text-white text-base font-semibold mb-0"
-                                >
-                                    ထီပေါက်စဉ်များ
-                                </p>
+                        <div
+                            class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                        >
+                            <a href="/winner_lists/1" class="w-full">
+                                <div class="py-3 text-center">
+                                    <p
+                                        class="text-white text-base font-semibold mb-0"
+                                    >
+                                        ထီပေါက်သူများ
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div
+                            class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                        >
+                            <a href="/lottery_history" class="w-full">
+                                <div class="py-3 text-center">
+                                    <p
+                                        class="text-white text-base font-semibold mb-0"
+                                    >
+                                        ထီပေါက်စဉ်များ
+                                    </p>
                                 </div>
                             </a>
                         </div>
