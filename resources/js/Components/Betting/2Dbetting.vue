@@ -1644,6 +1644,7 @@ export default {
             delete_bet_number: "",
             error_modal_text: "",
             numbersLoading: false,
+            preventNextStepRefresh: false,
         };
     },
     computed: {
@@ -2370,15 +2371,18 @@ export default {
                     this.twod_settings = response.data.twod_settings;
                     this.main_game_active = response.data.is_active;
                     if (!refreshOnly && this.step !== 5) {
+                        this.preventNextStepRefresh = true;
                         this.step = 5;
                     }
                 } else {
                     if (!refreshOnly && this.step !== 5) {
+                        this.preventNextStepRefresh = true;
                         this.step = 5; //error page
                     }
                 }
             } else {
                 if (!refreshOnly && this.step !== 5) {
+                    this.preventNextStepRefresh = true;
                     this.step = 5; //error page
                 }
             }
@@ -2444,6 +2448,10 @@ export default {
                 window.removeEventListener("scroll", this.handleScroll);
             }
             if (newValue === 5) {
+                if (this.preventNextStepRefresh) {
+                    this.preventNextStepRefresh = false;
+                    return;
+                }
                 this.checkGameActive(true);
             }
         },
