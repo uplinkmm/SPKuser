@@ -69,7 +69,11 @@
                                         >
                                             <span
                                                 class="text-white text-sm font-medium"
-                                                >Insufficient Balance</span
+                                                >{{
+                                                    getRoomUnavailableMessage(
+                                                        room.room_id,
+                                                    )
+                                                }}</span
                                             >
                                         </div>
                                     </div>
@@ -182,12 +186,22 @@ export default {
             return map[roomId] || "50-200x200.png";
         },
         checkAvailableRooms(room_id) {
-            //return true false
+            return this.getRoomAvailabilityStatus(room_id) === "available";
+        },
+        getRoomAvailabilityStatus(room_id) {
             let room = this.roomsData.find((room) => {
                 return room.roomId == room_id;
             });
-            if (!room) return false; // room not found, assume not available
-            return room.room_info.min_bet <= this.current_balance;
+            if (!room) return "missing";
+
+            return room.room_info.min_bet <= this.current_balance
+                ? "available"
+                : "insufficient_balance";
+        },
+        getRoomUnavailableMessage(room_id) {
+            return this.getRoomAvailabilityStatus(room_id) === "missing"
+                ? "Room not available"
+                : "Insufficient Balance";
         },
         async getGameUrl(game) {
             console.log(game.id);

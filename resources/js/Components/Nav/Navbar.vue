@@ -100,11 +100,16 @@
                     <i class="fas fa-chevron-left"></i>
                 </a>
             </button>
-            <p v-if="hideBackBtn"></p>
-            <p
-                :class="textColor"
-                class="text-2xl font-semibold text-white ml-12"
-            >
+
+            <div :class="hideBackBtn ? 'ml-0' : '-ml-10'" class="w-10">
+                <img
+                    src="../../../../public/icons/logo_transparent.png"
+                    class="w-10 h-10 object-contain"
+                    alt=""
+                />
+            </div>
+
+            <p :class="textColor" class="text-2xl font-semibold text-white">
                 ရွှေပေါက်ကံ
             </p>
             <div class="flex gap-x-4">

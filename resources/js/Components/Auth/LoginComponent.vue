@@ -4,7 +4,7 @@
     >
         <div class="w-full">
             <div
-                class="flex items-center justify-between text-center pt-8 pb-6 px-20"
+                class="flex items-center justify-between text-center pt-8 pb-6 px-10 md:px-20"
             >
                 <img
                     src="../../../../public/img/SPK Logo.png"
