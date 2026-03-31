@@ -194,33 +194,33 @@
                                         </p>
                                     </div>
                                 </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                    >
+                        <a href="/winner_lists/1" class="w-full">
+                            <div class="py-3 text-center">
+                                <p
+                                    class="text-white text-base font-semibold mb-0"
+                                >
+                                    ထီပေါက်သူများ
+                                </p>
                             </div>
-                        </div>
+                        </a>
+                    </div>
 
-                        <div
-                            class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-                        >
-                            <a href="/winner_lists/1" class="w-full">
-                                <div class="py-3 text-center">
-                                    <p
-                                        class="text-white text-base font-semibold mb-0"
-                                    >
-                                        ထီပေါက်သူများ
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div
-                            class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
-                        >
-                            <a href="/lottery_history" class="w-full">
-                                <div class="py-3 text-center">
-                                    <p
-                                        class="text-white text-base font-semibold mb-0"
-                                    >
-                                        ထီပေါက်စဉ်များ
-                                    </p>
+                    <div
+                        class="background-black mb-4 rounded-2xl shadow-lg flex justify-center flex-col"
+                    >
+                        <a href="/lottery_history" class="w-full">
+                            <div class="py-3 text-center">
+                                <p
+                                    class="text-white text-base font-semibold mb-0"
+                                >
+                                    ထီပေါက်စဉ်များ
+                                </p>
                                 </div>
                             </a>
                         </div>
@@ -387,17 +387,17 @@
             >
                 <a href="/winner_lists/1">
                     <div
-                        class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                        class="flex justify-center gap-x-4 w-10/12 mx-auto py-4 text-center"
                     >
                         <img
                             class="w-16 my-4"
                             src="../../../../public/img/Chart_white.png"
                         />
-                        <div class="flex justify-center flex-col">
-                            <p class="text-white text-xl pb-0 pl-2 mb-1">
+                        <div class="flex justify-center items-center flex-col">
+                            <p class="text-white text-xl pb-0 mb-1">
                                 ထီပေါက်သူများ
                             </p>
-                            <p class="text-white text-sm pb-0 pl-2">
+                            <p class="text-white text-sm pb-0">
                                 ထီပေါက်သူများ
                             </p>
                         </div>
@@ -410,19 +410,17 @@
             >
                 <a href="/lottery_history">
                     <div
-                        class="flex justify-start gap-x-4 w-10/12 mx-auto py-4"
+                        class="flex justify-center gap-x-4 w-10/12 mx-auto py-4 text-center"
                     >
                         <img
                             class="w-16 my-4"
                             src="../../../../public/img/Chart_white.png"
                         />
-                        <div class="flex justify-center flex-col">
-                            <p
-                                class="text-white text-xl pb-0 pl-2 font-semibold mb-1"
-                            >
+                        <div class="flex justify-center items-center flex-col">
+                            <p class="text-white text-xl pb-0 font-semibold mb-1">
                                 ထီပေါက်စဉ်များ
                             </p>
-                            <p class="text-white text-sm pb-0 pl-2">
+                            <p class="text-white text-sm pb-0">
                                 ထွက်ခဲ့သော နံပတ်များ
                             </p>
                         </div>
