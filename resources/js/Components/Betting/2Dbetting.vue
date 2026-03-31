@@ -494,21 +494,20 @@
                         {{ $t("Clear") }}
                     </button>
                 </div>
-                <div class="grid grid-cols-10 gap-x-1 gap-y-2">
-                    <div
-                        class="contents"
-                        v-for="(num, index) in numbers"
-                        :key="index"
-                    >
-                        <!-- <div v-if="index == '96'" class="opacity-0"></div> -->
-
+                <div v-if="numbersLoading" class="py-16 flex justify-center">
+                    <p class="text-lg font-semibold text-gray-800">
+                        ခေတ္တစောင့်ပါ
+                    </p>
+                </div>
+                <div v-else class="grid grid-cols-10 gap-x-1 gap-y-2">
+                    <div class="contents" v-for="(num, index) in numbers" :key="index">
                         <div
                             :class="[
                                 num.is_active == 0
                                     ? 'bg-[#d4d4d4] text-gray-400 cursor-not-allowed'
                                     : isBetNumber(num.number)
-                                      ? 'bg-[#D9A63A] text-white'
-                                      : 'bg-[#e5e7eb] text-black',
+                                        ? 'bg-[#D9A63A] text-white'
+                                        : 'bg-[#e5e7eb] text-black',
                                 'rounded-lg pt-3 shadow-md aspect-square flex flex-col items-center justify-center border border-white',
                             ]"
                             @click="
@@ -1644,6 +1643,7 @@ export default {
             pendingGameSetting: null,
             delete_bet_number: "",
             error_modal_text: "",
+            numbersLoading: false,
         };
     },
     computed: {
@@ -2276,21 +2276,28 @@ export default {
             }
         },
         async getBetNumbers() {
-            let response = await getApiData({
-                url: `api/bet_number_list?game_id=1&game_setting_id=${this.game_setting_id}`,
-                token: this.getToken,
-            });
-            this.numbers = response.data.bet_list_numbers;
+            this.numbersLoading = true;
+            this.numbers = [];
+            this.no_more_bet = false;
+            try {
+                let response = await getApiData({
+                    url: `api/bet_number_list?game_id=1&game_setting_id=${this.game_setting_id}`,
+                    token: this.getToken,
+                });
+                this.numbers = response.data.bet_list_numbers;
 
-            this.wallet_balance = response.data.balance;
-            this.bet_limit = response.data.bet_limit;
+                this.wallet_balance = response.data.balance;
+                this.bet_limit = response.data.bet_limit;
 
-            let twoDGame = response.data.game;
-            this.bet_multiplier = twoDGame.bet_multiplier;
-            this.opening_time = moment(twoDGame.opening_time, "HH:mm");
-            this.closing_time = moment(twoDGame.closing_time, "HH:mm");
-            this.min = twoDGame.min;
-            this.max = twoDGame.max;
+                let twoDGame = response.data.game;
+                this.bet_multiplier = twoDGame.bet_multiplier;
+                this.opening_time = moment(twoDGame.opening_time, "HH:mm");
+                this.closing_time = moment(twoDGame.closing_time, "HH:mm");
+                this.min = twoDGame.min;
+                this.max = twoDGame.max;
+            } finally {
+                this.numbersLoading = false;
+            }
         },
         computedWidth(percentage) {
             return percentage + "%";
