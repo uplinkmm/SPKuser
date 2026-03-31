@@ -2357,7 +2357,7 @@ export default {
             this.chooseTime(this.pendingGameSetting);
             this.step = 1;
         },
-        async checkGameActive() {
+        async checkGameActive(refreshOnly = false) {
             let response = await getApiData({
                 url: `api/game_list?game_id=1`,
                 token: this.getToken,
@@ -2369,12 +2369,18 @@ export default {
                 if (response.data.twod_settings.length) {
                     this.twod_settings = response.data.twod_settings;
                     this.main_game_active = response.data.is_active;
-                    this.step = 5;
+                    if (!refreshOnly && this.step !== 5) {
+                        this.step = 5;
+                    }
                 } else {
-                    this.step = 5; //error page
+                    if (!refreshOnly && this.step !== 5) {
+                        this.step = 5; //error page
+                    }
                 }
             } else {
-                this.step = 5; //error page
+                if (!refreshOnly && this.step !== 5) {
+                    this.step = 5; //error page
+                }
             }
         },
         async getBetWinners() {
@@ -2436,6 +2442,9 @@ export default {
                 this.getBetWinners();
             } else {
                 window.removeEventListener("scroll", this.handleScroll);
+            }
+            if (newValue === 5) {
+                this.checkGameActive(true);
             }
         },
     },
