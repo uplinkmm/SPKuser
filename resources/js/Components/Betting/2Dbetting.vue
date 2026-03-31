@@ -494,21 +494,20 @@
                         {{ $t("Clear") }}
                     </button>
                 </div>
-                <div class="grid grid-cols-10 gap-x-1 gap-y-2">
-                    <div
-                        class="contents"
-                        v-for="(num, index) in numbers"
-                        :key="index"
-                    >
-                        <!-- <div v-if="index == '96'" class="opacity-0"></div> -->
-
+                <div v-if="numbersLoading" class="py-16 flex justify-center">
+                    <p class="text-lg font-semibold text-gray-800">
+                        ခေတ္တစောင့်ပါ
+                    </p>
+                </div>
+                <div v-else class="grid grid-cols-10 gap-x-1 gap-y-2">
+                    <div class="contents" v-for="(num, index) in numbers" :key="index">
                         <div
                             :class="[
                                 num.is_active == 0
                                     ? 'bg-[#d4d4d4] text-gray-400 cursor-not-allowed'
                                     : isBetNumber(num.number)
-                                      ? 'bg-[#D9A63A] text-white'
-                                      : 'bg-[#e5e7eb] text-black',
+                                        ? 'bg-[#D9A63A] text-white'
+                                        : 'bg-[#e5e7eb] text-black',
                                 'rounded-lg pt-3 shadow-md aspect-square flex flex-col items-center justify-center border border-white',
                             ]"
                             @click="
