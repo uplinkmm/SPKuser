@@ -1,7 +1,7 @@
 <template lang="">
     <a
         href="/2d/live"
-        class="background-black rounded-2xl shadow-lg flex justify-center flex-col overflow-hidden"
+        class="background-black rounded-2xl shadow-lg flex flex-col items-center justify-between overflow-hidden p-6 h-full"
     >
         <!-- <div class="w-fit mx-auto">
                         <div>
@@ -12,59 +12,42 @@
                             <p class="text-white text-xl pl-2">2D Live</p>
                         </div>
                     </div> -->
-        <div class="w-full mx-auto flex flex-col h-full py-10 px-5">
-            <p class="text-[#D3A12A] text-2xl font-semibold text-center mb-2">
-                2D Live
-            </p>
-
-            <div class="flex items-center justify-between mb-2 gap-x-3 min-w-0">
-                <div class="text-left min-w-0 flex-1">
-                    <p
-                        class="text-white text-2xl font-medium leading-none mb-2"
-                    >
-                        {{ displayTime }}
-                    </p>
-                    <p
-                        class="text-white text-2xl font-medium leading-none mb-0"
-                    >
-                        {{ displayMeridiem }}
-                    </p>
-                </div>
-
-                <div class="shrink-0 text-right">
-                    <p
-                        class="font-semibold leading-none whitespace-nowrap animate-pulse text-green-500"
-                        style="font-size: clamp(48px, 14vw, 72px)"
-                    >
-                        {{ twoDList?.twod }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-x-4 mb-1">
-                <p
-                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
-                >
-                    {{ twoDList?.set }}
+        <div class="w-full mx-auto flex flex-col items-center h-full gap-6">
+            <div class="text-center">
+                <p class="text-[#D3A12A] text-2xl font-semibold leading-tight">
+                    2D Live
                 </p>
-                <p
-                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
-                >
-                    {{ twoDList?.value }}
+                <p class="text-[#9CC3FF] text-xl font-medium leading-tight">
+                    {{ displayTime }} {{ displayMeridiem }}
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 gap-x-4 mb-2">
+            <div class="flex items-center justify-center w-full">
                 <p
-                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
+                    class="font-semibold leading-none whitespace-nowrap text-green-500 drop-shadow-lg"
+                    style="font-size: clamp(72px, 22vw, 110px)"
                 >
-                    Set
+                    {{ twoDList?.twod }}
                 </p>
-                <p
-                    class="text-[#D3A12A] text-sm font-semibold text-center mb-0"
-                >
-                    Value
-                </p>
+            </div>
+
+            <div class="w-full space-y-2">
+                <div class="grid grid-cols-2 gap-x-4">
+                    <p class="text-[#D3A12A] text-base font-semibold text-center mb-0">
+                        {{ twoDList?.set }}
+                    </p>
+                    <p class="text-[#D3A12A] text-base font-semibold text-center mb-0">
+                        {{ twoDList?.value }}
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-x-4">
+                    <p class="text-[#D3A12A] text-sm font-semibold text-center mb-0">
+                        Set
+                    </p>
+                    <p class="text-[#D3A12A] text-sm font-semibold text-center mb-0">
+                        Value
+                    </p>
+                </div>
             </div>
 
             <!-- <div class="grid grid-cols-2 gap-x-4">
