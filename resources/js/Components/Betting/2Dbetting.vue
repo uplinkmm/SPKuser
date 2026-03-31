@@ -2285,6 +2285,14 @@ export default {
                     url: `api/bet_number_list?game_id=1&game_setting_id=${this.game_setting_id}`,
                     token: this.getToken,
                 });
+                if (!response.success) {
+                    this.error_modal_text =
+                        response.message || "Game is invalid";
+                    this.showErrorModal();
+                    this.preventNextStepRefresh = true;
+                    this.step = 5;
+                    return;
+                }
                 this.numbers = response.data.bet_list_numbers;
 
                 this.wallet_balance = response.data.balance;
