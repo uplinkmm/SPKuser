@@ -1673,16 +1673,17 @@ export default {
             return errorText;
         },
         checkUserEachLimitError() {
+            // bet_limit check disabled per request
             var errorText = "";
-            this.bet_numbers.forEach((bet) => {
-                if (
-                    this.bet_limit <
-                    parseInt(bet.amount) + parseInt(bet.total_amount)
-                ) {
-                    errorText = `${bet.number} has reached your limit.`;
-                    return;
-                }
-            });
+            // this.bet_numbers.forEach((bet) => {
+            //     if (
+            //         this.bet_limit <
+            //         parseInt(bet.amount) + parseInt(bet.total_amount)
+            //     ) {
+            //         errorText = `${bet.number} has reached your limit.`;
+            //         return;
+            //     }
+            // });
             return errorText;
         },
         closingTimeFormat() {
@@ -1752,14 +1753,15 @@ export default {
 
                     return;
                 }
-                if (this.each_amount > this.bet_limit) {
-                    var errorText = `Your limit is  ${this.bet_limit}`;
-                    this.$notify({
-                        text: errorText,
-                        type: "error",
-                    });
-                    return;
-                }
+                // bet_limit check disabled per request
+                // if (this.each_amount > this.bet_limit) {
+                //     var errorText = `Your limit is  ${this.bet_limit}`;
+                //     this.$notify({
+                //         text: errorText,
+                //         type: "error",
+                //     });
+                //     return;
+                // }
                 this.bet_numbers.forEach((number) => {
                     number.amount = this.each_amount;
                 });
